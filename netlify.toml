@@ -1,0 +1,16 @@
+# Netlify build configuration for the portfolio.
+# The React app lives in /frontend, so we point Netlify there.
+# Netlify reads this file automatically on every deploy — no manual settings needed.
+
+[build]
+  base = "frontend"           # cd into frontend/ before building (clean deps, no Playwright)
+  command = "npm run build"   # Create React App production build → frontend/build
+  publish = "frontend/build"  # the folder Netlify serves (path from the repo root)
+
+[build.environment]
+  NODE_VERSION = "20"         # match the Node version used locally
+  CI = "false"                # don't treat CRA build warnings as errors (Netlify sets CI=true by default)
+
+# Note: SPA routing and the embedded /recruitos/ + /knowledgeos/ prototypes are
+# handled by frontend/public/_redirects, which CRA copies into the build output.
+# So no [[redirects]] rules are needed here.
