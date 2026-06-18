@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RecruitOS — Interactive Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F7F9FC; --surface:#FFFFFF; --surface-v:#F1F3F9; --surface-v2:#EEF1F8;
+    --ink:#1F1F1F; --muted:#5F6368; --faint:#80868B; --border:#E3E5EB; --border-soft:#EDEEF3;
+    --blue:#1A73E8; --blue-deep:#174EA6; --blue-soft:#E8F0FE;
+    --green:#1E8E3E; --green-soft:#E6F4EA; --yellow:#C98A00; --yellow-soft:#FEF7E0; --red:#D93025; --red-soft:#FCE8E6;
+    --teal:#0E9CA6; --teal-soft:#E0F5F5;
+    --ai-violet:#9168F0; --ai-pink:#E8519B;
+    --font-d:'Plus Jakarta Sans',system-ui,sans-serif; --font-b:'Inter',system-ui,sans-serif; --font-m:'Roboto Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:#DDE3EC;color:var(--ink);font-family:var(--font-b);-webkit-font-smoothing:antialiased;line-height:1.5;padding:24px;}
+  .frame-label{max-width:1440px;margin:0 auto 12px;font-family:var(--font-m);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:#6B7280;display:flex;justify-content:space-between;}
+  .app{width:1440px;max-width:100%;height:864px;margin:0 auto;background:var(--bg);border-radius:20px;overflow:hidden;box-shadow:0 30px 70px rgba(20,30,60,0.30);display:flex;flex-direction:column;border:1px solid rgba(0,0,0,0.06);position:relative;}
+
+  .grad{background:linear-gradient(120deg,#4285F4,#9168F0 55%,#E8519B)!important;}
+  .grain{position:relative;overflow:hidden;}
+  .grain::after{content:"";position:absolute;inset:0;border-radius:inherit;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:0.16;mix-blend-mode:overlay;pointer-events:none;}
+  .gtext{background:linear-gradient(120deg,#4285F4,#9168F0,#E8519B);-webkit-background-clip:text;background-clip:text;color:transparent;}
+
+  /* TOP BAR */
+  .topbar{height:56px;flex-shrink:0;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:stretch;position:relative;z-index:40;}
+  .tb-left{width:236px;flex-shrink:0;display:flex;align-items:center;gap:10px;padding:0 18px;transition:width .22s ease;}
+  .tb-left.shrunk{width:72px;}
+  .tb-center{flex:1;min-width:0;display:flex;align-items:center;padding:0 26px;}
+  .tb-right{width:366px;flex-shrink:0;display:flex;align-items:center;justify-content:flex-end;gap:12px;padding:0 18px;}
+  .mark{display:flex;align-items:center;gap:10px;overflow:hidden;cursor:pointer;}
+  .mark .m{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex-shrink:0;}
+  .mark .m b{font-family:var(--font-d);font-weight:800;font-size:16px;color:#fff;}
+  .mark .wm{font-family:var(--font-d);font-weight:700;font-size:16px;white-space:nowrap;}
+  .hdr-search{width:100%;display:flex;align-items:center;gap:11px;height:38px;background:var(--surface-v);border:1px solid var(--border-soft);border-radius:10px;padding:0 14px;cursor:text;}
+  .hdr-search svg{color:var(--muted);}
+  .hdr-search input{flex:1;border:none;outline:none;background:transparent;font-family:var(--font-b);font-size:13.5px;color:var(--ink);}
+  .hdr-search input::placeholder{color:var(--faint);}
+  .hdr-search .scope{font-size:11px;color:var(--muted);background:var(--surface);border:1px solid var(--border-soft);border-radius:999px;padding:4px 10px;font-weight:500;}
+  .hdr-search .kbd{font-family:var(--font-m);font-size:10px;background:var(--surface);border:1px solid var(--border);border-radius:5px;padding:2px 6px;color:var(--muted);}
+  .askbtn{display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 16px;border-radius:999px;border:none;cursor:pointer;color:#fff;font-family:var(--font-b);font-size:13px;font-weight:600;animation:aiglow 5s ease-in-out infinite;}
+  .askbtn .spark{font-size:14px;}
+  .railham{width:32px;height:32px;border-radius:9px;border:1px solid var(--border);background:var(--surface);color:var(--muted);display:grid;place-items:center;cursor:pointer;flex-shrink:0;}
+  .railham:hover{background:var(--surface-v);color:var(--ink);}
+  .icobtn{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;color:var(--muted);position:relative;cursor:pointer;}
+  .icobtn:hover{background:var(--surface-v);}
+  .icobtn .badge{position:absolute;top:5px;right:6px;width:7px;height:7px;border-radius:50%;background:var(--red);border:1.5px solid #fff;}
+  .me{display:flex;align-items:center;gap:9px;cursor:pointer;}
+  .me .av{width:32px;height:32px;border-radius:50%;background:var(--blue-soft);color:var(--blue-deep);display:grid;place-items:center;font-weight:700;font-size:12px;font-family:var(--font-d);}
+  .me .nm{font-size:13px;font-weight:600;}
+
+  .body{flex:1;display:flex;min-height:0;position:relative;z-index:10;}
+
+  /* RAIL */
+  .rail{width:236px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;padding:14px 12px;transition:width .22s ease;overflow:hidden;}
+  .rail.collapsed{width:72px;padding:14px 10px;}
+  .rail.collapsed .ws{display:none;}
+  .rail.collapsed .rail-top{justify-content:center;}
+  .tb-left.shrunk .wm{display:none;}
+  .rail-top{display:flex;align-items:center;gap:8px;margin-bottom:14px;}
+  .ws{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:12px;background:var(--surface-v);flex:1;min-width:0;overflow:hidden;}
+  .ws .logo{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,#1A73E8,#174EA6);color:#fff;display:grid;place-items:center;font-weight:700;font-size:13px;font-family:var(--font-d);flex-shrink:0;}
+  .ws .t{font-size:13px;font-weight:600;line-height:1.1;white-space:nowrap;}
+  .ws .s{font-size:11px;color:var(--faint);white-space:nowrap;}
+  .collapse-btn{width:30px;height:30px;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--muted);display:grid;place-items:center;cursor:pointer;flex-shrink:0;}
+  .collapse-btn:hover{background:var(--surface-v);color:var(--ink);}
+  .newbtn{height:42px;border-radius:999px;background:var(--blue);color:#fff;border:none;font-family:var(--font-b);font-weight:600;font-size:13.5px;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;margin-bottom:16px;box-shadow:0 4px 12px rgba(26,115,232,0.28);white-space:nowrap;overflow:hidden;}
+  .nav-sec{font-family:var(--font-m);font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--faint);padding:0 12px;margin:6px 0 6px;white-space:nowrap;}
+  .ni{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:999px;color:var(--muted);font-size:13.5px;font-weight:500;margin-bottom:2px;cursor:pointer;white-space:nowrap;overflow:hidden;}
+  .ni svg{width:18px;height:18px;stroke-width:1.9;flex-shrink:0;}
+  .ni:hover{background:var(--surface-v);color:var(--ink);}
+  .ni.active{background:var(--blue-soft);color:var(--blue-deep);font-weight:600;}
+  .ni.active svg{color:var(--blue);}
+  .ni .ct{margin-left:auto;font-size:11px;font-weight:600;color:var(--faint);}
+  .rail.collapsed .lbl-txt,.rail.collapsed .nav-sec,.rail.collapsed .ni .ct,.rail.collapsed .ws .wsx{display:none;}
+  .rail.collapsed .ni{justify-content:center;padding:10px;}
+  .rail.collapsed .newbtn{padding:0;}
+  .rail.collapsed .ws{justify-content:center;padding:8px;}
+  .rail-foot{margin-top:auto;border-top:1px solid var(--border-soft);padding-top:10px;}
+
+  /* STAGE */
+  .stage{flex:1;min-width:0;display:flex;}
+  .main{flex:1;min-width:0;overflow-y:auto;padding:22px 28px 28px;position:relative;}
+  .aside-ai{width:366px;flex-shrink:0;background:linear-gradient(180deg,#F4F7FF 0%,#F7F4FD 54%,#FCF5FA 100%);border-left:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;}
+  .aside-ai.plain{background:var(--surface);}
+  .ai-head{padding:16px 18px;border-bottom:1px solid var(--border-soft);display:flex;align-items:center;gap:9px;flex-shrink:0;}
+  .ai-head .gi{width:22px;height:22px;border-radius:7px;flex-shrink:0;}
+  .ai-head h3{font-family:var(--font-d);font-weight:700;font-size:14.5px;flex:1;}
+  .ai-body{padding:16px 18px;overflow-y:auto;display:flex;flex-direction:column;gap:13px;}
+
+  /* shared bits */
+  .crumb{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted);margin-bottom:10px;flex-wrap:wrap;}
+  .crumb .b{color:var(--blue);cursor:pointer;font-weight:600;}
+  .crumb .sep{color:var(--faint);}
+  h1.title{font-family:var(--font-d);font-weight:700;font-size:24px;letter-spacing:-0.01em;margin-bottom:4px;}
+  .subtitle{font-size:13.5px;color:var(--muted);margin-bottom:20px;}
+  .sec-h{display:flex;align-items:center;justify-content:space-between;margin:0 0 13px;}
+  .sec-h .lft{display:flex;align-items:center;gap:8px;}
+  .sec-h h2{font-family:var(--font-d);font-weight:700;font-size:16px;}
+  .sec-h .gi{width:18px;height:18px;border-radius:5px;}
+  .sec-h .cnt{font-size:12px;color:var(--faint);font-weight:500;}
+  .sec-h .link{font-size:12.5px;font-weight:600;color:var(--blue);cursor:pointer;}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:20px;}
+
+  .btn-ghost{height:42px;padding:0 18px;border-radius:999px;border:1px solid var(--border);background:#fff;font-weight:600;font-size:13.5px;color:var(--muted);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;}
+  .btn-ghost:hover{background:var(--surface-v);color:var(--ink);}
+  .btn-primary{height:42px;padding:0 22px;border-radius:999px;border:none;background:var(--blue);color:#fff;font-weight:600;font-size:13.5px;cursor:pointer;box-shadow:0 4px 12px rgba(26,115,232,0.26);display:inline-flex;align-items:center;gap:8px;}
+  .btn-primary:hover{background:var(--blue-deep);}
+  .btn-ai{height:42px;padding:0 20px;border-radius:999px;border:none;cursor:pointer;position:relative;overflow:hidden;isolation:isolate;display:inline-flex;align-items:center;animation:aiglow 5s ease-in-out infinite;}
+  .btn-ai::before{content:"";position:absolute;z-index:0;width:360%;aspect-ratio:1;top:50%;left:50%;transform:translate(-50%,-50%);background:conic-gradient(from 0deg,#4285F4,#46B5F0,#9168F0,#E8519B,#9168F0,#4285F4);animation:aispin 4.5s linear infinite;}
+  .btn-ai::after{content:"";position:absolute;z-index:1;inset:2.5px;border-radius:999px;background:#fff;}
+  .btn-ai .lbl{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--ink);}
+  .btn-ai .spark{font-size:15px;}
+  @keyframes aispin{to{transform:translate(-50%,-50%) rotate(360deg);}}
+  @keyframes aiglow{0%,100%{box-shadow:0 5px 16px rgba(145,104,240,0.22);}50%{box-shadow:0 7px 22px rgba(232,81,155,0.28);}}
+  @media (prefers-reduced-motion: reduce){.btn-ai,.askbtn{animation:none;}.btn-ai::before,.askbtn::before{animation:none;background:linear-gradient(120deg,#4285F4,#9168F0,#E8519B);}}
+  .dots span{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--ai-violet);margin-right:3px;animation:blink 1.3s infinite;}
+  .dots span:nth-child(2){animation-delay:.2s;}.dots span:nth-child(3){animation-delay:.4s;}
+  @keyframes blink{0%,100%{opacity:.3;}50%{opacity:1;}}
+
+  /* KPI */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px;}
+  .kpi{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:16px;cursor:pointer;transition:box-shadow .15s,border-color .15s;}
+  .kpi:hover{box-shadow:0 6px 18px rgba(20,30,60,0.07);border-color:#d3d6e0;}
+  .kpi .num{font-family:var(--font-d);font-weight:800;font-size:27px;letter-spacing:-0.02em;line-height:1;}
+  .kpi .lab{font-size:12px;color:var(--muted);margin-top:7px;}
+  .kpi .delta{font-size:11px;font-weight:600;margin-top:7px;display:inline-flex;align-items:center;gap:3px;}
+  .delta.up{color:#137333;} .delta.flat{color:var(--faint);} .delta.warn{color:#c5221f;}
+
+  /* priorities */
+  .pri-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-bottom:26px;}
+  .pri{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:15px;display:flex;gap:12px;align-items:stretch;position:relative;}
+  .pri .pic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;flex-shrink:0;font-size:15px;}
+  .pic-warn{background:var(--red-soft);color:var(--red);}
+  .pic-ai{color:#fff;}.pic-ok{background:var(--green-soft);color:var(--green);}.pic-info{background:var(--surface-v2);color:var(--muted);}
+  .pri .pb{flex:1;min-width:0;display:flex;flex-direction:column;}
+  .pri .pt{font-size:13.5px;font-weight:600;line-height:1.3;padding-right:20px;}
+  .pri .ps{font-size:11.5px;color:var(--faint);margin-top:2px;margin-bottom:14px;}
+  .pri .pbtn{margin-top:auto;align-self:flex-start;height:30px;padding:0 13px;border-radius:999px;border:1px solid var(--border);background:var(--surface);font-size:12px;font-weight:600;color:var(--ink);cursor:pointer;}
+  .pri-x{position:absolute;top:10px;right:10px;width:22px;height:22px;border-radius:7px;display:grid;place-items:center;color:var(--faint);cursor:pointer;font-size:12px;}
+  .pri-x:hover{background:var(--surface-v);color:var(--ink);}
+  .pri .pbtn:hover{background:var(--blue-soft);border-color:#c3d9fb;color:var(--blue-deep);}
+
+  /* project cards / mini */
+  .pmini-list{display:flex;flex-direction:column;gap:10px;}
+  .pmini{display:flex;align-items:center;gap:13px;padding:13px 15px;border:1px solid var(--border);border-radius:14px;background:var(--surface);cursor:pointer;transition:border-color .15s,box-shadow .15s;}
+  .pmini:hover{border-color:#d3d6e0;box-shadow:0 6px 18px rgba(20,30,60,0.07);}
+  .pmini .pl{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;font-weight:700;font-size:12px;font-family:var(--font-d);color:#fff;flex-shrink:0;}
+  .pmini .pi{flex:1;min-width:0;}
+  .pmini .pic2{font-size:11px;color:var(--muted);}
+  .pmini .pr{font-family:var(--font-d);font-weight:700;font-size:14px;line-height:1.15;}
+  .pmini .pstat{font-size:12px;color:var(--muted);white-space:nowrap;}
+  .pmini .pstat b{color:var(--ink);font-weight:700;font-family:var(--font-d);}
+  .pmini .psla{font-size:11px;font-weight:600;padding:4px 10px;border-radius:999px;background:var(--surface-v);color:var(--muted);white-space:nowrap;}
+  .pmini .psla.risk{background:var(--red-soft);color:#c5221f;}
+
+  .pgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .pcard-full{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:17px;cursor:pointer;transition:border-color .15s,box-shadow .15s;}
+  .pcard-full:hover{border-color:#c3d9fb;box-shadow:0 8px 22px rgba(20,30,60,0.08);}
+  .pcard-full .top{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+  .pcard-full .pl{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;font-weight:700;font-size:14px;font-family:var(--font-d);color:#fff;flex-shrink:0;}
+  .pcard-full .pi{flex:1;min-width:0;}
+  .pcard-full .pc{font-size:12px;color:var(--muted);}
+  .pcard-full .pr{font-family:var(--font-d);font-weight:700;font-size:15.5px;line-height:1.15;}
+  .schip{font-size:11px;font-weight:600;padding:5px 11px;border-radius:999px;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;}
+  .schip .d{width:7px;height:7px;border-radius:50%;}
+  .s-active{background:var(--green-soft);color:#137333;}.s-active .d{background:#1E8E3E;}
+  .s-hold{background:var(--surface-v);color:var(--muted);}.s-hold .d{background:var(--faint);}
+  .s-filled{background:var(--blue-soft);color:var(--blue-deep);}.s-filled .d{background:var(--blue);}
+  .s-risk{background:var(--red-soft);color:#c5221f;}.s-risk .d{background:var(--red);}
+  .pipebar{height:6px;border-radius:4px;background:var(--surface-v);display:flex;overflow:hidden;margin-bottom:12px;}
+  .pipebar i{height:100%;}
+  .pmeta{display:flex;align-items:center;gap:16px;font-size:12px;color:var(--muted);}
+  .pmeta b{color:var(--ink);font-weight:700;font-family:var(--font-d);}
+  .pmeta .mr{margin-left:auto;display:flex;align-items:center;gap:7px;}
+  .pmeta img{width:22px;height:22px;border-radius:50%;background:var(--surface-v);}
+
+  .ftabs{display:flex;gap:8px;margin-bottom:16px;}
+  .ftab{height:34px;padding:0 14px;border-radius:999px;border:1px solid var(--border);background:#fff;font-size:12.5px;font-weight:600;color:var(--muted);cursor:pointer;display:inline-flex;align-items:center;gap:7px;}
+  .ftab .d{width:7px;height:7px;border-radius:50%;}
+  .ftab.active{background:var(--ink);color:#fff;border-color:var(--ink);}
+
+  /* live feed */
+  .live{display:inline-flex;align-items:center;gap:6px;font-size:10.5px;font-weight:600;color:#137333;font-family:var(--font-m);text-transform:uppercase;letter-spacing:0.06em;}
+  .live .dot{width:7px;height:7px;border-radius:50%;background:#1E8E3E;animation:pulse 1.8s infinite;}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(30,142,62,.45);}70%{box-shadow:0 0 0 6px rgba(30,142,62,0);}100%{box-shadow:0 0 0 0 rgba(30,142,62,0);}}
+  .feed{position:relative;}
+  .feed::before{content:"";position:absolute;left:14px;top:6px;bottom:6px;width:1.5px;background:var(--border);}
+  .act{display:flex;gap:13px;position:relative;padding-bottom:16px;}
+  .act:last-child{padding-bottom:0;}
+  .act .adot{width:29px;height:29px;border-radius:9px;display:grid;place-items:center;flex-shrink:0;font-size:13px;background:#fff;border:1px solid var(--border-soft);z-index:1;}
+  .adot.ai{color:#fff;border:none;}.adot.warn{color:var(--yellow);background:var(--yellow-soft);border-color:transparent;}.adot.ok{color:var(--green);background:var(--green-soft);border-color:transparent;}
+  .act .atx{font-size:12.5px;color:var(--ink);line-height:1.4;}
+  .act .atx b{font-weight:600;}
+  .act .atm{font-size:10.5px;color:var(--faint);margin-top:2px;font-family:var(--font-m);}
+
+  /* AI assist notes */
+  .ai-intro{font-size:13px;color:var(--muted);line-height:1.55;background:#fff;border:1px solid var(--border-soft);border-radius:14px;padding:15px;}
+  .ai-intro b{color:var(--ink);font-weight:600;}
+  .xsum{background:#fff;border:1px solid var(--border-soft);border-radius:14px;padding:14px;}
+  .xsum .xn{font-family:var(--font-d);font-weight:700;font-size:15px;}
+  .xsum .xs{font-size:12px;color:var(--faint);margin-top:2px;}
+  .xnote{display:flex;align-items:flex-start;gap:9px;font-size:12.5px;color:var(--muted);line-height:1.4;}
+  .xnote .xi{width:18px;height:18px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;font-size:10px;font-weight:700;margin-top:1px;}
+  .xnote.ok .xi{background:var(--green-soft);color:var(--green);}.xnote.warn .xi{background:var(--yellow-soft);color:var(--yellow);}.xnote.bad .xi{background:var(--red-soft);color:var(--red);}.xnote.ai .xi{color:#fff;}
+  .xnote b{color:var(--ink);font-weight:600;}
+  .xprov{font-family:var(--font-m);font-size:10.5px;color:var(--faint);display:flex;align-items:center;gap:7px;margin-top:2px;}
+  .xprov .gi{width:12px;height:12px;border-radius:4px;}
+  .conf{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--border-soft);border-radius:14px;padding:14px;}
+  .conf .ring{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;flex-shrink:0;font-family:var(--font-d);font-weight:800;font-size:14px;color:#fff;}
+  .conf .ct{font-size:12.5px;color:var(--muted);line-height:1.35;}
+  .conf .ct b{color:var(--ink);font-family:var(--font-d);}
+
+  .statusbar{height:34px;flex-shrink:0;background:var(--surface);border-top:1px solid var(--border);display:flex;align-items:center;padding:0 18px;gap:14px;font-size:11.5px;color:var(--muted);position:relative;z-index:20;}
+  .sb-ai{display:inline-flex;align-items:center;gap:7px;}
+  .sb-ai .gi{width:13px;height:13px;border-radius:4px;}
+  .sb-right{margin-left:auto;display:flex;align-items:center;gap:14px;color:var(--faint);}
+  .sb-pip{width:3px;height:3px;border-radius:50%;background:var(--faint);}
+
+  /* toast */
+  .toast{position:fixed;bottom:40px;left:50%;transform:translateX(-50%) translateY(20px);background:#1F1F1F;color:#fff;font-size:13px;font-weight:500;padding:11px 18px;border-radius:999px;box-shadow:0 16px 40px rgba(0,0,0,0.3);opacity:0;pointer-events:none;transition:all .25s ease;z-index:400;max-width:80%;}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+  /* table (workspace) */
+  .ctable{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;}
+  .ctable .thead{display:grid;grid-template-columns:30px 2.2fr 1.5fr 1.3fr 0.7fr 0.5fr;gap:10px;padding:11px 16px;border-bottom:1px solid var(--border);font-family:var(--font-m);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--faint);align-items:center;}
+  .crow{display:grid;grid-template-columns:30px 2.2fr 1.5fr 1.3fr 0.7fr 0.5fr;gap:10px;padding:12px 16px;border-bottom:1px solid var(--border-soft);align-items:center;}
+  .crow:last-child{border-bottom:none;}
+  .crow:hover{background:var(--surface-v);}
+  .crow .rk{font-family:var(--font-d);font-weight:700;font-size:13px;color:var(--faint);text-align:center;}
+  .cwho{display:flex;align-items:center;gap:11px;min-width:0;}
+  .cwho img{width:34px;height:34px;border-radius:50%;background:var(--surface-v);flex-shrink:0;}
+  .cwho .cn{font-size:13.5px;font-weight:600;line-height:1.15;cursor:pointer;}
+  .cwho .cn:hover{color:var(--blue);text-decoration:underline;}
+  .cwho .cr{font-size:11px;color:var(--faint);}
+  .crank{font-family:var(--font-d);font-weight:800;font-size:13px;color:var(--faint);text-align:center;}
+  .cproj{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--muted);min-width:0;}
+  .copen{height:30px;padding:0 15px;border-radius:999px;border:1px solid var(--border);background:var(--surface);font-family:var(--font-b);font-size:12px;font-weight:600;color:var(--ink);cursor:pointer;line-height:1;}
+  .copen:hover{background:var(--blue-soft);border-color:#c3d9fb;color:var(--blue-deep);}
+  .cand-insight{display:flex;gap:13px;align-items:flex-start;background:linear-gradient(180deg,#F6F4FE,#FCF5FA);border:1px solid #ECE6FB;border-radius:16px;padding:15px 16px;margin-bottom:16px;}
+  .cand-insight .cii{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-size:16px;flex-shrink:0;}
+  .cand-insight .cit{font-family:var(--font-d);font-weight:700;font-size:14.5px;}
+  .cand-insight .cis{font-size:12.5px;color:var(--muted);margin-top:2px;}
+  .cichips{display:flex;flex-wrap:wrap;gap:8px;margin-top:11px;}
+  .cichip{font-size:12px;font-weight:500;color:var(--muted);background:#fff;border:1px solid var(--border-soft);border-radius:999px;padding:5px 11px;}
+  .cichip b{font-family:var(--font-d);font-weight:800;color:var(--ink);}
+  .cichip.ai b{color:var(--ai-violet);} .cichip.warn b{color:#c5221f;}
+  .cand-askai{position:sticky;bottom:18px;margin:24px 16px 2px;height:54px;width:auto;display:flex;align-items:center;justify-content:center;gap:9px;border:none;border-radius:999px;color:#fff;font-family:var(--font-d);font-weight:700;font-size:15px;cursor:pointer;box-shadow:0 12px 30px rgba(90,80,200,0.34);z-index:5;}
+  .cand-askai .spark{font-size:16px;}
+  .fitcell{display:flex;align-items:center;gap:9px;}
+  .fitcell .fitbar{flex:1;height:6px;border-radius:3px;background:var(--surface-v);overflow:hidden;}
+  .fitcell .fitbar i{display:block;height:100%;border-radius:3px;}
+  .fitcell .fitnum{font-family:var(--font-d);font-size:13px;font-weight:700;min-width:34px;}
+  .stchip{font-size:11.5px;font-weight:600;padding:5px 11px;border-radius:999px;display:inline-flex;align-items:center;gap:6px;cursor:pointer;border:1px solid transparent;white-space:nowrap;}
+  .stchip:hover{box-shadow:0 0 0 2px rgba(26,115,232,.18);}
+  .stchip .d{width:7px;height:7px;border-radius:50%;}
+  .notescell{display:flex;align-items:center;justify-content:center;gap:5px;font-size:11.5px;font-weight:600;color:var(--blue);cursor:pointer;}
+  .assessbtn{height:30px;padding:0 12px;border-radius:8px;border:1px solid var(--border);background:#fff;font-size:11.5px;font-weight:600;color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:6px;}
+  .assessbtn:hover{background:var(--blue-soft);border-color:#c3d9fb;color:var(--blue-deep);}
+  .filtpills{display:flex;gap:7px;margin-bottom:14px;flex-wrap:wrap;}
+  .fp{height:30px;padding:0 12px;border-radius:999px;border:1px solid var(--border);background:#fff;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;display:inline-flex;align-items:center;gap:6px;}
+  .fp .d{width:7px;height:7px;border-radius:50%;}
+  .fp.active{background:var(--ink);color:#fff;border-color:var(--ink);}
+
+  /* switcher */
+  .switcher{position:relative;}
+  .swbtn{display:flex;align-items:center;gap:11px;padding:11px 14px;border:1px solid var(--border);border-radius:13px;background:var(--surface);cursor:pointer;width:100%;}
+  .swbtn:hover{border-color:#c3d9fb;}
+  .swbtn .pl{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;color:#fff;font-weight:700;font-size:12px;font-family:var(--font-d);flex-shrink:0;}
+  .swbtn .si{flex:1;min-width:0;text-align:left;}
+  .swbtn .sc{font-size:11px;color:var(--muted);}
+  .swbtn .sr{font-family:var(--font-d);font-weight:700;font-size:14px;line-height:1.1;}
+  .swbtn .chev{color:var(--muted);}
+  .swmenu{position:absolute;top:calc(100% + 6px);left:0;right:0;background:#fff;border:1px solid var(--border);border-radius:13px;box-shadow:0 16px 40px rgba(20,30,60,.16);padding:6px;z-index:50;display:none;}
+  .swmenu.open{display:block;}
+  .switem{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:9px;cursor:pointer;}
+  .switem:hover{background:var(--surface-v);}
+  .switem .pl{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;color:#fff;font-weight:700;font-size:11px;font-family:var(--font-d);flex-shrink:0;}
+  .switem .swt{font-size:13px;font-weight:600;}
+  .switem .sws{font-size:11px;color:var(--faint);}
+  .swmenu .swall{border-top:1px solid var(--border-soft);margin-top:4px;padding-top:4px;}
+  .swall .switem{color:var(--blue);font-weight:600;font-size:12.5px;justify-content:center;}
+
+  /* popover */
+  .pop{position:fixed;background:#fff;border:1px solid var(--border);border-radius:13px;box-shadow:0 18px 44px rgba(20,30,60,.2);padding:8px;z-index:300;width:260px;display:none;}
+  .pop.open{display:block;}
+  .pop .ph{font-size:11px;color:var(--faint);font-weight:600;padding:4px 8px;}
+  .popopt{display:flex;align-items:center;gap:9px;padding:8px;border-radius:8px;cursor:pointer;font-size:13px;}
+  .popopt:hover{background:var(--surface-v);}
+  .popopt .d{width:8px;height:8px;border-radius:50%;}
+  .pop textarea{width:100%;border:1px solid var(--border);border-radius:9px;padding:9px;font-family:var(--font-b);font-size:12.5px;resize:none;height:54px;margin-top:6px;outline:none;}
+  .pop .savebtn{width:100%;height:32px;border-radius:9px;border:none;background:var(--blue);color:#fff;font-size:12.5px;font-weight:600;cursor:pointer;margin-top:6px;}
+
+  /* modal */
+  .scrim{position:absolute;inset:0;background:rgba(20,28,48,.34);z-index:200;display:none;align-items:center;justify-content:center;padding:30px;}
+  .scrim.open{display:flex;}
+  .modal{background:#fff;border-radius:18px;width:540px;max-width:100%;max-height:84%;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 30px 70px rgba(0,0,0,.3);}
+  .modal-h{padding:18px 20px;border-bottom:1px solid var(--border-soft);display:flex;align-items:center;gap:12px;}
+  .modal-h img{width:38px;height:38px;border-radius:50%;background:var(--surface-v);}
+  .modal-h .mt{font-family:var(--font-d);font-weight:700;font-size:15px;}
+  .modal-h .ms{font-size:12px;color:var(--faint);}
+  .modal-h .x{margin-left:auto;cursor:pointer;color:var(--muted);width:30px;height:30px;border-radius:8px;display:grid;place-items:center;}
+  .modal-h .x:hover{background:var(--surface-v);}
+  .modal-b{padding:18px 20px;overflow-y:auto;}
+  .thread{position:relative;padding-left:6px;}
+  .titem{display:flex;gap:12px;padding-bottom:16px;position:relative;}
+  .titem .ti-d{width:30px;height:30px;border-radius:9px;flex-shrink:0;display:grid;place-items:center;font-size:12px;}
+  .titem .tt{font-size:13px;}.titem .tt b{font-weight:600;}
+  .titem .tj{font-size:12.5px;color:var(--muted);background:var(--surface-v);border-radius:10px;padding:9px 11px;margin-top:6px;}
+  .titem .tm{font-size:10.5px;color:var(--faint);font-family:var(--font-m);margin-top:4px;}
+  .addcomment{display:flex;gap:9px;margin-top:6px;}
+  .addcomment input{flex:1;border:1px solid var(--border);border-radius:10px;padding:0 12px;height:38px;font-family:var(--font-b);font-size:13px;outline:none;}
+  .addcomment button{height:38px;padding:0 16px;border-radius:10px;border:none;background:var(--blue);color:#fff;font-weight:600;font-size:13px;cursor:pointer;}
+
+  /* analysis running */
+  .anlz-wrap{max-width:640px;margin:8px auto 0;}
+  .anlz-hero{text-align:center;margin-bottom:26px;}
+  .anlz-hero .orb{width:64px;height:64px;border-radius:20px;margin:0 auto 16px;display:grid;place-items:center;font-size:26px;color:#fff;animation:aiglow 4s ease-in-out infinite;}
+  .anlz-hero h1{font-family:var(--font-d);font-weight:700;font-size:22px;}
+  .anlz-hero p{font-size:13.5px;color:var(--muted);margin-top:5px;}
+  .progress{height:8px;border-radius:5px;background:var(--surface-v);overflow:hidden;margin:20px 0 24px;}
+  .progress i{display:block;height:100%;width:0;border-radius:5px;background:linear-gradient(90deg,#4285F4,#9168F0,#E8519B);transition:width .6s ease;}
+  .steps{display:flex;flex-direction:column;gap:11px;margin-bottom:26px;}
+  .step{display:flex;align-items:center;gap:12px;padding:13px 15px;border:1px solid var(--border-soft);border-radius:13px;background:#fff;opacity:.5;transition:opacity .4s,border-color .4s;}
+  .step.on{opacity:1;border-color:#d7dbe6;}
+  .step.done{opacity:1;}
+  .step .si{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;flex-shrink:0;background:var(--surface-v);color:var(--faint);font-size:12px;}
+  .step.on .si{color:#fff;}
+  .step.done .si{background:var(--green-soft);color:var(--green);}
+  .step .stt{font-size:13.5px;font-weight:600;flex:1;}
+  .step .sts{font-size:11.5px;color:var(--faint);font-family:var(--font-m);}
+  .anlz-cands{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:26px;}
+  .acand{display:flex;flex-direction:column;align-items:center;gap:6px;width:64px;}
+  .acand img{width:42px;height:42px;border-radius:50%;background:var(--surface-v);filter:grayscale(1);opacity:.5;transition:all .4s;}
+  .acand.scored img{filter:none;opacity:1;}
+  .acand .asc{font-family:var(--font-d);font-weight:700;font-size:12px;color:var(--faint);}
+  .acand.scored .asc{color:var(--ink);}
+  .anlz-foot{text-align:center;}
+
+  /* candidate detail */
+  .cand-hero{display:flex;gap:18px;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:20px;margin-bottom:18px;}
+  .cand-hero img{width:72px;height:72px;border-radius:50%;background:var(--surface-v);flex-shrink:0;}
+  .cand-hero .ch{flex:1;min-width:0;}
+  .cand-hero h1{font-family:var(--font-d);font-weight:700;font-size:22px;}
+  .cand-hero .crole{font-size:13.5px;color:var(--muted);margin-top:2px;}
+  .cand-hero .ctags{display:flex;gap:7px;margin-top:10px;flex-wrap:wrap;}
+  .ctag{font-size:11px;font-weight:600;padding:4px 10px;border-radius:999px;background:var(--surface-v);color:var(--muted);}
+  .cand-hero .cfit{text-align:center;flex-shrink:0;}
+  .cand-hero .cfit .ring{width:74px;height:74px;border-radius:50%;display:grid;place-items:center;color:#fff;font-family:var(--font-d);font-weight:800;font-size:21px;}
+  .cand-hero .cfit .cl{font-size:11px;color:var(--faint);margin-top:6px;font-weight:600;}
+  .cgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;}
+  .cbox{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:17px;}
+  .cbox h3{font-family:var(--font-d);font-weight:700;font-size:14px;margin-bottom:13px;display:flex;align-items:center;gap:8px;}
+  .cbox h3 .gi{width:16px;height:16px;border-radius:5px;}
+  .reasonline{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--ink);line-height:1.45;margin-bottom:11px;}
+  .reasonline:last-child{margin-bottom:0;}
+  .reasonline .ri{width:20px;height:20px;border-radius:6px;flex-shrink:0;display:grid;place-items:center;font-size:11px;font-weight:700;margin-top:1px;}
+  .ri.ok{background:var(--green-soft);color:var(--green);}.ri.warn{background:var(--yellow-soft);color:var(--yellow);}.ri.bad{background:var(--red-soft);color:var(--red);}
+  .skillmatch{display:flex;flex-wrap:wrap;gap:7px;}
+  .sm{font-size:12px;font-weight:600;padding:5px 11px;border-radius:999px;display:inline-flex;align-items:center;gap:6px;}
+  .sm.has{background:var(--green-soft);color:#137333;}.sm.miss{background:var(--surface-v);color:var(--faint);text-decoration:line-through;}
+  .cactions{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px;}
+
+  /* shortlist */
+  .sl-item{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--border);border-radius:15px;padding:14px 16px;margin-bottom:11px;}
+  .sl-item .hand{color:var(--faint);cursor:grab;}
+  .sl-item .rk{font-family:var(--font-d);font-weight:800;font-size:17px;color:var(--blue);width:20px;text-align:center;}
+  .sl-item img{width:42px;height:42px;border-radius:50%;background:var(--surface-v);}
+  .sl-item .si{flex:1;min-width:0;}
+  .sl-item .sn{font-size:14px;font-weight:600;}
+  .sl-item .sr{font-size:12px;color:var(--muted);margin-top:1px;}
+  .sl-item .sfit{font-family:var(--font-d);font-weight:700;font-size:15px;}
+  .sl-item .srm{color:var(--faint);cursor:pointer;width:28px;height:28px;border-radius:8px;display:grid;place-items:center;}
+  .sl-item .srm:hover{background:var(--red-soft);color:var(--red);}
+
+  /* outreach */
+  .ovars{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
+  .ovar{height:32px;padding:0 13px;border-radius:999px;border:1px solid var(--border);background:#fff;font-size:12.5px;font-weight:600;color:var(--muted);cursor:pointer;}
+  .ovar.active{background:var(--blue-soft);color:var(--blue-deep);border-color:#c3d9fb;}
+  .omsg{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:18px;font-size:13.5px;line-height:1.65;color:var(--ink);white-space:pre-wrap;min-height:230px;}
+  .omsg .tok{background:#F2EEFD;color:#6b46c1;border-radius:5px;padding:1px 5px;font-weight:600;}
+
+  /* brewing empty */
+  .brew{max-width:460px;margin:60px auto 0;text-align:center;}
+  .brew .orb{width:74px;height:74px;border-radius:22px;margin:0 auto 20px;display:grid;place-items:center;font-size:30px;color:#fff;animation:aiglow 4s ease-in-out infinite;}
+  .brew h1{font-family:var(--font-d);font-weight:700;font-size:22px;margin-bottom:8px;}
+  .brew p{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:20px;}
+  .brew .bchips{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;}
+  .bchip{height:36px;padding:0 15px;border-radius:999px;border:1px solid var(--border);background:#fff;font-size:13px;font-weight:600;color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:7px;}
+  .bchip:hover{background:var(--blue-soft);border-color:#c3d9fb;color:var(--blue-deep);}
+
+  /* CHATBOT */
+  .cb-launch{position:absolute;bottom:50px;right:26px;z-index:120;display:flex;align-items:center;gap:10px;height:52px;padding:0 20px 0 16px;border-radius:999px;border:none;cursor:pointer;color:#fff;box-shadow:0 12px 30px rgba(145,104,240,.4);animation:aiglow 4s ease-in-out infinite;}
+  .cb-launch .sp{font-size:19px;}
+  .cb-launch .lb{font-size:14px;font-weight:600;}
+  .cb-drawer{position:absolute;top:0;right:0;bottom:0;width:420px;background:#fff;border-left:1px solid var(--border);z-index:150;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);box-shadow:-20px 0 50px rgba(20,30,60,.16);}
+  .cb-drawer.open{transform:translateX(0);}
+  .cb-head{padding:16px 18px;border-bottom:1px solid var(--border-soft);display:flex;align-items:center;gap:11px;background:linear-gradient(120deg,#F4F7FF,#FCF5FA);}
+  .cb-head .gi{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;color:#fff;font-size:15px;flex-shrink:0;}
+  .cb-head .ct{flex:1;}
+  .cb-head .ctt{font-family:var(--font-d);font-weight:700;font-size:15px;}
+  .cb-head .cts{font-size:11.5px;color:var(--muted);}
+  .cb-head .x{cursor:pointer;color:var(--muted);width:30px;height:30px;border-radius:8px;display:grid;place-items:center;}
+  .cb-head .x:hover{background:rgba(0,0,0,.05);}
+  .cb-msgs{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:14px;}
+  .cbm{display:flex;gap:10px;max-width:90%;}
+  .cbm.user{align-self:flex-end;flex-direction:row-reverse;}
+  .cbm .cba{width:28px;height:28px;border-radius:8px;flex-shrink:0;display:grid;place-items:center;font-size:13px;color:#fff;}
+  .cbm.user .cba{background:var(--blue-soft);color:var(--blue-deep);font-family:var(--font-d);font-weight:700;font-size:11px;}
+  .cbm .bub{padding:11px 14px;border-radius:14px;font-size:13.5px;line-height:1.5;}
+  .cbm.ai .bub{background:var(--surface-v);color:var(--ink);border-top-left-radius:5px;}
+  .cbm.user .bub{background:var(--blue);color:#fff;border-top-right-radius:5px;}
+  .cbm .bub b{font-weight:600;}
+  .cbm .bub .didbtn{display:inline-flex;align-items:center;gap:7px;margin-top:9px;height:32px;padding:0 13px;border-radius:9px;background:#fff;border:1px solid var(--border);font-size:12.5px;font-weight:600;color:var(--blue-deep);cursor:pointer;}
+  .cbm .bub .didbtn:hover{background:var(--blue-soft);}
+  .cb-chips{padding:10px 16px;display:flex;gap:8px;flex-wrap:wrap;border-top:1px solid var(--border-soft);}
+  .cbchip{height:32px;padding:0 12px;border-radius:999px;border:1px solid var(--border);background:#fff;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;white-space:nowrap;}
+  .cbchip:hover{background:var(--blue-soft);color:var(--blue-deep);border-color:#c3d9fb;}
+  .cb-input{padding:12px 16px 16px;border-top:1px solid var(--border-soft);display:flex;gap:9px;align-items:center;}
+  .cb-input input{flex:1;height:42px;border:1px solid var(--border);border-radius:12px;padding:0 14px;font-family:var(--font-b);font-size:13.5px;outline:none;}
+  .cb-input input:focus{border-color:var(--ai-violet);box-shadow:0 0 0 3px rgba(145,104,240,.13);}
+  .cb-input .send{width:42px;height:42px;border-radius:12px;border:none;color:#fff;cursor:pointer;display:grid;place-items:center;flex-shrink:0;}
+  .cb-typing{display:flex;align-items:center;gap:4px;padding:11px 14px;background:var(--surface-v);border-radius:14px;border-top-left-radius:5px;width:fit-content;}
+
+  .candsearch input{flex:1;border:none;outline:none;background:transparent;font-family:var(--font-b);font-size:13.5px;color:var(--ink);}
+  .accept-card{background:linear-gradient(180deg,#F1FAF3,#FFFFFF);border:1px solid #BFE3C9;border-radius:16px;padding:17px;margin-bottom:16px;}
+  .accept-card .ah{display:flex;align-items:center;gap:11px;margin-bottom:13px;}
+  .accept-card .ai-ic{width:30px;height:30px;border-radius:9px;background:var(--green-soft);color:var(--green);display:grid;place-items:center;flex-shrink:0;}
+  .accept-card .at2{font-family:var(--font-d);font-weight:700;font-size:15px;}
+  .accept-card .ad{font-size:12px;color:var(--muted);}
+  .accept-card .joinpill{margin-left:auto;font-size:11px;font-weight:600;color:#137333;background:var(--green-soft);padding:5px 11px;border-radius:999px;}
+  .email-evi{background:#fff;border:1px solid var(--border-soft);border-radius:12px;padding:13px;display:flex;gap:11px;}
+  .email-evi .env{width:32px;height:32px;border-radius:8px;background:var(--blue-soft);color:var(--blue-deep);display:grid;place-items:center;flex-shrink:0;}
+  .email-evi .es{font-size:11px;color:var(--faint);}
+  .email-evi .esub{font-size:13px;font-weight:600;margin:1px 0 5px;}
+  .email-evi .ebody{font-size:12.5px;color:var(--muted);line-height:1.5;font-style:italic;}
+  .accept-risk{display:flex;align-items:flex-start;gap:9px;font-size:12.5px;color:#7a5600;background:var(--yellow-soft);border:1px solid #f0e0a8;border-radius:11px;padding:11px 13px;margin-top:11px;line-height:1.5;}
+  .attach-list{display:flex;flex-direction:column;gap:8px;}
+  .attach-row{display:flex;align-items:center;gap:12px;padding:10px 13px;border:1px solid var(--border-soft);border-radius:12px;cursor:pointer;background:#fff;transition:.15s;}
+  .attach-row:hover{border-color:#c3d9fb;background:var(--blue-soft);}
+  .attach-row .fic{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;flex-shrink:0;color:#fff;}
+  .attach-row .fn{font-size:13px;font-weight:600;line-height:1.2;}
+  .attach-row .fm{font-size:11px;color:var(--faint);}
+  .attach-row .ftype{margin-left:auto;font-size:10.5px;font-weight:600;padding:4px 9px;border-radius:999px;background:var(--surface-v);color:var(--muted);white-space:nowrap;}
+  .attach-add{display:flex;align-items:center;justify-content:center;gap:7px;padding:11px;border:1px dashed var(--border);border-radius:12px;color:var(--muted);font-size:12.5px;font-weight:600;cursor:pointer;}
+  .attach-add:hover{border-color:var(--blue);color:var(--blue);}
+  .aisoft{background:#F1ECFC!important;color:#7C5CDB!important;}
+  .cand-actions{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap;}
+  .ca-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
+  .statusdd{height:42px;padding:0 16px;border-radius:999px;border:none;background:var(--blue);color:#fff;font-weight:600;font-size:13.5px;cursor:pointer;display:inline-flex;align-items:center;gap:9px;box-shadow:0 4px 12px rgba(26,115,232,.26);}
+  .statusdd:hover{background:var(--blue-deep);}
+  .stdot{width:8px;height:8px;border-radius:50%;display:inline-block;flex-shrink:0;}
+
+  .hidden{display:none !important;}
+</style>
+</head>
+<body>
+<div class="frame-label"><span>RecruitOS · Interactive Prototype — click anything · open "Ask" for the copilot</span><span>Desktop · 1440 × 864</span></div>
+
+<div class="app" id="app">
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="tb-left" id="tbLeft"><div class="mark" data-nav="overview"><div class="m grad grain"><b>R</b></div><div class="wm">RecruitOS</div></div></div>
+    <div class="tb-center">
+      <div class="hdr-search">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+        <input placeholder="Search projects, candidates, notes — or just ask…">
+        <span class="scope">All workspaces</span><span class="kbd">⌘K</span>
+      </div>
+    </div>
+    <div class="tb-right">
+      <button class="askbtn grad grain" data-action="open-chat"><span class="spark">✦</span> Ask AI</button>
+      <div class="icobtn" data-action="notifs"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg><span class="badge"></span></div>
+      <div class="me" data-action="profile"><div class="av">MJ</div><div class="nm">Meera</div></div>
+    </div>
+  </div>
+
+  <div class="body">
+    <!-- RAIL -->
+    <aside class="rail" id="rail">
+      <div class="rail-top">
+        <div class="ws"><div class="logo">TC</div><div class="wsx"><div class="t">Talent Co</div><div class="s">12 seats · Agency</div></div></div>
+        <button class="collapse-btn" id="railToggle" title="Collapse sidebar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="9" y1="4" x2="9" y2="20"/></svg></button>
+      </div>
+      <button class="newbtn" data-nav="new-project"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg><span class="lbl-txt">New project</span></button>
+      <div class="nav-sec">Workspace</div>
+      <div class="ni" data-nav="overview" data-sec="overview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span class="lbl-txt">Overview</span></div>
+      <div class="ni" data-nav="projects" data-sec="projects"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span class="lbl-txt">Projects</span><span class="ct">9</span></div>
+      <div class="ni" data-nav="candidates" data-sec="candidates"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M17 11l2 2 3-3.5"/></svg><span class="lbl-txt">Candidates</span></div>
+      <div class="ni" data-nav="outreach" data-sec="outreach"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg><span class="lbl-txt">Outreach</span></div>
+      <div class="ni" data-nav="reports" data-sec="reports"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 19V5M9 19v-7M14 19V8M19 19v-4"/></svg><span class="lbl-txt">Reports</span></div>
+      <div class="ni" data-nav="knowledge" data-sec="knowledge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3l9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4"/></svg><span class="lbl-txt">Knowledge</span></div>
+      <div class="rail-foot">
+        <div class="ni" data-nav="settings" data-sec="settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1.3l2-1.6-2-3.4-2.4 1a7 7 0 0 0-2.2-1.3L14 2h-4l-.3 2.4a7 7 0 0 0-2.2 1.3l-2.4-1-2 3.4 2 1.6A7 7 0 0 0 5 12a7 7 0 0 0 .1 1.3l-2 1.6 2 3.4 2.4-1a7 7 0 0 0 2.2 1.3L10 22h4l.3-2.4a7 7 0 0 0 2.2-1.3l2.4 1 2-3.4-2-1.6A7 7 0 0 0 19 12z"/></svg><span class="lbl-txt">Settings</span></div>
+        <div class="ni" data-nav="help" data-sec="help"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 .8-1 1.7M12 17h.01"/></svg><span class="lbl-txt">Help</span></div>
+      </div>
+    </aside>
+
+    <!-- STAGE -->
+    <div class="stage">
+      <main class="main" id="main"></main>
+      <aside class="aside-ai" id="aside"></aside>
+    </div>
+  </div>
+
+  <div class="statusbar">
+    <span class="sb-ai"><span class="gi grad grain" style="width:13px;height:13px;border-radius:4px"></span> <span id="sbText">AI watching 9 projects · 64 candidates · live</span></span>
+    <div class="sb-right"><span>Talent Co</span><span class="sb-pip"></span><span>Meera Joshi</span><span class="sb-pip"></span><span>UTC+5:30</span></div>
+  </div>
+
+  <!-- CHATBOT -->
+  <div class="cb-drawer" id="cbDrawer">
+    <div class="cb-head">
+      <div class="gi grad grain">✦</div>
+      <div class="ct"><div class="ctt">Copilot</div><div class="cts">Ask anything · I can act on it too</div></div>
+      <div class="x" data-action="close-chat"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></div>
+    </div>
+    <div class="cb-msgs" id="cbMsgs"></div>
+    <div class="cb-chips" id="cbChips"></div>
+    <div class="cb-input">
+      <input id="cbInput" placeholder="Message Copilot…">
+      <button class="send grad grain" data-action="cb-send"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/></svg></button>
+    </div>
+  </div>
+
+  <!-- popover + modal + scrim mount points -->
+  <div class="pop" id="pop"></div>
+  <div class="scrim" id="scrim"><div class="modal" id="modal"></div></div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============== DATA ============== */
+function av(seed,s){return 'https://api.dicebear.com/9.x/avataaars/png?seed='+seed+'&size='+(s||72);}
+var STATUSES={
+  sourced:{label:'Sourced',color:'#5F6368',bg:'#F1F3F9'},
+  screened:{label:'Screened',color:'#0a7d85',bg:'#E0F5F5'},
+  interview:{label:'Interview',color:'#174EA6',bg:'#E8F0FE'},
+  offer:{label:'Offer extended',color:'#C98A00',bg:'#FEF7E0'},
+  accepted:{label:'Accepted',color:'#137333',bg:'#E6F4EA'},
+  rejected:{label:'Rejected',color:'#c5221f',bg:'#FCE8E6'}
+};
+var CANDS=[
+  {id:'anaya',name:'Anaya Krishnan',seed:'Anaya',role:'Senior Backend Engineer',co:'ex-Stripe',fit:87,status:'interview',notice:'90 days',
+   strengths:['7 yrs backend at scale — Stripe payments infra','Deep Node.js + PostgreSQL, exactly the core stack','Led a 4-engineer pod — covers the mentoring ask'],
+   concerns:['90-day notice period — longer than Acme prefers','No direct Kubernetes in listed experience'],
+   has:['Node.js','PostgreSQL','AWS','React'],miss:['Kubernetes'],sources:'3 sources · résumé, LinkedIn, GitHub'},
+  {id:'marcus',name:'Marcus Lee',seed:'Marcus',role:'Senior Engineer',co:'Razorpay',fit:81,status:'accepted',notice:'30 days',
+   strengths:['Strong fintech backend background','Short 30-day notice — fast to onboard','Solid AWS + PostgreSQL'],
+   concerns:['Less React depth than the brief implies','Hasn\'t formally led a team'],
+   has:['Node.js','PostgreSQL','AWS'],miss:['React','Kubernetes'],sources:'2 sources · résumé, LinkedIn'},
+  {id:'sofia',name:'Sofia Almeida',seed:'Sofia',role:'Backend Developer',co:'Zoho',fit:64,status:'screened',notice:'60 days',
+   strengths:['Reliable mid-senior backend profile','GraphQL experience — a listed nice-to-have'],
+   concerns:['Only 5 yrs vs 7+ asked','No cloud-scale infra experience'],
+   has:['Node.js','PostgreSQL','GraphQL'],miss:['AWS','Kubernetes','React'],sources:'1 source · résumé'},
+  {id:'dev',name:'Dev Sharma',seed:'Dev',role:'Software Engineer',co:'Swiggy',fit:58,status:'sourced',notice:'45 days',
+   strengths:['Good product-eng instincts at scale','React + Node full-stack'],
+   concerns:['Backend depth is thinner than role needs','Possible duplicate of an archived profile'],
+   has:['Node.js','React'],miss:['PostgreSQL','AWS','Kubernetes'],sources:'2 sources · LinkedIn, résumé'},
+  {id:'liang',name:'Liang Wu',seed:'Liang',role:'Backend Engineer',co:'Freshworks',fit:55,status:'sourced',notice:'60 days',
+   strengths:['Steady backend delivery record'],
+   concerns:['Stack overlap partial — limited AWS','Comp expectation may exceed band'],
+   has:['Node.js','PostgreSQL'],miss:['AWS','React','Kubernetes'],sources:'1 source · pool record'},
+  {id:'priya',name:'Priya Nair',seed:'Priya',role:'Backend Engineer',co:'Postman',fit:49,status:'sourced',notice:'30 days',
+   strengths:['API-first mindset','Fast availability'],
+   concerns:['Below experience bar','Limited data-layer depth'],
+   has:['Node.js'],miss:['PostgreSQL','AWS','React','Kubernetes'],sources:'1 source · résumé'},
+  {id:'omar',name:'Omar Haddad',seed:'Omar',role:'Full-stack Engineer',co:'Zeta',fit:38,status:'rejected',notice:'—',
+   strengths:['Broad full-stack exposure'],
+   concerns:['Generalist — not backend-deep enough','Skills mismatch on core stack'],
+   has:['React'],miss:['Node.js','PostgreSQL','AWS','Kubernetes'],sources:'1 source · LinkedIn'},
+  {id:'tom',name:'Tom Becker',seed:'Tom',role:'Junior Engineer',co:'Acme intern alum',fit:31,status:'rejected',notice:'—',
+   strengths:['Knows Acme\'s domain from internship'],
+   concerns:['Too junior for a senior req','Major gaps across required stack'],
+   has:[],miss:['Node.js','PostgreSQL','AWS','React','Kubernetes'],sources:'1 source · ATS'}
+];
+var PROJECTS=[
+  {id:'acme',co:'Acme Corp',role:'Senior Backend Engineer',logo:'AC',grad:true,status:'active',cands:8,fit:87,sla:'5d left',risk:false,pipe:[['#1E8E3E',40],['#174EA6',25],['#0E9CA6',20],['#5F6368',15]]},
+  {id:'zenco',co:'Zenco Labs',role:'Product Designer',logo:'ZL',color:'#6B46C1',status:'active',cands:5,fit:78,sla:'9d left',risk:false,pipe:[['#1E8E3E',30],['#174EA6',30],['#5F6368',40]]},
+  {id:'nimbus',co:'Nimbus AI',role:'DevOps Lead',logo:'NA',color:'#0E9CA6',status:'risk',cands:12,fit:71,sla:'2d left',risk:true,pipe:[['#174EA6',25],['#0E9CA6',35],['#5F6368',40]]},
+  {id:'orbit',co:'Orbit Health',role:'QA Engineer',logo:'OH',color:'#D93025',status:'active',cands:6,fit:69,sla:'4d left',risk:false,pipe:[['#1E8E3E',20],['#0E9CA6',30],['#5F6368',50]]},
+  {id:'vertex',co:'Vertex Pay',role:'Engineering Manager',logo:'VP',color:'#C98A00',status:'hold',cands:4,fit:74,sla:'on hold',risk:false,pipe:[['#174EA6',40],['#5F6368',60]]},
+  {id:'bluepeak',co:'BluePeak',role:'Data Scientist',logo:'BP',color:'#1A73E8',status:'filled',cands:9,fit:91,sla:'filled',risk:false,pipe:[['#1E8E3E',100]]}
+];
+function cand(id){return CANDS.find(function(c){return c.id===id;});}
+function proj(id){return PROJECTS.find(function(p){return p.id===id;});}
+var STATE={view:'overview',projId:'acme',candId:'anaya',filter:'all',shortlist:['anaya','marcus','sofia']};
+
+/* ============== HELPERS ============== */
+function $(id){return document.getElementById(id);}
+var _tt;
+function toast(m){var t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(function(){t.classList.remove('show');},2300);}
+function plogo(p,size){var st=size?'width:'+size+'px;height:'+size+'px;':'';if(p.grad)return '<div class="pl grad grain" style="'+st+'">'+p.logo+'</div>';return '<div class="pl" style="'+st+'background:'+(p.color||'#1A73E8')+'">'+p.logo+'</div>';}
+function fitColor(f){return f>=75?'#1E8E3E':f>=55?'#C98A00':'#D93025';}
+function stChip(st){var s=STATUSES[st];return '<span class="stchip" style="background:'+s.bg+';color:'+s.color+'"><span class="d" style="background:'+s.color+'"></span>'+s.label+'</span>';}
+
+var SECTION_OF={overview:'overview',projects:'projects','new-project':'projects','add-candidates':'projects',analysis:'projects',workspace:'projects',candidate:'projects',shortlist:'projects',candidates:'candidates',outreach:'outreach','share-client':'reports',reports:'reports',knowledge:'knowledge',settings:'settings',help:'help'};
+function setActiveNav(sec){document.querySelectorAll('.ni').forEach(function(n){n.classList.toggle('active',n.getAttribute('data-sec')===sec);});}
+
+var VIEWS={};
+function go(view,opts){opts=opts||{};if(opts.projId)STATE.projId=opts.projId;if(opts.candId)STATE.candId=opts.candId;STATE.view=view;
+  var v=VIEWS[view]?VIEWS[view]():{main:'<div class="brew"><div class="orb grad grain">✦</div><h1>Coming together</h1><p>This part of RecruitOS is still brewing.</p></div>',aside:asideDefault()};
+  $('main').innerHTML=v.main;$('aside').innerHTML=v.aside;$('aside').className='aside-ai'+(v.plainAside?' plain':'');
+  setActiveNav(SECTION_OF[view]||view);$('main').scrollTop=0;
+  if(v.after)v.after();
+}
+function asideDefault(){return '<div class="ai-head"><span class="gi grad grain"></span><h3>Copilot</h3></div><div class="ai-body"><div class="ai-intro"><b>I\'m watching everything in the background.</b><br>Open me from any screen with <b>Ask AI</b> to search, summarise, or take an action by just describing it.</div><div class="xnote ai"><span class="xi grad grain">✦</span><span>9 projects · 64 candidates being tracked</span></div></div>';}
+
+/* ============== VIEW: OVERVIEW ============== */
+VIEWS.overview=function(){
+  var main=''+
+  '<div class="crumb"><span>Overview</span></div>'+
+  '<div class="hero" style="display:flex;align-items:flex-start;gap:14px;margin-bottom:22px"><div style="flex:1"><h1 class="title" style="font-size:25px">Good morning, Meera</h1><div class="subtitle" style="margin-bottom:0;display:flex;align-items:center;gap:8px"><span class="gi grad grain" style="width:18px;height:18px;border-radius:5px;display:inline-grid;place-items:center;color:#fff;font-size:11px">✦</span> You\'re on track across 9 roles — 4 things need you before noon.</div></div><div style="font-size:12.5px;color:var(--faint);font-weight:500;white-space:nowrap;padding-top:5px">Monday, 15 June 2026</div></div>'+
+  '<div class="kpis">'+
+    '<div class="kpi" data-nav="projects"><div class="num">9</div><div class="lab">Active roles</div><div class="delta up">▲ 2 this week</div></div>'+
+    '<div class="kpi" data-nav="candidates"><div class="num">64</div><div class="lab">Candidates in pipeline</div><div class="delta flat">across 9 projects</div></div>'+
+    '<div class="kpi" data-nav="workspace"><div class="num">3</div><div class="lab">Offers extended</div><div class="delta up">▲ 1 accepted</div></div>'+
+    '<div class="kpi" data-nav="reports"><div class="num">4</div><div class="lab">Placed in June</div><div class="delta up">▲ on target</div></div>'+
+  '</div>'+
+  '<div class="sec-h"><div class="lft"><h2>Needs you today</h2></div></div>'+
+  '<div class="pri-grid">'+
+    '<div class="pri"><div class="pic pic-warn">!</div><div class="pb"><div class="pt">2 roles breach SLA within 48h</div><div class="ps">Nimbus AI · Orbit Health</div><button class="pbtn" data-nav="workspace" data-proj="nimbus">Review</button></div><span class="pri-x" data-action="dismiss-pri">✕</span></div>'+
+    '<div class="pri"><div class="pic pic-ai aisoft">✦</div><div class="pb"><div class="pt">3 strong new matches for Acme Corp</div><div class="ps">All 80%+ fit · sourced overnight</div><button class="pbtn" data-nav="add-candidates" data-proj="acme">See matches</button></div><span class="pri-x" data-action="dismiss-pri">✕</span></div>'+
+    '<div class="pri"><div class="pic pic-ok">✓</div><div class="pb"><div class="pt">Marcus Lee accepted — move to placed?</div><div class="ps">Acme Corp — Senior Backend Engineer</div><button class="pbtn" data-nav="candidate" data-cand="marcus" data-proj="acme">Confirm placement</button></div><span class="pri-x" data-action="dismiss-pri">✕</span></div>'+
+    '<div class="pri"><div class="pic pic-info">○</div><div class="pb"><div class="pt">Zenco Labs is going cold</div><div class="ps">No activity in 4 days</div><button class="pbtn" data-nav="outreach">Re-engage</button></div><span class="pri-x" data-action="dismiss-pri">✕</span></div>'+
+  '</div>'+
+  '<div class="sec-h"><div class="lft"><h2>Your active projects</h2></div><span class="link" data-nav="projects">View all 9 ›</span></div>'+
+  '<div class="pmini-list">'+
+    PROJECTS.slice(0,3).map(function(p){return '<div class="pmini" data-nav="workspace" data-proj="'+p.id+'">'+plogo(p)+'<div class="pi"><div class="pic2">'+p.co+'</div><div class="pr">'+p.role+'</div></div><span class="pstat"><b>'+p.cands+'</b> candidates</span><span class="pstat">top fit <b>'+p.fit+'%</b></span><span class="psla'+(p.risk?' risk':'')+'">'+p.sla+'</span></div>';}).join('')+
+  '</div>';
+  var aside='<div class="ai-head"><span class="gi grad grain"></span><h3>Activity</h3><span class="live"><span class="dot"></span> Live</span></div><div class="ai-body"><div class="feed">'+
+    '<div class="act"><div class="adot ai aisoft">✦</div><div class="at"><div class="atx">Ranked <b>8 candidates</b> for Acme Corp</div><div class="atm">8 min ago</div></div></div>'+
+    '<div class="act"><div class="adot ai aisoft">✦</div><div class="at"><div class="atx">Sourced <b>3 new matches</b> overnight</div><div class="atm">2 hours ago</div></div></div>'+
+    '<div class="act"><div class="adot warn">!</div><div class="at"><div class="atx">Flagged <b>Nimbus AI</b> SLA risk</div><div class="atm">3 hours ago</div></div></div>'+
+    '<div class="act"><div class="adot ai aisoft">✦</div><div class="at"><div class="atx">Drafted outreach to <b>Anaya Krishnan</b></div><div class="atm">5 hours ago</div></div></div>'+
+    '<div class="act"><div class="adot ok">✓</div><div class="at"><div class="atx"><b>Marcus Lee</b> accepted the offer</div><div class="atm">6 hours ago</div></div></div>'+
+    '<div class="act"><div class="adot ai aisoft">✦</div><div class="at"><div class="atx">Generated client report · <b>BluePeak</b></div><div class="atm">Yesterday</div></div></div>'+
+  '</div></div>';
+  return {main:main,aside:aside};
+};
+
+/* ============== VIEW: PROJECTS ============== */
+VIEWS.projects=function(){
+  var cards=PROJECTS.map(function(p){
+    var scls=p.status==='active'?'s-active':p.status==='hold'?'s-hold':p.status==='filled'?'s-filled':'s-risk';
+    var slabel=p.status==='active'?'Active':p.status==='hold'?'On hold':p.status==='filled'?'Filled':'At risk';
+    var pipe=p.pipe.map(function(s){return '<i style="background:'+s[0]+';width:'+s[1]+'%"></i>';}).join('');
+    var act=(p.status==='filled'||p.status==='hold')?'':' data-nav="workspace" data-proj="'+p.id+'"';
+    return '<div class="pcard-full"'+act+'><div class="top">'+plogo(p)+'<div class="pi"><div class="pc">'+p.co+'</div><div class="pr">'+p.role+'</div></div><span class="schip '+scls+'"><span class="d"></span>'+slabel+'</span></div><div class="pipebar">'+pipe+'</div><div class="pmeta"><span><b>'+p.cands+'</b> candidates</span><span>top <b>'+p.fit+'%</b></span><span class="mr"><img src="'+av('Meera',44)+'"> <span style="font-size:11px">'+p.sla+'</span></span></div></div>';
+  }).join('');
+  var main=
+    '<div class="crumb"><span class="b" data-nav="overview">Overview</span><span class="sep">/</span><span>Projects</span></div>'+
+    '<div class="sec-h"><div class="lft"><h1 class="title" style="margin:0">Projects</h1><span class="cnt">· 9 open</span></div></div>'+
+    '<div class="ftabs"><div class="ftab active" data-filt="all">All</div><div class="ftab" data-filt="active"><span class="d" style="background:#1E8E3E"></span>Active</div><div class="ftab" data-filt="risk"><span class="d" style="background:#D93025"></span>At risk</div><div class="ftab" data-filt="hold"><span class="d" style="background:#9AA0A6"></span>On hold</div><div class="ftab" data-filt="filled"><span class="d" style="background:#1A73E8"></span>Filled</div></div>'+
+    '<div class="pgrid">'+cards+'</div>';
+  var aside='<div class="ai-head"><span class="gi grad grain"></span><h3>Today\'s briefing</h3></div><div class="ai-body">'+
+    '<div class="ai-intro"><b>Across your 9 projects:</b> 2 need attention today, 1 is filled and ready to close out.</div>'+
+    '<div class="xnote bad"><span class="xi">!</span><span><b>Nimbus AI</b> breaches SLA in 2 days — only mid-funnel candidates</span></div>'+
+    '<div class="xnote warn"><span class="xi">!</span><span><b>Orbit Health</b> pipeline is thin — consider sourcing</span></div>'+
+    '<div class="xnote ok"><span class="xi">✓</span><span><b>Acme Corp</b> has a lockable shortlist — Anaya leads at 87%</span></div>'+
+    '<div class="xnote ai"><span class="xi grad grain">✦</span><span><b>BluePeak</b> is filled — want me to draft the close-out report?</span></div>'+
+    '<div class="xprov"><span class="gi grad grain"></span> Updated 8 min ago · live</div>'+
+  '</div>';
+  return {main:main,aside:aside};
+};
+
+/* ============== VIEW: NEW PROJECT ============== */
+VIEWS['new-project']=function(){
+  var main='<div class="crumb"><span class="b" data-nav="projects">All projects</span><span class="sep">/</span><span>New project</span></div>'+
+    '<h1 class="title">New project</h1><div class="subtitle">Paste the client\'s brief and let AI structure the role — or fill it in yourself.</div>'+
+    '<div id="npPaste"><div class="card"><div style="display:flex;align-items:center;gap:8px;font-family:var(--font-d);font-weight:700;font-size:15px;margin-bottom:6px"><span class="gi grad grain" style="width:20px;height:20px;border-radius:6px"></span> Start from a brief</div><div style="font-size:13px;color:var(--muted);margin-bottom:14px">Paste a job description, a client email, or a rough note. AI extracts the role, skills, comp, and requirements.</div>'+
+    '<textarea id="jd" style="width:100%;height:200px;resize:none;border:1px solid var(--border);border-radius:14px;padding:15px;font-family:var(--font-b);font-size:13px;line-height:1.6;color:var(--ink);background:var(--surface-v);outline:none">Hi Meera — we\'re hiring a Senior Backend Engineer at Acme Corp (Bangalore, hybrid 3 days). Need someone with 7+ years building scalable services, strong in Node.js and React, solid PostgreSQL, ideally some AWS. GraphQL and Kubernetes would be a bonus. They\'ll work closely with the platform team and may mentor a couple of juniors. Budget is around 35-45 LPA. Long notice periods are tough for us. Thanks!</textarea>'+
+    '<div style="display:flex;align-items:center;gap:12px;margin-top:16px"><button class="btn-ai" data-action="parse"><span class="lbl"><span class="spark gtext">✦</span> Parse with AI</span></button><span class="link" data-action="manual" style="font-weight:600;color:var(--muted)">or fill in manually</span></div></div></div>'+
+    '<div id="npForm" class="card hidden"></div>';
+  return {main:main,aside:'<div class="ai-head"><span class="gi grad grain"></span><h3>AI assist</h3></div><div class="ai-body" id="npAside"><div class="ai-intro"><b>Paste a brief and I\'ll structure it.</b><br>I\'ll pull out the company, role, seniority, skills, comp, and requirements — and flag anything ambiguous for you to decide.</div></div>'};
+};
+function npFormHTML(manual){
+  function f(label,val){return '<div class="field"><label>'+label+(manual?'':' <span class="ai-tag"><span class="gi grad grain" style="width:9px;height:9px;border-radius:3px"></span> AI</span>')+'</label><input value="'+(manual?'':val)+'" '+(manual?'placeholder="'+val+'"':'')+'></div>';}
+  var chip=function(t,nice){return '<span class="skill'+(nice?' nice':'')+'">'+t+' <span class="x" data-toast="Edit skills (demo)">×</span></span>';};
+  var src=manual?'':'<div class="src-chip" style="display:inline-flex;align-items:center;gap:8px;background:var(--green-soft);color:#137333;font-size:12px;font-weight:600;padding:7px 13px;border-radius:999px;margin-bottom:18px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg> Extracted from pasted brief · review &amp; edit below</div>';
+  var aiSwitch=manual?'<div style="display:flex;align-items:center;gap:10px;margin-bottom:18px"><button class="btn-ai" data-action="switch-ai" style="height:38px"><span class="lbl"><span class="spark gtext">✦</span> Switch to AI parse</span></button><span style="font-size:12.5px;color:var(--muted)">Paste a brief instead and let AI fill this in</span></div>':'';
+  return src+aiSwitch+
+  '<div class="fgroup" style="margin-bottom:22px"><div class="fgroup-h" style="font-family:var(--font-m);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:13px">Role basics</div>'+
+  '<div class="frow" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">'+f('Company','Acme Corp')+f('Role title','Senior Backend Engineer')+'</div>'+
+  '<div class="frow" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">'+f('Seniority','Senior')+f('Employment type','Full-time')+'</div>'+
+  '<div class="frow" style="display:grid;grid-template-columns:1fr 1fr;gap:14px">'+f('Location','Bangalore · Hybrid')+f('Experience required','7+ years')+'</div></div>'+
+  '<div class="fgroup"><div class="fgroup-h" style="font-family:var(--font-m);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:13px">Requirements</div>'+
+  '<div class="field" style="margin-bottom:14px"><label>Must-have skills'+(manual?'':' <span class="ai-tag"><span class="gi grad grain" style="width:9px;height:9px;border-radius:3px"></span> AI</span>')+'</label><div class="chips">'+(manual?'':chip('Node.js')+chip('React')+chip('PostgreSQL')+chip('AWS'))+'<span class="skill-add" data-toast="Add skill (demo)">+ Add skill</span></div></div>'+
+  '<div class="field" style="margin-bottom:14px"><label>Nice-to-have'+(manual?'':' <span class="ai-tag"><span class="gi grad grain" style="width:9px;height:9px;border-radius:3px"></span> AI</span>')+'</label><div class="chips">'+(manual?'':chip('GraphQL',1)+chip('Kubernetes',1))+'<span class="skill-add" data-toast="Add skill (demo)">+ Add</span></div></div>'+
+  '<div class="frow" style="display:grid;grid-template-columns:1fr 1fr;gap:14px">'+f('Notice period','≤ 60 days')+f('Comp range','₹35–45 LPA')+'</div>'+
+  (manual?'':'<div class="flag" style="display:flex;align-items:flex-start;gap:9px;background:var(--yellow-soft);border:1px solid #f0e0a8;border-radius:12px;padding:12px 14px;font-size:12.5px;color:#7a5600;line-height:1.45;margin-top:14px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:1px"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg><span><b>Team leadership unclear.</b> The brief says "may mentor a couple of juniors" — I left this out. Add it as a must-have if leadership is required.</span></div>')+'</div>'+
+  '<div style="display:flex;align-items:center;justify-content:flex-end;gap:10px;margin-top:22px;padding-top:18px;border-top:1px solid var(--border-soft)"><button class="btn-ghost" data-nav="projects">Cancel</button><button class="btn-primary" data-action="create-project">Create project</button></div>';
+}
+/* field styles injected once */
+(function(){var s=document.createElement('style');s.textContent='.field label{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:var(--muted);margin-bottom:6px}.field input{width:100%;height:44px;border:1px solid var(--border);border-radius:11px;padding:0 14px;font-family:var(--font-b);font-size:14px;color:var(--ink);background:#fff;outline:none}.field input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(26,115,232,.12)}.ai-tag{display:inline-flex;align-items:center;gap:4px;font-size:9.5px;font-weight:600;color:var(--ai-violet);background:#F2EEFD;padding:2px 7px;border-radius:5px}.chips{display:flex;flex-wrap:wrap;gap:8px}.skill{display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 12px;border-radius:999px;background:var(--blue-soft);color:var(--blue-deep);font-size:13px;font-weight:600}.skill .x{opacity:.55;cursor:pointer;font-size:14px}.skill.nice{background:var(--surface-v);color:var(--muted)}.skill-add{height:34px;padding:0 13px;border-radius:999px;border:1px dashed var(--border);background:transparent;color:var(--muted);font-size:13px;font-weight:600;cursor:pointer}';document.head.appendChild(s);})();
+
+/* ============== VIEW: ADD CANDIDATES ============== */
+VIEWS['add-candidates']=function(){
+  var p=proj(STATE.projId)||proj('acme');
+  var added=CANDS.slice(0,6).map(function(c,i){
+    var src=i<2?'<span class="src pool">✦ From pool</span>':(i%2?'<span class="src link">LinkedIn</span>':'<span class="src resume">Résumé</span>');
+    return '<div class="added-row"><img src="'+av(c.seed,72)+'"><div class="an"><div class="ann" data-nav="candidate" data-cand="'+c.id+'" style="cursor:pointer">'+c.name+'</div><div class="anr">'+c.role+' · '+c.co+'</div></div>'+src+'<span class="ready"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px;height:13px"><path d="M20 6L9 17l-5-5"/></svg> Ready</span><span class="remove" data-toast="Removed from project (demo)">✕</span></div>';
+  }).join('');
+  var pool=[['Anaya Krishnan','Anaya','ex-Stripe · Backend',87,'#1E8E3E'],['Marcus Lee','Marcus','Sr. Engineer · Razorpay',81,'#1E8E3E'],['Liang Wu','Liang','Backend · Freshworks',55,'#C98A00']].map(function(x){
+    return '<div class="pcard" data-name="'+x[0]+'"><div class="ptop"><img src="'+av(x[1],76)+'"><div><div class="pn">'+x[0]+'</div><div class="pr">'+x[2]+'</div></div></div><div class="pfit"><div class="fitbar"><i style="width:'+x[3]+'%;background:'+x[4]+'"></i></div><span class="fitnum" style="color:'+x[4]+'">'+x[3]+'%</span></div><button class="addbtn" data-action="pooladd">+ Add to project</button></div>';
+  }).join('');
+  var main='<div class="crumb"><span class="b" data-nav="projects">All projects</span><span class="sep">/</span><span class="b" data-nav="workspace" data-proj="'+p.id+'">'+p.co+'</span><span class="sep">/</span><span>Add candidates</span></div>'+
+  '<div class="ctx" style="display:flex;align-items:center;gap:12px;margin-bottom:18px">'+plogo(p,40)+'<div><div style="font-size:12px;color:var(--muted)">'+p.co+'</div><div style="font-family:var(--font-d);font-weight:700;font-size:20px">'+p.role+' <span style="font-size:11px;font-weight:600;color:#137333;background:var(--green-soft);padding:4px 10px;border-radius:999px;margin-left:6px">Just created</span></div></div></div>'+
+  '<div class="sec-h"><div class="lft"><h2>Bring in candidates</h2></div></div>'+
+  '<div class="methods" style="display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-bottom:24px">'+
+    '<div class="method" data-action="method" data-m="Upload résumés"><div class="mi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M5 16v3a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3"/></svg></div><div><div class="mt">Upload résumés</div><div class="ms">Drop PDFs or DOCX — AI parses each</div></div></div>'+
+    '<div class="method" data-action="method" data-m="Paste profile links"><div class="mi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg></div><div><div class="mt">Paste profile links</div><div class="ms">LinkedIn or portfolio URLs</div></div></div>'+
+  '</div>'+
+  '<div class="ai-pool" style="border:1px solid #E4DAFB;border-radius:16px;padding:16px 17px;margin-bottom:24px;background:linear-gradient(180deg,#FAF8FF,#FCF6FB)"><div style="display:flex;align-items:center;gap:9px;margin-bottom:4px"><span class="gi grad grain" style="width:20px;height:20px;border-radius:6px"></span><h3 style="font-family:var(--font-d);font-weight:700;font-size:14px">3 strong matches already in your pool</h3></div><div style="font-size:12.5px;color:var(--muted);margin-bottom:14px;margin-left:29px">I checked your agency database — these fit this role and aren\'t in another active project.</div><div class="pool-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:11px">'+pool+'</div></div>'+
+  '<div class="sec-h"><div class="lft"><h2>Added to this project</h2><span class="cnt">· 8 candidates</span></div></div>'+
+  '<div class="added-card" style="background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden">'+added+'</div>'+
+  '<div style="display:flex;align-items:center;gap:14px;margin-top:20px"><div style="font-size:12.5px;color:var(--muted)">AI will rank all <b style="color:var(--ink);font-family:var(--font-d)">8 candidates</b> against the '+p.co+' brief.</div><button class="btn-ai" data-action="run-analysis" style="margin-left:auto;height:46px"><span class="lbl"><span class="spark gtext">✦</span> Run AI analysis</span></button></div>';
+  var aside='<div class="ai-head"><span class="gi grad grain"></span><h3>AI assist</h3></div><div class="ai-body">'+
+    '<div class="xsum"><div class="xn">8 candidates staged</div><div class="xs">3 from pool · 3 résumés · 2 links</div></div>'+
+    '<div class="xnote ok"><span class="xi">✓</span><span>All résumés parsed — <b>no missing fields</b></span></div>'+
+    '<div class="xnote ai"><span class="xi grad grain">✦</span><span>Surfaced <b>3 pool matches</b> you already have — no need to re-source</span></div>'+
+    '<div class="xnote warn"><span class="xi">!</span><span><b>Dev Sharma</b> looks like a possible duplicate — I\'ll merge on analysis</span></div>'+
+    '<div class="xnote warn"><span class="xi">!</span><span>2 candidates have <b>no public salary signal</b> — fit weights skills more</span></div>'+
+    '<div class="xprov"><span class="gi grad grain"></span> Matching against the brief · 11 fields</div>'+
+  '</div>';
+  /* method/pool/added styles */
+  return {main:main,aside:aside};
+};
+(function(){var s=document.createElement('style');s.textContent='.method{border:1.5px dashed var(--border);border-radius:14px;padding:18px;display:flex;align-items:center;gap:13px;cursor:pointer;background:var(--surface);transition:.15s}.method:hover{border-color:var(--blue);background:var(--blue-soft)}.method .mi{width:40px;height:40px;border-radius:11px;background:var(--surface-v);color:var(--muted);display:grid;place-items:center;flex-shrink:0}.method:hover .mi{background:#fff;color:var(--blue)}.method .mt{font-size:13.5px;font-weight:600}.method .ms{font-size:11.5px;color:var(--faint);margin-top:1px}.pcard{background:#fff;border:1px solid var(--border-soft);border-radius:13px;padding:13px}.pcard .ptop{display:flex;align-items:center;gap:10px;margin-bottom:11px}.pcard img{width:38px;height:38px;border-radius:50%;background:var(--surface-v);flex-shrink:0}.pcard .pn{font-size:13px;font-weight:600;line-height:1.15}.pcard .pr{font-size:11px;color:var(--faint)}.pcard .pfit{display:flex;align-items:center;gap:7px;margin-bottom:11px}.pcard .fitbar{flex:1;height:5px;border-radius:3px;background:var(--surface-v);overflow:hidden}.pcard .fitbar i{display:block;height:100%}.pcard .fitnum{font-family:var(--font-d);font-size:12px;font-weight:700}.pcard .addbtn{width:100%;height:32px;border-radius:9px;border:1px solid var(--border);background:#fff;font-size:12px;font-weight:600;color:var(--blue-deep);cursor:pointer}.pcard .addbtn:hover{background:var(--blue-soft);border-color:#c3d9fb}.pcard.added .addbtn{background:var(--green-soft);border-color:transparent;color:#137333}.added-row{display:flex;align-items:center;gap:13px;padding:12px 16px;border-bottom:1px solid var(--border-soft)}.added-row:last-child{border-bottom:none}.added-row img{width:36px;height:36px;border-radius:50%;background:var(--surface-v);flex-shrink:0}.added-row .an{flex:1;min-width:0}.added-row .ann{font-size:13.5px;font-weight:600;line-height:1.15}.added-row .ann:hover{color:var(--blue);text-decoration:underline}.added-row .anr{font-size:11.5px;color:var(--faint)}.src{font-size:11px;font-weight:600;padding:4px 10px;border-radius:999px;white-space:nowrap}.src.pool{background:#F2EEFD;color:#6b46c1}.src.resume{background:var(--surface-v);color:var(--muted)}.src.link{background:var(--teal-soft);color:#0a7d85}.ready{font-size:11px;font-weight:600;color:#137333;display:inline-flex;align-items:center;gap:5px;white-space:nowrap}.remove{color:var(--faint);cursor:pointer;width:26px;height:26px;border-radius:7px;display:grid;place-items:center}.remove:hover{background:var(--red-soft);color:var(--red)}';document.head.appendChild(s);})();
+
+/* ============== VIEW: AI ANALYSIS (agentic run) ============== */
+VIEWS.analysis=function(){
+  var p=proj(STATE.projId)||proj('acme');
+  var cands=CANDS.slice(0,8).map(function(c){return '<div class="acand" data-c="'+c.id+'"><img src="'+av(c.seed,84)+'"><span class="asc">·</span></div>';}).join('');
+  var steps=[['Parsing résumés &amp; profiles','8 documents'],['Matching skills to the brief','11 criteria'],['Checking notice &amp; comp fit','band ₹35–45 LPA'],['Scoring &amp; ranking candidates','weighted fit']].map(function(s,i){
+    return '<div class="step" data-i="'+i+'"><div class="si">'+(i+1)+'</div><div class="stt">'+s[0]+'</div><div class="sts">'+s[1]+'</div></div>';
+  }).join('');
+  var main='<div class="anlz-wrap"><div class="anlz-hero"><div class="orb grad grain">✦</div><h1>Analysing 8 candidates</h1><p>for '+p.co+' — '+p.role+'</p></div>'+
+    '<div class="progress"><i id="prog"></i></div>'+
+    '<div class="steps">'+steps+'</div>'+
+    '<div class="anlz-cands">'+cands+'</div>'+
+    '<div class="anlz-foot"><button class="btn-primary hidden" id="anlzDone" data-nav="workspace" data-proj="'+p.id+'">View ranked results ›</button><div id="anlzWait" style="font-size:12.5px;color:var(--faint)">This usually takes a few seconds…</div></div></div>';
+  var aside='<div class="ai-head"><span class="gi grad grain"></span><h3>Working</h3><span class="live"><span class="dot"></span> Live</span></div><div class="ai-body"><div class="feed" id="anlzFeed"></div></div>';
+  return {main:main,aside:aside,after:runAnalysis};
+};
+function runAnalysis(){
+  var alive=function(){return STATE.view==='analysis'&&$('prog');};
+  var steps=document.querySelectorAll('.step');var feed=$('anlzFeed');var acands=document.querySelectorAll('.acand');
+  var feedItems=['Reading 8 résumés &amp; profiles','Extracted skills, seniority, notice','Comparing against 11 brief criteria','Anaya Krishnan — strong match (87%)','Marcus Lee — strong match (81%)','Flagged Anaya\'s 90-day notice','Ranking complete'];
+  var scores=[87,81,64,58,55,49,38,31];
+  var fi=0;var fInt=setInterval(function(){if(!alive()||fi>=feedItems.length){clearInterval(fInt);return;}feed.insertAdjacentHTML('beforeend','<div class="act"><div class="adot ai aisoft">✦</div><div class="at"><div class="atx">'+feedItems[fi]+'</div><div class="atm">just now</div></div></div>');fi++;},650);
+  var si=0;function nextStep(){if(!alive())return;if(si>0&&steps[si-1]){steps[si-1].classList.remove('on');steps[si-1].classList.add('done');steps[si-1].querySelector('.si').innerHTML='✓';}if(si<steps.length){steps[si].classList.add('on');$('prog').style.width=((si+1)/steps.length*100)+'%';si++;setTimeout(nextStep,1300);}else{finish();}}
+  setTimeout(nextStep,400);
+  acands.forEach(function(el,i){setTimeout(function(){if(!alive())return;el.classList.add('scored');el.querySelector('.asc').textContent=scores[i]+'%';el.querySelector('.asc').style.color=fitColor(scores[i]);},800+i*420);});
+  function finish(){if(!alive())return;$('prog').style.width='100%';if($('anlzWait'))$('anlzWait').classList.add('hidden');if($('anlzDone'))$('anlzDone').classList.remove('hidden');toast('Analysis complete — 8 candidates ranked');}
+}
+
+/* ============== VIEW: WORKSPACE (hub) ============== */
+VIEWS.workspace=function(){
+  var p=proj(STATE.projId)||proj('acme');
+  var list=(p.id==='acme')?CANDS:CANDS.slice(0,p.cands||5);
+  var rows=list.filter(function(c){return STATE.filter==='all'||c.status===STATE.filter;}).map(function(c,i){
+    return '<div class="crow" data-cand="'+c.id+'"><div class="rk">'+(i+1)+'</div>'+
+      '<div class="cwho"><img src="'+av(c.seed,68)+'"><div><div class="cn" data-nav="candidate" data-cand="'+c.id+'">'+c.name+'</div><div class="cr">'+c.role+' · '+c.co+'</div></div></div>'+
+      '<div class="fitcell"><div class="fitbar"><i style="width:'+c.fit+'%;background:'+fitColor(c.fit)+'"></i></div><span class="fitnum" style="color:'+fitColor(c.fit)+'">'+c.fit+'%</span></div>'+
+      '<div data-action="status" data-cand="'+c.id+'">'+stChip(c.status)+'</div>'+
+      '<div class="notescell" data-action="notes" data-cand="'+c.id+'"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'+(c.id==='anaya'?'3':c.id==='marcus'?'2':'·')+'</div>'+
+      '<div style="text-align:right"><button class="assessbtn" data-nav="candidate" data-cand="'+c.id+'"><span class="gtext">✦</span></button></div></div>';
+  }).join('');
+  var pills=[['all','All',null],['accepted','Accepted','#137333'],['rejected','Rejected','#c5221f'],['sourced','Sourced','#5F6368'],['screened','Screened','#0a7d85'],['interview','Interview','#174EA6'],['offer','Offer extended','#C98A00']].map(function(x){
+    return '<div class="fp'+(STATE.filter===x[0]?' active':'')+'" data-filt="'+x[0]+'">'+(x[2]?'<span class="d" style="background:'+x[2]+'"></span>':'')+x[1]+'</div>';
+  }).join('');
+  var others=PROJECTS.filter(function(x){return x.id!==p.id;}).map(function(x){return '<div class="switem" data-action="switch-proj" data-proj="'+x.id+'">'+plogo(x,28)+'<div><div class="swt">'+x.role+'</div><div class="sws">'+x.co+'</div></div></div>';}).join('');
+  var main='<div class="crumb"><span class="b" data-nav="projects">All projects</span><span class="sep">/</span><span>'+p.co+'</span></div>'+
+    '<div class="switcher" style="max-width:420px;margin-bottom:18px"><div class="swbtn" data-action="toggle-sw">'+plogo(p,34)+'<div class="si"><div class="sc">'+p.co+' · '+p.cands+' candidates</div><div class="sr">'+p.role+'</div></div><svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="swmenu" id="swmenu">'+others+'<div class="swall"><div class="switem" data-nav="projects">View all projects</div></div></div></div>'+
+    '<div class="sec-h"><div class="lft"><h2>AI-ranked candidates</h2><span class="cnt">· ranked by fit to brief</span></div><button class="btn-ai" data-action="run-analysis" style="height:36px"><span class="lbl" style="font-size:12.5px"><span class="spark gtext">✦</span> Re-run</span></button></div>'+
+    '<div class="filtpills">'+pills+'</div>'+
+    '<div class="ctable"><div class="thead"><span></span><span>Candidate</span><span>AI fit</span><span>Status</span><span style="text-align:center">Notes</span><span></span></div>'+rows+'</div>';
+  var c=cand('anaya');
+  var aside='<div class="ai-head"><span class="gi grad grain"></span><h3>AI analysis</h3></div><div class="ai-body">'+
+    '<div class="conf"><div class="ring grad grain">'+c.fit+'</div><div class="ct"><b>'+c.name+'</b> is the strongest fit. Confidence is high — built from <b>'+c.sources+'</b>.</div></div>'+
+    '<div style="font-family:var(--font-m);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)">Why</div>'+
+    c.strengths.map(function(s){return '<div class="xnote ok"><span class="xi">✓</span><span>'+s+'</span></div>';}).join('')+
+    c.concerns.map(function(s){return '<div class="xnote warn"><span class="xi">!</span><span>'+s+'</span></div>';}).join('')+
+    '<div style="display:flex;gap:8px;margin-top:4px"><button class="btn-ai" data-nav="outreach" data-cand="anaya" style="height:38px;flex:1"><span class="lbl" style="font-size:12.5px"><span class="spark gtext">✦</span> Draft outreach</span></button><button class="btn-ghost" data-nav="candidate" data-cand="anaya" style="height:38px;padding:0 14px">Open</button></div>'+
+    '<div class="xnote ai" style="background:#fff;border:1px solid var(--border-soft);border-radius:12px;padding:12px"><span class="xi grad grain">✦</span><span><b>Memory:</b> Acme rejected over-90-day notices on the last two roles. Anaya is at 90 — worth confirming early.</span></div>'+
+    '<div class="xprov"><span class="gi grad grain"></span> Re-ranked 8 min ago</div>'+
+  '</div>';
+  return {main:main,aside:aside};
+};
+
+/* ============== VIEW: CANDIDATE DEEP ANALYSIS ============== */
+VIEWS.candidate=function(){
+  var c=cand(STATE.candId)||cand('anaya');var p=proj(STATE.projId)||proj('acme');
+  var otherC=CANDS.filter(function(x){return x.id!==c.id;}).map(function(x){return '<div class="switem" data-action="switch-cand" data-cand="'+x.id+'"><img src="'+av(x.seed,56)+'" style="width:28px;height:28px;border-radius:50%"><div><div class="swt">'+x.name+'</div><div class="sws">'+x.fit+'% · '+STATUSES[x.status].label+'</div></div></div>';}).join('');
+  var has=c.has.map(function(s){return '<span class="sm has"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>'+s+'</span>';}).join('');
+  var miss=c.miss.map(function(s){return '<span class="sm miss">'+s+'</span>';}).join('');
+  var accepted=c.status==='accepted';var fn=c.name.split(' ')[0];
+  var acceptBlock=accepted?('<div class="accept-card"><div class="ah"><div class="ai-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></div><div><div class="at2">Offer accepted</div><div class="ad">Confirmed by email · 6 hours ago</div></div><div class="joinpill">Joining in '+c.notice.replace(' days','d')+'</div></div><div class="email-evi"><div class="env"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg></div><div><div class="es">From '+fn+' &lt;'+fn.toLowerCase()+'@gmail.com&gt; · 14 Jun, 6:02 PM</div><div class="esub">Re: Offer — '+p.role+', '+p.co+'</div><div class="ebody">"Thrilled to accept — really looking forward to joining the team. I\'ll serve my notice and can start as planned. Thanks for making the process smooth."</div></div></div><div class="accept-risk"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:1px"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg><span><b>Not joined yet.</b> 2 of your last 5 acceptances saw counter-offers before the start date. A warm check-in this week de-risks the placement. <span style="color:var(--blue);font-weight:600;cursor:pointer" data-nav="outreach" data-cand="'+c.id+'">Draft a check-in ›</span></span></div></div>'):'';
+  var atts=accepted?[['Résumé','PDF · 240 KB','#1A73E8','Résumé'],['Offer letter','PDF · 88 KB','#6B46C1','Offer'],['Signed acceptance','PDF · 102 KB','#1E8E3E','Signed'],['Acceptance email','EML · 12 KB','#0E9CA6','Email']]:[['Résumé','PDF · 240 KB','#1A73E8','Résumé'],['Screening notes','DOC · 30 KB','#6B46C1','Notes'],['Portfolio','Link · github.com','#0E9CA6','Link']];
+  var attHtml=atts.map(function(a){return '<div class="attach-row" data-toast="Preview '+a[0]+' (demo)"><div class="fic" style="background:'+a[2]+'"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></div><div><div class="fn">'+a[0]+'</div><div class="fm">'+a[1]+'</div></div><span class="ftype">'+a[3]+'</span></div>';}).join('');
+  var attachBlock='<div class="cbox" style="margin-bottom:16px"><h3>Attachments <span style="font-weight:500;font-size:11px;color:var(--faint);margin-left:auto">'+atts.length+' files</span></h3><div class="attach-list">'+attHtml+'<div class="attach-add" data-toast="Upload attachment (demo)">+ Add attachment</div></div></div>';
+  var inSL=STATE.shortlist.indexOf(c.id)>=0;
+  var canSL=['sourced','screened','interview'].indexOf(c.status)>=0;
+  var canDis=['sourced','screened','interview','offer'].indexOf(c.status)>=0;
+  var st=STATUSES[c.status];
+  var stMenu=Object.keys(STATUSES).map(function(k){return '<div class="switem" data-action="set-cand-status" data-st="'+k+'"><span class="stdot" style="background:'+STATUSES[k].color+'"></span><div class="swt">'+STATUSES[k].label+'</div>'+(c.status===k?'<span style="margin-left:auto;color:var(--blue)">\u2713</span>':'')+'</div>';}).join('');
+  var rightBtns='';
+  if(canDis)rightBtns+='<button class="btn-ghost" data-action="dismiss-cand" data-cand="'+c.id+'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg> Dismiss</button>';
+  if(inSL)rightBtns+='<button class="btn-ghost" disabled style="opacity:.55;cursor:default"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg> Shortlisted</button>';
+  else if(canSL)rightBtns+='<button class="btn-ghost" data-action="to-shortlist" data-cand="'+c.id+'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg> Add to shortlist</button>';
+  var statusDD='<div class="switcher" style="display:inline-block"><button class="statusdd" data-action="toggle-statusdd">Status&nbsp;\u00b7&nbsp;'+st.label+' <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button><div class="swmenu" id="statusMenu" style="left:auto;right:0;min-width:210px">'+stMenu+'</div></div>';
+  var toolbar='<div class="cand-actions"><button class="btn-ai" data-nav="outreach" data-cand="'+c.id+'"><span class="lbl"><span class="spark gtext">\u2726</span> Draft outreach</span></button><div class="ca-right">'+rightBtns+statusDD+'</div></div>';
+  var main='<div class="crumb"><span class="b" data-nav="projects">All projects</span><span class="sep">/</span><span class="b" data-nav="workspace" data-proj="'+p.id+'">'+p.co+'</span><span class="sep">/</span><span>'+c.name+'</span></div>'+
+  '<div style="display:flex;gap:12px;margin-bottom:16px"><div class="switcher" style="flex:1"><div class="swbtn" data-action="toggle-sw">'+plogo(p,30)+'<div class="si"><div class="sc">Project</div><div class="sr" style="font-size:13px">'+p.role+'</div></div><svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="swmenu" id="swmenu">'+PROJECTS.filter(function(x){return x.id!==p.id;}).map(function(x){return '<div class="switem" data-action="switch-proj" data-proj="'+x.id+'">'+plogo(x,26)+'<div><div class="swt">'+x.role+'</div><div class="sws">'+x.co+'</div></div></div>';}).join('')+'</div></div>'+
+  '<div class="switcher" style="flex:1"><div class="swbtn" data-action="toggle-sw2"><img src="'+av(c.seed,60)+'" style="width:30px;height:30px;border-radius:50%"><div class="si"><div class="sc">Candidate</div><div class="sr" style="font-size:13px">'+c.name+'</div></div><svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="swmenu" id="swmenu2">'+otherC+'</div></div></div>'+
+  toolbar+'<div class="cand-hero"><img src="'+av(c.seed,84)+'"><div class="ch"><h1>'+c.name+'</h1><div class="crole">'+c.role+' · '+c.co+'</div><div class="ctags"><span class="ctag">Notice: '+c.notice+'</span><span class="ctag">'+c.sources+'</span><span class="ctag">📎 '+atts.length+' files</span>'+stChip(c.status)+'</div></div><div class="cfit"><div class="ring grad grain" style="background:'+fitColor(c.fit)+'">'+c.fit+'</div><div class="cl">AI fit</div></div></div>'+acceptBlock+
+  '<div class="cgrid"><div class="cbox"><h3><span class="gi grad grain"></span> Why AI ranked '+c.name.split(' ')[0]+' here</h3>'+c.strengths.map(function(s){return '<div class="reasonline"><span class="ri ok">✓</span><span>'+s+'</span></div>';}).join('')+c.concerns.map(function(s){return '<div class="reasonline"><span class="ri warn">!</span><span>'+s+'</span></div>';}).join('')+'</div>'+
+  '<div class="cbox"><h3>Skills vs the brief</h3><div style="font-size:11px;color:var(--faint);margin-bottom:8px;font-weight:600">MATCHED</div><div class="skillmatch" style="margin-bottom:14px">'+(has||'<span style="font-size:12.5px;color:var(--faint)">None of the core stack</span>')+'</div><div style="font-size:11px;color:var(--faint);margin-bottom:8px;font-weight:600">MISSING</div><div class="skillmatch">'+(miss||'<span style="font-size:12.5px;color:#137333">All requirements met</span>')+'</div></div></div>'+
+  '<div class="cbox" style="margin-bottom:16px"><h3>Provenance</h3><div style="font-size:13px;color:var(--muted);line-height:1.6">This assessment was built from <b style="color:var(--ink)">'+c.sources+'</b>. Every claim above traces to a source document — nothing is inferred without a basis. The fit score weighs skills (50%), experience (30%), and logistics like notice &amp; comp (20%).</div></div>'+
+  attachBlock;
+  var aside='<div class="ai-head"><span class="gi grad grain"></span><h3>Copilot</h3></div><div class="ai-body">'+
+    '<div class="conf"><div class="ring grad grain" style="background:'+fitColor(c.fit)+'">'+c.fit+'</div><div class="ct">Fit confidence is <b>'+(c.fit>=75?'high':c.fit>=55?'moderate':'low')+'</b> for this role.</div></div>'+
+    '<div class="ai-intro"><b>Ask me about '+c.name.split(' ')[0]+':</b> "compare to Marcus", "is the notice period a dealbreaker?", "draft a screening call agenda".</div>'+
+    '<div style="font-family:var(--font-m);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)">Similar in your pool</div>'+
+    CANDS.slice(1,4).map(function(x){return '<div class="pmini" data-nav="candidate" data-cand="'+x.id+'" style="padding:10px 12px"><img src="'+av(x.seed,56)+'" style="width:30px;height:30px;border-radius:50%"><div class="pi"><div class="pr" style="font-size:13px">'+x.name+'</div><div class="pic2">'+x.co+'</div></div><span class="pstat"><b>'+x.fit+'%</b></span></div>';}).join('')+
+  '</div>';
+  return {main:main,aside:aside};
+};
+
+/* ============== VIEW: SHORTLIST ============== */
+VIEWS.shortlist=function(){
+  var p=proj('acme');
+  var items=STATE.shortlist.map(function(id,i){var c=cand(id);return '<div class="sl-item" data-id="'+id+'"><span class="hand">⋮⋮</span><span class="rk">'+(i+1)+'</span><img src="'+av(c.seed,72)+'"><div class="si"><div class="sn" data-nav="candidate" data-cand="'+id+'" style="cursor:pointer">'+c.name+'</div><div class="sr">'+c.role+' · '+c.co+' · '+c.strengths[0]+'</div></div><span class="sfit" style="color:'+fitColor(c.fit)+'">'+c.fit+'%</span><span class="srm" data-action="sl-remove" data-id="'+id+'">✕</span></div>';}).join('');
+  var main='<div class="crumb"><span class="b" data-nav="projects">All projects</span><span class="sep">/</span><span class="b" data-nav="workspace" data-proj="acme">Acme Corp</span><span class="sep">/</span><span>Shortlist</span></div>'+
+    '<div class="sec-h"><div class="lft"><h1 class="title" style="margin:0">Lock shortlist</h1><span class="cnt">· '+p.co+' — '+p.role+'</span></div></div>'+
+    '<div class="subtitle">Drag to reorder. When you lock it, this becomes the client-ready list — you can share it or start outreach.</div>'+
+    items+
+    '<div style="display:flex;gap:10px;margin-top:18px"><button class="btn-primary" data-action="lock-share"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Lock &amp; share with client</button><button class="btn-ai" data-nav="outreach" data-cand="anaya"><span class="lbl"><span class="spark gtext">✦</span> Draft outreach to all</span></button><button class="btn-ghost" data-nav="workspace" data-proj="acme">Back to pipeline</button></div>';
+  var aside='<div class="ai-head"><span class="gi grad grain"></span><h3>Why these three</h3></div><div class="ai-body">'+
+    '<div class="ai-intro">I picked the top of the ranking and checked they\'re genuinely client-ready — not just high scores.</div>'+
+    '<div class="xnote ok"><span class="xi">✓</span><span><b>Anaya</b> (87%) — clear technical lead, just confirm the 90-day notice</span></div>'+
+    '<div class="xnote ok"><span class="xi">✓</span><span><b>Marcus</b> (81%) — already accepted, fastest to place</span></div>'+
+    '<div class="xnote warn"><span class="xi">!</span><span><b>Sofia</b> (64%) — included as a diverse-experience option; below the others on tenure</span></div>'+
+    '<div class="xnote ai"><span class="xi grad grain">✦</span><span>Want a 4th? <b>Dev Sharma</b> (58%) is the next closest on culture signals.</span></div>'+
+    '<div class="xprov"><span class="gi grad grain"></span> Ranked against the Acme brief</div>'+
+  '</div>';
+  return {main:main,aside:aside};
+};
+
+/* ============== VIEW: OUTREACH ============== */
+VIEWS.outreach=function(){
+  var c=cand(STATE.candId)||cand('anaya');
+  var msg='Hi <span class="tok">'+c.name.split(' ')[0]+'</span>,\n\nI came across your work at <span class="tok">'+c.co.replace('ex-','')+'</span> — the depth on <span class="tok">payments infrastructure</span> stood out. I\'m partnering with <span class="tok">Acme Corp</span> on a Senior Backend Engineer role where that exact experience would land well: scaling Node.js + PostgreSQL services with a small team to mentor.\n\nIt\'s a hybrid role in Bangalore, comp in the ₹35–45 LPA band. Given your background I think you\'d skip straight to the technical conversation.\n\nWould you be open to a short call this week?\n\nBest,\nMeera';
+  var main='<div class="crumb"><span class="b" data-nav="workspace" data-proj="acme">Acme Corp</span><span class="sep">/</span><span class="b" data-nav="candidate" data-cand="'+c.id+'">'+c.name+'</span><span class="sep">/</span><span>Outreach</span></div>'+
+    '<div class="sec-h"><div class="lft"><h1 class="title" style="margin:0">Draft outreach</h1><span class="cnt">· to '+c.name+'</span></div></div>'+
+    '<div class="subtitle">AI personalised this from '+c.name.split(' ')[0]+'\'s background and the Acme brief. Highlighted bits are pulled from real sources — edit anything.</div>'+
+    '<div class="ovars"><div class="ovar active" data-action="ovar" data-v="warm">Warm &amp; personal</div><div class="ovar" data-action="ovar" data-v="direct">Short &amp; direct</div><div class="ovar" data-action="ovar" data-v="formal">Formal</div></div>'+
+    '<div class="omsg" id="omsg">'+msg+'</div>'+
+    '<div style="display:flex;align-items:center;gap:10px;margin-top:16px"><button class="btn-ai" data-action="regen"><span class="lbl"><span class="spark gtext">✦</span> Regenerate</span></button><div style="margin-left:auto;display:flex;gap:10px"><button class="btn-ghost" data-toast="Saved to drafts">Save draft</button><button class="btn-primary" data-action="send-outreach"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/></svg> Send message</button></div></div>';
+  var aside='<div class="ai-head"><span class="gi grad grain"></span><h3>Personalisation</h3></div><div class="ai-body">'+
+    '<div class="ai-intro">Every <span class="tok" style="background:#F2EEFD;color:#6b46c1;border-radius:5px;padding:1px 5px;font-weight:600">highlighted</span> phrase traces to a source — no invented flattery.</div>'+
+    '<div class="xnote ok"><span class="xi">✓</span><span>"payments infrastructure" — from her <b>Stripe</b> experience</span></div>'+
+    '<div class="xnote ok"><span class="xi">✓</span><span>"small team to mentor" — matches the Acme brief</span></div>'+
+    '<div class="xnote warn"><span class="xi">!</span><span>I left out comp specifics beyond the band — add if you prefer transparency upfront</span></div>'+
+    '<div class="xnote ai"><span class="xi grad grain">✦</span><span>Best send time for senior eng replies: <b>Tue–Thu, 8–9am</b></span></div>'+
+  '</div>';
+  return {main:main,aside:aside};
+};
+
+/* ============== VIEW: SHARE WITH CLIENT ============== */
+VIEWS['share-client']=function(){
+  var rows=STATE.shortlist.map(function(id,i){var c=cand(id);return '<div style="display:flex;align-items:center;gap:13px;padding:14px 0;border-bottom:1px solid var(--border-soft)"><span style="font-family:var(--font-d);font-weight:800;color:var(--blue);width:18px">'+(i+1)+'</span><img src="'+av(c.seed,68)+'" style="width:40px;height:40px;border-radius:50%"><div style="flex:1"><div style="font-weight:600;font-size:14px">'+c.name+'</div><div style="font-size:12px;color:var(--muted)">'+c.role+' · '+c.co+'</div></div><span style="font-family:var(--font-d);font-weight:700;color:'+fitColor(c.fit)+'">'+c.fit+'% fit</span></div>';}).join('');
+  var main='<div class="crumb"><span class="b" data-nav="shortlist">Shortlist</span><span class="sep">/</span><span>Share with client</span></div>'+
+    '<div class="sec-h"><div class="lft"><h1 class="title" style="margin:0">Client-ready shortlist</h1></div><span class="schip s-filled"><span class="d"></span>Preview</span></div>'+
+    '<div class="subtitle">This is what Sarah Chen at Acme Corp will see. Clean, no internal notes, no AI jargon.</div>'+
+    '<div class="card" style="padding:0;overflow:hidden"><div style="padding:18px 22px;border-bottom:1px solid var(--border-soft);display:flex;align-items:center;gap:12px"><div class="pl grad grain" style="width:40px;height:40px;border-radius:11px;display:grid;place-items:center;color:#fff;font-weight:700;font-family:var(--font-d)">AC</div><div><div style="font-family:var(--font-d);font-weight:700;font-size:16px">Senior Backend Engineer — Shortlist</div><div style="font-size:12.5px;color:var(--muted)">Prepared by Talent Co · 3 candidates · 15 June 2026</div></div></div><div style="padding:6px 22px 16px">'+rows+'</div></div>'+
+    '<div style="display:flex;gap:10px;margin-top:16px"><button class="btn-primary" data-action="share-link"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg> Copy share link</button><button class="btn-ghost" data-toast="Exporting PDF (demo)">Export PDF</button><button class="btn-ghost" data-toast="Opened email composer (demo)">Email to client</button></div>';
+  var aside='<div class="ai-head"><span class="gi grad grain"></span><h3>Before you send</h3></div><div class="ai-body">'+
+    '<div class="xnote ok"><span class="xi">✓</span><span>Stripped all internal notes &amp; status history</span></div>'+
+    '<div class="xnote ok"><span class="xi">✓</span><span>Fit scores shown as simple %, no model details</span></div>'+
+    '<div class="xnote warn"><span class="xi">!</span><span>Anaya\'s 90-day notice isn\'t shown — mention it to Sarah directly</span></div>'+
+    '<div class="ai-intro"><b>Tip:</b> clients open shortlists 3× more when sent before noon. It\'s 9:14am — good window.</div>'+
+  '</div>';
+  return {main:main,aside:aside};
+};
+
+/* ============== VIEW: CANDIDATES (global) ============== */
+VIEWS.candidates=function(){
+  var GTC='grid-template-columns:30px 2fr 1.3fr 1.1fr 1fr 0.65fr 0.5fr';
+  var sorted=CANDS.slice().sort(function(a,b){return b.fit-a.fit;});
+  var rows=sorted.map(function(c,i){
+    var notes=(c.id==='anaya'?'3':c.id==='marcus'?'2':'\u00b7');
+    return '<div class="crow" data-cand="'+c.id+'" style="'+GTC+'">'+
+      '<div class="rk">'+(i+1)+'</div>'+
+      '<div class="cwho"><img src="'+av(c.seed,68)+'"><div><div class="cn" data-nav="candidate" data-cand="'+c.id+'">'+c.name+'</div><div class="cr">'+c.role+' \u00b7 '+c.co+'</div></div></div>'+
+      '<div class="cproj"><span class="grad grain" style="width:20px;height:20px;border-radius:6px;display:inline-grid;place-items:center;color:#fff;font-size:9px;font-weight:700;flex-shrink:0">AC</span> Acme Corp</div>'+
+      '<div class="fitcell"><div class="fitbar"><i style="width:'+c.fit+'%;background:'+fitColor(c.fit)+'"></i></div><span class="fitnum" style="color:'+fitColor(c.fit)+'">'+c.fit+'%</span></div>'+
+      '<div data-action="status" data-cand="'+c.id+'">'+stChip(c.status)+'</div>'+
+      '<div class="notescell" data-action="notes" data-cand="'+c.id+'"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'+notes+'</div>'+
+      '<div style="text-align:right"><button class="assessbtn" data-nav="candidate" data-cand="'+c.id+'"><span class="gtext">\u2726</span></button></div>'+
+    '</div>';
+  }).join('');
+  var insight=
+    '<div class="cand-insight">'+
+      '<span class="aisoft cii">\u2726</span>'+
+      '<div class="cib">'+
+        '<div class="cit">What the AI sees across your 64 candidates</div>'+
+        '<div class="cis">Scored and ranked this morning \u2014 here\u2019s where your attention pays off first.</div>'+
+        '<div class="cichips">'+
+          '<span class="cichip"><b>18</b> interview-ready</span>'+
+          '<span class="cichip"><b>7</b> awaiting your decision</span>'+
+          '<span class="cichip ai"><b>3</b> surfaced overnight</span>'+
+          '<span class="cichip warn"><b>2</b> possible flight risks</span>'+
+        '</div>'+
+      '</div>'+
+    '</div>';
+  var main=
+    '<div class="crumb"><span class="b" data-nav="overview">Overview</span><span class="sep">/</span><span>Candidates</span></div>'+
+    '<div class="sec-h"><div class="lft"><h1 class="title" style="margin:0">Candidates</h1><span class="cnt">\u00b7 64 across all projects</span></div></div>'+
+    insight+
+    '<div class="ctable"><div class="thead" style="'+GTC+'"><span></span><span>Candidate</span><span>Project</span><span>AI fit</span><span>Status</span><span style="text-align:center">Notes</span><span></span></div><div id="candRows">'+rows+'</div></div>'+
+    '<button class="cand-askai grad grain" data-action="open-chat"><span class="spark">\u2726</span> Ask AI to find the right candidate</button>';
+  return {main:main,aside:asideDefault()};
+};
+
+/* ============== BREWING VIEWS ============== */
+function brew(title,desc,chips){return {main:'<div class="crumb"><span class="b" data-nav="overview">Overview</span><span class="sep">/</span><span>'+title+'</span></div><div class="brew"><div class="orb grad grain">✦</div><h1>'+title+'</h1><p>'+desc+'</p><div class="bchips">'+chips.map(function(c){return '<div class="bchip" '+(c[1]||'data-action="open-chat"')+'>'+c[0]+'</div>';}).join('')+'</div></div>',aside:asideDefault()};}
+VIEWS.outreach_hub=function(){return brew('Outreach','All your sequences and drafts live here.',[]);};
+VIEWS.reports=function(){return brew('Reports','Placement metrics, time-to-fill, and client-ready reports — generated on demand.',[['✦ Generate this month\'s report'],['View BluePeak close-out','data-nav="share-client"']]);};
+VIEWS.knowledge=function(){return brew('Knowledge','Your agency\'s playbooks, client preferences, and past placements — the memory your copilot draws on.',[['✦ What does Acme dislike in candidates?'],['Ask anything']]);};
+VIEWS.settings=function(){return brew('Settings','Workspace, seats, and AI preferences.',[['Manage seats','data-toast="Seats (demo)"'],['AI behaviour','data-action="open-chat"']]);};
+VIEWS.help=function(){return brew('Help','Stuck? The copilot knows the whole product — just ask it.',[['✦ How do I lock a shortlist?'],['✦ How does AI fit scoring work?']]);};
+
+/* ============== INTERACTIVITY GLUE ============== */
+var app=$('app');
+function closeMenus(){document.querySelectorAll('.swmenu.open').forEach(function(m){m.classList.remove('open');});var p=$('pop');if(p)p.classList.remove('open');}
+
+app.addEventListener('click',function(e){
+  var t=e.target.closest('[data-nav],[data-action],[data-toast],[data-filt]');
+  if(!t){closeMenus();return;}
+  var nav=t.getAttribute('data-nav'),action=t.getAttribute('data-action'),tmsg=t.getAttribute('data-toast'),filt=t.getAttribute('data-filt');
+  var opts={};if(t.getAttribute('data-proj'))opts.projId=t.getAttribute('data-proj');if(t.getAttribute('data-cand'))opts.candId=t.getAttribute('data-cand');
+  if(nav){closeMenus();go(nav,opts);return;}
+  if(tmsg!==null){toast(tmsg);return;}
+  if(filt!==null){handleFilt(filt,t);return;}
+  if(action){handleAction(action,t,opts,e);}
+});
+
+
+function handleFilt(filt,t){
+  if(STATE.view==='workspace'){STATE.filter=filt;go('workspace');return;}
+  // projects: toggle active + show/hide by status
+  t.parentNode.querySelectorAll('.ftab').forEach(function(x){x.classList.remove('active');});t.classList.add('active');
+  document.querySelectorAll('.pcard-full').forEach(function(card,i){var st=PROJECTS[i]?PROJECTS[i].status:'';card.style.display=(filt==='all'||st===filt)?'':'none';});
+}
+
+function nextStatus(s){var o=['sourced','screened','interview','offer','accepted'];var i=o.indexOf(s);return i>=0&&i<o.length-1?o[i+1]:s;}
+
+function handleAction(a,t,opts,e){
+  switch(a){
+    case 'open-chat': openChat(); break;
+    case 'close-chat': $('cbDrawer').classList.remove('open'); break;
+    case 'cb-send': cbSend(); break;
+    case 'search': openChat(); break;
+    case 'notifs': toast('3 new — 2 SLA alerts, 1 acceptance'); break;
+    case 'profile': toast('Meera Joshi · Senior Recruiter'); break;
+    case 'parse': doParse(); break;
+    case 'manual': $('npPaste').classList.add('hidden'); $('npForm').classList.remove('hidden'); $('npForm').innerHTML=npFormHTML(true); $('npAside').innerHTML='<div class="ai-intro"><b>Manual entry.</b> Prefer to paste a brief? Hit <b>Switch to AI parse</b> any time and I\'ll fill these in for you.</div>'; break;
+    case 'switch-ai': $('npForm').classList.add('hidden'); $('npPaste').classList.remove('hidden'); $('npAside').innerHTML='<div class="ai-intro"><b>Paste a brief and I\'ll structure it.</b><br>Company, role, skills, comp, requirements — extracted and flagged.</div>'; break;
+    case 'create-project': toast('Project created — Acme Corp · Senior Backend Engineer'); setTimeout(function(){go('add-candidates',{projId:'acme'});},650); break;
+    case 'run-analysis': go('analysis',{projId:STATE.projId||'acme'}); break;
+    case 'method': toast(t.getAttribute('data-m')+' — (demo)'); break;
+    case 'pooladd': var pc=t.closest('.pcard'); if(pc&&!pc.classList.contains('added')){pc.classList.add('added');t.innerHTML='✓ Added';toast((pc.getAttribute('data-name')||'Candidate')+' added to project');} break;
+    case 'toggle-sw': e.stopPropagation(); var m=$('swmenu'); var wasOpen=m.classList.contains('open'); closeMenus(); if(!wasOpen)m.classList.add('open'); break;
+    case 'toggle-sw2': e.stopPropagation(); var m2=$('swmenu2'); var wo2=m2.classList.contains('open'); closeMenus(); if(!wo2)m2.classList.add('open'); break;
+    case 'switch-proj': closeMenus(); go('workspace',{projId:t.getAttribute('data-proj')}); break;
+    case 'switch-cand': closeMenus(); go('candidate',{candId:t.getAttribute('data-cand')}); break;
+    case 'status': openStatusPop(t,t.getAttribute('data-cand'),e); break;
+    case 'set-status': var c=cand(t.getAttribute('data-cand')); if(c){c.status=t.getAttribute('data-st');} closeMenus(); go(STATE.view); toast('Status updated → '+STATUSES[t.getAttribute('data-st')].label); break;
+    case 'notes': openNotes(t.getAttribute('data-cand')); break;
+    case 'add-note': var inp=$('noteInput'); if(inp&&inp.value.trim()){var th=$('thread'); th.insertAdjacentHTML('beforeend','<div class="titem"><div class="ti-d" style="background:#E8F0FE;color:#174EA6">MJ</div><div><div class="tt"><b>You</b> commented</div><div class="tj">'+inp.value.replace(/</g,'&lt;')+'</div><div class="tm">just now</div></div></div>'); inp.value=''; th.scrollTop=th.scrollHeight;} break;
+    case 'advance': var ca=cand(t.getAttribute('data-cand')); if(ca){var ns=nextStatus(ca.status);ca.status=ns;go('candidate');toast('Advanced to '+STATUSES[ns].label);} break;
+    case 'to-shortlist': var id=t.getAttribute('data-cand'); if(STATE.shortlist.indexOf(id)<0)STATE.shortlist.push(id); toast((cand(id)?cand(id).name:'Candidate')+' added to shortlist'); if(STATE.view==='candidate')go('candidate'); break;
+    case 'dismiss-cand': var dc=cand(t.getAttribute('data-cand')); toast('Dismissed '+(dc?dc.name:'candidate')+' (demo)'); go('workspace'); break;
+    case 'toggle-statusdd': e.stopPropagation(); var sm=$('statusMenu'); var so=sm.classList.contains('open'); closeMenus(); if(!so)sm.classList.add('open'); break;
+    case 'set-cand-status': var cs=cand(STATE.candId); var nst=t.getAttribute('data-st'); if(cs)cs.status=nst; closeMenus(); go('candidate'); toast('Status set to '+STATUSES[nst].label); break;
+    case 'dismiss-pri': var pcard=t.closest('.pri'); if(pcard){pcard.style.transition='opacity .2s';pcard.style.opacity='0';setTimeout(function(){pcard.style.display='none';},200);} toast('Dismissed'); break;
+    case 'sl-remove': var rid=t.getAttribute('data-id'); STATE.shortlist=STATE.shortlist.filter(function(x){return x!==rid;}); go('shortlist'); toast('Removed from shortlist'); break;
+    case 'lock-share': toast('Shortlist locked'); setTimeout(function(){go('share-client');},600); break;
+    case 'share-link': toast('Share link copied to clipboard'); break;
+    case 'ovar': t.parentNode.querySelectorAll('.ovar').forEach(function(x){x.classList.remove('active');}); t.classList.add('active'); setOutreachTone(t.getAttribute('data-v')); break;
+    case 'regen': toast('Regenerated a fresh draft'); break;
+    case 'send-outreach': toast('Message sent (demo) — I\'ll watch for a reply'); break;
+  }
+}
+
+/* new project parse */
+function doParse(){
+  var btn=document.querySelector('[data-action="parse"] .lbl'); if(btn)btn.innerHTML='<span class="dots"><span></span><span></span><span></span></span> Parsing…';
+  $('npAside').innerHTML='<div class="ai-intro"><span class="dots"><span></span><span></span><span></span></span> Reading the brief, extracting fields…</div>';
+  setTimeout(function(){
+    $('npPaste').classList.add('hidden'); $('npForm').classList.remove('hidden'); $('npForm').innerHTML=npFormHTML(false);
+    $('npAside').innerHTML='<div class="xsum"><div class="xn">11 fields extracted</div><div class="xs">From 1 pasted brief · ready to review</div></div>'+
+      '<div class="xnote ok" style="margin-top:13px"><span class="xi">✓</span><span>Found <b>4 must-have skills</b> and 2 nice-to-haves</span></div>'+
+      '<div class="xnote ok"><span class="xi">✓</span><span>Seniority <b>Senior</b> — from "7+ years"</span></div>'+
+      '<div class="xnote warn"><span class="xi">!</span><span><b>Comp</b> read as ₹35–45 LPA — confirm before publishing</span></div>'+
+      '<div class="xnote warn"><span class="xi">!</span><span>Notice set to <b>≤ 60 days</b> from "long notice is tough"</span></div>'+
+      '<div class="xnote warn"><span class="xi">!</span><span><b>Team leadership</b> ambiguous — flagged on the form</span></div>'+
+      '<div class="xprov" style="margin-top:8px"><span class="gi grad grain"></span> Based on the brief · nothing invented</div>';
+  },1300);
+}
+
+/* outreach tone */
+function setOutreachTone(tone){
+  var c=cand(STATE.candId)||cand('anaya'); var fn=c.name.split(' ')[0]; var co=c.co.replace('ex-','');
+  var msgs={
+    warm:'Hi <span class="tok">'+fn+'</span>,\n\nI came across your work at <span class="tok">'+co+'</span> — the depth on <span class="tok">payments infrastructure</span> stood out. I\'m partnering with <span class="tok">Acme Corp</span> on a Senior Backend Engineer role where that exact experience would land well: scaling Node.js + PostgreSQL services with a small team to mentor.\n\nIt\'s a hybrid role in Bangalore, comp in the ₹35–45 LPA band. Given your background I think you\'d skip straight to the technical conversation.\n\nWould you be open to a short call this week?\n\nBest,\nMeera',
+    direct:'Hi <span class="tok">'+fn+'</span> — I\'m hiring a <span class="tok">Senior Backend Engineer</span> at <span class="tok">Acme Corp</span> (Bangalore, hybrid, ₹35–45 LPA). Your <span class="tok">'+co+'</span> backend experience is a strong match. Open to a quick call this week?\n\n— Meera',
+    formal:'Dear <span class="tok">'+fn+'</span>,\n\nI am reaching out regarding a Senior Backend Engineer opportunity with <span class="tok">Acme Corp</span>. Your experience at <span class="tok">'+co+'</span>, particularly in backend systems at scale, aligns closely with the requirements.\n\nThe position is hybrid in Bangalore with compensation in the ₹35–45 LPA range. I would welcome the opportunity to discuss it with you.\n\nKind regards,\nMeera Joshi\nTalent Co'
+  };
+  $('omsg').innerHTML=msgs[tone]||msgs.warm;
+}
+
+/* status popover */
+function openStatusPop(el,candId,e){
+  e.stopPropagation(); var pop=$('pop'); var c=cand(candId);
+  var opts=Object.keys(STATUSES).map(function(k){var s=STATUSES[k];return '<div class="popopt" data-action="set-status" data-st="'+k+'" data-cand="'+candId+'"><span class="d" style="background:'+s.color+'"></span>'+s.label+(c&&c.status===k?' <span style="margin-left:auto;color:var(--blue)">✓</span>':'')+'</div>';}).join('');
+  pop.innerHTML='<div class="ph">Change status</div>'+opts+'<div class="ph" style="margin-top:4px">Why? (logged with history)</div><textarea placeholder="e.g. Strong screen — moving to interview"></textarea><button class="savebtn" data-action="set-status" data-st="'+(c?nextStatus(c.status):'screened')+'" data-cand="'+candId+'">Save change</button>';
+  var r=el.getBoundingClientRect(); pop.style.left=Math.min(r.left,window.innerWidth-280)+'px'; pop.style.top=(r.bottom+6)+'px'; pop.classList.add('open');
+}
+
+/* notes modal */
+function openNotes(candId){
+  var c=cand(candId)||cand('anaya'); var scrim=$('scrim');
+  var hist=[
+    ['grad','✦','<b>AI</b> ranked '+c.name.split(' ')[0]+' at '+c.fit+'%','Built from '+c.sources,'8 min ago'],
+    ['#E8F0FE|#174EA6','MJ','<b>You</b> moved to '+STATUSES[c.status].label,'Strong technical screen — solid on system design.','2 days ago'],
+    ['#FEF7E0|#C98A00','✦','<b>AI</b> flagged notice period','90-day notice — Acme prefers under 60. Confirm early.','2 days ago']
+  ].map(function(h){var bg,col;if(h[0]==='grad'){return '<div class="titem"><div class="ti-d grad grain" style="color:#fff">'+h[1]+'</div><div><div class="tt">'+h[2]+'</div><div class="tj">'+h[3]+'</div><div class="tm">'+h[4]+'</div></div></div>';}var parts=h[0].split('|');return '<div class="titem"><div class="ti-d" style="background:'+parts[0]+';color:'+(parts[1]||'#5F6368')+'">'+h[1]+'</div><div><div class="tt">'+h[2]+'</div><div class="tj">'+h[3]+'</div><div class="tm">'+h[4]+'</div></div></div>';}).join('');
+  $('modal').innerHTML='<div class="modal-h"><img src="'+av(c.seed,76)+'"><div><div class="mt">'+c.name+'</div><div class="ms">Notes &amp; status history</div></div><div class="x" data-action="close-modal">✕</div></div><div class="modal-b"><div class="thread" id="thread">'+hist+'</div><div class="addcomment"><input id="noteInput" placeholder="Add a note…"><button data-action="add-note">Add</button></div></div>';
+  scrim.classList.add('open');
+}
+$('scrim').addEventListener('click',function(e){if(e.target===$('scrim'))$('scrim').classList.remove('open');var x=e.target.closest('[data-action="close-modal"]');if(x)$('scrim').classList.remove('open');});
+
+/* rail collapse — single control, icon state */
+function toggleRail(){$('rail').classList.toggle('collapsed');$('tbLeft').classList.toggle('shrunk');}
+$('railToggle').addEventListener('click',toggleRail);
+
+/* ============== CHATBOT ============== */
+function openChat(){$('cbDrawer').classList.add('open');setTimeout(function(){var i=$('cbInput');if(i)i.focus();},250);}
+function cbPush(role,html){var m=$('cbMsgs');var av2=role==='ai'?'<div class="cba grad grain">✦</div>':'<div class="cba">MJ</div>';m.insertAdjacentHTML('beforeend','<div class="cbm '+role+'">'+av2+'<div class="bub">'+html+'</div></div>');m.scrollTop=m.scrollHeight;}
+function cbTyping(){var m=$('cbMsgs');m.insertAdjacentHTML('beforeend','<div class="cbm ai" id="cbTyping"><div class="cba grad grain">✦</div><div class="cb-typing"><span class="dots"><span></span><span></span><span></span></span></div></div>');m.scrollTop=m.scrollHeight;}
+function cbStopTyping(){var t=$('cbTyping');if(t)t.remove();}
+function cbChips(list){$('cbChips').innerHTML=list.map(function(c){return '<div class="cbchip" data-chip="'+c.replace(/"/g,'')+'">'+c+'</div>';}).join('');}
+$('cbChips').addEventListener('click',function(e){var c=e.target.closest('.cbchip');if(c){$('cbInput').value=c.getAttribute('data-chip');cbSend();}});
+$('cbInput').addEventListener('keydown',function(e){if(e.key==='Enter')cbSend();});
+
+function cbSend(){var inp=$('cbInput');var q=inp.value.trim();if(!q)return;cbPush('user',q.replace(/</g,'&lt;'));inp.value='';cbTyping();setTimeout(function(){cbStopTyping();botReply(q);},700);}
+
+function botReply(q){
+  var s=q.toLowerCase();
+  function did(label,view,opts){setTimeout(function(){go(view,opts||{});},500);return '<div style="margin-top:9px"><span class="cbchip" style="pointer-events:none;background:var(--green-soft);color:#137333;border-color:transparent">✦ Opened '+label+'</span></div>';}
+  // candidate name lookup
+  var named=CANDS.find(function(c){return s.indexOf(c.name.toLowerCase())>=0||s.indexOf(c.name.split(' ')[0].toLowerCase())>=0;});
+  if(/(create|new|start).*(project|role|req)/.test(s)){cbPush('ai','Starting a new project for you. Paste the client\'s brief and I\'ll structure the role automatically.'+did('New project','new-project'));cbChips(['Parse a sample brief','Add candidates','Top candidates for Acme']);return;}
+  if(/(draft|write|send).*(outreach|message|email|note)/.test(s)||(/outreach/.test(s)&&named)){var oc=named?named.id:'anaya';cbPush('ai','Drafting a personalised outreach to <b>'+(named?named.name:'Anaya Krishnan')+'</b> — pulling real details from their background so it doesn\'t read like a template.'+did('outreach draft','outreach',{candId:oc}));cbChips(['Make it shorter','Best time to send?','Add to shortlist']);return;}
+  if(/(sla|breach|risk|behind|urgent|overdue)/.test(s)){cbPush('ai','<b>Nimbus AI — DevOps Lead</b> breaches SLA in <b>2 days</b> and only has mid-funnel candidates. Orbit Health is the next watch item (4 days). Opening Nimbus so you can act.'+did('Nimbus AI workspace','workspace',{projId:'nimbus'}));cbChips(['Source more for Nimbus','Who\'s the top candidate?','Show all projects']);return;}
+  if(/(shortlist|lock|finalise|finalize)/.test(s)){cbPush('ai','Here\'s the Acme shortlist — Anaya, Marcus and Sofia. You can reorder, drop anyone, then lock it to share with the client.'+did('shortlist','shortlist'));cbChips(['Share with client','Add a 4th candidate','Draft outreach to all']);return;}
+  if(/(share|send).*(client|sarah)/.test(s)||/client.?ready|client report/.test(s)){cbPush('ai','Prepared the client-ready shortlist for Sarah at Acme — internal notes and AI jargon stripped out.'+did('client preview','share-client'));cbChips(['Copy share link','Export PDF','Back to pipeline']);return;}
+  if(named&&/(compare|vs|versus|better)/.test(s)){cbPush('ai','<b>'+named.name+'</b> ('+named.fit+'%) vs the field: '+named.strengths[0]+'. Main caveat — '+named.concerns[0].toLowerCase()+'. Opening the full breakdown.'+did(named.name.split(' ')[0]+'\'s analysis','candidate',{candId:named.id}));cbChips(['Draft outreach','Add to shortlist','Show top candidates']);return;}
+  if(named){cbPush('ai','<b>'+named.name+'</b> — '+named.role+' ('+named.co+'), <b>'+named.fit+'% fit</b>, currently '+STATUSES[named.status].label.toLowerCase()+'. '+named.strengths[0]+'. Opening their profile.'+did(named.name.split(' ')[0]+'\'s profile','candidate',{candId:named.id}));cbChips(['Why this score?','Draft outreach','Compare to Marcus']);return;}
+  if(/(top|best|strongest|ranked|good).*(candidate|fit|match)/.test(s)||/who.*(should|best|top)/.test(s)){cbPush('ai','For <b>Acme Corp</b>, the ranking is led by <b>Anaya Krishnan (87%)</b>, then Marcus Lee (81%) and Sofia Almeida (64%). Opening the ranked pipeline.'+did('Acme pipeline','workspace',{projId:'acme'}));cbChips(['Open Anaya\'s profile','Lock a shortlist','Draft outreach to Anaya']);return;}
+  if(/(add|source|find).*(candidate|people|talent)/.test(s)){cbPush('ai','Opening sourcing for Acme — I\'ve already found <b>3 strong matches in your pool</b> so you don\'t start from scratch.'+did('add candidates','add-candidates',{projId:'acme'}));cbChips(['Run AI analysis','Show top candidates']);return;}
+  if(/(project|role)s?\b/.test(s)&&/(show|list|all|my|open)/.test(s)){cbPush('ai','You have <b>9 open roles</b>. Opening the full list — 2 need attention today.'+did('projects','projects'));cbChips(['Who\'s breaching SLA?','Create a new project']);return;}
+  if(/(overview|home|today|morning|summary|dashboard)/.test(s)){cbPush('ai','Here\'s your day: <b>4 things need you</b> — 2 SLA risks, 3 new Acme matches, and Marcus\'s acceptance to confirm. Opening your overview.'+did('overview','overview'));cbChips(['Who\'s breaching SLA?','Top candidates for Acme']);return;}
+  if(/(fit|score|how).*(work|calculat|comput|mean)/.test(s)||/how.*fit/.test(s)){cbPush('ai','<b>Fit score</b> weighs three things: skills match against the brief (50%), relevant experience &amp; seniority (30%), and logistics like notice period &amp; comp (20%). Every score traces back to source documents — nothing invented.');cbChips(['Show top candidates','Open Anaya\'s profile']);return;}
+  if(/(hi|hello|hey|yo)\b/.test(s)&&s.length<12){cbPush('ai','Hey Meera 👋 I can run pretty much anything here — try <b>"who\'s breaching SLA?"</b>, <b>"draft outreach to Anaya"</b>, or <b>"create a new project"</b>.');cbChips(['Top candidates for Acme','Who\'s breaching SLA?','Create a new project']);return;}
+  // fallback
+  cbPush('ai','I can do that kind of thing right from here — navigation, summaries, drafting, sourcing. Want me to start with one of these?');
+  cbChips(['Top candidates for Acme','Who\'s breaching SLA?','Create a new project','Draft outreach to Anaya']);
+}
+
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeMenus();}});
+
+/* ============== INIT ============== */
+go('overview');
+cbPush('ai','Hi Meera 👋 I\'m your copilot. I can <b>answer</b> questions and <b>do</b> things — navigate, draft, source, summarise. Just tell me what you need.');
+cbChips(['Top candidates for Acme','Who\'s breaching SLA?','Create a new project','Draft outreach to Anaya']);
+</script>
+</body>
+</html>

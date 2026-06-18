@@ -1,0 +1,68 @@
+{
+  "summary": "Iteration 2 — full Playwright validation of FinVista case study integration. All 11 review-request flows pass with no console errors and no failed network requests.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_results": {
+    "landing": {
+      "projects_grid_heading": "case studies (matches spec, not 'other projects')",
+      "coming_soon_cards": ["aurora", "next-gen-institute", "somethings-cooking"],
+      "each_card_has_coming_soon_badge": true,
+      "featured_link_href": "/case/finvista"
+    },
+    "projects_route": {
+      "featured_card": "projects-card-finvista present",
+      "coming_soon_cards_present": ["aurora", "next-gen-institute", "somethings-cooking"],
+      "total_cards": 4
+    },
+    "finvista_case_study": {
+      "all_10_sections_in_order": ["section-overview","section-problem","section-research","section-insights","section-flow","section-design","section-design-system","section-validation","section-impact","section-gallery"],
+      "hero_title": "finvista",
+      "subtitle_present": true,
+      "stat_blocks": 3,
+      "stat_values": "6 Loan Products | 11 Step Loan Journey | 100+ Components",
+      "section_06_design": {
+        "final_screen_cards_with_h4": 17,
+        "total_figures_in_section": 23,
+        "wireframe_and_exploration_figures": "3 wireframe SVG figures + 3 exploration figures + 17 final screen cards = 23"
+      },
+      "section_10_gallery": {
+        "initial_figures": 10,
+        "button_text_before": "view all 47 screens →",
+        "after_toggle_figures": 47,
+        "button_text_after": "show fewer screens"
+      },
+      "all_finvista_images_loaded": "42/42 (no broken)",
+      "failed_http_responses": 0
+    },
+    "coming_soon_fallback": {
+      "/case/aurora": {"title": "aurora", "badge": "coming soon", "mailto_cta": true},
+      "/case/next-gen-institute": {"title": "next-gen institute", "badge": "coming soon", "mailto_cta": true},
+      "/case/somethings-cooking": {"title": "something's cooking", "badge": "coming soon", "mailto_cta": true}
+    },
+    "sidebar_nav_from_case_finvista": {
+      "nav-projects": "/projects ✓",
+      "nav-about": "/about ✓",
+      "nav-services": "/services ✓",
+      "nav-contact": "/contact ✓"
+    },
+    "console_errors": 0,
+    "all_failed_network_responses": 0
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "FinvistaCaseStudy.jsx hero image src uses pattern `fv.overview && '/finvista/...'` — works because fv.overview is truthy, but the && conditional is misleading. A clearer plain string would be safer.",
+    "FinvistaCaseStudy.jsx is ~595 lines — close to the 700-line threshold. Consider splitting per-section components into separate files for maintainability."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (skipped)", "frontend": "100% (11/11)"},
+  "test_credentials": "None required",
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "FinVista case study fully integrated and working. Key testids: finvista-case-study, section-overview…section-gallery, toggle-gallery (10→47 screens), case-hero-image, coming-soon-case, early-walkthrough-cta, projects-card-<slug>, project-card-<slug>, nav-{projects,about,services,contact}. All 96 files in /finvista/ public folder serve 200. Total 42 lazy <img> tags from /finvista/ load successfully when scrolled."
+}

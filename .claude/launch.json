@@ -1,0 +1,14 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "portfolio",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": [
+        "-c",
+        "cd /Users/mr.khan/ux-portfolio-2026/frontend && export NVM_DIR=\"$HOME/.nvm\" && . \"$NVM_DIR/nvm.sh\" && nvm use 20.20.2 >/dev/null && BROWSER=none exec npm start"
+      ],
+      "port": 3000
+    }
+  ]
+}

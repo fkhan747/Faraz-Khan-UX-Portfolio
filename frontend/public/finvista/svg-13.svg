@@ -1,0 +1,76 @@
+<svg style="width:100%;background:#f5f5f3;border-radius:12px;" viewbox="0 0 1080 520" xmlns="http://www.w3.org/2000/svg">
+<style>text{font-family:Inter,sans-serif;fill:#666}rect.fr{fill:#fff;stroke:#ccc;stroke-width:1;rx:12}rect.bar{fill:#ddd;rx:4}rect.btn{fill:#999;rx:8}rect.fld{fill:none;stroke:#bbb;stroke-width:1;rx:6}rect.blk{fill:#eee;rx:6}rect.chip{fill:none;stroke:#bbb;stroke-width:1;rx:6}text.tt{font-size:13px;font-weight:700;fill:#444}text.lb{font-size:9px;fill:#999}text.sm{font-size:8px;fill:#aaa}</style>
+<g transform="translate(20,20)"><rect class="fr" height="460" width="220"></rect><rect class="bar" height="24" width="200" x="10" y="10"></rect>
+<rect class="blk" height="20" rx="4" width="180" x="20" y="50"></rect><text class="sm" text-anchor="middle" x="110" y="64">Logo</text>
+<text class="tt" text-anchor="middle" x="110" y="110">Welcome</text>
+<text class="lb" text-anchor="middle" x="110" y="128">Login to your account</text>
+<text class="lb" x="20" y="170">Mobile number</text><rect class="fld" height="28" width="180" x="20" y="178"></rect>
+<text class="sm" x="30" y="196">Enter your number</text>
+<rect class="btn" height="36" rx="18" width="180" x="20" y="230"></rect><text style="fill:#fff;font-size:11px;font-weight:600" text-anchor="middle" x="110" y="253">Send OTP</text>
+<line style="stroke:#ddd" x1="20" x2="200" y1="290" y2="290"></line><text class="lb" text-anchor="middle" x="110" y="289">or</text>
+<rect height="36" rx="18" style="fill:none;stroke:#999;stroke-width:1.5" width="180" x="20" y="305"></rect>
+<text style="font-size:11px;font-weight:600;fill:#666" text-anchor="middle" x="110" y="328">Employee Login</text></g>
+<g transform="translate(270,20)"><rect class="fr" height="460" width="220"></rect><rect class="bar" height="24" width="200" x="10" y="10"></rect>
+<rect class="blk" height="28" rx="6" width="95" x="10" y="44"></rect><rect class="blk" height="28" rx="6" style="fill:#ccc" width="95" x="115" y="44"></rect>
+<text class="sm" text-anchor="middle" x="57" y="62">Dashboard</text><text class="sm" text-anchor="middle" x="162" y="62">Applications</text>
+<rect class="fld" height="24" width="165" x="15" y="82"></rect><text class="sm" x="25" y="98">Search by Name/LAN</text>
+<rect class="blk" height="24" rx="4" width="20" x="190" y="82"></rect>
+<rect height="80" rx="8" style="fill:none;stroke:#888;stroke-width:1.5" width="190" x="15" y="116"></rect>
+<text class="tt" style="font-size:11px" x="25" y="136">Applicant Name</text>
+<text class="sm" x="25" y="152">App ID</text><text class="sm" x="25" y="166">Stage: Lead</text><text class="sm" x="25" y="182">Created — Updated</text>
+<rect height="70" rx="8" style="fill:none;stroke:#ddd;stroke-width:1" width="190" x="15" y="206"></rect>
+<text class="tt" style="font-size:11px" x="25" y="226">Applicant</text>
+<rect height="16" rx="8" style="fill:#bbb" width="44" x="155" y="214"></rect>
+<text style="font-size:7px;fill:#fff;font-weight:600" text-anchor="middle" x="177" y="226">Escalated</text>
+<text class="sm" x="25" y="244">App ID</text><text class="sm" x="25" y="258">Stage: DDE</text>
+<rect class="btn" height="36" rx="18" width="190" x="15" y="410"></rect>
+<text style="fill:#fff;font-size:10px;font-weight:600" text-anchor="middle" x="110" y="433">Create New Application</text></g>
+<g transform="translate(520,20)"><rect class="fr" height="460" width="220"></rect><rect class="bar" height="24" width="200" x="10" y="10"></rect>
+<text class="sm" style="fill:#777;font-weight:600" x="15" y="52">Great Start</text><text class="sm" x="140" y="52">9% Complete</text>
+<rect height="14" rx="7" style="fill:#bbb" width="30" x="180" y="44"></rect>
+<text style="font-size:6px;fill:#fff" text-anchor="middle" x="195" y="55">Step 1</text>
+<rect height="4" rx="2" style="fill:#e5e5e5" width="200" x="10" y="62"></rect>
+<rect height="4" rx="2" style="fill:#999" width="20" x="10" y="62"></rect>
+<text class="tt" x="15" y="90">Personal details</text>
+<text class="lb" x="15" y="110">First name</text><rect class="fld" height="24" width="90" x="15" y="116"></rect>
+<text class="lb" x="120" y="110">Last name</text><rect class="fld" height="24" width="90" x="120" y="116"></rect>
+<text class="lb" x="15" y="156">DOB</text><rect class="fld" height="24" width="90" x="15" y="162"></rect>
+<text class="lb" x="120" y="156">Gender</text><rect class="fld" height="24" width="90" x="120" y="162"></rect>
+<text class="lb" x="15" y="202">Marital status</text>
+<g transform="translate(15,208)"><circle cx="8" cy="8" r="7" style="fill:#999"></circle><text class="sm" x="20" y="12">Married</text>
+<circle cx="88" cy="8" r="7" style="fill:none;stroke:#bbb"></circle><text class="sm" x="100" y="12">Unmarried</text></g>
+<text class="lb" x="15" y="246">Spouse's name</text><rect class="fld" height="24" width="195" x="15" y="252"></rect>
+<text class="lb" x="15" y="292">Father's name</text><rect class="fld" height="24" width="90" x="15" y="298"></rect>
+<text class="lb" x="120" y="292">Mother's name</text><rect class="fld" height="24" width="90" x="120" y="298"></rect>
+<text class="lb" x="15" y="340">Capture live photo</text>
+<rect class="blk" height="44" rx="22" width="44" x="160" y="330"></rect>
+<rect class="btn" height="36" rx="18" width="190" x="15" y="410"></rect>
+<text style="fill:#fff;font-size:10px;font-weight:600" text-anchor="middle" x="110" y="433">Verify KYC Details</text></g>
+<g transform="translate(770,20)"><rect class="fr" height="460" width="220"></rect><rect class="bar" height="24" width="200" x="10" y="10"></rect>
+<text class="sm" style="fill:#777;font-weight:600" x="15" y="52">Great Start</text>
+<rect height="18" rx="9" style="fill:#e5e5e5" width="80" x="130" y="42"></rect>
+<text style="font-size:7px;fill:#777;font-weight:600" text-anchor="middle" x="170" y="55">30% Complete</text>
+<text class="tt" x="15" y="82">Application progress</text>
+<g transform="translate(15,95)">
+<circle cx="10" cy="10" r="8" style="fill:#888"></circle><text style="font-size:7px;fill:#fff" text-anchor="middle" x="10" y="14">✓</text>
+<text class="sm" style="fill:#666;font-weight:600" x="26" y="8">Personal Details</text><text class="sm" x="26" y="20">Name, DOB &amp; Gender</text>
+<line style="stroke:#888;stroke-width:1.5" x1="10" x2="10" y1="22" y2="42"></line>
+<circle cx="10" cy="52" r="8" style="fill:#888"></circle><text style="font-size:7px;fill:#fff" text-anchor="middle" x="10" y="56">✓</text>
+<text class="sm" style="fill:#666;font-weight:600" x="26" y="50">PAN Details</text><text class="sm" x="26" y="62">PAN / Form 60</text>
+<line style="stroke:#888;stroke-width:1.5" x1="10" x2="10" y1="64" y2="84"></line>
+<circle cx="10" cy="94" r="8" style="fill:#e5e5e5;stroke:#888;stroke-width:1.5"></circle>
+<text class="sm" style="font-weight:600;fill:#555" x="26" y="92">Address</text><text class="sm" x="26" y="104">Residence &amp; Landmark</text>
+<line style="stroke:#ddd;stroke-width:1" x1="10" x2="10" y1="106" y2="126"></line>
+<circle cx="10" cy="136" r="8" style="fill:#e5e5e5;stroke:#ddd"></circle><text class="sm" x="26" y="134">Employment</text><text class="sm" x="26" y="146">Type, Company</text>
+<line style="stroke:#ddd;stroke-width:1" x1="10" x2="10" y1="148" y2="168"></line>
+<circle cx="10" cy="178" r="8" style="fill:#e5e5e5;stroke:#ddd"></circle><text class="sm" x="26" y="176">Income</text><text class="sm" x="26" y="188">Applicant &amp; Household</text>
+<line style="stroke:#ddd;stroke-width:1" x1="10" x2="10" y1="190" y2="210"></line>
+<circle cx="10" cy="220" r="8" style="fill:#e5e5e5;stroke:#ddd"></circle><text class="sm" x="26" y="218">Product</text><text class="sm" x="26" y="230">Schemes &amp; VAS</text>
+<line style="stroke:#ddd;stroke-width:1" x1="10" x2="10" y1="232" y2="252"></line>
+<circle cx="10" cy="262" r="8" style="fill:#e5e5e5;stroke:#ddd"></circle><text class="sm" x="26" y="260">Bank Account</text><text class="sm" x="26" y="272">UPI, Bank &amp; Mandate</text>
+</g></g>
+<text style="font-size:11px;font-weight:600;fill:#444" text-anchor="middle" x="130" y="505">Welcome</text>
+<text style="font-size:11px;font-weight:600;fill:#444" text-anchor="middle" x="380" y="505">Applications</text>
+<text style="font-size:11px;font-weight:600;fill:#444" text-anchor="middle" x="630" y="505">Personal Details</text>
+<text style="font-size:11px;font-weight:600;fill:#444" text-anchor="middle" x="880" y="505">Progress Tracker</text>
+</svg>

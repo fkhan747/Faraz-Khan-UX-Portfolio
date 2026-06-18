@@ -1,0 +1,91 @@
+<svg style="width:100%;background:#f5f5f3;border-radius:12px;" viewbox="0 0 1080 520" xmlns="http://www.w3.org/2000/svg">
+<style>text{font-family:Inter,sans-serif;fill:#666}rect.fr{fill:#fff;stroke:#ccc;stroke-width:1;rx:12}rect.bar{fill:#ddd;rx:4}rect.btn{fill:#999;rx:8}rect.fld{fill:none;stroke:#bbb;stroke-width:1;rx:6}rect.blk{fill:#eee;rx:6}rect.chip{fill:none;stroke:#bbb;stroke-width:1;rx:6}text.tt{font-size:13px;font-weight:700;fill:#444}text.lb{font-size:9px;fill:#999}text.sm{font-size:8px;fill:#aaa}</style>
+<g transform="translate(20,20)"><rect class="fr" height="460" width="220"></rect><rect class="bar" height="24" width="200" x="10" y="10"></rect>
+<text class="sm" style="fill:#777;font-weight:600" x="15" y="52">Validation</text>
+<rect height="18" rx="9" style="fill:#e5e5e5" width="80" x="130" y="42"></rect>
+<text style="font-size:7px;fill:#777;font-weight:600" text-anchor="middle" x="170" y="55">5% Complete</text>
+<text class="tt" x="15" y="90">Validate customer</text>
+<text class="lb" x="15" y="110">Verify using PAN/Aadhaar</text>
+<text class="lb" x="15" y="150">Mobile number</text><rect class="fld" height="28" width="190" x="15" y="158"></rect>
+<text class="sm" x="25" y="176">+91 9876543210</text>
+<text class="lb" x="15" y="202">PAN</text><rect class="fld" height="28" width="190" x="15" y="210"></rect>
+<text class="sm" x="25" y="228">ABCDE1234F</text>
+<text class="lb" x="15" y="254">Date of Birth</text><rect class="fld" height="28" width="190" x="15" y="262"></rect>
+<text class="sm" x="25" y="280">DD/MM/YYYY</text>
+<rect height="60" rx="8" style="fill:#f0f0f0" width="190" x="15" y="306"></rect>
+<text class="sm" style="font-weight:600" x="25" y="324">Information note</text>
+<text class="sm" x="25" y="338">By proceeding, you authorize</text>
+<text class="sm" x="25" y="350">FinVista to fetch your data.</text>
+<rect class="btn" height="36" rx="18" width="190" x="15" y="410"></rect>
+<text style="fill:#fff;font-size:10px;font-weight:600" text-anchor="middle" x="110" y="433">Fetch Details</text></g>
+<g transform="translate(270,20)"><rect class="fr" height="460" width="220"></rect><rect class="bar" height="24" width="200" x="10" y="10"></rect>
+<text class="sm" style="fill:#777;font-weight:600" x="15" y="52">Halfway there</text><text class="sm" x="130" y="52">27% Complete</text>
+<rect height="14" rx="7" style="fill:#bbb" width="30" x="180" y="44"></rect>
+<text style="font-size:6px;fill:#fff" text-anchor="middle" x="195" y="55">Step 3</text>
+<rect height="4" rx="2" style="fill:#e5e5e5" width="200" x="10" y="62"></rect>
+<rect height="4" rx="2" style="fill:#999" width="55" x="10" y="62"></rect>
+<text class="tt" x="15" y="90">Address details</text>
+<text class="lb" x="15" y="110">Current address</text>
+<rect class="fld" height="32" width="195" x="15" y="118"></rect>
+<text class="sm" x="25" y="138">House no., Street name</text>
+<text class="lb" x="15" y="170">Landmark</text><rect class="fld" height="28" width="195" x="15" y="178"></rect>
+<text class="lb" x="15" y="222">Pin code</text><rect class="fld" height="28" width="95" x="15" y="230"></rect>
+<text class="sm" x="25" y="248">560001</text>
+<text class="lb" x="120" y="222">City</text><rect class="fld" height="28" width="90" x="120" y="230"></rect>
+<text class="sm" x="130" y="248">Bengaluru</text>
+<text class="lb" x="15" y="274">Residence type</text>
+<g transform="translate(15,282)">
+<rect class="chip" height="22" rx="11" width="55"></rect><text class="sm" text-anchor="middle" x="28" y="14">Owned</text>
+<rect class="chip" height="22" rx="11" style="fill:#eee;stroke:none" width="55" x="62"></rect><text class="sm" text-anchor="middle" x="90" y="14">Rented</text>
+<rect class="chip" height="22" rx="11" width="65" x="124"></rect><text class="sm" text-anchor="middle" x="156" y="14">Family</text>
+</g>
+<text class="lb" x="15" y="328">Years at this address</text><rect class="fld" height="28" width="195" x="15" y="336"></rect>
+<rect class="btn" height="36" rx="18" width="190" x="15" y="410"></rect>
+<text style="fill:#fff;font-size:10px;font-weight:600" text-anchor="middle" x="110" y="433">Continue</text></g>
+<g transform="translate(520,20)"><rect class="fr" height="460" width="220"></rect><rect class="bar" height="24" width="200" x="10" y="10"></rect>
+<text class="sm" style="fill:#777;font-weight:600" x="15" y="52">Halfway there</text><text class="sm" x="130" y="52">36% Complete</text>
+<rect height="14" rx="7" style="fill:#bbb" width="30" x="180" y="44"></rect>
+<text style="font-size:6px;fill:#fff" text-anchor="middle" x="195" y="55">Step 4</text>
+<rect height="4" rx="2" style="fill:#e5e5e5" width="200" x="10" y="62"></rect>
+<rect height="4" rx="2" style="fill:#999" width="72" x="10" y="62"></rect>
+<text class="tt" x="15" y="90">Employment details</text>
+<text class="lb" x="15" y="110">Employment type</text>
+<g transform="translate(15,120)">
+<rect class="chip" height="24" rx="12" width="58"></rect><text class="sm" text-anchor="middle" x="29" y="15">Salaried</text>
+<rect class="chip" height="24" rx="12" style="fill:#eee;stroke:none" width="70" x="65"></rect><text class="sm" text-anchor="middle" x="100" y="15">Self-Emp</text>
+<rect class="chip" height="24" rx="12" width="50" x="142"></rect><text class="sm" text-anchor="middle" x="167" y="15">Other</text>
+</g>
+<text class="lb" x="15" y="170">Company name</text><rect class="fld" height="28" width="195" x="15" y="178"></rect>
+<text class="lb" x="15" y="222">Designation</text><rect class="fld" height="28" width="195" x="15" y="230"></rect>
+<text class="lb" x="15" y="274">Years</text><rect class="fld" height="28" width="95" x="15" y="282"></rect>
+<text class="lb" x="120" y="274">Income/month</text><rect class="fld" height="28" width="90" x="120" y="282"></rect>
+<text class="sm" x="130" y="300">₹ 50,000</text>
+<text class="lb" x="15" y="326">Office landmark</text><rect class="fld" height="28" width="195" x="15" y="334"></rect>
+<rect class="btn" height="36" rx="18" width="190" x="15" y="410"></rect>
+<text style="fill:#fff;font-size:10px;font-weight:600" text-anchor="middle" x="110" y="433">Continue</text></g>
+<g transform="translate(770,20)"><rect class="fr" height="460" width="220"></rect><rect class="bar" height="24" width="200" x="10" y="10"></rect>
+<text class="sm" style="fill:#777;font-weight:600" x="15" y="52">Halfway there</text><text class="sm" x="130" y="52">45% Complete</text>
+<rect height="14" rx="7" style="fill:#bbb" width="30" x="180" y="44"></rect>
+<text style="font-size:6px;fill:#fff" text-anchor="middle" x="195" y="55">Step 5</text>
+<rect height="4" rx="2" style="fill:#e5e5e5" width="200" x="10" y="62"></rect>
+<rect height="4" rx="2" style="fill:#999" width="90" x="10" y="62"></rect>
+<text class="tt" x="15" y="90">Products</text>
+<text class="lb" x="15" y="108">Start by adding the product</text>
+<rect height="56" rx="8" style="fill:none;stroke:#bbb" width="195" x="15" y="120"></rect>
+<rect class="blk" height="32" rx="6" width="32" x="25" y="132"></rect>
+<text class="sm" style="font-weight:600;fill:#444" x="68" y="153">ICE</text>
+<rect height="56" rx="8" style="fill:none;stroke:#bbb" width="195" x="15" y="186"></rect>
+<rect class="blk" height="32" rx="6" width="32" x="25" y="198"></rect>
+<text class="sm" style="font-weight:600;fill:#444" x="68" y="219">Electric</text>
+<rect height="80" rx="8" style="fill:#eee" width="195" x="15" y="260"></rect>
+<text class="sm" style="font-weight:600;fill:#444" x="25" y="280">Add Product</text>
+<text class="sm" x="25" y="296">Asset: Bike</text>
+<text class="sm" x="25" y="310">Make: Velar</text>
+<text class="sm" x="25" y="324">Model: Storm</text>
+<rect class="btn" height="36" rx="18" width="190" x="15" y="410"></rect>
+<text style="fill:#fff;font-size:10px;font-weight:600" text-anchor="middle" x="110" y="433">Continue</text></g>
+<text style="font-size:11px;font-weight:600;fill:#444" text-anchor="middle" x="130" y="505">Customer Validation</text>
+<text style="font-size:11px;font-weight:600;fill:#444" text-anchor="middle" x="380" y="505">Address Details</text>
+<text style="font-size:11px;font-weight:600;fill:#444" text-anchor="middle" x="630" y="505">Employment</text>
+<text style="font-size:11px;font-weight:600;fill:#444" text-anchor="middle" x="880" y="505">Product Selection</text>
+</svg>

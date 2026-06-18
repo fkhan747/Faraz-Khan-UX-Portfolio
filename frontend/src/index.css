@@ -1,0 +1,141 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-main: #FDFBF7;
+  --bg-card: #F7F1DA;
+  --primary: #E94B1F;
+  --primary-hover: #D83A0F;
+  --accent-yellow: #FFD93D;
+  --accent-yellow-hover: #F3C721;
+  --ink: #0A0A0A;
+  --ink-muted: #5A5A5A;
+  --ok: #10B981;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+  margin: 0;
+  background: var(--bg-main);
+  color: var(--ink);
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-weight: 400;
+}
+
+::selection {
+  background: var(--primary);
+  color: var(--accent-yellow);
+}
+
+.font-display {
+  font-family: 'Playfair Display', serif;
+  letter-spacing: -0.03em;
+  /* Site-wide: display headings render in Title Case, not forced lowercase. */
+  text-transform: capitalize;
+}
+
+/* Opt-out for places where Title Case is wrong: emails, stylized wordmarks,
+   and case-study body headings authored in their own correct case (with
+   acronyms like AI / OS / UX intact). Wins via !important over .font-display. */
+.case-keep {
+  text-transform: none !important;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Letter "o" with colorful dot inside */
+.dot-o {
+  position: relative;
+  display: inline-block;
+  /* The dotted letter is always mid/end-of-word, never a word's first letter,
+     so keep it lowercase even when the parent heading is Title Case (capitalize).
+     Without this, capitalize treats the span as a word start → "FOotball". */
+  text-transform: lowercase;
+}
+.dot-o::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -45%);
+  width: 0.32em;
+  height: 0.32em;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 0 2px var(--bg-main);
+}
+
+.dot-o-yellow::after { background: var(--accent-yellow); box-shadow: 0 0 0 2px var(--ink); }
+
+/* Subtle grain */
+.grain::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image: radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px);
+  background-size: 3px 3px;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  opacity: 0.4;
+}
+
+/* Staggered entrance */
+@keyframes riseIn {
+  0% { opacity: 0; transform: translateY(28px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.rise { opacity: 0; animation: riseIn 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) forwards; }
+.rise-1 { animation-delay: 0.05s; }
+.rise-2 { animation-delay: 0.15s; }
+.rise-3 { animation-delay: 0.25s; }
+.rise-4 { animation-delay: 0.35s; }
+.rise-5 { animation-delay: 0.45s; }
+.rise-6 { animation-delay: 0.55s; }
+
+/* Marquee */
+@keyframes scrollX {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track { animation: scrollX 30s linear infinite; }
+
+/* Hide scrollbar in sidebar */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Hover lift for cards */
+.lift { transition: transform 0.4s cubic-bezier(0.2,0.7,0.2,1), box-shadow 0.4s; }
+.lift:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -24px rgba(233, 75, 31, 0.25); }
+
+@layer base {
+  body { @apply text-foreground; }
+}
+
+:root {
+  --background: 39 33% 98%;
+  --foreground: 0 0% 4%;
+  --card: 51 70% 92%;
+  --card-foreground: 0 0% 4%;
+  --popover: 39 33% 98%;
+  --popover-foreground: 0 0% 4%;
+  --primary: 14 83% 51%;
+  --primary-foreground: 51 100% 92%;
+  --secondary: 51 70% 92%;
+  --secondary-foreground: 0 0% 4%;
+  --muted: 39 20% 92%;
+  --muted-foreground: 0 0% 35%;
+  --accent: 50 100% 62%;
+  --accent-foreground: 0 0% 4%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 0 0% 4% / 0.1;
+  --input: 0 0% 4% / 0.1;
+  --ring: 14 83% 51%;
+  --radius: 1rem;
+}

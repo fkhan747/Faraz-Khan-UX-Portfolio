@@ -1,0 +1,865 @@
+import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
+import {
+  ArrowLeft, ArrowUpRight, Check, X, Star, Sparkles, Maximize2, Quote,
+} from "lucide-react";
+import { concepts, PROFILE } from "../data/content";
+
+/**
+ * Shared renderer for the AI-native OS-family concept case studies
+ * (KnowledgeOS, DecisionOS — and any future ones). RecruitOS keeps its own
+ * page because it embeds a live interactive prototype; these render hi-fi
+ * concept screens instead.
+ *
+ * Props:
+ *   data   — the case object (knowledgeos / decisionos), same shape as recruitosCase
+ *   accent — the product's AI gradient (CSS string), e.g. "linear-gradient(...)"
+ *   wordmark — JSX for the lowercase title with the dot-o span
+ */
+
+const SectionLabel = ({ num, name }) => (
+  <div className="flex items-center gap-4 mb-6">
+    <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#E94B1F]">
+      {num} · {name}
+    </span>
+    <span className="flex-1 h-px bg-black/15" />
+  </div>
+);
+
+const SectionWrap = ({ children, className = "", ...rest }) => (
+  <section className={`px-6 md:px-10 lg:px-16 py-20 md:py-24 border-t border-black/10 ${className}`} {...rest}>
+    {children}
+  </section>
+);
+
+const scoreColor = (cell) =>
+  cell === "Yes" ? "text-[#10B981]" :
+  cell === "No" ? "text-[#E94B1F]" :
+  cell === "Partial" ? "text-[#D97706]" : "";
+
+export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
+  const AI_GRAD = accent;
+  const gradText = {
+    background: AI_GRAD, WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent", backgroundClip: "text",
+  };
+
+  // Auto-size the embedded prototype to its real content height (same-origin),
+  // so there is no scrollbar inside the iframe. Re-syncs on content + window resize.
+  const iframeRef = useRef(null);
+  useEffect(() => {
+    if (!r.prototypeUrl) return;
+    const iframe = iframeRef.current;
+    if (!iframe) return;
+
+    let observer;
+    const syncHeight = () => {
+      try {
+        const doc = iframe.contentDocument || iframe.contentWindow?.document;
+        if (!doc) return;
+        const body = doc.body, html = doc.documentElement;
+        // NB: documentElement.scrollHeight / clientHeight report the iframe
+        // VIEWPORT height (a spec special-case), so they floor-clamp to the
+        // iframe's current height and trap auto-sizing in a feedback loop.
+        // body.* and html.offsetHeight are the real content box and can shrink
+        // below the current iframe height — use those instead.
+        const h = Math.max(
+          body?.scrollHeight || 0,
+          body?.offsetHeight || 0,
+          html?.offsetHeight || 0
+        );
+        if (h > 0) iframe.style.height = h + "px";
+      } catch (e) {
+        /* cross-origin or not ready — leave the fallback height in place */
+      }
+    };
+
+    const onLoad = () => {
+      syncHeight();
+      try {
+        const doc = iframe.contentDocument || iframe.contentWindow?.document;
+        if (doc && "ResizeObserver" in window) {
+          observer = new ResizeObserver(syncHeight);
+          if (doc.documentElement) observer.observe(doc.documentElement);
+          if (doc.body) observer.observe(doc.body);
+        }
+      } catch (e) {
+        /* ignore — keep fallback height */
+      }
+    };
+
+    iframe.addEventListener("load", onLoad);
+    // Handle the already-loaded (cached) case.
+    try {
+      if (iframe.contentDocument?.readyState === "complete") onLoad();
+    } catch (e) { /* ignore */ }
+    window.addEventListener("resize", syncHeight);
+
+    return () => {
+      iframe.removeEventListener("load", onLoad);
+      window.removeEventListener("resize", syncHeight);
+      if (observer) observer.disconnect();
+    };
+  }, [r.prototypeUrl]);
+
+  return (
+    <article data-testid={`${r.slug}-case-study`} className="pb-24">
+      {/* ============ TITLE BLOCK ============ */}
+      <header className="px-6 md:px-10 lg:px-16 pt-12 pb-10">
+        <Link
+          to="/projects"
+          data-testid="back-link"
+          className="inline-flex items-center gap-2 mb-10 text-xs font-mono uppercase tracking-widest text-[#5A5A5A] hover:text-[#E94B1F] transition-colors"
+        >
+          <ArrowLeft size={14} /> all projects
+        </Link>
+
+        <p className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.25em] mb-5" style={gradText}>
+          <Sparkles size={13} /> {r.kind}
+        </p>
+
+        <h1 className="font-display text-6xl md:text-7xl lg:text-[8rem] font-black tracking-tighter leading-[0.9] lowercase case-keep">
+          {wordmark}
+        </h1>
+
+        <p className="mt-8 max-w-3xl text-xl md:text-2xl text-[#1a1a1a] leading-snug font-light italic">
+          {r.subtitle}
+        </p>
+
+        <div className="mt-12 grid grid-cols-3 gap-4 max-w-3xl">
+          {r.hero.stats.map((s) => (
+            <div key={s.label} className="bg-[#F7F1DA] rounded-2xl p-5 md:p-6">
+              <div className="font-display text-3xl md:text-5xl font-black text-[#E94B1F] leading-none">{s.value}</div>
+              <div className="mt-3 text-[10px] md:text-xs font-mono uppercase tracking-widest text-[#5A5A5A]">{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </header>
+
+      {/* ============ 00 OVERVIEW ============ */}
+      <SectionWrap data-testid="section-overview">
+        <SectionLabel num="00" name="Overview" />
+        <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-4xl mb-6">{r.overview.headline}</h2>
+
+        <div className="rounded-3xl bg-[#0A0A0A] text-white p-8 md:p-12 relative overflow-hidden">
+          <div className="absolute -top-10 -right-10 w-72 h-72 rounded-full blur-3xl opacity-40" style={{ background: AI_GRAD }} />
+          <p className="relative text-[11px] font-mono uppercase tracking-[0.25em] text-[#FFD93D] mb-4">{r.overview.tldrTitle}</p>
+          <p className="relative font-display text-xl md:text-2xl leading-snug text-white/95 max-w-4xl">{r.overview.tldr}</p>
+          <p className="relative mt-6 inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-white/70">
+            <Sparkles size={13} /> {r.overview.badge}
+          </p>
+        </div>
+
+        <div className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-4">
+          {r.overview.facts.map((f) => (
+            <div key={f.label} className="bg-[#F7F1DA] rounded-2xl p-5">
+              <p className="text-[10px] font-mono uppercase tracking-widest text-[#5A5A5A] mb-2">{f.label}</p>
+              <p className="font-display text-base md:text-lg font-bold">{f.value}</p>
+            </div>
+          ))}
+        </div>
+
+        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-8">process</h3>
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+          {r.overview.process.map((p) => (
+            <div key={p.step} className="bg-[#F7F1DA] rounded-2xl p-6">
+              <div className="font-display text-4xl md:text-5xl font-black text-[#E94B1F]">{p.step}</div>
+              <div className="mt-3 font-display text-lg font-bold lowercase">{p.title}</div>
+              <div className="mt-1 text-xs font-mono uppercase tracking-widest text-[#5A5A5A]">{p.duration}</div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-16 grid lg:grid-cols-12 gap-8">
+          <div className="lg:col-span-7 space-y-5 text-lg leading-relaxed text-[#1a1a1a]">
+            <p>{r.overview.intro}</p>
+            <p>{r.overview.intro2}</p>
+            <div className="mt-6 rounded-3xl bg-[#FFD93D] p-7">
+              <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3">{r.overview.contextTitle}</p>
+              <p className="font-display text-lg md:text-xl font-bold leading-snug">{r.overview.contextBody}</p>
+            </div>
+          </div>
+          <div className="lg:col-span-5 space-y-3">
+            {r.overview.metadata.map((m) => (
+              <div key={m.k} className="bg-[#F7F1DA] rounded-2xl p-5 flex items-center justify-between gap-4">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-[#5A5A5A]">{m.k}</span>
+                <span className="font-display text-sm md:text-base font-bold text-right">{m.v}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </SectionWrap>
+
+      {/* ============ 01 PERSONAS ============ */}
+      <SectionWrap data-testid="section-personas">
+        <SectionLabel num="01" name="The People" />
+        <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-4xl mb-6">{r.personasSection.headline}</h2>
+        <p className="text-base md:text-lg leading-relaxed max-w-4xl text-[#1a1a1a] mb-10">{r.personasSection.intro}</p>
+
+        <div className="grid md:grid-cols-3 gap-5">
+          {r.personasSection.personas.map((p) => (
+            <div key={p.name} className="bg-[#F7F1DA] rounded-3xl p-7 flex flex-col">
+              <div className="flex items-center gap-4 mb-5">
+                <div className="w-14 h-14 rounded-full bg-[#E94B1F] text-white flex items-center justify-center font-display font-black text-lg">{p.initials}</div>
+                <div>
+                  <h4 className="font-display text-lg font-black">{p.name}</h4>
+                  <p className="text-xs font-mono uppercase tracking-widest text-[#5A5A5A]">{p.role}</p>
+                </div>
+              </div>
+              <p className="text-sm leading-relaxed text-[#1a1a1a]/90 mb-4">{p.context}</p>
+
+              <p className="text-[10px] font-mono uppercase tracking-widest text-[#10B981] mb-2">goals</p>
+              <ul className="space-y-1.5 mb-4">
+                {p.goals.map((g) => (<li key={g} className="text-sm flex gap-2"><Check size={14} className="flex-shrink-0 mt-1 text-[#10B981]" />{g}</li>))}
+              </ul>
+
+              <p className="text-[10px] font-mono uppercase tracking-widest text-[#E94B1F] mb-2">frustrations</p>
+              <ul className="space-y-1.5 mb-4">
+                {p.frustrations.map((f) => (<li key={f} className="text-sm flex gap-2"><X size={14} className="flex-shrink-0 mt-1 text-[#E94B1F]" />{f}</li>))}
+              </ul>
+
+              <div className="mt-auto pt-4 border-t border-black/10">
+                <p className="text-[10px] font-mono uppercase tracking-widest text-[#5A5A5A] mb-2">jobs to be done</p>
+                <p className="text-sm italic leading-snug mb-3">&ldquo;{p.jtbd}&rdquo;</p>
+                <p className="text-[10px] font-mono uppercase tracking-widest text-[#5A5A5A]">{p.tools}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {r.personasSection.quoteWall && (
+          <>
+            <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">in their words</h3>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {r.personasSection.quoteWall.map((q) => (
+                <blockquote key={q.q} className="rounded-3xl bg-[#0A0A0A] text-white p-6 flex flex-col">
+                  <Quote size={18} className="text-[#FFD93D] mb-3" />
+                  <p className="font-display text-lg leading-snug mb-3">&ldquo;{q.q}&rdquo;</p>
+                  <footer className="mt-auto text-[10px] font-mono uppercase tracking-widest text-white/50">{q.a}</footer>
+                </blockquote>
+              ))}
+            </div>
+          </>
+        )}
+      </SectionWrap>
+
+      {/* ============ 02 RESEARCH 1 ============ */}
+      <SectionWrap data-testid="section-research-1">
+        <SectionLabel num="02" name="The Workflow" />
+        <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-4xl mb-6">{r.research1.headline}</h2>
+
+        <h3 className="mt-10 font-display text-2xl md:text-3xl font-black mb-4">{r.research1.methodTitle}</h3>
+        <p className="text-base md:text-lg leading-relaxed max-w-4xl text-[#1a1a1a] mb-6">{r.research1.methodIntro}</p>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {r.research1.method.map((m) => (
+            <div key={m.l} className="bg-[#F7F1DA] rounded-2xl p-5">
+              <p className="text-[10px] font-mono uppercase tracking-widest text-[#5A5A5A] mb-2">{m.l}</p>
+              <p className="font-display text-sm md:text-base font-bold">{m.v}</p>
+            </div>
+          ))}
+        </div>
+
+        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">{r.research1.timelineTitle}</h3>
+        <p className="text-base md:text-lg leading-relaxed max-w-4xl text-[#1a1a1a] mb-8">{r.research1.timelineIntro}</p>
+        <div className="rounded-3xl bg-[#F7F1DA] p-6 md:p-8">
+          <div className="relative pl-6 md:pl-8">
+            <span className="absolute left-1 md:left-2 top-2 bottom-2 w-px bg-black/15" />
+            <ul className="space-y-5">
+              {r.research1.timeline.map((t) => (
+                <li key={t.time} className="relative">
+                  <span className="absolute -left-[1.35rem] md:-left-[1.65rem] top-1.5 h-3 w-3 rounded-full" style={{ background: t.pain ? "#E94B1F" : "#10B981" }} />
+                  <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                    <span className="font-mono text-xs font-bold text-[#5A5A5A] w-16">{t.time}</span>
+                    <span className="font-display text-base font-black lowercase">{t.label}</span>
+                    {t.pain && <span className="text-[9px] font-mono uppercase tracking-widest text-[#E94B1F] px-2 py-0.5 rounded-full bg-[#E94B1F]/10">pain point</span>}
+                  </div>
+                  <p className="mt-1 text-sm leading-relaxed text-[#1a1a1a]/85 md:pl-[4.75rem]">{t.note}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">{r.research1.affinityTitle}</h3>
+        <p className="text-base md:text-lg leading-relaxed max-w-4xl text-[#1a1a1a] mb-8">{r.research1.affinityIntro}</p>
+        <div className="grid md:grid-cols-2 gap-5">
+          {r.research1.affinityThemes.map((t) => (
+            <div key={t.t} className="bg-[#F7F1DA] rounded-3xl p-7 border-l-4 border-[#E94B1F]">
+              <h4 className="font-display text-xl font-black lowercase mb-2">{t.t}</h4>
+              <p className="text-base leading-relaxed">{t.d}</p>
+            </div>
+          ))}
+        </div>
+
+        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">{r.research1.insightsTitle}</h3>
+        <div className="grid md:grid-cols-3 gap-5">
+          {r.research1.insights.map((i, idx) => (
+            <div key={i.t} className="bg-[#F7F1DA] rounded-3xl p-7 flex flex-col">
+              <div className="font-display text-5xl font-black text-[#E94B1F] leading-none mb-3">0{idx + 1}</div>
+              <h4 className="font-display text-lg font-black lowercase mb-2">{i.t}</h4>
+              <p className="text-sm leading-relaxed mb-4">{i.d}</p>
+              <p className="mt-auto text-xs font-mono uppercase tracking-widest text-[#10B981]">{i.link}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-12 rounded-3xl bg-[#FFD93D] p-8 md:p-10">
+          <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3">★ key insight</p>
+          <p className="font-display text-xl md:text-2xl font-bold leading-snug max-w-4xl">{r.research1.keyInsight}</p>
+        </div>
+      </SectionWrap>
+
+      {/* ============ 03 RESEARCH 2 ============ */}
+      <SectionWrap data-testid="section-research-2">
+        <SectionLabel num="03" name="The Broken Stack" />
+        <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-4xl mb-6">{r.research2.headline}</h2>
+
+        <h3 className="mt-10 font-display text-2xl md:text-3xl font-black mb-4">{r.research2.ecoTitle}</h3>
+        <p className="text-base md:text-lg leading-relaxed max-w-4xl text-[#1a1a1a] mb-8">{r.research2.ecoIntro}</p>
+        <div className="relative">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {r.research2.ecosystem.map((e) => (
+              <div key={e.name} className="bg-[#F7F1DA] rounded-2xl p-5 text-center">
+                <div className="font-display text-base font-black">{e.name}</div>
+                <div className="mt-2 text-xs text-[#5A5A5A] leading-snug">{e.role}</div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-6 rounded-3xl bg-[#E94B1F] text-white p-7 text-center">
+            <p className="font-display text-lg md:text-xl font-bold leading-snug max-w-3xl mx-auto">{r.research2.ecoGap}</p>
+          </div>
+        </div>
+
+        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">{r.research2.heuristicTitle}</h3>
+        <p className="text-base md:text-lg leading-relaxed max-w-4xl text-[#1a1a1a] mb-6">{r.research2.heuristicIntro}</p>
+        <div className="rounded-3xl bg-[#F7F1DA] divide-y divide-black/10">
+          {r.research2.heuristics.map((h) => (
+            <div key={h.t} className="p-5 md:p-6 grid grid-cols-12 gap-4 items-center">
+              <div className="col-span-12 md:col-span-4 font-display font-bold text-base lowercase">{h.t}</div>
+              <div className="col-span-9 md:col-span-6 text-sm text-[#1a1a1a]/80">{h.d}</div>
+              <div className="col-span-3 md:col-span-2 text-right font-display font-black text-2xl text-[#E94B1F]">{h.s}</div>
+            </div>
+          ))}
+        </div>
+
+        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">{r.research2.teardownTitle}</h3>
+        <p className="text-base md:text-lg leading-relaxed max-w-4xl text-[#1a1a1a] mb-6">{r.research2.teardownIntro}</p>
+        <div className="rounded-3xl bg-[#F7F1DA] overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-black/10">
+                {r.research2.competitiveTable.headers.map((h, i) => (
+                  <th key={i} className={`p-4 text-left font-mono uppercase text-[10px] tracking-widest ${i === 1 ? "text-[#E94B1F]" : ""}`}>{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {r.research2.competitiveTable.rows.map((row, i) => (
+                <tr key={i} className="border-b border-black/5">
+                  {row.map((cell, j) => (
+                    <td key={j} className={`p-4 ${j === 0 ? "font-medium" : `text-center font-display font-bold ${scoreColor(cell)}`} ${j === 1 && cell !== row[0] ? "bg-[#FFD93D]/40" : ""}`}>{cell}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="mt-10 rounded-3xl bg-[#0A0A0A] text-white p-8 md:p-10">
+          <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#FFD93D] mb-3">{r.research2.gapTitle}</p>
+          <p className="font-display text-xl md:text-2xl leading-snug max-w-4xl">{r.research2.gap}</p>
+        </div>
+      </SectionWrap>
+
+      {/* ============ 04 HYPOTHESIS ============ */}
+      <SectionWrap data-testid="section-hypothesis">
+        <SectionLabel num="04" name="The Hypothesis" />
+        <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-4xl mb-6">{r.hypothesis.headline}</h2>
+
+        <div className="rounded-3xl bg-[#FFD93D] p-8 md:p-10 mb-10">
+          <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3">{r.hypothesis.positioningTitle}</p>
+          <p className="font-display text-xl md:text-2xl font-bold leading-snug max-w-4xl">{r.hypothesis.positioning}</p>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-5">
+          <div className="bg-[#F7F1DA] rounded-3xl p-7">
+            <div className="flex items-center gap-2 mb-4">
+              <span className="w-2 h-2 rounded-full bg-[#10B981]" />
+              <p className="font-mono text-xs uppercase tracking-widest">what it is</p>
+            </div>
+            <ul className="space-y-3">
+              {r.hypothesis.isItList.map((s) => (<li key={s} className="flex items-start gap-3 text-base"><Check className="flex-shrink-0 mt-1 text-[#10B981]" size={16} />{s}</li>))}
+            </ul>
+          </div>
+          <div className="bg-[#F7F1DA] rounded-3xl p-7">
+            <div className="flex items-center gap-2 mb-4">
+              <span className="w-2 h-2 rounded-full bg-[#E94B1F]" />
+              <p className="font-mono text-xs uppercase tracking-widest">what it's not</p>
+            </div>
+            <ul className="space-y-3">
+              {r.hypothesis.isNotList.map((s) => (<li key={s} className="flex items-start gap-3 text-base"><X className="flex-shrink-0 mt-1 text-[#E94B1F]" size={16} />{s}</li>))}
+            </ul>
+          </div>
+        </div>
+
+        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">{r.hypothesis.modelTitle}</h3>
+        <p className="text-base md:text-lg leading-relaxed max-w-4xl text-[#1a1a1a] mb-8">{r.hypothesis.modelIntro}</p>
+        <div className="rounded-3xl bg-[#0A0A0A] p-7 md:p-9">
+          <div className="flex flex-wrap items-stretch justify-center gap-3 md:gap-4">
+            {r.hypothesis.modelNodes.map((n, idx) => (
+              <div key={n.t} className="flex items-center gap-3 md:gap-4">
+                <div className={`rounded-2xl p-5 w-40 md:w-44 ${idx === 0 ? "text-white" : "bg-white/5 text-white"}`} style={idx === 0 ? { background: AI_GRAD } : {}}>
+                  <div className="font-display text-base font-black lowercase">{n.t}</div>
+                  <div className="mt-1.5 text-xs leading-snug text-white/80">{n.d}</div>
+                </div>
+                {idx < r.hypothesis.modelNodes.length - 1 && (<span className="hidden md:inline text-white/30 font-display text-xl">&rarr;</span>)}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">{r.hypothesis.principlesTitle}</h3>
+        <p className="text-base md:text-lg leading-relaxed max-w-4xl text-[#1a1a1a] mb-8">{r.hypothesis.principlesIntro}</p>
+        <div className="grid md:grid-cols-2 gap-5">
+          {r.hypothesis.principles.map((p, idx) => (
+            <div key={p.t} className={`rounded-3xl p-7 ${idx % 2 === 0 ? "bg-[#F7F1DA]" : "bg-[#FFD93D]"}`}>
+              <div className="font-mono text-[10px] uppercase tracking-widest text-[#5A5A5A]">principle 0{idx + 1}</div>
+              <h4 className="mt-2 font-display text-xl font-black lowercase">{p.t}</h4>
+              <p className="mt-2 text-base leading-relaxed">{p.d}</p>
+              <p className="mt-4 text-xs font-mono uppercase tracking-widest text-[#E94B1F]">{p.from}</p>
+            </div>
+          ))}
+        </div>
+      </SectionWrap>
+
+      {/* ============ 05 IA ============ */}
+      <SectionWrap data-testid="section-ia">
+        <SectionLabel num="05" name="How It Thinks" />
+        <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-4xl mb-6">{r.ia.headline}</h2>
+
+        <h3 className="mt-10 font-display text-2xl md:text-3xl font-black mb-4">{r.ia.taskTitle}</h3>
+        <p className="text-base md:text-lg leading-relaxed max-w-4xl text-[#1a1a1a] mb-8">{r.ia.taskIntro}</p>
+        <div className="grid grid-cols-1 md:grid-cols-7 gap-3">
+          {r.ia.lifecycle.map((t, idx) => (
+            <div key={t.t} className="bg-[#F7F1DA] rounded-2xl p-5">
+              <div className="font-mono text-[10px] uppercase tracking-widest text-[#E94B1F] mb-2">step {idx + 1}</div>
+              <div className="font-display text-sm font-black lowercase">{t.t}</div>
+              <div className="mt-1.5 text-xs leading-snug text-[#1a1a1a]/80">{t.d}</div>
+            </div>
+          ))}
+        </div>
+
+        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">{r.ia.cardSortTitle}</h3>
+        <p className="text-base md:text-lg leading-relaxed max-w-4xl text-[#1a1a1a] mb-6">{r.ia.cardSortIntro}</p>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {r.ia.cardSort.map((c) => (
+            <div key={c.l} className="bg-[#F7F1DA] rounded-2xl p-5">
+              <p className="text-[10px] font-mono uppercase tracking-widest text-[#5A5A5A] mb-2">{c.l}</p>
+              <p className="font-display text-sm md:text-base font-bold">{c.v}</p>
+            </div>
+          ))}
+        </div>
+
+        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">{r.ia.iaDecisionsTitle}</h3>
+        <div className="grid md:grid-cols-3 gap-5">
+          {r.ia.iaDecisions.map((d, idx) => (
+            <div key={d.t} className="bg-[#F7F1DA] rounded-3xl p-7 flex flex-col">
+              <div className="font-display text-4xl font-black text-[#E94B1F] leading-none mb-3">0{idx + 1}</div>
+              <h4 className="font-display text-lg font-black lowercase mb-2">{d.t}</h4>
+              <p className="text-sm leading-relaxed mb-3"><span className="font-semibold">Chose: </span>{d.chose}</p>
+              <p className="mt-auto text-xs leading-relaxed text-[#1a1a1a]/70 italic">{d.alt}</p>
+            </div>
+          ))}
+        </div>
+      </SectionWrap>
+
+      {/* ============ 06 BUILDING IT ============ */}
+      <SectionWrap data-testid="section-design">
+        <SectionLabel num="06" name="Building It" />
+        <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-4xl mb-6">{r.design.headline}</h2>
+
+        <h3 className="mt-10 font-display text-2xl md:text-3xl font-black mb-4">low-fidelity wireframes</h3>
+        <p className="text-base md:text-lg leading-relaxed max-w-4xl text-[#1a1a1a] mb-8">{r.design.wireframesIntro}</p>
+        <div className="grid md:grid-cols-2 gap-6">
+          {r.design.wireframes.map((w) => (
+            <figure key={w.title} className="rounded-3xl bg-[#F7F1DA] overflow-hidden">
+              <div className="bg-white p-4 md:p-6 border-b border-black/5">
+                <img src={w.src} alt={w.title} loading="lazy" className="w-full h-auto" />
+              </div>
+              <figcaption className="p-6">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-[#E94B1F]">{w.tag}</span>
+                <h4 className="mt-2 font-display text-lg font-black lowercase">{w.title}</h4>
+                <p className="mt-2 text-sm leading-relaxed">{w.desc}</p>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+
+        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">{r.design.flowsTitle}</h3>
+        <p className="text-base md:text-lg leading-relaxed max-w-4xl text-[#1a1a1a] mb-8">{r.design.flowsIntro}</p>
+        <div className="grid md:grid-cols-3 gap-5">
+          {r.design.flows.map((f, idx) => (
+            <div key={f.t} className="bg-[#0A0A0A] text-white rounded-3xl p-7">
+              <div className="font-mono text-[10px] uppercase tracking-widest text-[#FFD93D] mb-3">flow 0{idx + 1}</div>
+              <h4 className="font-display text-lg font-black lowercase mb-3" style={gradText}>{f.t}</h4>
+              <p className="text-sm leading-relaxed text-white/85">{f.d}</p>
+            </div>
+          ))}
+        </div>
+
+        {r.prototypeUrl && (
+          <>
+            <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">the live prototype</h3>
+            <p className="text-base md:text-lg leading-relaxed max-w-4xl text-[#1a1a1a] mb-6">{r.design.finalIntro}</p>
+            <div className="mb-4 flex flex-wrap items-center gap-3">
+              <a href={r.prototypeUrl} target="_blank" rel="noreferrer" data-testid="open-fullscreen"
+                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0A0A0A] text-white font-semibold text-sm hover:bg-[#1a1a1a] transition-colors">
+                view prototype in browser <Maximize2 size={14} />
+              </a>
+              <span className="text-xs font-mono uppercase tracking-widest text-[#5A5A5A]">click anything — it answers from your sources, cites every claim, and flags what's stale</span>
+            </div>
+            <div className="rounded-3xl overflow-hidden border border-[#E7E2CF] bg-[#DDE3EC] shadow-[0_30px_70px_rgba(20,30,60,0.18)]">
+              <iframe
+                ref={iframeRef}
+                src={r.prototypeUrl}
+                title={`${r.title} interactive prototype`}
+                data-testid={`${r.slug}-iframe`}
+                className="w-full block"
+                style={{ height: "720px", border: "0" }}
+                scrolling="no"
+              />
+            </div>
+          </>
+        )}
+
+        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">{r.prototypeUrl ? "key screens" : "hi-fidelity design"}</h3>
+        {!r.prototypeUrl && (
+          <p className="text-base md:text-lg leading-relaxed max-w-4xl text-[#1a1a1a] mb-8">{r.design.finalIntro}</p>
+        )}
+        <div className="space-y-6">
+          {r.design.finalScreens.map((s) => (
+            <figure key={s.title} className="rounded-3xl bg-[#F7F1DA] overflow-hidden">
+              <div className="bg-white p-4 md:p-6 border-b border-black/5">
+                <img src={s.src} alt={s.title} loading="lazy" className="w-full h-auto rounded-lg" />
+              </div>
+              <figcaption className="p-6 md:flex md:items-baseline md:gap-6">
+                <div className="md:w-56 md:flex-shrink-0">
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-[#E94B1F]">{s.tag}</span>
+                  <h4 className="mt-2 font-display text-xl font-black lowercase">{s.title}</h4>
+                </div>
+                <p className="mt-2 md:mt-0 text-sm md:text-base leading-relaxed text-[#1a1a1a]/85">{s.desc}</p>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </SectionWrap>
+
+      {/* ============ 07 THE AI LAYER ============ */}
+      <SectionWrap data-testid="section-ai-layer">
+        <SectionLabel num="07" name="The AI Layer" />
+        <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-4xl mb-6">{r.aiLayer.headline}</h2>
+        <p className="text-base md:text-lg leading-relaxed max-w-4xl text-[#1a1a1a] mb-10">{r.aiLayer.intro}</p>
+
+        <div className="grid md:grid-cols-2 gap-5">
+          {r.aiLayer.patterns.map((p) => (
+            <div key={p.id} className={`rounded-3xl p-7 ${p.featured ? "text-white" : "bg-[#F7F1DA]"}`} style={p.featured ? { background: AI_GRAD } : {}}>
+              <div className="flex items-center gap-3 mb-3">
+                <span className={`font-mono text-xs font-bold px-2 py-1 rounded-full ${p.featured ? "bg-white/20 text-white" : "bg-[#0A0A0A] text-white"}`}>{p.id}</span>
+                {p.featured && <span className="inline-flex items-center gap-1 text-[10px] font-mono uppercase tracking-widest text-white/90"><Sparkles size={12} /> centrepiece</span>}
+              </div>
+              <h4 className={`font-display text-xl font-black lowercase mb-2 ${p.featured ? "text-white" : ""}`}>{p.t}</h4>
+              <p className={`text-base leading-relaxed ${p.featured ? "text-white/90" : ""}`}>{p.d}</p>
+            </div>
+          ))}
+        </div>
+
+        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">{r.aiLayer.decisionsTitle}</h3>
+        <div className="grid md:grid-cols-3 gap-5">
+          {r.aiLayer.decisions.map((d) => (
+            <div key={d.t} className="bg-[#F7F1DA] rounded-3xl p-7">
+              <h4 className="font-display text-lg font-black lowercase mb-2">{d.t}</h4>
+              <p className="text-sm leading-relaxed">{d.d}</p>
+            </div>
+          ))}
+        </div>
+      </SectionWrap>
+
+      {/* ============ 08 DESIGN SYSTEM ============ */}
+      <SectionWrap data-testid="section-design-system">
+        <SectionLabel num="08" name="Design System" />
+        <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-4xl mb-6">{r.designSystem.headline}</h2>
+        <p className="text-base md:text-lg leading-relaxed max-w-4xl text-[#1a1a1a]">{r.designSystem.intro}</p>
+
+        <div className="mt-10 rounded-3xl overflow-hidden">
+          <div className="h-28 md:h-36 flex items-center justify-center" style={{ background: r.designSystem.aiGradient }}>
+            <span className="font-display text-2xl md:text-3xl font-black text-white flex items-center gap-3"><Sparkles size={26} /> the AI gradient &mdash; reserved for AI only</span>
+          </div>
+        </div>
+
+        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">color foundations</h3>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {r.designSystem.colors.map((c) => (
+            <div key={c.name} className="bg-[#F7F1DA] rounded-2xl overflow-hidden">
+              <div className="aspect-[3/2]" style={{ background: c.hex }} />
+              <div className="p-4">
+                <div className="font-display text-sm font-bold">{c.name}</div>
+                <div className="font-mono text-xs text-[#5A5A5A] mt-1">{c.hex}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">typography scale</h3>
+        <div className="rounded-3xl bg-[#F7F1DA] divide-y divide-black/10">
+          {r.designSystem.typography.map((t) => (
+            <div key={t.t} className="p-5 flex items-center justify-between gap-4">
+              <span className="font-display text-base font-bold">{t.t}</span>
+              <span className="font-mono text-sm text-[#5A5A5A]">{t.v}</span>
+            </div>
+          ))}
+        </div>
+
+        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">spacing scale (8pt grid)</h3>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          {r.designSystem.spacing.map((s) => (
+            <div key={s.t} className="bg-[#F7F1DA] rounded-2xl p-5">
+              <div className="font-mono text-xs uppercase tracking-widest text-[#E94B1F]">{s.t}</div>
+              <div className="mt-2 font-display text-lg font-bold">{s.v}</div>
+            </div>
+          ))}
+        </div>
+
+        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">design tokens</h3>
+        <div className="rounded-3xl bg-[#F7F1DA] overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead><tr className="border-b border-black/10">
+              <th className="p-4 text-left font-mono uppercase text-[10px] tracking-widest">Token</th>
+              <th className="p-4 text-left font-mono uppercase text-[10px] tracking-widest">Value</th>
+            </tr></thead>
+            <tbody>
+              {r.designSystem.tokens.map(([k, v]) => (
+                <tr key={k} className="border-b border-black/5">
+                  <td className="p-4 font-mono text-[#0A0A0A]">{k}</td>
+                  <td className="p-4 font-mono text-[#5A5A5A]">{v}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">component library</h3>
+        <p className="text-base leading-relaxed max-w-4xl text-[#1a1a1a] mb-8">A Material-grade component set extended with the AI-specific pieces that make the product trustworthy &mdash; the patterns that carry the confidence-and-provenance language across the OS family.</p>
+        <div className="flex flex-wrap gap-2">
+          {r.designSystem.componentCategories.map((c) => (
+            <span key={c} className="px-4 py-2 rounded-full bg-[#F7F1DA] text-sm font-medium hover:bg-[#FFD93D] transition-colors cursor-default">{c}</span>
+          ))}
+        </div>
+
+        <div className="mt-12 rounded-3xl bg-[#0A0A0A] text-white p-8 md:p-10">
+          <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#FFD93D] mb-3">system outcomes</p>
+          <p className="font-display text-xl md:text-2xl leading-snug max-w-4xl">{r.designSystem.systemOutcomes}</p>
+        </div>
+        <div className="mt-6 rounded-3xl bg-[#FFD93D] p-8 md:p-10">
+          <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3">a shared OS-family base</p>
+          <p className="font-display text-lg md:text-xl font-bold leading-snug max-w-4xl">{r.designSystem.crossProduct}</p>
+        </div>
+      </SectionWrap>
+
+      {/* ============ 09 VALIDATION ============ */}
+      <SectionWrap data-testid="section-validation">
+        {r.whereItStands ? (
+          <>
+            <SectionLabel num="09" name="Where It Stands" />
+            <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-4xl mb-6">{r.whereItStands.headline}</h2>
+            <p className="text-base md:text-lg leading-relaxed max-w-4xl text-[#1a1a1a] mb-10">{r.whereItStands.intro}</p>
+
+            <h3 className="font-display text-2xl md:text-3xl font-black mb-6">{r.whereItStands.doneTitle}</h3>
+            <div className="rounded-3xl bg-[#FFD93D] p-8 md:p-10 mb-12">
+              <ul className="space-y-3">
+                {r.whereItStands.done.map((x) => (<li key={x} className="flex items-start gap-3 text-base md:text-lg"><Check className="flex-shrink-0 mt-1 text-[#0A0A0A]" size={18} /><span>{x}</span></li>))}
+              </ul>
+            </div>
+
+            <h3 className="font-display text-2xl md:text-3xl font-black mb-2">{r.whereItStands.targetsTitle}</h3>
+            <p className="text-xs font-mono uppercase tracking-[0.2em] text-[#5A5A5A] mb-6">{r.whereItStands.targetsNote}</p>
+            <div className="grid md:grid-cols-3 gap-5">
+              {r.whereItStands.targets.map((t) => (
+                <div key={t.t} className="bg-[#F7F1DA] rounded-3xl p-7">
+                  <h4 className="font-display text-lg font-black lowercase mb-2">{t.t}</h4>
+                  <p className="text-sm leading-relaxed">{t.d}</p>
+                </div>
+              ))}
+            </div>
+          </>
+        ) : (
+          <>
+            <SectionLabel num="09" name="Does It Work?" />
+            <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-4xl mb-6">{r.validation.headline}</h2>
+            <p className="text-base md:text-lg leading-relaxed max-w-4xl text-[#1a1a1a] mb-10">{r.validation.intro}</p>
+
+            <h3 className="font-display text-2xl md:text-3xl font-black mb-6">test setup</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {r.validation.testSetup.map((s) => (
+                <div key={s.l} className="bg-[#F7F1DA] rounded-2xl p-5">
+                  <p className="text-[10px] font-mono uppercase tracking-widest text-[#5A5A5A] mb-2">{s.l}</p>
+                  <p className="font-display text-base font-bold">{s.v}</p>
+                </div>
+              ))}
+            </div>
+
+            <h3 className="mt-12 font-display text-2xl md:text-3xl font-black mb-6">key results</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {r.validation.keyResults.map((res) => (
+                <div key={res.l} className="rounded-3xl bg-[#F7F1DA] p-6">
+                  <div className="font-display text-4xl md:text-5xl font-black text-[#E94B1F] leading-none">{res.v}</div>
+                  <div className="mt-3 font-display text-base font-bold lowercase">{res.l}</div>
+                  <div className="mt-1 text-xs font-mono uppercase tracking-widest text-[#10B981]">{res.s}</div>
+                </div>
+              ))}
+            </div>
+
+            <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">{r.validation.findingsTitle}</h3>
+            <div className="grid md:grid-cols-3 gap-5">
+              {r.validation.findings.map((f) => (
+                <div key={f.t} className="bg-[#F7F1DA] rounded-3xl p-7 flex flex-col">
+                  <h4 className="font-display text-lg font-black lowercase mb-2">{f.t}</h4>
+                  <p className="text-sm leading-relaxed mb-4">{f.d}</p>
+                  <p className="mt-auto text-xs font-mono uppercase tracking-widest text-[#10B981]">{f.fix}</p>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+      </SectionWrap>
+
+      {/* ============ 10 IMPACT ============ */}
+      <SectionWrap data-testid="section-impact">
+        {r.futureVision ? (
+          <>
+            <SectionLabel num="10" name="Future Vision" />
+            <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-4xl mb-4">{r.futureVision.headline}</h2>
+            <p className="text-base md:text-lg leading-relaxed max-w-4xl text-[#1a1a1a] mb-10">{r.futureVision.intro}</p>
+
+            <h3 className="font-display text-2xl md:text-3xl font-black mb-6">{r.futureVision.phasesTitle}</h3>
+            <div className="space-y-5 mb-12">
+              {r.futureVision.phases.map((ph) => (
+                <div key={ph.phase} className="bg-[#F7F1DA] rounded-3xl p-7">
+                  <div className="flex items-baseline gap-3 mb-4">
+                    <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#E94B1F]">{ph.phase}</span>
+                    <h4 className="font-display text-xl font-black lowercase">{ph.title}</h4>
+                  </div>
+                  <ul className="space-y-2.5">
+                    {ph.items.map((it) => (<li key={it} className="flex items-start gap-3 text-sm md:text-base"><span className="text-[#E94B1F] font-bold mt-0.5">&rarr;</span><span>{it}</span></li>))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+
+            <div className="rounded-3xl bg-[#FFD93D] p-8 md:p-10">
+              <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#0A0A0A]/60 mb-3">{r.futureVision.closingTitle}</p>
+              <p className="font-display text-lg md:text-xl font-bold leading-snug">{r.futureVision.closing}</p>
+            </div>
+          </>
+        ) : (
+          <>
+            <SectionLabel num="10" name="The Numbers" />
+            <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-4xl mb-4">{r.impact.headline}</h2>
+            <p className="text-sm font-mono uppercase tracking-widest text-[#5A5A5A] max-w-4xl mb-10">{r.impact.note}</p>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+              {r.impact.outcomes.map((m) => (
+                <div key={m.l} className="rounded-3xl bg-[#F7F1DA] p-6">
+                  <div className="font-display text-3xl md:text-4xl font-black text-[#E94B1F] leading-none">{m.v}</div>
+                  <div className="mt-3 font-display text-base font-bold lowercase">{m.l}</div>
+                  <div className="mt-1 text-xs font-mono uppercase tracking-widest text-[#5A5A5A]">{m.s}</div>
+                </div>
+              ))}
+            </div>
+
+            <h3 className="font-display text-2xl md:text-3xl font-black mb-6">{r.impact.provesTitle}</h3>
+            <div className="grid md:grid-cols-2 gap-5 mb-12">
+              {r.impact.proves.map((p) => (
+                <div key={p.t} className="bg-[#F7F1DA] rounded-3xl p-7">
+                  <h4 className="font-display text-lg font-black lowercase mb-2">{p.t}</h4>
+                  <p className="text-sm leading-relaxed">{p.d}</p>
+                </div>
+              ))}
+            </div>
+
+            <h3 className="font-display text-2xl md:text-3xl font-black mb-6">artifacts created</h3>
+            <div className="grid md:grid-cols-2 gap-5 mb-12">
+              {r.impact.artifacts.map((a) => (
+                <div key={a.t} className="bg-[#F7F1DA] rounded-3xl p-7">
+                  <h4 className="font-display text-lg font-black mb-2">{a.t}</h4>
+                  <p className="text-sm leading-relaxed">{a.d}</p>
+                </div>
+              ))}
+            </div>
+
+            <h3 className="font-display text-2xl md:text-3xl font-black mb-6">where it goes next</h3>
+            <div className="rounded-3xl bg-[#FFD93D] p-8 md:p-10 mb-16">
+              <ul className="space-y-3">
+                {r.impact.next.map((p) => (
+                  <li key={p} className="flex items-start gap-3 text-base md:text-lg"><span className="text-[#E94B1F] font-bold mt-1">&rarr;</span>{p}</li>
+                ))}
+              </ul>
+            </div>
+
+            <h3 className="font-display text-2xl md:text-3xl font-black mb-8">key learnings & reflection</h3>
+            <div className="grid md:grid-cols-2 gap-5">
+              <div className="bg-[#F7F1DA] rounded-3xl p-7">
+                <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#10B981] mb-4">what went well</p>
+                <ul className="space-y-3">
+                  {r.impact.wentWell.map((x) => (<li key={x} className="flex items-start gap-3 text-base"><Check className="flex-shrink-0 mt-1 text-[#10B981]" size={16} /><span>{x}</span></li>))}
+                </ul>
+              </div>
+              <div className="bg-[#F7F1DA] rounded-3xl p-7">
+                <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#E94B1F] mb-4">what I&apos;d do differently</p>
+                <ul className="space-y-3">
+                  {r.impact.differently.map((x) => (<li key={x} className="flex items-start gap-3 text-base"><Star className="flex-shrink-0 mt-1 text-[#E94B1F]" size={16} /><span>{x}</span></li>))}
+                </ul>
+              </div>
+            </div>
+          </>
+        )}
+      </SectionWrap>
+
+      {/* ============ MORE CONCEPTS ============ */}
+      <SectionWrap>
+        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#E94B1F] mb-4">more concepts</p>
+        <h2 className="font-display text-3xl md:text-4xl font-black mb-8">the rest of the OS family &rarr;</h2>
+        <div className="grid md:grid-cols-2 gap-6">
+          {concepts.filter((x) => x.slug !== r.slug).map((x) => {
+            const card = (
+              <div className="rounded-3xl bg-[#F7F1DA] p-7 flex items-start justify-between gap-6 h-full">
+                <div>
+                  <div className="flex items-baseline gap-3 mb-1">
+                    <h3 className="font-display text-2xl font-black">{x.title}</h3>
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-[#5A5A5A]">{x.status}</span>
+                  </div>
+                  <p className="text-sm text-[#5A5A5A]">{x.subtitle}</p>
+                </div>
+                <span className="mt-1 h-3 w-3 rounded-full flex-shrink-0" style={{ background: x.accent }} aria-hidden />
+              </div>
+            );
+            return x.live && x.href ? (
+              <Link key={x.slug} to={x.href} className="block hover:-translate-y-0.5 transition-transform">{card}</Link>
+            ) : (
+              <div key={x.slug}>{card}</div>
+            );
+          })}
+        </div>
+      </SectionWrap>
+
+      {/* ============ FOOTER ============ */}
+      <SectionWrap className="text-center">
+        <h2 className="font-display text-3xl md:text-5xl font-black mb-6">thank you for reading.</h2>
+        <p className="text-lg text-[#5A5A5A] mb-8">{r.title} is a self-initiated concept. If you&apos;d like to talk through the process &mdash; or where it goes next &mdash; I&apos;d love to connect.</p>
+        <div className="flex gap-4 justify-center flex-wrap">
+          <a href={`mailto:${PROFILE.email}`} data-testid="case-cta-email" className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-[#FFD93D] text-[#0A0A0A] font-semibold text-sm hover:bg-[#F3C721] transition-colors">email me <ArrowUpRight size={16} /></a>
+          <Link to="/projects" className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-black/15 text-[#0A0A0A] font-semibold text-sm hover:bg-[#F7F1DA] transition-colors">view all projects</Link>
+        </div>
+      </SectionWrap>
+    </article>
+  );
+}

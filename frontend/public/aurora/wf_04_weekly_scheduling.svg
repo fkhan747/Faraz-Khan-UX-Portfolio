@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="740" viewBox="0 0 900 740" style="background:#FAFBFC;">
+<defs>
+  <style>
+    .lbl{font-family:'Inter','Helvetica',sans-serif;font-size:10px;fill:#6B7280;font-weight:500}
+    .lbl-sm{font-family:'Inter','Helvetica',sans-serif;font-size:8.5px;fill:#9CA3AF;font-weight:500;letter-spacing:0.3px}
+    .lbl-tab{font-family:'Inter','Helvetica',sans-serif;font-size:10px;fill:#4B5563;font-weight:700;letter-spacing:0.8px}
+    .lbl-title{font-family:'Inter','Helvetica',sans-serif;font-size:13px;fill:#374151;font-weight:600}
+    .lbl-section{font-family:'Inter','Helvetica',sans-serif;font-size:10px;fill:#6B7280;font-weight:700;letter-spacing:1px}
+    .lbl-btn{font-family:'Inter','Helvetica',sans-serif;font-size:10px;fill:#fff;font-weight:600}
+    .lbl-btn-dk{font-family:'Inter','Helvetica',sans-serif;font-size:10px;fill:#374151;font-weight:600}
+  </style>
+</defs>
+<rect x="0" y="0" width="900" height="36" fill="#F3F4F6" stroke="#E5E7EB"></rect>
+<rect x="14" y="10" width="16" height="16" fill="#D1D5DB" rx="3"></rect>
+<text x="38" y="22" class="lbl-sm">AURORA ENGAGE</text>
+<rect x="850" y="12" width="12" height="12" fill="#E5E7EB" rx="6"></rect>
+<rect x="870" y="12" width="12" height="12" fill="#E5E7EB" rx="3"></rect>
+<rect x="0" y="36" width="48" height="704" fill="#FAFBFC" stroke="#E5E7EB"></rect>
+<rect x="14" y="60" width="20" height="20" fill="#E5E7EB" rx="3"></rect>
+<rect x="14" y="104" width="20" height="20" fill="#E5E7EB" rx="3"></rect>
+<rect x="14" y="148" width="20" height="20" fill="#E5E7EB" rx="3"></rect>
+<rect x="14" y="192" width="20" height="20" fill="#E5E7EB" rx="3"></rect>
+<rect x="14" y="236" width="20" height="20" fill="#E5E7EB" rx="3"></rect>
+<rect x="14" y="280" width="20" height="20" fill="#E5E7EB" rx="3"></rect>
+<rect x="14" y="324" width="20" height="20" fill="#E5E7EB" rx="3"></rect>
+<rect x="65" y="55" width="10" height="10" fill="#9CA3AF" rx="2"></rect>
+<text x="80" y="64" class="lbl">Back</text>
+<rect x="280.0" y="50" width="116.0" height="26" fill="#fff" stroke="#E5E7EB" rx="13"></rect>
+<text x="338.0" y="67" class="lbl-tab" text-anchor="middle" fill="#6B7280">TYPE</text>
+<rect x="400.0" y="50" width="116.0" height="26" fill="#fff" stroke="#E5E7EB" rx="13"></rect>
+<text x="458.0" y="67" class="lbl-tab" text-anchor="middle" fill="#6B7280">CONTENT</text>
+<rect x="520.0" y="50" width="116.0" height="26" fill="#9CA3AF" stroke="#9CA3AF" rx="13"></rect>
+<text x="578.0" y="67" class="lbl-tab" text-anchor="middle" fill="#fff">PROPERTIES</text>
+<text x="65" y="105" class="lbl-title">Create New Recurring Batch Journey</text>
+<rect x="65" y="130" width="3" height="14" fill="#9CA3AF" rx="1.5"></rect>
+<text x="75" y="141" class="lbl-section">AUDIENCE</text>
+<text x="65" y="158" class="lbl-sm">Audience is pre-filled</text>
+<text x="65" y="172" class="lbl-sm">based on the selected</text>
+<text x="65" y="186" class="lbl-sm">message.</text>
+<text x="280" y="126" class="lbl-sm">Audience</text>
+<rect x="280" y="130" width="400" height="28" fill="#fff" stroke="#D1D5DB" rx="3"></rect>
+<text x="290" y="147.0" class="lbl">Travel Contacts</text>
+<text x="280" y="176" class="lbl-sm">Segment</text>
+<rect x="280" y="180" width="400" height="28" fill="#fff" stroke="#D1D5DB" rx="3"></rect>
+<text x="290" y="197.0" class="lbl">Sports audience</text>
+<text x="280" y="225" class="lbl-sm">5 messages will be sent to 5 contacts.</text>
+<rect x="280" y="232" width="80" height="22" fill="#fff" stroke="#D1D5DB" rx="4"></rect>
+<text x="320" y="247" text-anchor="middle" class="lbl-btn-dk">Edit Filter</text>
+<rect x="370" y="232" width="80" height="22" fill="#fff" stroke="#D1D5DB" rx="4"></rect>
+<text x="410" y="247" text-anchor="middle" class="lbl-btn-dk">Clear Filter</text>
+<rect x="65" y="280" width="3" height="14" fill="#9CA3AF" rx="1.5"></rect>
+<text x="75" y="291" class="lbl-section">TIMEZONE</text>
+<text x="280" y="276" class="lbl-sm">Timezone</text>
+<rect x="280" y="280" width="400" height="28" fill="#fff" stroke="#D1D5DB" rx="3"></rect>
+<text x="290" y="297.0" class="lbl">UTC+1 Romance Standard Time</text>
+<rect x="65" y="340" width="3" height="14" fill="#9CA3AF" rx="1.5"></rect>
+<text x="75" y="351" class="lbl-section">ACTIVATION</text>
+<text x="280" y="336" class="lbl-sm">Start Date</text>
+<rect x="280" y="340" width="195" height="28" fill="#fff" stroke="#D1D5DB" rx="3"></rect>
+<text x="290" y="357.0" class="lbl">DD/MM/YYYY</text>
+<text x="485" y="336" class="lbl-sm">Start Time</text>
+<rect x="485" y="340" width="195" height="28" fill="#fff" stroke="#D1D5DB" rx="3"></rect>
+<text x="495" y="357.0" class="lbl">00:00 AM</text>
+<text x="280" y="381" class="lbl-sm">End Date</text>
+<rect x="280" y="385" width="195" height="28" fill="#fff" stroke="#D1D5DB" rx="3"></rect>
+<text x="290" y="402.0" class="lbl">DD/MM/YYYY</text>
+<text x="485" y="381" class="lbl-sm">End Time</text>
+<rect x="485" y="385" width="195" height="28" fill="#fff" stroke="#D1D5DB" rx="3"></rect>
+<text x="495" y="402.0" class="lbl">00:00 AM</text>
+<rect x="65" y="440" width="3" height="14" fill="#9CA3AF" rx="1.5"></rect>
+<text x="75" y="451" class="lbl-section">SCHEDULING</text>
+<text x="65" y="468" class="lbl-sm">Set the schedule for</text>
+<text x="65" y="482" class="lbl-sm">recurring run.</text>
+<rect x="280" y="442" width="50" height="22" fill="#fff" stroke="#D1D5DB" rx="11"></rect>
+<text x="305.0" y="457" text-anchor="middle" class="lbl-sm" fill="#6B7280">Min</text>
+<rect x="335" y="442" width="50" height="22" fill="#fff" stroke="#D1D5DB" rx="11"></rect>
+<text x="360.0" y="457" text-anchor="middle" class="lbl-sm" fill="#6B7280">Hr</text>
+<rect x="390" y="442" width="50" height="22" fill="#fff" stroke="#D1D5DB" rx="11"></rect>
+<text x="415.0" y="457" text-anchor="middle" class="lbl-sm" fill="#6B7280">Day</text>
+<rect x="445" y="442" width="50" height="22" fill="#374151" stroke="#374151" rx="11"></rect>
+<text x="470.0" y="457" text-anchor="middle" class="lbl-sm" fill="#fff">Wk</text>
+<rect x="500" y="442" width="50" height="22" fill="#fff" stroke="#D1D5DB" rx="11"></rect>
+<text x="525.0" y="457" text-anchor="middle" class="lbl-sm" fill="#6B7280">Mo</text>
+<rect x="555" y="442" width="50" height="22" fill="#fff" stroke="#D1D5DB" rx="11"></rect>
+<text x="580.0" y="457" text-anchor="middle" class="lbl-sm" fill="#6B7280">Cust</text>
+<text x="280" y="490" class="lbl-sm">The content will be sent weekly on the selected day, at the selected time.</text>
+<rect x="280" y="500" width="36" height="22" fill="#fff" stroke="#D1D5DB" rx="4"></rect>
+<text x="298" y="515" text-anchor="middle" class="lbl-sm" fill="#6B7280">M</text>
+<rect x="322" y="500" width="36" height="22" fill="#fff" stroke="#D1D5DB" rx="4"></rect>
+<text x="340" y="515" text-anchor="middle" class="lbl-sm" fill="#6B7280">T</text>
+<rect x="364" y="500" width="36" height="22" fill="#374151" stroke="#374151" rx="4"></rect>
+<text x="382" y="515" text-anchor="middle" class="lbl-sm" fill="#fff">W</text>
+<rect x="406" y="500" width="36" height="22" fill="#fff" stroke="#D1D5DB" rx="4"></rect>
+<text x="424" y="515" text-anchor="middle" class="lbl-sm" fill="#6B7280">T</text>
+<rect x="448" y="500" width="36" height="22" fill="#fff" stroke="#D1D5DB" rx="4"></rect>
+<text x="466" y="515" text-anchor="middle" class="lbl-sm" fill="#6B7280">F</text>
+<rect x="490" y="500" width="36" height="22" fill="#fff" stroke="#D1D5DB" rx="4"></rect>
+<text x="508" y="515" text-anchor="middle" class="lbl-sm" fill="#6B7280">S</text>
+<rect x="532" y="500" width="36" height="22" fill="#fff" stroke="#D1D5DB" rx="4"></rect>
+<text x="550" y="515" text-anchor="middle" class="lbl-sm" fill="#6B7280">S</text>
+<rect x="280" y="530" width="46" height="22" fill="#fff" stroke="#D1D5DB" rx="3"></rect>
+<text x="303" y="545" text-anchor="middle" class="lbl-sm">00:00</text>
+<rect x="330" y="530" width="46" height="22" fill="#fff" stroke="#D1D5DB" rx="3"></rect>
+<text x="353" y="545" text-anchor="middle" class="lbl-sm">00:00</text>
+<rect x="380" y="530" width="46" height="22" fill="#fff" stroke="#D1D5DB" rx="3"></rect>
+<text x="403" y="545" text-anchor="middle" class="lbl-sm">00:00</text>
+<rect x="430" y="530" width="46" height="22" fill="#fff" stroke="#D1D5DB" rx="3"></rect>
+<text x="453" y="545" text-anchor="middle" class="lbl-sm">00:00</text>
+<rect x="65" y="590" width="3" height="14" fill="#9CA3AF" rx="1.5"></rect>
+<text x="75" y="601" class="lbl-section">INTERACTION</text>
+<rect x="280" y="595" width="30" height="16" fill="#374151" rx="8"></rect>
+<circle cx="304" cy="603" r="6" fill="#fff"></circle>
+<text x="320" y="607" class="lbl">Send same message multiple times</text>
+<rect x="480" y="680" width="80" height="30" fill="#fff" stroke="#D1D5DB" rx="4"></rect>
+<text x="520.0" y="698.5" text-anchor="middle" class="lbl-btn-dk">Previous</text>
+<rect x="570" y="680" width="110" height="30" fill="#9CA3AF" stroke="#9CA3AF" rx="4"></rect>
+<text x="625.0" y="698.5" text-anchor="middle" class="lbl-btn">Create Journey</text>
+</svg>
