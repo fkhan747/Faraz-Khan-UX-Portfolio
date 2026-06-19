@@ -51,7 +51,7 @@ export default function ComingSoonCase() {
 
       <section className="px-6 md:px-10 lg:px-16 py-20">
         <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#075EFD] mb-4">while you&apos;re here</p>
-        <h2 className="font-display text-3xl md:text-4xl font-black mb-8 ">read a full case study →</h2>
+        <h2 className="font-display text-3xl md:text-4xl font-black mb-8 ">read a Full Case Study →</h2>
         <Link
           to="/case/finvista"
           data-testid="read-featured"

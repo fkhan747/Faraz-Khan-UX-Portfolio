@@ -10,7 +10,7 @@ export default function Layout({ children }) {
   return (
     <div className="min-h-screen bg-[#100210]">
       <Chrome />
-      <main className="pt-20 md:pt-24 pb-28 md:pb-32 min-h-screen" data-testid="main-content">
+      <main className="pt-[90px] pb-16 min-h-screen" data-testid="main-content">
         {children}
       </main>
     </div>

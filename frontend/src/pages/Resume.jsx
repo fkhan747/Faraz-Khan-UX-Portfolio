@@ -97,13 +97,13 @@ export default function Resume() {
       <section className="pt-10 md:pt-12 pb-10">
         <Container>
           <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#075EFD] mb-6">résumé · cv</p>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
             {/* Identity */}
             <div className="lg:col-span-8 order-2 lg:order-1">
               <h1 className="font-display text-5xl md:text-6xl font-black tracking-tighter leading-[0.95]">
                 Faraz Khan
               </h1>
-              <p className="mt-3 text-lg md:text-xl font-semibold text-[#F5379B]">
+              <p className="mt-3 text-lg md:text-xl font-semibold text-[#075EFD]">
                 Senior UX Lead — Bridging Design, Data &amp; Development
               </p>
               <p className="mt-5 max-w-2xl text-base md:text-lg text-[#A29CB4] leading-relaxed">
@@ -140,7 +140,7 @@ export default function Resume() {
                   data-testid="resume-download"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#075EFD] text-white font-semibold text-sm capitalize hover:bg-[#2E78FF] transition-colors"
                 >
-                  <Download size={16} /> download pdf
+                  <Download size={16} /> download PDF
                 </a>
                 <a
                   href={RESUME_PATH}
@@ -149,23 +149,23 @@ export default function Resume() {
                   data-testid="resume-open-new-tab"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/15 text-[#F4F3FA] font-semibold text-sm capitalize hover:bg-[#261E3A] transition-colors"
                 >
-                  <ExternalLink size={16} /> open pdf
+                  <ExternalLink size={16} /> open PDF
                 </a>
               </div>
             </div>
 
-            {/* Photo */}
-            <div className="lg:col-span-4 order-1 lg:order-2 relative">
-              <div className="absolute -inset-4 bg-[#075EFD] opacity-20 blur-3xl rounded-[42%] pointer-events-none" aria-hidden="true" />
-              <div className="relative rounded-3xl overflow-hidden border border-white/10 max-w-[240px] mx-auto">
+            {/* Photo — same treatment as the home hero: fades into the page */}
+            <div className="lg:col-span-4 order-1 lg:order-2 relative min-h-[320px]">
+              <div className="relative h-full w-full min-h-[320px] overflow-hidden rounded-2xl lg:rounded-tl-none lg:rounded-br-none lg:rounded-bl-none lg:rounded-tr-[3rem]">
                 <img
                   src="/images/faraz.jpg"
                   alt="Faraz Khan"
-                  className="photo-blue w-full aspect-[4/5] object-cover object-top"
                   data-testid="resume-photo"
+                  className="photo-blue absolute inset-0 w-full h-full object-cover object-top"
                 />
                 <div className="absolute inset-0 grain-overlay pointer-events-none" aria-hidden="true" />
-                <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#100210] to-transparent pointer-events-none" aria-hidden="true" />
+                <div className="absolute inset-0 pointer-events-none" aria-hidden="true" style={{ background: "linear-gradient(to top, #100210 0%, rgba(16,2,16,0) 45%)" }} />
+                <div className="absolute inset-0 pointer-events-none hidden lg:block" aria-hidden="true" style={{ background: "linear-gradient(to right, #100210 0%, rgba(16,2,16,0) 55%)" }} />
               </div>
             </div>
           </div>

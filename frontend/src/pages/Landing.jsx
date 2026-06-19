@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowUpRight, Star, Quote } from "lucide-react";
 import { PROFILE, projects, testimonials } from "../data/content";
 import { Container, Grid } from "../components/Grid";
+import CaseCover from "../components/CaseCover";
 
 export default function Landing() {
   const featured = projects[0];
@@ -10,7 +11,7 @@ export default function Landing() {
   return (
     <div data-testid="landing-page">
       {/* HERO */}
-      <section className="pt-10 md:pt-14 pb-14 md:pb-20 relative" data-testid="hero">
+      <section className="pt-7 pb-14 md:pb-20 relative" data-testid="hero">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
             {/* Copy */}
@@ -83,25 +84,11 @@ export default function Landing() {
         <div className="flex items-baseline justify-between mb-6">
           <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#075EFD]">featured project · 2024</span>
           <Link to={`/case/${featured.slug}`} className="hidden md:inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4 decoration-[#075EFD]">
-            full case study <ArrowUpRight size={16} />
+            Full Case Study <ArrowUpRight size={16} />
           </Link>
         </div>
-        <Link to={`/case/${featured.slug}`} data-testid="featured-link" className="block group">
-          <div className="rounded-3xl overflow-hidden dark-card lift">
-            <div className="aspect-[16/9] md:aspect-[21/9] overflow-hidden relative flex items-center justify-center" style={{ background: "#15101F" }}>
-              <img src={featured.cover} alt={featured.title} loading="lazy" className="w-full h-full object-contain p-6 md:p-10 group-hover:scale-105 transition-transform duration-700" />
-              <div className="absolute top-5 left-5 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#075EFD] text-white text-[11px] font-mono uppercase tracking-widest">
-                featured
-              </div>
-            </div>
-            <div className="px-6 md:px-10 py-7 flex items-center justify-between gap-6 flex-wrap">
-              <div>
-                <h3 className="font-display text-3xl md:text-4xl font-black">{featured.title}</h3>
-                <p className="text-sm md:text-base text-[#A29CB4] mt-1">{featured.subtitle}</p>
-              </div>
-              <div className="text-xs font-mono uppercase tracking-widest text-[#F4F3FA]">{featured.client} → {featured.year}</div>
-            </div>
-          </div>
+        <Link to={`/case/${featured.slug}`} data-testid="featured-link" className="block group rounded-3xl overflow-hidden lift">
+          <CaseCover img={featured.coverImg} title={featured.title} subtitle={featured.subtitle} year={featured.year} size="lg" />
         </Link>
         </Container>
       </section>
@@ -121,7 +108,7 @@ export default function Landing() {
         <Container>
         <div className="flex items-baseline justify-between mb-10">
           <h2 className="font-display text-3xl md:text-4xl font-black">case studies</h2>
-          <Link to="/projects" data-testid="all-projects-link" className="text-sm font-semibold underline underline-offset-4 decoration-[#075EFD]">view all →</Link>
+          <Link to="/projects" data-testid="all-projects-link" className="text-sm font-semibold underline underline-offset-4 decoration-[#075EFD]">View All →</Link>
         </div>
         <Grid>
           {others.map((p, i) => (
@@ -129,23 +116,9 @@ export default function Landing() {
               key={p.slug}
               to={`/case/${p.slug}`}
               data-testid={`project-card-${p.slug}`}
-              className={`col-span-12 md:col-span-4 group block rounded-3xl overflow-hidden dark-card lift rise rise-${(i % 5) + 1}`}
+              className={`col-span-12 md:col-span-4 group block rounded-3xl overflow-hidden lift rise rise-${(i % 5) + 1}`}
             >
-              <div className="aspect-[4/3] overflow-hidden relative" style={{ background: p.color }}>
-                <img src={p.cover} alt={p.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                {p.comingSoon && (
-                  <span className="absolute top-4 left-4 inline-flex items-center gap-2 px-3 py-1 rounded-full dark-card text-white text-[10px] font-mono uppercase tracking-widest">
-                    coming soon
-                  </span>
-                )}
-              </div>
-              <div className="px-6 py-5 flex items-start justify-between gap-4">
-                <div>
-                  <h3 className="font-display text-2xl font-black">{p.title}</h3>
-                  <p className="text-sm text-[#A29CB4] mt-0.5">{p.subtitle}</p>
-                </div>
-                <ArrowUpRight className="flex-shrink-0 mt-2 opacity-60 group-hover:opacity-100 group-hover:rotate-45 transition-all" size={20} />
-              </div>
+              <CaseCover img={p.coverImg} title={p.title} subtitle={p.subtitle} comingSoon={p.comingSoon} />
             </Link>
           ))}
         </Grid>
@@ -157,7 +130,7 @@ export default function Landing() {
         <div className="flex marquee-track whitespace-nowrap font-display text-5xl md:text-7xl font-black">
           {Array.from({ length: 2 }).map((_, k) => (
             <div key={k} className="flex items-center gap-12 px-6">
-              {["product design", "✦", "ux research", "✦", "design systems", "✦", "brand voice", "✦", "motion", "✦", "prototyping", "✦"].map((t, i) => (
+              {["product design", "✦", "UX research", "✦", "design systems", "✦", "brand voice", "✦", "motion", "✦", "prototyping", "✦"].map((t, i) => (
                 <span key={`${k}-${i}`} className={i % 2 === 0 ? "italic font-light" : ""}>{t}</span>
               ))}
             </div>
@@ -216,10 +189,10 @@ export default function Landing() {
           </p>
           <div className="relative mt-10 flex gap-4 flex-wrap">
             <a href={`mailto:${PROFILE.email}`} data-testid="cta-email" className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-[#F5379B] text-white font-semibold text-sm hover:bg-[#D81F7E] transition-colors">
-              start a project <ArrowUpRight size={16} />
+              Start A Project <ArrowUpRight size={16} />
             </a>
             <Link to="/contact" data-testid="cta-contact" className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white/30 text-white font-semibold text-sm hover:bg-white/10 transition-colors">
-              other ways to reach me
+              Other Ways To Reach Me
             </Link>
           </div>
         </div>

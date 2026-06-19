@@ -521,7 +521,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
             <div className="mb-4 flex flex-wrap items-center gap-3">
               <a href={r.prototypeUrl} target="_blank" rel="noreferrer" data-testid="open-fullscreen"
                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full dark-card text-white font-semibold text-sm hover:bg-[#241B33] transition-colors">
-                view prototype in browser <Maximize2 size={14} />
+                View Prototype In Browser <Maximize2 size={14} />
               </a>
               <span className="text-xs font-mono uppercase tracking-widest text-[#A29CB4]">click anything — it answers from your sources, cites every claim, and flags what's stale</span>
             </div>
@@ -864,7 +864,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
         <p className="text-lg text-[#A29CB4] mb-8">{r.title} is a self-initiated concept. If you&apos;d like to talk through the process &mdash; or where it goes next &mdash; I&apos;d love to connect.</p>
         <div className="flex gap-4 justify-center flex-wrap">
           <a href={`mailto:${PROFILE.email}`} data-testid="case-cta-email" className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-[#F5379B] text-[#F4F3FA] font-semibold text-sm hover:bg-[#D81F7E] transition-colors">email me <ArrowUpRight size={16} /></a>
-          <Link to="/projects" className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white/15 text-[#F4F3FA] font-semibold text-sm hover:bg-[#261E3A] transition-colors">view all projects</Link>
+          <Link to="/projects" className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white/15 text-[#F4F3FA] font-semibold text-sm hover:bg-[#261E3A] transition-colors">View All projects</Link>
         </div>
       </SectionWrap>
     </article>

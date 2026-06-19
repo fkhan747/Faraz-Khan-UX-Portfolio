@@ -23,12 +23,13 @@ export const projects = [
   {
     slug: "finvista",
     title: "FinVista",
-    subtitle: "re-imagining a digital lending platform for india's next billion borrowers",
+    subtitle: "Re-imagining a Digital Lending Platform for India's Next Billion Borrowers",
     client: "FinVista (Leading Indian NBFC)",
     role: "Sr. UX Lead",
     services: "UX, Design Systems, Research",
     year: "2024",
     cover: F("003-final-mobile-screens-welcome-applications-personal-details.png"),
+    coverImg: "https://images.unsplash.com/photo-1554260570-9140fd3b7614?w=1200&q=80&auto=format&fit=crop",
     color: "#FFE3B3",
     tag: "case study",
     summary:
@@ -38,12 +39,13 @@ export const projects = [
   {
     slug: "aurora",
     title: "Aurora",
-    subtitle: "redesigning a marketing campaign platform & embedding ai in the canvas",
+    subtitle: "Redesigning a Marketing Campaign Platform & Embedding AI in the Canvas",
     client: "Aurora (by Helio)",
     role: "Lead Product Designer",
     services: "Product Design, Design System, Research",
     year: "2024",
     cover: "/aurora/04_RBJ_Properties_Weekly.jpg",
+    coverImg: "https://images.unsplash.com/photo-1640340434855-6084b1f4901c?w=1200&q=80&auto=format&fit=crop",
     color: "#E8F2F0",
     tag: "case study",
     summary:
@@ -53,13 +55,14 @@ export const projects = [
   {
     slug: "next-gen-institute",
     title: "Next-Gen Institute",
-    subtitle: "an edtech platform for india's tier-2 students",
+    subtitle: "An Edtech Platform for India's Tier-2 Students",
     client: "Next-Gen Institute",
     role: "Lead Product Designer",
     services: "Product Design, UX Research",
     year: "2023",
     cover:
       "https://images.unsplash.com/photo-1601972602237-8c79241e468b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDJ8MHwxfHNlYXJjaHw0fHxtb2JpbGUlMjBhcHAlMjBtb2NrdXB8ZW58MHx8fHwxNzgxMDEwMzczfDA&ixlib=rb-4.1.0&q=85",
+    coverImg: "https://images.unsplash.com/photo-1639322537228-f710d846310a?w=1200&q=80&auto=format&fit=crop",
     color: "#C9DDEB",
     tag: "coming soon",
     summary: "Case study coming soon — stay tuned.",
@@ -69,13 +72,14 @@ export const projects = [
   {
     slug: "somethings-cooking",
     title: "Something's Cooking",
-    subtitle: "a recipe & meal-planning experience",
+    subtitle: "A Recipe & Meal-Planning Experience",
     client: "Something's Cooking",
     role: "Product Designer",
     services: "Mobile App, Visual Design",
     year: "2023",
     cover:
       "https://images.pexels.com/photos/35052818/pexels-photo-35052818.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    coverImg: "https://images.pexels.com/photos/35052818/pexels-photo-35052818.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200",
     color: "#F7D6A3",
     tag: "coming soon",
     summary: "Case study coming soon — stay tuned.",
@@ -89,11 +93,12 @@ export const concepts = [
   {
     slug: "recruitos",
     title: "Recruit-OS",
-    subtitle: "an ai recruitment os for staffing agencies",
+    subtitle: "An AI Recruitment OS for Staffing Agencies",
     kind: "AI-native concept",
     role: "Sr. UX Lead · self-initiated",
     year: "2026",
     accent: "#4285F4",
+    coverImg: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1200&q=80&auto=format&fit=crop",
     status: "live prototype",
     summary:
       "A recruitment workspace where the AI sources, ranks, and drafts outreach while the recruiter stays the decision-maker. Designed end-to-end and built as an interactive prototype.",
@@ -103,11 +108,12 @@ export const concepts = [
   {
     slug: "knowledgeos",
     title: "Knowledge-OS",
-    subtitle: "an enterprise ai knowledge os",
+    subtitle: "An Enterprise AI Knowledge OS",
     kind: "AI-native concept",
     role: "Sr. UX Lead · self-initiated",
     year: "2026",
     accent: "#0E9CA6",
+    coverImg: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&q=80&auto=format&fit=crop",
     status: "case study",
     summary:
       "Turning institutional memory into something teams can actually ask — not just search through.",
@@ -117,11 +123,12 @@ export const concepts = [
   {
     slug: "decisionos",
     title: "Decision-OS",
-    subtitle: "ai executive decision intelligence",
+    subtitle: "AI Executive Decision Intelligence",
     kind: "AI-native concept",
     role: "Sr. UX Lead · self-initiated",
     year: "2026",
     accent: "#E8519B",
+    coverImg: "https://images.unsplash.com/photo-1543286386-2e659306cd6c?w=1200&q=80&auto=format&fit=crop",
     status: "case study",
     summary:
       "Turning scattered signals into a clear, defensible call for the people who have to make it.",

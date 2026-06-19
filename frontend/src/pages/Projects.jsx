@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { projects, concepts } from "../data/content";
 import { Container, Grid } from "../components/Grid";
+import CaseCover from "../components/CaseCover";
 
 export default function Projects() {
   return (
@@ -27,27 +28,10 @@ export default function Projects() {
             <Link
               key={p.slug}
               to={`/case/${p.slug}`}
-              className={`col-span-12 md:col-span-6 group block rounded-3xl overflow-hidden dark-card lift rise rise-${(i % 6) + 1}`}
+              className={`col-span-12 md:col-span-6 group block rounded-3xl overflow-hidden lift rise rise-${(i % 6) + 1}`}
               data-testid={`projects-card-${p.slug}`}
             >
-              <div className="aspect-[16/10] overflow-hidden relative" style={{ background: p.color }}>
-                <img src={p.cover} alt={p.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                {p.comingSoon && (
-                  <span className="absolute top-4 left-4 inline-flex items-center gap-2 px-3 py-1 rounded-full dark-card text-white text-[10px] font-mono uppercase tracking-widest">
-                    coming soon
-                  </span>
-                )}
-              </div>
-              <div className="px-6 md:px-7 py-5 flex items-start justify-between gap-4">
-                <div>
-                  <div className="flex items-baseline gap-3 mb-1">
-                    <h3 className="font-display text-2xl md:text-3xl font-black">{p.title}</h3>
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4]">{p.year}</span>
-                  </div>
-                  <p className="text-sm md:text-base text-[#A29CB4]">{p.subtitle}</p>
-                </div>
-                <ArrowUpRight className="flex-shrink-0 mt-2 opacity-60 group-hover:opacity-100 group-hover:rotate-45 transition-all" size={22} />
-              </div>
+              <CaseCover img={p.coverImg} title={p.title} subtitle={p.subtitle} year={p.year} comingSoon={p.comingSoon} />
             </Link>
           ))}
         </Grid>
@@ -70,54 +54,23 @@ export default function Projects() {
 
         <Grid>
           {concepts.map((c, i) => {
-            const inner = (
-              <>
-                <div
-                  className="aspect-[16/10] overflow-hidden relative grid place-items-center"
-                  style={{ background: `linear-gradient(140deg, ${c.accent}, #261E3A 118%)` }}
-                >
-                  <span className="font-display font-black text-white/95 text-7xl leading-none drop-shadow-sm">
-                    {c.title.charAt(0).toUpperCase()}
-                  </span>
-                  <span className="absolute top-4 left-4 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/35 backdrop-blur-sm border border-white/15 text-white text-[10px] font-mono uppercase tracking-widest">
-                    {c.status}
-                  </span>
-                </div>
-                <div className="px-6 md:px-7 py-5 text-white">
-                  <div className="flex items-baseline gap-3 mb-1">
-                    <h3 className="font-display text-2xl md:text-3xl font-black">{c.title}</h3>
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-white/45">{c.year}</span>
-                  </div>
-                  <p className="text-sm md:text-base text-white/60 leading-relaxed">{c.subtitle}</p>
-                  {c.live ? (
-                    <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold" style={{ color: c.accent }}>
-                      {c.slug === "recruitos" ? "open prototype" : "read case study"}
-                      <ArrowUpRight size={16} className="group-hover:rotate-45 transition-transform" />
-                    </span>
-                  ) : (
-                    <span className="mt-4 inline-flex text-[11px] font-mono uppercase tracking-widest text-white/35">
-                      case study coming soon
-                    </span>
-                  )}
-                </div>
-              </>
-            );
+            const card = <CaseCover img={c.coverImg} title={c.title} subtitle={c.subtitle} year={c.year} badge={c.status} />;
             return c.live ? (
               <Link
                 key={c.slug}
                 to={c.href}
                 data-testid={`concept-card-${c.slug}`}
-                className={`col-span-12 md:col-span-4 group block rounded-3xl overflow-hidden dark-card border border-white/10 lift rise rise-${(i % 6) + 1}`}
+                className={`col-span-12 md:col-span-4 group block rounded-3xl overflow-hidden lift rise rise-${(i % 6) + 1}`}
               >
-                {inner}
+                {card}
               </Link>
             ) : (
               <div
                 key={c.slug}
                 data-testid={`concept-card-${c.slug}`}
-                className="col-span-12 md:col-span-4 rounded-3xl overflow-hidden dark-card border border-white/10"
+                className={`col-span-12 md:col-span-4 rounded-3xl overflow-hidden rise rise-${(i % 6) + 1}`}
               >
-                {inner}
+                {card}
               </div>
             );
           })}

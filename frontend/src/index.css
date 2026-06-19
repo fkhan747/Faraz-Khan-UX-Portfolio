@@ -135,6 +135,12 @@ html, body {
   filter: grayscale(1) brightness(0.62) sepia(1) hue-rotate(178deg) saturate(5) contrast(1.02);
 }
 
+/* Case-study cover image base — slightly dimmed/desaturated so the brand tint
+   and overlaid title read cleanly on top. */
+.cover-img {
+  filter: brightness(0.8) saturate(0.9);
+}
+
 /* Organic film grain (real fractal noise, not a dot grid). Sits over a photo. */
 .grain-overlay {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
