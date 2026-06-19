@@ -102,25 +102,26 @@ export default function About() {
       <section className="pb-16" data-testid="about-profile">
         <Container>
         <Grid>
-          {/* Profile card */}
-          <div className="col-span-12 lg:col-span-5 dark-card rounded-3xl p-7 flex flex-col">
-            <div className="flex items-center gap-5 mb-6">
-              <div className="relative w-24 h-24 rounded-2xl overflow-hidden border border-white/10 flex-shrink-0">
-                <img
-                  src="/images/faraz.jpg"
-                  alt="Faraz Khan"
-                  className="photo-blue w-full h-full object-cover object-top"
-                />
-                <div className="absolute inset-0 grain-overlay pointer-events-none" aria-hidden="true" />
-              </div>
-              <div>
-                <h2 className="font-display text-2xl font-black">Faraz Khan</h2>
-                <p className="text-sm text-[#A29CB4]">{PROFILE.role}</p>
-              </div>
+          {/* Profile card — photo gets the home-hero treatment: blue duotone, grain, fades into the card (no frame) */}
+          <div className="col-span-12 lg:col-span-5 dark-card rounded-3xl overflow-hidden flex min-h-[210px]">
+            {/* Photo strip */}
+            <div className="relative w-36 sm:w-44 flex-shrink-0 overflow-hidden">
+              <img
+                src="/images/faraz.jpg"
+                alt="Faraz Khan"
+                className="photo-blue absolute inset-0 w-full h-full object-cover object-top"
+              />
+              <div className="absolute inset-0 grain-overlay pointer-events-none" aria-hidden="true" />
+              <div className="absolute inset-0 pointer-events-none" aria-hidden="true" style={{ background: "linear-gradient(to right, rgba(38,30,58,0) 52%, #261E3A 100%)" }} />
             </div>
-            <p className="text-sm text-[#A29CB4] mt-auto">
-              Currently at <strong className="text-[#F4F3FA]">{PROFILE.currentCompany}</strong> since {PROFILE.currentSince}.
-            </p>
+            {/* Identity */}
+            <div className="flex-1 p-7 flex flex-col">
+              <h2 className="font-display text-2xl font-black">Faraz Khan</h2>
+              <p className="text-sm text-[#A29CB4] mt-1">{PROFILE.role}</p>
+              <p className="text-sm text-[#A29CB4] mt-auto pt-6">
+                Currently at <strong className="text-[#F4F3FA]">{PROFILE.currentCompany}</strong> since {PROFILE.currentSince}.
+              </p>
+            </div>
           </div>
 
           {/* Stats */}
@@ -132,7 +133,7 @@ export default function About() {
             ].map((s) => (
               <div key={s.l} className="dark-card rounded-3xl p-6 md:p-7 flex flex-col justify-between">
                 <p className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4]">{s.l}</p>
-                <p className="mt-4 font-display text-5xl md:text-6xl font-black text-[#F4F3FA]">{s.v}</p>
+                <p className="mt-4 num text-5xl md:text-6xl font-black text-[#F4F3FA]">{s.v}</p>
               </div>
             ))}
           </div>
@@ -172,7 +173,7 @@ export default function About() {
       {/* 01 — CORE COMPETENCIES */}
       <section className="py-20 border-t border-white/10" data-testid="about-competencies">
         <Container>
-        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#075EFD] mb-4">01 — what i do</p>
+        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">01 — what i do</p>
         <h2 className="font-display text-4xl md:text-5xl font-black mb-10 max-w-5xl">core <span className="italic font-light">competencies.</span></h2>
         <Grid>
           {COMPETENCIES.map((c, i) => (
@@ -189,7 +190,7 @@ export default function About() {
       {/* 02 — TOOLKIT */}
       <section className="py-20 border-t border-white/10" data-testid="about-tools">
         <Container>
-        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#075EFD] mb-4">02 — toolkit</p>
+        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">02 — toolkit</p>
         <h2 className="font-display text-4xl md:text-5xl font-black mb-10 max-w-5xl">tools & <span className="italic font-light">skills.</span></h2>
 
         <Grid>
@@ -239,7 +240,7 @@ export default function About() {
       {/* 03 — SELECTED WORK */}
       <section className="py-20 border-t border-white/10" data-testid="about-recent-projects">
         <Container>
-        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#075EFD] mb-4">03 — selected work</p>
+        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">03 — selected work</p>
         <h2 className="font-display text-4xl md:text-5xl font-black mb-10 max-w-5xl">recent <span className="italic font-light">projects.</span></h2>
 
         <div className="border-t border-white/10">

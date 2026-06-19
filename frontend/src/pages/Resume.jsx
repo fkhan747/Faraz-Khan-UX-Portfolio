@@ -82,7 +82,7 @@ const telHref = "tel:" + PROFILE.phone.replace(/[^+\d]/g, "");
 function RailCard({ icon, title, children }) {
   return (
     <div className="dark-card rounded-2xl p-6">
-      <p className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.25em] text-[#075EFD] mb-4">
+      <p className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">
         {icon} {title}
       </p>
       {children}
@@ -96,14 +96,14 @@ export default function Resume() {
       {/* HEADER */}
       <section className="pt-10 md:pt-12 pb-10">
         <Container>
-          <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#075EFD] mb-6">résumé · cv</p>
+          <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-6">résumé · cv</p>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
             {/* Identity */}
             <div className="lg:col-span-8 order-2 lg:order-1">
               <h1 className="font-display text-5xl md:text-6xl font-black tracking-tighter leading-[0.95]">
                 Faraz Khan
               </h1>
-              <p className="mt-3 text-lg md:text-xl font-semibold text-[#075EFD]">
+              <p className="mt-3 text-lg md:text-xl font-semibold text-[#F5379B]">
                 Senior UX Lead — Bridging Design, Data &amp; Development
               </p>
               <p className="mt-5 max-w-2xl text-base md:text-lg text-[#A29CB4] leading-relaxed">
@@ -178,7 +178,7 @@ export default function Resume() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
             {/* Experience */}
             <div className="lg:col-span-7">
-              <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#075EFD] mb-8">experience</p>
+              <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-8">experience</p>
               <ol className="relative border-l border-white/10 pl-7 space-y-9">
                 {EXPERIENCE.map((e) => (
                   <li key={e.org} className="relative">
@@ -191,7 +191,7 @@ export default function Resume() {
                     <ul className="mt-3 space-y-2">
                       {e.points.map((p, i) => (
                         <li key={i} className="flex gap-3 text-sm md:text-[15px] leading-relaxed text-[#F4F3FA]/90">
-                          <span className="mt-2 h-1 w-1 rounded-full bg-[#075EFD] flex-shrink-0" aria-hidden="true" />
+                          <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#F5379B] flex-shrink-0" aria-hidden="true" />
                           {p}
                         </li>
                       ))}
@@ -224,7 +224,7 @@ export default function Resume() {
                 <ul className="space-y-3">
                   {CERTS.map((c) => (
                     <li key={c.t} className="flex gap-3">
-                      <span className={`mt-1.5 h-2 w-2 rounded-full flex-shrink-0 ${c.star ? "bg-[#F5379B]" : "bg-[#075EFD]"}`} aria-hidden="true" />
+                      <span className="mt-1.5 h-2 w-2 rounded-full flex-shrink-0 bg-[#F5379B]" aria-hidden="true" />
                       <div>
                         <p className="text-sm font-semibold leading-snug">{c.t}</p>
                         <p className="text-xs text-[#A29CB4] mt-0.5">{c.s}</p>

@@ -16,7 +16,7 @@ export default function Landing() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
             {/* Copy */}
             <div className="lg:col-span-8">
-              <p className="font-mono text-xs md:text-sm uppercase tracking-[0.25em] text-[#075EFD] font-medium mb-5 rise rise-1" data-testid="hero-designation">
+              <p className="font-mono text-xs md:text-sm uppercase tracking-[0.25em] text-[#F5379B] font-medium mb-5 rise rise-1" data-testid="hero-designation">
                 Senior UX Lead — design · data · development
               </p>
               <h1 className="font-display font-black leading-[1.03] text-4xl sm:text-5xl lg:text-[3.6rem] xl:text-[4rem] tracking-tight rise rise-2" data-testid="hero-headline">
@@ -70,7 +70,7 @@ export default function Landing() {
               { v: "5", l: "industry verticals" },
             ].map((s) => (
               <div key={s.l} className="col-span-6 md:col-span-3 dark-card rounded-2xl p-6">
-                <div className="font-display text-4xl md:text-5xl font-black">{s.v}</div>
+                <div className="num text-4xl md:text-5xl font-black">{s.v}</div>
                 <div className="mt-2 text-xs font-mono uppercase tracking-widest text-[#A29CB4]">{s.l}</div>
               </div>
             ))}
@@ -82,7 +82,7 @@ export default function Landing() {
       <section className="pb-16" data-testid="featured-project">
         <Container>
         <div className="flex items-baseline justify-between mb-6">
-          <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#075EFD]">featured project · 2024</span>
+          <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B]">featured project · 2024</span>
           <Link to={`/case/${featured.slug}`} className="hidden md:inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4 decoration-[#075EFD]">
             Full Case Study <ArrowUpRight size={16} />
           </Link>
@@ -96,7 +96,7 @@ export default function Landing() {
       {/* MANIFESTO */}
       <section className="py-20 md:py-28 border-t border-white/10" data-testid="manifesto">
         <Container>
-          <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#075EFD] mb-6">what i believe</p>
+          <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-6">what i believe</p>
           <h2 className="font-display text-4xl md:text-5xl lg:text-[3.3rem] font-black leading-[1.4] max-w-none">
             I believe the best design <span className="italic font-light">disappears</span>. That <span className="bg-[#F5379B] text-white px-3 rounded-full">clarity</span> beats decoration, that the strongest calls follow <span className="underline decoration-[#075EFD] decoration-4 underline-offset-4">facts, not feelings</span> — and that putting people first is what&apos;s best for the business, too.
           </h2>
@@ -142,7 +142,7 @@ export default function Landing() {
       {false && (
       <section className="py-20 md:py-28 border-t border-white/10" data-testid="testimonials">
         <Container>
-        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#075EFD] mb-4">what clients say</p>
+        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">what clients say</p>
         <h2 className="font-display text-4xl md:text-5xl font-black mb-12 leading-tight max-w-3xl">the results <span className="italic font-light">speak</span> for themselves.</h2>
 
         <Grid>
@@ -202,10 +202,10 @@ export default function Landing() {
       <footer className="py-10 border-t border-[#2C2542]/10">
         <Container className="flex items-center justify-between gap-4 flex-wrap text-xs font-mono uppercase tracking-widest text-[#A29CB4]">
           <span>©2025 {PROFILE.name} · {PROFILE.city}</span>
-          <div className="flex items-center gap-5">
-            <a href={PROFILE.social.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-[#075EFD] transition-colors">LinkedIn</a>
-            <a href={`mailto:${PROFILE.email}`} className="hover:text-[#075EFD] transition-colors">Email</a>
-            <Link to="/resume" className="hover:text-[#075EFD] transition-colors">Resume</Link>
+          <div className="flex items-center gap-3 flex-wrap">
+            <a href={PROFILE.social.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-full border border-[#0A66C2] text-[#0A66C2] px-4 py-2 hover:bg-[#0A66C2] hover:text-white transition-colors">LinkedIn</a>
+            <a href={`mailto:${PROFILE.email}`} className="inline-flex items-center rounded-full border border-[#075EFD] text-[#075EFD] px-4 py-2 hover:bg-[#075EFD] hover:text-white transition-colors">Email</a>
+            <Link to="/resume" className="inline-flex items-center rounded-full border border-[#F5379B] text-[#F5379B] px-4 py-2 hover:bg-[#F5379B] hover:text-white transition-colors">Resume</Link>
           </div>
         </Container>
       </footer>

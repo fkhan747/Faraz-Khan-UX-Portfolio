@@ -37,11 +37,11 @@ export default function FinvistaCaseStudy() {
         <Link
           to="/projects"
           data-testid="back-link"
-          className="inline-flex items-center gap-2 mb-10 text-xs font-mono uppercase tracking-widest text-[#A29CB4] hover:text-[#075EFD] transition-colors"
+          className="inline-flex items-center gap-2 mb-10 text-xs font-mono uppercase tracking-widest text-[#A29CB4] hover:text-[#F5379B] transition-colors"
         >
           <ArrowLeft size={14} /> all projects
         </Link>
-        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#075EFD] mb-5">
+        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-5">
           ux case study · featured
         </p>
         <h1 className="font-display text-6xl md:text-7xl lg:text-[8rem] font-black tracking-tighter leading-[0.9] lowercase case-keep">
@@ -55,7 +55,7 @@ export default function FinvistaCaseStudy() {
         <div className="mt-12 grid grid-cols-3 gap-4 max-w-5xl">
           {fv.hero.stats.map((s) => (
             <div key={s.label} className="dark-card rounded-2xl p-5 md:p-6">
-              <div className="font-display text-3xl md:text-5xl font-black text-[#075EFD] leading-none">{s.value}</div>
+              <div className="num text-3xl md:text-5xl font-black text-[#075EFD] leading-none">{s.value}</div>
               <div className="mt-3 text-[10px] md:text-xs font-mono uppercase tracking-widest text-[#A29CB4]">{s.label}</div>
             </div>
           ))}
@@ -107,7 +107,7 @@ export default function FinvistaCaseStudy() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {fv.overview.process.map((p) => (
             <div key={p.step} className="dark-card rounded-2xl p-6">
-              <div className="font-display text-5xl font-black text-[#075EFD]">{p.step}</div>
+              <div className="num text-5xl font-black text-[#075EFD]">{p.step}</div>
               <div className="mt-3 font-display text-xl font-bold ">{p.title}</div>
               <div className="mt-1 text-xs font-mono uppercase tracking-widest text-[#A29CB4]">{p.duration}</div>
             </div>
@@ -295,7 +295,7 @@ export default function FinvistaCaseStudy() {
               </p>
               <div className="space-y-4">
                 <div>
-                  <p className="text-[10px] font-mono uppercase tracking-widest text-[#075EFD] mb-2">Challenges</p>
+                  <p className="text-[10px] font-mono uppercase tracking-widest text-[#F5379B] mb-2">Challenges</p>
                   <ul className="space-y-2">
                     {p.challenges.map((c) => (
                       <li key={c.t} className="text-sm">
@@ -512,7 +512,7 @@ export default function FinvistaCaseStudy() {
             </ul>
           </div>
           <div className="dark-card rounded-3xl p-7">
-            <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#075EFD] mb-4">what I&apos;d do differently</p>
+            <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">what I&apos;d do differently</p>
             <ul className="space-y-3">
               {fv.impact.differently.map((x) => (
                 <li key={x} className="flex items-start gap-3 text-base">

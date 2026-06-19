@@ -6,7 +6,7 @@ export const PROFILE = {
   status: "available for new opportunities",
   email: "Abdulfarazkhan@outlook.com",
   phone: "+91 - 7795661693",
-  bookingUrl: "https://cal.com/your-handle/30min", // TODO: replace with my real Cal.com or Calendly link
+  bookingUrl: "https://cal.com/fkhan747", // Cal.com public page. Add a REQUIRED "Enter Job Description" booking question in the event-type's Advanced settings on cal.com.
   city: "Pune, Maharashtra · India",
   currentCompany: "Persistent Systems Limited",
   currentSince: "Feb 2023",

@@ -12,7 +12,7 @@ const NAV = [
   { to: "/projects", label: "Projects" },
   { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
-  { to: "/resume", label: "Resume" },
+  { to: "/resume", label: "My Profile" },
 ];
 
 const navItem = ({ isActive }) =>

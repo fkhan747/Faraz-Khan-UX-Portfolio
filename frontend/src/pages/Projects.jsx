@@ -9,7 +9,7 @@ export default function Projects() {
     <div data-testid="projects-page">
       <section className="pt-12 pb-10">
         <Container>
-        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#075EFD] mb-6">selected work · 2023 — 2025</p>
+        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-6">selected work · 2023 — 2025</p>
         <h1 className="font-display font-black leading-[0.95] text-[14vw] md:text-[8vw] lg:text-[7rem] tracking-tighter ">
           c<span className="dot-o">a</span>se studies.
         </h1>
@@ -22,7 +22,7 @@ export default function Projects() {
       {/* Client work — equal 2-column grid */}
       <section className="pb-24" data-testid="client-work-section">
         <Container>
-        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#075EFD] mb-6">client work</p>
+        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-6">client work</p>
         <Grid>
           {projects.map((p, i) => (
             <Link
@@ -41,7 +41,7 @@ export default function Projects() {
       {/* AI-native concepts — section title treated like the rest; dark cards in one row */}
       <section className="pb-24" data-testid="concepts-section">
         <Container>
-        <p className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.25em] text-[#075EFD] mb-6">
+        <p className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-6">
           <Sparkles size={13} /> self-initiated · ai-native concepts
         </p>
         <h2 className="font-display font-black leading-[0.95] text-4xl md:text-6xl tracking-tighter mb-4">

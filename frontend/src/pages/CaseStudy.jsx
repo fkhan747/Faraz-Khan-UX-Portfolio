@@ -12,11 +12,11 @@ export default function ComingSoonCase() {
         <Link
           to="/projects"
           data-testid="back-link"
-          className="inline-flex items-center gap-2 mb-10 text-xs font-mono uppercase tracking-widest text-[#A29CB4] hover:text-[#075EFD] transition-colors"
+          className="inline-flex items-center gap-2 mb-10 text-xs font-mono uppercase tracking-widest text-[#A29CB4] hover:text-[#F5379B] transition-colors"
         >
           <ArrowLeft size={14} /> all projects
         </Link>
-        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#075EFD] mb-6">case study · drafting</p>
+        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-6">case study · drafting</p>
         <h1 className="font-display text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.95]">
           {project ? project.title : "Case study"}
         </h1>
@@ -50,7 +50,7 @@ export default function ComingSoonCase() {
       </section>
 
       <section className="px-6 md:px-10 lg:px-16 py-20">
-        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#075EFD] mb-4">while you&apos;re here</p>
+        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">while you&apos;re here</p>
         <h2 className="font-display text-3xl md:text-4xl font-black mb-8 ">read a Full Case Study →</h2>
         <Link
           to="/case/finvista"

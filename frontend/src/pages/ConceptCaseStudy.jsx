@@ -19,7 +19,7 @@ import { concepts, PROFILE } from "../data/content";
 
 const SectionLabel = ({ num, name }) => (
   <div className="flex items-center gap-4 mb-6">
-    <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#075EFD]">
+    <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#F5379B]">
       {num} · {name}
     </span>
     <span className="flex-1 h-px bg-black/15" />
@@ -116,7 +116,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
         <Link
           to="/projects"
           data-testid="back-link"
-          className="inline-flex items-center gap-2 mb-10 text-xs font-mono uppercase tracking-widest text-[#A29CB4] hover:text-[#075EFD] transition-colors"
+          className="inline-flex items-center gap-2 mb-10 text-xs font-mono uppercase tracking-widest text-[#A29CB4] hover:text-[#F5379B] transition-colors"
         >
           <ArrowLeft size={14} /> all projects
         </Link>
@@ -136,7 +136,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
         <div className="mt-12 grid grid-cols-3 gap-4 max-w-5xl">
           {r.hero.stats.map((s) => (
             <div key={s.label} className="dark-card rounded-2xl p-5 md:p-6">
-              <div className="font-display text-3xl md:text-5xl font-black text-[#075EFD] leading-none">{s.value}</div>
+              <div className="num text-3xl md:text-5xl font-black text-[#075EFD] leading-none">{s.value}</div>
               <div className="mt-3 text-[10px] md:text-xs font-mono uppercase tracking-widest text-[#A29CB4]">{s.label}</div>
             </div>
           ))}
@@ -170,7 +170,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
           {r.overview.process.map((p) => (
             <div key={p.step} className="dark-card rounded-2xl p-6">
-              <div className="font-display text-4xl md:text-5xl font-black text-[#075EFD]">{p.step}</div>
+              <div className="num text-4xl md:text-5xl font-black text-[#075EFD]">{p.step}</div>
               <div className="mt-3 font-display text-lg font-bold ">{p.title}</div>
               <div className="mt-1 text-xs font-mono uppercase tracking-widest text-[#A29CB4]">{p.duration}</div>
             </div>
@@ -220,7 +220,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
                 {p.goals.map((g) => (<li key={g} className="text-sm flex gap-2"><Check size={14} className="flex-shrink-0 mt-1 text-[#F5379B]" />{g}</li>))}
               </ul>
 
-              <p className="text-[10px] font-mono uppercase tracking-widest text-[#075EFD] mb-2">frustrations</p>
+              <p className="text-[10px] font-mono uppercase tracking-widest text-[#F5379B] mb-2">frustrations</p>
               <ul className="space-y-1.5 mb-4">
                 {p.frustrations.map((f) => (<li key={f} className="text-sm flex gap-2"><X size={14} className="flex-shrink-0 mt-1 text-[#075EFD]" />{f}</li>))}
               </ul>
@@ -278,7 +278,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
                   <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                     <span className="font-mono text-xs font-bold text-[#A29CB4] w-16">{t.time}</span>
                     <span className="font-display text-base font-black ">{t.label}</span>
-                    {t.pain && <span className="text-[9px] font-mono uppercase tracking-widest text-[#075EFD] px-2 py-0.5 rounded-full bg-[#075EFD]/10">pain point</span>}
+                    {t.pain && <span className="text-[9px] font-mono uppercase tracking-widest text-[#F5379B] px-2 py-0.5 rounded-full bg-[#075EFD]/10">pain point</span>}
                   </div>
                   <p className="mt-1 text-sm leading-relaxed text-[#F4F3FA]/85 md:pl-[4.75rem]">{t.note}</p>
                 </li>
@@ -356,7 +356,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
             <thead>
               <tr className="border-b border-white/10">
                 {r.research2.competitiveTable.headers.map((h, i) => (
-                  <th key={i} className={`p-4 text-left font-mono uppercase text-[10px] tracking-widest ${i === 1 ? "text-[#075EFD]" : ""}`}>{h}</th>
+                  <th key={i} className={`p-4 text-left font-mono uppercase text-[10px] tracking-widest ${i === 1 ? "text-[#F5379B]" : ""}`}>{h}</th>
                 ))}
               </tr>
             </thead>
@@ -433,7 +433,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
               <div className="font-mono text-[10px] uppercase tracking-widest text-[#A29CB4]">principle 0{idx + 1}</div>
               <h4 className="mt-2 font-display text-xl font-black ">{p.t}</h4>
               <p className="mt-2 text-base leading-relaxed">{p.d}</p>
-              <p className="mt-4 text-xs font-mono uppercase tracking-widest text-[#075EFD]">{p.from}</p>
+              <p className="mt-4 text-xs font-mono uppercase tracking-widest text-[#F5379B]">{p.from}</p>
             </div>
           ))}
         </div>
@@ -449,7 +449,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
         <div className="grid grid-cols-1 md:grid-cols-7 gap-3">
           {r.ia.lifecycle.map((t, idx) => (
             <div key={t.t} className="dark-card rounded-2xl p-5">
-              <div className="font-mono text-[10px] uppercase tracking-widest text-[#075EFD] mb-2">step {idx + 1}</div>
+              <div className="font-mono text-[10px] uppercase tracking-widest text-[#F5379B] mb-2">step {idx + 1}</div>
               <div className="font-display text-sm font-black ">{t.t}</div>
               <div className="mt-1.5 text-xs leading-snug text-[#F4F3FA]/80">{t.d}</div>
             </div>
@@ -494,7 +494,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
                 <img src={w.src} alt={w.title} loading="lazy" className="w-full h-auto" />
               </div>
               <figcaption className="p-6">
-                <span className="text-[10px] font-mono uppercase tracking-widest text-[#075EFD]">{w.tag}</span>
+                <span className="text-[10px] font-mono uppercase tracking-widest text-[#F5379B]">{w.tag}</span>
                 <h4 className="mt-2 font-display text-lg font-black ">{w.title}</h4>
                 <p className="mt-2 text-sm leading-relaxed">{w.desc}</p>
               </figcaption>
@@ -551,7 +551,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
               </div>
               <figcaption className="p-6 md:flex md:items-baseline md:gap-6">
                 <div className="md:w-56 md:flex-shrink-0">
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-[#075EFD]">{s.tag}</span>
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-[#F5379B]">{s.tag}</span>
                   <h4 className="mt-2 font-display text-xl font-black ">{s.title}</h4>
                 </div>
                 <p className="mt-2 md:mt-0 text-sm md:text-base leading-relaxed text-[#F4F3FA]/85">{s.desc}</p>
@@ -630,8 +630,8 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {r.designSystem.spacing.map((s) => (
             <div key={s.t} className="dark-card rounded-2xl p-5">
-              <div className="font-mono text-xs uppercase tracking-widest text-[#075EFD]">{s.t}</div>
-              <div className="mt-2 font-display text-lg font-bold">{s.v}</div>
+              <div className="font-mono text-xs uppercase tracking-widest text-[#F5379B]">{s.t}</div>
+              <div className="mt-2 num text-lg font-bold">{s.v}</div>
             </div>
           ))}
         </div>
@@ -709,7 +709,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
               {r.validation.testSetup.map((s) => (
                 <div key={s.l} className="dark-card rounded-2xl p-5">
                   <p className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-2">{s.l}</p>
-                  <p className="font-display text-base font-bold">{s.v}</p>
+                  <p className="num text-base font-bold">{s.v}</p>
                 </div>
               ))}
             </div>
@@ -752,7 +752,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
               {r.futureVision.phases.map((ph) => (
                 <div key={ph.phase} className="dark-card rounded-3xl p-7">
                   <div className="flex items-baseline gap-3 mb-4">
-                    <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#075EFD]">{ph.phase}</span>
+                    <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B]">{ph.phase}</span>
                     <h4 className="font-display text-xl font-black ">{ph.title}</h4>
                   </div>
                   <ul className="space-y-2.5">
@@ -821,7 +821,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
                 </ul>
               </div>
               <div className="dark-card rounded-3xl p-7">
-                <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#075EFD] mb-4">what I&apos;d do differently</p>
+                <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">what I&apos;d do differently</p>
                 <ul className="space-y-3">
                   {r.impact.differently.map((x) => (<li key={x} className="flex items-start gap-3 text-base"><Star className="flex-shrink-0 mt-1 text-[#075EFD]" size={16} /><span>{x}</span></li>))}
                 </ul>
@@ -833,7 +833,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
 
       {/* ============ MORE CONCEPTS ============ */}
       <SectionWrap>
-        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#075EFD] mb-4">more concepts</p>
+        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">more concepts</p>
         <h2 className="font-display text-3xl md:text-4xl font-black mb-8">the rest of the OS family &rarr;</h2>
         <div className="grid md:grid-cols-2 gap-6">
           {concepts.filter((x) => x.slug !== r.slug).map((x) => {

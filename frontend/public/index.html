@@ -29,6 +29,27 @@
         <noscript>You need to enable JavaScript to run this app.</noscript>
         <div id="root"></div>
         <!--
+        Netlify Forms detection. This hidden static form is what Netlify's build
+        scans to register the "contact" form (the real form is React-rendered, so
+        it's invisible to the build). Field names MUST match ContactForm.jsx.
+        Submissions POST to "/" via AJAX; enable email notifications in the
+        Netlify dashboard (Forms → Notifications) to receive them by email.
+        -->
+        <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+            <input type="text" name="full_name" />
+            <input type="email" name="email" />
+            <select name="inquiry_type">
+                <option>Full-time role</option>
+                <option>Contract or freelance project</option>
+                <option>Remote opportunity</option>
+                <option>Speaking or advisory</option>
+                <option>Just saying hi</option>
+            </select>
+            <input type="text" name="company" />
+            <textarea name="message"></textarea>
+            <input type="text" name="bot-field" />
+        </form>
+        <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
 

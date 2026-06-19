@@ -5,7 +5,7 @@ import { PROFILE } from "../data/content";
 
 const SectionLabel = ({ num, name }) => (
   <div className="flex items-center gap-4 mb-6">
-    <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#075EFD]">
+    <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#F5379B]">
       {num} · {name}
     </span>
     <span className="flex-1 h-px bg-black/15" />
@@ -26,11 +26,11 @@ export default function AuroraCaseStudy() {
         <Link
           to="/projects"
           data-testid="back-link"
-          className="inline-flex items-center gap-2 mb-10 text-xs font-mono uppercase tracking-widest text-[#A29CB4] hover:text-[#075EFD] transition-colors"
+          className="inline-flex items-center gap-2 mb-10 text-xs font-mono uppercase tracking-widest text-[#A29CB4] hover:text-[#F5379B] transition-colors"
         >
           <ArrowLeft size={14} /> all projects
         </Link>
-        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#075EFD] mb-5">
+        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-5">
           ux case study · b2b saas · europe
         </p>
         <h1 className="font-display text-6xl md:text-7xl lg:text-[8rem] font-black tracking-tighter leading-[0.9] lowercase case-keep">
@@ -43,7 +43,7 @@ export default function AuroraCaseStudy() {
         <div className="mt-12 grid grid-cols-3 gap-4 max-w-5xl">
           {au.hero.stats.map((s) => (
             <div key={s.label} className="dark-card rounded-2xl p-5 md:p-6">
-              <div className="font-display text-3xl md:text-5xl font-black text-[#075EFD] leading-none">{s.value}</div>
+              <div className="num text-3xl md:text-5xl font-black text-[#075EFD] leading-none">{s.value}</div>
               <div className="mt-3 text-[10px] md:text-xs font-mono uppercase tracking-widest text-[#A29CB4]">{s.label}</div>
             </div>
           ))}
@@ -81,7 +81,7 @@ export default function AuroraCaseStudy() {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
           {au.overview.process.map((p) => (
             <div key={p.step} className="dark-card rounded-2xl p-6">
-              <div className="font-display text-4xl md:text-5xl font-black text-[#075EFD]">{p.step}</div>
+              <div className="num text-4xl md:text-5xl font-black text-[#075EFD]">{p.step}</div>
               <div className="mt-3 font-display text-lg font-bold ">{p.title}</div>
               <div className="mt-1 text-xs font-mono uppercase tracking-widest text-[#A29CB4]">{p.duration}</div>
             </div>
@@ -184,7 +184,7 @@ export default function AuroraCaseStudy() {
             </ul>
           </div>
           <div className="dark-card rounded-3xl p-7">
-            <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#075EFD] mb-4">identified risks</p>
+            <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">identified risks</p>
             <ul className="space-y-3">
               {au.problem.risks.map((r) => (
                 <li key={r} className="flex items-start gap-3 text-sm"><AlertTriangle className="flex-shrink-0 mt-1 text-[#075EFD]" size={14} />{r}</li>
@@ -230,7 +230,7 @@ export default function AuroraCaseStudy() {
         <div className="grid md:grid-cols-3 gap-5">
           {au.research.stakeholders.map((s) => (
             <div key={s.role} className="dark-card rounded-3xl p-7">
-              <p className="text-[10px] font-mono uppercase tracking-widest text-[#075EFD] mb-3">{s.role}</p>
+              <p className="text-[10px] font-mono uppercase tracking-widest text-[#F5379B] mb-3">{s.role}</p>
               <p className="italic text-base leading-relaxed border-l-2 border-[#075EFD] pl-4 mb-4">&ldquo;{s.quote}&rdquo;</p>
               <div className="text-xs font-mono uppercase tracking-widest text-[#A29CB4]">priority</div>
               <div className="font-display text-base font-bold mt-1">{s.priority}</div>
@@ -291,7 +291,7 @@ export default function AuroraCaseStudy() {
               <ul className="space-y-1.5 mb-4">
                 {p.goals.map((g) => (<li key={g} className="text-sm flex gap-2"><Check size={14} className="flex-shrink-0 mt-1 text-[#F5379B]" />{g}</li>))}
               </ul>
-              <p className="text-[10px] font-mono uppercase tracking-widest text-[#075EFD] mb-2">frustrations</p>
+              <p className="text-[10px] font-mono uppercase tracking-widest text-[#F5379B] mb-2">frustrations</p>
               <ul className="space-y-1.5">
                 {p.frustrations.map((f) => (<li key={f} className="text-sm flex gap-2"><X size={14} className="flex-shrink-0 mt-1 text-[#075EFD]" />{f}</li>))}
               </ul>
@@ -330,7 +330,7 @@ export default function AuroraCaseStudy() {
                 <img src={s.src} alt={s.title} loading="lazy" className="w-full h-auto" />
               </div>
               <figcaption className="p-6">
-                <span className="text-[10px] font-mono uppercase tracking-widest text-[#075EFD]">{s.tag}</span>
+                <span className="text-[10px] font-mono uppercase tracking-widest text-[#F5379B]">{s.tag}</span>
                 <h4 className="mt-2 font-display text-xl font-black ">{s.title}</h4>
                 <p className="mt-2 text-sm leading-relaxed">{s.desc}</p>
               </figcaption>
@@ -347,7 +347,7 @@ export default function AuroraCaseStudy() {
                 <img src={w.src} alt={w.title} loading="lazy" className="w-full h-auto" />
               </div>
               <figcaption className="p-6">
-                <span className="text-[10px] font-mono uppercase tracking-widest text-[#075EFD]">{w.tag}</span>
+                <span className="text-[10px] font-mono uppercase tracking-widest text-[#F5379B]">{w.tag}</span>
                 <h4 className="mt-2 font-display text-lg font-black ">{w.title}</h4>
                 <p className="mt-2 text-sm leading-relaxed">{w.desc}</p>
               </figcaption>
@@ -364,7 +364,7 @@ export default function AuroraCaseStudy() {
                 <img src={s.src} alt={s.title} loading="lazy" className="w-full h-auto rounded-lg" />
               </div>
               <figcaption className="p-5">
-                <span className="text-[10px] font-mono uppercase tracking-widest text-[#075EFD]">{s.tag}</span>
+                <span className="text-[10px] font-mono uppercase tracking-widest text-[#F5379B]">{s.tag}</span>
                 <h4 className="mt-2 font-display text-base font-black ">{s.title}</h4>
                 <p className="mt-2 text-sm leading-relaxed text-[#F4F3FA]/85">{s.desc}</p>
               </figcaption>
@@ -406,8 +406,8 @@ export default function AuroraCaseStudy() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {au.designSystem.spacing.map((s) => (
             <div key={s.t} className="dark-card rounded-2xl p-5">
-              <div className="font-mono text-xs uppercase tracking-widest text-[#075EFD]">{s.t}</div>
-              <div className="mt-2 font-display text-lg font-bold">{s.v}</div>
+              <div className="font-mono text-xs uppercase tracking-widest text-[#F5379B]">{s.t}</div>
+              <div className="mt-2 num text-lg font-bold">{s.v}</div>
             </div>
           ))}
         </div>
@@ -458,7 +458,7 @@ export default function AuroraCaseStudy() {
           {au.validation.testSetup.map((s) => (
             <div key={s.l} className="dark-card rounded-2xl p-5">
               <p className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-2">{s.l}</p>
-              <p className="font-display text-base font-bold">{s.v}</p>
+              <p className="num text-base font-bold">{s.v}</p>
             </div>
           ))}
         </div>
@@ -518,7 +518,7 @@ export default function AuroraCaseStudy() {
             </ul>
           </div>
           <div className="dark-card rounded-3xl p-7">
-            <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#075EFD] mb-4">what I&apos;d do differently</p>
+            <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">what I&apos;d do differently</p>
             <ul className="space-y-3">
               {au.impact.differently.map((x) => (<li key={x} className="flex items-start gap-3 text-base"><Star className="flex-shrink-0 mt-1 text-[#075EFD]" size={16} /><span>{x}</span></li>))}
             </ul>

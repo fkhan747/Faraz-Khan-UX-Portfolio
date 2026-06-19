@@ -42,6 +42,16 @@ html, body {
   letter-spacing: -0.03em;
   /* Site-wide: display headings render in Title Case, not forced lowercase. */
   text-transform: capitalize;
+  /* Use even-height lining figures so any numbers sit on the baseline. */
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+/* Numbers (stats, step counters) — a clean sans with even, baseline-aligned
+   figures. Playfair's old-style digits are hard to read small and bounce up/down. */
+.num {
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-variant-numeric: lining-nums tabular-nums;
+  letter-spacing: -0.02em;
 }
 
 /* Opt-out for places where Title Case is wrong: emails, stylized wordmarks,
@@ -53,6 +63,8 @@ html, body {
 
 .font-mono {
   font-family: 'JetBrains Mono', monospace;
+  /* Mono labels/eyebrows are tracked-out + muted; 400 reads too thin. */
+  font-weight: 600;
 }
 
 /* Letter "o" with colorful dot inside */

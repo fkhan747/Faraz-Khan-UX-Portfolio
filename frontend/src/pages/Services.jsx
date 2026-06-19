@@ -20,7 +20,7 @@ export default function Services() {
     <div data-testid="services-page">
       <section className="pt-12 pb-10">
         <Container>
-        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#075EFD] mb-6">how we work together</p>
+        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-6">how we work together</p>
         <h1 className="font-display font-black leading-[0.95] text-[14vw] md:text-[8vw] lg:text-[7rem] tracking-tighter ">
           servic<span className="dot-o">e</span>s.
         </h1>
@@ -49,12 +49,12 @@ export default function Services() {
 
       <section className="py-20 border-t border-white/10" data-testid="process-section">
         <Container>
-        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#075EFD] mb-4">my process</p>
+        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">my process</p>
         <h2 className="font-display text-4xl md:text-5xl font-black mb-12 max-w-3xl">a simple, <span className="italic font-light">honest</span> way to ship.</h2>
         <Grid>
           {PROCESS.map((p) => (
             <div key={p.step} className="col-span-12 md:col-span-6 border-t-2 border-white/10 pt-6">
-              <div className="font-display text-6xl font-black text-[#075EFD] mb-3">{p.step}</div>
+              <div className="num text-6xl font-black text-[#075EFD] mb-3">{p.step}</div>
               <h3 className="font-display text-2xl font-black mb-2">{p.title}</h3>
               <p className="text-base leading-relaxed text-[#F4F3FA]">{p.desc}</p>
             </div>
@@ -65,7 +65,7 @@ export default function Services() {
 
       <section className="py-20 border-t border-white/10" data-testid="packages-section">
         <Container>
-        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#075EFD] mb-4">engagements</p>
+        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">engagements</p>
         <h2 className="font-display text-4xl md:text-5xl font-black mb-10">three ways to <span className="italic font-light">begin.</span></h2>
         <Grid>
           {PACKAGES.map((p, i) => (
