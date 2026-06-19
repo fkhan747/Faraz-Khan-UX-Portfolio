@@ -12,23 +12,23 @@ export default function ComingSoonCase() {
         <Link
           to="/projects"
           data-testid="back-link"
-          className="inline-flex items-center gap-2 mb-10 text-xs font-mono uppercase tracking-widest text-[#5A5A5A] hover:text-[#E94B1F] transition-colors"
+          className="inline-flex items-center gap-2 mb-10 text-xs font-mono uppercase tracking-widest text-[#A29CB4] hover:text-[#075EFD] transition-colors"
         >
           <ArrowLeft size={14} /> all projects
         </Link>
-        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#E94B1F] mb-6">case study · drafting</p>
+        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#075EFD] mb-6">case study · drafting</p>
         <h1 className="font-display text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.95]">
           {project ? project.title : "Case study"}
         </h1>
         {project && (
-          <p className="mt-6 max-w-2xl text-xl md:text-2xl text-[#1a1a1a] leading-snug font-light italic">
+          <p className="mt-6 max-w-2xl text-xl md:text-2xl text-[#F4F3FA] leading-snug font-light italic">
             {project.subtitle}
           </p>
         )}
       </section>
 
       <section className="px-6 md:px-10 lg:px-16">
-        <div className="rounded-3xl bg-[#FFD93D] p-10 md:p-16">
+        <div className="rounded-3xl bg-[#F5379B] p-10 md:p-16">
           <div className="flex items-center gap-3 mb-6">
             <Clock size={20} />
             <span className="font-mono text-xs uppercase tracking-[0.25em]">coming soon</span>
@@ -42,7 +42,7 @@ export default function ComingSoonCase() {
           <a
             href={`mailto:${PROFILE.email}?subject=Walkthrough%20request%20—%20${encodeURIComponent(project ? project.title : "case study")}`}
             data-testid="early-walkthrough-cta"
-            className="mt-10 inline-flex items-center gap-2 px-7 py-4 rounded-full bg-[#0A0A0A] text-white font-semibold text-sm hover:bg-[#1a1a1a] transition-colors"
+            className="mt-10 inline-flex items-center gap-2 px-7 py-4 rounded-full dark-card text-white font-semibold text-sm hover:bg-[#241B33] transition-colors"
           >
             request early walkthrough <ArrowUpRight size={16} />
           </a>
@@ -50,17 +50,17 @@ export default function ComingSoonCase() {
       </section>
 
       <section className="px-6 md:px-10 lg:px-16 py-20">
-        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#E94B1F] mb-4">while you&apos;re here</p>
-        <h2 className="font-display text-3xl md:text-4xl font-black mb-8 lowercase">read a full case study →</h2>
+        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#075EFD] mb-4">while you&apos;re here</p>
+        <h2 className="font-display text-3xl md:text-4xl font-black mb-8 ">read a full case study →</h2>
         <Link
           to="/case/finvista"
           data-testid="read-featured"
-          className="group block rounded-3xl bg-[#F7F1DA] p-7 hover:-translate-y-1 transition-transform"
+          className="group block rounded-3xl dark-card p-7 hover:-translate-y-1 transition-transform"
         >
           <div className="flex items-start justify-between gap-6 flex-wrap">
             <div>
               <h3 className="font-display text-2xl md:text-3xl font-black">FinVista</h3>
-              <p className="mt-2 text-sm md:text-base text-[#5A5A5A]">
+              <p className="mt-2 text-sm md:text-base text-[#A29CB4]">
                 re-imagining a digital lending platform for india&apos;s next billion borrowers
               </p>
             </div>

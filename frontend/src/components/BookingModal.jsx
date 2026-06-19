@@ -17,7 +17,7 @@ export default function BookingModal({ open, onOpenChange }) {
           <DialogTitle className="font-display text-2xl md:text-3xl font-black">
             Thanks for reaching out.
           </DialogTitle>
-          <DialogDescription className="text-sm text-[#5A5A5A] leading-relaxed">
+          <DialogDescription className="text-sm text-[#A29CB4] leading-relaxed">
             Pick whatever slot works for you below — a calendar invite and a video link land in
             your inbox the moment you book. Looking forward to talking.
           </DialogDescription>

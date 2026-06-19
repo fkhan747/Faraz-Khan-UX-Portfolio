@@ -78,6 +78,20 @@ webpackConfig.devServer = (devServerConfig) => {
     };
   }
 
+  // Silence the benign "ResizeObserver loop completed with undelivered
+  // notifications" warning in the dev error overlay. It's harmless, never
+  // appears in the production build, and otherwise blocks the concept pages
+  // (which auto-size an embedded prototype iframe via ResizeObserver).
+  // All other runtime errors still surface in the overlay.
+  devServerConfig.client = {
+    ...(devServerConfig.client || {}),
+    overlay: {
+      ...(typeof devServerConfig.client?.overlay === "object" ? devServerConfig.client.overlay : {}),
+      runtimeErrors: (error) =>
+        !(error && error.message && /ResizeObserver loop/.test(error.message)),
+    },
+  };
+
   return devServerConfig;
 };
 
