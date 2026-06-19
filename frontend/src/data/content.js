@@ -6,7 +6,7 @@ export const PROFILE = {
   status: "available for new opportunities",
   email: "Abdulfarazkhan@outlook.com",
   phone: "+91 - 7795661693",
-  bookingUrl: "https://cal.com/fkhan747/30min?theme=dark", // Direct to the 30-min event (skips the event-type picker) + dark theme to match the site. Add the required "Enter Job Description" question to this event in cal.com → Advanced. Swap 30min→15min to default to the short call.
+  bookingUrl: "https://cal.com/khanfaraz/30min?theme=dark", // Direct to the 30-min event (skips the picker) + dark theme. Handle is "khanfaraz" (changed from fkhan747). Other events: /interview and /15min — swap the slug here to change which one the button opens.
   city: "Pune, Maharashtra · India",
   currentCompany: "Persistent Systems Limited",
   currentSince: "Feb 2023",
