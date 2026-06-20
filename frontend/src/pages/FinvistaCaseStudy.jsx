@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ArrowUpRight, Check, X, Star } from "lucide-react";
+import { ArrowLeft, Mail, Check, X, Star } from "lucide-react";
 import { finvista as fv } from "../data/finvistaCase";
 import { PROFILE } from "../data/content";
 
@@ -579,7 +579,7 @@ export default function FinvistaCaseStudy() {
             data-testid="case-cta-email"
             className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-[#F5379B] text-[#F4F3FA] font-semibold text-sm hover:bg-[#D81F7E] transition-colors"
           >
-            email me <ArrowUpRight size={16} />
+            <Mail size={16} /> email me
           </a>
           <Link
             to="/projects"

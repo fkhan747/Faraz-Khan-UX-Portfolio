@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, ArrowUpRight, Clock } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Clock, Mail } from "lucide-react";
 import { projects, PROFILE } from "../data/content";
 
 export default function ComingSoonCase() {
@@ -44,7 +44,7 @@ export default function ComingSoonCase() {
             data-testid="early-walkthrough-cta"
             className="mt-10 inline-flex items-center gap-2 px-7 py-4 rounded-full dark-card text-white font-semibold text-sm hover:bg-[#241B33] transition-colors"
           >
-            request early walkthrough <ArrowUpRight size={16} />
+            <Mail size={16} /> request early walkthrough
           </a>
         </div>
       </section>

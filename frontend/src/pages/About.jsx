@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import {
-  ArrowUpRight,
+  Mail,
+  Linkedin,
+  Download,
   Lightbulb,
   Users,
   Search,
@@ -9,6 +11,9 @@ import {
   GitBranch,
   Globe,
   Repeat,
+  Award,
+  GraduationCap,
+  Sparkles,
 } from "lucide-react";
 import { PROFILE } from "../data/content";
 import { Container, Grid } from "../components/Grid";
@@ -41,25 +46,68 @@ const CORE_SKILLS = [
   "Design Handoff", "Stakeholder Management", "Cross-functional Collaboration", "Agile & Scrum Methodology",
 ];
 
-const RECENT_WORK = [
+const INDUSTRIES = ["BFSI", "Software & High Tech", "Consumer Tech", "Education & Tech", "E-commerce"];
+
+// --- Résumé data (merged in from the former /resume page) ---
+const RESUME_PATH = "/files/Faraz_Khan_Resume.pdf";
+
+const EXPERIENCE = [
   {
-    n: "01",
-    domain: "BFSI",
-    desc: "Designed a Progressive Web App (PWA) for a leading NBFC, serving both end-users and sales teams. Led client requirement gathering, collaborated with product teams, created wireframes, Visual Designs, and established a scalable design system to ensure consistency across all products and journeys.",
+    role: "Senior UX Lead",
+    org: "Persistent Systems",
+    time: "Feb 2023 — Present",
+    place: "Pune, India",
+    points: [
+      "Lead UX for enterprise platforms end-to-end — wireframes to high-fidelity Figma prototypes — with a focus on seamless navigation and measurable engagement.",
+      "Build and maintain scalable design systems that stay consistent across web, mobile and enterprise environments.",
+      "Embed UX inside Agile delivery (JIRA, Confluence), keeping product, engineering and business aligned every sprint.",
+    ],
   },
   {
-    n: "02",
-    domain: "Education & Tech",
-    desc: "Redesigned the user experience of an administrative platform for university staff to streamline student admission data analysis. Conducted a UX audit to identify usability issues and visual inconsistencies. Applied data visualization best practices compatible with Power BI to ensure clarity and feasibility. The enhanced interface supported data-driven decisions and reduced the need for extensive training and support.",
+    role: "Sr. Data Visualization & UX/UI Designer",
+    org: "Infocepts Data & AI",
+    time: "Dec 2017 — Dec 2022",
+    place: "Nagpur, India",
+    points: [
+      "Designed dynamic, actionable dashboards that turned complex datasets into confident, data-driven decisions for global clients.",
+      "Ran usability audits and experience optimization to surface pain points and lift engagement.",
+      "Partnered with PMs and stakeholders to translate business goals into intuitive, real-world interfaces.",
+    ],
   },
   {
-    n: "03",
-    domain: "Software & High Tech",
-    desc: "Reimagined marketing tool visual design and enhanced the usability rate. Conducted competitive analysis, UX audit to enable visibility, discoverability and improved usability. Introduction of design system to cater diverse use cases, visual consistency and effortless component discovery.",
+    role: "Senior UI/UX Designer",
+    org: "MobiSir Technologies",
+    time: "Jan 2017 — Dec 2017",
+    place: "Bengaluru, India",
+    points: [
+      "Designed end-to-end digital ecosystems across web, mobile and social — sitemaps, flows, wireframes and interactive mockups.",
+      "Applied heuristic evaluation, personas and usability testing to sharpen task flows across platforms.",
+    ],
+  },
+  {
+    role: "Senior Visualizer",
+    org: "Circuit 9 Communications",
+    time: "Apr 2016 — Dec 2016",
+    place: "Bengaluru, India",
+    points: [
+      "Crafted multi-platform brand and campaign assets with consistency and impact across digital and print.",
+    ],
   },
 ];
 
-const INDUSTRIES = ["BFSI", "Software & High Tech", "Consumer Tech", "Education & Tech", "E-commerce"];
+const EARLIER =
+  "Earlier — Sr. UX/UI Designer at Jack of All Threads, and Graphic Designer at Jainawin Retails & Prime Advertising (2011–2016).";
+
+const CERTS = [
+  { t: "Advanced Certificate — UI/UX with Agentic AI & Gen-AI", s: "IIT Madras · pursuing" },
+  { t: "AI for Designers", s: "Interaction Design Foundation" },
+  { t: "Journey Mapping", s: "Interaction Design Foundation" },
+];
+
+const AWARDS = [
+  { t: "Bravo Individual Award", s: "Persistent — impact built on facts, not feelings." },
+  { t: "Humanity Mindset Winner", s: "Persistent — empathetic, inclusive, people-first design." },
+];
 
 export default function About() {
   return (
@@ -86,7 +134,15 @@ export default function About() {
             data-testid="about-cta-email"
             className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-[#075EFD] text-white font-semibold text-sm capitalize hover:bg-[#2E78FF] transition-colors"
           >
-            get in touch <ArrowUpRight size={16} />
+            <Mail size={16} /> get in touch
+          </a>
+          <a
+            href={RESUME_PATH}
+            download="Faraz_Khan_Resume.pdf"
+            data-testid="about-download-resume"
+            className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white/15 text-[#F4F3FA] font-semibold text-sm capitalize hover:bg-[#261E3A] transition-colors"
+          >
+            <Download size={16} /> download résumé
           </a>
           <Link
             to="/projects"
@@ -101,55 +157,41 @@ export default function About() {
       {/* PROFILE + STATS */}
       <section className="pb-16" data-testid="about-profile">
         <Container>
-        <Grid>
-          {/* Profile card — photo gets the home-hero treatment: blue duotone, grain, fades into the card (no frame) */}
-          <div className="col-span-12 lg:col-span-5 dark-card rounded-3xl overflow-hidden flex min-h-[210px]">
-            {/* Photo strip */}
-            <div className="relative w-36 sm:w-44 flex-shrink-0 overflow-hidden">
-              <img
-                src="/images/faraz.jpg"
-                alt="Faraz Khan"
-                className="photo-blue absolute inset-0 w-full h-full object-cover object-top"
-              />
-              <div className="absolute inset-0 grain-overlay pointer-events-none" aria-hidden="true" />
-              <div className="absolute inset-0 pointer-events-none" aria-hidden="true" style={{ background: "linear-gradient(to right, rgba(38,30,58,0) 52%, #261E3A 100%)" }} />
-            </div>
-            {/* Identity */}
-            <div className="flex-1 p-7 flex flex-col">
-              <h2 className="font-display text-2xl font-black">Faraz Khan</h2>
-              <p className="text-sm text-[#A29CB4] mt-1">{PROFILE.role}</p>
-              <p className="text-sm text-[#A29CB4] mt-auto pt-6">
-                Currently at <strong className="text-[#F4F3FA]">{PROFILE.currentCompany}</strong> since {PROFILE.currentSince}.
-              </p>
-            </div>
+        {/* Profile card — photo (home-hero treatment) + identity + bio, all in one container */}
+        <div className="dark-card rounded-3xl overflow-hidden flex flex-col sm:flex-row" data-testid="about-profile-card">
+          {/* Photo strip — fades into the card: downward on mobile, rightward on desktop */}
+          <div className="relative w-full h-56 sm:h-auto sm:w-52 md:w-64 flex-shrink-0 overflow-hidden">
+            <img
+              src="/images/faraz.jpg"
+              alt="Faraz Khan"
+              className="photo-blue absolute inset-0 w-full h-full object-cover object-top"
+            />
+            <div className="absolute inset-0 grain-overlay pointer-events-none" aria-hidden="true" />
+            <div className="absolute inset-0 pointer-events-none sm:hidden" aria-hidden="true" style={{ background: "linear-gradient(to bottom, rgba(38,30,58,0) 45%, #261E3A 100%)" }} />
+            <div className="absolute inset-0 pointer-events-none hidden sm:block" aria-hidden="true" style={{ background: "linear-gradient(to right, rgba(38,30,58,0) 52%, #261E3A 100%)" }} />
           </div>
-
-          {/* Stats */}
-          <div className="col-span-12 lg:col-span-7 grid grid-cols-3 gap-6">
-            {[
-              { v: "12+", l: "Years of Experience" },
-              { v: "500+", l: "Projects Delivered" },
-              { v: "15+", l: "Teams Mentored" },
-            ].map((s) => (
-              <div key={s.l} className="dark-card rounded-3xl p-6 md:p-7 flex flex-col justify-between">
-                <p className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4]">{s.l}</p>
-                <p className="mt-4 num text-5xl md:text-6xl font-black text-[#F4F3FA]">{s.v}</p>
+          {/* Identity + bio */}
+          <div className="flex-1 p-7 md:p-10 relative overflow-hidden">
+            <div className="absolute -top-10 -right-10 w-72 h-72 rounded-full bg-[#075EFD] blur-3xl opacity-20 pointer-events-none" aria-hidden="true" />
+            <div className="relative">
+              <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2">
+                <div>
+                  <h2 className="font-display text-2xl md:text-3xl font-black">Faraz Khan</h2>
+                  <p className="text-sm md:text-base text-[#A29CB4] mt-1">{PROFILE.role}</p>
+                </div>
+                <p className="text-sm text-[#A29CB4] sm:text-right flex-shrink-0">
+                  Currently at <strong className="text-[#F4F3FA]">{PROFILE.currentCompany}</strong> since {PROFILE.currentSince}.
+                </p>
               </div>
-            ))}
-          </div>
-        </Grid>
-
-        {/* Bio block */}
-        <div className="mt-6 rounded-3xl dark-card text-white p-8 md:p-12 relative overflow-hidden">
-          <div className="absolute -top-10 -right-10 w-72 h-72 rounded-full bg-[#075EFD] blur-3xl opacity-25" />
-          <p className="relative text-[11px] font-mono uppercase tracking-[0.25em] text-white mb-4">about</p>
-          <div className="relative space-y-5 max-w-6xl text-base md:text-lg leading-relaxed text-white/95">
-            <p>
-              Hey there! I&apos;m a UX Lead with <strong>12+ years</strong> of hands-on design experience across India&apos;s buzzing tech hubs — Pune, Nagpur, and Bengaluru. Whether it&apos;s building enterprise dashboards or crafting sleek, story-driven visuals, I&apos;ve always aimed to blend creative flair with smart functionality.
-            </p>
-            <p>
-              I&apos;ve worked with both startups and global giants — leading UX/UI projects that put users first while staying aligned with business goals. Always up for a new challenge, I&apos;m now looking to bring my passion for human-centered design to opportunities in the Middle East or back in India.
-            </p>
+              <div className="mt-6 space-y-4 text-base md:text-lg leading-relaxed text-white/95">
+                <p>
+                  Hey there! I&apos;m a UX Lead with <strong>12+ years</strong> of hands-on design experience across India&apos;s buzzing tech hubs — Pune, Nagpur, and Bengaluru. Whether it&apos;s building enterprise dashboards or crafting sleek, story-driven visuals, I&apos;ve always aimed to blend creative flair with smart functionality.
+                </p>
+                <p>
+                  I&apos;ve worked with both startups and global giants — leading UX/UI projects that put users first while staying aligned with business goals. Always up for a new challenge, I&apos;m now looking to bring my passion for human-centered design to opportunities in the Middle East or back in India.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -237,27 +279,75 @@ export default function About() {
         </Container>
       </section>
 
-      {/* 03 — SELECTED WORK */}
-      <section className="py-20 border-t border-white/10" data-testid="about-recent-projects">
+      {/* 03 — EXPERIENCE (merged from résumé) */}
+      <section className="py-20 border-t border-white/10" data-testid="about-experience">
         <Container>
-        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">03 — selected work</p>
-        <h2 className="font-display text-4xl md:text-5xl font-black mb-10 max-w-5xl">recent <span className="italic font-light">projects.</span></h2>
-
-        <div className="border-t border-white/10">
-          {RECENT_WORK.map((w) => (
-            <Link
-              key={w.n}
-              to="/projects"
-              data-testid={`recent-${w.n}`}
-              className="group grid grid-cols-12 gap-4 md:gap-6 py-8 border-b border-white/10 hover:bg-[#261E3A] transition-colors px-3 -mx-3 rounded-xl items-start"
-            >
-              <span className="col-span-1 font-mono text-xs uppercase tracking-widest text-[#A29CB4] pt-1">{w.n}</span>
-              <h3 className="col-span-11 md:col-span-3 font-display text-xl md:text-2xl font-black">{w.domain}</h3>
-              <p className="col-span-11 md:col-span-7 text-sm md:text-base leading-relaxed text-[#F4F3FA]/85">{w.desc}</p>
-              <ArrowUpRight className="col-span-1 hidden md:inline-block opacity-40 group-hover:opacity-100 group-hover:rotate-45 transition-all" size={18} />
-            </Link>
+        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">03 — experience</p>
+        <h2 className="font-display text-4xl md:text-5xl font-black mb-10 max-w-5xl">where i&apos;ve <span className="italic font-light">worked.</span></h2>
+        <ol className="relative border-l border-white/10 pl-7 space-y-9 max-w-4xl">
+          {EXPERIENCE.map((e) => (
+            <li key={e.org} className="relative" data-testid={`experience-${e.org}`}>
+              <span className="absolute -left-[2.1rem] top-1.5 h-3 w-3 rounded-full bg-[#F5379B] ring-4 ring-[#100210]" aria-hidden="true" />
+              <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                <h3 className="font-display text-xl md:text-2xl font-black">{e.role}</h3>
+                <span className="text-[11px] font-mono uppercase tracking-widest text-[#A29CB4]">{e.time}</span>
+              </div>
+              <p className="text-sm font-semibold text-[#F5379B] mt-0.5">{e.org} <span className="text-[#A29CB4] font-normal">· {e.place}</span></p>
+              <ul className="mt-3 space-y-2">
+                {e.points.map((p, i) => (
+                  <li key={i} className="flex gap-3 text-sm md:text-[15px] leading-relaxed text-[#F4F3FA]/90">
+                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#F5379B] flex-shrink-0" aria-hidden="true" />
+                    {p}
+                  </li>
+                ))}
+              </ul>
+            </li>
           ))}
-        </div>
+        </ol>
+        <p className="mt-8 pl-7 text-sm text-[#A29CB4] leading-relaxed max-w-4xl">{EARLIER}</p>
+        </Container>
+      </section>
+
+      {/* 04 — CREDENTIALS (merged from résumé) */}
+      <section className="py-20 border-t border-white/10" data-testid="about-credentials">
+        <Container>
+        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">04 — credentials</p>
+        <h2 className="font-display text-4xl md:text-5xl font-black mb-10 max-w-5xl">certs, awards &amp; <span className="italic font-light">education.</span></h2>
+        <Grid>
+          {/* Certifications */}
+          <div className="col-span-12 md:col-span-4 dark-card rounded-3xl p-7">
+            <p className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-5"><Sparkles size={14} /> certifications</p>
+            <ul className="space-y-4">
+              {CERTS.map((c) => (
+                <li key={c.t} className="flex gap-3">
+                  <span className="mt-1.5 h-2 w-2 rounded-full flex-shrink-0 bg-[#F5379B]" aria-hidden="true" />
+                  <div>
+                    <p className="text-sm font-semibold leading-snug">{c.t}</p>
+                    <p className="text-xs text-[#A29CB4] mt-0.5">{c.s}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+          {/* Recognition */}
+          <div className="col-span-12 md:col-span-4 dark-card rounded-3xl p-7">
+            <p className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-5"><Award size={14} /> recognition</p>
+            <ul className="space-y-4">
+              {AWARDS.map((a) => (
+                <li key={a.t}>
+                  <p className="text-sm font-semibold">{a.t}</p>
+                  <p className="text-xs text-[#A29CB4] mt-0.5">{a.s}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+          {/* Education */}
+          <div className="col-span-12 md:col-span-4 dark-card rounded-3xl p-7">
+            <p className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-5"><GraduationCap size={14} /> education</p>
+            <p className="text-sm font-semibold">B.Sc. Multimedia</p>
+            <p className="text-xs text-[#A29CB4] mt-0.5">Vishwakarma Creative-i College, Pune · 2008–2011</p>
+          </div>
+        </Grid>
         </Container>
       </section>
 
@@ -289,7 +379,7 @@ export default function About() {
             </div>
             {/* LinkedIn */}
             <a href={PROFILE.social.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white/25 text-white font-semibold text-sm hover:bg-white/10 transition-colors">
-              LinkedIn profile <ArrowUpRight size={16} />
+              <Linkedin size={16} /> LinkedIn profile
             </a>
           </div>
         </div>

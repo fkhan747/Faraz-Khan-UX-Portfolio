@@ -1,5 +1,5 @@
 import "@/App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import Landing from "./pages/Landing";
 import About from "./pages/About";
@@ -9,7 +9,8 @@ import Projects from "./pages/Projects";
 // and the nav item in components/Sidebar.jsx.
 // import Services from "./pages/Services";
 import Contact from "./pages/Contact";
-import Resume from "./pages/Resume";
+// Resume page merged into About ("This is Me"). /resume redirects to /about below.
+// Resume.jsx is kept on disk (unused) in case the standalone CV page is ever restored.
 import CaseStudy from "./pages/CaseStudy";
 import FinvistaCaseStudy from "./pages/FinvistaCaseStudy";
 import AuroraCaseStudy from "./pages/AuroraCaseStudy";
@@ -28,7 +29,7 @@ function App() {
             <Route path="/about" element={<About />} />
             {/* <Route path="/services" element={<Services />} /> */}
             <Route path="/contact" element={<Contact />} />
-            <Route path="/resume" element={<Resume />} />
+            <Route path="/resume" element={<Navigate to="/about" replace />} />
             <Route path="/case/finvista" element={<FinvistaCaseStudy />} />
             <Route path="/case/aurora" element={<AuroraCaseStudy />} />
             <Route path="/case/recruitos" element={<RecruitosConcept />} />

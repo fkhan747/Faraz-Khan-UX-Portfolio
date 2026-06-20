@@ -9,10 +9,9 @@ import BookCallButton from "./BookCallButton";
  * Page content scrolls underneath (a full-width page-bg scrim masks the top).
  */
 const NAV = [
-  { to: "/projects", label: "Projects" },
-  { to: "/about", label: "About" },
-  { to: "/contact", label: "Contact" },
-  { to: "/resume", label: "My Profile" },
+  { to: "/about", label: "This is Me" },
+  { to: "/projects", label: "My Work" },
+  { to: "/contact", label: "Get in Touch" },
 ];
 
 const navItem = ({ isActive }) =>

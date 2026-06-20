@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { ArrowUpRight, CheckCircle2, ChevronDown } from "lucide-react";
+import { Send, CheckCircle2, ChevronDown } from "lucide-react";
 
 /**
  * Inquiry form for the Contact page. Submissions are captured by Netlify Forms:
@@ -256,7 +256,7 @@ export default function ContactForm() {
           className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-10 py-4 rounded-full bg-[#F5379B] text-white font-semibold text-sm hover:bg-[#D81F7E] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
         >
           {status === "submitting" ? "Sending…" : "Send message"}
-          {status !== "submitting" && <ArrowUpRight size={16} />}
+          {status !== "submitting" && <Send size={16} />}
         </button>
       </div>
     </form>

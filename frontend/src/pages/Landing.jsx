@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Star, Quote } from "lucide-react";
+import { ArrowRight, Mail, Briefcase, User, Star, Quote } from "lucide-react";
 import { PROFILE, projects, testimonials } from "../data/content";
 import { Container, Grid } from "../components/Grid";
 import CaseCover from "../components/CaseCover";
 
 export default function Landing() {
-  const featured = projects[0];
-  const others = projects.slice(1);
+  // The two fully-built case studies (FinVista, Aurora) are featured on the home
+  // page, stacked one below the other. The full list lives on the "My Work" page.
+  const featured = projects.filter((p) => p.detail).slice(0, 2);
 
   return (
     <div data-testid="landing-page">
@@ -31,16 +32,16 @@ export default function Landing() {
                   data-testid="hero-cta"
                   className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-[#075EFD] text-white text-base font-semibold capitalize hover:bg-[#2E78FF] transition-colors"
                 >
-                  see my work
-                  <ArrowUpRight size={18} />
+                  <Briefcase size={18} />
+                  see what i do
                 </Link>
                 <Link
                   to="/about"
                   data-testid="hero-about-link"
-                  className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-[#F5379B] text-white text-base font-semibold capitalize hover:bg-[#D81F7E] transition-colors"
+                  className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white/40 text-white text-base font-semibold capitalize hover:bg-white hover:text-[#100210] transition-colors"
                 >
-                  about me
-                  <ArrowUpRight size={18} />
+                  <User size={18} />
+                  know me
                 </Link>
               </div>
             </div>
@@ -60,68 +61,40 @@ export default function Landing() {
               </div>
             </div>
           </div>
-
-          {/* Status row */}
-          <Grid className="mt-14 md:mt-20 rise rise-4" data-testid="hero-stats">
-            {[
-              { v: "12+", l: "years shipping" },
-              { v: "500+", l: "projects delivered" },
-              { v: "15+", l: "teams mentored" },
-              { v: "5", l: "industry verticals" },
-            ].map((s) => (
-              <div key={s.l} className="col-span-6 md:col-span-3 dark-card rounded-2xl p-6">
-                <div className="num text-4xl md:text-5xl font-black">{s.v}</div>
-                <div className="mt-2 text-xs font-mono uppercase tracking-widest text-[#A29CB4]">{s.l}</div>
-              </div>
-            ))}
-          </Grid>
         </Container>
       </section>
 
-      {/* FEATURED PROJECT */}
+      {/* FEATURED CASE STUDIES — two full case studies with the manifesto between them */}
       <section className="pb-16" data-testid="featured-project">
         <Container>
         <div className="flex items-baseline justify-between mb-6">
-          <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B]">featured project · 2024</span>
-          <Link to={`/case/${featured.slug}`} className="hidden md:inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4 decoration-[#075EFD]">
-            Full Case Study <ArrowUpRight size={16} />
+          <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B]">featured case studies</span>
+          <Link to="/projects" data-testid="all-projects-link" className="hidden md:inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4 decoration-[#075EFD]">
+            All Work <ArrowRight size={16} />
           </Link>
         </div>
-        <Link to={`/case/${featured.slug}`} data-testid="featured-link" className="block group rounded-3xl overflow-hidden lift">
-          <CaseCover img={featured.coverImg} title={featured.title} subtitle={featured.subtitle} year={featured.year} size="lg" />
-        </Link>
-        </Container>
-      </section>
 
-      {/* MANIFESTO */}
-      <section className="py-20 md:py-28 border-t border-white/10" data-testid="manifesto">
-        <Container>
+        {/* First featured case study */}
+        {featured[0] && (
+          <Link to={`/case/${featured[0].slug}`} data-testid={`featured-link-${featured[0].slug}`} className="block group rounded-3xl overflow-hidden lift">
+            <CaseCover img={featured[0].coverImg} title={featured[0].title} subtitle={featured[0].subtitle} year={featured[0].year} size="lg" />
+          </Link>
+        )}
+
+        {/* MANIFESTO — sits between the two featured case studies */}
+        <div className="py-16 md:py-24" data-testid="manifesto">
           <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-6">what i believe</p>
           <h2 className="font-display text-4xl md:text-5xl lg:text-[3.3rem] font-black leading-[1.4] max-w-none">
             I believe the best design <span className="italic font-light">disappears</span>. That <span className="bg-[#F5379B] text-white px-3 rounded-full">clarity</span> beats decoration, that the strongest calls follow <span className="underline decoration-[#075EFD] decoration-4 underline-offset-4">facts, not feelings</span> — and that putting people first is what&apos;s best for the business, too.
           </h2>
-        </Container>
-      </section>
-
-      {/* OTHER CASE STUDIES */}
-      <section className="py-16 border-t border-white/10" data-testid="projects-grid">
-        <Container>
-        <div className="flex items-baseline justify-between mb-10">
-          <h2 className="font-display text-3xl md:text-4xl font-black">case studies</h2>
-          <Link to="/projects" data-testid="all-projects-link" className="text-sm font-semibold underline underline-offset-4 decoration-[#075EFD]">View All →</Link>
         </div>
-        <Grid>
-          {others.map((p, i) => (
-            <Link
-              key={p.slug}
-              to={`/case/${p.slug}`}
-              data-testid={`project-card-${p.slug}`}
-              className={`col-span-12 md:col-span-4 group block rounded-3xl overflow-hidden lift rise rise-${(i % 5) + 1}`}
-            >
-              <CaseCover img={p.coverImg} title={p.title} subtitle={p.subtitle} comingSoon={p.comingSoon} />
-            </Link>
-          ))}
-        </Grid>
+
+        {/* Second featured case study */}
+        {featured[1] && (
+          <Link to={`/case/${featured[1].slug}`} data-testid={`featured-link-${featured[1].slug}`} className="block group rounded-3xl overflow-hidden lift">
+            <CaseCover img={featured[1].coverImg} title={featured[1].title} subtitle={featured[1].subtitle} year={featured[1].year} size="lg" />
+          </Link>
+        )}
         </Container>
       </section>
 
@@ -189,7 +162,7 @@ export default function Landing() {
           </p>
           <div className="relative mt-10 flex gap-4 flex-wrap">
             <a href={`mailto:${PROFILE.email}`} data-testid="cta-email" className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-[#F5379B] text-white font-semibold text-sm hover:bg-[#D81F7E] transition-colors">
-              Start A Project <ArrowUpRight size={16} />
+              <Mail size={16} /> Start A Project
             </a>
             <Link to="/contact" data-testid="cta-contact" className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white/30 text-white font-semibold text-sm hover:bg-white/10 transition-colors">
               Other Ways To Reach Me
@@ -205,7 +178,7 @@ export default function Landing() {
           <div className="flex items-center gap-3 flex-wrap">
             <a href={PROFILE.social.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-full border border-[#0A66C2] text-[#0A66C2] px-4 py-2 hover:bg-[#0A66C2] hover:text-white transition-colors">LinkedIn</a>
             <a href={`mailto:${PROFILE.email}`} className="inline-flex items-center rounded-full border border-[#075EFD] text-[#075EFD] px-4 py-2 hover:bg-[#075EFD] hover:text-white transition-colors">Email</a>
-            <Link to="/resume" className="inline-flex items-center rounded-full border border-[#F5379B] text-[#F5379B] px-4 py-2 hover:bg-[#F5379B] hover:text-white transition-colors">Resume</Link>
+            <a href="/files/Faraz_Khan_Resume.pdf" download="Faraz_Khan_Resume.pdf" className="inline-flex items-center rounded-full border border-[#F5379B] text-[#F5379B] px-4 py-2 hover:bg-[#F5379B] hover:text-white transition-colors">Resume</a>
           </div>
         </Container>
       </footer>

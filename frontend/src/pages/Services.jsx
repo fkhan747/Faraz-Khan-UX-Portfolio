@@ -1,5 +1,5 @@
 import { services, PROFILE } from "../data/content";
-import { ArrowUpRight } from "lucide-react";
+import { Calendar } from "lucide-react";
 import { Container, Grid } from "../components/Grid";
 
 const PROCESS = [
@@ -91,7 +91,7 @@ export default function Services() {
             two slots <span className="italic font-light text-white">open</span> for q1.
           </h2>
           <a href={`mailto:${PROFILE.email}`} data-testid="services-cta" className="relative mt-8 inline-flex items-center gap-2 px-7 py-4 rounded-full bg-[#F5379B] text-white font-semibold text-sm hover:bg-[#D81F7E] transition-colors">
-            book a 30-min call <ArrowUpRight size={16} />
+            <Calendar size={16} /> book a 30-min call
           </a>
         </div>
         </Container>
