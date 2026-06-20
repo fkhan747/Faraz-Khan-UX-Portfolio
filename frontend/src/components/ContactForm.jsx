@@ -46,7 +46,7 @@ export default function ContactForm() {
     if (!form.full_name.trim()) next.full_name = "Please enter your name.";
     if (!form.email.trim()) next.email = "I’ll need an email to reply.";
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim()))
-      next.email = "That email doesn’t look right — e.g. name@company.com.";
+      next.email = "That email doesn’t look right. Try name@company.com.";
     if (!form.inquiry_type) next.inquiry_type = "Pick the closest option.";
     if (form.message.trim().length < 10) next.message = "A sentence or two about what you have in mind.";
     return next;
@@ -86,7 +86,7 @@ export default function ContactForm() {
         </span>
         <h3 className="font-display text-2xl md:text-3xl font-black mb-2">Message sent.</h3>
         <p className="text-[#A29CB4] max-w-xs">
-          Thanks for reaching out — I reply within 24 hours on weekdays.
+          Thanks for reaching out. I reply within 24 hours on weekdays.
         </p>
         <button
           type="button"
@@ -221,7 +221,7 @@ export default function ContactForm() {
         </div>
       </div>
 
-      {/* Message — full width below the 2-column grid */}
+      {/* Message - full width below the 2-column grid */}
       <div className="mt-5">
         <label htmlFor="cf-message" className="block text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-1.5">
           Message <span className="text-[#F5379B]">*</span>
@@ -233,7 +233,7 @@ export default function ContactForm() {
           value={form.message}
           onChange={update}
           required
-          placeholder="A few lines about the role or project, links, timeline — whatever helps."
+          placeholder="A few lines about the role or project. Links and timeline help too."
           aria-required="true"
           aria-invalid={!!errors.message}
           aria-describedby={errors.message ? "cf-message-err" : undefined}

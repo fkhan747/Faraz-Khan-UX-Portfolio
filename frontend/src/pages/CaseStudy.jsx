@@ -28,19 +28,19 @@ export default function ComingSoonCase() {
       </section>
 
       <section className="px-6 md:px-10 lg:px-16">
-        <div className="rounded-3xl bg-[#F5379B] p-10 md:p-16">
-          <div className="flex items-center gap-3 mb-6">
+        <div className="rounded-3xl bg-white border-2 border-[#F5379B] p-10 md:p-16">
+          <div className="flex items-center gap-3 mb-6 text-[#F5379B]">
             <Clock size={20} />
             <span className="font-mono text-xs uppercase tracking-[0.25em]">coming soon</span>
           </div>
-          <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-3xl">
+          <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-3xl text-[#F5379B]">
             I&apos;m polishing this one in the studio.
           </h2>
-          <p className="mt-6 text-base md:text-lg leading-relaxed max-w-2xl">
-            The case study is being written and screens prepared. Drop me a line if you&apos;d like an early walkthrough — happy to share over a 30-min call.
+          <p className="mt-6 text-base md:text-lg leading-relaxed max-w-2xl text-black">
+            The case study is being written and the screens prepared. Want an early walkthrough? Drop me a line and I&apos;ll share it over a 30-min call.
           </p>
           <a
-            href={`mailto:${PROFILE.email}?subject=Walkthrough%20request%20—%20${encodeURIComponent(project ? project.title : "case study")}`}
+            href={`mailto:${PROFILE.email}?subject=Walkthrough%20request%20-%20${encodeURIComponent(project ? project.title : "case study")}`}
             data-testid="early-walkthrough-cta"
             className="mt-10 inline-flex items-center gap-2 px-7 py-4 rounded-full dark-card text-white font-semibold text-sm hover:bg-[#241B33] transition-colors"
           >

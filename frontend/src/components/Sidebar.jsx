@@ -7,7 +7,7 @@ import BookCallButton from "./BookCallButton";
 const NAV = [
   { to: "/projects", label: "projects", shortcut: "01" },
   { to: "/about", label: "about", shortcut: "02" },
-  // Services hidden for now — restore this item (and the route in App.js) to unhide.
+  // Services hidden for now - restore this item (and the route in App.js) to unhide.
   // { to: "/services", label: "services", shortcut: "03" },
   { to: "/contact", label: "contact", shortcut: "03" },
 ];

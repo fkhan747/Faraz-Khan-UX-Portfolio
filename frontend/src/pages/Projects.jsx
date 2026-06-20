@@ -9,17 +9,17 @@ export default function Projects() {
     <div data-testid="projects-page">
       <section className="pt-12 pb-10">
         <Container>
-        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-6">selected work · 2023 — 2025</p>
+        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-6">selected work</p>
         <h1 className="font-display font-black leading-[0.95] text-[14vw] md:text-[8vw] lg:text-[7rem] tracking-tighter ">
           c<span className="dot-o">a</span>se studies.
         </h1>
         <p className="mt-6 max-w-2xl text-lg md:text-xl text-[#F4F3FA]">
-          Selected client work alongside a self-initiated track of AI-native product concepts — full case studies and a few being prepared, available for an early walkthrough on request.
+          Client work plus a self-initiated track of AI-native product concepts. Some are full case studies; a few are still being prepared, and I'm happy to walk you through those early on request.
         </p>
         </Container>
       </section>
 
-      {/* Client work — equal 2-column grid */}
+      {/* Client work - equal 2-column grid */}
       <section className="pb-24" data-testid="client-work-section">
         <Container>
         <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-6">client work</p>
@@ -38,7 +38,7 @@ export default function Projects() {
         </Container>
       </section>
 
-      {/* AI-native concepts — section title treated like the rest; dark cards in one row */}
+      {/* AI-native concepts - section title treated like the rest; dark cards in one row */}
       <section className="pb-24" data-testid="concepts-section">
         <Container>
         <p className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-6">
@@ -48,7 +48,7 @@ export default function Projects() {
           what these products look like, AI-first.
         </h2>
         <p className="max-w-2xl text-lg md:text-xl text-[#F4F3FA] mb-12">
-          A separate track from my client work — products I designed end-to-end to explore what an
+          A separate track from my client work. These are products I designed end-to-end to find out what an
           AI-native version of a workflow actually feels like to use.
         </p>
 

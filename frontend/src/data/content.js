@@ -6,7 +6,7 @@ export const PROFILE = {
   status: "available for new opportunities",
   email: "Abdulfarazkhan@outlook.com",
   phone: "+91 - 7795661693",
-  bookingUrl: "https://cal.com/khanfaraz/30min?theme=dark", // Direct to the 30-min event (skips the picker) + dark theme. Handle is "khanfaraz" (changed from fkhan747). Other events: /interview and /15min — swap the slug here to change which one the button opens.
+  bookingUrl: "https://cal.com/khanfaraz/30min?theme=dark", // Direct to the 30-min event (skips the picker) + dark theme. Handle is "khanfaraz" (changed from fkhan747). Other events: /interview and /15min - swap the slug here to change which one the button opens.
   city: "Pune, Maharashtra · India",
   currentCompany: "Persistent Systems Limited",
   currentSince: "Feb 2023",
@@ -29,7 +29,7 @@ export const projects = [
     services: "UX, Design Systems, Research",
     year: "2024",
     cover: F("003-final-mobile-screens-welcome-applications-personal-details.png"),
-    coverImg: "https://images.unsplash.com/photo-1554260570-9140fd3b7614?w=1200&q=80&auto=format&fit=crop",
+    coverImg: "https://images.unsplash.com/photo-1638722026478-f2ed724d70e7?w=1200&q=80&auto=format&fit=crop",
     color: "#FFE3B3",
     tag: "case study",
     summary:
@@ -45,11 +45,11 @@ export const projects = [
     services: "Product Design, Design System, Research",
     year: "2024",
     cover: "/aurora/04_RBJ_Properties_Weekly.jpg",
-    coverImg: "https://images.unsplash.com/photo-1640340434855-6084b1f4901c?w=1200&q=80&auto=format&fit=crop",
+    coverImg: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80&auto=format&fit=crop",
     color: "#E8F2F0",
     tag: "case study",
     summary:
-      "Led the redesign of the Recurring Batch Journey configurator and embedded the Helio AI composer — cutting clicks for campaign setup 3:1 and shipping a 52-component design system.",
+      "Led the redesign of the Recurring Batch Journey configurator and embedded the Helio AI composer. Cut clicks for campaign setup 3:1 and shipped a 52-component design system.",
     detail: true,
   },
   {
@@ -65,7 +65,7 @@ export const projects = [
     coverImg: "https://images.unsplash.com/photo-1639322537228-f710d846310a?w=1200&q=80&auto=format&fit=crop",
     color: "#C9DDEB",
     tag: "coming soon",
-    summary: "Case study coming soon — stay tuned.",
+    summary: "Case study coming soon. Stay tuned.",
     detail: false,
     comingSoon: true,
   },
@@ -82,18 +82,18 @@ export const projects = [
     coverImg: "https://images.pexels.com/photos/35052818/pexels-photo-35052818.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200",
     color: "#F7D6A3",
     tag: "coming soon",
-    summary: "Case study coming soon — stay tuned.",
+    summary: "Case study coming soon. Stay tuned.",
     detail: false,
     comingSoon: true,
   },
 ];
 
-// AI-native concepts — self-initiated, separate from client work.
+// AI-native concepts - self-initiated, separate from client work.
 export const concepts = [
   {
     slug: "recruitos",
-    title: "Recruit-OS",
-    subtitle: "An AI Recruitment OS for Staffing Agencies",
+    title: "Slate",
+    subtitle: "AI recruiting workspace for staffing agencies",
     kind: "AI-native concept",
     role: "Sr. UX Lead · self-initiated",
     year: "2026",
@@ -107,8 +107,8 @@ export const concepts = [
   },
   {
     slug: "knowledgeos",
-    title: "Knowledge-OS",
-    subtitle: "An Enterprise AI Knowledge OS",
+    title: "Almanac",
+    subtitle: "Enterprise AI your team can actually ask",
     kind: "AI-native concept",
     role: "Sr. UX Lead · self-initiated",
     year: "2026",
@@ -116,13 +116,13 @@ export const concepts = [
     coverImg: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&q=80&auto=format&fit=crop",
     status: "case study",
     summary:
-      "Turning institutional memory into something teams can actually ask — not just search through.",
+      "Turning institutional memory into something teams can actually ask, not just search through.",
     href: "/case/knowledgeos",
     live: true,
   },
   {
     slug: "decisionos",
-    title: "Decision-OS",
+    title: "Crux",
     subtitle: "AI Executive Decision Intelligence",
     kind: "AI-native concept",
     role: "Sr. UX Lead · self-initiated",
@@ -138,9 +138,9 @@ export const concepts = [
 ];
 
 export const services = [
-  { title: "product design", desc: "End-to-end design from research to ship — websites, mobile, dashboards." },
+  { title: "product design", desc: "End-to-end design from research to ship. Websites, mobile, and dashboards." },
   { title: "design systems", desc: "Scalable, token-driven systems your engineers will actually want to use." },
-  { title: "ux research", desc: "Interviews, usability tests, surveys — the messy work that makes the rest easy." },
+  { title: "ux research", desc: "Interviews, usability tests, and surveys. The messy work that makes the rest easy." },
   { title: "brand & visual", desc: "Identities and visual languages that don't blur into the rest of the category." },
 ];
 
@@ -149,7 +149,7 @@ export const testimonials = [
     name: "anya kapoor",
     role: "product lead, finvista",
     photo: "https://i.pravatar.cc/120?img=47",
-    quote: "Faraz turned a paper-heavy loan process into something my team — and our customers — genuinely enjoy using. The design system is still our source of truth two years later.",
+    quote: "Faraz turned a paper-heavy loan process into something my team, and our customers, genuinely enjoy using. The design system is still our source of truth two years later.",
   },
   {
     name: "marcus weber",
@@ -166,9 +166,9 @@ export const testimonials = [
 ];
 
 export const journey = [
-  { year: "2015", text: "First freelance gig — a coffee shop website, paid in croissants." },
+  { year: "2015", text: "First freelance gig. A coffee shop website, paid in croissants." },
   { year: "2018", text: "Joined a Berlin fintech as their 4th hire. Learned to love spreadsheets." },
   { year: "2020", text: "Led design at a Series A health-tech through lockdown. Shipped 14 releases in 9 months." },
   { year: "2022", text: "Went solo. Started taking on 3 clients a year, no more, no less." },
-  { year: "2024", text: "Led UX of FinVista's lending platform — 6 products, 100+ components, one design system." },
+  { year: "2024", text: "Led UX of FinVista's lending platform: 6 products, 100+ components, one design system." },
 ];

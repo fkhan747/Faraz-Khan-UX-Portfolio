@@ -18,13 +18,13 @@ export default function Landing() {
             {/* Copy */}
             <div className="lg:col-span-8">
               <p className="font-mono text-xs md:text-sm uppercase tracking-[0.25em] text-[#F5379B] font-medium mb-5 rise rise-1" data-testid="hero-designation">
-                Senior UX Lead — design · data · development
+                Senior UX Lead · design · data · development
               </p>
               <h1 className="font-display font-black leading-[1.03] text-4xl sm:text-5xl lg:text-[3.6rem] xl:text-[4rem] tracking-tight rise rise-2" data-testid="hero-headline">
-                I am <span className="italic font-light">Faraz</span> — I make complex products feel <span className="italic font-light">effortless</span>.
+                I am <span className="italic font-light">Faraz</span>. I make complex products feel <span className="italic font-light">effortless</span>.
               </h1>
               <p className="mt-6 max-w-xl text-base md:text-lg text-[#A29CB4] leading-relaxed rise rise-3" data-testid="hero-sub">
-                A senior UX lead with 12+ years bridging design, data &amp; development — turning enterprise dashboards, design systems and AI-native ideas into experiences people actually understand.
+                A senior UX lead with 12+ years bridging design, data &amp; development. I turn enterprise dashboards, design systems and AI-native ideas into experiences people actually understand.
               </p>
               <div className="mt-9 flex items-center gap-4 flex-wrap rise rise-3">
                 <Link
@@ -46,7 +46,7 @@ export default function Landing() {
               </div>
             </div>
 
-            {/* Photo — dark "sand" portrait that fades into the page (aligns with the copy column) */}
+            {/* Photo - dark "sand" portrait that fades into the page (aligns with the copy column) */}
             <div className="lg:col-span-4 relative rise rise-3 min-h-[300px] lg:min-h-0" data-testid="hero-photo-wrap">
               <div className="relative h-full w-full min-h-[300px] overflow-hidden rounded-2xl lg:rounded-tl-none lg:rounded-br-none lg:rounded-bl-none lg:rounded-tr-[3.5rem]">
                 <img
@@ -64,7 +64,7 @@ export default function Landing() {
         </Container>
       </section>
 
-      {/* FEATURED CASE STUDIES — two full case studies with the manifesto between them */}
+      {/* FEATURED CASE STUDIES - two full case studies with the manifesto between them */}
       <section className="pb-16" data-testid="featured-project">
         <Container>
         <div className="flex items-baseline justify-between mb-6">
@@ -81,11 +81,11 @@ export default function Landing() {
           </Link>
         )}
 
-        {/* MANIFESTO — sits between the two featured case studies */}
+        {/* MANIFESTO - sits between the two featured case studies */}
         <div className="py-16 md:py-24" data-testid="manifesto">
           <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-6">what i believe</p>
           <h2 className="font-display text-4xl md:text-5xl lg:text-[3.3rem] font-black leading-[1.4] max-w-none">
-            I believe the best design <span className="italic font-light">disappears</span>. That <span className="bg-[#F5379B] text-white px-3 rounded-full">clarity</span> beats decoration, that the strongest calls follow <span className="underline decoration-[#075EFD] decoration-4 underline-offset-4">facts, not feelings</span> — and that putting people first is what&apos;s best for the business, too.
+            I believe the best design <span className="italic font-light">disappears</span>. That <span className="bg-[#F5379B] text-white px-3 rounded-full">clarity</span> beats decoration. That the strongest calls follow <span className="underline decoration-[#075EFD] decoration-4 underline-offset-4">facts, not feelings</span>. And that putting people first is what&apos;s best for the business, too.
           </h2>
         </div>
 
@@ -141,7 +141,7 @@ export default function Landing() {
             ))}
           </div>
           <span className="font-display text-xl font-bold">4.9 / 5</span>
-          <span className="text-sm text-[#A29CB4]">— across 30+ engagements since 2015</span>
+          <span className="text-sm text-[#A29CB4]">across 30+ engagements since 2015</span>
         </div>
         </Container>
       </section>

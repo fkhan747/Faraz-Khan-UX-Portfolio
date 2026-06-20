@@ -11,8 +11,8 @@ const PROCESS = [
 
 const PACKAGES = [
   { name: "sprint", duration: "2 weeks", desc: "A focused engagement: audit, redesign one flow, ship.", price: "from €8k" },
-  { name: "project", duration: "6—12 weeks", desc: "End-to-end product or feature design, including research.", price: "from €28k" },
-  { name: "embedded", duration: "3—6 months", desc: "I join your team part-time. Best for design-led founding teams.", price: "monthly retainer" },
+  { name: "project", duration: "6 - 12 weeks", desc: "End-to-end product or feature design, research included.", price: "from €28k" },
+  { name: "embedded", duration: "3 - 6 months", desc: "I join your team part-time. Best for design-led founding teams.", price: "monthly retainer" },
 ];
 
 export default function Services() {

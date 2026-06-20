@@ -53,7 +53,7 @@ export default function AuroraCaseStudy() {
       {/* Hero image */}
       <div className="px-6 md:px-10 lg:px-16">
         <div className="rounded-3xl overflow-hidden dark-card p-6 md:p-10" data-testid="case-hero-image">
-          <img src="/aurora/04_RBJ_Properties_Weekly.jpg" alt="Aurora hero — Recurring Batch Journey, Weekly cadence" className="w-full h-auto object-contain rounded-xl" loading="lazy" />
+          <img src="/aurora/04_RBJ_Properties_Weekly.jpg" alt="Aurora hero: Recurring Batch Journey, Weekly cadence" className="w-full h-auto object-contain rounded-xl" loading="lazy" />
         </div>
       </div>
 
@@ -92,9 +92,9 @@ export default function AuroraCaseStudy() {
           <div className="lg:col-span-7 space-y-5 text-lg leading-relaxed text-[#F4F3FA]">
             <p>{au.overview.intro}</p>
             <p>{au.overview.intro2}</p>
-            <div className="mt-6 rounded-3xl bg-[#F5379B] p-7">
-              <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3">{au.overview.contextTitle}</p>
-              <p className="font-display text-lg md:text-xl font-bold leading-snug">{au.overview.contextBody}</p>
+            <div className="mt-6 rounded-3xl bg-white border-2 border-[#F5379B] p-7">
+              <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3 text-[#F5379B]">{au.overview.contextTitle}</p>
+              <p className="font-display text-lg md:text-xl font-bold leading-snug text-black">{au.overview.contextBody}</p>
             </div>
           </div>
           <div className="lg:col-span-5 space-y-3">
@@ -113,9 +113,9 @@ export default function AuroraCaseStudy() {
         <SectionLabel num="02" name="The Problem" />
         <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-6xl mb-10">{au.problem.headline}</h2>
 
-        <blockquote className="rounded-3xl bg-[#075EFD] text-white p-8 md:p-10 max-w-6xl">
-          <p className="font-display text-xl md:text-3xl italic leading-snug">&ldquo;{au.problem.quote}&rdquo;</p>
-          <footer className="mt-4 text-xs font-mono uppercase tracking-widest text-white">{au.problem.quoteAttribution}</footer>
+        <blockquote className="rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10 max-w-6xl">
+          <p className="font-display text-xl md:text-3xl italic leading-snug text-black">&ldquo;{au.problem.quote}&rdquo;</p>
+          <footer className="mt-4 text-xs font-mono uppercase tracking-widest text-[#F5379B]">{au.problem.quoteAttribution}</footer>
         </blockquote>
 
         <div className="mt-12 grid md:grid-cols-2 gap-5">
@@ -193,9 +193,9 @@ export default function AuroraCaseStudy() {
           </div>
         </div>
 
-        <div className="mt-10 rounded-3xl bg-[#F5379B] p-8 md:p-10">
-          <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3">★ key insight</p>
-          <p className="font-display text-xl md:text-2xl font-bold leading-snug max-w-6xl">{au.problem.keyInsight}</p>
+        <div className="mt-10 rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
+          <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3 text-[#F5379B]">★ key insight</p>
+          <p className="font-display text-xl md:text-2xl font-bold leading-snug max-w-6xl text-black">{au.problem.keyInsight}</p>
         </div>
       </SectionWrap>
 
@@ -302,10 +302,10 @@ export default function AuroraCaseStudy() {
         <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-8">design goals</h3>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {au.insights.designGoals.map((g, i) => (
-            <div key={g.t} className={`rounded-3xl p-6 ${i % 2 === 0 ? "dark-card" : "bg-[#F5379B]"}`}>
+            <div key={g.t} className={`rounded-3xl p-6 ${i % 2 === 0 ? "dark-card" : "bg-white border-2 border-[#F5379B]"}`}>
               <div className="font-mono text-[10px] uppercase tracking-widest text-[#A29CB4]">0{i + 1}</div>
-              <h4 className="mt-2 font-display text-lg font-black ">{g.t}</h4>
-              <p className="mt-2 text-sm leading-relaxed">{g.d}</p>
+              <h4 className={`mt-2 font-display text-lg font-black ${i % 2 === 0 ? "" : "text-[#F5379B]"}`}>{g.t}</h4>
+              <p className={`mt-2 text-sm leading-relaxed ${i % 2 === 0 ? "" : "text-black"}`}>{g.d}</p>
             </div>
           ))}
         </div>
@@ -438,13 +438,13 @@ export default function AuroraCaseStudy() {
           ))}
         </div>
 
-        <div className="mt-12 rounded-3xl bg-[#075EFD] text-white p-8 md:p-10">
-          <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-white mb-3">system outcomes</p>
-          <p className="font-display text-xl md:text-2xl leading-snug max-w-6xl">{au.designSystem.systemOutcomes}</p>
+        <div className="mt-12 rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
+          <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-3">system outcomes</p>
+          <p className="font-display text-xl md:text-2xl leading-snug max-w-6xl text-black">{au.designSystem.systemOutcomes}</p>
         </div>
-        <div className="mt-6 rounded-3xl bg-[#F5379B] p-8 md:p-10">
-          <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3">cross-product collaboration</p>
-          <p className="font-display text-lg md:text-xl font-bold leading-snug max-w-6xl">{au.designSystem.crossProduct}</p>
+        <div className="mt-6 rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
+          <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3 text-[#F5379B]">cross-product collaboration</p>
+          <p className="font-display text-lg md:text-xl font-bold leading-snug max-w-6xl text-black">{au.designSystem.crossProduct}</p>
         </div>
       </SectionWrap>
 
@@ -501,10 +501,10 @@ export default function AuroraCaseStudy() {
         </div>
 
         <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">sales talking points</h3>
-        <div className="rounded-3xl bg-[#F5379B] p-8 md:p-10">
+        <div className="rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
           <ul className="space-y-3">
             {au.impact.salesTalkingPoints.map((p) => (
-              <li key={p} className="flex items-start gap-3 text-base md:text-lg"><span className="text-[#075EFD] font-bold mt-1">•</span>{p}</li>
+              <li key={p} className="flex items-start gap-3 text-base md:text-lg text-black"><span className="text-[#075EFD] font-bold mt-1">•</span>{p}</li>
             ))}
           </ul>
         </div>

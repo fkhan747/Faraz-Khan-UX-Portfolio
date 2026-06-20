@@ -7,14 +7,14 @@ import { concepts, PROFILE } from "../data/content";
 
 /**
  * Shared renderer for the AI-native OS-family concept case studies
- * (KnowledgeOS, DecisionOS — and any future ones). RecruitOS keeps its own
+ * (KnowledgeOS, DecisionOS - and any future ones). RecruitOS keeps its own
  * page because it embeds a live interactive prototype; these render hi-fi
  * concept screens instead.
  *
  * Props:
- *   data   — the case object (knowledgeos / decisionos), same shape as recruitosCase
- *   accent — the product's AI gradient (CSS string), e.g. "linear-gradient(...)"
- *   wordmark — JSX for the title with the dot-o span
+ *   data   - the case object (knowledgeos / decisionos), same shape as recruitosCase
+ *   accent - the product's AI gradient (CSS string), e.g. "linear-gradient(...)"
+ *   wordmark - JSX for the title with the dot-o span
  */
 
 const SectionLabel = ({ num, name }) => (
@@ -68,7 +68,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
           // VIEWPORT height (a spec special-case), so they floor-clamp to the
           // iframe's current height and trap auto-sizing in a feedback loop.
           // body.* and html.offsetHeight are the real content box and can shrink
-          // below the current iframe height — use those instead.
+          // below the current iframe height - use those instead.
           const h = Math.max(
             body?.scrollHeight || 0,
             body?.offsetHeight || 0,
@@ -76,7 +76,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
           );
           if (h > 0 && iframe.style.height !== h + "px") iframe.style.height = h + "px";
         } catch (e) {
-          /* cross-origin or not ready — leave the fallback height in place */
+          /* cross-origin or not ready - leave the fallback height in place */
         }
       });
     };
@@ -91,7 +91,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
           if (doc.body) observer.observe(doc.body);
         }
       } catch (e) {
-        /* ignore — keep fallback height */
+        /* ignore - keep fallback height */
       }
     };
 
@@ -181,9 +181,9 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
           <div className="lg:col-span-7 space-y-5 text-lg leading-relaxed text-[#F4F3FA]">
             <p>{r.overview.intro}</p>
             <p>{r.overview.intro2}</p>
-            <div className="mt-6 rounded-3xl bg-[#F5379B] p-7">
-              <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3">{r.overview.contextTitle}</p>
-              <p className="font-display text-lg md:text-xl font-bold leading-snug">{r.overview.contextBody}</p>
+            <div className="mt-6 rounded-3xl bg-white border-2 border-[#F5379B] p-7">
+              <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3 text-[#F5379B]">{r.overview.contextTitle}</p>
+              <p className="font-display text-lg md:text-xl font-bold leading-snug text-black">{r.overview.contextBody}</p>
             </div>
           </div>
           <div className="lg:col-span-5 space-y-3">
@@ -310,9 +310,9 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
           ))}
         </div>
 
-        <div className="mt-12 rounded-3xl bg-[#F5379B] p-8 md:p-10">
-          <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3">★ key insight</p>
-          <p className="font-display text-xl md:text-2xl font-bold leading-snug max-w-6xl">{r.research1.keyInsight}</p>
+        <div className="mt-12 rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
+          <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3 text-[#F5379B]">★ key insight</p>
+          <p className="font-display text-xl md:text-2xl font-bold leading-snug max-w-6xl text-black">{r.research1.keyInsight}</p>
         </div>
       </SectionWrap>
 
@@ -332,8 +332,8 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
               </div>
             ))}
           </div>
-          <div className="mt-6 rounded-3xl bg-[#075EFD] text-white p-7 text-center">
-            <p className="font-display text-lg md:text-xl font-bold leading-snug max-w-5xl mx-auto">{r.research2.ecoGap}</p>
+          <div className="mt-6 rounded-3xl bg-white border-2 border-[#F5379B] p-7 text-center">
+            <p className="font-display text-lg md:text-xl font-bold leading-snug max-w-5xl mx-auto text-black">{r.research2.ecoGap}</p>
           </div>
         </div>
 
@@ -383,9 +383,9 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
         <SectionLabel num="04" name="The Hypothesis" />
         <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-6xl mb-6">{r.hypothesis.headline}</h2>
 
-        <div className="rounded-3xl bg-[#F5379B] p-8 md:p-10 mb-10">
-          <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3">{r.hypothesis.positioningTitle}</p>
-          <p className="font-display text-xl md:text-2xl font-bold leading-snug max-w-6xl">{r.hypothesis.positioning}</p>
+        <div className="rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10 mb-10">
+          <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3 text-[#F5379B]">{r.hypothesis.positioningTitle}</p>
+          <p className="font-display text-xl md:text-2xl font-bold leading-snug max-w-6xl text-black">{r.hypothesis.positioning}</p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-5">
@@ -429,10 +429,10 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
         <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{r.hypothesis.principlesIntro}</p>
         <div className="grid md:grid-cols-2 gap-5">
           {r.hypothesis.principles.map((p, idx) => (
-            <div key={p.t} className={`rounded-3xl p-7 ${idx % 2 === 0 ? "dark-card" : "bg-[#F5379B]"}`}>
+            <div key={p.t} className={`rounded-3xl p-7 ${idx % 2 === 0 ? "dark-card" : "bg-white border-2 border-[#F5379B]"}`}>
               <div className="font-mono text-[10px] uppercase tracking-widest text-[#A29CB4]">principle 0{idx + 1}</div>
-              <h4 className="mt-2 font-display text-xl font-black ">{p.t}</h4>
-              <p className="mt-2 text-base leading-relaxed">{p.d}</p>
+              <h4 className={`mt-2 font-display text-xl font-black ${idx % 2 === 0 ? "" : "text-[#F5379B]"}`}>{p.t}</h4>
+              <p className={`mt-2 text-base leading-relaxed ${idx % 2 === 0 ? "" : "text-black"}`}>{p.d}</p>
               <p className="mt-4 text-xs font-mono uppercase tracking-widest text-[#F5379B]">{p.from}</p>
             </div>
           ))}
@@ -523,7 +523,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full dark-card text-white font-semibold text-sm hover:bg-[#241B33] transition-colors">
                 View Prototype In Browser <Maximize2 size={14} />
               </a>
-              <span className="text-xs font-mono uppercase tracking-widest text-[#A29CB4]">click anything — it answers from your sources, cites every claim, and flags what's stale</span>
+              <span className="text-xs font-mono uppercase tracking-widest text-[#A29CB4]">click anything. it answers from your sources, cites every claim, and flags what's stale</span>
             </div>
             <div className="rounded-3xl overflow-hidden border border-[#2C2542] bg-[#DDE3EC] shadow-[0_30px_70px_rgba(20,30,60,0.18)]">
               <iframe
@@ -599,7 +599,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
 
         <div className="mt-10 rounded-3xl overflow-hidden">
           <div className="h-28 md:h-36 flex items-center justify-center" style={{ background: r.designSystem.aiGradient }}>
-            <span className="font-display text-2xl md:text-3xl font-black text-white flex items-center gap-3"><Sparkles size={26} /> the AI gradient &mdash; reserved for AI only</span>
+            <span className="font-display text-2xl md:text-3xl font-black text-white flex items-center gap-3"><Sparkles size={26} /> the AI gradient. reserved for AI only</span>
           </div>
         </div>
 
@@ -655,7 +655,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
         </div>
 
         <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">component library</h3>
-        <p className="text-base leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">A Material-grade component set extended with the AI-specific pieces that make the product trustworthy &mdash; the patterns that carry the confidence-and-provenance language across the OS family.</p>
+        <p className="text-base leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">A Material-grade component set, extended with the AI-specific pieces that make the product trustworthy. These are the patterns that carry the confidence-and-provenance language across the OS family.</p>
         <div className="flex flex-wrap gap-2">
           {r.designSystem.componentCategories.map((c) => (
             <span key={c} className="px-4 py-2 rounded-full dark-card text-sm font-medium hover:bg-[#D81F7E] transition-colors cursor-default">{c}</span>
@@ -666,9 +666,9 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
           <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-white mb-3">system outcomes</p>
           <p className="font-display text-xl md:text-2xl leading-snug max-w-6xl">{r.designSystem.systemOutcomes}</p>
         </div>
-        <div className="mt-6 rounded-3xl bg-[#F5379B] p-8 md:p-10">
-          <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3">a shared OS-family base</p>
-          <p className="font-display text-lg md:text-xl font-bold leading-snug max-w-6xl">{r.designSystem.crossProduct}</p>
+        <div className="mt-6 rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
+          <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3 text-[#F5379B]">a shared OS-family base</p>
+          <p className="font-display text-lg md:text-xl font-bold leading-snug max-w-6xl text-black">{r.designSystem.crossProduct}</p>
         </div>
       </SectionWrap>
 
@@ -681,9 +681,9 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
             <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-10">{r.whereItStands.intro}</p>
 
             <h3 className="font-display text-2xl md:text-3xl font-black mb-6">{r.whereItStands.doneTitle}</h3>
-            <div className="rounded-3xl bg-[#F5379B] p-8 md:p-10 mb-12">
+            <div className="rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10 mb-12">
               <ul className="space-y-3">
-                {r.whereItStands.done.map((x) => (<li key={x} className="flex items-start gap-3 text-base md:text-lg"><Check className="flex-shrink-0 mt-1 text-[#F4F3FA]" size={18} /><span>{x}</span></li>))}
+                {r.whereItStands.done.map((x) => (<li key={x} className="flex items-start gap-3 text-base md:text-lg text-black"><Check className="flex-shrink-0 mt-1 text-[#F5379B]" size={18} /><span>{x}</span></li>))}
               </ul>
             </div>
 
@@ -762,9 +762,9 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
               ))}
             </div>
 
-            <div className="rounded-3xl bg-[#F5379B] p-8 md:p-10">
-              <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F4F3FA]/60 mb-3">{r.futureVision.closingTitle}</p>
-              <p className="font-display text-lg md:text-xl font-bold leading-snug">{r.futureVision.closing}</p>
+            <div className="rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
+              <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-3">{r.futureVision.closingTitle}</p>
+              <p className="font-display text-lg md:text-xl font-bold leading-snug text-black">{r.futureVision.closing}</p>
             </div>
           </>
         ) : (
@@ -804,10 +804,10 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
             </div>
 
             <h3 className="font-display text-2xl md:text-3xl font-black mb-6">where it goes next</h3>
-            <div className="rounded-3xl bg-[#F5379B] p-8 md:p-10 mb-16">
+            <div className="rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10 mb-16">
               <ul className="space-y-3">
                 {r.impact.next.map((p) => (
-                  <li key={p} className="flex items-start gap-3 text-base md:text-lg"><span className="text-[#075EFD] font-bold mt-1">&rarr;</span>{p}</li>
+                  <li key={p} className="flex items-start gap-3 text-base md:text-lg text-black"><span className="text-[#075EFD] font-bold mt-1">&rarr;</span>{p}</li>
                 ))}
               </ul>
             </div>
@@ -861,7 +861,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
       {/* ============ FOOTER ============ */}
       <SectionWrap className="text-center">
         <h2 className="font-display text-3xl md:text-5xl font-black mb-6">thank you for reading.</h2>
-        <p className="text-lg text-[#A29CB4] mb-8">{r.title} is a self-initiated concept. If you&apos;d like to talk through the process &mdash; or where it goes next &mdash; I&apos;d love to connect.</p>
+        <p className="text-lg text-[#A29CB4] mb-8">{r.title} is a self-initiated concept. If you&apos;d like to talk through the process, or where it goes next, I&apos;d love to connect.</p>
         <div className="flex gap-4 justify-center flex-wrap">
           <a href={`mailto:${PROFILE.email}`} data-testid="case-cta-email" className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-[#F5379B] text-[#F4F3FA] font-semibold text-sm hover:bg-[#D81F7E] transition-colors"><Mail size={16} /> email me</a>
           <Link to="/projects" className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white/15 text-[#F4F3FA] font-semibold text-sm hover:bg-[#261E3A] transition-colors">View All projects</Link>

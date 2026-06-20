@@ -1,7 +1,7 @@
 import { cn } from "../lib/utils";
 
 /**
- * 12-column layout primitives — the single source of truth for horizontal
+ * 12-column layout primitives - the single source of truth for horizontal
  * alignment across the site.
  *
  * Container: consistent outer margins (matches the site's px-6/md:10/lg:16

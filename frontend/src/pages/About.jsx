@@ -25,11 +25,11 @@ const COMPETENCIES = [
   { icon: Lightbulb, t: "User Experience Strategy & Leadership", d: "Setting UX vision, OKRs, and design culture across multi-product orgs." },
   { icon: Users, t: "Design Thinking & Human-Centered Innovation", d: "Workshops, divergent exploration, and decision frameworks that ship." },
   { icon: Search, t: "User Research & Behavioral Insights", d: "Qualitative interviews, diary studies, usability testing, and synthesis." },
-  { icon: Palette, t: "Advanced UI/UX & Visual Design", d: "From systems thinking to pixel-level craft on Figma — across web and mobile." },
+  { icon: Palette, t: "Advanced UI/UX & Visual Design", d: "Systems thinking down to pixel-level craft in Figma, across web and mobile." },
   { icon: LineChart, t: "Data-Driven Dashboard Design", d: "Translating BI data (Power BI, Tableau, MicroStrategy) into clear, actionable UIs." },
-  { icon: GitBranch, t: "Agile Collaboration & DesignOps", d: "Tight loops with PMs, engineers and QA — Jira-native, sprint-ready handoffs." },
+  { icon: GitBranch, t: "Agile Collaboration & DesignOps", d: "Tight loops with PMs, engineers and QA. Jira-native, sprint-ready handoffs." },
   { icon: Globe, t: "Global & Multicultural UX Expertise", d: "12+ years across BFSI, edtech, enterprise and consumer tech, multiple geographies." },
-  { icon: Repeat, t: "Continuous Improvement & UX Optimization", d: "Post-launch loops — heuristic audits, A/B testing, accessibility, and visual QA." },
+  { icon: Repeat, t: "Continuous Improvement & UX Optimization", d: "Post-launch loops: heuristic audits, A/B testing, accessibility, and visual QA." },
 ];
 
 const TOOLS = {
@@ -55,10 +55,10 @@ const EXPERIENCE = [
   {
     role: "Senior UX Lead",
     org: "Persistent Systems",
-    time: "Feb 2023 — Present",
+    time: "Feb 2023 - Present",
     place: "Pune, India",
     points: [
-      "Lead UX for enterprise platforms end-to-end — wireframes to high-fidelity Figma prototypes — with a focus on seamless navigation and measurable engagement.",
+      "Lead UX for enterprise platforms end-to-end, from wireframes to high-fidelity Figma prototypes. The focus is clean navigation and engagement we can actually measure.",
       "Build and maintain scalable design systems that stay consistent across web, mobile and enterprise environments.",
       "Embed UX inside Agile delivery (JIRA, Confluence), keeping product, engineering and business aligned every sprint.",
     ],
@@ -66,7 +66,7 @@ const EXPERIENCE = [
   {
     role: "Sr. Data Visualization & UX/UI Designer",
     org: "Infocepts Data & AI",
-    time: "Dec 2017 — Dec 2022",
+    time: "Dec 2017 - Dec 2022",
     place: "Nagpur, India",
     points: [
       "Designed dynamic, actionable dashboards that turned complex datasets into confident, data-driven decisions for global clients.",
@@ -77,17 +77,17 @@ const EXPERIENCE = [
   {
     role: "Senior UI/UX Designer",
     org: "MobiSir Technologies",
-    time: "Jan 2017 — Dec 2017",
+    time: "Jan 2017 - Dec 2017",
     place: "Bengaluru, India",
     points: [
-      "Designed end-to-end digital ecosystems across web, mobile and social — sitemaps, flows, wireframes and interactive mockups.",
+      "Designed end-to-end digital ecosystems across web, mobile and social: sitemaps, flows, wireframes and interactive mockups.",
       "Applied heuristic evaluation, personas and usability testing to sharpen task flows across platforms.",
     ],
   },
   {
     role: "Senior Visualizer",
     org: "Circuit 9 Communications",
-    time: "Apr 2016 — Dec 2016",
+    time: "Apr 2016 - Dec 2016",
     place: "Bengaluru, India",
     points: [
       "Crafted multi-platform brand and campaign assets with consistency and impact across digital and print.",
@@ -96,17 +96,17 @@ const EXPERIENCE = [
 ];
 
 const EARLIER =
-  "Earlier — Sr. UX/UI Designer at Jack of All Threads, and Graphic Designer at Jainawin Retails & Prime Advertising (2011–2016).";
+  "Before that, I was Sr. UX/UI Designer at Jack of All Threads, and Graphic Designer at Jainawin Retails & Prime Advertising (2011 - 2016).";
 
 const CERTS = [
-  { t: "Advanced Certificate — UI/UX with Agentic AI & Gen-AI", s: "IIT Madras · pursuing" },
+  { t: "Advanced Certificate in UI/UX with Agentic AI & Gen-AI", s: "IIT Madras · pursuing" },
   { t: "AI for Designers", s: "Interaction Design Foundation" },
   { t: "Journey Mapping", s: "Interaction Design Foundation" },
 ];
 
 const AWARDS = [
-  { t: "Bravo Individual Award", s: "Persistent — impact built on facts, not feelings." },
-  { t: "Humanity Mindset Winner", s: "Persistent — empathetic, inclusive, people-first design." },
+  { t: "Bravo Individual Award", s: "Persistent. Impact built on facts, not feelings." },
+  { t: "Humanity Mindset Winner", s: "Persistent. For empathetic, people-first design." },
 ];
 
 export default function About() {
@@ -126,7 +126,7 @@ export default function About() {
           int<span className="dot-o">o</span>&nbsp;<span className="italic font-light">complex</span>&nbsp;systems.
         </h1>
         <p className="mt-8 max-w-5xl text-lg md:text-xl leading-relaxed text-[#F4F3FA]">
-          User Experience Lead with <strong>12+ years</strong> across BFSI, enterprise software, and consumer tech — translating research into interfaces that ship and scale.
+          User Experience Lead with <strong>12+ years</strong> across BFSI, enterprise software, and consumer tech. I turn research into interfaces that ship and scale.
         </p>
         <div className="mt-8 flex gap-4 flex-wrap">
           <a
@@ -157,9 +157,9 @@ export default function About() {
       {/* PROFILE + STATS */}
       <section className="pb-16" data-testid="about-profile">
         <Container>
-        {/* Profile card — photo (home-hero treatment) + identity + bio, all in one container */}
+        {/* Profile card - photo (home-hero treatment) + identity + bio, all in one container */}
         <div className="dark-card rounded-3xl overflow-hidden flex flex-col sm:flex-row" data-testid="about-profile-card">
-          {/* Photo strip — fades into the card: downward on mobile, rightward on desktop */}
+          {/* Photo strip - fades into the card: downward on mobile, rightward on desktop */}
           <div className="relative w-full h-56 sm:h-auto sm:w-52 md:w-64 flex-shrink-0 overflow-hidden">
             <img
               src="/images/faraz.jpg"
@@ -185,10 +185,10 @@ export default function About() {
               </div>
               <div className="mt-6 space-y-4 text-base md:text-lg leading-relaxed text-white/95">
                 <p>
-                  Hey there! I&apos;m a UX Lead with <strong>12+ years</strong> of hands-on design experience across India&apos;s buzzing tech hubs — Pune, Nagpur, and Bengaluru. Whether it&apos;s building enterprise dashboards or crafting sleek, story-driven visuals, I&apos;ve always aimed to blend creative flair with smart functionality.
+                  Hey there! I&apos;m a UX Lead with <strong>12+ years</strong> of hands-on design experience across India&apos;s buzzing tech hubs: Pune, Nagpur, and Bengaluru. Whether I&apos;m building enterprise dashboards or crafting story-driven visuals, I aim to pair creative flair with smart functionality.
                 </p>
                 <p>
-                  I&apos;ve worked with both startups and global giants — leading UX/UI projects that put users first while staying aligned with business goals. Always up for a new challenge, I&apos;m now looking to bring my passion for human-centered design to opportunities in the Middle East or back in India.
+                  I&apos;ve worked with both startups and global giants, leading UX/UI projects that put users first while staying aligned with business goals. I&apos;m now looking to bring my passion for human-centered design to opportunities in the Middle East or back in India.
                 </p>
               </div>
             </div>
@@ -212,10 +212,10 @@ export default function About() {
         </Container>
       </section>
 
-      {/* 01 — CORE COMPETENCIES */}
+      {/* 01 - CORE COMPETENCIES */}
       <section className="py-20 border-t border-white/10" data-testid="about-competencies">
         <Container>
-        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">01 — what i do</p>
+        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">01 / what i do</p>
         <h2 className="font-display text-4xl md:text-5xl font-black mb-10 max-w-5xl">core <span className="italic font-light">competencies.</span></h2>
         <Grid>
           {COMPETENCIES.map((c, i) => (
@@ -229,10 +229,10 @@ export default function About() {
         </Container>
       </section>
 
-      {/* 02 — TOOLKIT */}
+      {/* 02 - TOOLKIT */}
       <section className="py-20 border-t border-white/10" data-testid="about-tools">
         <Container>
-        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">02 — toolkit</p>
+        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">02 / toolkit</p>
         <h2 className="font-display text-4xl md:text-5xl font-black mb-10 max-w-5xl">tools & <span className="italic font-light">skills.</span></h2>
 
         <Grid>
@@ -279,10 +279,10 @@ export default function About() {
         </Container>
       </section>
 
-      {/* 03 — EXPERIENCE (merged from résumé) */}
+      {/* 03 - EXPERIENCE (merged from résumé) */}
       <section className="py-20 border-t border-white/10" data-testid="about-experience">
         <Container>
-        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">03 — experience</p>
+        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">03 / experience</p>
         <h2 className="font-display text-4xl md:text-5xl font-black mb-10 max-w-5xl">where i&apos;ve <span className="italic font-light">worked.</span></h2>
         <ol className="relative border-l border-white/10 pl-7 space-y-9 max-w-4xl">
           {EXPERIENCE.map((e) => (
@@ -308,10 +308,10 @@ export default function About() {
         </Container>
       </section>
 
-      {/* 04 — CREDENTIALS (merged from résumé) */}
+      {/* 04 - CREDENTIALS (merged from résumé) */}
       <section className="py-20 border-t border-white/10" data-testid="about-credentials">
         <Container>
-        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">04 — credentials</p>
+        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">04 / credentials</p>
         <h2 className="font-display text-4xl md:text-5xl font-black mb-10 max-w-5xl">certs, awards &amp; <span className="italic font-light">education.</span></h2>
         <Grid>
           {/* Certifications */}
@@ -345,7 +345,7 @@ export default function About() {
           <div className="col-span-12 md:col-span-4 dark-card rounded-3xl p-7">
             <p className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-5"><GraduationCap size={14} /> education</p>
             <p className="text-sm font-semibold">B.Sc. Multimedia</p>
-            <p className="text-xs text-[#A29CB4] mt-0.5">Vishwakarma Creative-i College, Pune · 2008–2011</p>
+            <p className="text-xs text-[#A29CB4] mt-0.5">Vishwakarma Creative-i College, Pune · 2008 - 2011</p>
           </div>
         </Grid>
         </Container>
@@ -363,14 +363,14 @@ export default function About() {
             Open to UX Lead and Senior Product Design roles across the Middle East and India.
           </p>
           <div className="relative mt-8 flex gap-3 flex-wrap">
-            {/* Email — with copy icon */}
+            {/* Email - with copy icon */}
             <div className="inline-flex items-center rounded-full bg-[#F5379B] text-white pr-1.5">
               <a href={`mailto:${PROFILE.email}`} data-testid="about-final-cta" className="inline-flex items-center gap-2 pl-7 pr-3 py-4 font-semibold text-sm break-all hover:opacity-80 transition-opacity">
                 {PROFILE.email}
               </a>
               <CopyButton value={PROFILE.email} label="email" size={15} className="h-9 w-9 hover:bg-black/10" />
             </div>
-            {/* Phone — added after email, with copy icon */}
+            {/* Phone - added after email, with copy icon */}
             <div className="inline-flex items-center rounded-full border border-white/25 text-white pr-1.5">
               <a href={telHref} data-testid="about-phone" className="inline-flex items-center gap-2 pl-7 pr-3 py-4 font-semibold text-sm hover:text-white transition-colors">
                 {PROFILE.phone}

@@ -11,7 +11,7 @@ const telHref = "tel:" + PROFILE.phone.replace(/[^+\d]/g, "");
 export default function Contact() {
   return (
     <div data-testid="contact-page">
-      {/* Hero — heading left, action buttons (outline only) top-right */}
+      {/* Hero - heading left, action buttons (outline only) top-right */}
       <section className="pt-12 pb-10">
         <Container>
         <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-6">get in touch</p>
@@ -27,7 +27,7 @@ export default function Contact() {
       {/* Get-in-touch */}
       <section className="pb-16" data-testid="get-in-touch">
         <Container>
-        {/* Availability banner — thin, full-width, with the actions on the right */}
+        {/* Availability banner - thin, full-width, with the actions on the right */}
         <div className="rounded-3xl dark-card text-white px-6 py-5 md:px-8 md:py-6 relative overflow-hidden flex flex-col md:flex-row md:items-center md:justify-between gap-5" data-testid="available-card">
           <div className="pointer-events-none absolute -bottom-20 -right-10 w-72 h-72 rounded-full bg-[#F5379B] blur-3xl opacity-25" />
           <p className="relative text-base md:text-lg font-bold leading-tight">Open to full-time &amp; remote opportunities.</p>
@@ -49,7 +49,7 @@ export default function Contact() {
           </div>
         </div>
 
-        {/* Contact cards — one row */}
+        {/* Contact cards - one row */}
         <div className="flex flex-col sm:flex-row sm:flex-wrap gap-4 mt-6">
           {/* Email */}
           <div className="flex items-center gap-3 rounded-2xl dark-card p-4 flex-auto" data-testid="contact-email">
@@ -94,7 +94,7 @@ export default function Contact() {
           </a>
         </div>
 
-        {/* Row 2 — send-a-message form (horizontal, full width) */}
+        {/* Row 2 - send-a-message form (horizontal, full width) */}
         <div className="mt-6 lg:mt-8">
           <ContactForm />
         </div>
@@ -108,8 +108,8 @@ export default function Contact() {
         <h2 className="font-display text-4xl md:text-5xl font-black mb-10">a few <span className="italic font-light">questions.</span></h2>
         <div className="space-y-4">
           {[
-            { q: "do you do logos / brand identity?", a: "Sometimes. If it's tied to a product engagement, yes. Standalone — rarely." },
-            { q: "are you taking on full-time roles?", a: "Yes — open to full-time and remote roles, plus embedded retainers up to 3 days/week." },
+            { q: "do you do logos / brand identity?", a: "Sometimes. If it's tied to a product engagement, yes. Standalone work, rarely." },
+            { q: "are you taking on full-time roles?", a: "Yes. I'm open to full-time and remote roles, plus embedded retainers up to 3 days/week." },
             { q: "do you sign NDAs?", a: "Happy to. Send yours over and I'll have it back within 24 hours." },
             { q: "what's your rate?", a: "Project-based, not hourly. Most engagements land between €8k and €60k." },
           ].map((f, i) => (
@@ -128,7 +128,7 @@ export default function Contact() {
       <footer className="py-10 border-t border-white/10">
         <Container className="flex items-center justify-between text-xs font-mono uppercase tracking-widest text-[#A29CB4] flex-wrap gap-4">
           <span>©2025 {PROFILE.name}</span>
-          <span>made with care — not with templates</span>
+          <span>made with care, not with templates</span>
         </Container>
       </footer>
     </div>

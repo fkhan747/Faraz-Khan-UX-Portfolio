@@ -67,7 +67,7 @@ export default function FinvistaCaseStudy() {
         <div className="rounded-3xl overflow-hidden dark-card p-6 md:p-10" data-testid="case-hero-image">
           <img
             src="/finvista/004-final-mobile-screens-vehicle-details-progress.png"
-            alt="FinVista hero — refined screens"
+            alt="FinVista hero, refined screens"
             className="w-full h-auto object-contain"
             loading="lazy"
           />
@@ -123,15 +123,15 @@ export default function FinvistaCaseStudy() {
           {fv.overview.productLandscape.products.map((p, i) => (
             <div
               key={p.name}
-              className={`rounded-3xl p-6 ${i === 0 ? "bg-[#075EFD] text-white" : "dark-card text-[#F4F3FA]"}`}
+              className={`rounded-3xl p-6 ${i === 0 ? "bg-white border-2 border-[#F5379B]" : "dark-card text-[#F4F3FA]"}`}
             >
               {p.badge && (
                 <span className="inline-block mb-3 text-[10px] font-mono uppercase tracking-widest bg-[#F5379B] text-black px-3 py-1 rounded-full">
                   {p.badge}
                 </span>
               )}
-              <h4 className="font-display text-xl font-black mb-3 ">{p.name}</h4>
-              <p className={`text-sm leading-relaxed ${i === 0 ? "text-white/90" : ""}`}>{p.desc}</p>
+              <h4 className={`font-display text-xl font-black mb-3 ${i === 0 ? "text-[#F5379B]" : ""}`}>{p.name}</h4>
+              <p className={`text-sm leading-relaxed ${i === 0 ? "text-black" : ""}`}>{p.desc}</p>
             </div>
           ))}
         </div>
@@ -145,9 +145,9 @@ export default function FinvistaCaseStudy() {
         </h2>
         <p className="text-lg md:text-xl leading-relaxed max-w-6xl text-[#F4F3FA]">{fv.problem.intro}</p>
 
-        <div className="mt-10 rounded-3xl bg-[#F5379B] p-8 md:p-10">
-          <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3">core challenge</p>
-          <p className="font-display text-xl md:text-2xl font-bold leading-snug max-w-6xl">
+        <div className="mt-10 rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
+          <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3 text-[#F5379B]">core challenge</p>
+          <p className="font-display text-xl md:text-2xl font-bold leading-snug max-w-6xl text-black">
             {fv.problem.coreChallenge}
           </p>
         </div>
@@ -240,7 +240,7 @@ export default function FinvistaCaseStudy() {
               {fv.research.findingsTable.rows.map((row, i) => (
                 <tr key={i} className="border-b border-white/5">
                   {row.map((cell, j) => (
-                    <td key={j} className={`p-4 ${j === 0 ? "font-medium" : "text-center font-display font-bold text-lg"} ${cell === "✓" ? "text-[#F5379B]" : cell === "—" ? "text-[#A29CB4]" : ""}`}>
+                    <td key={j} className={`p-4 ${j === 0 ? "font-medium" : "text-center font-display font-bold text-lg"} ${cell === "✓" ? "text-[#F5379B]" : cell === "–" ? "text-[#A29CB4]" : ""}`}>
                       {cell}
                     </td>
                   ))}
@@ -400,7 +400,7 @@ export default function FinvistaCaseStudy() {
         </div>
 
         {/* Final 17 screens */}
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">final design — two-wheeler journey</h3>
+        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">final design: the two-wheeler journey</h3>
         <p className="text-base leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{fv.design.finalDesign.intro}</p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {fv.design.finalDesign.screens.map((s) => (
@@ -420,9 +420,9 @@ export default function FinvistaCaseStudy() {
         <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-8">key design decisions</h3>
         <div className="grid md:grid-cols-2 gap-5">
           {fv.design.keyDecisions.map((k, i) => (
-            <div key={k.t} className={`rounded-3xl p-7 ${i % 2 === 0 ? "dark-card" : "bg-[#F5379B]"}`}>
-              <h4 className="font-display text-xl font-black mb-3">{k.t}</h4>
-              <p className="text-base leading-relaxed">{k.d}</p>
+            <div key={k.t} className={`rounded-3xl p-7 ${i % 2 === 0 ? "dark-card" : "bg-white border-2 border-[#F5379B]"}`}>
+              <h4 className={`font-display text-xl font-black mb-3 ${i % 2 === 0 ? "" : "text-[#F5379B]"}`}>{k.t}</h4>
+              <p className={`text-base leading-relaxed ${i % 2 === 0 ? "" : "text-black"}`}>{k.d}</p>
             </div>
           ))}
         </div>
@@ -449,9 +449,9 @@ export default function FinvistaCaseStudy() {
           ))}
         </div>
 
-        <div className="mt-10 rounded-3xl bg-[#075EFD] text-white p-8 md:p-10">
-          <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-white mb-3">system impact</p>
-          <p className="font-display text-xl md:text-2xl leading-snug max-w-6xl">{fv.designSystem.systemImpact}</p>
+        <div className="mt-10 rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
+          <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-3">system impact</p>
+          <p className="font-display text-xl md:text-2xl leading-snug max-w-6xl text-black">{fv.designSystem.systemImpact}</p>
         </div>
       </SectionWrap>
 

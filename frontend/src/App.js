@@ -4,7 +4,7 @@ import Layout from "./components/Layout";
 import Landing from "./pages/Landing";
 import About from "./pages/About";
 import Projects from "./pages/Projects";
-// Services page hidden for now — keep the import + route commented so it can be
+// Services page hidden for now - keep the import + route commented so it can be
 // restored later without rebuilding the page. To unhide: uncomment both lines
 // and the nav item in components/Sidebar.jsx.
 // import Services from "./pages/Services";

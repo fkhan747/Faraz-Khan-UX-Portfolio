@@ -40,7 +40,6 @@ export default function CaseCover({ img, title, subtitle, year, comingSoon = fal
         <div className="min-w-0">
           <div className="flex items-baseline gap-3 mb-1 flex-wrap">
             <h3 className={`font-display ${titleSize} font-black text-white leading-none`}>{title}</h3>
-            {year && <span className="text-[10px] font-mono uppercase tracking-widest text-white/55">{year}</span>}
           </div>
           {subtitle && <p className="text-sm md:text-base text-white/75 max-w-xl">{subtitle}</p>}
         </div>

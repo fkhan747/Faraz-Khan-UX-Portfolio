@@ -9,10 +9,10 @@ const EXPERIENCE = [
   {
     role: "Senior UX Lead",
     org: "Persistent Systems",
-    time: "Feb 2023 — Present",
+    time: "Feb 2023 - Present",
     place: "Pune, India",
     points: [
-      "Lead UX for enterprise platforms end-to-end — wireframes to high-fidelity Figma prototypes — with a focus on seamless navigation and measurable engagement.",
+      "Lead UX for enterprise platforms end-to-end, from wireframes to high-fidelity Figma prototypes. The focus is on clear navigation and engagement we can measure.",
       "Build and maintain scalable design systems that stay consistent across web, mobile and enterprise environments.",
       "Embed UX inside Agile delivery (JIRA, Confluence), keeping product, engineering and business aligned every sprint.",
     ],
@@ -20,7 +20,7 @@ const EXPERIENCE = [
   {
     role: "Sr. Data Visualization & UX/UI Designer",
     org: "Infocepts Data & AI",
-    time: "Dec 2017 — Dec 2022",
+    time: "Dec 2017 - Dec 2022",
     place: "Nagpur, India",
     points: [
       "Designed dynamic, actionable dashboards that turned complex datasets into confident, data-driven decisions for global clients.",
@@ -31,17 +31,17 @@ const EXPERIENCE = [
   {
     role: "Senior UI/UX Designer",
     org: "MobiSir Technologies",
-    time: "Jan 2017 — Dec 2017",
+    time: "Jan 2017 - Dec 2017",
     place: "Bengaluru, India",
     points: [
-      "Designed end-to-end digital ecosystems across web, mobile and social — sitemaps, flows, wireframes and interactive mockups.",
+      "Designed end-to-end digital products across web, mobile and social: sitemaps, flows, wireframes and interactive mockups.",
       "Applied heuristic evaluation, personas and usability testing to sharpen task flows across platforms.",
     ],
   },
   {
     role: "Senior Visualizer",
     org: "Circuit 9 Communications",
-    time: "Apr 2016 — Dec 2016",
+    time: "Apr 2016 - Dec 2016",
     place: "Bengaluru, India",
     points: [
       "Crafted multi-platform brand and campaign assets with consistency and impact across digital and print.",
@@ -50,7 +50,7 @@ const EXPERIENCE = [
 ];
 
 const EARLIER =
-  "Earlier — Sr. UX/UI Designer at Jack of All Threads, and Graphic Designer at Jainawin Retails & Prime Advertising (2011–2016).";
+  "Earlier roles: Sr. UX/UI Designer at Jack of All Threads, and Graphic Designer at Jainawin Retails & Prime Advertising (2011–2016).";
 
 const COMPETENCIES = [
   "UX Strategy & Leadership",
@@ -67,14 +67,14 @@ const COMPETENCIES = [
 const TOOLS = ["Figma", "Adobe XD", "Illustrator", "Photoshop", "InDesign", "JIRA", "Confluence", "HTML", "CSS"];
 
 const CERTS = [
-  { t: "Advanced Certificate — UI/UX with Agentic AI & Gen-AI", s: "IIT Madras · pursuing", star: true },
+  { t: "Advanced Certificate in UI/UX with Agentic AI & Gen-AI", s: "IIT Madras · pursuing", star: true },
   { t: "AI for Designers", s: "Interaction Design Foundation" },
   { t: "Journey Mapping", s: "Interaction Design Foundation" },
 ];
 
 const AWARDS = [
-  { t: "Bravo Individual Award", s: "Persistent — impact built on facts, not feelings." },
-  { t: "Humanity Mindset Winner", s: "Persistent — empathetic, inclusive, people-first design." },
+  { t: "Bravo Individual Award", s: "Persistent. Impact built on facts, not feelings." },
+  { t: "Humanity Mindset Winner", s: "Persistent. Empathetic, inclusive, people-first design." },
 ];
 
 const telHref = "tel:" + PROFILE.phone.replace(/[^+\d]/g, "");
@@ -104,11 +104,11 @@ export default function Resume() {
                 Faraz Khan
               </h1>
               <p className="mt-3 text-lg md:text-xl font-semibold text-[#F5379B]">
-                Senior UX Lead — Bridging Design, Data &amp; Development
+                Senior UX Lead Bridging Design, Data &amp; Development
               </p>
               <p className="mt-5 max-w-2xl text-base md:text-lg text-[#A29CB4] leading-relaxed">
-                12+ years across enterprise software, data &amp; AI and consumer tech — leading UX from research
-                to shipped product, blending creative craft with data-driven thinking. Now building AI-native
+                12+ years across enterprise software, data &amp; AI and consumer tech. I lead UX from research
+                to shipped product, pairing creative craft with data-driven thinking. Now building AI-native
                 experiences. Open to full-time and remote roles.
               </p>
 
@@ -154,7 +154,7 @@ export default function Resume() {
               </div>
             </div>
 
-            {/* Photo — same treatment as the home hero: fades into the page */}
+            {/* Photo - same treatment as the home hero: fades into the page */}
             <div className="lg:col-span-4 order-1 lg:order-2 relative min-h-[320px]">
               <div className="relative h-full w-full min-h-[320px] overflow-hidden rounded-2xl lg:rounded-tl-none lg:rounded-br-none lg:rounded-bl-none lg:rounded-tr-[3rem]">
                 <img
