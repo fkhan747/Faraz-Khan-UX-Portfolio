@@ -96,3 +96,6 @@ credentials.json
 /concepts-drop-in/
 /recruitos-drop-in/
 /knowledgeos-prototype-dropin/
+
+# Local Netlify folder
+.netlify
