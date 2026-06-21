@@ -447,14 +447,14 @@ export default function About() {
           </p>
           <div className="relative mt-8 flex gap-3 flex-wrap">
             {/* Email - with copy icon */}
-            <div className="inline-flex items-center rounded-full bg-[#F5379B] text-white pr-1.5">
-              <a href={`mailto:${PROFILE.email}`} data-testid="about-final-cta" className="inline-flex items-center gap-2 pl-7 pr-3 py-4 font-semibold text-sm break-all hover:opacity-80 transition-opacity">
+            <div className="inline-flex items-center rounded-full border border-white text-white pr-1.5">
+              <a href={`mailto:${PROFILE.email}`} data-testid="about-final-cta" className="inline-flex items-center gap-2 pl-7 pr-3 py-4 font-semibold text-sm break-all hover:text-white transition-colors">
                 {PROFILE.email}
               </a>
-              <CopyButton value={PROFILE.email} label="email" size={15} className="h-9 w-9 hover:bg-black/10" />
+              <CopyButton value={PROFILE.email} label="email" size={15} className="h-9 w-9 text-white hover:bg-white/10" />
             </div>
             {/* Phone - added after email, with copy icon */}
-            <div className="inline-flex items-center rounded-full border border-white/25 text-white pr-1.5">
+            <div className="inline-flex items-center rounded-full border border-white text-white pr-1.5">
               <a href={telHref} data-testid="about-phone" className="inline-flex items-center gap-2 pl-7 pr-3 py-4 font-semibold text-sm hover:text-white transition-colors">
                 {PROFILE.phone}
               </a>
