@@ -29,7 +29,7 @@ export const projects = [
     services: "UX, Design Systems, Research",
     year: "2024",
     cover: F("003-final-mobile-screens-welcome-applications-personal-details.png"),
-    coverImg: "https://images.unsplash.com/photo-1638722026478-f2ed724d70e7?w=1200&q=80&auto=format&fit=crop",
+    coverImg: "/finvista/cover.jpg",
     color: "#FFE3B3",
     tag: "case study",
     summary:

@@ -41,7 +41,7 @@ export default function Chrome() {
                 data-testid="chrome-logo"
                 className="group flex items-center flex-shrink-0 -ml-1 mr-1 md:mr-3 px-3 py-2.5 rounded-full hover:bg-[#1A1326]/[0.06] transition-colors"
               >
-                <Logo className="h-7 w-auto group-hover:scale-105 transition-transform" />
+                <Logo className="h-9 w-auto group-hover:scale-105 transition-transform" />
               </Link>
               {NAV.map((item) => (
                 <NavLink key={item.to} to={item.to} data-testid={`nav-${item.label.toLowerCase()}`} className={navItem}>

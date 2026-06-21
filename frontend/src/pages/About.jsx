@@ -304,14 +304,14 @@ export default function About() {
         <h2 className="font-display text-4xl md:text-5xl font-black mb-10 max-w-5xl">tools & <span className="italic font-light">skills.</span></h2>
 
         <Grid>
-          <div className="col-span-12 md:col-span-6 dark-card rounded-3xl p-7">
+          <div className="col-span-12 md:col-span-4 dark-card rounded-3xl p-7">
             <p className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-4">design tools</p>
             <div className="flex flex-wrap gap-2">
               {TOOLS.design.map((t) => <ToolPill key={t.name} {...t} />)}
             </div>
           </div>
 
-          <div className="col-span-12 md:col-span-6 dark-card rounded-3xl p-7">
+          <div className="col-span-12 md:col-span-4 dark-card rounded-3xl p-7">
             <p className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-2">development</p>
             <p className="text-xs italic text-[#A29CB4] mb-4">Basic understanding & familiarity with front-end technologies</p>
             <div className="flex flex-wrap gap-2">
@@ -319,20 +319,25 @@ export default function About() {
             </div>
           </div>
 
-          <div className="col-span-12 md:col-span-6 dark-card rounded-3xl p-7">
+          <div className="col-span-12 md:col-span-4 dark-card rounded-3xl p-7">
             <p className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-4">collaboration</p>
             <div className="flex flex-wrap gap-2">
               {TOOLS.collaboration.map((t) => <ToolPill key={t.name} {...t} />)}
             </div>
           </div>
+        </Grid>
 
-          <div className="col-span-12 md:col-span-6 dark-card rounded-3xl p-7">
-            <p className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-4">ai tools</p>
+        {/* AI Tools - thin full-width card with the closing-CTA glow treatment */}
+        <div className="mt-6 rounded-3xl dark-card relative overflow-hidden p-7 md:p-8" data-testid="about-ai-tools">
+          <div className="absolute -top-16 -right-10 w-72 h-72 rounded-full bg-[#075EFD] blur-3xl opacity-30 pointer-events-none" aria-hidden="true" />
+          <div className="absolute -bottom-20 -left-10 w-72 h-72 rounded-full bg-[#F5379B] blur-3xl opacity-25 pointer-events-none" aria-hidden="true" />
+          <div className="relative flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
+            <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-white md:w-28 flex-shrink-0">ai tools</p>
             <div className="flex flex-wrap gap-2">
               {TOOLS.ai.map((t) => <ToolPill key={t.name} {...t} />)}
             </div>
           </div>
-        </Grid>
+        </div>
 
         <div className="mt-6 rounded-3xl dark-card p-7" data-testid="about-core-skills">
           <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
