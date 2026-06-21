@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowLeft, Mail, Check, X, Star } from "lucide-react";
 import { finvista as fv } from "../data/finvistaCase";
 import { PROFILE } from "../data/content";
+import Seo from "../components/Seo";
 
 /* -- Reusable section header in portfolio voice -- */
 const SectionLabel = ({ num, name, accent = "#075EFD" }) => (
@@ -32,6 +33,7 @@ export default function FinvistaCaseStudy() {
 
   return (
     <article data-testid="finvista-case-study" className="pb-24">
+      <Seo title={fv.title} description={fv.subtitle} />
       {/* TITLE BLOCK */}
       <header className="px-6 md:px-10 lg:px-16 pt-12 pb-10">
         <Link

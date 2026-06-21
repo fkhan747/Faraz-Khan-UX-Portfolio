@@ -4,6 +4,7 @@ import {
   ArrowLeft, Mail, Check, X, Star, Sparkles, Maximize2, Quote,
 } from "lucide-react";
 import { concepts, PROFILE } from "../data/content";
+import Seo from "../components/Seo";
 
 /**
  * Shared renderer for the AI-native OS-family concept case studies
@@ -111,6 +112,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
 
   return (
     <article data-testid={`${r.slug}-case-study`} className="pb-24">
+      <Seo title={r.title} description={r.subtitle} />
       {/* ============ TITLE BLOCK ============ */}
       <header className="px-6 md:px-10 lg:px-16 pt-12 pb-10">
         <Link

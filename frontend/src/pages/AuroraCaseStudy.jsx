@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowLeft, Mail, Check, X, Star, AlertTriangle } from "lucide-react";
 import { aurora as au } from "../data/auroraCase";
 import { PROFILE } from "../data/content";
+import Seo from "../components/Seo";
 
 const SectionLabel = ({ num, name }) => (
   <div className="flex items-center gap-4 mb-6">
@@ -21,6 +22,7 @@ const SectionWrap = ({ children, className = "", ...rest }) => (
 export default function AuroraCaseStudy() {
   return (
     <article data-testid="aurora-case-study" className="pb-24">
+      <Seo title={au.title} description={au.subtitle} />
       {/* TITLE BLOCK */}
       <header className="px-6 md:px-10 lg:px-16 pt-12 pb-10">
         <Link
