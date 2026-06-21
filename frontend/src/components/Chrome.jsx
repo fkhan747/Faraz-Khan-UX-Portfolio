@@ -32,7 +32,7 @@ export default function Chrome() {
       {/* Sticky top bar, aligned to body-content width, nudged down from the top */}
       <header className="fixed top-0 inset-x-0 z-50 pt-7 pointer-events-none" data-testid="global-header">
         <Container>
-          <div className="pointer-events-auto flex items-center justify-between gap-3 rounded-full bg-white/95 backdrop-blur-md border border-[#075EFD]/15 pl-4 md:pl-5 pr-2 py-2.5 shadow-[0_0_44px_-4px_rgba(7,94,253,0.5)]">
+          <div className="pointer-events-auto flex items-center justify-between gap-3 rounded-full bg-white/95 backdrop-blur-md border border-[#075EFD]/15 pl-4 md:pl-5 pr-5 md:pr-7 py-2.5 shadow-[0_0_44px_-4px_rgba(7,94,253,0.5)]">
             {/* Left: logo + nav links */}
             <div className="flex items-center gap-0.5 md:gap-1 min-w-0 overflow-x-auto no-scrollbar">
               <Link
