@@ -48,7 +48,7 @@ export default function ContactForm() {
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim()))
       next.email = "That email doesn’t look right. Try name@company.com.";
     if (!form.inquiry_type) next.inquiry_type = "Pick the closest option.";
-    if (form.message.trim().length < 10) next.message = "A sentence or two about what you have in mind.";
+    if (!form.company.trim()) next.company = "Let me know who you're with.";
     return next;
   };
 
@@ -203,10 +203,10 @@ export default function ContactForm() {
           {errors.inquiry_type && <p id="cf-inquiry-err" className="mt-1.5 text-xs text-[#F5379B]">{errors.inquiry_type}</p>}
         </div>
 
-        {/* Company (optional) */}
+        {/* Company (required) */}
         <div>
           <label htmlFor="cf-company" className="block text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-1.5">
-            Company or team <span className="text-[#6F6885]">(optional)</span>
+            Company or team <span className="text-[#F5379B]">*</span>
           </label>
           <input
             id="cf-company"
@@ -214,17 +214,22 @@ export default function ContactForm() {
             type="text"
             value={form.company}
             onChange={update}
+            required
             autoComplete="organization"
             placeholder="Acme Inc."
-            className={fieldClass(false)}
+            aria-required="true"
+            aria-invalid={!!errors.company}
+            aria-describedby={errors.company ? "cf-company-err" : undefined}
+            className={fieldClass(errors.company)}
           />
+          {errors.company && <p id="cf-company-err" className="mt-1.5 text-xs text-[#F5379B]">{errors.company}</p>}
         </div>
       </div>
 
       {/* Message - full width below the 2-column grid */}
       <div className="mt-5">
         <label htmlFor="cf-message" className="block text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-1.5">
-          Message <span className="text-[#F5379B]">*</span>
+          Message <span className="text-[#6F6885]">(optional)</span>
         </label>
         <textarea
           id="cf-message"
@@ -232,14 +237,9 @@ export default function ContactForm() {
           rows={5}
           value={form.message}
           onChange={update}
-          required
           placeholder="A few lines about the role or project. Links and timeline help too."
-          aria-required="true"
-          aria-invalid={!!errors.message}
-          aria-describedby={errors.message ? "cf-message-err" : undefined}
-          className={`${fieldClass(errors.message)} resize-y min-h-[120px]`}
+          className={`${fieldClass(false)} resize-y min-h-[120px]`}
         />
-        {errors.message && <p id="cf-message-err" className="mt-1.5 text-xs text-[#F5379B]">{errors.message}</p>}
       </div>
 
       {status === "error" && (
@@ -253,7 +253,7 @@ export default function ContactForm() {
           type="submit"
           disabled={status === "submitting"}
           data-testid="contact-form-submit"
-          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-10 py-4 rounded-full bg-[#F5379B] text-white font-semibold text-sm hover:bg-[#D81F7E] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-10 py-4 rounded-full bg-white text-[#F5379B] border-2 border-[#F5379B] font-semibold text-sm hover:bg-[#F5379B] hover:text-white transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
         >
           {status === "submitting" ? "Sending…" : "Send message"}
           {status !== "submitting" && <Send size={16} />}

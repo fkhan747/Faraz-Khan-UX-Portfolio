@@ -1,6 +1,7 @@
 import "@/App.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
+import ScrollToTop from "./components/ScrollToTop";
 import Landing from "./pages/Landing";
 import About from "./pages/About";
 import Projects from "./pages/Projects";
@@ -22,6 +23,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <ScrollToTop />
         <Layout>
           <Routes>
             <Route path="/" element={<Landing />} />

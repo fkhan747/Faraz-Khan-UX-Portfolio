@@ -100,6 +100,7 @@ export const concepts = [
     accent: "#4285F4",
     coverImg: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1200&q=80&auto=format&fit=crop",
     status: "live prototype",
+    prototypeUrl: "/recruitos/",
     summary:
       "A recruitment workspace where the AI sources, ranks, and drafts outreach while the recruiter stays the decision-maker. Designed end-to-end and built as an interactive prototype.",
     href: "/case/recruitos",
@@ -114,7 +115,8 @@ export const concepts = [
     year: "2026",
     accent: "#0E9CA6",
     coverImg: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&q=80&auto=format&fit=crop",
-    status: "case study",
+    status: "live prototype",
+    prototypeUrl: "/knowledgeos/",
     summary:
       "Turning institutional memory into something teams can actually ask, not just search through.",
     href: "/case/knowledgeos",
@@ -130,6 +132,7 @@ export const concepts = [
     accent: "#E8519B",
     coverImg: "https://images.unsplash.com/photo-1543286386-2e659306cd6c?w=1200&q=80&auto=format&fit=crop",
     status: "case study",
+    prototypeUrl: null,
     summary:
       "Turning scattered signals into a clear, defensible call for the people who have to make it.",
     href: "/case/decisionos",

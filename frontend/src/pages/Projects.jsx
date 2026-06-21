@@ -1,12 +1,14 @@
 import { Link } from "react-router-dom";
-import { Sparkles } from "lucide-react";
+import { Sparkles, ArrowUpRight } from "lucide-react";
 import { projects, concepts } from "../data/content";
 import { Container, Grid } from "../components/Grid";
 import CaseCover from "../components/CaseCover";
+import Seo from "../components/Seo";
 
 export default function Projects() {
   return (
     <div data-testid="projects-page">
+      <Seo title="My Work" description="Selected UX case studies by Faraz Khan: FinVista, Aurora, and self-initiated AI-native product concepts (Slate, Almanac, Crux)." />
       <section className="pt-12 pb-10">
         <Container>
         <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-6">selected work</p>
@@ -53,27 +55,28 @@ export default function Projects() {
         </p>
 
         <Grid>
-          {concepts.map((c, i) => {
-            const card = <CaseCover img={c.coverImg} title={c.title} subtitle={c.subtitle} year={c.year} badge={c.status} />;
-            return c.live ? (
-              <Link
-                key={c.slug}
-                to={c.href}
-                data-testid={`concept-card-${c.slug}`}
-                className={`col-span-12 md:col-span-4 group block rounded-3xl overflow-hidden lift rise rise-${(i % 6) + 1}`}
-              >
-                {card}
+          {concepts.map((c, i) => (
+            <div
+              key={c.slug}
+              data-testid={`concept-card-${c.slug}`}
+              className={`relative col-span-12 md:col-span-4 rise rise-${(i % 6) + 1}`}
+            >
+              <Link to={c.href} className="group block rounded-3xl overflow-hidden lift">
+                <CaseCover img={c.coverImg} title={c.title} subtitle={c.subtitle} badge={c.status} />
               </Link>
-            ) : (
-              <div
-                key={c.slug}
-                data-testid={`concept-card-${c.slug}`}
-                className={`col-span-12 md:col-span-4 rounded-3xl overflow-hidden rise rise-${(i % 6) + 1}`}
-              >
-                {card}
-              </div>
-            );
-          })}
+              {c.prototypeUrl && (
+                <a
+                  href={c.prototypeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-testid={`concept-prototype-${c.slug}`}
+                  className="absolute top-4 right-4 z-10 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white text-[#F5379B] text-[11px] font-bold uppercase tracking-wide shadow-md hover:bg-[#F5379B] hover:text-white transition-colors"
+                >
+                  Jump to Prototype <ArrowUpRight size={13} />
+                </a>
+              )}
+            </div>
+          ))}
         </Grid>
         </Container>
       </section>

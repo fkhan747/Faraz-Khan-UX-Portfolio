@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Mail,
@@ -18,6 +19,7 @@ import {
 import { PROFILE } from "../data/content";
 import { Container, Grid } from "../components/Grid";
 import CopyButton from "../components/CopyButton";
+import Seo from "../components/Seo";
 
 const telHref = "tel:" + PROFILE.phone.replace(/[^+\d]/g, "");
 
@@ -32,17 +34,44 @@ const COMPETENCIES = [
   { icon: Repeat, t: "Continuous Improvement & UX Optimization", d: "Post-launch loops: heuristic audits, A/B testing, accessibility, and visual QA." },
 ];
 
+// Each tool carries a Simple Icons slug for its brand logo (rendered from
+// cdn.simpleicons.org). Any unknown slug falls back to text-only via onError.
 const TOOLS = {
-  design: ["Figma", "Adobe XD", "Illustrator", "Photoshop", "InDesign"],
-  development: ["HTML", "CSS", "JavaScript", "Power BI", "Tableau", "MicroStrategy"],
-  collaboration: ["Jira", "Confluence", "Slack", "Teams"],
+  design: [
+    { name: "Figma Suite", slug: "figma" },
+    { name: "Adobe XD", slug: "adobexd" },
+    { name: "Illustrator", slug: "adobeillustrator" },
+    { name: "InVision", slug: "invision" },
+  ],
+  development: [
+    { name: "HTML", slug: "html5" },
+    { name: "CSS", slug: "css3" },
+    { name: "Power BI", slug: "powerbi" },
+    { name: "Tableau", slug: "tableau" },
+    { name: "MicroStrategy", slug: "microstrategy" },
+  ],
+  collaboration: [
+    { name: "Jira", slug: "jira" },
+    { name: "Confluence", slug: "confluence" },
+    { name: "Slack", slug: "slack" },
+    { name: "Teams", slug: "microsoftteams" },
+    { name: "Miro", slug: "miro" },
+  ],
+  ai: [
+    { name: "VS Code", slug: "visualstudiocode" },
+    { name: "Claude AI", slug: "claude" },
+    { name: "Claude Code", slug: "claude" },
+    { name: "GitHub", slug: "github" },
+    { name: "ChatGPT", slug: "openai" },
+    { name: "Codex", slug: "openai" },
+  ],
 };
 
 const CORE_SKILLS = [
   "Requirement Gathering", "User Research", "Personas & Scenarios", "User Journey Mapping",
   "Information Architecture", "Wireframing & Prototyping", "Design Systems", "UI Design",
   "Visual Design", "Interaction Design", "Responsive Design", "Accessibility (WCAG)",
-  "Usability Testing", "A/B Testing", "Heuristic Evaluation", "Visual QA",
+  "Heuristic Evaluation", "Visual QA",
   "Design Handoff", "Stakeholder Management", "Cross-functional Collaboration", "Agile & Scrum Methodology",
 ];
 
@@ -93,10 +122,37 @@ const EXPERIENCE = [
       "Crafted multi-platform brand and campaign assets with consistency and impact across digital and print.",
     ],
   },
+  {
+    role: "Senior UX / UI Designer",
+    org: "Jack of All Threads",
+    time: "Feb 2015 - Mar 2016",
+    place: "Bengaluru, India",
+    points: [
+      "Ran usability research and shipped user-focused redesigns that lifted website performance and engagement.",
+      "Used data-backed strategies to grow traffic, improve retention, and strengthen the brand online.",
+    ],
+  },
+  {
+    role: "Graphic Designer",
+    org: "Jainawin Retails",
+    time: "Jan 2013 - Dec 2014",
+    place: "Bhopal, India",
+    points: [
+      "Built cohesive brand identities, logos, brand guides, and templates, for a consistent presence across channels.",
+      "Designed digital and print campaigns end to end, from concept through final production.",
+    ],
+  },
+  {
+    role: "Graphic Designer",
+    org: "Prime Advertising",
+    time: "Nov 2011 - Dec 2012",
+    place: "Bhopal, India",
+    points: [
+      "Created print and digital advertising campaigns for local newspapers and businesses.",
+      "Turned client briefs into production-ready brochures, banners, signage, and displays.",
+    ],
+  },
 ];
-
-const EARLIER =
-  "Before that, I was Sr. UX/UI Designer at Jack of All Threads, and Graphic Designer at Jainawin Retails & Prime Advertising (2011 - 2016).";
 
 const CERTS = [
   { t: "Advanced Certificate in UI/UX with Agentic AI & Gen-AI", s: "IIT Madras · pursuing" },
@@ -109,9 +165,33 @@ const AWARDS = [
   { t: "Humanity Mindset Winner", s: "Persistent. For empathetic, people-first design." },
 ];
 
+// A tool pill with its brand logo (white glyph). If the logo fails to load,
+// onError hides the image and the label stands alone.
+function ToolPill({ name, slug }) {
+  return (
+    <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full dark-card text-[#F4F3FA] text-sm font-medium border border-white/10">
+      {slug && (
+        <img
+          src={`https://cdn.simpleicons.org/${slug}/ffffff`}
+          alt=""
+          aria-hidden="true"
+          width="16"
+          height="16"
+          loading="lazy"
+          className="h-4 w-4 object-contain"
+          onError={(e) => { e.currentTarget.style.display = "none"; }}
+        />
+      )}
+      {name}
+    </span>
+  );
+}
+
 export default function About() {
+  const [showAllExp, setShowAllExp] = useState(false);
   return (
     <div data-testid="about-page">
+      <Seo title="This is Me" description="Faraz Khan, Senior UX Lead. 12+ years across BFSI, enterprise software, data and AI, and consumer tech. Design systems, dashboards, and AI-native product concepts." />
       {/* HERO */}
       <section className="pt-12 pb-12" data-testid="about-hero">
         <Container>
@@ -140,13 +220,13 @@ export default function About() {
             href={RESUME_PATH}
             download="Faraz_Khan_Resume.pdf"
             data-testid="about-download-resume"
-            className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white/15 text-[#F4F3FA] font-semibold text-sm capitalize hover:bg-[#261E3A] transition-colors"
+            className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-[#F4F3FA] font-semibold text-sm capitalize hover:bg-[#261E3A] transition-colors"
           >
             <Download size={16} /> download résumé
           </a>
           <Link
             to="/projects"
-            className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white/15 text-[#F4F3FA] font-semibold text-sm capitalize hover:bg-[#261E3A] transition-colors"
+            className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-[#F4F3FA] font-semibold text-sm capitalize hover:bg-[#261E3A] transition-colors"
           >
             see my work
           </Link>
@@ -188,7 +268,7 @@ export default function About() {
                   Hey there! I&apos;m a UX Lead with <strong>12+ years</strong> of hands-on design experience across India&apos;s buzzing tech hubs: Pune, Nagpur, and Bengaluru. Whether I&apos;m building enterprise dashboards or crafting story-driven visuals, I aim to pair creative flair with smart functionality.
                 </p>
                 <p>
-                  I&apos;ve worked with both startups and global giants, leading UX/UI projects that put users first while staying aligned with business goals. I&apos;m now looking to bring my passion for human-centered design to opportunities in the Middle East or back in India.
+                  I&apos;ve worked with both startups and global giants, leading UX/UI projects that put users first while staying aligned with business goals. I&apos;m now looking to bring my passion for human-centered design to opportunities in India, the Middle East, or anywhere remote.
                 </p>
               </div>
             </div>
@@ -236,31 +316,32 @@ export default function About() {
         <h2 className="font-display text-4xl md:text-5xl font-black mb-10 max-w-5xl">tools & <span className="italic font-light">skills.</span></h2>
 
         <Grid>
-          <div className="col-span-12 md:col-span-4 dark-card rounded-3xl p-7">
+          <div className="col-span-12 md:col-span-6 dark-card rounded-3xl p-7">
             <p className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-4">design tools</p>
             <div className="flex flex-wrap gap-2">
-              {TOOLS.design.map((t) => (
-                <span key={t} className="px-4 py-2 rounded-full dark-card text-[#F4F3FA] text-sm font-medium border border-white/10">{t}</span>
-              ))}
+              {TOOLS.design.map((t) => <ToolPill key={t.name} {...t} />)}
             </div>
           </div>
 
-          <div className="col-span-12 md:col-span-4 dark-card rounded-3xl p-7">
+          <div className="col-span-12 md:col-span-6 dark-card rounded-3xl p-7">
             <p className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-2">development</p>
             <p className="text-xs italic text-[#A29CB4] mb-4">Basic understanding & familiarity with front-end technologies</p>
             <div className="flex flex-wrap gap-2">
-              {TOOLS.development.map((t) => (
-                <span key={t} className="px-4 py-2 rounded-full dark-card text-[#F4F3FA] text-sm font-medium border border-white/10">{t}</span>
-              ))}
+              {TOOLS.development.map((t) => <ToolPill key={t.name} {...t} />)}
             </div>
           </div>
 
-          <div className="col-span-12 md:col-span-4 dark-card rounded-3xl p-7">
+          <div className="col-span-12 md:col-span-6 dark-card rounded-3xl p-7">
             <p className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-4">collaboration</p>
             <div className="flex flex-wrap gap-2">
-              {TOOLS.collaboration.map((t) => (
-                <span key={t} className="px-4 py-2 rounded-full dark-card text-[#F4F3FA] text-sm font-medium border border-white/10">{t}</span>
-              ))}
+              {TOOLS.collaboration.map((t) => <ToolPill key={t.name} {...t} />)}
+            </div>
+          </div>
+
+          <div className="col-span-12 md:col-span-6 dark-card rounded-3xl p-7">
+            <p className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-4">ai tools</p>
+            <div className="flex flex-wrap gap-2">
+              {TOOLS.ai.map((t) => <ToolPill key={t.name} {...t} />)}
             </div>
           </div>
         </Grid>
@@ -285,7 +366,7 @@ export default function About() {
         <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">03 / experience</p>
         <h2 className="font-display text-4xl md:text-5xl font-black mb-10 max-w-5xl">where i&apos;ve <span className="italic font-light">worked.</span></h2>
         <ol className="relative border-l border-white/10 pl-7 space-y-9 max-w-4xl">
-          {EXPERIENCE.map((e) => (
+          {(showAllExp ? EXPERIENCE : EXPERIENCE.slice(0, 3)).map((e) => (
             <li key={e.org} className="relative" data-testid={`experience-${e.org}`}>
               <span className="absolute -left-[2.1rem] top-1.5 h-3 w-3 rounded-full bg-[#F5379B] ring-4 ring-[#100210]" aria-hidden="true" />
               <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
@@ -304,7 +385,16 @@ export default function About() {
             </li>
           ))}
         </ol>
-        <p className="mt-8 pl-7 text-sm text-[#A29CB4] leading-relaxed max-w-4xl">{EARLIER}</p>
+        {EXPERIENCE.length > 3 && (
+          <button
+            type="button"
+            onClick={() => setShowAllExp((v) => !v)}
+            data-testid="experience-toggle"
+            className="mt-10 ml-7 inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white text-white text-sm font-semibold hover:bg-white hover:text-[#100210] transition-colors"
+          >
+            {showAllExp ? "Show less" : `Show all ${EXPERIENCE.length} roles`}
+          </button>
+        )}
         </Container>
       </section>
 
@@ -360,7 +450,7 @@ export default function About() {
             ready to build <span className="italic font-light text-white">something</span> together?
           </h2>
           <p className="relative mt-6 text-base md:text-lg text-white/80 max-w-xl">
-            Open to UX Lead and Senior Product Design roles across the Middle East and India.
+            Open to UX Lead and Senior Product Design roles across India and the Middle East. Open for global relocation or remote opportunities.
           </p>
           <div className="relative mt-8 flex gap-3 flex-wrap">
             {/* Email - with copy icon */}
@@ -378,7 +468,7 @@ export default function About() {
               <CopyButton value={PROFILE.phone} label="phone" size={15} className="h-9 w-9 text-white hover:bg-white/10" />
             </div>
             {/* LinkedIn */}
-            <a href={PROFILE.social.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white/25 text-white font-semibold text-sm hover:bg-white/10 transition-colors">
+            <a href={PROFILE.social.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-white font-semibold text-sm hover:bg-white/10 transition-colors">
               <Linkedin size={16} /> LinkedIn profile
             </a>
           </div>

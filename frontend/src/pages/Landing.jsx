@@ -3,6 +3,7 @@ import { ArrowRight, Mail, Briefcase, User, Star, Quote } from "lucide-react";
 import { PROFILE, projects, testimonials } from "../data/content";
 import { Container, Grid } from "../components/Grid";
 import CaseCover from "../components/CaseCover";
+import Seo from "../components/Seo";
 
 export default function Landing() {
   // The two fully-built case studies (FinVista, Aurora) are featured on the home
@@ -11,6 +12,7 @@ export default function Landing() {
 
   return (
     <div data-testid="landing-page">
+      <Seo description="Faraz Khan, Senior UX Lead with 12+ years bridging design, data, and development. Enterprise platforms, design systems, and AI-native product concepts." />
       {/* HERO */}
       <section className="pt-7 pb-14 md:pb-20 relative" data-testid="hero">
         <Container>
@@ -38,7 +40,7 @@ export default function Landing() {
                 <Link
                   to="/about"
                   data-testid="hero-about-link"
-                  className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white/40 text-white text-base font-semibold capitalize hover:bg-white hover:text-[#100210] transition-colors"
+                  className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-white text-base font-semibold capitalize hover:bg-white hover:text-[#100210] transition-colors"
                 >
                   <User size={18} />
                   know me
@@ -70,7 +72,7 @@ export default function Landing() {
         <div className="flex items-baseline justify-between mb-6">
           <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B]">featured case studies</span>
           <Link to="/projects" data-testid="all-projects-link" className="hidden md:inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4 decoration-[#075EFD]">
-            All Work <ArrowRight size={16} />
+            View all case studies <ArrowRight size={16} />
           </Link>
         </div>
 
@@ -157,14 +159,11 @@ export default function Landing() {
           <h2 className="relative font-display text-5xl md:text-7xl font-black leading-[0.95] max-w-4xl">
             have an idea <span className="italic font-light text-white">worth</span> shipping?
           </h2>
-          <p className="relative mt-6 text-lg text-white/80 max-w-xl">
-            I take on three projects a year. There are two slots open for Q1.
-          </p>
           <div className="relative mt-10 flex gap-4 flex-wrap">
-            <a href={`mailto:${PROFILE.email}`} data-testid="cta-email" className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-[#F5379B] text-white font-semibold text-sm hover:bg-[#D81F7E] transition-colors">
+            <a href={`mailto:${PROFILE.email}`} data-testid="cta-email" className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-[#F5379B] border-2 border-[#F5379B] font-semibold text-sm hover:bg-[#F5379B] hover:text-white transition-colors">
               <Mail size={16} /> Start A Project
             </a>
-            <Link to="/contact" data-testid="cta-contact" className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white/30 text-white font-semibold text-sm hover:bg-white/10 transition-colors">
+            <Link to="/contact" data-testid="cta-contact" className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-white font-semibold text-sm hover:bg-white/10 transition-colors">
               Other Ways To Reach Me
             </Link>
           </div>
@@ -172,16 +171,6 @@ export default function Landing() {
         </Container>
       </section>
 
-      <footer className="py-10 border-t border-[#2C2542]/10">
-        <Container className="flex items-center justify-between gap-4 flex-wrap text-xs font-mono uppercase tracking-widest text-[#A29CB4]">
-          <span>©2025 {PROFILE.name} · {PROFILE.city}</span>
-          <div className="flex items-center gap-3 flex-wrap">
-            <a href={PROFILE.social.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-full border border-[#0A66C2] text-[#0A66C2] px-4 py-2 hover:bg-[#0A66C2] hover:text-white transition-colors">LinkedIn</a>
-            <a href={`mailto:${PROFILE.email}`} className="inline-flex items-center rounded-full border border-[#075EFD] text-[#075EFD] px-4 py-2 hover:bg-[#075EFD] hover:text-white transition-colors">Email</a>
-            <a href="/files/Faraz_Khan_Resume.pdf" download="Faraz_Khan_Resume.pdf" className="inline-flex items-center rounded-full border border-[#F5379B] text-[#F5379B] px-4 py-2 hover:bg-[#F5379B] hover:text-white transition-colors">Resume</a>
-          </div>
-        </Container>
-      </footer>
     </div>
   );
 }

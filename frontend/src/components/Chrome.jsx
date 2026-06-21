@@ -1,6 +1,7 @@
 import { NavLink, Link } from "react-router-dom";
 import { Container } from "./Grid";
 import BookCallButton from "./BookCallButton";
+import Logo from "./Logo";
 
 /**
  * Global top header (sticky). White "inverse" bar aligned to the body-content
@@ -34,10 +35,13 @@ export default function Chrome() {
           <div className="pointer-events-auto flex items-center justify-between gap-3 rounded-full bg-white/95 backdrop-blur-md border border-[#075EFD]/15 pl-4 md:pl-5 pr-2 py-2.5 shadow-[0_0_44px_-4px_rgba(7,94,253,0.5)]">
             {/* Left: logo + nav links */}
             <div className="flex items-center gap-0.5 md:gap-1 min-w-0 overflow-x-auto no-scrollbar">
-              <Link to="/" aria-label="home" data-testid="chrome-logo" className="flex items-center gap-1.5 group flex-shrink-0 mr-2 md:mr-4">
-                <span className="w-3.5 h-3.5 rounded-full bg-[#075EFD] group-hover:scale-110 transition-transform" />
-                <span className="w-3.5 h-3.5 rounded-sm bg-[#F5379B] group-hover:scale-110 transition-transform" />
-                <span className="w-3.5 h-3.5 rotate-45 bg-[#1A1326] group-hover:scale-110 transition-transform" />
+              <Link
+                to="/"
+                aria-label="Faraz Khan, home"
+                data-testid="chrome-logo"
+                className="group flex items-center flex-shrink-0 -ml-1 mr-1 md:mr-3 px-3 py-2.5 rounded-full hover:bg-[#1A1326]/[0.06] transition-colors"
+              >
+                <Logo className="h-7 w-auto group-hover:scale-105 transition-transform" />
               </Link>
               {NAV.map((item) => (
                 <NavLink key={item.to} to={item.to} data-testid={`nav-${item.label.toLowerCase()}`} className={navItem}>

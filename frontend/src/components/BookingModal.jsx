@@ -17,10 +17,10 @@ export default function BookingModal({ open, onOpenChange }) {
         <div className="space-y-2 pr-8">
           <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B]">book a call</p>
           <DialogTitle className="font-display text-2xl md:text-3xl font-black text-[#F4F3FA]">
-            Thanks for reaching out.
+            Let&apos;s find a time to talk.
           </DialogTitle>
           <DialogDescription className="text-sm text-[#A29CB4] leading-relaxed">
-            Pick a slot below. The calendar invite and video link land in your inbox the moment you book.
+            Really glad you reached out. Grab whatever time works for you and I&apos;ll take care of the rest, the calendar invite and meeting link are on the way to your inbox.
           </DialogDescription>
         </div>
 
