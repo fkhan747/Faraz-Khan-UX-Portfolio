@@ -90,7 +90,7 @@ export default function Services() {
           <h2 className="relative font-display text-4xl md:text-6xl font-black leading-tight max-w-3xl">
             two slots <span className="italic font-light text-white">open</span> for q1.
           </h2>
-          <a href={`mailto:${PROFILE.email}`} data-testid="services-cta" className="relative mt-8 inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-[#F5379B] border-2 border-[#F5379B] font-semibold text-sm hover:bg-[#F5379B] hover:text-white transition-colors">
+          <a href={`mailto:${PROFILE.email}`} data-testid="services-cta" className="relative mt-8 inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-[#F5379B] font-semibold text-sm hover:bg-[#F5379B] hover:text-white transition-colors">
             <Calendar size={16} /> book a 30-min call
           </a>
         </div>

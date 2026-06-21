@@ -577,7 +577,7 @@ export default function FinvistaCaseStudy() {
           <a
             href={`mailto:${PROFILE.email}`}
             data-testid="case-cta-email"
-            className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-[#F5379B] border-2 border-[#F5379B] font-semibold text-sm hover:bg-[#F5379B] hover:text-white transition-colors"
+            className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-[#F5379B] font-semibold text-sm hover:bg-[#F5379B] hover:text-white transition-colors"
           >
             <Mail size={16} /> email me
           </a>

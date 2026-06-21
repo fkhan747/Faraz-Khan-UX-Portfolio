@@ -32,10 +32,10 @@ export default function Contact() {
         {/* Availability banner - thin, full-width, with the actions on the right */}
         <div
           className="rounded-3xl border-2 border-white text-white px-6 py-5 md:px-8 md:py-6 relative overflow-hidden flex flex-col md:flex-row md:items-center md:justify-between gap-5"
-          style={{ background: "linear-gradient(105deg, #F5379B 0%, #CE2D86 40%, #2A1E6B 80%, #131A5C 100%)" }}
+          style={{ background: "linear-gradient(110deg, #C32E7E 0%, #6E2B7A 30%, #2A1E6B 60%, #131A5C 100%)" }}
           data-testid="available-card"
         >
-          <p className="relative text-base md:text-lg font-bold leading-tight">Open to full-time &amp; remote opportunities.</p>
+          <p className="relative text-lg md:text-xl font-bold leading-tight">Open to full-time &amp; remote opportunities.</p>
           <div className="relative flex flex-wrap gap-3 md:flex-shrink-0">
             <BookCallButton
               data-testid="schedule-call"

@@ -531,7 +531,7 @@ export default function AuroraCaseStudy() {
         <h2 className="font-display text-3xl md:text-5xl font-black mb-6">thank you for reading.</h2>
         <p className="text-lg text-[#A29CB4] mb-8">If you&apos;d like to discuss this project in more detail or explore collaboration opportunities, I&apos;d love to connect.</p>
         <div className="flex gap-4 justify-center flex-wrap">
-          <a href={`mailto:${PROFILE.email}`} data-testid="case-cta-email" className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-[#F5379B] border-2 border-[#F5379B] font-semibold text-sm hover:bg-[#F5379B] hover:text-white transition-colors"><Mail size={16} /> email me</a>
+          <a href={`mailto:${PROFILE.email}`} data-testid="case-cta-email" className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-[#F5379B] font-semibold text-sm hover:bg-[#F5379B] hover:text-white transition-colors"><Mail size={16} /> email me</a>
           <Link to="/case/finvista" className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-[#F4F3FA] font-semibold text-sm hover:bg-[#261E3A] transition-colors">read finvista case study</Link>
           <Link to="/projects" className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-[#F4F3FA] font-semibold text-sm hover:bg-[#261E3A] transition-colors">View All projects</Link>
         </div>
