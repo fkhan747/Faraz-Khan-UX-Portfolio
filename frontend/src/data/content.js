@@ -131,8 +131,8 @@ export const concepts = [
     year: "2026",
     accent: "#E8519B",
     coverImg: "https://images.unsplash.com/photo-1543286386-2e659306cd6c?w=1200&q=80&auto=format&fit=crop",
-    status: "case study",
-    prototypeUrl: null,
+    status: "live prototype",
+    prototypeUrl: "/decisionos/",
     summary:
       "Turning scattered signals into a clear, defensible call for the people who have to make it.",
     href: "/case/decisionos",

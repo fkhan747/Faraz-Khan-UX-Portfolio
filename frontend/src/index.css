@@ -3,20 +3,20 @@
 @tailwind utilities;
 
 :root {
-  /* Brand palette — single source of truth (Palette A: retro peach / magenta / indigo).
+  /* Brand palette - single source of truth (Palette A: retro peach / magenta / indigo).
      Swapping the whole site's colors = editing the values here.
      NOTE: --brand (not --primary) holds the brand accent, to avoid colliding with
      the shadcn HSL --primary token defined further down. */
-  --bg-main: #100210;           /* near-black (purple-tinted) — page background */
-  --bg-card: #261E3A;           /* elevated dark (grained via .dark-card) — card / panel surface */
+  --bg-main: #100210;           /* near-black (purple-tinted) - page background */
+  --bg-card: #261E3A;           /* elevated dark (grained via .dark-card) - card / panel surface */
   --bg-card-border: #2C2542;    /* subtle dark border / divider */
-  --brand: #075EFD;             /* electric blue — primary accent */
+  --brand: #075EFD;             /* electric blue - primary accent */
   --brand-hover: #2E78FF;
-  --accent-yellow: #F5379B;     /* magenta — secondary accent (kept var name) */
+  --accent-yellow: #F5379B;     /* magenta - secondary accent (kept var name) */
   --accent-yellow-hover: #D81F7E;
-  --ink: #F4F3FA;               /* off-white — primary text (light on dark) */
-  --ink-muted: #A29CB4;         /* muted lavender-gray — secondary text */
-  --ok: #F5379B;                /* magenta — available/status */
+  --ink: #F4F3FA;               /* off-white - primary text (light on dark) */
+  --ink-muted: #A29CB4;         /* muted lavender-gray - secondary text */
+  --ok: #F5379B;                /* magenta - available/status */
 }
 
 * {
@@ -46,7 +46,7 @@ html, body {
   font-variant-numeric: lining-nums tabular-nums;
 }
 
-/* Numbers (stats, step counters) — a clean sans with even, baseline-aligned
+/* Numbers (stats, step counters) - a clean sans with even, baseline-aligned
    figures. Playfair's old-style digits are hard to read small and bounce up/down. */
 .num {
   font-family: 'Outfit', system-ui, sans-serif;
@@ -130,7 +130,7 @@ html, body {
 .lift { transition: transform 0.4s cubic-bezier(0.2,0.7,0.2,1), box-shadow 0.4s; }
 .lift:hover { transform: translateY(-6px); box-shadow: 0 24px 48px -24px rgba(7, 94, 253, 0.4); }
 
-/* Dark card surface — lighter than the near-black page + a faint grain so cards
+/* Dark card surface - lighter than the near-black page + a faint grain so cards
    read clearly. The grain is a background layer, so it sits behind card content. */
 .dark-card {
   background-color: #261E3A;
@@ -141,13 +141,13 @@ html, body {
   background-position: 0 0, 2px 3px;
 }
 
-/* Dark, cool, blue-tinted duotone for portraits — dark enough that the white
+/* Dark, cool, blue-tinted duotone for portraits - dark enough that the white
    studio background recedes into the page. */
 .photo-blue {
   filter: grayscale(1) brightness(0.62) sepia(1) hue-rotate(178deg) saturate(5) contrast(1.02);
 }
 
-/* Case-study cover image base — slightly dimmed/desaturated so the brand tint
+/* Case-study cover image base - slightly dimmed/desaturated so the brand tint
    and overlaid title read cleanly on top. */
 .cover-img {
   filter: brightness(0.8) saturate(0.9);
@@ -166,7 +166,7 @@ html, body {
 }
 
 :root {
-  /* shadcn/ui tokens — rebased onto Palette A so shadcn components match the brand. */
+  /* shadcn/ui tokens - rebased onto Palette A so shadcn components match the brand. */
   --background: 300 78% 4%;
   --foreground: 252 33% 96%;
   --card: 258 33% 11%;

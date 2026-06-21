@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RecruitOS — Interactive Prototype</title>
+<title>RecruitOS - Interactive Prototype</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -459,7 +459,7 @@
 </style>
 </head>
 <body>
-<div class="frame-label"><span>RecruitOS · Interactive Prototype — click anything · open "Ask" for the copilot</span><span>Desktop · 1440 × 864</span></div>
+<div class="frame-label"><span>RecruitOS · Interactive Prototype - click anything · open "Ask" for the copilot</span><span>Desktop · 1440 × 864</span></div>
 
 <div class="app" id="app">
   <!-- TOP BAR -->
@@ -468,7 +468,7 @@
     <div class="tb-center">
       <div class="hdr-search">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
-        <input placeholder="Search projects, candidates, notes — or just ask…">
+        <input placeholder="Search projects, candidates, notes - or just ask…">
         <span class="scope">All workspaces</span><span class="kbd">⌘K</span>
       </div>
     </div>
@@ -548,15 +548,15 @@ var STATUSES={
 };
 var CANDS=[
   {id:'anaya',name:'Anaya Krishnan',seed:'Anaya',role:'Senior Backend Engineer',co:'ex-Stripe',fit:87,status:'interview',notice:'90 days',
-   strengths:['7 yrs backend at scale — Stripe payments infra','Deep Node.js + PostgreSQL, exactly the core stack','Led a 4-engineer pod — covers the mentoring ask'],
-   concerns:['90-day notice period — longer than Acme prefers','No direct Kubernetes in listed experience'],
+   strengths:['7 yrs backend at scale - Stripe payments infra','Deep Node.js + PostgreSQL, exactly the core stack','Led a 4-engineer pod - covers the mentoring ask'],
+   concerns:['90-day notice period - longer than Acme prefers','No direct Kubernetes in listed experience'],
    has:['Node.js','PostgreSQL','AWS','React'],miss:['Kubernetes'],sources:'3 sources · résumé, LinkedIn, GitHub'},
   {id:'marcus',name:'Marcus Lee',seed:'Marcus',role:'Senior Engineer',co:'Razorpay',fit:81,status:'accepted',notice:'30 days',
-   strengths:['Strong fintech backend background','Short 30-day notice — fast to onboard','Solid AWS + PostgreSQL'],
+   strengths:['Strong fintech backend background','Short 30-day notice - fast to onboard','Solid AWS + PostgreSQL'],
    concerns:['Less React depth than the brief implies','Hasn\'t formally led a team'],
    has:['Node.js','PostgreSQL','AWS'],miss:['React','Kubernetes'],sources:'2 sources · résumé, LinkedIn'},
   {id:'sofia',name:'Sofia Almeida',seed:'Sofia',role:'Backend Developer',co:'Zoho',fit:64,status:'screened',notice:'60 days',
-   strengths:['Reliable mid-senior backend profile','GraphQL experience — a listed nice-to-have'],
+   strengths:['Reliable mid-senior backend profile','GraphQL experience - a listed nice-to-have'],
    concerns:['Only 5 yrs vs 7+ asked','No cloud-scale infra experience'],
    has:['Node.js','PostgreSQL','GraphQL'],miss:['AWS','Kubernetes','React'],sources:'1 source · résumé'},
   {id:'dev',name:'Dev Sharma',seed:'Dev',role:'Software Engineer',co:'Swiggy',fit:58,status:'sourced',notice:'45 days',
@@ -565,17 +565,17 @@ var CANDS=[
    has:['Node.js','React'],miss:['PostgreSQL','AWS','Kubernetes'],sources:'2 sources · LinkedIn, résumé'},
   {id:'liang',name:'Liang Wu',seed:'Liang',role:'Backend Engineer',co:'Freshworks',fit:55,status:'sourced',notice:'60 days',
    strengths:['Steady backend delivery record'],
-   concerns:['Stack overlap partial — limited AWS','Comp expectation may exceed band'],
+   concerns:['Stack overlap partial - limited AWS','Comp expectation may exceed band'],
    has:['Node.js','PostgreSQL'],miss:['AWS','React','Kubernetes'],sources:'1 source · pool record'},
   {id:'priya',name:'Priya Nair',seed:'Priya',role:'Backend Engineer',co:'Postman',fit:49,status:'sourced',notice:'30 days',
    strengths:['API-first mindset','Fast availability'],
    concerns:['Below experience bar','Limited data-layer depth'],
    has:['Node.js'],miss:['PostgreSQL','AWS','React','Kubernetes'],sources:'1 source · résumé'},
-  {id:'omar',name:'Omar Haddad',seed:'Omar',role:'Full-stack Engineer',co:'Zeta',fit:38,status:'rejected',notice:'—',
+  {id:'omar',name:'Omar Haddad',seed:'Omar',role:'Full-stack Engineer',co:'Zeta',fit:38,status:'rejected',notice:'-',
    strengths:['Broad full-stack exposure'],
-   concerns:['Generalist — not backend-deep enough','Skills mismatch on core stack'],
+   concerns:['Generalist - not backend-deep enough','Skills mismatch on core stack'],
    has:['React'],miss:['Node.js','PostgreSQL','AWS','Kubernetes'],sources:'1 source · LinkedIn'},
-  {id:'tom',name:'Tom Becker',seed:'Tom',role:'Junior Engineer',co:'Acme intern alum',fit:31,status:'rejected',notice:'—',
+  {id:'tom',name:'Tom Becker',seed:'Tom',role:'Junior Engineer',co:'Acme intern alum',fit:31,status:'rejected',notice:'-',
    strengths:['Knows Acme\'s domain from internship'],
    concerns:['Too junior for a senior req','Major gaps across required stack'],
    has:[],miss:['Node.js','PostgreSQL','AWS','React','Kubernetes'],sources:'1 source · ATS'}
@@ -616,7 +616,7 @@ function asideDefault(){return '<div class="ai-head"><span class="gi grad grain"
 VIEWS.overview=function(){
   var main=''+
   '<div class="crumb"><span>Overview</span></div>'+
-  '<div class="hero" style="display:flex;align-items:flex-start;gap:14px;margin-bottom:22px"><div style="flex:1"><h1 class="title" style="font-size:25px">Good morning, Meera</h1><div class="subtitle" style="margin-bottom:0;display:flex;align-items:center;gap:8px"><span class="gi grad grain" style="width:18px;height:18px;border-radius:5px;display:inline-grid;place-items:center;color:#fff;font-size:11px">✦</span> You\'re on track across 9 roles — 4 things need you before noon.</div></div><div style="font-size:12.5px;color:var(--faint);font-weight:500;white-space:nowrap;padding-top:5px">Monday, 15 June 2026</div></div>'+
+  '<div class="hero" style="display:flex;align-items:flex-start;gap:14px;margin-bottom:22px"><div style="flex:1"><h1 class="title" style="font-size:25px">Good morning, Meera</h1><div class="subtitle" style="margin-bottom:0;display:flex;align-items:center;gap:8px"><span class="gi grad grain" style="width:18px;height:18px;border-radius:5px;display:inline-grid;place-items:center;color:#fff;font-size:11px">✦</span> You\'re on track across 9 roles - 4 things need you before noon.</div></div><div style="font-size:12.5px;color:var(--faint);font-weight:500;white-space:nowrap;padding-top:5px">Monday, 15 June 2026</div></div>'+
   '<div class="kpis">'+
     '<div class="kpi" data-nav="projects"><div class="num">9</div><div class="lab">Active roles</div><div class="delta up">▲ 2 this week</div></div>'+
     '<div class="kpi" data-nav="candidates"><div class="num">64</div><div class="lab">Candidates in pipeline</div><div class="delta flat">across 9 projects</div></div>'+
@@ -627,7 +627,7 @@ VIEWS.overview=function(){
   '<div class="pri-grid">'+
     '<div class="pri"><div class="pic pic-warn">!</div><div class="pb"><div class="pt">2 roles breach SLA within 48h</div><div class="ps">Nimbus AI · Orbit Health</div><button class="pbtn" data-nav="workspace" data-proj="nimbus">Review</button></div><span class="pri-x" data-action="dismiss-pri">✕</span></div>'+
     '<div class="pri"><div class="pic pic-ai aisoft">✦</div><div class="pb"><div class="pt">3 strong new matches for Acme Corp</div><div class="ps">All 80%+ fit · sourced overnight</div><button class="pbtn" data-nav="add-candidates" data-proj="acme">See matches</button></div><span class="pri-x" data-action="dismiss-pri">✕</span></div>'+
-    '<div class="pri"><div class="pic pic-ok">✓</div><div class="pb"><div class="pt">Marcus Lee accepted — move to placed?</div><div class="ps">Acme Corp — Senior Backend Engineer</div><button class="pbtn" data-nav="candidate" data-cand="marcus" data-proj="acme">Confirm placement</button></div><span class="pri-x" data-action="dismiss-pri">✕</span></div>'+
+    '<div class="pri"><div class="pic pic-ok">✓</div><div class="pb"><div class="pt">Marcus Lee accepted - move to placed?</div><div class="ps">Acme Corp - Senior Backend Engineer</div><button class="pbtn" data-nav="candidate" data-cand="marcus" data-proj="acme">Confirm placement</button></div><span class="pri-x" data-action="dismiss-pri">✕</span></div>'+
     '<div class="pri"><div class="pic pic-info">○</div><div class="pb"><div class="pt">Zenco Labs is going cold</div><div class="ps">No activity in 4 days</div><button class="pbtn" data-nav="outreach">Re-engage</button></div><span class="pri-x" data-action="dismiss-pri">✕</span></div>'+
   '</div>'+
   '<div class="sec-h"><div class="lft"><h2>Your active projects</h2></div><span class="link" data-nav="projects">View all 9 ›</span></div>'+
@@ -661,10 +661,10 @@ VIEWS.projects=function(){
     '<div class="pgrid">'+cards+'</div>';
   var aside='<div class="ai-head"><span class="gi grad grain"></span><h3>Today\'s briefing</h3></div><div class="ai-body">'+
     '<div class="ai-intro"><b>Across your 9 projects:</b> 2 need attention today, 1 is filled and ready to close out.</div>'+
-    '<div class="xnote bad"><span class="xi">!</span><span><b>Nimbus AI</b> breaches SLA in 2 days — only mid-funnel candidates</span></div>'+
-    '<div class="xnote warn"><span class="xi">!</span><span><b>Orbit Health</b> pipeline is thin — consider sourcing</span></div>'+
-    '<div class="xnote ok"><span class="xi">✓</span><span><b>Acme Corp</b> has a lockable shortlist — Anaya leads at 87%</span></div>'+
-    '<div class="xnote ai"><span class="xi grad grain">✦</span><span><b>BluePeak</b> is filled — want me to draft the close-out report?</span></div>'+
+    '<div class="xnote bad"><span class="xi">!</span><span><b>Nimbus AI</b> breaches SLA in 2 days - only mid-funnel candidates</span></div>'+
+    '<div class="xnote warn"><span class="xi">!</span><span><b>Orbit Health</b> pipeline is thin - consider sourcing</span></div>'+
+    '<div class="xnote ok"><span class="xi">✓</span><span><b>Acme Corp</b> has a lockable shortlist - Anaya leads at 87%</span></div>'+
+    '<div class="xnote ai"><span class="xi grad grain">✦</span><span><b>BluePeak</b> is filled - want me to draft the close-out report?</span></div>'+
     '<div class="xprov"><span class="gi grad grain"></span> Updated 8 min ago · live</div>'+
   '</div>';
   return {main:main,aside:aside};
@@ -673,12 +673,12 @@ VIEWS.projects=function(){
 /* ============== VIEW: NEW PROJECT ============== */
 VIEWS['new-project']=function(){
   var main='<div class="crumb"><span class="b" data-nav="projects">All projects</span><span class="sep">/</span><span>New project</span></div>'+
-    '<h1 class="title">New project</h1><div class="subtitle">Paste the client\'s brief and let AI structure the role — or fill it in yourself.</div>'+
+    '<h1 class="title">New project</h1><div class="subtitle">Paste the client\'s brief and let AI structure the role - or fill it in yourself.</div>'+
     '<div id="npPaste"><div class="card"><div style="display:flex;align-items:center;gap:8px;font-family:var(--font-d);font-weight:700;font-size:15px;margin-bottom:6px"><span class="gi grad grain" style="width:20px;height:20px;border-radius:6px"></span> Start from a brief</div><div style="font-size:13px;color:var(--muted);margin-bottom:14px">Paste a job description, a client email, or a rough note. AI extracts the role, skills, comp, and requirements.</div>'+
-    '<textarea id="jd" style="width:100%;height:200px;resize:none;border:1px solid var(--border);border-radius:14px;padding:15px;font-family:var(--font-b);font-size:13px;line-height:1.6;color:var(--ink);background:var(--surface-v);outline:none">Hi Meera — we\'re hiring a Senior Backend Engineer at Acme Corp (Bangalore, hybrid 3 days). Need someone with 7+ years building scalable services, strong in Node.js and React, solid PostgreSQL, ideally some AWS. GraphQL and Kubernetes would be a bonus. They\'ll work closely with the platform team and may mentor a couple of juniors. Budget is around 35-45 LPA. Long notice periods are tough for us. Thanks!</textarea>'+
+    '<textarea id="jd" style="width:100%;height:200px;resize:none;border:1px solid var(--border);border-radius:14px;padding:15px;font-family:var(--font-b);font-size:13px;line-height:1.6;color:var(--ink);background:var(--surface-v);outline:none">Hi Meera - we\'re hiring a Senior Backend Engineer at Acme Corp (Bangalore, hybrid 3 days). Need someone with 7+ years building scalable services, strong in Node.js and React, solid PostgreSQL, ideally some AWS. GraphQL and Kubernetes would be a bonus. They\'ll work closely with the platform team and may mentor a couple of juniors. Budget is around 35-45 LPA. Long notice periods are tough for us. Thanks!</textarea>'+
     '<div style="display:flex;align-items:center;gap:12px;margin-top:16px"><button class="btn-ai" data-action="parse"><span class="lbl"><span class="spark gtext">✦</span> Parse with AI</span></button><span class="link" data-action="manual" style="font-weight:600;color:var(--muted)">or fill in manually</span></div></div></div>'+
     '<div id="npForm" class="card hidden"></div>';
-  return {main:main,aside:'<div class="ai-head"><span class="gi grad grain"></span><h3>AI assist</h3></div><div class="ai-body" id="npAside"><div class="ai-intro"><b>Paste a brief and I\'ll structure it.</b><br>I\'ll pull out the company, role, seniority, skills, comp, and requirements — and flag anything ambiguous for you to decide.</div></div>'};
+  return {main:main,aside:'<div class="ai-head"><span class="gi grad grain"></span><h3>AI assist</h3></div><div class="ai-body" id="npAside"><div class="ai-intro"><b>Paste a brief and I\'ll structure it.</b><br>I\'ll pull out the company, role, seniority, skills, comp, and requirements - and flag anything ambiguous for you to decide.</div></div>'};
 };
 function npFormHTML(manual){
   function f(label,val){return '<div class="field"><label>'+label+(manual?'':' <span class="ai-tag"><span class="gi grad grain" style="width:9px;height:9px;border-radius:3px"></span> AI</span>')+'</label><input value="'+(manual?'':val)+'" '+(manual?'placeholder="'+val+'"':'')+'></div>';}
@@ -694,7 +694,7 @@ function npFormHTML(manual){
   '<div class="field" style="margin-bottom:14px"><label>Must-have skills'+(manual?'':' <span class="ai-tag"><span class="gi grad grain" style="width:9px;height:9px;border-radius:3px"></span> AI</span>')+'</label><div class="chips">'+(manual?'':chip('Node.js')+chip('React')+chip('PostgreSQL')+chip('AWS'))+'<span class="skill-add" data-toast="Add skill (demo)">+ Add skill</span></div></div>'+
   '<div class="field" style="margin-bottom:14px"><label>Nice-to-have'+(manual?'':' <span class="ai-tag"><span class="gi grad grain" style="width:9px;height:9px;border-radius:3px"></span> AI</span>')+'</label><div class="chips">'+(manual?'':chip('GraphQL',1)+chip('Kubernetes',1))+'<span class="skill-add" data-toast="Add skill (demo)">+ Add</span></div></div>'+
   '<div class="frow" style="display:grid;grid-template-columns:1fr 1fr;gap:14px">'+f('Notice period','≤ 60 days')+f('Comp range','₹35–45 LPA')+'</div>'+
-  (manual?'':'<div class="flag" style="display:flex;align-items:flex-start;gap:9px;background:var(--yellow-soft);border:1px solid #f0e0a8;border-radius:12px;padding:12px 14px;font-size:12.5px;color:#7a5600;line-height:1.45;margin-top:14px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:1px"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg><span><b>Team leadership unclear.</b> The brief says "may mentor a couple of juniors" — I left this out. Add it as a must-have if leadership is required.</span></div>')+'</div>'+
+  (manual?'':'<div class="flag" style="display:flex;align-items:flex-start;gap:9px;background:var(--yellow-soft);border:1px solid #f0e0a8;border-radius:12px;padding:12px 14px;font-size:12.5px;color:#7a5600;line-height:1.45;margin-top:14px"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:1px"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg><span><b>Team leadership unclear.</b> The brief says "may mentor a couple of juniors" - I left this out. Add it as a must-have if leadership is required.</span></div>')+'</div>'+
   '<div style="display:flex;align-items:center;justify-content:flex-end;gap:10px;margin-top:22px;padding-top:18px;border-top:1px solid var(--border-soft)"><button class="btn-ghost" data-nav="projects">Cancel</button><button class="btn-primary" data-action="create-project">Create project</button></div>';
 }
 /* field styles injected once */
@@ -714,19 +714,19 @@ VIEWS['add-candidates']=function(){
   '<div class="ctx" style="display:flex;align-items:center;gap:12px;margin-bottom:18px">'+plogo(p,40)+'<div><div style="font-size:12px;color:var(--muted)">'+p.co+'</div><div style="font-family:var(--font-d);font-weight:700;font-size:20px">'+p.role+' <span style="font-size:11px;font-weight:600;color:#137333;background:var(--green-soft);padding:4px 10px;border-radius:999px;margin-left:6px">Just created</span></div></div></div>'+
   '<div class="sec-h"><div class="lft"><h2>Bring in candidates</h2></div></div>'+
   '<div class="methods" style="display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-bottom:24px">'+
-    '<div class="method" data-action="method" data-m="Upload résumés"><div class="mi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M5 16v3a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3"/></svg></div><div><div class="mt">Upload résumés</div><div class="ms">Drop PDFs or DOCX — AI parses each</div></div></div>'+
+    '<div class="method" data-action="method" data-m="Upload résumés"><div class="mi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M5 16v3a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3"/></svg></div><div><div class="mt">Upload résumés</div><div class="ms">Drop PDFs or DOCX - AI parses each</div></div></div>'+
     '<div class="method" data-action="method" data-m="Paste profile links"><div class="mi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg></div><div><div class="mt">Paste profile links</div><div class="ms">LinkedIn or portfolio URLs</div></div></div>'+
   '</div>'+
-  '<div class="ai-pool" style="border:1px solid #E4DAFB;border-radius:16px;padding:16px 17px;margin-bottom:24px;background:linear-gradient(180deg,#FAF8FF,#FCF6FB)"><div style="display:flex;align-items:center;gap:9px;margin-bottom:4px"><span class="gi grad grain" style="width:20px;height:20px;border-radius:6px"></span><h3 style="font-family:var(--font-d);font-weight:700;font-size:14px">3 strong matches already in your pool</h3></div><div style="font-size:12.5px;color:var(--muted);margin-bottom:14px;margin-left:29px">I checked your agency database — these fit this role and aren\'t in another active project.</div><div class="pool-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:11px">'+pool+'</div></div>'+
+  '<div class="ai-pool" style="border:1px solid #E4DAFB;border-radius:16px;padding:16px 17px;margin-bottom:24px;background:linear-gradient(180deg,#FAF8FF,#FCF6FB)"><div style="display:flex;align-items:center;gap:9px;margin-bottom:4px"><span class="gi grad grain" style="width:20px;height:20px;border-radius:6px"></span><h3 style="font-family:var(--font-d);font-weight:700;font-size:14px">3 strong matches already in your pool</h3></div><div style="font-size:12.5px;color:var(--muted);margin-bottom:14px;margin-left:29px">I checked your agency database - these fit this role and aren\'t in another active project.</div><div class="pool-cards" style="display:grid;grid-template-columns:repeat(3,1fr);gap:11px">'+pool+'</div></div>'+
   '<div class="sec-h"><div class="lft"><h2>Added to this project</h2><span class="cnt">· 8 candidates</span></div></div>'+
   '<div class="added-card" style="background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden">'+added+'</div>'+
   '<div style="display:flex;align-items:center;gap:14px;margin-top:20px"><div style="font-size:12.5px;color:var(--muted)">AI will rank all <b style="color:var(--ink);font-family:var(--font-d)">8 candidates</b> against the '+p.co+' brief.</div><button class="btn-ai" data-action="run-analysis" style="margin-left:auto;height:46px"><span class="lbl"><span class="spark gtext">✦</span> Run AI analysis</span></button></div>';
   var aside='<div class="ai-head"><span class="gi grad grain"></span><h3>AI assist</h3></div><div class="ai-body">'+
     '<div class="xsum"><div class="xn">8 candidates staged</div><div class="xs">3 from pool · 3 résumés · 2 links</div></div>'+
-    '<div class="xnote ok"><span class="xi">✓</span><span>All résumés parsed — <b>no missing fields</b></span></div>'+
-    '<div class="xnote ai"><span class="xi grad grain">✦</span><span>Surfaced <b>3 pool matches</b> you already have — no need to re-source</span></div>'+
-    '<div class="xnote warn"><span class="xi">!</span><span><b>Dev Sharma</b> looks like a possible duplicate — I\'ll merge on analysis</span></div>'+
-    '<div class="xnote warn"><span class="xi">!</span><span>2 candidates have <b>no public salary signal</b> — fit weights skills more</span></div>'+
+    '<div class="xnote ok"><span class="xi">✓</span><span>All résumés parsed - <b>no missing fields</b></span></div>'+
+    '<div class="xnote ai"><span class="xi grad grain">✦</span><span>Surfaced <b>3 pool matches</b> you already have - no need to re-source</span></div>'+
+    '<div class="xnote warn"><span class="xi">!</span><span><b>Dev Sharma</b> looks like a possible duplicate - I\'ll merge on analysis</span></div>'+
+    '<div class="xnote warn"><span class="xi">!</span><span>2 candidates have <b>no public salary signal</b> - fit weights skills more</span></div>'+
     '<div class="xprov"><span class="gi grad grain"></span> Matching against the brief · 11 fields</div>'+
   '</div>';
   /* method/pool/added styles */
@@ -741,7 +741,7 @@ VIEWS.analysis=function(){
   var steps=[['Parsing résumés &amp; profiles','8 documents'],['Matching skills to the brief','11 criteria'],['Checking notice &amp; comp fit','band ₹35–45 LPA'],['Scoring &amp; ranking candidates','weighted fit']].map(function(s,i){
     return '<div class="step" data-i="'+i+'"><div class="si">'+(i+1)+'</div><div class="stt">'+s[0]+'</div><div class="sts">'+s[1]+'</div></div>';
   }).join('');
-  var main='<div class="anlz-wrap"><div class="anlz-hero"><div class="orb grad grain">✦</div><h1>Analysing 8 candidates</h1><p>for '+p.co+' — '+p.role+'</p></div>'+
+  var main='<div class="anlz-wrap"><div class="anlz-hero"><div class="orb grad grain">✦</div><h1>Analysing 8 candidates</h1><p>for '+p.co+' - '+p.role+'</p></div>'+
     '<div class="progress"><i id="prog"></i></div>'+
     '<div class="steps">'+steps+'</div>'+
     '<div class="anlz-cands">'+cands+'</div>'+
@@ -752,13 +752,13 @@ VIEWS.analysis=function(){
 function runAnalysis(){
   var alive=function(){return STATE.view==='analysis'&&$('prog');};
   var steps=document.querySelectorAll('.step');var feed=$('anlzFeed');var acands=document.querySelectorAll('.acand');
-  var feedItems=['Reading 8 résumés &amp; profiles','Extracted skills, seniority, notice','Comparing against 11 brief criteria','Anaya Krishnan — strong match (87%)','Marcus Lee — strong match (81%)','Flagged Anaya\'s 90-day notice','Ranking complete'];
+  var feedItems=['Reading 8 résumés &amp; profiles','Extracted skills, seniority, notice','Comparing against 11 brief criteria','Anaya Krishnan - strong match (87%)','Marcus Lee - strong match (81%)','Flagged Anaya\'s 90-day notice','Ranking complete'];
   var scores=[87,81,64,58,55,49,38,31];
   var fi=0;var fInt=setInterval(function(){if(!alive()||fi>=feedItems.length){clearInterval(fInt);return;}feed.insertAdjacentHTML('beforeend','<div class="act"><div class="adot ai aisoft">✦</div><div class="at"><div class="atx">'+feedItems[fi]+'</div><div class="atm">just now</div></div></div>');fi++;},650);
   var si=0;function nextStep(){if(!alive())return;if(si>0&&steps[si-1]){steps[si-1].classList.remove('on');steps[si-1].classList.add('done');steps[si-1].querySelector('.si').innerHTML='✓';}if(si<steps.length){steps[si].classList.add('on');$('prog').style.width=((si+1)/steps.length*100)+'%';si++;setTimeout(nextStep,1300);}else{finish();}}
   setTimeout(nextStep,400);
   acands.forEach(function(el,i){setTimeout(function(){if(!alive())return;el.classList.add('scored');el.querySelector('.asc').textContent=scores[i]+'%';el.querySelector('.asc').style.color=fitColor(scores[i]);},800+i*420);});
-  function finish(){if(!alive())return;$('prog').style.width='100%';if($('anlzWait'))$('anlzWait').classList.add('hidden');if($('anlzDone'))$('anlzDone').classList.remove('hidden');toast('Analysis complete — 8 candidates ranked');}
+  function finish(){if(!alive())return;$('prog').style.width='100%';if($('anlzWait'))$('anlzWait').classList.add('hidden');if($('anlzDone'))$('anlzDone').classList.remove('hidden');toast('Analysis complete - 8 candidates ranked');}
 }
 
 /* ============== VIEW: WORKSPACE (hub) ============== */
@@ -784,12 +784,12 @@ VIEWS.workspace=function(){
     '<div class="ctable"><div class="thead"><span></span><span>Candidate</span><span>AI fit</span><span>Status</span><span style="text-align:center">Notes</span><span></span></div>'+rows+'</div>';
   var c=cand('anaya');
   var aside='<div class="ai-head"><span class="gi grad grain"></span><h3>AI analysis</h3></div><div class="ai-body">'+
-    '<div class="conf"><div class="ring grad grain">'+c.fit+'</div><div class="ct"><b>'+c.name+'</b> is the strongest fit. Confidence is high — built from <b>'+c.sources+'</b>.</div></div>'+
+    '<div class="conf"><div class="ring grad grain">'+c.fit+'</div><div class="ct"><b>'+c.name+'</b> is the strongest fit. Confidence is high - built from <b>'+c.sources+'</b>.</div></div>'+
     '<div style="font-family:var(--font-m);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)">Why</div>'+
     c.strengths.map(function(s){return '<div class="xnote ok"><span class="xi">✓</span><span>'+s+'</span></div>';}).join('')+
     c.concerns.map(function(s){return '<div class="xnote warn"><span class="xi">!</span><span>'+s+'</span></div>';}).join('')+
     '<div style="display:flex;gap:8px;margin-top:4px"><button class="btn-ai" data-nav="outreach" data-cand="anaya" style="height:38px;flex:1"><span class="lbl" style="font-size:12.5px"><span class="spark gtext">✦</span> Draft outreach</span></button><button class="btn-ghost" data-nav="candidate" data-cand="anaya" style="height:38px;padding:0 14px">Open</button></div>'+
-    '<div class="xnote ai" style="background:#fff;border:1px solid var(--border-soft);border-radius:12px;padding:12px"><span class="xi grad grain">✦</span><span><b>Memory:</b> Acme rejected over-90-day notices on the last two roles. Anaya is at 90 — worth confirming early.</span></div>'+
+    '<div class="xnote ai" style="background:#fff;border:1px solid var(--border-soft);border-radius:12px;padding:12px"><span class="xi grad grain">✦</span><span><b>Memory:</b> Acme rejected over-90-day notices on the last two roles. Anaya is at 90 - worth confirming early.</span></div>'+
     '<div class="xprov"><span class="gi grad grain"></span> Re-ranked 8 min ago</div>'+
   '</div>';
   return {main:main,aside:aside};
@@ -802,7 +802,7 @@ VIEWS.candidate=function(){
   var has=c.has.map(function(s){return '<span class="sm has"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>'+s+'</span>';}).join('');
   var miss=c.miss.map(function(s){return '<span class="sm miss">'+s+'</span>';}).join('');
   var accepted=c.status==='accepted';var fn=c.name.split(' ')[0];
-  var acceptBlock=accepted?('<div class="accept-card"><div class="ah"><div class="ai-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></div><div><div class="at2">Offer accepted</div><div class="ad">Confirmed by email · 6 hours ago</div></div><div class="joinpill">Joining in '+c.notice.replace(' days','d')+'</div></div><div class="email-evi"><div class="env"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg></div><div><div class="es">From '+fn+' &lt;'+fn.toLowerCase()+'@gmail.com&gt; · 14 Jun, 6:02 PM</div><div class="esub">Re: Offer — '+p.role+', '+p.co+'</div><div class="ebody">"Thrilled to accept — really looking forward to joining the team. I\'ll serve my notice and can start as planned. Thanks for making the process smooth."</div></div></div><div class="accept-risk"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:1px"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg><span><b>Not joined yet.</b> 2 of your last 5 acceptances saw counter-offers before the start date. A warm check-in this week de-risks the placement. <span style="color:var(--blue);font-weight:600;cursor:pointer" data-nav="outreach" data-cand="'+c.id+'">Draft a check-in ›</span></span></div></div>'):'';
+  var acceptBlock=accepted?('<div class="accept-card"><div class="ah"><div class="ai-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></div><div><div class="at2">Offer accepted</div><div class="ad">Confirmed by email · 6 hours ago</div></div><div class="joinpill">Joining in '+c.notice.replace(' days','d')+'</div></div><div class="email-evi"><div class="env"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg></div><div><div class="es">From '+fn+' &lt;'+fn.toLowerCase()+'@gmail.com&gt; · 14 Jun, 6:02 PM</div><div class="esub">Re: Offer - '+p.role+', '+p.co+'</div><div class="ebody">"Thrilled to accept - really looking forward to joining the team. I\'ll serve my notice and can start as planned. Thanks for making the process smooth."</div></div></div><div class="accept-risk"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:1px"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg><span><b>Not joined yet.</b> 2 of your last 5 acceptances saw counter-offers before the start date. A warm check-in this week de-risks the placement. <span style="color:var(--blue);font-weight:600;cursor:pointer" data-nav="outreach" data-cand="'+c.id+'">Draft a check-in ›</span></span></div></div>'):'';
   var atts=accepted?[['Résumé','PDF · 240 KB','#1A73E8','Résumé'],['Offer letter','PDF · 88 KB','#6B46C1','Offer'],['Signed acceptance','PDF · 102 KB','#1E8E3E','Signed'],['Acceptance email','EML · 12 KB','#0E9CA6','Email']]:[['Résumé','PDF · 240 KB','#1A73E8','Résumé'],['Screening notes','DOC · 30 KB','#6B46C1','Notes'],['Portfolio','Link · github.com','#0E9CA6','Link']];
   var attHtml=atts.map(function(a){return '<div class="attach-row" data-toast="Preview '+a[0]+' (demo)"><div class="fic" style="background:'+a[2]+'"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></div><div><div class="fn">'+a[0]+'</div><div class="fm">'+a[1]+'</div></div><span class="ftype">'+a[3]+'</span></div>';}).join('');
   var attachBlock='<div class="cbox" style="margin-bottom:16px"><h3>Attachments <span style="font-weight:500;font-size:11px;color:var(--faint);margin-left:auto">'+atts.length+' files</span></h3><div class="attach-list">'+attHtml+'<div class="attach-add" data-toast="Upload attachment (demo)">+ Add attachment</div></div></div>';
@@ -823,7 +823,7 @@ VIEWS.candidate=function(){
   toolbar+'<div class="cand-hero"><img src="'+av(c.seed,84)+'"><div class="ch"><h1>'+c.name+'</h1><div class="crole">'+c.role+' · '+c.co+'</div><div class="ctags"><span class="ctag">Notice: '+c.notice+'</span><span class="ctag">'+c.sources+'</span><span class="ctag">📎 '+atts.length+' files</span>'+stChip(c.status)+'</div></div><div class="cfit"><div class="ring grad grain" style="background:'+fitColor(c.fit)+'">'+c.fit+'</div><div class="cl">AI fit</div></div></div>'+acceptBlock+
   '<div class="cgrid"><div class="cbox"><h3><span class="gi grad grain"></span> Why AI ranked '+c.name.split(' ')[0]+' here</h3>'+c.strengths.map(function(s){return '<div class="reasonline"><span class="ri ok">✓</span><span>'+s+'</span></div>';}).join('')+c.concerns.map(function(s){return '<div class="reasonline"><span class="ri warn">!</span><span>'+s+'</span></div>';}).join('')+'</div>'+
   '<div class="cbox"><h3>Skills vs the brief</h3><div style="font-size:11px;color:var(--faint);margin-bottom:8px;font-weight:600">MATCHED</div><div class="skillmatch" style="margin-bottom:14px">'+(has||'<span style="font-size:12.5px;color:var(--faint)">None of the core stack</span>')+'</div><div style="font-size:11px;color:var(--faint);margin-bottom:8px;font-weight:600">MISSING</div><div class="skillmatch">'+(miss||'<span style="font-size:12.5px;color:#137333">All requirements met</span>')+'</div></div></div>'+
-  '<div class="cbox" style="margin-bottom:16px"><h3>Provenance</h3><div style="font-size:13px;color:var(--muted);line-height:1.6">This assessment was built from <b style="color:var(--ink)">'+c.sources+'</b>. Every claim above traces to a source document — nothing is inferred without a basis. The fit score weighs skills (50%), experience (30%), and logistics like notice &amp; comp (20%).</div></div>'+
+  '<div class="cbox" style="margin-bottom:16px"><h3>Provenance</h3><div style="font-size:13px;color:var(--muted);line-height:1.6">This assessment was built from <b style="color:var(--ink)">'+c.sources+'</b>. Every claim above traces to a source document - nothing is inferred without a basis. The fit score weighs skills (50%), experience (30%), and logistics like notice &amp; comp (20%).</div></div>'+
   attachBlock;
   var aside='<div class="ai-head"><span class="gi grad grain"></span><h3>Copilot</h3></div><div class="ai-body">'+
     '<div class="conf"><div class="ring grad grain" style="background:'+fitColor(c.fit)+'">'+c.fit+'</div><div class="ct">Fit confidence is <b>'+(c.fit>=75?'high':c.fit>=55?'moderate':'low')+'</b> for this role.</div></div>'+
@@ -839,15 +839,15 @@ VIEWS.shortlist=function(){
   var p=proj('acme');
   var items=STATE.shortlist.map(function(id,i){var c=cand(id);return '<div class="sl-item" data-id="'+id+'"><span class="hand">⋮⋮</span><span class="rk">'+(i+1)+'</span><img src="'+av(c.seed,72)+'"><div class="si"><div class="sn" data-nav="candidate" data-cand="'+id+'" style="cursor:pointer">'+c.name+'</div><div class="sr">'+c.role+' · '+c.co+' · '+c.strengths[0]+'</div></div><span class="sfit" style="color:'+fitColor(c.fit)+'">'+c.fit+'%</span><span class="srm" data-action="sl-remove" data-id="'+id+'">✕</span></div>';}).join('');
   var main='<div class="crumb"><span class="b" data-nav="projects">All projects</span><span class="sep">/</span><span class="b" data-nav="workspace" data-proj="acme">Acme Corp</span><span class="sep">/</span><span>Shortlist</span></div>'+
-    '<div class="sec-h"><div class="lft"><h1 class="title" style="margin:0">Lock shortlist</h1><span class="cnt">· '+p.co+' — '+p.role+'</span></div></div>'+
-    '<div class="subtitle">Drag to reorder. When you lock it, this becomes the client-ready list — you can share it or start outreach.</div>'+
+    '<div class="sec-h"><div class="lft"><h1 class="title" style="margin:0">Lock shortlist</h1><span class="cnt">· '+p.co+' - '+p.role+'</span></div></div>'+
+    '<div class="subtitle">Drag to reorder. When you lock it, this becomes the client-ready list - you can share it or start outreach.</div>'+
     items+
     '<div style="display:flex;gap:10px;margin-top:18px"><button class="btn-primary" data-action="lock-share"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Lock &amp; share with client</button><button class="btn-ai" data-nav="outreach" data-cand="anaya"><span class="lbl"><span class="spark gtext">✦</span> Draft outreach to all</span></button><button class="btn-ghost" data-nav="workspace" data-proj="acme">Back to pipeline</button></div>';
   var aside='<div class="ai-head"><span class="gi grad grain"></span><h3>Why these three</h3></div><div class="ai-body">'+
-    '<div class="ai-intro">I picked the top of the ranking and checked they\'re genuinely client-ready — not just high scores.</div>'+
-    '<div class="xnote ok"><span class="xi">✓</span><span><b>Anaya</b> (87%) — clear technical lead, just confirm the 90-day notice</span></div>'+
-    '<div class="xnote ok"><span class="xi">✓</span><span><b>Marcus</b> (81%) — already accepted, fastest to place</span></div>'+
-    '<div class="xnote warn"><span class="xi">!</span><span><b>Sofia</b> (64%) — included as a diverse-experience option; below the others on tenure</span></div>'+
+    '<div class="ai-intro">I picked the top of the ranking and checked they\'re genuinely client-ready - not just high scores.</div>'+
+    '<div class="xnote ok"><span class="xi">✓</span><span><b>Anaya</b> (87%) - clear technical lead, just confirm the 90-day notice</span></div>'+
+    '<div class="xnote ok"><span class="xi">✓</span><span><b>Marcus</b> (81%) - already accepted, fastest to place</span></div>'+
+    '<div class="xnote warn"><span class="xi">!</span><span><b>Sofia</b> (64%) - included as a diverse-experience option; below the others on tenure</span></div>'+
     '<div class="xnote ai"><span class="xi grad grain">✦</span><span>Want a 4th? <b>Dev Sharma</b> (58%) is the next closest on culture signals.</span></div>'+
     '<div class="xprov"><span class="gi grad grain"></span> Ranked against the Acme brief</div>'+
   '</div>';
@@ -857,18 +857,18 @@ VIEWS.shortlist=function(){
 /* ============== VIEW: OUTREACH ============== */
 VIEWS.outreach=function(){
   var c=cand(STATE.candId)||cand('anaya');
-  var msg='Hi <span class="tok">'+c.name.split(' ')[0]+'</span>,\n\nI came across your work at <span class="tok">'+c.co.replace('ex-','')+'</span> — the depth on <span class="tok">payments infrastructure</span> stood out. I\'m partnering with <span class="tok">Acme Corp</span> on a Senior Backend Engineer role where that exact experience would land well: scaling Node.js + PostgreSQL services with a small team to mentor.\n\nIt\'s a hybrid role in Bangalore, comp in the ₹35–45 LPA band. Given your background I think you\'d skip straight to the technical conversation.\n\nWould you be open to a short call this week?\n\nBest,\nMeera';
+  var msg='Hi <span class="tok">'+c.name.split(' ')[0]+'</span>,\n\nI came across your work at <span class="tok">'+c.co.replace('ex-','')+'</span> - the depth on <span class="tok">payments infrastructure</span> stood out. I\'m partnering with <span class="tok">Acme Corp</span> on a Senior Backend Engineer role where that exact experience would land well: scaling Node.js + PostgreSQL services with a small team to mentor.\n\nIt\'s a hybrid role in Bangalore, comp in the ₹35–45 LPA band. Given your background I think you\'d skip straight to the technical conversation.\n\nWould you be open to a short call this week?\n\nBest,\nMeera';
   var main='<div class="crumb"><span class="b" data-nav="workspace" data-proj="acme">Acme Corp</span><span class="sep">/</span><span class="b" data-nav="candidate" data-cand="'+c.id+'">'+c.name+'</span><span class="sep">/</span><span>Outreach</span></div>'+
     '<div class="sec-h"><div class="lft"><h1 class="title" style="margin:0">Draft outreach</h1><span class="cnt">· to '+c.name+'</span></div></div>'+
-    '<div class="subtitle">AI personalised this from '+c.name.split(' ')[0]+'\'s background and the Acme brief. Highlighted bits are pulled from real sources — edit anything.</div>'+
+    '<div class="subtitle">AI personalised this from '+c.name.split(' ')[0]+'\'s background and the Acme brief. Highlighted bits are pulled from real sources - edit anything.</div>'+
     '<div class="ovars"><div class="ovar active" data-action="ovar" data-v="warm">Warm &amp; personal</div><div class="ovar" data-action="ovar" data-v="direct">Short &amp; direct</div><div class="ovar" data-action="ovar" data-v="formal">Formal</div></div>'+
     '<div class="omsg" id="omsg">'+msg+'</div>'+
     '<div style="display:flex;align-items:center;gap:10px;margin-top:16px"><button class="btn-ai" data-action="regen"><span class="lbl"><span class="spark gtext">✦</span> Regenerate</span></button><div style="margin-left:auto;display:flex;gap:10px"><button class="btn-ghost" data-toast="Saved to drafts">Save draft</button><button class="btn-primary" data-action="send-outreach"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/></svg> Send message</button></div></div>';
   var aside='<div class="ai-head"><span class="gi grad grain"></span><h3>Personalisation</h3></div><div class="ai-body">'+
-    '<div class="ai-intro">Every <span class="tok" style="background:#F2EEFD;color:#6b46c1;border-radius:5px;padding:1px 5px;font-weight:600">highlighted</span> phrase traces to a source — no invented flattery.</div>'+
-    '<div class="xnote ok"><span class="xi">✓</span><span>"payments infrastructure" — from her <b>Stripe</b> experience</span></div>'+
-    '<div class="xnote ok"><span class="xi">✓</span><span>"small team to mentor" — matches the Acme brief</span></div>'+
-    '<div class="xnote warn"><span class="xi">!</span><span>I left out comp specifics beyond the band — add if you prefer transparency upfront</span></div>'+
+    '<div class="ai-intro">Every <span class="tok" style="background:#F2EEFD;color:#6b46c1;border-radius:5px;padding:1px 5px;font-weight:600">highlighted</span> phrase traces to a source - no invented flattery.</div>'+
+    '<div class="xnote ok"><span class="xi">✓</span><span>"payments infrastructure" - from her <b>Stripe</b> experience</span></div>'+
+    '<div class="xnote ok"><span class="xi">✓</span><span>"small team to mentor" - matches the Acme brief</span></div>'+
+    '<div class="xnote warn"><span class="xi">!</span><span>I left out comp specifics beyond the band - add if you prefer transparency upfront</span></div>'+
     '<div class="xnote ai"><span class="xi grad grain">✦</span><span>Best send time for senior eng replies: <b>Tue–Thu, 8–9am</b></span></div>'+
   '</div>';
   return {main:main,aside:aside};
@@ -880,13 +880,13 @@ VIEWS['share-client']=function(){
   var main='<div class="crumb"><span class="b" data-nav="shortlist">Shortlist</span><span class="sep">/</span><span>Share with client</span></div>'+
     '<div class="sec-h"><div class="lft"><h1 class="title" style="margin:0">Client-ready shortlist</h1></div><span class="schip s-filled"><span class="d"></span>Preview</span></div>'+
     '<div class="subtitle">This is what Sarah Chen at Acme Corp will see. Clean, no internal notes, no AI jargon.</div>'+
-    '<div class="card" style="padding:0;overflow:hidden"><div style="padding:18px 22px;border-bottom:1px solid var(--border-soft);display:flex;align-items:center;gap:12px"><div class="pl grad grain" style="width:40px;height:40px;border-radius:11px;display:grid;place-items:center;color:#fff;font-weight:700;font-family:var(--font-d)">AC</div><div><div style="font-family:var(--font-d);font-weight:700;font-size:16px">Senior Backend Engineer — Shortlist</div><div style="font-size:12.5px;color:var(--muted)">Prepared by Talent Co · 3 candidates · 15 June 2026</div></div></div><div style="padding:6px 22px 16px">'+rows+'</div></div>'+
+    '<div class="card" style="padding:0;overflow:hidden"><div style="padding:18px 22px;border-bottom:1px solid var(--border-soft);display:flex;align-items:center;gap:12px"><div class="pl grad grain" style="width:40px;height:40px;border-radius:11px;display:grid;place-items:center;color:#fff;font-weight:700;font-family:var(--font-d)">AC</div><div><div style="font-family:var(--font-d);font-weight:700;font-size:16px">Senior Backend Engineer - Shortlist</div><div style="font-size:12.5px;color:var(--muted)">Prepared by Talent Co · 3 candidates · 15 June 2026</div></div></div><div style="padding:6px 22px 16px">'+rows+'</div></div>'+
     '<div style="display:flex;gap:10px;margin-top:16px"><button class="btn-primary" data-action="share-link"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg> Copy share link</button><button class="btn-ghost" data-toast="Exporting PDF (demo)">Export PDF</button><button class="btn-ghost" data-toast="Opened email composer (demo)">Email to client</button></div>';
   var aside='<div class="ai-head"><span class="gi grad grain"></span><h3>Before you send</h3></div><div class="ai-body">'+
     '<div class="xnote ok"><span class="xi">✓</span><span>Stripped all internal notes &amp; status history</span></div>'+
     '<div class="xnote ok"><span class="xi">✓</span><span>Fit scores shown as simple %, no model details</span></div>'+
-    '<div class="xnote warn"><span class="xi">!</span><span>Anaya\'s 90-day notice isn\'t shown — mention it to Sarah directly</span></div>'+
-    '<div class="ai-intro"><b>Tip:</b> clients open shortlists 3× more when sent before noon. It\'s 9:14am — good window.</div>'+
+    '<div class="xnote warn"><span class="xi">!</span><span>Anaya\'s 90-day notice isn\'t shown - mention it to Sarah directly</span></div>'+
+    '<div class="ai-intro"><b>Tip:</b> clients open shortlists 3× more when sent before noon. It\'s 9:14am - good window.</div>'+
   '</div>';
   return {main:main,aside:aside};
 };
@@ -933,10 +933,10 @@ VIEWS.candidates=function(){
 /* ============== BREWING VIEWS ============== */
 function brew(title,desc,chips){return {main:'<div class="crumb"><span class="b" data-nav="overview">Overview</span><span class="sep">/</span><span>'+title+'</span></div><div class="brew"><div class="orb grad grain">✦</div><h1>'+title+'</h1><p>'+desc+'</p><div class="bchips">'+chips.map(function(c){return '<div class="bchip" '+(c[1]||'data-action="open-chat"')+'>'+c[0]+'</div>';}).join('')+'</div></div>',aside:asideDefault()};}
 VIEWS.outreach_hub=function(){return brew('Outreach','All your sequences and drafts live here.',[]);};
-VIEWS.reports=function(){return brew('Reports','Placement metrics, time-to-fill, and client-ready reports — generated on demand.',[['✦ Generate this month\'s report'],['View BluePeak close-out','data-nav="share-client"']]);};
-VIEWS.knowledge=function(){return brew('Knowledge','Your agency\'s playbooks, client preferences, and past placements — the memory your copilot draws on.',[['✦ What does Acme dislike in candidates?'],['Ask anything']]);};
+VIEWS.reports=function(){return brew('Reports','Placement metrics, time-to-fill, and client-ready reports - generated on demand.',[['✦ Generate this month\'s report'],['View BluePeak close-out','data-nav="share-client"']]);};
+VIEWS.knowledge=function(){return brew('Knowledge','Your agency\'s playbooks, client preferences, and past placements - the memory your copilot draws on.',[['✦ What does Acme dislike in candidates?'],['Ask anything']]);};
 VIEWS.settings=function(){return brew('Settings','Workspace, seats, and AI preferences.',[['Manage seats','data-toast="Seats (demo)"'],['AI behaviour','data-action="open-chat"']]);};
-VIEWS.help=function(){return brew('Help','Stuck? The copilot knows the whole product — just ask it.',[['✦ How do I lock a shortlist?'],['✦ How does AI fit scoring work?']]);};
+VIEWS.help=function(){return brew('Help','Stuck? The copilot knows the whole product - just ask it.',[['✦ How do I lock a shortlist?'],['✦ How does AI fit scoring work?']]);};
 
 /* ============== INTERACTIVITY GLUE ============== */
 var app=$('app');
@@ -969,14 +969,14 @@ function handleAction(a,t,opts,e){
     case 'close-chat': $('cbDrawer').classList.remove('open'); break;
     case 'cb-send': cbSend(); break;
     case 'search': openChat(); break;
-    case 'notifs': toast('3 new — 2 SLA alerts, 1 acceptance'); break;
+    case 'notifs': toast('3 new - 2 SLA alerts, 1 acceptance'); break;
     case 'profile': toast('Meera Joshi · Senior Recruiter'); break;
     case 'parse': doParse(); break;
     case 'manual': $('npPaste').classList.add('hidden'); $('npForm').classList.remove('hidden'); $('npForm').innerHTML=npFormHTML(true); $('npAside').innerHTML='<div class="ai-intro"><b>Manual entry.</b> Prefer to paste a brief? Hit <b>Switch to AI parse</b> any time and I\'ll fill these in for you.</div>'; break;
-    case 'switch-ai': $('npForm').classList.add('hidden'); $('npPaste').classList.remove('hidden'); $('npAside').innerHTML='<div class="ai-intro"><b>Paste a brief and I\'ll structure it.</b><br>Company, role, skills, comp, requirements — extracted and flagged.</div>'; break;
-    case 'create-project': toast('Project created — Acme Corp · Senior Backend Engineer'); setTimeout(function(){go('add-candidates',{projId:'acme'});},650); break;
+    case 'switch-ai': $('npForm').classList.add('hidden'); $('npPaste').classList.remove('hidden'); $('npAside').innerHTML='<div class="ai-intro"><b>Paste a brief and I\'ll structure it.</b><br>Company, role, skills, comp, requirements - extracted and flagged.</div>'; break;
+    case 'create-project': toast('Project created - Acme Corp · Senior Backend Engineer'); setTimeout(function(){go('add-candidates',{projId:'acme'});},650); break;
     case 'run-analysis': go('analysis',{projId:STATE.projId||'acme'}); break;
-    case 'method': toast(t.getAttribute('data-m')+' — (demo)'); break;
+    case 'method': toast(t.getAttribute('data-m')+' - (demo)'); break;
     case 'pooladd': var pc=t.closest('.pcard'); if(pc&&!pc.classList.contains('added')){pc.classList.add('added');t.innerHTML='✓ Added';toast((pc.getAttribute('data-name')||'Candidate')+' added to project');} break;
     case 'toggle-sw': e.stopPropagation(); var m=$('swmenu'); var wasOpen=m.classList.contains('open'); closeMenus(); if(!wasOpen)m.classList.add('open'); break;
     case 'toggle-sw2': e.stopPropagation(); var m2=$('swmenu2'); var wo2=m2.classList.contains('open'); closeMenus(); if(!wo2)m2.classList.add('open'); break;
@@ -997,7 +997,7 @@ function handleAction(a,t,opts,e){
     case 'share-link': toast('Share link copied to clipboard'); break;
     case 'ovar': t.parentNode.querySelectorAll('.ovar').forEach(function(x){x.classList.remove('active');}); t.classList.add('active'); setOutreachTone(t.getAttribute('data-v')); break;
     case 'regen': toast('Regenerated a fresh draft'); break;
-    case 'send-outreach': toast('Message sent (demo) — I\'ll watch for a reply'); break;
+    case 'send-outreach': toast('Message sent (demo) - I\'ll watch for a reply'); break;
   }
 }
 
@@ -1009,10 +1009,10 @@ function doParse(){
     $('npPaste').classList.add('hidden'); $('npForm').classList.remove('hidden'); $('npForm').innerHTML=npFormHTML(false);
     $('npAside').innerHTML='<div class="xsum"><div class="xn">11 fields extracted</div><div class="xs">From 1 pasted brief · ready to review</div></div>'+
       '<div class="xnote ok" style="margin-top:13px"><span class="xi">✓</span><span>Found <b>4 must-have skills</b> and 2 nice-to-haves</span></div>'+
-      '<div class="xnote ok"><span class="xi">✓</span><span>Seniority <b>Senior</b> — from "7+ years"</span></div>'+
-      '<div class="xnote warn"><span class="xi">!</span><span><b>Comp</b> read as ₹35–45 LPA — confirm before publishing</span></div>'+
+      '<div class="xnote ok"><span class="xi">✓</span><span>Seniority <b>Senior</b> - from "7+ years"</span></div>'+
+      '<div class="xnote warn"><span class="xi">!</span><span><b>Comp</b> read as ₹35–45 LPA - confirm before publishing</span></div>'+
       '<div class="xnote warn"><span class="xi">!</span><span>Notice set to <b>≤ 60 days</b> from "long notice is tough"</span></div>'+
-      '<div class="xnote warn"><span class="xi">!</span><span><b>Team leadership</b> ambiguous — flagged on the form</span></div>'+
+      '<div class="xnote warn"><span class="xi">!</span><span><b>Team leadership</b> ambiguous - flagged on the form</span></div>'+
       '<div class="xprov" style="margin-top:8px"><span class="gi grad grain"></span> Based on the brief · nothing invented</div>';
   },1300);
 }
@@ -1021,8 +1021,8 @@ function doParse(){
 function setOutreachTone(tone){
   var c=cand(STATE.candId)||cand('anaya'); var fn=c.name.split(' ')[0]; var co=c.co.replace('ex-','');
   var msgs={
-    warm:'Hi <span class="tok">'+fn+'</span>,\n\nI came across your work at <span class="tok">'+co+'</span> — the depth on <span class="tok">payments infrastructure</span> stood out. I\'m partnering with <span class="tok">Acme Corp</span> on a Senior Backend Engineer role where that exact experience would land well: scaling Node.js + PostgreSQL services with a small team to mentor.\n\nIt\'s a hybrid role in Bangalore, comp in the ₹35–45 LPA band. Given your background I think you\'d skip straight to the technical conversation.\n\nWould you be open to a short call this week?\n\nBest,\nMeera',
-    direct:'Hi <span class="tok">'+fn+'</span> — I\'m hiring a <span class="tok">Senior Backend Engineer</span> at <span class="tok">Acme Corp</span> (Bangalore, hybrid, ₹35–45 LPA). Your <span class="tok">'+co+'</span> backend experience is a strong match. Open to a quick call this week?\n\n— Meera',
+    warm:'Hi <span class="tok">'+fn+'</span>,\n\nI came across your work at <span class="tok">'+co+'</span> - the depth on <span class="tok">payments infrastructure</span> stood out. I\'m partnering with <span class="tok">Acme Corp</span> on a Senior Backend Engineer role where that exact experience would land well: scaling Node.js + PostgreSQL services with a small team to mentor.\n\nIt\'s a hybrid role in Bangalore, comp in the ₹35–45 LPA band. Given your background I think you\'d skip straight to the technical conversation.\n\nWould you be open to a short call this week?\n\nBest,\nMeera',
+    direct:'Hi <span class="tok">'+fn+'</span> - I\'m hiring a <span class="tok">Senior Backend Engineer</span> at <span class="tok">Acme Corp</span> (Bangalore, hybrid, ₹35–45 LPA). Your <span class="tok">'+co+'</span> backend experience is a strong match. Open to a quick call this week?\n\n- Meera',
     formal:'Dear <span class="tok">'+fn+'</span>,\n\nI am reaching out regarding a Senior Backend Engineer opportunity with <span class="tok">Acme Corp</span>. Your experience at <span class="tok">'+co+'</span>, particularly in backend systems at scale, aligns closely with the requirements.\n\nThe position is hybrid in Bangalore with compensation in the ₹35–45 LPA range. I would welcome the opportunity to discuss it with you.\n\nKind regards,\nMeera Joshi\nTalent Co'
   };
   $('omsg').innerHTML=msgs[tone]||msgs.warm;
@@ -1032,7 +1032,7 @@ function setOutreachTone(tone){
 function openStatusPop(el,candId,e){
   e.stopPropagation(); var pop=$('pop'); var c=cand(candId);
   var opts=Object.keys(STATUSES).map(function(k){var s=STATUSES[k];return '<div class="popopt" data-action="set-status" data-st="'+k+'" data-cand="'+candId+'"><span class="d" style="background:'+s.color+'"></span>'+s.label+(c&&c.status===k?' <span style="margin-left:auto;color:var(--blue)">✓</span>':'')+'</div>';}).join('');
-  pop.innerHTML='<div class="ph">Change status</div>'+opts+'<div class="ph" style="margin-top:4px">Why? (logged with history)</div><textarea placeholder="e.g. Strong screen — moving to interview"></textarea><button class="savebtn" data-action="set-status" data-st="'+(c?nextStatus(c.status):'screened')+'" data-cand="'+candId+'">Save change</button>';
+  pop.innerHTML='<div class="ph">Change status</div>'+opts+'<div class="ph" style="margin-top:4px">Why? (logged with history)</div><textarea placeholder="e.g. Strong screen - moving to interview"></textarea><button class="savebtn" data-action="set-status" data-st="'+(c?nextStatus(c.status):'screened')+'" data-cand="'+candId+'">Save change</button>';
   var r=el.getBoundingClientRect(); pop.style.left=Math.min(r.left,window.innerWidth-280)+'px'; pop.style.top=(r.bottom+6)+'px'; pop.classList.add('open');
 }
 
@@ -1041,15 +1041,15 @@ function openNotes(candId){
   var c=cand(candId)||cand('anaya'); var scrim=$('scrim');
   var hist=[
     ['grad','✦','<b>AI</b> ranked '+c.name.split(' ')[0]+' at '+c.fit+'%','Built from '+c.sources,'8 min ago'],
-    ['#E8F0FE|#174EA6','MJ','<b>You</b> moved to '+STATUSES[c.status].label,'Strong technical screen — solid on system design.','2 days ago'],
-    ['#FEF7E0|#C98A00','✦','<b>AI</b> flagged notice period','90-day notice — Acme prefers under 60. Confirm early.','2 days ago']
+    ['#E8F0FE|#174EA6','MJ','<b>You</b> moved to '+STATUSES[c.status].label,'Strong technical screen - solid on system design.','2 days ago'],
+    ['#FEF7E0|#C98A00','✦','<b>AI</b> flagged notice period','90-day notice - Acme prefers under 60. Confirm early.','2 days ago']
   ].map(function(h){var bg,col;if(h[0]==='grad'){return '<div class="titem"><div class="ti-d grad grain" style="color:#fff">'+h[1]+'</div><div><div class="tt">'+h[2]+'</div><div class="tj">'+h[3]+'</div><div class="tm">'+h[4]+'</div></div></div>';}var parts=h[0].split('|');return '<div class="titem"><div class="ti-d" style="background:'+parts[0]+';color:'+(parts[1]||'#5F6368')+'">'+h[1]+'</div><div><div class="tt">'+h[2]+'</div><div class="tj">'+h[3]+'</div><div class="tm">'+h[4]+'</div></div></div>';}).join('');
   $('modal').innerHTML='<div class="modal-h"><img src="'+av(c.seed,76)+'"><div><div class="mt">'+c.name+'</div><div class="ms">Notes &amp; status history</div></div><div class="x" data-action="close-modal">✕</div></div><div class="modal-b"><div class="thread" id="thread">'+hist+'</div><div class="addcomment"><input id="noteInput" placeholder="Add a note…"><button data-action="add-note">Add</button></div></div>';
   scrim.classList.add('open');
 }
 $('scrim').addEventListener('click',function(e){if(e.target===$('scrim'))$('scrim').classList.remove('open');var x=e.target.closest('[data-action="close-modal"]');if(x)$('scrim').classList.remove('open');});
 
-/* rail collapse — single control, icon state */
+/* rail collapse - single control, icon state */
 function toggleRail(){$('rail').classList.toggle('collapsed');$('tbLeft').classList.toggle('shrunk');}
 $('railToggle').addEventListener('click',toggleRail);
 
@@ -1070,20 +1070,20 @@ function botReply(q){
   // candidate name lookup
   var named=CANDS.find(function(c){return s.indexOf(c.name.toLowerCase())>=0||s.indexOf(c.name.split(' ')[0].toLowerCase())>=0;});
   if(/(create|new|start).*(project|role|req)/.test(s)){cbPush('ai','Starting a new project for you. Paste the client\'s brief and I\'ll structure the role automatically.'+did('New project','new-project'));cbChips(['Parse a sample brief','Add candidates','Top candidates for Acme']);return;}
-  if(/(draft|write|send).*(outreach|message|email|note)/.test(s)||(/outreach/.test(s)&&named)){var oc=named?named.id:'anaya';cbPush('ai','Drafting a personalised outreach to <b>'+(named?named.name:'Anaya Krishnan')+'</b> — pulling real details from their background so it doesn\'t read like a template.'+did('outreach draft','outreach',{candId:oc}));cbChips(['Make it shorter','Best time to send?','Add to shortlist']);return;}
-  if(/(sla|breach|risk|behind|urgent|overdue)/.test(s)){cbPush('ai','<b>Nimbus AI — DevOps Lead</b> breaches SLA in <b>2 days</b> and only has mid-funnel candidates. Orbit Health is the next watch item (4 days). Opening Nimbus so you can act.'+did('Nimbus AI workspace','workspace',{projId:'nimbus'}));cbChips(['Source more for Nimbus','Who\'s the top candidate?','Show all projects']);return;}
-  if(/(shortlist|lock|finalise|finalize)/.test(s)){cbPush('ai','Here\'s the Acme shortlist — Anaya, Marcus and Sofia. You can reorder, drop anyone, then lock it to share with the client.'+did('shortlist','shortlist'));cbChips(['Share with client','Add a 4th candidate','Draft outreach to all']);return;}
-  if(/(share|send).*(client|sarah)/.test(s)||/client.?ready|client report/.test(s)){cbPush('ai','Prepared the client-ready shortlist for Sarah at Acme — internal notes and AI jargon stripped out.'+did('client preview','share-client'));cbChips(['Copy share link','Export PDF','Back to pipeline']);return;}
-  if(named&&/(compare|vs|versus|better)/.test(s)){cbPush('ai','<b>'+named.name+'</b> ('+named.fit+'%) vs the field: '+named.strengths[0]+'. Main caveat — '+named.concerns[0].toLowerCase()+'. Opening the full breakdown.'+did(named.name.split(' ')[0]+'\'s analysis','candidate',{candId:named.id}));cbChips(['Draft outreach','Add to shortlist','Show top candidates']);return;}
-  if(named){cbPush('ai','<b>'+named.name+'</b> — '+named.role+' ('+named.co+'), <b>'+named.fit+'% fit</b>, currently '+STATUSES[named.status].label.toLowerCase()+'. '+named.strengths[0]+'. Opening their profile.'+did(named.name.split(' ')[0]+'\'s profile','candidate',{candId:named.id}));cbChips(['Why this score?','Draft outreach','Compare to Marcus']);return;}
+  if(/(draft|write|send).*(outreach|message|email|note)/.test(s)||(/outreach/.test(s)&&named)){var oc=named?named.id:'anaya';cbPush('ai','Drafting a personalised outreach to <b>'+(named?named.name:'Anaya Krishnan')+'</b> - pulling real details from their background so it doesn\'t read like a template.'+did('outreach draft','outreach',{candId:oc}));cbChips(['Make it shorter','Best time to send?','Add to shortlist']);return;}
+  if(/(sla|breach|risk|behind|urgent|overdue)/.test(s)){cbPush('ai','<b>Nimbus AI - DevOps Lead</b> breaches SLA in <b>2 days</b> and only has mid-funnel candidates. Orbit Health is the next watch item (4 days). Opening Nimbus so you can act.'+did('Nimbus AI workspace','workspace',{projId:'nimbus'}));cbChips(['Source more for Nimbus','Who\'s the top candidate?','Show all projects']);return;}
+  if(/(shortlist|lock|finalise|finalize)/.test(s)){cbPush('ai','Here\'s the Acme shortlist - Anaya, Marcus and Sofia. You can reorder, drop anyone, then lock it to share with the client.'+did('shortlist','shortlist'));cbChips(['Share with client','Add a 4th candidate','Draft outreach to all']);return;}
+  if(/(share|send).*(client|sarah)/.test(s)||/client.?ready|client report/.test(s)){cbPush('ai','Prepared the client-ready shortlist for Sarah at Acme - internal notes and AI jargon stripped out.'+did('client preview','share-client'));cbChips(['Copy share link','Export PDF','Back to pipeline']);return;}
+  if(named&&/(compare|vs|versus|better)/.test(s)){cbPush('ai','<b>'+named.name+'</b> ('+named.fit+'%) vs the field: '+named.strengths[0]+'. Main caveat - '+named.concerns[0].toLowerCase()+'. Opening the full breakdown.'+did(named.name.split(' ')[0]+'\'s analysis','candidate',{candId:named.id}));cbChips(['Draft outreach','Add to shortlist','Show top candidates']);return;}
+  if(named){cbPush('ai','<b>'+named.name+'</b> - '+named.role+' ('+named.co+'), <b>'+named.fit+'% fit</b>, currently '+STATUSES[named.status].label.toLowerCase()+'. '+named.strengths[0]+'. Opening their profile.'+did(named.name.split(' ')[0]+'\'s profile','candidate',{candId:named.id}));cbChips(['Why this score?','Draft outreach','Compare to Marcus']);return;}
   if(/(top|best|strongest|ranked|good).*(candidate|fit|match)/.test(s)||/who.*(should|best|top)/.test(s)){cbPush('ai','For <b>Acme Corp</b>, the ranking is led by <b>Anaya Krishnan (87%)</b>, then Marcus Lee (81%) and Sofia Almeida (64%). Opening the ranked pipeline.'+did('Acme pipeline','workspace',{projId:'acme'}));cbChips(['Open Anaya\'s profile','Lock a shortlist','Draft outreach to Anaya']);return;}
-  if(/(add|source|find).*(candidate|people|talent)/.test(s)){cbPush('ai','Opening sourcing for Acme — I\'ve already found <b>3 strong matches in your pool</b> so you don\'t start from scratch.'+did('add candidates','add-candidates',{projId:'acme'}));cbChips(['Run AI analysis','Show top candidates']);return;}
-  if(/(project|role)s?\b/.test(s)&&/(show|list|all|my|open)/.test(s)){cbPush('ai','You have <b>9 open roles</b>. Opening the full list — 2 need attention today.'+did('projects','projects'));cbChips(['Who\'s breaching SLA?','Create a new project']);return;}
-  if(/(overview|home|today|morning|summary|dashboard)/.test(s)){cbPush('ai','Here\'s your day: <b>4 things need you</b> — 2 SLA risks, 3 new Acme matches, and Marcus\'s acceptance to confirm. Opening your overview.'+did('overview','overview'));cbChips(['Who\'s breaching SLA?','Top candidates for Acme']);return;}
-  if(/(fit|score|how).*(work|calculat|comput|mean)/.test(s)||/how.*fit/.test(s)){cbPush('ai','<b>Fit score</b> weighs three things: skills match against the brief (50%), relevant experience &amp; seniority (30%), and logistics like notice period &amp; comp (20%). Every score traces back to source documents — nothing invented.');cbChips(['Show top candidates','Open Anaya\'s profile']);return;}
-  if(/(hi|hello|hey|yo)\b/.test(s)&&s.length<12){cbPush('ai','Hey Meera 👋 I can run pretty much anything here — try <b>"who\'s breaching SLA?"</b>, <b>"draft outreach to Anaya"</b>, or <b>"create a new project"</b>.');cbChips(['Top candidates for Acme','Who\'s breaching SLA?','Create a new project']);return;}
+  if(/(add|source|find).*(candidate|people|talent)/.test(s)){cbPush('ai','Opening sourcing for Acme - I\'ve already found <b>3 strong matches in your pool</b> so you don\'t start from scratch.'+did('add candidates','add-candidates',{projId:'acme'}));cbChips(['Run AI analysis','Show top candidates']);return;}
+  if(/(project|role)s?\b/.test(s)&&/(show|list|all|my|open)/.test(s)){cbPush('ai','You have <b>9 open roles</b>. Opening the full list - 2 need attention today.'+did('projects','projects'));cbChips(['Who\'s breaching SLA?','Create a new project']);return;}
+  if(/(overview|home|today|morning|summary|dashboard)/.test(s)){cbPush('ai','Here\'s your day: <b>4 things need you</b> - 2 SLA risks, 3 new Acme matches, and Marcus\'s acceptance to confirm. Opening your overview.'+did('overview','overview'));cbChips(['Who\'s breaching SLA?','Top candidates for Acme']);return;}
+  if(/(fit|score|how).*(work|calculat|comput|mean)/.test(s)||/how.*fit/.test(s)){cbPush('ai','<b>Fit score</b> weighs three things: skills match against the brief (50%), relevant experience &amp; seniority (30%), and logistics like notice period &amp; comp (20%). Every score traces back to source documents - nothing invented.');cbChips(['Show top candidates','Open Anaya\'s profile']);return;}
+  if(/(hi|hello|hey|yo)\b/.test(s)&&s.length<12){cbPush('ai','Hey Meera 👋 I can run pretty much anything here - try <b>"who\'s breaching SLA?"</b>, <b>"draft outreach to Anaya"</b>, or <b>"create a new project"</b>.');cbChips(['Top candidates for Acme','Who\'s breaching SLA?','Create a new project']);return;}
   // fallback
-  cbPush('ai','I can do that kind of thing right from here — navigation, summaries, drafting, sourcing. Want me to start with one of these?');
+  cbPush('ai','I can do that kind of thing right from here - navigation, summaries, drafting, sourcing. Want me to start with one of these?');
   cbChips(['Top candidates for Acme','Who\'s breaching SLA?','Create a new project','Draft outreach to Anaya']);
 }
 
@@ -1091,7 +1091,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeMenus(
 
 /* ============== INIT ============== */
 go('overview');
-cbPush('ai','Hi Meera 👋 I\'m your copilot. I can <b>answer</b> questions and <b>do</b> things — navigate, draft, source, summarise. Just tell me what you need.');
+cbPush('ai','Hi Meera 👋 I\'m your copilot. I can <b>answer</b> questions and <b>do</b> things - navigate, draft, source, summarise. Just tell me what you need.');
 cbChips(['Top candidates for Acme','Who\'s breaching SLA?','Create a new project','Draft outreach to Anaya']);
 </script>
 </body>

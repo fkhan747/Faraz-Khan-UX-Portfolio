@@ -165,23 +165,11 @@ const AWARDS = [
   { t: "Humanity Mindset Winner", s: "Persistent. For empathetic, people-first design." },
 ];
 
-// A tool pill with its brand logo (white glyph). If the logo fails to load,
-// onError hides the image and the label stands alone.
-function ToolPill({ name, slug }) {
+// Text-only tool pill. Brand logos were dropped for consistency: several tools
+// (e.g. Adobe products) have no reliable logo source, so it was all-or-nothing.
+function ToolPill({ name }) {
   return (
-    <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full dark-card text-[#F4F3FA] text-sm font-medium border border-white/10">
-      {slug && (
-        <img
-          src={`https://cdn.simpleicons.org/${slug}/ffffff`}
-          alt=""
-          aria-hidden="true"
-          width="16"
-          height="16"
-          loading="lazy"
-          className="h-4 w-4 object-contain"
-          onError={(e) => { e.currentTarget.style.display = "none"; }}
-        />
-      )}
+    <span className="px-4 py-2 rounded-full dark-card text-[#F4F3FA] text-sm font-medium border border-white/10">
       {name}
     </span>
   );

@@ -62,7 +62,7 @@ export default function Projects() {
               className={`relative col-span-12 md:col-span-4 rise rise-${(i % 6) + 1}`}
             >
               <Link to={c.href} className="group block rounded-3xl overflow-hidden lift">
-                <CaseCover img={c.coverImg} title={c.title} subtitle={c.subtitle} badge={c.status} />
+                <CaseCover img={c.coverImg} title={c.title} subtitle={c.subtitle} />
               </Link>
               {c.prototypeUrl && (
                 <a
@@ -70,9 +70,9 @@ export default function Projects() {
                   target="_blank"
                   rel="noopener noreferrer"
                   data-testid={`concept-prototype-${c.slug}`}
-                  className="absolute top-4 right-4 z-10 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white text-[#F5379B] text-[11px] font-bold uppercase tracking-wide shadow-md hover:bg-[#F5379B] hover:text-white transition-colors"
+                  className="absolute top-4 left-4 z-10 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white text-[#F5379B] text-[10px] font-mono font-bold uppercase tracking-widest shadow-md hover:bg-white/90 transition-colors"
                 >
-                  Jump to Prototype <ArrowUpRight size={13} />
+                  {c.status} <ArrowUpRight size={13} />
                 </a>
               )}
             </div>
