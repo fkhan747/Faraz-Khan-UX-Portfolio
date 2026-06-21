@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- NOTE: replace the https://farazkhan.netlify.app base with your real domain once it's live. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://farazkhan.netlify.app/</loc><priority>1.0</priority></url>
-  <url><loc>https://farazkhan.netlify.app/projects</loc><priority>0.9</priority></url>
-  <url><loc>https://farazkhan.netlify.app/about</loc><priority>0.8</priority></url>
-  <url><loc>https://farazkhan.netlify.app/contact</loc><priority>0.7</priority></url>
-  <url><loc>https://farazkhan.netlify.app/case/finvista</loc><priority>0.8</priority></url>
-  <url><loc>https://farazkhan.netlify.app/case/aurora</loc><priority>0.8</priority></url>
-  <url><loc>https://farazkhan.netlify.app/case/recruitos</loc><priority>0.8</priority></url>
-  <url><loc>https://farazkhan.netlify.app/case/knowledgeos</loc><priority>0.8</priority></url>
-  <url><loc>https://farazkhan.netlify.app/case/decisionos</loc><priority>0.8</priority></url>
+  <url><loc>https://www.khanfaraz.in/</loc><priority>1.0</priority></url>
+  <url><loc>https://www.khanfaraz.in/projects</loc><priority>0.9</priority></url>
+  <url><loc>https://www.khanfaraz.in/about</loc><priority>0.8</priority></url>
+  <url><loc>https://www.khanfaraz.in/contact</loc><priority>0.7</priority></url>
+  <url><loc>https://www.khanfaraz.in/case/finvista</loc><priority>0.8</priority></url>
+  <url><loc>https://www.khanfaraz.in/case/aurora</loc><priority>0.8</priority></url>
+  <url><loc>https://www.khanfaraz.in/case/recruitos</loc><priority>0.8</priority></url>
+  <url><loc>https://www.khanfaraz.in/case/knowledgeos</loc><priority>0.8</priority></url>
+  <url><loc>https://www.khanfaraz.in/case/decisionos</loc><priority>0.8</priority></url>
 </urlset>

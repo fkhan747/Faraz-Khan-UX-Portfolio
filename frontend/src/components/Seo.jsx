@@ -9,7 +9,7 @@ import { useEffect } from "react";
 const NAME = "Faraz Khan";
 const DEFAULT_DESC =
   "Senior UX Lead with 12+ years bridging design, data, and development. Enterprise platforms, design systems, and AI-native product concepts.";
-const OG_IMAGE = "/images/faraz.jpg";
+const OG_IMAGE = "https://www.khanfaraz.in/images/faraz.jpg";
 
 function upsert(selector, attr, key, content) {
   let el = document.head.querySelector(selector);

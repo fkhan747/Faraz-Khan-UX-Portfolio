@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# NOTE: replace the domain below with your real domain once it's live.
-Sitemap: https://farazkhan.netlify.app/sitemap.xml
+Sitemap: https://www.khanfaraz.in/sitemap.xml
