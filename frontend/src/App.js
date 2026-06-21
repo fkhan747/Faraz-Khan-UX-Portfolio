@@ -2,6 +2,7 @@ import "@/App.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import ScrollToTop from "./components/ScrollToTop";
+import { LightboxProvider } from "./components/Lightbox";
 import Landing from "./pages/Landing";
 import About from "./pages/About";
 import Projects from "./pages/Projects";
@@ -24,6 +25,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <ScrollToTop />
+        <LightboxProvider>
         <Layout>
           <Routes>
             <Route path="/" element={<Landing />} />
@@ -41,6 +43,7 @@ function App() {
             <Route path="*" element={<Landing />} />
           </Routes>
         </Layout>
+        </LightboxProvider>
       </BrowserRouter>
     </div>
   );

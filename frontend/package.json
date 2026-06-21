@@ -65,6 +65,7 @@
     "start": "craco start",
     "build": "craco build",
     "postbuild": "react-snap || true",
+    "deploy": "npm run build && netlify deploy --prod --dir=build",
     "test": "craco test"
   },
   "browserslist": {

@@ -3,6 +3,7 @@ import { ArrowLeft, Mail, Check, X, Star, AlertTriangle } from "lucide-react";
 import { aurora as au } from "../data/auroraCase";
 import { PROFILE } from "../data/content";
 import Seo from "../components/Seo";
+import Zoomable from "../components/Zoomable";
 
 const SectionLabel = ({ num, name }) => (
   <div className="flex items-center gap-4 mb-6">
@@ -54,9 +55,9 @@ export default function AuroraCaseStudy() {
 
       {/* Hero image */}
       <div className="px-6 md:px-10 lg:px-16">
-        <div className="rounded-3xl overflow-hidden dark-card p-6 md:p-10" data-testid="case-hero-image">
-          <img src="/aurora/04_RBJ_Properties_Weekly.jpg" alt="Aurora hero: Recurring Batch Journey, Weekly cadence" className="w-full h-auto object-contain rounded-xl" loading="lazy" />
-        </div>
+        <Zoomable src="/aurora/04_RBJ_Properties_Weekly.jpg" alt="Aurora hero: Recurring Batch Journey, Weekly cadence" caption="Recurring Batch Journey — Weekly cadence" className="rounded-3xl overflow-hidden dark-card p-6 md:p-10">
+          <img src="/aurora/04_RBJ_Properties_Weekly.jpg" alt="Aurora hero: Recurring Batch Journey, Weekly cadence" className="w-full h-auto object-contain rounded-xl" loading="eager" />
+        </Zoomable>
       </div>
 
       {/* 01 OVERVIEW */}
@@ -328,9 +329,9 @@ export default function AuroraCaseStudy() {
         <div className="grid md:grid-cols-2 gap-6">
           {au.design.sketches.map((s) => (
             <figure key={s.title} className="rounded-3xl dark-card overflow-hidden">
-              <div className="bg-[#FAF5E8] p-4 md:p-6">
+              <Zoomable src={s.src} alt={s.title} caption={s.desc} className="bg-[#FAF5E8] p-4 md:p-6">
                 <img src={s.src} alt={s.title} loading="lazy" className="w-full h-auto" />
-              </div>
+              </Zoomable>
               <figcaption className="p-6">
                 <span className="text-[10px] font-mono uppercase tracking-widest text-[#F5379B]">{s.tag}</span>
                 <h4 className="mt-2 font-display text-xl font-black ">{s.title}</h4>
@@ -345,9 +346,9 @@ export default function AuroraCaseStudy() {
         <div className="grid md:grid-cols-2 gap-6">
           {au.design.wireframes.map((w) => (
             <figure key={w.title} className="rounded-3xl dark-card overflow-hidden">
-              <div className="bg-white p-4 md:p-6 border-b border-white/5">
+              <Zoomable src={w.src} alt={w.title} caption={w.desc} className="bg-white p-4 md:p-6 border-b border-white/5">
                 <img src={w.src} alt={w.title} loading="lazy" className="w-full h-auto" />
-              </div>
+              </Zoomable>
               <figcaption className="p-6">
                 <span className="text-[10px] font-mono uppercase tracking-widest text-[#F5379B]">{w.tag}</span>
                 <h4 className="mt-2 font-display text-lg font-black ">{w.title}</h4>
@@ -362,9 +363,9 @@ export default function AuroraCaseStudy() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {au.design.finalScreens.map((s) => (
             <figure key={s.title} className="rounded-3xl dark-card overflow-hidden">
-              <div className="bg-white p-3 border-b border-white/5">
+              <Zoomable src={s.src} alt={s.title} caption={s.desc} className="bg-white p-3 border-b border-white/5">
                 <img src={s.src} alt={s.title} loading="lazy" className="w-full h-auto rounded-lg" />
-              </div>
+              </Zoomable>
               <figcaption className="p-5">
                 <span className="text-[10px] font-mono uppercase tracking-widest text-[#F5379B]">{s.tag}</span>
                 <h4 className="mt-2 font-display text-base font-black ">{s.title}</h4>

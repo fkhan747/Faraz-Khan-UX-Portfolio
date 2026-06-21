@@ -5,6 +5,7 @@ import {
 } from "lucide-react";
 import { concepts, PROFILE } from "../data/content";
 import Seo from "../components/Seo";
+import Zoomable from "../components/Zoomable";
 
 /**
  * Shared renderer for the AI-native OS-family concept case studies
@@ -492,9 +493,9 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
         <div className="grid md:grid-cols-2 gap-6">
           {r.design.wireframes.map((w) => (
             <figure key={w.title} className="rounded-3xl dark-card overflow-hidden">
-              <div className="bg-white p-4 md:p-6 border-b border-white/5">
+              <Zoomable src={w.src} alt={w.title} caption={w.desc} className="bg-white p-4 md:p-6 border-b border-white/5">
                 <img src={w.src} alt={w.title} loading="lazy" className="w-full h-auto" />
-              </div>
+              </Zoomable>
               <figcaption className="p-6">
                 <span className="text-[10px] font-mono uppercase tracking-widest text-[#F5379B]">{w.tag}</span>
                 <h4 className="mt-2 font-display text-lg font-black ">{w.title}</h4>
@@ -548,9 +549,9 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
         <div className="space-y-6">
           {r.design.finalScreens.map((s) => (
             <figure key={s.title} className="rounded-3xl dark-card overflow-hidden">
-              <div className="bg-white p-4 md:p-6 border-b border-white/5">
+              <Zoomable src={s.src} alt={s.title} caption={s.desc} className="bg-white p-4 md:p-6 border-b border-white/5">
                 <img src={s.src} alt={s.title} loading="lazy" className="w-full h-auto rounded-lg" />
-              </div>
+              </Zoomable>
               <figcaption className="p-6 md:flex md:items-baseline md:gap-6">
                 <div className="md:w-56 md:flex-shrink-0">
                   <span className="text-[10px] font-mono uppercase tracking-widest text-[#F5379B]">{s.tag}</span>

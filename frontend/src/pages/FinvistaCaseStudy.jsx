@@ -4,6 +4,7 @@ import { ArrowLeft, Mail, Check, X, Star } from "lucide-react";
 import { finvista as fv } from "../data/finvistaCase";
 import { PROFILE } from "../data/content";
 import Seo from "../components/Seo";
+import Zoomable from "../components/Zoomable";
 
 /* -- Reusable section header in portfolio voice -- */
 const SectionLabel = ({ num, name, accent = "#075EFD" }) => (
@@ -66,14 +67,14 @@ export default function FinvistaCaseStudy() {
 
       {/* Hero image */}
       <div className="px-6 md:px-10 lg:px-16">
-        <div className="rounded-3xl overflow-hidden dark-card p-6 md:p-10" data-testid="case-hero-image">
+        <Zoomable src="/finvista/004-final-mobile-screens-vehicle-details-progress.png" alt="FinVista hero, refined screens" caption="Refined screens: vehicle details and application progress" className="rounded-3xl overflow-hidden dark-card p-6 md:p-10">
           <img
             src="/finvista/004-final-mobile-screens-vehicle-details-progress.png"
             alt="FinVista hero, refined screens"
             className="w-full h-auto object-contain"
-            loading="lazy"
+            loading="eager"
           />
-        </div>
+        </Zoomable>
       </div>
 
       {/* 01 PROJECT OVERVIEW */}
@@ -214,9 +215,9 @@ export default function FinvistaCaseStudy() {
         <div className="grid md:grid-cols-2 gap-5">
           {fv.research.competitive.map((c) => (
             <div key={c.name} className="dark-card rounded-3xl overflow-hidden">
-              <div className="aspect-[4/3] overflow-hidden bg-white">
+              <Zoomable src={c.image} alt={c.name} caption={c.name} className="aspect-[4/3] overflow-hidden bg-white">
                 <img src={c.image} alt={c.name} loading="lazy" className="w-full h-full object-contain" />
-              </div>
+              </Zoomable>
               <div className="p-6">
                 <h4 className="font-display text-xl font-black mb-2">{c.name}</h4>
                 <p className="text-sm leading-relaxed">{c.notes}</p>
@@ -342,9 +343,9 @@ export default function FinvistaCaseStudy() {
         <p className="text-lg md:text-xl leading-relaxed max-w-6xl text-[#F4F3FA]">{fv.flow.intro}</p>
 
         {/* Flow SVG */}
-        <div className="mt-10 rounded-3xl dark-card p-6 md:p-10 overflow-x-auto">
+        <Zoomable src={fv.flow.diagramSvg} alt={fv.flow.diagramCaption} caption={fv.flow.diagramCaption} className="mt-10 rounded-3xl dark-card p-6 md:p-10 overflow-x-auto">
           <img src={fv.flow.diagramSvg} alt={fv.flow.diagramCaption} loading="lazy" className="w-full h-auto" />
-        </div>
+        </Zoomable>
         <p className="mt-3 text-xs font-mono uppercase tracking-widest text-[#A29CB4] text-center">
           {fv.flow.diagramCaption}
         </p>
@@ -379,7 +380,9 @@ export default function FinvistaCaseStudy() {
         <div className="space-y-8">
           {fv.design.wireframes.batches.map((b, i) => (
             <figure key={i} className="rounded-3xl dark-card p-6 md:p-8">
-              <img src={b.src} alt={b.caption} loading="lazy" className="w-full h-auto" />
+              <Zoomable src={b.src} alt={b.caption} caption={b.caption} className="block">
+                <img src={b.src} alt={b.caption} loading="lazy" className="w-full h-auto" />
+              </Zoomable>
               <figcaption className="mt-4 text-xs font-mono uppercase tracking-widest text-[#A29CB4] text-center">
                 {b.caption}
               </figcaption>
@@ -393,7 +396,9 @@ export default function FinvistaCaseStudy() {
         <div className="space-y-6">
           {fv.design.explorations.images.map((img, i) => (
             <figure key={i} className="rounded-3xl dark-card p-6 md:p-8">
-              <img src={img.src} alt={img.caption} loading="lazy" className="w-full h-auto" />
+              <Zoomable src={img.src} alt={img.caption} caption={img.caption} className="block">
+                <img src={img.src} alt={img.caption} loading="lazy" className="w-full h-auto" />
+              </Zoomable>
               <figcaption className="mt-4 text-xs font-mono uppercase tracking-widest text-[#A29CB4] text-center">
                 {img.caption}
               </figcaption>
@@ -407,9 +412,9 @@ export default function FinvistaCaseStudy() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {fv.design.finalDesign.screens.map((s) => (
             <figure key={s.title} className="rounded-3xl dark-card overflow-hidden">
-              <div className="aspect-[9/16] bg-white p-4 flex items-center justify-center">
+              <Zoomable src={s.src} alt={s.title} caption={s.desc} className="aspect-[9/16] bg-white p-4 flex items-center justify-center">
                 <img src={s.src} alt={s.title} loading="lazy" className="max-w-full max-h-full object-contain" />
-              </div>
+              </Zoomable>
               <figcaption className="p-5">
                 <h4 className="font-display text-base font-black ">{s.title}</h4>
                 <p className="text-sm mt-1 leading-relaxed text-[#F4F3FA]/85">{s.desc}</p>
@@ -443,7 +448,9 @@ export default function FinvistaCaseStudy() {
         <div className="space-y-6">
           {fv.designSystem.panels.map((p, i) => (
             <figure key={i} className="rounded-3xl dark-card p-6 md:p-8">
-              <img src={p.src} alt={p.caption} loading="lazy" className="w-full h-auto" />
+              <Zoomable src={p.src} alt={p.caption} caption={p.caption} className="block">
+                <img src={p.src} alt={p.caption} loading="lazy" className="w-full h-auto" />
+              </Zoomable>
               <figcaption className="mt-4 text-xs font-mono uppercase tracking-widest text-[#A29CB4] text-center">
                 {p.caption}
               </figcaption>
@@ -538,9 +545,9 @@ export default function FinvistaCaseStudy() {
         <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
           {fv.gallery.representative.map((s) => (
             <figure key={s.title} className="rounded-2xl dark-card overflow-hidden">
-              <div className="aspect-[9/16] bg-white p-2 flex items-center justify-center">
+              <Zoomable src={s.src} alt={s.title} caption={s.title} className="aspect-[9/16] bg-white p-2 flex items-center justify-center">
                 <img src={s.src} alt={s.title} loading="lazy" className="max-w-full max-h-full object-contain" />
-              </div>
+              </Zoomable>
               <figcaption className="px-3 py-3 text-[11px] font-mono uppercase tracking-wider text-[#F4F3FA]">
                 {s.title}
               </figcaption>
@@ -549,9 +556,9 @@ export default function FinvistaCaseStudy() {
           {showAll &&
             fv.gallery.all.map((s) => (
               <figure key={s.title} className="rounded-2xl dark-card overflow-hidden">
-                <div className="aspect-[9/16] bg-white p-2 flex items-center justify-center">
+                <Zoomable src={s.src} alt={s.title} caption={s.title} className="aspect-[9/16] bg-white p-2 flex items-center justify-center">
                   <img src={s.src} alt={s.title} loading="lazy" className="max-w-full max-h-full object-contain" />
-                </div>
+                </Zoomable>
                 <figcaption className="px-3 py-3 text-[11px] font-mono uppercase tracking-wider text-[#F4F3FA]">
                   {s.title}
                 </figcaption>
