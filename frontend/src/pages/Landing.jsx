@@ -7,7 +7,7 @@ import Seo from "../components/Seo";
 
 export default function Landing() {
   // The two fully-built case studies (FinVista, Aurora) are featured on the home
-  // page, stacked one below the other. The full list lives on the "My Work" page.
+  // page, side by side. The full list lives on the "My Work" page.
   const featured = projects.filter((p) => p.detail).slice(0, 2);
 
   return (
@@ -23,10 +23,10 @@ export default function Landing() {
                 Senior UX Lead · design · data · development
               </p>
               <h1 className="font-display font-black leading-[1.03] text-4xl sm:text-5xl lg:text-[3.6rem] xl:text-[4rem] tracking-tight rise rise-2" data-testid="hero-headline">
-                I am <span className="italic font-light">Faraz</span>. I make complex products feel <span className="italic font-light">effortless</span>.
+                Hi, I&apos;m <span className="italic font-light">Faraz</span>. I make complex products feel <span className="italic font-light">obvious</span>.
               </h1>
               <p className="mt-6 max-w-xl text-base md:text-lg text-[#A29CB4] leading-relaxed rise rise-3" data-testid="hero-sub">
-                A senior UX lead with 12+ years bridging design, data &amp; development. I turn enterprise dashboards, design systems and AI-native ideas into experiences people actually understand.
+                12+ years across design, data &amp; development. Big believer in clarity over decoration, <span className="text-[#F4F3FA] underline decoration-[#075EFD] decoration-2 underline-offset-4">facts over feelings</span>, and design that gets out of your way. Turns out treating people well is also great for business. Who knew.
               </p>
               <div className="mt-9 flex items-center gap-4 flex-wrap rise rise-3">
                 <Link
@@ -66,7 +66,7 @@ export default function Landing() {
         </Container>
       </section>
 
-      {/* FEATURED CASE STUDIES - two full case studies with the manifesto between them */}
+      {/* FEATURED CASE STUDIES - the two fully-built case studies, side by side */}
       <section className="pb-16" data-testid="featured-project">
         <Container>
         <div className="flex items-baseline justify-between mb-6">
@@ -76,27 +76,13 @@ export default function Landing() {
           </Link>
         </div>
 
-        {/* First featured case study */}
-        {featured[0] && (
-          <Link to={`/case/${featured[0].slug}`} data-testid={`featured-link-${featured[0].slug}`} className="block group rounded-3xl overflow-hidden lift">
-            <CaseCover img={featured[0].coverImg} title={featured[0].title} subtitle={featured[0].subtitle} year={featured[0].year} size="lg" />
-          </Link>
-        )}
-
-        {/* MANIFESTO - sits between the two featured case studies */}
-        <div className="py-16 md:py-24" data-testid="manifesto">
-          <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-6">what i believe</p>
-          <h2 className="font-display text-4xl md:text-5xl lg:text-[3.3rem] font-black leading-[1.4] max-w-none">
-            I believe the best design <span className="italic font-light">disappears</span>. That <span className="bg-[#F5379B] text-white px-3 rounded-full">clarity</span> beats decoration. That the strongest calls follow <span className="underline decoration-[#075EFD] decoration-4 underline-offset-4">facts, not feelings</span>. And that putting people first is what&apos;s best for the business, too.
-          </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {featured.map((p) => (
+            <Link key={p.slug} to={`/case/${p.slug}`} data-testid={`featured-link-${p.slug}`} className="block group rounded-3xl overflow-hidden lift">
+              <CaseCover img={p.coverImg} title={p.title} subtitle={p.subtitle} year={p.year} />
+            </Link>
+          ))}
         </div>
-
-        {/* Second featured case study */}
-        {featured[1] && (
-          <Link to={`/case/${featured[1].slug}`} data-testid={`featured-link-${featured[1].slug}`} className="block group rounded-3xl overflow-hidden lift">
-            <CaseCover img={featured[1].coverImg} title={featured[1].title} subtitle={featured[1].subtitle} year={featured[1].year} size="lg" />
-          </Link>
-        )}
         </Container>
       </section>
 
