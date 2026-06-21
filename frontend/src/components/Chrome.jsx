@@ -39,9 +39,9 @@ export default function Chrome() {
                 to="/"
                 aria-label="Faraz Khan, home"
                 data-testid="chrome-logo"
-                className="group flex items-center flex-shrink-0 -ml-1 mr-1 md:mr-3 px-3 py-2.5 rounded-full hover:bg-[#1A1326]/[0.06] transition-colors"
+                className="flex items-center flex-shrink-0 ml-1 md:ml-2 mr-2 md:mr-4"
               >
-                <Logo className="h-12 w-auto group-hover:scale-105 transition-transform" />
+                <Logo className="h-12 w-auto" />
               </Link>
               {NAV.map((item) => (
                 <NavLink key={item.to} to={item.to} data-testid={`nav-${item.label.toLowerCase()}`} className={navItem}>
