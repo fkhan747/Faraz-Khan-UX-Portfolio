@@ -4,6 +4,7 @@ import { aurora as au } from "../data/auroraCase";
 import { PROFILE } from "../data/content";
 import Seo from "../components/Seo";
 import Zoomable from "../components/Zoomable";
+import AuroraDesignSystem from "../components/AuroraDesignSystem";
 
 const SectionLabel = ({ num, name }) => (
   <div className="flex items-center gap-4 mb-6">
@@ -382,63 +383,8 @@ export default function AuroraCaseStudy() {
         <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-6xl mb-6">{au.designSystem.headline}</h2>
         <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{au.designSystem.intro}</p>
 
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">color foundations</h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {au.designSystem.colors.map((c) => (
-            <div key={c.name} className="dark-card rounded-2xl overflow-hidden">
-              <div className="aspect-[3/2]" style={{ background: c.hex }} />
-              <div className="p-4">
-                <div className="font-display text-sm font-bold">{c.name}</div>
-                <div className="font-mono text-xs text-[#A29CB4] mt-1">{c.hex}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">typography scale</h3>
-        <div className="rounded-3xl dark-card divide-y divide-black/10">
-          {au.designSystem.typography.map((t) => (
-            <div key={t.t} className="p-5 flex items-center justify-between gap-4">
-              <span className="font-display text-base font-bold">{t.t}</span>
-              <span className="font-mono text-sm text-[#A29CB4]">{t.v}</span>
-            </div>
-          ))}
-        </div>
-
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">spacing scale (8pt grid)</h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {au.designSystem.spacing.map((s) => (
-            <div key={s.t} className="dark-card rounded-2xl p-5">
-              <div className="font-mono text-xs uppercase tracking-widest text-[#F5379B]">{s.t}</div>
-              <div className="mt-2 num text-lg font-bold">{s.v}</div>
-            </div>
-          ))}
-        </div>
-
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">design tokens</h3>
-        <div className="rounded-3xl dark-card overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead><tr className="border-b border-white/10">
-              <th className="p-4 text-left font-mono uppercase text-[10px] tracking-widest">Token</th>
-              <th className="p-4 text-left font-mono uppercase text-[10px] tracking-widest">Value</th>
-            </tr></thead>
-            <tbody>
-              {au.designSystem.tokens.map(([k, v]) => (
-                <tr key={k} className="border-b border-white/5">
-                  <td className="p-4 font-mono text-[#F4F3FA]">{k}</td>
-                  <td className="p-4 font-mono text-[#A29CB4]">{v}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">component library · aurora engage UI kit</h3>
-        <p className="text-base leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">52 production components organized by category. Each variant lives in Figma with auto-layout and ships as an Angular component on the front-end.</p>
-        <div className="flex flex-wrap gap-2">
-          {au.designSystem.componentCategories.map((c) => (
-            <span key={c} className="px-4 py-2 rounded-full dark-card text-sm font-medium hover:bg-[#D81F7E] transition-colors cursor-default">{c}</span>
-          ))}
+        <div className="mt-16">
+          <AuroraDesignSystem />
         </div>
 
         <div className="mt-12 rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
