@@ -130,7 +130,7 @@ export default function AuroraCaseStudy() {
         <SectionLabel num="02" name="The Problem" />
         <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-10">{au.problem.headline}</h2>
 
-        <blockquote className="rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10 max-w-6xl">
+        <blockquote className="rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
           <p className="font-display text-xl md:text-3xl italic leading-snug text-black">&ldquo;{au.problem.quote}&rdquo;</p>
           <footer className="mt-4 text-xs font-mono uppercase tracking-widest text-[#F5379B]">{au.problem.quoteAttribution}</footer>
         </blockquote>
