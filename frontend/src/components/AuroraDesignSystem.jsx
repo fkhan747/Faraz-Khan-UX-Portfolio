@@ -330,13 +330,13 @@ const ButtonsSection = () => (
         {/* Primary column */}
         <div className="space-y-4">
           <SpecLabel>Primary</SpecLabel>
-          <button type="button" className="block w-full rounded-lg bg-[#2B8679] text-white text-sm font-bold px-5 py-2.5" style={ROBOTO}>
+          <button type="button" className="block w-full rounded bg-[#2B8679] text-white text-sm font-bold px-5 py-2.5" style={ROBOTO}>
             Primary action
           </button>
-          <button type="button" className="block w-full rounded-lg bg-[#1F6359] text-white text-sm font-bold px-5 py-2.5" style={ROBOTO}>
+          <button type="button" className="block w-full rounded bg-[#1F6359] text-white text-sm font-bold px-5 py-2.5" style={ROBOTO}>
             Primary action
           </button>
-          <button type="button" disabled className="block w-full rounded-lg bg-[#B1B9C2] text-white text-sm font-bold px-5 py-2.5 cursor-not-allowed" style={ROBOTO}>
+          <button type="button" disabled className="block w-full rounded bg-[#B1B9C2] text-white text-sm font-bold px-5 py-2.5 cursor-not-allowed" style={ROBOTO}>
             Primary action
           </button>
           <div className="text-[11px] text-[#637285] grid grid-cols-3 text-center" style={ROBOTO}>
@@ -349,13 +349,13 @@ const ButtonsSection = () => (
         {/* Secondary column */}
         <div className="space-y-4">
           <SpecLabel>Secondary</SpecLabel>
-          <button type="button" className="block w-full rounded-lg border border-[#2B8679] text-[#2B8679] bg-white text-sm font-bold px-5 py-2.5" style={ROBOTO}>
+          <button type="button" className="block w-full rounded border border-[#2B8679] text-[#2B8679] bg-white text-sm font-bold px-5 py-2.5" style={ROBOTO}>
             Secondary action
           </button>
-          <button type="button" className="block w-full rounded-lg border border-[#1F6359] text-[#1F6359] bg-[#D5EAE6] text-sm font-bold px-5 py-2.5" style={ROBOTO}>
+          <button type="button" className="block w-full rounded border border-[#1F6359] text-[#1F6359] bg-[#D5EAE6] text-sm font-bold px-5 py-2.5" style={ROBOTO}>
             Secondary action
           </button>
-          <button type="button" disabled className="block w-full rounded-lg border border-[#B1B9C2] text-[#B1B9C2] bg-white text-sm font-bold px-5 py-2.5 cursor-not-allowed" style={ROBOTO}>
+          <button type="button" disabled className="block w-full rounded border border-[#B1B9C2] text-[#B1B9C2] bg-white text-sm font-bold px-5 py-2.5 cursor-not-allowed" style={ROBOTO}>
             Secondary action
           </button>
           <div className="text-[11px] text-[#637285] grid grid-cols-3 text-center" style={ROBOTO}>
@@ -368,13 +368,13 @@ const ButtonsSection = () => (
         {/* Tertiary column */}
         <div className="space-y-4">
           <SpecLabel>Tertiary / Text</SpecLabel>
-          <button type="button" className="block w-full rounded-lg text-[#2B8679] bg-white text-sm font-bold px-5 py-2.5" style={ROBOTO}>
+          <button type="button" className="block w-full rounded text-[#2B8679] bg-white text-sm font-bold px-5 py-2.5" style={ROBOTO}>
             Tertiary action
           </button>
-          <button type="button" className="block w-full rounded-lg text-[#1F6359] bg-[#D5EAE6] text-sm font-bold px-5 py-2.5" style={ROBOTO}>
+          <button type="button" className="block w-full rounded text-[#1F6359] bg-[#D5EAE6] text-sm font-bold px-5 py-2.5" style={ROBOTO}>
             Tertiary action
           </button>
-          <button type="button" disabled className="block w-full rounded-lg text-[#B1B9C2] bg-white text-sm font-bold px-5 py-2.5 cursor-not-allowed" style={ROBOTO}>
+          <button type="button" disabled className="block w-full rounded text-[#B1B9C2] bg-white text-sm font-bold px-5 py-2.5 cursor-not-allowed" style={ROBOTO}>
             Tertiary action
           </button>
           <div className="text-[11px] text-[#637285] grid grid-cols-3 text-center" style={ROBOTO}>
@@ -393,7 +393,7 @@ const ButtonsSection = () => (
 const OutlinedField = ({ label, value, placeholder, borderColor = "#E0E3E7", labelColor = "#637285", supporting, supportingColor = "#637285", disabled, error }) => (
   <div>
     <div
-      className={`relative rounded-lg bg-white px-3 pt-4 pb-2 ${disabled ? "bg-[#F2F4F5]" : ""}`}
+      className={`relative rounded bg-white px-3 pt-4 pb-2 ${disabled ? "bg-[#F2F4F5]" : ""}`}
       style={{ border: `${error || (borderColor !== "#E0E3E7") ? "2px" : "1px"} solid ${borderColor}` }}
     >
       <span
@@ -740,14 +740,14 @@ const NavSection = () => (
 
       <Specimen label="Pagination">
         <div className="flex items-center gap-1.5" style={ROBOTO}>
-          <button type="button" className="flex items-center justify-center w-9 h-9 rounded-lg border border-[#E0E3E7] text-[#637285]" aria-label="Previous page">
+          <button type="button" className="flex items-center justify-center w-9 h-9 rounded border border-[#E0E3E7] text-[#637285]" aria-label="Previous page">
             <Icon.chevronLeft />
           </button>
           {[1, 2, 3, 4].map((n) => (
             <button
               type="button"
               key={n}
-              className={`w-9 h-9 rounded-lg text-sm font-bold ${
+              className={`w-9 h-9 rounded text-sm font-bold ${
                 n === 1 ? "bg-[#2B8679] text-white" : "text-[#4A5056] hover:bg-[#F2F4F5]"
               }`}
             >
@@ -755,8 +755,8 @@ const NavSection = () => (
             </button>
           ))}
           <span className="text-[#A5A8AB] text-sm px-1">…</span>
-          <button type="button" className="w-9 h-9 rounded-lg text-sm font-bold text-[#4A5056] hover:bg-[#F2F4F5]">8</button>
-          <button type="button" className="flex items-center justify-center w-9 h-9 rounded-lg border border-[#E0E3E7] text-[#637285]" aria-label="Next page">
+          <button type="button" className="w-9 h-9 rounded text-sm font-bold text-[#4A5056] hover:bg-[#F2F4F5]">8</button>
+          <button type="button" className="flex items-center justify-center w-9 h-9 rounded border border-[#E0E3E7] text-[#637285]" aria-label="Next page">
             <Icon.chevronRight />
           </button>
           <span className="text-[12px] text-[#637285] ml-3">Page 1 of 8</span>
@@ -788,7 +788,7 @@ const NotificationsSection = () => (
         return (
           <div
             key={n.kind}
-            className="flex items-start gap-3 rounded-lg px-4 py-3"
+            className="flex items-start gap-3 rounded px-4 py-3"
             style={{ ...ROBOTO, backgroundColor: n.bg, borderLeft: `4px solid ${n.border}` }}
             role="status"
           >
@@ -822,7 +822,7 @@ const SearchSection = () => (
   >
     <WhitePanel>
       <Specimen label="Search">
-        <div className="flex items-center gap-2.5 rounded-lg border border-[#E0E3E7] bg-white px-3 py-2.5 max-w-md" style={ROBOTO}>
+        <div className="flex items-center gap-2.5 rounded border border-[#E0E3E7] bg-white px-3 py-2.5 max-w-md" style={ROBOTO}>
           <span className="text-[#637285]"><Icon.search /></span>
           <input
             type="text"
