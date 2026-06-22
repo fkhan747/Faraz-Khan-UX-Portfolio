@@ -509,83 +509,61 @@ const ToastsSection = () => (
 
 /* ---------- 09 · TEXT FIELDS ---------- */
 
-const FieldShell = ({ label, children, supporting, supportingColor = "#65656A" }) => (
-  <div>
-    <label className="block text-[14px] font-semibold text-[#252729] mb-1.5" style={RALEWAY}>
-      {label}
-    </label>
-    {children}
-    {supporting ? (
-      <p className="text-[12px] font-medium mt-1.5 leading-4" style={{ ...RALEWAY, color: supportingColor }}>
-        {supporting}
-      </p>
-    ) : null}
-  </div>
-);
+/* FinVista fields are underline / bottom-border style (label on top, value,
+   single bottom rule) — matching the live login + form screens. */
+const BORDER_BY_STATE = {
+  default: "border-b border-[#DCDCDC]",
+  focus: "border-b-2 border-[#0E8943]",
+  filled: "border-b border-[#65656A]",
+  error: "border-b-2 border-[#F6323E]",
+  disabled: "border-b border-[#E6E6E6]",
+};
+
+const UnderlineField = ({ label, value, placeholder, required, state = "default", supporting, supportingColor = "#65656A" }) => {
+  const valueColor = state === "disabled" ? "#B2B0AC" : value ? "#252729" : "#909090";
+  return (
+    <div>
+      <label className="block text-[12px] font-medium text-[#65656A] mb-2" style={RALEWAY}>
+        {label}
+        {required ? <span className="text-[#F6323E]"> *</span> : null}
+      </label>
+      <div className={`pb-2 ${BORDER_BY_STATE[state]}`}>
+        <span className="text-base font-medium" style={{ ...RALEWAY, color: valueColor }}>
+          {value || placeholder}
+        </span>
+      </div>
+      {supporting ? (
+        <p className="text-[12px] font-medium mt-2 leading-4" style={{ ...RALEWAY, color: supportingColor }}>
+          {supporting}
+        </p>
+      ) : null}
+    </div>
+  );
+};
 
 const TextFieldsSection = () => (
   <SubSection
     num="10"
     label="Component"
     title="Text Fields"
-    blurb="Label, input, and helper/error text across Default, Focus, Filled, Error, and Disabled states."
+    blurb="Underline fields with a label on top and a single bottom rule, across Default, Focus, Filled, Error, and Disabled states."
   >
     <WhitePanel>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-8">
         <Specimen label="Default">
-          <FieldShell label="Field label" supporting="Helper text">
-            <input
-              type="text"
-              placeholder="Placeholder"
-              className="w-full rounded-lg border border-[#DCDCDC] bg-white text-base text-[#252729] placeholder-[#909090] px-3 py-2.5 outline-none"
-              style={RALEWAY}
-            />
-          </FieldShell>
+          <UnderlineField label="Field label" required placeholder="Placeholder" state="default" supporting="Helper text" />
         </Specimen>
-
         <Specimen label="Focus">
-          <FieldShell label="Field label" supporting="Helper text">
-            <input
-              type="text"
-              defaultValue="Typing"
-              className="w-full rounded-lg border-2 border-[#0E8943] bg-white text-base text-[#252729] px-3 py-2 outline-none"
-              style={RALEWAY}
-            />
-          </FieldShell>
+          <UnderlineField label="Field label" required value="Typing" state="focus" supporting="Helper text" />
         </Specimen>
-
         <Specimen label="Filled">
-          <FieldShell label="Field label" supporting="Helper text">
-            <input
-              type="text"
-              defaultValue="Field value"
-              className="w-full rounded-lg border border-[#65656A] bg-white text-base text-[#252729] px-3 py-2.5 outline-none"
-              style={RALEWAY}
-            />
-          </FieldShell>
+          <UnderlineField label="Field label" value="Field value" state="filled" supporting="Helper text" />
         </Specimen>
-
         <Specimen label="Error">
-          <FieldShell label="Field label" supporting="Error message" supportingColor="#F6323E">
-            <input
-              type="text"
-              defaultValue="Invalid value"
-              className="w-full rounded-lg border-2 border-[#F6323E] bg-white text-base text-[#252729] px-3 py-2 outline-none"
-              style={RALEWAY}
-            />
-          </FieldShell>
+          <UnderlineField label="Field label" value="Invalid value" state="error" supporting="Error message" supportingColor="#F6323E" />
         </Specimen>
-
         <Specimen label="Disabled">
-          <FieldShell label="Field label" supporting="Helper text" supportingColor="#909090">
-            <input
-              type="text"
-              disabled
-              placeholder="Placeholder"
-              className="w-full rounded-lg border border-[#DCDCDC] bg-[#F7F7F7] text-base text-[#909090] placeholder-[#909090] px-3 py-2.5 outline-none cursor-not-allowed"
-              style={RALEWAY}
-            />
-          </FieldShell>
+          <UnderlineField label="Field label" placeholder="Placeholder" state="disabled" supporting="Helper text" supportingColor="#B2B0AC" />
         </Specimen>
       </div>
     </WhitePanel>
@@ -689,20 +667,26 @@ const DialogSection = () => (
     num="08"
     label="Component"
     title="Dialog"
-    blurb="A centered modal dialog with a title, body, and paired action buttons."
+    blurb="A centered confirmation dialog: title, body, an accept-terms checkbox, and two clear actions."
   >
     <WhitePanel>
       <Specimen label="Confirmation dialog">
-        <div className="rounded-2xl border border-[#DCDCDC] bg-white p-6 max-w-sm shadow-lg" style={RALEWAY}>
+        <div className="rounded-2xl border border-[#DCDCDC] bg-white p-6 max-w-sm shadow-lg mx-auto" style={RALEWAY}>
           <div className="text-lg font-bold text-[#252729] mb-2">Confirm submission</div>
-          <p className="text-sm text-[#505054] leading-relaxed mb-6">
-            Are you sure you want to submit this application? This action cannot be undone.
+          <p className="text-sm text-[#505054] leading-relaxed mb-5">
+            Please review your details before submitting. You can edit them later from your profile.
           </p>
+          <label className="flex items-start gap-2.5 text-[13px] text-[#252729] leading-snug mb-6">
+            <span className="mt-0.5"><CheckBox checked /></span>
+            <span>
+              I accept the <span className="text-[#0E8943] font-semibold">Privacy Policy</span> and{" "}
+              <span className="text-[#0E8943] font-semibold">Terms &amp; Conditions</span>.
+            </span>
+          </label>
           <div className="flex gap-3">
-            <button type="button" className="text-sm font-bold text-[#0E8943]" style={RALEWAY}>Text Button</button>
-            <button type="button" className="flex-1 rounded-full bg-[#0E8943] text-white text-sm font-bold py-2.5" style={RALEWAY}>Primary Normal</button>
+            <button type="button" className="flex-1 rounded-full border-2 border-[#0E8943] text-[#0E8943] text-sm font-bold py-2.5">Cancel</button>
+            <button type="button" className="flex-1 rounded-full bg-[#0E8943] text-white text-sm font-bold py-2.5">Confirm</button>
           </div>
-          <button type="button" className="w-full rounded-full border-2 border-[#0E8943] text-[#0E8943] text-sm font-bold py-2.5 mt-3" style={RALEWAY}>Tertiary Normal</button>
         </div>
       </Specimen>
     </WhitePanel>
