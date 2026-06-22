@@ -220,8 +220,9 @@ export default function FinvistaCaseStudy() {
         {/* Competitive */}
         <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">competitive analysis</h3>
         <p className="text-base leading-relaxed max-w-5xl text-[#F4F3FA] mb-8">
-          Analyzed the UX patterns, IA, and interaction design of five leading lending apps to identify best practices and opportunities.
+          I benchmarked five leading lending apps for their UX patterns, information architecture, and interaction design. Navi and KreditBee, the two closest to FinVista's audience, got full screen-by-screen teardowns. All five are then compared feature by feature in the table that follows.
         </p>
+        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">in-depth teardowns · 2 of 5</p>
         <div className="grid md:grid-cols-2 gap-5">
           {fv.research.competitive.map((c) => (
             <div key={c.name} className="dark-card rounded-3xl overflow-hidden">
@@ -237,7 +238,10 @@ export default function FinvistaCaseStudy() {
         </div>
 
         {/* Findings table */}
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">findings across 5 competitors</h3>
+        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">findings across 5 competitors</h3>
+        <p className="text-base leading-relaxed max-w-5xl text-[#F4F3FA] mb-8">
+          The full benchmark, including Bajaj Finserv, Home Credit, and Muthoot alongside the two teardowns above.
+        </p>
         <div className="rounded-3xl dark-card overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
