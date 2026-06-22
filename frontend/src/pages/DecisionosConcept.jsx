@@ -7,7 +7,7 @@ export default function DecisionosConcept() {
     <ConceptCaseStudy
       data={decisionos}
       accent="linear-gradient(120deg,#E8519B,#C45BCB 55%,#8A6BF0)"
-      wordmark={<>crux</>}
+      wordmark={<>Crux</>}
     />
   );
 }

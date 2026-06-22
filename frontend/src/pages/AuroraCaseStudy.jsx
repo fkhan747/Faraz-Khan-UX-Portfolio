@@ -56,8 +56,8 @@ export default function AuroraCaseStudy() {
           <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-5">
             ux case study · b2b saas · europe
           </p>
-          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9] lowercase case-keep text-[#F7F5FF]">
-            aur<span className="dot-o">o</span>ra
+          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9] case-keep text-[#F7F5FF]">
+            Aur<span className="dot-o">o</span>ra
           </h1>
           <p className="mt-8 max-w-3xl text-xl md:text-2xl text-[#F4F3FA] leading-snug font-light italic">
             {au.subtitle}
@@ -85,7 +85,7 @@ export default function AuroraCaseStudy() {
           <p className="relative font-display text-xl md:text-2xl leading-snug text-white/95 max-w-6xl">{au.overview.tldr}</p>
         </div>
 
-        <div className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
           {au.overview.facts.map((f) => (
             <div key={f.label} className="dark-card rounded-2xl p-5">
               <p className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-2">{f.label}</p>
@@ -105,23 +105,23 @@ export default function AuroraCaseStudy() {
           ))}
         </div>
 
-        <div className="mt-16 grid lg:grid-cols-12 gap-8">
-          <div className="lg:col-span-7 space-y-5 text-base md:text-lg leading-relaxed text-[#F4F3FA]">
-            <p>{au.overview.intro}</p>
-            <p>{au.overview.intro2}</p>
-            <div className="mt-6 rounded-3xl bg-white border-2 border-[#F5379B] p-7">
-              <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3 text-[#F5379B]">{au.overview.contextTitle}</p>
-              <p className="font-display text-lg md:text-xl font-bold leading-snug text-black">{au.overview.contextBody}</p>
+        <div className="mt-16 space-y-5 text-base md:text-lg leading-relaxed text-[#F4F3FA]">
+          <p>{au.overview.intro}</p>
+          <p>{au.overview.intro2}</p>
+        </div>
+
+        <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+          {au.overview.metadata.map((m) => (
+            <div key={m.k} className="dark-card rounded-2xl p-5">
+              <p className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-2">{m.k}</p>
+              <p className="font-display text-sm md:text-base font-bold leading-snug">{m.v}</p>
             </div>
-          </div>
-          <div className="lg:col-span-5 space-y-3">
-            {au.overview.metadata.map((m) => (
-              <div key={m.k} className="dark-card rounded-2xl p-5 flex items-center justify-between gap-4">
-                <span className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4]">{m.k}</span>
-                <span className="font-display text-sm md:text-base font-bold text-right">{m.v}</span>
-              </div>
-            ))}
-          </div>
+          ))}
+        </div>
+
+        <div className="mt-8 rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
+          <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3 text-[#F5379B]">{au.overview.contextTitle}</p>
+          <p className="font-display text-lg md:text-xl font-bold leading-snug text-black">{au.overview.contextBody}</p>
         </div>
       </SectionWrap>
 
@@ -263,7 +263,7 @@ export default function AuroraCaseStudy() {
             <thead>
               <tr className="border-b border-white/10">
                 {au.research.competitiveTable.headers.map((h, i) => (
-                  <th key={i} className="p-4 text-left font-mono uppercase text-[10px] tracking-widest">{h}</th>
+                  <th key={i} className={`p-4 font-mono uppercase text-[10px] tracking-widest ${i === 0 ? "text-left" : "text-center"}`}>{h}</th>
                 ))}
               </tr>
             </thead>

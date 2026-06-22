@@ -621,7 +621,7 @@ const TRACKER_STEPS = [
 
 const TrackerSection = () => (
   <SubSection
-    num="09"
+    num="11"
     label="Component"
     title="Tracker"
     blurb="A horizontal step tracker with completed steps, a current step, and an upcoming step."
@@ -675,7 +675,7 @@ const TABLE_ROWS = [
 
 const TableSection = () => (
   <SubSection
-    num="10"
+    num="12"
     label="Component"
     title="Data Table"
     blurb="A header row with three to four line-separated body rows, dividers in Line Gray (#E0E3E7)."
@@ -722,7 +722,7 @@ const TableSection = () => (
 
 const NavSection = () => (
   <SubSection
-    num="11"
+    num="10"
     label="Component"
     title="Breadcrumbs & Pagination"
     blurb="A breadcrumb trail to the current page, plus numbered pagination with previous/next and an active page."
@@ -777,7 +777,7 @@ const NOTIFICATIONS = [
 
 const NotificationsSection = () => (
   <SubSection
-    num="12"
+    num="13"
     label="Component"
     title="Persistent Notifications"
     blurb="Banner notifications for Success, Error, Warning, and Info, each with an icon, message, and dismiss control."
@@ -815,7 +815,7 @@ const NotificationsSection = () => (
 
 const SearchSection = () => (
   <SubSection
-    num="13"
+    num="09"
     label="Component"
     title="Search Bar"
     blurb="A single-line search input with a leading search icon and placeholder text."
@@ -849,14 +849,18 @@ export default function AuroraDesignSystem() {
       {/* Components */}
       <ButtonsSection />
       <TextFieldsSection />
-      <ChipsSection />
-      <SegmentedTabsSection />
-      <ToggleCheckboxSection />
+      <div className="grid lg:grid-cols-2 gap-12 md:gap-14 items-start">
+        <ChipsSection />
+        <SegmentedTabsSection />
+      </div>
+      <div className="grid lg:grid-cols-2 gap-12 md:gap-14 items-start">
+        <ToggleCheckboxSection />
+        <SearchSection />
+      </div>
+      <NavSection />
       <TrackerSection />
       <TableSection />
-      <NavSection />
       <NotificationsSection />
-      <SearchSection />
     </div>
   );
 }

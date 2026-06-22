@@ -9,7 +9,7 @@ export default function RecruitosConcept() {
     <ConceptCaseStudy
       data={recruitos}
       accent="linear-gradient(120deg,#4285F4,#9168F0 55%,#E8519B)"
-      wordmark={<>slate</>}
+      wordmark={<>Slate</>}
     />
   );
 }

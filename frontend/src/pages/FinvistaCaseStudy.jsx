@@ -68,8 +68,8 @@ export default function FinvistaCaseStudy() {
           <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-5">
             ux case study · featured
           </p>
-          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9] lowercase case-keep text-[#F7F5FF]">
-            finv<span className="dot-o">i</span>sta
+          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9] case-keep text-[#F7F5FF]">
+            Finv<span className="dot-o">i</span>sta
           </h1>
           <p className="mt-8 max-w-3xl text-xl md:text-2xl text-[#F4F3FA] leading-snug font-light italic">
             {fv.subtitle}
@@ -109,7 +109,7 @@ export default function FinvistaCaseStudy() {
         </div>
 
         {/* Facts */}
-        <div className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
           {fv.overview.facts.map((f) => (
             <FactCell key={f.label} label={f.label} value={f.value} />
           ))}
@@ -243,7 +243,7 @@ export default function FinvistaCaseStudy() {
             <thead>
               <tr className="border-b border-white/10">
                 {fv.research.findingsTable.headers.map((h, i) => (
-                  <th key={i} className={`p-4 text-left font-mono uppercase text-[10px] tracking-widest ${i === 0 ? "min-w-[200px]" : ""}`}>
+                  <th key={i} className={`p-4 font-mono uppercase text-[10px] tracking-widest ${i === 0 ? "text-left min-w-[200px]" : "text-center"}`}>
                     {h}
                   </th>
                 ))}

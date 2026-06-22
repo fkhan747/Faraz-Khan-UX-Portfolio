@@ -445,7 +445,7 @@ const PROGRESS_ROWS = [
 
 const ProgressSection = () => (
   <SubSection
-    num="07"
+    num="09"
     label="Component"
     title="Progress"
     blurb="A combined progress indicator showing a motivational label, a percentage bar, a completion percentage, and a step counter badge."
@@ -478,7 +478,7 @@ const TOASTS = [
 
 const ToastsSection = () => (
   <SubSection
-    num="08"
+    num="07"
     label="Component"
     title="Toasts"
     blurb="Notification toasts for Success, Error, Warning, and Info with a left accent border, icon, message, and dismiss control."
@@ -525,7 +525,7 @@ const FieldShell = ({ label, children, supporting, supportingColor = "#65656A" }
 
 const TextFieldsSection = () => (
   <SubSection
-    num="09"
+    num="10"
     label="Component"
     title="Text Fields"
     blurb="Label, input, and helper/error text across Default, Focus, Filled, Error, and Disabled states."
@@ -596,7 +596,7 @@ const TextFieldsSection = () => (
 
 const FileUploadSection = () => (
   <SubSection
-    num="10"
+    num="11"
     label="Component"
     title="File Upload"
     blurb="A drop-zone uploader and a file-row with status, size, and remove action."
@@ -636,7 +636,7 @@ const FileUploadSection = () => (
 
 const CardsSection = () => (
   <SubSection
-    num="11"
+    num="12"
     label="Component"
     title="Cards & Bottom Sheet"
     blurb="A lead card with status badge, a value-added-service card, and a bottom sheet with a pull handle."
@@ -686,7 +686,7 @@ const CardsSection = () => (
 
 const DialogSection = () => (
   <SubSection
-    num="12"
+    num="08"
     label="Component"
     title="Dialog"
     blurb="A centered modal dialog with a title, body, and paired action buttons."
@@ -718,14 +718,20 @@ export default function FinvistaDesignSystem() {
       <TypographySection />
       <SpacingSection />
       <ButtonsSection />
-      <TabsSection />
-      <CheckboxSection />
+      <div className="grid lg:grid-cols-2 gap-12 md:gap-14 items-start">
+        <TabsSection />
+        <CheckboxSection />
+      </div>
+      <div className="grid lg:grid-cols-2 gap-12 md:gap-14 items-start">
+        <ToastsSection />
+        <DialogSection />
+      </div>
       <ProgressSection />
-      <ToastsSection />
       <TextFieldsSection />
-      <FileUploadSection />
-      <CardsSection />
-      <DialogSection />
+      <div className="grid lg:grid-cols-2 gap-12 md:gap-14 items-start">
+        <FileUploadSection />
+        <CardsSection />
+      </div>
     </div>
   );
 }

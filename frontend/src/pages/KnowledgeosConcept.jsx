@@ -7,7 +7,7 @@ export default function KnowledgeosConcept() {
     <ConceptCaseStudy
       data={knowledgeos}
       accent="linear-gradient(120deg,#0E9CA6,#2BB6B0 55%,#6FD7C6)"
-      wordmark={<>almanac</>}
+      wordmark={<>Almanac</>}
     />
   );
 }
