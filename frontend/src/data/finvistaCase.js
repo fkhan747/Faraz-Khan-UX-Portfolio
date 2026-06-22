@@ -133,13 +133,13 @@ export const finvista = {
     competitive: [
       {
         name: "Navi",
-        image: F("000-navi-app-screens.png"),
+        image: F("Navi.jpg"),
         notes:
           "Clean UI, contextual navigation, one-step-at-a-time approach, intuitive micro-interactions and animations.",
       },
       {
         name: "KreditBee",
-        image: F("001-kreditbee-screens.png"),
+        image: F("KreditBee.jpg"),
         notes:
           "Step-by-step onboarding, progress tracking, categorized information, help always available mid-journey.",
       },

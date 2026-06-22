@@ -223,11 +223,11 @@ export default function FinvistaCaseStudy() {
           I benchmarked five leading lending apps for their UX patterns, information architecture, and interaction design. Navi and KreditBee, the two closest to FinVista's audience, got full screen-by-screen teardowns. All five are then compared feature by feature in the table that follows.
         </p>
         <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">in-depth teardowns · 2 of 5</p>
-        <div className="grid md:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 gap-6">
           {fv.research.competitive.map((c) => (
             <div key={c.name} className="dark-card rounded-3xl overflow-hidden">
-              <Zoomable src={c.image} alt={c.name} caption={c.name} className="aspect-[4/3] overflow-hidden bg-white">
-                <img src={c.image} alt={c.name} loading="lazy" className="w-full h-full object-contain" />
+              <Zoomable src={c.image} alt={`${c.name} app teardown`} caption={`${c.name} — screen-by-screen teardown`} className="bg-white overflow-hidden">
+                <img src={c.image} alt={`${c.name} app teardown`} loading="lazy" className="block w-full h-auto" />
               </Zoomable>
               <div className="p-6">
                 <h4 className="font-display text-xl font-black mb-2">{c.name}</h4>
