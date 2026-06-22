@@ -6,6 +6,7 @@ import { PROFILE } from "../data/content";
 import Seo from "../components/Seo";
 import Zoomable from "../components/Zoomable";
 import PhoneFrame from "../components/PhoneFrame";
+import { Container } from "../components/Grid";
 
 /* -- Reusable section header in portfolio voice -- */
 const SectionLabel = ({ num, name, accent = "#075EFD" }) => (
@@ -18,8 +19,8 @@ const SectionLabel = ({ num, name, accent = "#075EFD" }) => (
 );
 
 const SectionWrap = ({ children, className = "", ...rest }) => (
-  <section className={`px-6 md:px-10 lg:px-16 py-20 md:py-24 border-t border-white/10 ${className}`} {...rest}>
-    {children}
+  <section className={`py-20 md:py-24 border-t border-white/10 ${className}`} {...rest}>
+    <Container>{children}</Container>
   </section>
 );
 
@@ -55,7 +56,7 @@ export default function FinvistaCaseStudy() {
           aria-hidden="true"
           style={{ background: "linear-gradient(to bottom, rgba(16,2,16,0.55) 0%, rgba(16,2,16,0) 28%, rgba(16,2,16,0) 50%, rgba(16,2,16,0.92) 100%)" }}
         />
-        <div className="relative z-10 px-6 md:px-10 lg:px-16 pt-12 pb-14">
+        <Container className="relative z-10 pt-12 pb-14">
           <Link
             to="/projects"
             data-testid="back-link"
@@ -66,7 +67,7 @@ export default function FinvistaCaseStudy() {
           <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-5">
             ux case study · featured
           </p>
-          <h1 className="font-display text-6xl md:text-7xl lg:text-[8rem] font-black tracking-tighter leading-[0.9] lowercase case-keep text-[#F7F5FF]">
+          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9] lowercase case-keep text-[#F7F5FF]">
             finv<span className="dot-o">i</span>sta
           </h1>
           <p className="mt-8 max-w-3xl text-xl md:text-2xl text-[#F4F3FA] leading-snug font-light italic">
@@ -82,16 +83,16 @@ export default function FinvistaCaseStudy() {
               </div>
             ))}
           </div>
-        </div>
+        </Container>
       </header>
 
       {/* 01 PROJECT OVERVIEW */}
       <SectionWrap data-testid="section-overview">
         <SectionLabel num="01" name="Project Overview" />
-        <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-6xl mb-6">
+        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">
           {fv.overview.headline}
         </h2>
-        <p className="text-lg md:text-xl leading-relaxed max-w-6xl text-[#F4F3FA]">
+        <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">
           {fv.overview.intro}
         </p>
 
@@ -151,10 +152,10 @@ export default function FinvistaCaseStudy() {
       {/* 02 PROBLEM */}
       <SectionWrap data-testid="section-problem">
         <SectionLabel num="02" name="The Problem" />
-        <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-6xl mb-6">
+        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">
           {fv.problem.headline}
         </h2>
-        <p className="text-lg md:text-xl leading-relaxed max-w-6xl text-[#F4F3FA]">{fv.problem.intro}</p>
+        <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{fv.problem.intro}</p>
 
         <div className="mt-10 rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
           <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3 text-[#F5379B]">core challenge</p>
@@ -210,10 +211,10 @@ export default function FinvistaCaseStudy() {
       {/* 03 RESEARCH */}
       <SectionWrap data-testid="section-research">
         <SectionLabel num="03" name="Research" />
-        <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-6xl mb-6">
+        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">
           {fv.research.headline}
         </h2>
-        <p className="text-lg md:text-xl leading-relaxed max-w-6xl text-[#F4F3FA]">{fv.research.intro}</p>
+        <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{fv.research.intro}</p>
 
         {/* Competitive */}
         <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">competitive analysis</h3>
@@ -283,10 +284,10 @@ export default function FinvistaCaseStudy() {
       {/* 04 INSIGHTS */}
       <SectionWrap data-testid="section-insights">
         <SectionLabel num="04" name="Insights" />
-        <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-6xl mb-6">
+        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">
           {fv.insights.headline}
         </h2>
-        <p className="text-lg md:text-xl leading-relaxed max-w-6xl text-[#F4F3FA]">{fv.insights.intro}</p>
+        <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{fv.insights.intro}</p>
 
         <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-8">user personas</h3>
         <div className="grid md:grid-cols-2 gap-6">
@@ -345,10 +346,10 @@ export default function FinvistaCaseStudy() {
       {/* 05 USER FLOW & TASKS */}
       <SectionWrap data-testid="section-flow">
         <SectionLabel num="05" name="User Flow & Tasks" />
-        <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-6xl mb-6">
+        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">
           {fv.flow.headline}
         </h2>
-        <p className="text-lg md:text-xl leading-relaxed max-w-6xl text-[#F4F3FA]">{fv.flow.intro}</p>
+        <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{fv.flow.intro}</p>
 
         {/* Flow SVG */}
         <Zoomable src={fv.flow.diagramSvg} alt={fv.flow.diagramCaption} caption={fv.flow.diagramCaption} className="mt-10 rounded-3xl dark-card p-6 md:p-10 overflow-x-auto">
@@ -377,10 +378,10 @@ export default function FinvistaCaseStudy() {
       {/* 06 DESIGN */}
       <SectionWrap data-testid="section-design">
         <SectionLabel num="06" name="Design" />
-        <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-6xl mb-6">
+        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">
           {fv.design.headline}
         </h2>
-        <p className="text-lg md:text-xl leading-relaxed max-w-6xl text-[#F4F3FA]">{fv.design.intro}</p>
+        <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{fv.design.intro}</p>
 
         {/* Wireframes */}
         <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">wireframes</h3>
@@ -446,10 +447,10 @@ export default function FinvistaCaseStudy() {
       {/* 07 DESIGN SYSTEM */}
       <SectionWrap data-testid="section-design-system">
         <SectionLabel num="07" name="Design System" />
-        <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-6xl mb-6">
+        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">
           {fv.designSystem.headline}
         </h2>
-        <p className="text-lg md:text-xl leading-relaxed max-w-6xl text-[#F4F3FA]">{fv.designSystem.intro}</p>
+        <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{fv.designSystem.intro}</p>
 
         <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">component library</h3>
         <p className="text-base leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{fv.designSystem.panelsIntro}</p>
@@ -475,10 +476,10 @@ export default function FinvistaCaseStudy() {
       {/* 08 VALIDATION */}
       <SectionWrap data-testid="section-validation">
         <SectionLabel num="08" name="Validation" />
-        <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-6xl mb-6">
+        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">
           {fv.validation.headline}
         </h2>
-        <p className="text-lg md:text-xl leading-relaxed max-w-6xl text-[#F4F3FA]">{fv.validation.intro}</p>
+        <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{fv.validation.intro}</p>
 
         <ol className="mt-12 relative border-l-2 border-white/15 ml-2 space-y-8">
           {fv.validation.rounds.map((r) => (
@@ -501,7 +502,7 @@ export default function FinvistaCaseStudy() {
       {/* 09 IMPACT */}
       <SectionWrap data-testid="section-impact">
         <SectionLabel num="09" name="Impact" />
-        <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-6xl mb-10">
+        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-10">
           {fv.impact.headline}
         </h2>
 
@@ -545,10 +546,10 @@ export default function FinvistaCaseStudy() {
       {/* 10 SCREEN GALLERY */}
       <SectionWrap data-testid="section-gallery">
         <SectionLabel num="10" name="Screen Gallery" />
-        <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-6xl mb-6">
+        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">
           {fv.gallery.headline}
         </h2>
-        <p className="text-lg md:text-xl leading-relaxed max-w-6xl text-[#F4F3FA]">{fv.gallery.intro}</p>
+        <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{fv.gallery.intro}</p>
 
         <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
           {fv.gallery.representative.map((s) => (
