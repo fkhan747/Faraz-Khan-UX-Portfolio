@@ -5,6 +5,7 @@ import { PROFILE } from "../data/content";
 import Seo from "../components/Seo";
 import Zoomable from "../components/Zoomable";
 import AuroraDesignSystem from "../components/AuroraDesignSystem";
+import { Container } from "../components/Grid";
 
 const SectionLabel = ({ num, name }) => (
   <div className="flex items-center gap-4 mb-6">
@@ -16,8 +17,8 @@ const SectionLabel = ({ num, name }) => (
 );
 
 const SectionWrap = ({ children, className = "", ...rest }) => (
-  <section className={`px-6 md:px-10 lg:px-16 py-20 md:py-24 border-t border-white/10 ${className}`} {...rest}>
-    {children}
+  <section className={`py-20 md:py-24 border-t border-white/10 ${className}`} {...rest}>
+    <Container>{children}</Container>
   </section>
 );
 
@@ -25,46 +26,58 @@ export default function AuroraCaseStudy() {
   return (
     <article data-testid="aurora-case-study" className="pb-24">
       <Seo title={au.title} description={au.subtitle} />
-      {/* TITLE BLOCK */}
-      <header className="px-6 md:px-10 lg:px-16 pt-12 pb-10">
-        <Link
-          to="/projects"
-          data-testid="back-link"
-          className="inline-flex items-center gap-2 mb-10 text-xs font-mono uppercase tracking-widest text-[#A29CB4] hover:text-[#F5379B] transition-colors"
-        >
-          <ArrowLeft size={14} /> all projects
-        </Link>
-        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-5">
-          ux case study · b2b saas · europe
-        </p>
-        <h1 className="font-display text-6xl md:text-7xl lg:text-[8rem] font-black tracking-tighter leading-[0.9] lowercase case-keep">
-          aur<span className="dot-o">o</span>ra
-        </h1>
-        <p className="mt-8 max-w-5xl text-xl md:text-2xl text-[#F4F3FA] leading-snug font-light italic">
-          {au.subtitle}
-        </p>
+      {/* TITLE BLOCK over a darkened cover image */}
+      <header className="relative overflow-hidden">
+        <img
+          src="/aurora/cover.png"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover"
+          loading="eager"
+        />
+        <div
+          className="absolute inset-0"
+          aria-hidden="true"
+          style={{ background: "linear-gradient(105deg, rgba(16,2,16,0.92) 0%, rgba(16,2,16,0.64) 60%, rgba(16,2,16,0.42) 100%)" }}
+        />
+        <div
+          className="absolute inset-0"
+          aria-hidden="true"
+          style={{ background: "linear-gradient(to bottom, rgba(16,2,16,0.55) 0%, rgba(16,2,16,0) 28%, rgba(16,2,16,0) 50%, rgba(16,2,16,0.92) 100%)" }}
+        />
+        <Container className="relative z-10 pt-12 pb-14">
+          <Link
+            to="/projects"
+            data-testid="back-link"
+            className="inline-flex items-center gap-2 mb-10 text-xs font-mono uppercase tracking-widest text-white/70 hover:text-[#F5379B] transition-colors"
+          >
+            <ArrowLeft size={14} /> all projects
+          </Link>
+          <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-5">
+            ux case study · b2b saas · europe
+          </p>
+          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9] lowercase case-keep text-[#F7F5FF]">
+            aur<span className="dot-o">o</span>ra
+          </h1>
+          <p className="mt-8 max-w-3xl text-xl md:text-2xl text-[#F4F3FA] leading-snug font-light italic">
+            {au.subtitle}
+          </p>
 
-        <div className="mt-12 grid grid-cols-3 gap-4 max-w-5xl">
-          {au.hero.stats.map((s) => (
-            <div key={s.label} className="dark-card rounded-2xl p-5 md:p-6">
-              <div className="num text-3xl md:text-5xl font-black text-[#075EFD] leading-none">{s.value}</div>
-              <div className="mt-3 text-[10px] md:text-xs font-mono uppercase tracking-widest text-[#A29CB4]">{s.label}</div>
-            </div>
-          ))}
-        </div>
+          <div className="mt-12 grid grid-cols-3 gap-4 max-w-4xl">
+            {au.hero.stats.map((s) => (
+              <div key={s.label} className="rounded-2xl p-5 md:p-6 bg-[#100210]/55 backdrop-blur-md border border-white/12">
+                <div className="num text-3xl md:text-5xl font-black text-[#075EFD] leading-none">{s.value}</div>
+                <div className="mt-3 text-[10px] md:text-xs font-mono uppercase tracking-widest text-white/70">{s.label}</div>
+              </div>
+            ))}
+          </div>
+        </Container>
       </header>
-
-      {/* Hero image */}
-      <div className="px-6 md:px-10 lg:px-16">
-        <Zoomable src="/aurora/04_RBJ_Properties_Weekly.jpg" alt="Aurora hero: Recurring Batch Journey, Weekly cadence" caption="Recurring Batch Journey — Weekly cadence" className="rounded-3xl overflow-hidden dark-card p-6 md:p-10">
-          <img src="/aurora/04_RBJ_Properties_Weekly.jpg" alt="Aurora hero: Recurring Batch Journey, Weekly cadence" className="w-full h-auto object-contain rounded-xl" loading="eager" />
-        </Zoomable>
-      </div>
 
       {/* 01 OVERVIEW */}
       <SectionWrap data-testid="section-overview">
         <SectionLabel num="01" name="Overview" />
-        <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-6xl mb-6">{au.overview.headline}</h2>
+        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{au.overview.headline}</h2>
 
         <div className="rounded-3xl dark-card text-white p-8 md:p-12 relative overflow-hidden">
           <div className="absolute -top-10 -right-10 w-72 h-72 rounded-full bg-[#075EFD] blur-3xl opacity-30" />
@@ -93,7 +106,7 @@ export default function AuroraCaseStudy() {
         </div>
 
         <div className="mt-16 grid lg:grid-cols-12 gap-8">
-          <div className="lg:col-span-7 space-y-5 text-lg leading-relaxed text-[#F4F3FA]">
+          <div className="lg:col-span-7 space-y-5 text-base md:text-lg leading-relaxed text-[#F4F3FA]">
             <p>{au.overview.intro}</p>
             <p>{au.overview.intro2}</p>
             <div className="mt-6 rounded-3xl bg-white border-2 border-[#F5379B] p-7">
@@ -115,7 +128,7 @@ export default function AuroraCaseStudy() {
       {/* 02 PROBLEM */}
       <SectionWrap data-testid="section-problem">
         <SectionLabel num="02" name="The Problem" />
-        <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-6xl mb-10">{au.problem.headline}</h2>
+        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-10">{au.problem.headline}</h2>
 
         <blockquote className="rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10 max-w-6xl">
           <p className="font-display text-xl md:text-3xl italic leading-snug text-black">&ldquo;{au.problem.quote}&rdquo;</p>
@@ -164,7 +177,9 @@ export default function AuroraCaseStudy() {
           <p className="font-display text-xl md:text-2xl leading-snug max-w-6xl">{au.problem.hypothesis}</p>
           <ul className="mt-6 flex flex-wrap gap-3">
             {au.problem.hypothesisBullets.map((b) => (
-              <li key={b} className="px-4 py-2 rounded-full bg-[#F5379B] text-[#F4F3FA] text-sm font-semibold">{b}</li>
+              <li key={b} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#F5379B]/45 bg-[#F5379B]/10 text-[#F4F3FA] text-sm font-semibold">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#F5379B]" />{b}
+              </li>
             ))}
           </ul>
         </div>
@@ -206,7 +221,7 @@ export default function AuroraCaseStudy() {
       {/* 03 RESEARCH */}
       <SectionWrap data-testid="section-research">
         <SectionLabel num="03" name="Research" />
-        <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-6xl mb-6">{au.research.headline}</h2>
+        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{au.research.headline}</h2>
 
         <h3 className="mt-12 font-display text-2xl md:text-3xl font-black mb-4">{au.research.auditTitle}</h3>
         <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{au.research.auditIntro}</p>
@@ -278,7 +293,7 @@ export default function AuroraCaseStudy() {
       {/* 04 INSIGHTS */}
       <SectionWrap data-testid="section-insights">
         <SectionLabel num="04" name="Insights" />
-        <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-6xl mb-10">{au.insights.headline}</h2>
+        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-10">{au.insights.headline}</h2>
 
         <h3 className="font-display text-2xl md:text-3xl font-black mb-8">user personas</h3>
         <div className="grid md:grid-cols-3 gap-5">
@@ -323,7 +338,7 @@ export default function AuroraCaseStudy() {
       {/* 05 DESIGN */}
       <SectionWrap data-testid="section-design">
         <SectionLabel num="05" name="Design" />
-        <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-6xl mb-6">{au.design.headline}</h2>
+        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{au.design.headline}</h2>
 
         <h3 className="mt-12 font-display text-2xl md:text-3xl font-black mb-4">hand-drawn sketches</h3>
         <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{au.design.sketchesIntro}</p>
@@ -361,9 +376,9 @@ export default function AuroraCaseStudy() {
 
         <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">final design</h3>
         <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{au.design.finalIntro}</p>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="columns-1 md:columns-2 lg:columns-3 gap-5">
           {au.design.finalScreens.map((s) => (
-            <figure key={s.title} className="rounded-3xl dark-card overflow-hidden">
+            <figure key={s.title} className="mb-5 break-inside-avoid rounded-3xl dark-card overflow-hidden">
               <Zoomable src={s.src} alt={s.title} caption={s.desc} className="bg-white p-3 border-b border-white/5">
                 <img src={s.src} alt={s.title} loading="lazy" className="w-full h-auto rounded-lg" />
               </Zoomable>
@@ -380,7 +395,7 @@ export default function AuroraCaseStudy() {
       {/* 06 DESIGN SYSTEM */}
       <SectionWrap data-testid="section-design-system">
         <SectionLabel num="06" name="Design System" />
-        <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-6xl mb-6">{au.designSystem.headline}</h2>
+        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{au.designSystem.headline}</h2>
         <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{au.designSystem.intro}</p>
 
         <div className="mt-16">
@@ -389,18 +404,18 @@ export default function AuroraCaseStudy() {
 
         <div className="mt-12 rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
           <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-3">system outcomes</p>
-          <p className="font-display text-xl md:text-2xl leading-snug max-w-6xl text-black">{au.designSystem.systemOutcomes}</p>
+          <p className="font-display text-xl md:text-2xl leading-snug text-black">{au.designSystem.systemOutcomes}</p>
         </div>
         <div className="mt-6 rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
           <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3 text-[#F5379B]">cross-product collaboration</p>
-          <p className="font-display text-lg md:text-xl font-bold leading-snug max-w-6xl text-black">{au.designSystem.crossProduct}</p>
+          <p className="font-display text-lg md:text-xl font-bold leading-snug text-black">{au.designSystem.crossProduct}</p>
         </div>
       </SectionWrap>
 
       {/* 07 VALIDATION */}
       <SectionWrap data-testid="section-validation">
         <SectionLabel num="07" name="Validation" />
-        <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-6xl mb-10">usability testing</h2>
+        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-10">usability testing</h2>
 
         <h3 className="font-display text-2xl md:text-3xl font-black mb-6">test setup</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -427,7 +442,7 @@ export default function AuroraCaseStudy() {
       {/* 08 IMPACT */}
       <SectionWrap data-testid="section-impact">
         <SectionLabel num="08" name="Impact" />
-        <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-6xl mb-10">outcomes & artifacts created</h2>
+        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-10">outcomes & artifacts created</h2>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
           {au.impact.outcomes.map((m) => (
@@ -477,7 +492,7 @@ export default function AuroraCaseStudy() {
 
       {/* Footer */}
       <SectionWrap className="text-center">
-        <h2 className="font-display text-3xl md:text-5xl font-black mb-6">thank you for reading.</h2>
+        <h2 className="font-display text-3xl md:text-4xl font-black mb-6">thank you for reading.</h2>
         <p className="text-lg text-[#A29CB4] mb-8">If you&apos;d like to discuss this project in more detail or explore collaboration opportunities, I&apos;d love to connect.</p>
         <div className="flex gap-4 justify-center flex-wrap">
           <a href={`mailto:${PROFILE.email}`} data-testid="case-cta-email" className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-[#F5379B] font-semibold text-sm hover:bg-[#F5379B] hover:text-white transition-colors"><Mail size={16} /> email me</a>
