@@ -390,12 +390,25 @@ const ButtonsSection = () => (
 
 /* ---------- 5 · TEXT FIELDS ---------- */
 
-const FieldShell = ({ label, children, supporting, supportingColor = "#637285" }) => (
+const OutlinedField = ({ label, value, placeholder, borderColor = "#E0E3E7", labelColor = "#637285", supporting, supportingColor = "#637285", disabled, error }) => (
   <div>
-    <label className="block text-[12px] font-medium text-[#292929] mb-1.5" style={ROBOTO}>
-      {label}
-    </label>
-    {children}
+    <div
+      className={`relative rounded-lg bg-white px-3 pt-4 pb-2 ${disabled ? "bg-[#F2F4F5]" : ""}`}
+      style={{ border: `${error || (borderColor !== "#E0E3E7") ? "2px" : "1px"} solid ${borderColor}` }}
+    >
+      <span
+        className="absolute -top-2.5 left-2.5 bg-white px-1 text-[12px] font-medium"
+        style={{ ...ROBOTO, color: labelColor }}
+      >
+        {label}
+      </span>
+      <div
+        className={`text-sm ${disabled ? "text-[#A5A8AB]" : value ? "text-[#292929]" : "text-[#A5A8AB]"}`}
+        style={ROBOTO}
+      >
+        {value || placeholder || "Placeholder"}
+      </div>
+    </div>
     {supporting ? (
       <p className="text-[12px] mt-1.5 leading-4" style={{ ...ROBOTO, color: supportingColor }}>
         {supporting}
@@ -409,64 +422,28 @@ const TextFieldsSection = () => (
     num="05"
     label="Component"
     title="Text Fields"
-    blurb="Label, input, and supporting/error text across Default, Focus, Filled, Error, and Disabled states."
+    blurb="Material-style outlined inputs with floating labels that sit on the border. Supporting/error text beneath each field."
   >
     <WhitePanel>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <Specimen label="Default">
-          <FieldShell label="Field label" supporting="Supporting text">
-            <input
-              type="text"
-              placeholder="Placeholder"
-              className="w-full rounded-lg border border-[#E0E3E7] bg-white text-sm text-[#292929] placeholder-[#A5A8AB] px-3 py-2.5 outline-none"
-              style={ROBOTO}
-            />
-          </FieldShell>
+          <OutlinedField label="Field label" placeholder="Placeholder" supporting="Supporting text" />
         </Specimen>
 
         <Specimen label="Focus">
-          <FieldShell label="Field label" supporting="Supporting text">
-            <input
-              type="text"
-              defaultValue="Typing"
-              className="w-full rounded-lg border-2 border-[#2B8679] bg-white text-sm text-[#292929] px-3 py-2 outline-none"
-              style={ROBOTO}
-            />
-          </FieldShell>
+          <OutlinedField label="Field label" value="Typing" borderColor="#2B8679" labelColor="#2B8679" supporting="Supporting text" />
         </Specimen>
 
         <Specimen label="Filled">
-          <FieldShell label="Field label" supporting="Supporting text">
-            <input
-              type="text"
-              defaultValue="Field value"
-              className="w-full rounded-lg border border-[#637285] bg-white text-sm text-[#292929] px-3 py-2.5 outline-none"
-              style={ROBOTO}
-            />
-          </FieldShell>
+          <OutlinedField label="Field label" value="Field value" borderColor="#637285" supporting="Supporting text" />
         </Specimen>
 
         <Specimen label="Error">
-          <FieldShell label="Field label" supporting="Error message goes here" supportingColor="#EE2F19">
-            <input
-              type="text"
-              defaultValue="Invalid value"
-              className="w-full rounded-lg border-2 border-[#EE2F19] bg-white text-sm text-[#292929] px-3 py-2 outline-none"
-              style={ROBOTO}
-            />
-          </FieldShell>
+          <OutlinedField label="Field label" value="Invalid value" borderColor="#EE2F19" labelColor="#EE2F19" supporting="Error message goes here" supportingColor="#EE2F19" error />
         </Specimen>
 
         <Specimen label="Disabled">
-          <FieldShell label="Field label" supporting="Supporting text" supportingColor="#A5A8AB">
-            <input
-              type="text"
-              disabled
-              placeholder="Placeholder"
-              className="w-full rounded-lg border border-[#E0E3E7] bg-[#F2F4F5] text-sm text-[#A5A8AB] placeholder-[#A5A8AB] px-3 py-2.5 outline-none cursor-not-allowed"
-              style={ROBOTO}
-            />
-          </FieldShell>
+          <OutlinedField label="Field label" placeholder="Placeholder" disabled supporting="Supporting text" supportingColor="#A5A8AB" />
         </Specimen>
       </div>
     </WhitePanel>
@@ -529,16 +506,21 @@ const SegmentedTabsSection = () => (
     blurb="A three-segment control with one active segment, plus underline tabs with a selected item."
   >
     <WhitePanel className="space-y-8">
-      <Specimen label="Segmented button">
-        <div className="inline-flex rounded-lg border border-[#E0E3E7] overflow-hidden" style={ROBOTO}>
-          {["Segment one", "Segment two", "Segment three"].map((s, i) => (
+      <Specimen label="Stepper / segmented">
+        <div className="inline-flex rounded-full border border-[#E0E3E7] overflow-hidden" style={ROBOTO}>
+          {["Step one", "Step two", "Step three"].map((s, i) => (
             <button
               type="button"
               key={s}
-              className={`text-[13px] font-bold px-4 py-2 ${i !== 0 ? "border-l border-[#E0E3E7]" : ""} ${
-                i === 0 ? "bg-[#2B8679] text-white" : "bg-white text-[#4A5056]"
+              className={`text-[13px] font-bold px-5 py-2 relative ${
+                i === 2 ? "bg-[#2B8679] text-white" : i === 1 ? "bg-[#D5EAE6] text-[#1F6359]" : "bg-white text-[#4A5056]"
               }`}
             >
+              {i > 0 && (
+                <span className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-px text-[#E0E3E7]">
+                  <svg width="8" height="24" viewBox="0 0 8 24" fill="none"><path d="M0 0l8 12-8 12" fill={i === 2 ? "#D5EAE6" : "white"}/></svg>
+                </span>
+              )}
               {s}
             </button>
           ))}

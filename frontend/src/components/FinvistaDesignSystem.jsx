@@ -288,65 +288,69 @@ const ButtonsSection = () => (
     num="04"
     label="Component"
     title="Buttons"
-    blurb="Primary (filled green), Secondary (green outline), and Tertiary (text-only) across Default, Hover, and Disabled states. Large (h56), Medium (h48), and Small (h36) sizes."
+    blurb="Pill-shaped buttons across Primary (filled green), Secondary (green outline), Secondary Alt (blue filled), and Tertiary (green outline text). Default, Hover, and Disabled states."
   >
     <WhitePanel>
       <div className="space-y-10">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-y-8 gap-x-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-8 gap-x-6">
           <div className="space-y-4">
             <SpecLabel>Primary</SpecLabel>
-            <button type="button" className="block w-full rounded-lg bg-[#0E8943] text-white text-base font-bold px-5 py-3" style={RALEWAY}>
-              Primary Action
+            <button type="button" className="block w-full rounded-full bg-[#0E8943] text-white text-sm font-bold px-5 py-2.5" style={RALEWAY}>
+              Primary Normal
             </button>
-            <button type="button" className="block w-full rounded-lg bg-[#0E7E3C] text-white text-base font-bold px-5 py-3" style={RALEWAY}>
-              Primary Action
+            <button type="button" className="block w-full rounded-full bg-[#0E7E3C] text-white text-sm font-bold px-5 py-2.5" style={RALEWAY}>
+              Primary Hover
             </button>
-            <button type="button" disabled className="block w-full rounded-lg bg-[#DCDCDC] text-[#909090] text-base font-bold px-5 py-3 cursor-not-allowed" style={RALEWAY}>
-              Primary Action
+            <button type="button" disabled className="block w-full rounded-full bg-[#DCDCDC] text-[#909090] text-sm font-bold px-5 py-2.5 cursor-not-allowed" style={RALEWAY}>
+              Primary Disabled
             </button>
-            <div className="text-[11px] text-[#65656A] grid grid-cols-3 text-center" style={RALEWAY}>
-              <span>Default</span><span>Hover</span><span>Disabled</span>
-            </div>
           </div>
 
           <div className="space-y-4">
             <SpecLabel>Secondary</SpecLabel>
-            <button type="button" className="block w-full rounded-lg border-2 border-[#0E8943] text-[#0E8943] bg-white text-base font-bold px-5 py-[10px]" style={RALEWAY}>
-              Secondary Action
+            <button type="button" className="block w-full rounded-full border-2 border-[#0E8943] text-[#0E8943] bg-white text-sm font-bold px-5 py-2" style={RALEWAY}>
+              Secondary Normal
             </button>
-            <button type="button" className="block w-full rounded-lg border-2 border-[#0E7E3C] text-[#0E7E3C] bg-[#EFFBF2] text-base font-bold px-5 py-[10px]" style={RALEWAY}>
-              Secondary Action
+            <button type="button" className="block w-full rounded-full border-2 border-[#0E7E3C] text-[#0E7E3C] bg-[#EFFBF2] text-sm font-bold px-5 py-2" style={RALEWAY}>
+              Secondary Hover
             </button>
-            <button type="button" disabled className="block w-full rounded-lg border-2 border-[#DCDCDC] text-[#909090] bg-white text-base font-bold px-5 py-[10px] cursor-not-allowed" style={RALEWAY}>
-              Secondary Action
+            <button type="button" disabled className="block w-full rounded-full border-2 border-[#DCDCDC] text-[#909090] bg-white text-sm font-bold px-5 py-2 cursor-not-allowed" style={RALEWAY}>
+              Secondary Disabled
             </button>
-            <div className="text-[11px] text-[#65656A] grid grid-cols-3 text-center" style={RALEWAY}>
-              <span>Default</span><span>Hover</span><span>Disabled</span>
-            </div>
           </div>
 
           <div className="space-y-4">
-            <SpecLabel>Tertiary / Text</SpecLabel>
-            <button type="button" className="block w-full rounded-lg text-[#0E8943] bg-white text-base font-bold px-5 py-3" style={RALEWAY}>
-              Tertiary Action
+            <SpecLabel>Secondary Alt</SpecLabel>
+            <button type="button" className="block w-full rounded-full bg-[#114984] text-white text-sm font-bold px-5 py-2.5" style={RALEWAY}>
+              Secondary Normal
             </button>
-            <button type="button" className="block w-full rounded-lg text-[#0E7E3C] bg-[#EFFBF2] text-base font-bold px-5 py-3" style={RALEWAY}>
-              Tertiary Action
+            <button type="button" className="block w-full rounded-full bg-[#174176] text-white text-sm font-bold px-5 py-2.5" style={RALEWAY}>
+              Secondary Hover
             </button>
-            <button type="button" disabled className="block w-full rounded-lg text-[#909090] bg-white text-base font-bold px-5 py-3 cursor-not-allowed" style={RALEWAY}>
-              Tertiary Action
+            <button type="button" disabled className="block w-full rounded-full bg-[#DCDCDC] text-[#909090] text-sm font-bold px-5 py-2.5 cursor-not-allowed" style={RALEWAY}>
+              Secondary Disabled
             </button>
-            <div className="text-[11px] text-[#65656A] grid grid-cols-3 text-center" style={RALEWAY}>
-              <span>Default</span><span>Hover</span><span>Disabled</span>
-            </div>
+          </div>
+
+          <div className="space-y-4">
+            <SpecLabel>Tertiary</SpecLabel>
+            <button type="button" className="block w-full rounded-full border border-[#0E8943] text-[#0E8943] bg-white text-sm font-bold px-5 py-2.5" style={RALEWAY}>
+              Tertiary Normal
+            </button>
+            <button type="button" className="block w-full rounded-full border border-[#0E7E3C] text-[#0E7E3C] bg-[#EFFBF2] text-sm font-bold px-5 py-2.5" style={RALEWAY}>
+              Tertiary Hover
+            </button>
+            <button type="button" disabled className="block w-full rounded-full border border-[#DCDCDC] text-[#909090] bg-white text-sm font-bold px-5 py-2.5 cursor-not-allowed" style={RALEWAY}>
+              Tertiary Disabled
+            </button>
           </div>
         </div>
 
         <Specimen label="Size scale">
           <div className="flex flex-wrap items-center gap-4">
-            <button type="button" className="rounded-lg bg-[#0E8943] text-white text-base font-bold px-6 h-14" style={RALEWAY}>Large 56</button>
-            <button type="button" className="rounded-lg bg-[#0E8943] text-white text-sm font-bold px-5 h-12" style={RALEWAY}>Medium 48</button>
-            <button type="button" className="rounded-lg bg-[#0E8943] text-white text-sm font-bold px-4 h-9" style={RALEWAY}>Small 36</button>
+            <button type="button" className="rounded-full bg-[#0E8943] text-white text-base font-bold px-8 h-14" style={RALEWAY}>Large 56</button>
+            <button type="button" className="rounded-full bg-[#0E8943] text-white text-sm font-bold px-6 h-12" style={RALEWAY}>Medium 48</button>
+            <button type="button" className="rounded-full bg-[#0E8943] text-white text-sm font-bold px-5 h-9" style={RALEWAY}>Small 36</button>
           </div>
         </Specimen>
       </div>
@@ -432,34 +436,33 @@ const CheckboxSection = () => (
 
 /* ---------- 07 · PROGRESS ---------- */
 
+const PROGRESS_ROWS = [
+  { label: "Great Start", pct: 18, step: 2 },
+  { label: "Nice Progress", pct: 36, step: 4 },
+  { label: "Halfway There", pct: 54, step: 6 },
+  { label: "Nearly Finished", pct: 90, step: 10 },
+];
+
 const ProgressSection = () => (
   <SubSection
     num="07"
     label="Component"
     title="Progress"
-    blurb="A dual-mode progress indicator: a percentage bar for overall progress and a stepped counter for multi-step flows."
+    blurb="A combined progress indicator showing a motivational label, a percentage bar, a completion percentage, and a step counter badge."
   >
-    <WhitePanel className="space-y-8">
-      <Specimen label="Percentage bar">
-        <div style={RALEWAY}>
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-sm font-semibold text-[#252729]">Application progress</span>
-            <span className="text-sm font-bold text-[#0E8943]" style={FIGTREE}>64%</span>
+    <WhitePanel className="space-y-5">
+      {PROGRESS_ROWS.map((r) => (
+        <div key={r.step} className="flex items-center gap-4" style={RALEWAY}>
+          <span className="text-sm font-semibold text-[#252729] w-32 shrink-0">{r.label}</span>
+          <div className="flex-1 h-2 rounded-full bg-[#DEF7E5] overflow-hidden">
+            <div className="h-full rounded-full bg-[#0E8943]" style={{ width: `${r.pct}%` }} />
           </div>
-          <div className="h-2.5 rounded-full bg-[#DEF7E5] overflow-hidden">
-            <div className="h-full rounded-full bg-[#0E8943]" style={{ width: "64%" }} />
-          </div>
+          <span className="text-xs font-bold text-[#0E8943] shrink-0" style={FIGTREE}>{r.pct}% Complete</span>
+          <span className="inline-flex items-center gap-1 rounded bg-[#0E8943] text-white text-[11px] font-bold px-2 py-0.5 shrink-0" style={FIGTREE}>
+            Step {r.step} of 11 <span className="text-[9px]">&#9660;</span>
+          </span>
         </div>
-      </Specimen>
-
-      <Specimen label="Step counter">
-        <div className="flex items-center gap-3" style={RALEWAY}>
-          <span className="text-sm font-bold text-[#0E8943]" style={FIGTREE}>Step 7 of 11</span>
-          <div className="flex-1 h-2 rounded-full bg-[#DEF7E5] overflow-hidden max-w-xs">
-            <div className="h-full rounded-full bg-[#0E8943]" style={{ width: `${(7/11)*100}%` }} />
-          </div>
-        </div>
-      </Specimen>
+      ))}
     </WhitePanel>
   </SubSection>
 );
@@ -480,26 +483,21 @@ const ToastsSection = () => (
     title="Toasts"
     blurb="Notification toasts for Success, Error, Warning, and Info with a left accent border, icon, message, and dismiss control."
   >
-    <WhitePanel className="space-y-3">
+    <WhitePanel className="space-y-3 max-w-md">
       {TOASTS.map((t) => {
         const I = t.icon;
         return (
           <div
             key={t.kind}
-            className="flex items-start gap-3 rounded-lg px-4 py-3"
+            className="flex items-center gap-3 rounded-lg px-4 py-3"
             style={{ ...RALEWAY, backgroundColor: t.bg, borderLeft: `4px solid ${t.border}` }}
             role="status"
           >
-            <span style={{ color: t.fg }} className="shrink-0 mt-0.5">
+            <span style={{ color: t.fg }} className="shrink-0">
               <I />
             </span>
-            <div className="flex-1 min-w-0">
-              <div className="text-sm font-bold text-[#252729]">{t.kind}</div>
-              <div className="text-[13px] text-[#505054] leading-5">
-                Notification message describing what happened.
-              </div>
-            </div>
-            <button type="button" className="shrink-0 text-[#65656A] mt-0.5" aria-label="Dismiss">
+            <span className="flex-1 text-sm font-bold" style={{ color: t.fg }}>{t.kind}</span>
+            <button type="button" className="shrink-0 text-[#252729]" aria-label="Dismiss">
               <Icon.close />
             </button>
           </div>
@@ -611,7 +609,7 @@ const FileUploadSection = () => (
           </div>
           <p className="text-sm font-semibold text-[#252729]">Drag and drop files here</p>
           <p className="text-[12px] text-[#65656A] mt-1">PDF, JPG, PNG up to 10 MB</p>
-          <button type="button" className="mt-4 rounded-lg border-2 border-[#0E8943] text-[#0E8943] text-sm font-bold px-5 py-2" style={RALEWAY}>
+          <button type="button" className="mt-4 rounded-full border-2 border-[#0E8943] text-[#0E8943] text-sm font-bold px-5 py-2" style={RALEWAY}>
             Browse Files
           </button>
         </div>
@@ -651,7 +649,7 @@ const CardsSection = () => (
               <div className="text-base font-bold text-[#252729]">Rajesh Kumar</div>
               <div className="text-[13px] text-[#65656A] mt-0.5">Personal Loan · INR 5,00,000</div>
             </div>
-            <span className="inline-block rounded-full bg-[#FFF9EF] text-[#F98D29] text-[11px] font-bold px-2.5 py-1">Escalated</span>
+            <span className="inline-block rounded-full border border-[#F6323E] text-[#F6323E] text-[11px] font-bold px-2.5 py-1">Escalated</span>
           </div>
           <div className="mt-4 flex items-center gap-4 text-[12px] text-[#65656A]">
             <span>ID: LN-00482</span>
@@ -674,8 +672,8 @@ const CardsSection = () => (
             <div className="text-base font-bold text-[#252729] mb-1">Select an option</div>
             <p className="text-[13px] text-[#65656A] mb-4">Choose how you would like to proceed with this application.</p>
             <div className="space-y-2">
-              <button type="button" className="w-full rounded-lg bg-[#0E8943] text-white text-sm font-bold py-3" style={RALEWAY}>Continue</button>
-              <button type="button" className="w-full rounded-lg border-2 border-[#0E8943] text-[#0E8943] text-sm font-bold py-2.5" style={RALEWAY}>Save for later</button>
+              <button type="button" className="w-full rounded-full bg-[#0E8943] text-white text-sm font-bold py-3" style={RALEWAY}>Continue</button>
+              <button type="button" className="w-full rounded-full border-2 border-[#0E8943] text-[#0E8943] text-sm font-bold py-2.5" style={RALEWAY}>Save for later</button>
             </div>
           </div>
         </div>
@@ -701,9 +699,10 @@ const DialogSection = () => (
             Are you sure you want to submit this application? This action cannot be undone.
           </p>
           <div className="flex gap-3">
-            <button type="button" className="flex-1 rounded-lg border-2 border-[#DCDCDC] text-[#65656A] text-sm font-bold py-2.5" style={RALEWAY}>Cancel</button>
-            <button type="button" className="flex-1 rounded-lg bg-[#0E8943] text-white text-sm font-bold py-2.5" style={RALEWAY}>Submit</button>
+            <button type="button" className="text-sm font-bold text-[#0E8943]" style={RALEWAY}>Text Button</button>
+            <button type="button" className="flex-1 rounded-full bg-[#0E8943] text-white text-sm font-bold py-2.5" style={RALEWAY}>Primary Normal</button>
           </div>
+          <button type="button" className="w-full rounded-full border-2 border-[#0E8943] text-[#0E8943] text-sm font-bold py-2.5 mt-3" style={RALEWAY}>Tertiary Normal</button>
         </div>
       </Specimen>
     </WhitePanel>
