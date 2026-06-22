@@ -5,6 +5,7 @@ import { finvista as fv } from "../data/finvistaCase";
 import { PROFILE } from "../data/content";
 import Seo from "../components/Seo";
 import Zoomable from "../components/Zoomable";
+import PhoneFrame from "../components/PhoneFrame";
 
 /* -- Reusable section header in portfolio voice -- */
 const SectionLabel = ({ num, name, accent = "#075EFD" }) => (
@@ -67,11 +68,11 @@ export default function FinvistaCaseStudy() {
 
       {/* Hero image */}
       <div className="px-6 md:px-10 lg:px-16">
-        <Zoomable src="/finvista/004-final-mobile-screens-vehicle-details-progress.png" alt="FinVista hero, refined screens" caption="Refined screens: vehicle details and application progress" className="rounded-3xl overflow-hidden dark-card p-6 md:p-10">
+        <Zoomable src="/finvista/cover.jpg" alt="FinVista, lending for India's next billion borrowers" caption="FinVista" className="rounded-3xl overflow-hidden dark-card">
           <img
-            src="/finvista/004-final-mobile-screens-vehicle-details-progress.png"
-            alt="FinVista hero, refined screens"
-            className="w-full h-auto object-contain"
+            src="/finvista/cover.jpg"
+            alt="FinVista, lending for India's next billion borrowers"
+            className="w-full h-auto block"
             loading="eager"
           />
         </Zoomable>
@@ -411,11 +412,11 @@ export default function FinvistaCaseStudy() {
         <p className="text-base leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{fv.design.finalDesign.intro}</p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {fv.design.finalDesign.screens.map((s) => (
-            <figure key={s.title} className="rounded-3xl dark-card overflow-hidden">
-              <Zoomable src={s.src} alt={s.title} caption={s.desc} className="aspect-[9/16] bg-white p-4 flex items-center justify-center">
-                <img src={s.src} alt={s.title} loading="lazy" className="max-w-full max-h-full object-contain" />
+            <figure key={s.title} className="rounded-3xl dark-card p-5">
+              <Zoomable src={s.src} alt={s.title} caption={s.desc} className="block">
+                <PhoneFrame src={s.src} alt={s.title} />
               </Zoomable>
-              <figcaption className="p-5">
+              <figcaption className="pt-4">
                 <h4 className="font-display text-base font-black ">{s.title}</h4>
                 <p className="text-sm mt-1 leading-relaxed text-[#F4F3FA]/85">{s.desc}</p>
               </figcaption>
@@ -572,7 +573,7 @@ export default function FinvistaCaseStudy() {
           data-testid="toggle-gallery"
           className="mt-10 inline-flex items-center gap-2 px-6 py-3 rounded-full dark-card text-white font-semibold text-sm hover:bg-[#241B33] transition-colors"
         >
-          {showAll ? "show fewer screens" : `view all 47 screens →`}
+          {showAll ? "show fewer screens" : `view all 46 screens →`}
         </button>
       </SectionWrap>
 

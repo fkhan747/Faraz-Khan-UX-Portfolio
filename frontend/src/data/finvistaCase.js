@@ -264,12 +264,11 @@ export const finvista = {
         "After wireframes, I explored several visual approaches, testing flat vs. 3D icons, input field styles, and layout density. I reviewed each variant with stakeholders and iterated on their feedback.",
       images: [
         { src: F("002-design-explorations-comparing-flat-and-3d-approaches.png"), caption: "Exploring flat vs. 3D icon styles, comparing approaches for tenure, loan amount, and add-on screens" },
-        { src: F("003-final-mobile-screens-welcome-applications-personal-details.png"), caption: "Refined screens: Welcome, Applications dashboard, and Personal details form with progress indicator" },
       ],
     },
     finalDesign: {
       intro:
-        "The finalized UI across 17 key screens, from login to disbursement. Each screen follows the no-scroll, single-action pattern with information chunking and dual progress indicators.",
+        "The finalized UI across 16 key screens, from login to disbursement. Each screen follows the no-scroll, single-action pattern with information chunking and dual progress indicators.",
       screens: [
         { src: F("005-login-authentication.png"), title: "Login & Authentication", desc: "Mobile number entry with OTP verification. Employee login fallback for sales executives." },
         { src: F("006-applications-dashboard.png"), title: "Applications Dashboard", desc: "Search, sort, filter. Status badges (Lead, DDE, Escalated) with quick access to applications." },
@@ -286,7 +285,6 @@ export const finvista = {
         { src: F("017-asset-validation.png"), title: "Asset Validation", desc: "Engine and chassis number with barcode scan. Locks the physical asset to the loan." },
         { src: F("018-kfs-e-agreement.png"), title: "KFS & E-Agreement", desc: "Digital signature with OTP. Real-time document tracking status." },
         { src: F("019-document-upload.png"), title: "Document Upload", desc: "Down payment, insurance, passbook upload with re-upload and format guidance." },
-        { src: F("020-soft-approval.png"), title: "Soft Approval", desc: "Instant approval with celebratory micro-interaction. Next steps guidance." },
         { src: F("021-disbursement.png"), title: "Disbursement", desc: "Final success state with application number and support contact." },
       ],
     },
@@ -363,7 +361,7 @@ export const finvista = {
   gallery: {
     headline: "All screens at a glance",
     intro:
-      "Showing 10 of the 47 screens designed for the Two-Wheeler journey. Open the full set below.",
+      "Showing 10 of the 46 screens designed for the Two-Wheeler journey. Open the full set below.",
     representative: [
       { src: F("005-login-authentication.png"), title: "Login" },
       { src: F("006-applications-dashboard.png"), title: "Applications Dashboard" },
@@ -408,7 +406,6 @@ export const finvista = {
       { src: F("065-personal-details-form-b.png"), title: "Personal Details: Form B" },
       { src: F("066-asset-validation.png"), title: "Asset Validation" },
       { src: F("067-asset-validation-2.png"), title: "Asset Validation (2)" },
-      { src: F("068-soft-approval.png"), title: "Soft Approval" },
       { src: F("069-customer-validation-a.png"), title: "Customer Validation A" },
       { src: F("070-customer-validation-b.png"), title: "Customer Validation B" },
       { src: F("071-customer-validation-c.png"), title: "Customer Validation C" },
