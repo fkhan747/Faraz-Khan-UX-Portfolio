@@ -1,76 +1,96 @@
-<svg style="width:100%;background:#f5f5f3;border-radius:12px;" viewBox="0 0 1080 520" xmlns="http://www.w3.org/2000/svg">
-<style>text{font-family:Inter,sans-serif;fill:#666}rect.fr{fill:#fff;stroke:#ccc;stroke-width:1;rx:12}rect.bar{fill:#ddd;rx:4}rect.btn{fill:#999;rx:8}rect.fld{fill:none;stroke:#bbb;stroke-width:1;rx:6}rect.blk{fill:#eee;rx:6}rect.chip{fill:none;stroke:#bbb;stroke-width:1;rx:6}text.tt{font-size:13px;font-weight:700;fill:#444}text.lb{font-size:9px;fill:#999}text.sm{font-size:8px;fill:#aaa}</style>
-<g transform="translate(20,20)"><rect class="fr" height="460" width="220"></rect><rect class="bar" height="24" width="200" x="10" y="10"></rect>
-<rect class="blk" height="20" rx="4" width="180" x="20" y="50"></rect><text class="sm" text-anchor="middle" x="110" y="64">Logo</text>
-<text class="tt" text-anchor="middle" x="110" y="110">Welcome</text>
-<text class="lb" text-anchor="middle" x="110" y="128">Login to your account</text>
-<text class="lb" x="20" y="170">Mobile number</text><rect class="fld" height="28" width="180" x="20" y="178"></rect>
-<text class="sm" x="30" y="196">Enter your number</text>
-<rect class="btn" height="36" rx="18" width="180" x="20" y="230"></rect><text style="fill:#fff;font-size:11px;font-weight:600" text-anchor="middle" x="110" y="253">Send OTP</text>
-<line style="stroke:#ddd" x1="20" x2="200" y1="290" y2="290"></line><text class="lb" text-anchor="middle" x="110" y="289">or</text>
-<rect height="36" rx="18" style="fill:none;stroke:#999;stroke-width:1.5" width="180" x="20" y="305"></rect>
-<text style="font-size:11px;font-weight:600;fill:#666" text-anchor="middle" x="110" y="328">Employee Login</text></g>
-<g transform="translate(270,20)"><rect class="fr" height="460" width="220"></rect><rect class="bar" height="24" width="200" x="10" y="10"></rect>
-<rect class="blk" height="28" rx="6" width="95" x="10" y="44"></rect><rect class="blk" height="28" rx="6" style="fill:#ccc" width="95" x="115" y="44"></rect>
-<text class="sm" text-anchor="middle" x="57" y="62">Dashboard</text><text class="sm" text-anchor="middle" x="162" y="62">Applications</text>
-<rect class="fld" height="24" width="165" x="15" y="82"></rect><text class="sm" x="25" y="98">Search by Name/LAN</text>
-<rect class="blk" height="24" rx="4" width="20" x="190" y="82"></rect>
-<rect height="80" rx="8" style="fill:none;stroke:#888;stroke-width:1.5" width="190" x="15" y="116"></rect>
-<text class="tt" style="font-size:11px" x="25" y="136">Applicant Name</text>
-<text class="sm" x="25" y="152">App ID</text><text class="sm" x="25" y="166">Stage: Lead</text><text class="sm" x="25" y="182">Created — Updated</text>
-<rect height="70" rx="8" style="fill:none;stroke:#ddd;stroke-width:1" width="190" x="15" y="206"></rect>
-<text class="tt" style="font-size:11px" x="25" y="226">Applicant</text>
-<rect height="16" rx="8" style="fill:#bbb" width="44" x="155" y="214"></rect>
-<text style="font-size:7px;fill:#fff;font-weight:600" text-anchor="middle" x="177" y="226">Escalated</text>
-<text class="sm" x="25" y="244">App ID</text><text class="sm" x="25" y="258">Stage: DDE</text>
-<rect class="btn" height="36" rx="18" width="190" x="15" y="410"></rect>
-<text style="fill:#fff;font-size:10px;font-weight:600" text-anchor="middle" x="110" y="433">Create New Application</text></g>
-<g transform="translate(520,20)"><rect class="fr" height="460" width="220"></rect><rect class="bar" height="24" width="200" x="10" y="10"></rect>
-<text class="sm" style="fill:#777;font-weight:600" x="15" y="52">Great Start</text><text class="sm" x="140" y="52">9% Complete</text>
-<rect height="14" rx="7" style="fill:#bbb" width="30" x="180" y="44"></rect>
-<text style="font-size:6px;fill:#fff" text-anchor="middle" x="195" y="55">Step 1</text>
-<rect height="4" rx="2" style="fill:#e5e5e5" width="200" x="10" y="62"></rect>
-<rect height="4" rx="2" style="fill:#999" width="20" x="10" y="62"></rect>
-<text class="tt" x="15" y="90">Personal details</text>
-<text class="lb" x="15" y="110">First name</text><rect class="fld" height="24" width="90" x="15" y="116"></rect>
-<text class="lb" x="120" y="110">Last name</text><rect class="fld" height="24" width="90" x="120" y="116"></rect>
-<text class="lb" x="15" y="156">DOB</text><rect class="fld" height="24" width="90" x="15" y="162"></rect>
-<text class="lb" x="120" y="156">Gender</text><rect class="fld" height="24" width="90" x="120" y="162"></rect>
-<text class="lb" x="15" y="202">Marital status</text>
-<g transform="translate(15,208)"><circle cx="8" cy="8" r="7" style="fill:#999"></circle><text class="sm" x="20" y="12">Married</text>
-<circle cx="88" cy="8" r="7" style="fill:none;stroke:#bbb"></circle><text class="sm" x="100" y="12">Unmarried</text></g>
-<text class="lb" x="15" y="246">Spouse's name</text><rect class="fld" height="24" width="195" x="15" y="252"></rect>
-<text class="lb" x="15" y="292">Father's name</text><rect class="fld" height="24" width="90" x="15" y="298"></rect>
-<text class="lb" x="120" y="292">Mother's name</text><rect class="fld" height="24" width="90" x="120" y="298"></rect>
-<text class="lb" x="15" y="340">Capture live photo</text>
-<rect class="blk" height="44" rx="22" width="44" x="160" y="330"></rect>
-<rect class="btn" height="36" rx="18" width="190" x="15" y="410"></rect>
-<text style="fill:#fff;font-size:10px;font-weight:600" text-anchor="middle" x="110" y="433">Verify KYC Details</text></g>
-<g transform="translate(770,20)"><rect class="fr" height="460" width="220"></rect><rect class="bar" height="24" width="200" x="10" y="10"></rect>
-<text class="sm" style="fill:#777;font-weight:600" x="15" y="52">Great Start</text>
-<rect height="18" rx="9" style="fill:#e5e5e5" width="80" x="130" y="42"></rect>
-<text style="font-size:7px;fill:#777;font-weight:600" text-anchor="middle" x="170" y="55">30% Complete</text>
-<text class="tt" x="15" y="82">Application progress</text>
-<g transform="translate(15,95)">
-<circle cx="10" cy="10" r="8" style="fill:#888"></circle><text style="font-size:7px;fill:#fff" text-anchor="middle" x="10" y="14">✓</text>
-<text class="sm" style="fill:#666;font-weight:600" x="26" y="8">Personal Details</text><text class="sm" x="26" y="20">Name, DOB &amp; Gender</text>
-<line style="stroke:#888;stroke-width:1.5" x1="10" x2="10" y1="22" y2="42"></line>
-<circle cx="10" cy="52" r="8" style="fill:#888"></circle><text style="font-size:7px;fill:#fff" text-anchor="middle" x="10" y="56">✓</text>
-<text class="sm" style="fill:#666;font-weight:600" x="26" y="50">PAN Details</text><text class="sm" x="26" y="62">PAN / Form 60</text>
-<line style="stroke:#888;stroke-width:1.5" x1="10" x2="10" y1="64" y2="84"></line>
-<circle cx="10" cy="94" r="8" style="fill:#e5e5e5;stroke:#888;stroke-width:1.5"></circle>
-<text class="sm" style="font-weight:600;fill:#555" x="26" y="92">Address</text><text class="sm" x="26" y="104">Residence &amp; Landmark</text>
-<line style="stroke:#ddd;stroke-width:1" x1="10" x2="10" y1="106" y2="126"></line>
-<circle cx="10" cy="136" r="8" style="fill:#e5e5e5;stroke:#ddd"></circle><text class="sm" x="26" y="134">Employment</text><text class="sm" x="26" y="146">Type, Company</text>
-<line style="stroke:#ddd;stroke-width:1" x1="10" x2="10" y1="148" y2="168"></line>
-<circle cx="10" cy="178" r="8" style="fill:#e5e5e5;stroke:#ddd"></circle><text class="sm" x="26" y="176">Income</text><text class="sm" x="26" y="188">Applicant &amp; Household</text>
-<line style="stroke:#ddd;stroke-width:1" x1="10" x2="10" y1="190" y2="210"></line>
-<circle cx="10" cy="220" r="8" style="fill:#e5e5e5;stroke:#ddd"></circle><text class="sm" x="26" y="218">Product</text><text class="sm" x="26" y="230">Schemes &amp; VAS</text>
-<line style="stroke:#ddd;stroke-width:1" x1="10" x2="10" y1="232" y2="252"></line>
-<circle cx="10" cy="262" r="8" style="fill:#e5e5e5;stroke:#ddd"></circle><text class="sm" x="26" y="260">Bank Account</text><text class="sm" x="26" y="272">UPI, Bank &amp; Mandate</text>
-</g></g>
-<text style="font-size:11px;font-weight:600;fill:#444" text-anchor="middle" x="130" y="505">Welcome</text>
-<text style="font-size:11px;font-weight:600;fill:#444" text-anchor="middle" x="380" y="505">Applications</text>
-<text style="font-size:11px;font-weight:600;fill:#444" text-anchor="middle" x="630" y="505">Personal Details</text>
-<text style="font-size:11px;font-weight:600;fill:#444" text-anchor="middle" x="880" y="505">Progress Tracker</text>
+<svg style="width:100%;background:#f1f0ec;border-radius:12px" viewBox="0 0 1080 580" xmlns="http://www.w3.org/2000/svg">
+<defs>
+ <filter id="sk" x="-3%" y="-3%" width="106%" height="106%">
+  <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed="7" result="n"/>
+  <feDisplacementMap in="SourceGraphic" in2="n" scale="3.2" xChannelSelector="R" yChannelSelector="G"/>
+ </filter>
+</defs>
+<style>
+ text{font-family:Inter,system-ui,-apple-system,sans-serif}
+ .frame{fill:#fcfcfb;stroke:#b1b1a9;stroke-width:2}
+ .chrome{fill:#d3d3cd}
+ .bar{fill:#e4e4df}
+ .bar2{fill:#d5d5cf}
+ .fld{fill:#ffffff;stroke:#bdbdb6;stroke-width:1.4;stroke-dasharray:5 3}
+ .btn{fill:#b9b9b2}
+ .opt{font-size:13px;font-weight:700;fill:#6a6a64}
+ .ann{font-size:10.5px;fill:#8f8f88}
+ .lbl{font-family:'Roboto Mono',monospace;font-size:11px;letter-spacing:.1em;fill:#9a9a93}
+ .chosen{fill:#5c5c56}
+ .chev{fill:#a8a8a2}
+</style>
+
+<text x="40" y="32" class="lbl">LOAN APPLICATION FORM &#183; LAYOUT EXPLORATION</text>
+<text x="40" y="66" class="opt">Option A</text>
+<text x="410" y="66" class="opt">Option B</text>
+<text x="780" y="66" class="opt">Option C</text>
+<g transform="translate(948,53)"><rect class="chosen" width="92" height="18" rx="9"/><text x="46" y="13" text-anchor="middle" style="font-size:9px;fill:#fff;font-weight:600">&#10003; chosen</text></g>
+
+<text x="40" y="540" class="ann">One long scrolling form.</text>
+<text x="40" y="556" class="ann">30+ fields in a row felt endless.</text>
+<text x="410" y="540" class="ann">Grouped accordion.</text>
+<text x="410" y="556" class="ann">Cleaner, but progress got buried.</text>
+<text x="780" y="540" class="ann">Stepped wizard, 11 clear steps.</text>
+<text x="780" y="556" class="ann">The direction we shipped.</text>
+
+<g filter="url(#sk)">
+ <!-- FRAME A: one long form -->
+ <g transform="translate(40,80)">
+  <rect class="frame" width="260" height="440" rx="24"/>
+  <rect class="chrome" x="95" y="12" width="70" height="13" rx="6.5"/>
+  <rect class="bar" x="22" y="15" width="22" height="6" rx="3"/>
+  <rect class="bar" x="214" y="15" width="24" height="6" rx="3"/>
+  <rect class="bar2" x="22" y="48" width="120" height="13" rx="3"/>
+  <rect class="bar" x="22" y="74" width="52" height="6" rx="3"/><rect class="fld" x="22" y="84" width="216" height="20" rx="5"/>
+  <rect class="bar" x="22" y="112" width="52" height="6" rx="3"/><rect class="fld" x="22" y="122" width="216" height="20" rx="5"/>
+  <rect class="bar" x="22" y="150" width="52" height="6" rx="3"/><rect class="fld" x="22" y="160" width="216" height="20" rx="5"/>
+  <rect class="bar" x="22" y="188" width="52" height="6" rx="3"/><rect class="fld" x="22" y="198" width="216" height="20" rx="5"/>
+  <rect class="bar" x="22" y="226" width="52" height="6" rx="3"/><rect class="fld" x="22" y="236" width="216" height="20" rx="5"/>
+  <rect class="bar" x="22" y="264" width="52" height="6" rx="3"/><rect class="fld" x="22" y="274" width="216" height="20" rx="5"/>
+  <rect class="bar" x="22" y="302" width="52" height="6" rx="3"/><rect class="fld" x="22" y="312" width="216" height="20" rx="5"/>
+  <rect class="bar" x="22" y="340" width="52" height="6" rx="3"/><rect class="fld" x="22" y="350" width="216" height="20" rx="5"/>
+  <rect class="bar" x="22" y="378" width="52" height="6" rx="3"/><rect class="fld" x="22" y="388" width="216" height="14" rx="5"/>
+  <rect class="chrome" x="95" y="422" width="70" height="6" rx="3"/>
+ </g>
+ <!-- FRAME B: grouped accordion -->
+ <g transform="translate(410,80)">
+  <rect class="frame" width="260" height="440" rx="24"/>
+  <rect class="chrome" x="95" y="12" width="70" height="13" rx="6.5"/>
+  <rect class="bar" x="22" y="15" width="22" height="6" rx="3"/>
+  <rect class="bar" x="214" y="15" width="24" height="6" rx="3"/>
+  <rect class="bar2" x="22" y="48" width="120" height="13" rx="3"/>
+  <rect class="bar2" x="22" y="74" width="216" height="28" rx="7"/>
+  <rect class="bar" x="34" y="85" width="96" height="6" rx="3"/>
+  <polygon class="chev" points="210,84 222,84 216,91"/>
+  <rect class="bar" x="34" y="114" width="44" height="6" rx="3"/><rect class="fld" x="34" y="123" width="196" height="20" rx="5"/>
+  <rect class="bar" x="34" y="150" width="44" height="6" rx="3"/><rect class="fld" x="34" y="159" width="196" height="20" rx="5"/>
+  <rect class="bar" x="34" y="186" width="44" height="6" rx="3"/><rect class="fld" x="34" y="195" width="196" height="20" rx="5"/>
+  <rect class="bar2" x="22" y="232" width="216" height="28" rx="7"/><rect class="bar" x="34" y="243" width="108" height="6" rx="3"/>
+  <polygon class="chev" points="212,240 212,252 220,246"/>
+  <rect class="bar2" x="22" y="270" width="216" height="28" rx="7"/><rect class="bar" x="34" y="281" width="80" height="6" rx="3"/>
+  <polygon class="chev" points="212,278 212,290 220,284"/>
+  <rect class="bar2" x="22" y="308" width="216" height="28" rx="7"/><rect class="bar" x="34" y="319" width="120" height="6" rx="3"/>
+  <polygon class="chev" points="212,316 212,328 220,322"/>
+  <rect class="chrome" x="95" y="422" width="70" height="6" rx="3"/>
+ </g>
+ <!-- FRAME C: stepped wizard (chosen) -->
+ <g transform="translate(780,80)">
+  <rect class="frame" width="260" height="440" rx="24" stroke="#8f8f88" stroke-width="2.5"/>
+  <rect class="chrome" x="95" y="12" width="70" height="13" rx="6.5"/>
+  <rect class="bar" x="22" y="15" width="22" height="6" rx="3"/>
+  <rect class="bar" x="214" y="15" width="24" height="6" rx="3"/>
+  <rect class="bar2" x="22" y="48" width="92" height="13" rx="3"/>
+  <rect class="bar" x="22" y="74" width="216" height="6" rx="3"/>
+  <rect class="chosen" x="22" y="74" width="66" height="6" rx="3"/>
+  <rect class="bar2" x="22" y="90" width="56" height="9" rx="3"/>
+  <rect class="bar2" x="22" y="118" width="134" height="13" rx="3"/>
+  <rect class="bar" x="22" y="146" width="52" height="6" rx="3"/><rect class="fld" x="22" y="156" width="216" height="20" rx="5"/>
+  <rect class="bar" x="22" y="186" width="52" height="6" rx="3"/><rect class="fld" x="22" y="196" width="216" height="20" rx="5"/>
+  <rect class="bar" x="22" y="226" width="52" height="6" rx="3"/><rect class="fld" x="22" y="236" width="216" height="20" rx="5"/>
+  <rect class="btn" x="22" y="362" width="216" height="34" rx="17"/>
+  <rect x="104" y="375" width="38" height="8" rx="4" fill="#f4f4f1"/>
+  <polygon points="150,375 150,383 157,379" fill="#f4f4f1"/>
+  <rect class="chrome" x="95" y="422" width="70" height="6" rx="3"/>
+ </g>
+</g>
 </svg>

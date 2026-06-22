@@ -252,11 +252,11 @@ export const finvista = {
       "The design evolved through three distinct phases: low-fidelity wireframing to validate information architecture, mid-fidelity explorations to test visual approaches, and high-fidelity final screens refined through stakeholder feedback.",
     wireframes: {
       intro:
-        "I built structured low-fidelity wireframes across the entire journey to validate information architecture and gather feedback before investing in visual design. Three batches covered onboarding, application flow, and post-submission states, 12 wireframes in all.",
+        "Before any visual polish, I explored the hardest screens in grayscale, weighing a few layout directions for each. Putting the options side by side is how the final structure earned its shape.",
       batches: [
-        { src: F("svg-13.svg"), caption: "Wireframes (1 of 3): Welcome, Applications list, Personal details form, Application progress tracker" },
-        { src: F("svg-14.svg"), caption: "Wireframes (2 of 3): Customer validation, Address details, Employment details, Product selection" },
-        { src: F("svg-15.svg"), caption: "Wireframes (3 of 3): Co-applicant, Loan summary, Document upload, Disbursement confirmation" },
+        { src: F("svg-13.svg"), caption: "Loan application form: one long form vs a grouped accordion vs a stepped wizard. The stepped wizard became the 11-step journey." },
+        { src: F("svg-14.svg"), caption: "Applications dashboard: a plain list vs status cards vs grouping by stage. Status cards won for daily scanning." },
+        { src: F("svg-15.svg"), caption: "Application progress: a top bar vs a vertical stepper vs a progress ring. The vertical stepper kept every stage visible." },
       ],
     },
     explorations: {

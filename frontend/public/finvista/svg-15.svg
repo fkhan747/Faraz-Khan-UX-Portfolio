@@ -1,95 +1,94 @@
-<svg style="width:100%;background:#f5f5f3;border-radius:12px;" viewBox="0 0 1080 520" xmlns="http://www.w3.org/2000/svg">
-<style>text{font-family:Inter,sans-serif;fill:#666}rect.fr{fill:#fff;stroke:#ccc;stroke-width:1;rx:12}rect.bar{fill:#ddd;rx:4}rect.btn{fill:#999;rx:8}rect.fld{fill:none;stroke:#bbb;stroke-width:1;rx:6}rect.blk{fill:#eee;rx:6}text.tt{font-size:13px;font-weight:700;fill:#444}text.lb{font-size:9px;fill:#999}text.sm{font-size:8px;fill:#aaa}</style>
-<g transform="translate(20,20)"><rect class="fr" height="460" width="220"></rect><rect class="bar" height="24" width="200" x="10" y="10"></rect>
-<text class="sm" style="fill:#777;font-weight:600" x="15" y="52">Halfway there</text><text class="sm" x="130" y="52">63% Complete</text>
-<rect height="14" rx="7" style="fill:#bbb" width="30" x="180" y="44"></rect>
-<text style="font-size:6px;fill:#fff" text-anchor="middle" x="195" y="55">Step 7</text>
-<rect height="4" rx="2" style="fill:#e5e5e5" width="200" x="10" y="62"></rect>
-<rect height="4" rx="2" style="fill:#999" width="126" x="10" y="62"></rect>
-<text class="tt" x="15" y="90">Co-applicant</text>
-<text class="lb" x="15" y="108">Add a co-applicant to strengthen application</text>
-<rect height="70" rx="8" style="fill:none;stroke:#999;stroke-width:1.5" width="195" x="15" y="128"></rect>
-<text class="sm" style="font-weight:600;fill:#444" x="25" y="148">Existing customer</text>
-<text class="sm" x="25" y="164">Select from existing relations</text>
-<text class="sm" style="font-style:italic" x="25" y="180">Spouse, parent or guardian</text>
-<rect height="70" rx="8" style="fill:none;stroke:#bbb" width="195" x="15" y="208"></rect>
-<text class="sm" style="font-weight:600;fill:#666" x="25" y="228">New co-applicant</text>
-<text class="sm" x="25" y="244">Add someone new</text>
-<text class="sm" style="font-style:italic" x="25" y="260">Requires KYC verification</text>
-<text class="lb" x="15" y="296">Selected: Father — Mohan Kumar</text>
-<rect class="fld" height="28" width="195" x="15" y="304"></rect>
-<rect class="btn" height="36" rx="18" width="190" x="15" y="410"></rect>
-<text style="fill:#fff;font-size:10px;font-weight:600" text-anchor="middle" x="110" y="433">Continue</text></g>
-<g transform="translate(270,20)"><rect class="fr" height="460" width="220"></rect><rect class="bar" height="24" width="200" x="10" y="10"></rect>
-<text class="sm" style="fill:#777;font-weight:600" x="15" y="52">Halfway there</text><text class="sm" x="130" y="52">48% Complete</text>
-<rect height="14" rx="7" style="fill:#bbb" width="30" x="180" y="44"></rect>
-<text style="font-size:6px;fill:#fff" text-anchor="middle" x="195" y="55">Step 6</text>
-<rect height="4" rx="2" style="fill:#e5e5e5" width="200" x="10" y="62"></rect>
-<rect height="4" rx="2" style="fill:#999" width="96" x="10" y="62"></rect>
-<text class="tt" x="15" y="90">Loan Summary</text>
-<rect height="68" rx="8" style="fill:#eee" width="195" x="15" y="100"></rect>
-<text class="sm" x="25" y="118">Total Loan</text><text class="sm" style="font-weight:600;fill:#444" text-anchor="end" x="180" y="118">₹65,000</text>
-<text class="sm" x="25" y="138">Total EMI</text><text class="sm" style="font-weight:600;fill:#444" text-anchor="end" x="180" y="138">₹11,000</text>
-<text class="sm" x="25" y="158">FEMI Date</text><text class="sm" style="font-weight:600;fill:#444" text-anchor="end" x="180" y="158">11/07/2024</text>
-<text class="lb" x="15" y="190">Loan breakdown</text>
-<line style="stroke:#ddd" x1="15" x2="205" y1="196" y2="196"></line>
-<text class="sm" x="15" y="214">Loan Amount</text><text class="sm" style="font-weight:600" text-anchor="end" x="200" y="214">₹60,000</text>
-<text class="sm" x="15" y="234">Tenure</text><text class="sm" style="font-weight:600" text-anchor="end" x="200" y="234">6 mo</text>
-<text class="sm" x="15" y="254">Down Payment</text><text class="sm" style="font-weight:600" text-anchor="end" x="200" y="254">₹20,000</text>
-<text class="sm" x="15" y="274">EMI</text><text class="sm" style="font-weight:600" text-anchor="end" x="200" y="274">₹9,999</text>
-<text class="sm" x="15" y="294">Cust IRR</text><text class="sm" style="font-weight:600" text-anchor="end" x="200" y="294">26.97%</text>
-<line style="stroke:#ddd" x1="15" x2="205" y1="312" y2="312"></line>
-<text class="sm" style="font-weight:600;fill:#444" x="15" y="332">Net Disbursement</text>
-<text class="sm" style="font-weight:600;fill:#444" text-anchor="end" x="200" y="332">₹60,500</text>
-<rect class="btn" height="36" rx="18" width="190" x="15" y="410"></rect>
-<text style="fill:#fff;font-size:10px;font-weight:600" text-anchor="middle" x="110" y="433">Proceed to Validation</text></g>
-<g transform="translate(520,20)"><rect class="fr" height="460" width="220"></rect><rect class="bar" height="24" width="200" x="10" y="10"></rect>
-<text class="sm" style="fill:#777;font-weight:600" x="15" y="52">Nearly finished</text><text class="sm" x="130" y="52">90% Complete</text>
-<rect height="14" rx="7" style="fill:#bbb" width="40" x="170" y="44"></rect>
-<text style="font-size:6px;fill:#fff" text-anchor="middle" x="190" y="55">Step 10</text>
-<rect height="4" rx="2" style="fill:#e5e5e5" width="200" x="10" y="62"></rect>
-<rect height="4" rx="2" style="fill:#999" width="180" x="10" y="62"></rect>
-<text class="tt" x="15" y="90">Upload Documents</text>
-<rect height="48" rx="8" style="fill:#eee" width="195" x="15" y="108"></rect>
-<rect class="blk" height="24" rx="3" width="24" x="25" y="120"></rect>
-<text class="sm" style="font-weight:600" x="58" y="130">Down Payment Receipt</text>
-<text class="sm" x="58" y="144">Required</text>
-<rect height="20" rx="10" style="fill:none;stroke:#888" width="50" x="155" y="125"></rect>
-<text class="sm" text-anchor="middle" x="180" y="138">Re-Upload</text>
-<rect height="48" rx="8" style="fill:#eee" width="195" x="15" y="166"></rect>
-<rect class="blk" height="24" rx="3" width="24" x="25" y="178"></rect>
-<text class="sm" style="font-weight:600" x="58" y="188">Insurance</text>
-<rect height="20" rx="10" style="fill:none;stroke:#888" width="50" x="155" y="183"></rect>
-<text class="sm" text-anchor="middle" x="180" y="196">Re-Upload</text>
-<rect height="48" rx="8" style="fill:none;stroke:#bbb" width="195" x="15" y="224"></rect>
-<rect class="blk" height="24" rx="3" width="24" x="25" y="236"></rect>
-<text class="sm" style="font-weight:600" x="58" y="246">Bank Passbook</text>
-<rect height="20" rx="10" style="fill:none;stroke:#888" width="50" x="155" y="241"></rect>
-<text class="sm" text-anchor="middle" x="180" y="254">Upload</text>
-<rect height="38" rx="8" style="fill:#f0f0f0" width="195" x="15" y="290"></rect>
-<text class="sm" x="25" y="306">Supported: JPG, PNG, PDF</text>
-<text class="sm" x="25" y="320">Max size: 4 MB</text>
-<rect class="btn" height="36" rx="18" width="190" x="15" y="410"></rect>
-<text style="fill:#fff;font-size:10px;font-weight:600" text-anchor="middle" x="110" y="433">Select Delivery Address</text></g>
-<g transform="translate(770,20)"><rect class="fr" height="460" width="220"></rect><rect class="bar" height="24" width="200" x="10" y="10"></rect>
-<rect class="blk" height="120" rx="60" width="140" x="40" y="80"></rect>
-<text class="sm" text-anchor="middle" x="110" y="148">Success icon</text>
-<text class="tt" style="font-size:18px;fill:#2D8B55" text-anchor="middle" x="110" y="230">Loan Disbursed!</text>
-<text class="lb" text-anchor="middle" x="110" y="252">Your loan has been approved</text>
-<text class="lb" text-anchor="middle" x="110" y="266">and disbursed successfully</text>
-<rect height="80" rx="8" style="fill:#eee" width="195" x="15" y="290"></rect>
-<text class="sm" x="25" y="310">Application ID</text>
-<text class="sm" style="font-weight:600;fill:#444" text-anchor="end" x="200" y="310">3000TW000001</text>
-<text class="sm" x="25" y="330">Amount Disbursed</text>
-<text class="sm" style="font-weight:600;fill:#444" text-anchor="end" x="200" y="330">₹60,500</text>
-<text class="sm" x="25" y="350">Date</text>
-<text class="sm" style="font-weight:600;fill:#444" text-anchor="end" x="200" y="350">15/06/2024</text>
-<rect height="28" rx="14" style="fill:none;stroke:#888" width="195" x="15" y="390"></rect>
-<text class="sm" style="font-weight:600" text-anchor="middle" x="110" y="408">Download Receipt</text>
-<rect class="btn" height="36" rx="18" width="190" x="15" y="424"></rect>
-<text style="fill:#fff;font-size:10px;font-weight:600" text-anchor="middle" x="110" y="447">Done</text></g>
-<text style="font-size:11px;font-weight:600;fill:#444" text-anchor="middle" x="130" y="505">Co-Applicant</text>
-<text style="font-size:11px;font-weight:600;fill:#444" text-anchor="middle" x="380" y="505">Loan Summary</text>
-<text style="font-size:11px;font-weight:600;fill:#444" text-anchor="middle" x="630" y="505">Upload Documents</text>
-<text style="font-size:11px;font-weight:600;fill:#444" text-anchor="middle" x="880" y="505">Disbursement</text>
+<svg style="width:100%;background:#f1f0ec;border-radius:12px" viewBox="0 0 1080 580" xmlns="http://www.w3.org/2000/svg">
+<defs>
+ <filter id="sk" x="-3%" y="-3%" width="106%" height="106%">
+  <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed="17" result="n"/>
+  <feDisplacementMap in="SourceGraphic" in2="n" scale="3.2" xChannelSelector="R" yChannelSelector="G"/>
+ </filter>
+</defs>
+<style>
+ text{font-family:Inter,system-ui,-apple-system,sans-serif}
+ .frame{fill:#fcfcfb;stroke:#b1b1a9;stroke-width:2}
+ .chrome{fill:#d3d3cd}
+ .bar{fill:#e4e4df}
+ .bar2{fill:#d5d5cf}
+ .fld{fill:#ffffff;stroke:#bdbdb6;stroke-width:1.4;stroke-dasharray:5 3}
+ .card{fill:#ffffff;stroke:#c4c4be;stroke-width:1.4}
+ .btn{fill:#b9b9b2}
+ .opt{font-size:13px;font-weight:700;fill:#6a6a64}
+ .ann{font-size:10.5px;fill:#8f8f88}
+ .lbl{font-family:'Roboto Mono',monospace;font-size:11px;letter-spacing:.1em;fill:#9a9a93}
+ .chosen{fill:#5c5c56}
+ .ringbg{fill:none;stroke:#deded8;stroke-width:14}
+ .ringfg{fill:none;stroke:#7a7a73;stroke-width:14;stroke-linecap:round}
+ .stepdone{fill:#6a6a64}
+ .steptodo{fill:#ffffff;stroke:#c4c4be;stroke-width:1.6}
+ .conn{stroke:#cdcdc7;stroke-width:2}
+</style>
+
+<text x="40" y="32" class="lbl">APPLICATION PROGRESS &#183; STATUS EXPLORATION</text>
+<text x="40" y="66" class="opt">Option A</text>
+<text x="410" y="66" class="opt">Option B</text>
+<text x="780" y="66" class="opt">Option C</text>
+<g transform="translate(560,53)"><rect class="chosen" width="92" height="18" rx="9"/><text x="46" y="13" text-anchor="middle" style="font-size:9px;fill:#fff;font-weight:600">&#10003; chosen</text></g>
+
+<text x="40" y="540" class="ann">Top progress bar.</text>
+<text x="40" y="556" class="ann">Compact, but the path felt hidden.</text>
+<text x="410" y="540" class="ann">Vertical stepper.</text>
+<text x="410" y="556" class="ann">Every stage visible and tappable.</text>
+<text x="780" y="540" class="ann">Progress ring.</text>
+<text x="780" y="556" class="ann">Pretty, less scannable for 8 stages.</text>
+
+<g filter="url(#sk)">
+ <!-- A: top progress bar + current step card -->
+ <g transform="translate(40,80)">
+  <rect class="frame" width="260" height="440" rx="24"/>
+  <rect class="chrome" x="95" y="12" width="70" height="13" rx="6.5"/>
+  <rect class="bar" x="22" y="15" width="22" height="6" rx="3"/><rect class="bar" x="214" y="15" width="24" height="6" rx="3"/>
+  <rect class="bar" x="22" y="52" width="216" height="10" rx="5"/>
+  <rect class="chosen" x="22" y="52" width="92" height="10" rx="5"/>
+  <rect class="bar2" x="22" y="74" width="70" height="8" rx="4"/>
+  <rect class="card" x="22" y="104" width="216" height="180" rx="10"/>
+  <rect class="bar2" x="34" y="120" width="110" height="11" rx="4"/>
+  <rect class="bar" x="34" y="146" width="48" height="6" rx="3"/><rect class="fld" x="34" y="156" width="192" height="22" rx="5"/>
+  <rect class="bar" x="34" y="190" width="48" height="6" rx="3"/><rect class="fld" x="34" y="200" width="192" height="22" rx="5"/>
+  <rect class="bar" x="34" y="238" width="120" height="6" rx="3"/>
+  <rect class="bar" x="34" y="252" width="150" height="6" rx="3"/>
+  <rect class="btn" x="22" y="362" width="216" height="34" rx="17"/>
+  <rect x="104" y="375" width="38" height="8" rx="4" fill="#f4f4f1"/>
+  <polygon points="150,375 150,383 157,379" fill="#f4f4f1"/>
+  <rect class="chrome" x="95" y="422" width="70" height="6" rx="3"/>
+ </g>
+ <!-- B: vertical stepper (chosen) -->
+ <g transform="translate(410,80)">
+  <rect class="frame" width="260" height="440" rx="24" stroke="#8f8f88" stroke-width="2.5"/>
+  <rect class="chrome" x="95" y="12" width="70" height="13" rx="6.5"/>
+  <rect class="bar" x="22" y="15" width="22" height="6" rx="3"/><rect class="bar" x="214" y="15" width="24" height="6" rx="3"/>
+  <rect class="bar2" x="22" y="50" width="130" height="13" rx="3"/>
+  <line class="conn" x1="40" y1="96" x2="40" y2="370"/>
+  <circle class="stepdone" cx="40" cy="92" r="9"/><rect class="bar2" x="60" y="84" width="120" height="8" rx="4"/><rect class="bar" x="60" y="97" width="84" height="5" rx="2.5"/>
+  <circle class="stepdone" cx="40" cy="136" r="9"/><rect class="bar2" x="60" y="128" width="104" height="8" rx="4"/><rect class="bar" x="60" y="141" width="84" height="5" rx="2.5"/>
+  <circle class="stepdone" cx="40" cy="180" r="9"/><rect class="bar2" x="60" y="172" width="116" height="8" rx="4"/><rect class="bar" x="60" y="185" width="84" height="5" rx="2.5"/>
+  <circle class="steptodo" cx="40" cy="224" r="9"/><rect class="bar2" x="60" y="216" width="96" height="8" rx="4"/><rect class="bar" x="60" y="229" width="84" height="5" rx="2.5"/>
+  <circle class="steptodo" cx="40" cy="268" r="9"/><rect class="bar2" x="60" y="260" width="110" height="8" rx="4"/><rect class="bar" x="60" y="273" width="84" height="5" rx="2.5"/>
+  <circle class="steptodo" cx="40" cy="312" r="9"/><rect class="bar2" x="60" y="304" width="100" height="8" rx="4"/><rect class="bar" x="60" y="317" width="84" height="5" rx="2.5"/>
+  <circle class="steptodo" cx="40" cy="356" r="9"/><rect class="bar2" x="60" y="348" width="120" height="8" rx="4"/><rect class="bar" x="60" y="361" width="84" height="5" rx="2.5"/>
+  <rect class="chrome" x="95" y="422" width="70" height="6" rx="3"/>
+ </g>
+ <!-- C: progress ring + next step -->
+ <g transform="translate(780,80)">
+  <rect class="frame" width="260" height="440" rx="24"/>
+  <rect class="chrome" x="95" y="12" width="70" height="13" rx="6.5"/>
+  <rect class="bar" x="22" y="15" width="22" height="6" rx="3"/><rect class="bar" x="214" y="15" width="24" height="6" rx="3"/>
+  <circle class="ringbg" cx="130" cy="150" r="68"/>
+  <circle class="ringfg" cx="130" cy="150" r="68" stroke-dasharray="192 235" transform="rotate(-90 130 150)"/>
+  <rect class="bar2" x="108" y="138" width="44" height="14" rx="4"/>
+  <rect class="bar" x="100" y="160" width="60" height="7" rx="3"/>
+  <rect class="card" x="22" y="262" width="216" height="86" rx="10"/>
+  <rect class="bar" x="34" y="276" width="64" height="6" rx="3"/>
+  <rect class="bar2" x="34" y="292" width="120" height="10" rx="4"/>
+  <rect class="bar" x="34" y="312" width="150" height="6" rx="3"/>
+  <polygon points="214,300 214,312 222,306" class="ringfg" fill="#9a9a93" stroke="none"/>
+  <rect class="chrome" x="95" y="422" width="70" height="6" rx="3"/>
+ </g>
+</g>
 </svg>
