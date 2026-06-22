@@ -36,47 +36,54 @@ export default function FinvistaCaseStudy() {
   return (
     <article data-testid="finvista-case-study" className="pb-24">
       <Seo title={fv.title} description={fv.subtitle} />
-      {/* TITLE BLOCK */}
-      <header className="px-6 md:px-10 lg:px-16 pt-12 pb-10">
-        <Link
-          to="/projects"
-          data-testid="back-link"
-          className="inline-flex items-center gap-2 mb-10 text-xs font-mono uppercase tracking-widest text-[#A29CB4] hover:text-[#F5379B] transition-colors"
-        >
-          <ArrowLeft size={14} /> all projects
-        </Link>
-        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-5">
-          ux case study · featured
-        </p>
-        <h1 className="font-display text-6xl md:text-7xl lg:text-[8rem] font-black tracking-tighter leading-[0.9] lowercase case-keep">
-          finv<span className="dot-o">i</span>sta
-        </h1>
-        <p className="mt-8 max-w-5xl text-xl md:text-2xl text-[#F4F3FA] leading-snug font-light italic">
-          {fv.subtitle}
-        </p>
+      {/* TITLE BLOCK over a darkened cover image */}
+      <header className="relative overflow-hidden">
+        <img
+          src="/finvista/cover.jpg"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover"
+          loading="eager"
+        />
+        <div
+          className="absolute inset-0"
+          aria-hidden="true"
+          style={{ background: "linear-gradient(105deg, rgba(16,2,16,0.92) 0%, rgba(16,2,16,0.64) 60%, rgba(16,2,16,0.42) 100%)" }}
+        />
+        <div
+          className="absolute inset-0"
+          aria-hidden="true"
+          style={{ background: "linear-gradient(to bottom, rgba(16,2,16,0.55) 0%, rgba(16,2,16,0) 28%, rgba(16,2,16,0) 50%, rgba(16,2,16,0.92) 100%)" }}
+        />
+        <div className="relative z-10 px-6 md:px-10 lg:px-16 pt-12 pb-14">
+          <Link
+            to="/projects"
+            data-testid="back-link"
+            className="inline-flex items-center gap-2 mb-10 text-xs font-mono uppercase tracking-widest text-white/70 hover:text-[#F5379B] transition-colors"
+          >
+            <ArrowLeft size={14} /> all projects
+          </Link>
+          <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-5">
+            ux case study · featured
+          </p>
+          <h1 className="font-display text-6xl md:text-7xl lg:text-[8rem] font-black tracking-tighter leading-[0.9] lowercase case-keep text-[#F7F5FF]">
+            finv<span className="dot-o">i</span>sta
+          </h1>
+          <p className="mt-8 max-w-3xl text-xl md:text-2xl text-[#F4F3FA] leading-snug font-light italic">
+            {fv.subtitle}
+          </p>
 
-        {/* Hero stats */}
-        <div className="mt-12 grid grid-cols-3 gap-4 max-w-5xl">
-          {fv.hero.stats.map((s) => (
-            <div key={s.label} className="dark-card rounded-2xl p-5 md:p-6">
-              <div className="num text-3xl md:text-5xl font-black text-[#075EFD] leading-none">{s.value}</div>
-              <div className="mt-3 text-[10px] md:text-xs font-mono uppercase tracking-widest text-[#A29CB4]">{s.label}</div>
-            </div>
-          ))}
+          {/* Hero stats */}
+          <div className="mt-12 grid grid-cols-3 gap-4 max-w-4xl">
+            {fv.hero.stats.map((s) => (
+              <div key={s.label} className="rounded-2xl p-5 md:p-6 bg-[#100210]/55 backdrop-blur-md border border-white/12">
+                <div className="num text-3xl md:text-5xl font-black text-[#075EFD] leading-none">{s.value}</div>
+                <div className="mt-3 text-[10px] md:text-xs font-mono uppercase tracking-widest text-white/70">{s.label}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </header>
-
-      {/* Hero image */}
-      <div className="px-6 md:px-10 lg:px-16">
-        <Zoomable src="/finvista/cover.jpg" alt="FinVista, lending for India's next billion borrowers" caption="FinVista" className="rounded-3xl overflow-hidden dark-card">
-          <img
-            src="/finvista/cover.jpg"
-            alt="FinVista, lending for India's next billion borrowers"
-            className="w-full h-auto block"
-            loading="eager"
-          />
-        </Zoomable>
-      </div>
 
       {/* 01 PROJECT OVERVIEW */}
       <SectionWrap data-testid="section-overview">
