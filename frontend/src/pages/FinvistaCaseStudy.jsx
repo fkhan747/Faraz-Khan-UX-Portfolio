@@ -6,6 +6,7 @@ import { PROFILE } from "../data/content";
 import Seo from "../components/Seo";
 import Zoomable from "../components/Zoomable";
 import PhoneFrame from "../components/PhoneFrame";
+import FinvistaDesignSystem from "../components/FinvistaDesignSystem";
 import { Container } from "../components/Grid";
 
 /* -- Reusable section header in portfolio voice -- */
@@ -452,19 +453,8 @@ export default function FinvistaCaseStudy() {
         </h2>
         <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{fv.designSystem.intro}</p>
 
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">component library</h3>
-        <p className="text-base leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{fv.designSystem.panelsIntro}</p>
-        <div className="space-y-6">
-          {fv.designSystem.panels.map((p, i) => (
-            <figure key={i} className="rounded-3xl dark-card p-6 md:p-8">
-              <Zoomable src={p.src} alt={p.caption} caption={p.caption} className="block">
-                <img src={p.src} alt={p.caption} loading="lazy" className="w-full h-auto" />
-              </Zoomable>
-              <figcaption className="mt-4 text-xs font-mono uppercase tracking-widest text-[#A29CB4] text-center">
-                {p.caption}
-              </figcaption>
-            </figure>
-          ))}
+        <div className="mt-16">
+          <FinvistaDesignSystem />
         </div>
 
         <div className="mt-10 rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
