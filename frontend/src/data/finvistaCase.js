@@ -265,7 +265,6 @@ export const finvista = {
       images: [
         { src: F("002-design-explorations-comparing-flat-and-3d-approaches.png"), caption: "Exploring flat vs. 3D icon styles, comparing approaches for tenure, loan amount, and add-on screens" },
         { src: F("003-final-mobile-screens-welcome-applications-personal-details.png"), caption: "Refined screens: Welcome, Applications dashboard, and Personal details form with progress indicator" },
-        { src: F("004-final-mobile-screens-vehicle-details-progress.png"), caption: "Refined screens: Vehicle type selection, Personal details with pre-verified data, and Application progress tracker" },
       ],
     },
     finalDesign: {
@@ -364,7 +363,7 @@ export const finvista = {
   gallery: {
     headline: "All screens at a glance",
     intro:
-      "Showing 10 representative screens from the Two-Wheeler journey. Toggle below to view all 47 screens.",
+      "Showing 10 of the 47 screens designed for the Two-Wheeler journey. Open the full set below.",
     representative: [
       { src: F("005-login-authentication.png"), title: "Login" },
       { src: F("006-applications-dashboard.png"), title: "Applications Dashboard" },
