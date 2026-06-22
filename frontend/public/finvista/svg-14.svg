@@ -1,4 +1,4 @@
-<svg style="width:100%;background:#f5f5f3;border-radius:12px;" viewbox="0 0 1080 520" xmlns="http://www.w3.org/2000/svg">
+<svg style="width:100%;background:#f5f5f3;border-radius:12px;" viewBox="0 0 1080 520" xmlns="http://www.w3.org/2000/svg">
 <style>text{font-family:Inter,sans-serif;fill:#666}rect.fr{fill:#fff;stroke:#ccc;stroke-width:1;rx:12}rect.bar{fill:#ddd;rx:4}rect.btn{fill:#999;rx:8}rect.fld{fill:none;stroke:#bbb;stroke-width:1;rx:6}rect.blk{fill:#eee;rx:6}rect.chip{fill:none;stroke:#bbb;stroke-width:1;rx:6}text.tt{font-size:13px;font-weight:700;fill:#444}text.lb{font-size:9px;fill:#999}text.sm{font-size:8px;fill:#aaa}</style>
 <g transform="translate(20,20)"><rect class="fr" height="460" width="220"></rect><rect class="bar" height="24" width="200" x="10" y="10"></rect>
 <text class="sm" style="fill:#777;font-weight:600" x="15" y="52">Validation</text>
