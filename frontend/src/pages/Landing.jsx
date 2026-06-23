@@ -32,9 +32,9 @@ export default function Landing() {
                 <Link
                   to="/projects"
                   data-testid="hero-cta"
-                  className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-[#075EFD] text-white text-base font-semibold capitalize hover:bg-[#2E78FF] transition-colors"
+                  className="inline-flex items-center gap-2 px-9 py-4 rounded-full bg-[#075EFD] text-white text-lg font-semibold capitalize shadow-[0_10px_36px_-8px_rgba(7,94,253,0.7)] hover:bg-[#2E78FF] transition-colors"
                 >
-                  <Briefcase size={18} />
+                  <Briefcase size={20} />
                   see what i do
                 </Link>
                 <Link
@@ -79,7 +79,7 @@ export default function Landing() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {featured.map((p) => (
             <Link key={p.slug} to={`/case/${p.slug}`} data-testid={`featured-link-${p.slug}`} className="block group rounded-3xl overflow-hidden lift">
-              <CaseCover img={p.coverImg} title={p.title} subtitle={p.subtitle} year={p.year} />
+              <CaseCover img={p.coverImg} title={p.title} subtitle={p.subtitle} year={p.year} titleAs="h2" />
             </Link>
           ))}
         </div>
@@ -146,7 +146,7 @@ export default function Landing() {
             have an idea <span className="italic font-light text-white">worth</span> shipping?
           </h2>
           <div className="relative mt-10 flex gap-4 flex-wrap">
-            <a href={`mailto:${PROFILE.email}`} data-testid="cta-email" className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-[#F5379B] font-semibold text-sm hover:bg-[#F5379B] hover:text-white transition-colors">
+            <a href={`mailto:${PROFILE.email}`} data-testid="cta-email" className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-[#C71E73] font-semibold text-sm hover:bg-[#C71E73] hover:text-white transition-colors">
               <Mail size={16} /> Start A Project
             </a>
             <Link to="/contact" data-testid="cta-contact" className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-white font-semibold text-sm hover:bg-white/10 transition-colors">

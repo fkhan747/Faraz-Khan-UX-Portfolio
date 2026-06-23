@@ -27,8 +27,8 @@ export default function Footer() {
 
           {/* Actions */}
           <div className="flex items-center gap-3 flex-wrap">
-            <a href={PROFILE.social.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-full border border-[#0A66C2] text-[#0A66C2] px-4 py-2 text-sm font-semibold hover:bg-[#0A66C2] hover:text-white transition-colors">LinkedIn</a>
-            <a href={`mailto:${PROFILE.email}`} className="inline-flex items-center rounded-full border border-[#075EFD] text-[#075EFD] px-4 py-2 text-sm font-semibold hover:bg-[#075EFD] hover:text-white transition-colors">Email</a>
+            <a href={PROFILE.social.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-full border border-[#0A66C2] text-[#6FB2F5] px-4 py-2 text-sm font-semibold hover:bg-[#0A66C2] hover:text-white transition-colors">LinkedIn</a>
+            <a href={`mailto:${PROFILE.email}`} className="inline-flex items-center rounded-full border border-[#075EFD] text-[#5B9BFF] px-4 py-2 text-sm font-semibold hover:bg-[#075EFD] hover:text-white transition-colors">Email</a>
             <a href={RESUME_PATH} download="Faraz_Khan_Resume.pdf" className="inline-flex items-center rounded-full border border-[#F5379B] text-[#F5379B] px-4 py-2 text-sm font-semibold hover:bg-[#F5379B] hover:text-white transition-colors">Résumé</a>
           </div>
         </div>

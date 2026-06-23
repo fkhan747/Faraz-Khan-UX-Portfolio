@@ -51,15 +51,12 @@ export default function Zoomable({ src, alt = "", caption, className = "", child
         />
       )}
       {children}
-      <button
-        type="button"
-        tabIndex={-1}
-        onClick={(e) => { e.stopPropagation(); fire(); }}
-        aria-label="View full screen"
-        className="absolute top-3 right-3 z-10 inline-flex items-center justify-center h-9 w-9 rounded-full bg-black/55 backdrop-blur-sm text-white border border-white/20 shadow-lg opacity-0 group-hover/zoom:opacity-100 focus-visible:opacity-100 max-sm:opacity-100 hover:bg-black/80 transition-opacity duration-200"
+      <span
+        aria-hidden="true"
+        className="absolute top-3 right-3 z-10 inline-flex items-center justify-center h-9 w-9 rounded-full bg-black/55 backdrop-blur-sm text-white border border-white/20 shadow-[0_8px_24px_-8px_rgba(7,94,253,0.5)] opacity-0 group-hover/zoom:opacity-100 max-sm:opacity-100 transition-opacity duration-200"
       >
         <Maximize2 size={16} />
-      </button>
+      </span>
     </div>
   );
 }

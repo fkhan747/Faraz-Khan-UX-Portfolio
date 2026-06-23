@@ -99,3 +99,6 @@ credentials.json
 
 # Local Netlify folder
 .netlify
+
+# uxaudit plugin output (local audit reports, not site code)
+.agents/

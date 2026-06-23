@@ -6,7 +6,7 @@ import { ArrowUpRight } from "lucide-react";
  * (no separate solid content strip). Used on the home + projects grids.
  * `size="lg"` is the wide featured treatment.
  */
-export default function CaseCover({ img, title, subtitle, year, comingSoon = false, badge, size = "md" }) {
+export default function CaseCover({ img, title, subtitle, year, comingSoon = false, badge, size = "md", titleAs: TitleTag = "h3" }) {
   const aspect = size === "lg" ? "aspect-[16/10] md:aspect-[21/9]" : "aspect-[4/3]";
   const titleSize = size === "lg" ? "text-3xl md:text-5xl" : "text-2xl md:text-3xl";
   const badgeText = badge || (comingSoon ? "coming soon" : null);
@@ -39,7 +39,7 @@ export default function CaseCover({ img, title, subtitle, year, comingSoon = fal
       <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 flex items-end justify-between gap-4">
         <div className="min-w-0">
           <div className="flex items-baseline gap-3 mb-1 flex-wrap">
-            <h3 className={`font-display ${titleSize} font-black text-white leading-none`}>{title}</h3>
+            <TitleTag className={`font-display ${titleSize} font-black text-white leading-none`}>{title}</TitleTag>
           </div>
           {subtitle && <p className="text-sm md:text-base text-white/75 max-w-xl">{subtitle}</p>}
         </div>

@@ -247,9 +247,11 @@ export default function About() {
                   <h2 className="font-display text-2xl md:text-3xl font-black">Faraz Khan</h2>
                   <p className="text-sm md:text-base text-[#A29CB4] mt-1">{PROFILE.role}</p>
                 </div>
-                <p className="text-sm text-[#A29CB4] sm:text-right flex-shrink-0">
-                  Currently at <strong className="text-[#F4F3FA]">{PROFILE.currentCompany}</strong> since {PROFILE.currentSince}.
-                </p>
+                <div className="text-sm text-[#A29CB4] sm:text-right flex-shrink-0 leading-snug">
+                  <span className="block text-[11px] font-mono uppercase tracking-[0.2em] text-[#A29CB4]">Currently at</span>
+                  <strong className="block text-[#F4F3FA] font-semibold mt-0.5">{PROFILE.currentCompany}</strong>
+                  <span className="block text-xs text-[#A29CB4] mt-0.5">since {PROFILE.currentSince}</span>
+                </div>
               </div>
               <div className="mt-6 space-y-4 text-base md:text-lg leading-relaxed text-white/95">
                 <p>

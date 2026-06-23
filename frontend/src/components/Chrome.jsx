@@ -53,7 +53,7 @@ export default function Chrome() {
             {/* Right: CTA */}
             <BookCallButton
               data-testid="sidebar-book-call"
-              className="ml-2 inline-flex items-center px-3.5 md:px-4 py-2.5 rounded-full bg-[#F5379B] text-white text-[13px] md:text-sm font-semibold capitalize hover:bg-[#D81F7E] transition-colors whitespace-nowrap flex-shrink-0"
+              className="ml-2 inline-flex items-center px-3.5 md:px-4 py-2.5 rounded-full bg-transparent border border-[#C71E73] text-[#C71E73] text-[13px] md:text-sm font-semibold capitalize hover:bg-[#C71E73] hover:text-white transition-colors whitespace-nowrap flex-shrink-0"
             >
               Book a call →
             </BookCallButton>

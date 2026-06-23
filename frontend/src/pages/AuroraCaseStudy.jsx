@@ -32,7 +32,7 @@ export default function AuroraCaseStudy() {
       {/* TITLE BLOCK over a darkened cover image */}
       <header className="relative overflow-hidden">
         <img
-          src="/aurora/cover.png"
+          src="/aurora/cover.jpg"
           alt=""
           aria-hidden="true"
           className="absolute inset-0 w-full h-full object-cover"
@@ -126,7 +126,7 @@ export default function AuroraCaseStudy() {
         </div>
 
         <div className="mt-8 rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
-          <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3 text-[#F5379B]">{au.overview.contextTitle}</p>
+          <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3 text-[#C71E73]">{au.overview.contextTitle}</p>
           <p className="font-display text-lg md:text-xl font-bold leading-snug text-black">{au.overview.contextBody}</p>
         </div>
 
@@ -134,7 +134,7 @@ export default function AuroraCaseStudy() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {au.primaryUsers.map((u) => (
             <div key={u.label} className="dark-card rounded-2xl p-6 border-l-4 border-[#075EFD]">
-              <h4 className="font-display text-lg font-black mb-2">{u.label}</h4>
+              <h3 className="font-display text-lg font-black mb-2">{u.label}</h3>
               <p className="text-sm leading-relaxed text-[#F4F3FA]/85">{u.desc}</p>
             </div>
           ))}
@@ -155,7 +155,7 @@ export default function AuroraCaseStudy() {
           {au.problem.challenges.map((c, i) => (
             <div key={c.t} className="dark-card rounded-3xl p-7">
               <div className="font-display text-5xl font-black text-[#075EFD] leading-none">{i + 1}</div>
-              <h4 className="mt-4 font-display text-xl font-black ">{c.t}</h4>
+              <h3 className="mt-4 font-display text-xl font-black ">{c.t}</h3>
               <p className="mt-2 text-base leading-relaxed">{c.d}</p>
             </div>
           ))}
@@ -203,7 +203,7 @@ export default function AuroraCaseStudy() {
         <div className="mt-8 grid md:grid-cols-2 gap-5">
           {au.problem.sideHypotheses.map((h) => (
             <div key={h.t} className="dark-card rounded-3xl p-7">
-              <h4 className="font-display text-xl font-black mb-3">{h.t}</h4>
+              <h3 className="font-display text-xl font-black mb-3">{h.t}</h3>
               <p className="text-base leading-relaxed">{h.d}</p>
             </div>
           ))}
@@ -229,7 +229,7 @@ export default function AuroraCaseStudy() {
         </div>
 
         <div className="mt-10 rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
-          <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3 text-[#F5379B]">★ key insight</p>
+          <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3 text-[#C71E73]">★ key insight</p>
           <p className="font-display text-xl md:text-2xl font-bold leading-snug max-w-6xl text-black">{au.problem.keyInsight}</p>
         </div>
       </SectionWrap>
@@ -244,7 +244,7 @@ export default function AuroraCaseStudy() {
         <div className="grid md:grid-cols-2 gap-5">
           {au.research.auditFindings.map((f) => (
             <div key={f.t} className="dark-card rounded-3xl p-7 border-l-4 border-[#075EFD]">
-              <h4 className="font-display text-xl font-black mb-2">{f.t}</h4>
+              <h3 className="font-display text-xl font-black mb-2">{f.t}</h3>
               <p className="text-base leading-relaxed">{f.d}</p>
             </div>
           ))}
@@ -287,7 +287,7 @@ export default function AuroraCaseStudy() {
               {au.research.competitiveTable.rows.map((row, i) => (
                 <tr key={i} className="border-b border-white/5">
                   {row.map((cell, j) => (
-                    <td key={j} className={`p-4 ${j === 0 ? "font-medium" : "text-center font-display font-bold"} ${cell === "Yes" ? "text-[#F5379B]" : cell === "No" ? "text-[#075EFD]" : cell === "Partial" ? "text-[#D97706]" : ""}`}>{cell}</td>
+                    <td key={j} className={`p-4 ${j === 0 ? "font-medium" : "text-center font-display font-bold"} ${cell === "Yes" ? "text-[#F5379B]" : cell === "No" ? "text-[#5B9BFF]" : cell === "Partial" ? "text-[#D97706]" : ""}`}>{cell}</td>
                   ))}
                 </tr>
               ))}
@@ -299,7 +299,7 @@ export default function AuroraCaseStudy() {
         <div className="grid md:grid-cols-2 gap-5">
           {au.research.findings.map((f) => (
             <div key={f.t} className="dark-card rounded-3xl p-7">
-              <h4 className="font-display text-lg font-black mb-2">{f.t}</h4>
+              <h3 className="font-display text-lg font-black mb-2">{f.t}</h3>
               <p className="text-sm leading-relaxed text-[#F4F3FA]">{f.d}</p>
             </div>
           ))}
@@ -318,7 +318,7 @@ export default function AuroraCaseStudy() {
               <div className="flex items-center gap-4 mb-5">
                 <div className="w-14 h-14 rounded-full bg-[#075EFD] text-white flex items-center justify-center font-display font-black text-lg">{p.initials}</div>
                 <div>
-                  <h4 className="font-display text-lg font-black">{p.name}</h4>
+                  <h3 className="font-display text-lg font-black">{p.name}</h3>
                   <p className="text-xs font-mono uppercase tracking-widest text-[#A29CB4]">{p.role}</p>
                 </div>
               </div>
@@ -339,7 +339,7 @@ export default function AuroraCaseStudy() {
           {au.insights.designGoals.map((g, i) => (
             <div key={g.t} className={`rounded-3xl p-6 ${i % 2 === 0 ? "dark-card" : "bg-white border-2 border-[#F5379B]"}`}>
               <div className="font-mono text-[10px] uppercase tracking-widest text-[#A29CB4]">0{i + 1}</div>
-              <h4 className={`mt-2 font-display text-lg font-black ${i % 2 === 0 ? "" : "text-[#F5379B]"}`}>{g.t}</h4>
+              <h3 className={`mt-2 font-display text-lg font-black ${i % 2 === 0 ? "" : "text-[#F5379B]"}`}>{g.t}</h3>
               <p className={`mt-2 text-sm leading-relaxed ${i % 2 === 0 ? "" : "text-black"}`}>{g.d}</p>
             </div>
           ))}
@@ -366,7 +366,7 @@ export default function AuroraCaseStudy() {
               </Zoomable>
               <figcaption className="p-6">
                 <span className="text-[10px] font-mono uppercase tracking-widest text-[#F5379B]">{s.tag}</span>
-                <h4 className="mt-2 font-display text-xl font-black ">{s.title}</h4>
+                <h3 className="mt-2 font-display text-xl font-black ">{s.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed">{s.desc}</p>
               </figcaption>
             </figure>
@@ -383,7 +383,7 @@ export default function AuroraCaseStudy() {
               </Zoomable>
               <figcaption className="p-6">
                 <span className="text-[10px] font-mono uppercase tracking-widest text-[#F5379B]">{w.tag}</span>
-                <h4 className="mt-2 font-display text-lg font-black ">{w.title}</h4>
+                <h3 className="mt-2 font-display text-lg font-black ">{w.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed">{w.desc}</p>
               </figcaption>
             </figure>
@@ -400,7 +400,7 @@ export default function AuroraCaseStudy() {
               </Zoomable>
               <figcaption className="p-5">
                 <span className="text-[10px] font-mono uppercase tracking-widest text-[#F5379B]">{s.tag}</span>
-                <h4 className="mt-2 font-display text-base font-black ">{s.title}</h4>
+                <h3 className="mt-2 font-display text-base font-black ">{s.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-[#F4F3FA]/85">{s.desc}</p>
               </figcaption>
             </figure>
@@ -419,11 +419,11 @@ export default function AuroraCaseStudy() {
         </div>
 
         <div className="mt-12 rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
-          <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-3">system outcomes</p>
+          <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#C71E73] mb-3">system outcomes</p>
           <p className="font-display text-xl md:text-2xl leading-snug text-black">{au.designSystem.systemOutcomes}</p>
         </div>
         <div className="mt-6 rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
-          <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3 text-[#F5379B]">cross-product collaboration</p>
+          <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3 text-[#C71E73]">cross-product collaboration</p>
           <p className="font-display text-lg md:text-xl font-bold leading-snug text-black">{au.designSystem.crossProduct}</p>
         </div>
       </SectionWrap>
@@ -442,7 +442,7 @@ export default function AuroraCaseStudy() {
               <span className="absolute -left-[14px] top-1 w-7 h-7 rounded-full bg-[#075EFD] text-white flex items-center justify-center font-display font-black text-sm border-4 border-[#100210]">
                 {r.n}
               </span>
-              <h4 className="font-display text-xl font-black ">{r.t}</h4>
+              <h3 className="font-display text-xl font-black ">{r.t}</h3>
               <p className="mt-2 text-base leading-relaxed max-w-5xl">{r.d}</p>
             </li>
           ))}
@@ -480,7 +480,7 @@ export default function AuroraCaseStudy() {
         <h2 className="font-display text-3xl md:text-4xl font-black mb-6">thank you for reading.</h2>
         <p className="text-lg text-[#A29CB4] mb-8">If you&apos;d like to discuss this project in more detail or explore collaboration opportunities, I&apos;d love to connect.</p>
         <div className="flex gap-4 justify-center flex-wrap">
-          <a href={`mailto:${PROFILE.email}`} data-testid="case-cta-email" className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-[#F5379B] font-semibold text-sm hover:bg-[#F5379B] hover:text-white transition-colors"><Mail size={16} /> email me</a>
+          <a href={`mailto:${PROFILE.email}`} data-testid="case-cta-email" className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-[#C71E73] font-semibold text-sm hover:bg-[#C71E73] hover:text-white transition-colors"><Mail size={16} /> email me</a>
           <Link to="/case/finvista" className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-[#F4F3FA] font-semibold text-sm hover:bg-[#261E3A] transition-colors">read finvista case study</Link>
           <Link to="/projects" className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-[#F4F3FA] font-semibold text-sm hover:bg-[#261E3A] transition-colors">View All projects</Link>
         </div>

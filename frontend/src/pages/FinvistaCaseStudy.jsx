@@ -12,7 +12,7 @@ import ProjectNav from "../components/ProjectNav";
 import { Container } from "../components/Grid";
 
 /* -- Reusable section header in portfolio voice -- */
-const SectionLabel = ({ num, name, accent = "#075EFD" }) => (
+const SectionLabel = ({ num, name, accent = "#5B9BFF" }) => (
   <div className="flex items-center gap-4 mb-6">
     <span className="font-mono text-xs uppercase tracking-[0.25em]" style={{ color: accent }}>
       {num} · {name}
@@ -149,7 +149,7 @@ export default function FinvistaCaseStudy() {
                   {p.badge}
                 </span>
               )}
-              <h4 className={`font-display text-xl font-black mb-3 ${i === 0 ? "text-[#F5379B]" : ""}`}>{p.name}</h4>
+              <h3 className={`font-display text-xl font-black mb-3 ${i === 0 ? "text-[#F5379B]" : ""}`}>{p.name}</h3>
               <p className={`text-sm leading-relaxed ${i === 0 ? "text-black" : ""}`}>{p.desc}</p>
             </div>
           ))}
@@ -159,7 +159,7 @@ export default function FinvistaCaseStudy() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {fv.primaryUsers.map((u) => (
             <div key={u.label} className="dark-card rounded-2xl p-6 border-l-4 border-[#075EFD]">
-              <h4 className="font-display text-lg font-black mb-2">{u.label}</h4>
+              <h3 className="font-display text-lg font-black mb-2">{u.label}</h3>
               <p className="text-sm leading-relaxed text-[#F4F3FA]/85">{u.desc}</p>
             </div>
           ))}
@@ -186,7 +186,7 @@ export default function FinvistaCaseStudy() {
           {fv.problem.dimensions.map((d, i) => (
             <div key={d.title} className="dark-card rounded-3xl p-7">
               <div className="font-display text-5xl font-black text-[#075EFD] leading-none">{String(i + 1).padStart(2, "0")}</div>
-              <h4 className="mt-4 font-display text-xl font-black ">{d.title}</h4>
+              <h3 className="mt-4 font-display text-xl font-black ">{d.title}</h3>
               <p className="mt-2 text-base leading-relaxed">{d.desc}</p>
             </div>
           ))}
@@ -246,7 +246,7 @@ export default function FinvistaCaseStudy() {
                 <img src={c.image} alt={`${c.name} app teardown`} loading="lazy" className="block w-full h-auto" />
               </Zoomable>
               <div className="p-6">
-                <h4 className="font-display text-xl font-black mb-2">{c.name}</h4>
+                <h3 className="font-display text-xl font-black mb-2">{c.name}</h3>
                 <p className="text-sm leading-relaxed">{c.notes}</p>
               </div>
             </div>
@@ -295,7 +295,7 @@ export default function FinvistaCaseStudy() {
           {fv.research.approach.map((a, i) => (
             <div key={a.title} className="dark-card rounded-3xl p-6 hover:bg-[#D81F7E] transition-colors">
               <span className="font-mono text-[10px] uppercase tracking-widest text-[#A29CB4]">0{i + 1}</span>
-              <h4 className="mt-3 font-display text-lg font-black ">{a.title}</h4>
+              <h3 className="mt-3 font-display text-lg font-black ">{a.title}</h3>
               <p className="mt-2 text-sm leading-relaxed">{a.desc}</p>
             </div>
           ))}
@@ -319,7 +319,7 @@ export default function FinvistaCaseStudy() {
                   {p.name.split(" ").map((x) => x[0]).join("")}
                 </div>
                 <div>
-                  <h4 className="font-display text-xl font-black">{p.name}</h4>
+                  <h3 className="font-display text-xl font-black">{p.name}</h3>
                   <p className="text-xs font-mono uppercase tracking-widest text-[#A29CB4]">{p.role}</p>
                 </div>
               </div>
@@ -357,7 +357,7 @@ export default function FinvistaCaseStudy() {
           {fv.insights.principles.map((p, i) => (
             <div key={p.t} className="dark-card rounded-3xl p-6">
               <div className="font-mono text-[10px] uppercase tracking-widest text-[#A29CB4]">0{i + 1}</div>
-              <h4 className="mt-2 font-display text-lg font-black ">{p.t}</h4>
+              <h3 className="mt-2 font-display text-lg font-black ">{p.t}</h3>
               <p className="mt-2 text-sm leading-relaxed">{p.d}</p>
             </div>
           ))}
@@ -388,7 +388,7 @@ export default function FinvistaCaseStudy() {
                 {t.n}
               </span>
               <div>
-                <h4 className="font-display text-base font-black ">{t.t}</h4>
+                <h3 className="font-display text-base font-black ">{t.t}</h3>
                 <p className="text-sm mt-1 leading-relaxed text-[#F4F3FA]/85">{t.d}</p>
               </div>
             </div>
@@ -446,7 +446,7 @@ export default function FinvistaCaseStudy() {
                 <PhoneFrame src={s.src} alt={s.title} />
               </Zoomable>
               <figcaption className="pt-4">
-                <h4 className="font-display text-base font-black ">{s.title}</h4>
+                <h3 className="font-display text-base font-black ">{s.title}</h3>
                 <p className="text-sm mt-1 leading-relaxed text-[#F4F3FA]/85">{s.desc}</p>
               </figcaption>
             </figure>
@@ -458,7 +458,7 @@ export default function FinvistaCaseStudy() {
         <div className="grid md:grid-cols-2 gap-5">
           {fv.design.keyDecisions.map((k, i) => (
             <div key={k.t} className={`rounded-3xl p-7 ${i % 2 === 0 ? "dark-card" : "bg-white border-2 border-[#F5379B]"}`}>
-              <h4 className={`font-display text-xl font-black mb-3 ${i % 2 === 0 ? "" : "text-[#F5379B]"}`}>{k.t}</h4>
+              <h3 className={`font-display text-xl font-black mb-3 ${i % 2 === 0 ? "" : "text-[#F5379B]"}`}>{k.t}</h3>
               <p className={`text-base leading-relaxed ${i % 2 === 0 ? "" : "text-black"}`}>{k.d}</p>
             </div>
           ))}
@@ -497,7 +497,7 @@ export default function FinvistaCaseStudy() {
               <span className="absolute -left-[14px] top-1 w-7 h-7 rounded-full bg-[#075EFD] text-white flex items-center justify-center font-display font-black text-sm border-4 border-[#100210]">
                 {r.n}
               </span>
-              <h4 className="font-display text-xl font-black ">{r.t}</h4>
+              <h3 className="font-display text-xl font-black ">{r.t}</h3>
               <p className="mt-2 text-base leading-relaxed max-w-5xl">{r.d}</p>
             </li>
           ))}
@@ -605,7 +605,7 @@ export default function FinvistaCaseStudy() {
           <a
             href={`mailto:${PROFILE.email}`}
             data-testid="case-cta-email"
-            className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-[#F5379B] font-semibold text-sm hover:bg-[#F5379B] hover:text-white transition-colors"
+            className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-[#C71E73] font-semibold text-sm hover:bg-[#C71E73] hover:text-white transition-colors"
           >
             <Mail size={16} /> email me
           </a>

@@ -39,7 +39,7 @@ export default function Contact() {
           <div className="relative flex flex-wrap gap-3 md:flex-shrink-0">
             <BookCallButton
               data-testid="schedule-call"
-              className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-white text-[#F5379B] font-semibold text-sm capitalize hover:bg-white/90 transition-colors"
+              className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-white text-[#C71E73] font-semibold text-sm capitalize hover:bg-white/90 transition-colors"
             >
               <Calendar size={16} /> Schedule a call
             </BookCallButton>
@@ -47,7 +47,7 @@ export default function Contact() {
               href={RESUME_PATH}
               download="Faraz_Khan_Resume.pdf"
               data-testid="download-resume"
-              className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-white text-[#F5379B] font-semibold text-sm capitalize hover:bg-white/90 transition-colors"
+              className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-white text-[#C71E73] font-semibold text-sm capitalize hover:bg-white/90 transition-colors"
             >
               Download resume <Download size={16} />
             </a>
@@ -61,7 +61,7 @@ export default function Contact() {
             <span className="h-10 w-10 rounded-xl bg-[#075EFD] grid place-items-center flex-shrink-0 text-white"><Mail size={17} /></span>
             <a href={`mailto:${PROFILE.email}`} className="min-w-0 flex-1 group">
               <p className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-0.5">email</p>
-              <p className="text-sm font-bold whitespace-nowrap group-hover:text-[#075EFD] transition-colors">{PROFILE.email}</p>
+              <p className="text-sm font-bold whitespace-nowrap group-hover:text-[#5B9BFF] transition-colors">{PROFILE.email}</p>
             </a>
             <CopyButton value={PROFILE.email} label="email" size={15} className="h-9 w-9 border border-white/15 text-[#F4F3FA] hover:bg-white/10 flex-shrink-0" />
           </div>
@@ -70,7 +70,7 @@ export default function Contact() {
             <span className="h-10 w-10 rounded-xl bg-[#075EFD] grid place-items-center flex-shrink-0 text-white"><Phone size={17} /></span>
             <a href={telHref} className="min-w-0 flex-1 group">
               <p className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-0.5">phone</p>
-              <p className="text-sm font-bold whitespace-nowrap group-hover:text-[#075EFD] transition-colors">{PROFILE.phone}</p>
+              <p className="text-sm font-bold whitespace-nowrap group-hover:text-[#5B9BFF] transition-colors">{PROFILE.phone}</p>
             </a>
             <CopyButton value={PROFILE.phone} label="phone" size={15} className="h-9 w-9 border border-white/15 text-[#F4F3FA] hover:bg-white/10 flex-shrink-0" />
           </div>

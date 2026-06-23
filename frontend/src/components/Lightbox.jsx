@@ -51,7 +51,7 @@ export function LightboxProvider({ children }) {
             src={item.src}
             alt={item.alt || ""}
             onClick={(e) => e.stopPropagation()}
-            className="max-w-[95vw] max-h-[85vh] w-auto h-auto object-contain rounded-lg shadow-2xl bg-white"
+            className="max-w-[95vw] max-h-[85vh] w-auto h-auto object-contain rounded-lg shadow-[0_40px_80px_-24px_rgba(7,94,253,0.45)] bg-white"
           />
           {item.caption && (
             <p

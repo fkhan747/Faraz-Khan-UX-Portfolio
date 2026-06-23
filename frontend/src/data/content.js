@@ -45,7 +45,7 @@ export const projects = [
     services: "Product Design, Design System, Research",
     year: "2024",
     cover: "/aurora/04_RBJ_Properties_Weekly.jpg",
-    coverImg: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80&auto=format&fit=crop",
+    coverImg: "/aurora/cover.jpg",
     color: "#E8F2F0",
     tag: "case study",
     summary:

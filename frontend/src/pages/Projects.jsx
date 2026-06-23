@@ -33,7 +33,7 @@ export default function Projects() {
               className={`col-span-12 md:col-span-6 group block rounded-3xl overflow-hidden lift rise rise-${(i % 6) + 1}`}
               data-testid={`projects-card-${p.slug}`}
             >
-              <CaseCover img={p.coverImg} title={p.title} subtitle={p.subtitle} year={p.year} comingSoon={p.comingSoon} />
+              <CaseCover img={p.coverImg} title={p.title} subtitle={p.subtitle} year={p.year} comingSoon={p.comingSoon} titleAs="h2" />
             </Link>
           ))}
         </Grid>
@@ -70,7 +70,7 @@ export default function Projects() {
                   target="_blank"
                   rel="noopener noreferrer"
                   data-testid={`concept-prototype-${c.slug}`}
-                  className="absolute top-4 left-4 z-10 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white text-[#F5379B] text-[10px] font-mono font-bold uppercase tracking-widest shadow-md hover:bg-white/90 transition-colors"
+                  className="absolute top-4 left-4 z-10 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white text-[#C71E73] text-[10px] font-mono font-bold uppercase tracking-widest shadow-[0_6px_20px_-6px_rgba(245,55,155,0.55)] hover:bg-white/90 transition-colors"
                 >
                   {c.status} <ArrowUpRight size={13} />
                 </a>

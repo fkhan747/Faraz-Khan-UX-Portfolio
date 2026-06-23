@@ -75,6 +75,18 @@ module.exports = {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out'
+      },
+      // Brand-tuned elevation: override Tailwind's default gray shadow scale
+      // with subtle blue-tinted shadows that fit the dark palette (matches the
+      // .lift idiom in index.css). Keeps the default class names so shadcn
+      // ui/* primitives pick these up automatically.
+      boxShadow: {
+        sm: '0 1px 2px 0 rgba(7, 94, 253, 0.12)',
+        DEFAULT: '0 1px 3px 0 rgba(7, 94, 253, 0.14), 0 1px 2px -1px rgba(7, 94, 253, 0.14)',
+        md: '0 4px 12px -2px rgba(7, 94, 253, 0.16)',
+        lg: '0 10px 24px -4px rgba(7, 94, 253, 0.18)',
+        xl: '0 20px 40px -8px rgba(7, 94, 253, 0.22)',
+        '2xl': '0 28px 64px -12px rgba(7, 94, 253, 0.28)'
       }
     }
   },

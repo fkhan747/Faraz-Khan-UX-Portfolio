@@ -64,7 +64,7 @@ export default function JoatCaseStudy() {
           <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-5">
             ux case study · crowdfunding commerce · india
           </p>
-          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[0.95] text-[#F7F5FF] max-w-5xl">
+          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[0.95] text-[#F7F5FF] max-w-5xl case-keep">
             Jack of All Threads
           </h1>
           <p className="mt-7 max-w-3xl text-lg md:text-2xl text-[#F4F3FA] leading-snug font-light italic">
@@ -90,7 +90,7 @@ export default function JoatCaseStudy() {
         <div className="rounded-3xl dark-card text-white p-8 md:p-12 relative overflow-hidden">
           <div className="absolute -top-10 -right-10 w-72 h-72 rounded-full bg-[#075EFD] blur-3xl opacity-30" />
           <p className="relative text-[11px] font-mono uppercase tracking-[0.25em] text-white mb-4">{j.overview.tldrTitle}</p>
-          <p className="relative font-display text-xl md:text-2xl leading-snug text-white/95 max-w-6xl">{j.overview.tldr}</p>
+          <p className="relative font-display text-xl md:text-2xl leading-snug text-white/95 max-w-6xl case-keep">{j.overview.tldr}</p>
         </div>
 
         <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -108,15 +108,15 @@ export default function JoatCaseStudy() {
         </div>
 
         <div className="mt-8 rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
-          <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3 text-[#F5379B]">{j.overview.contextTitle}</p>
-          <p className="font-display text-xl md:text-2xl font-bold leading-snug text-black">{j.overview.contextBody}</p>
+          <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3 text-[#C71E73]">{j.overview.contextTitle}</p>
+          <p className="font-display text-xl md:text-2xl font-bold leading-snug text-black case-keep">{j.overview.contextBody}</p>
         </div>
 
         <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">Primary Users</h3>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {j.primaryUsers.map((u) => (
             <div key={u.label} className="dark-card rounded-2xl p-6 border-l-4 border-[#075EFD]">
-              <h4 className="font-display text-lg font-black mb-2">{u.label}</h4>
+              <h3 className="font-display text-lg font-black mb-2">{u.label}</h3>
               <p className="text-sm leading-relaxed text-[#F4F3FA]/85">{u.desc}</p>
             </div>
           ))}
@@ -129,15 +129,15 @@ export default function JoatCaseStudy() {
         <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{j.problem.headline}</h2>
 
         <div className="rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
-          <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3 text-[#F5379B]">core challenge</p>
-          <p className="font-display text-xl md:text-2xl font-bold leading-snug text-black">{j.problem.coreChallenge}</p>
+          <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3 text-[#C71E73]">core challenge</p>
+          <p className="font-display text-xl md:text-2xl font-bold leading-snug text-black case-keep">{j.problem.coreChallenge}</p>
         </div>
 
         <div className="mt-12 grid md:grid-cols-2 gap-5">
           {j.problem.dimensions.map((d, i) => (
             <div key={d.title} className="dark-card rounded-3xl p-7">
               <div className="font-display text-5xl font-black text-[#075EFD] leading-none">{String(i + 1).padStart(2, "0")}</div>
-              <h4 className="mt-4 font-display text-xl font-black">{d.title}</h4>
+              <h3 className="mt-4 font-display text-xl font-black">{d.title}</h3>
               <p className="mt-2 text-base leading-relaxed">{d.desc}</p>
             </div>
           ))}
@@ -145,7 +145,7 @@ export default function JoatCaseStudy() {
 
         <div className="mt-10 rounded-3xl dark-card text-white p-8 md:p-10">
           <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-white mb-3">{j.problem.hypothesisTitle}</p>
-          <p className="font-display text-xl md:text-2xl leading-snug max-w-6xl">{j.problem.hypothesis}</p>
+          <p className="font-display text-xl md:text-2xl leading-snug max-w-6xl case-keep">{j.problem.hypothesis}</p>
           <ul className="mt-6 flex flex-wrap gap-3">
             {j.problem.hypothesisBullets.map((b) => (
               <li key={b} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#F5379B]/45 bg-[#F5379B]/10 text-[#F4F3FA] text-sm font-semibold">
@@ -166,7 +166,7 @@ export default function JoatCaseStudy() {
           {j.howItWorks.steps.map((s) => (
             <div key={s.n} className="dark-card rounded-3xl p-7">
               <div className="num text-4xl md:text-5xl font-black text-[#075EFD] leading-none">{s.n}</div>
-              <h4 className="mt-4 font-display text-xl font-black">{s.t}</h4>
+              <h3 className="mt-4 font-display text-xl font-black">{s.t}</h3>
               <p className="mt-2 text-base leading-relaxed">{s.d}</p>
             </div>
           ))}
@@ -239,7 +239,7 @@ export default function JoatCaseStudy() {
         <div className="mt-8 grid md:grid-cols-3 gap-5">
           {j.studio.points.map((p) => (
             <div key={p.t} className="dark-card rounded-3xl p-7 border-l-4 border-[#075EFD]">
-              <h4 className="font-display text-lg font-black mb-2">{p.t}</h4>
+              <h3 className="font-display text-lg font-black mb-2">{p.t}</h3>
               <p className="text-sm leading-relaxed text-[#F4F3FA]">{p.d}</p>
             </div>
           ))}
@@ -259,7 +259,7 @@ export default function JoatCaseStudy() {
                 <img src={s.src} alt={s.title} loading="lazy" className="block w-full h-auto" />
               </Zoomable>
               <figcaption className="p-6">
-                <h4 className="font-display text-lg font-black">{s.title}</h4>
+                <h3 className="font-display text-lg font-black">{s.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-[#F4F3FA]/85">{s.desc}</p>
               </figcaption>
             </figure>
@@ -280,7 +280,7 @@ export default function JoatCaseStudy() {
                 <img src={s.src} alt={s.title} loading="lazy" className="block w-full h-auto" />
               </Zoomable>
               <figcaption className="p-5">
-                <h4 className="font-display text-base font-black">{s.title}</h4>
+                <h3 className="font-display text-base font-black">{s.title}</h3>
                 <p className="mt-1.5 text-sm leading-relaxed text-[#F4F3FA]/85">{s.desc}</p>
               </figcaption>
             </figure>
@@ -313,7 +313,7 @@ export default function JoatCaseStudy() {
 
         <div className="rounded-3xl dark-card text-white p-8 md:p-10">
           <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-white mb-3">an honest note</p>
-          <p className="font-display text-lg md:text-xl leading-snug max-w-6xl text-white/95">{j.reflection.note}</p>
+          <p className="font-display text-lg md:text-xl leading-snug max-w-6xl text-white/95 case-keep">{j.reflection.note}</p>
         </div>
 
         <div className="mt-12 grid md:grid-cols-2 gap-5">
@@ -341,7 +341,7 @@ export default function JoatCaseStudy() {
         <h2 className="font-display text-3xl md:text-4xl font-black mb-6">thank you for reading.</h2>
         <p className="text-lg text-[#A29CB4] mb-8">If you&apos;d like to talk through this project or how I approach end-to-end product design, I&apos;d love to connect.</p>
         <div className="flex gap-4 justify-center flex-wrap">
-          <a href={`mailto:${PROFILE.email}`} data-testid="case-cta-email" className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-[#F5379B] font-semibold text-sm hover:bg-[#F5379B] hover:text-white transition-colors"><Mail size={16} /> email me</a>
+          <a href={`mailto:${PROFILE.email}`} data-testid="case-cta-email" className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-[#C71E73] font-semibold text-sm hover:bg-[#C71E73] hover:text-white transition-colors"><Mail size={16} /> email me</a>
           <Link to="/case/aurora" className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-[#F4F3FA] font-semibold text-sm hover:bg-[#261E3A] transition-colors">read aurora case study</Link>
           <Link to="/projects" className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-[#F4F3FA] font-semibold text-sm hover:bg-[#261E3A] transition-colors">View All projects</Link>
         </div>
