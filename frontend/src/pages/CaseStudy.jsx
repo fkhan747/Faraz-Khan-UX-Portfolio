@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, ArrowUpRight, Clock, Mail } from "lucide-react";
 import { projects, PROFILE } from "../data/content";
+import ProjectNav from "../components/ProjectNav";
 
 export default function ComingSoonCase() {
   const { slug } = useParams();
@@ -9,13 +10,16 @@ export default function ComingSoonCase() {
   return (
     <div data-testid="coming-soon-case" className="min-h-[80vh]">
       <section className="px-6 md:px-10 lg:px-16 pt-12 pb-10">
-        <Link
-          to="/projects"
-          data-testid="back-link"
-          className="inline-flex items-center gap-2 mb-10 text-xs font-mono uppercase tracking-widest text-[#A29CB4] hover:text-[#F5379B] transition-colors"
-        >
-          <ArrowLeft size={14} /> all projects
-        </Link>
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-10">
+          <Link
+            to="/projects"
+            data-testid="back-link"
+            className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#A29CB4] hover:text-[#F5379B] transition-colors"
+          >
+            <ArrowLeft size={14} /> all projects
+          </Link>
+          <ProjectNav slug={slug} />
+        </div>
         <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-6">case study · drafting</p>
         <h1 className="font-display text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.95]">
           {project ? project.title : "Case study"}

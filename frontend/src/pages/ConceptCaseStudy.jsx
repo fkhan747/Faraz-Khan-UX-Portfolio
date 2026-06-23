@@ -7,6 +7,7 @@ import { concepts, PROFILE } from "../data/content";
 import Seo from "../components/Seo";
 import Zoomable from "../components/Zoomable";
 import CaseStudyNav from "../components/CaseStudyNav";
+import ProjectNav from "../components/ProjectNav";
 
 /**
  * Shared renderer for the AI-native OS-family concept case studies
@@ -118,13 +119,16 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
       <CaseStudyNav />
       {/* ============ TITLE BLOCK ============ */}
       <header className="px-6 md:px-10 lg:px-16 pt-12 pb-10">
-        <Link
-          to="/projects"
-          data-testid="back-link"
-          className="inline-flex items-center gap-2 mb-10 text-xs font-mono uppercase tracking-widest text-[#A29CB4] hover:text-[#F5379B] transition-colors"
-        >
-          <ArrowLeft size={14} /> all projects
-        </Link>
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-10">
+          <Link
+            to="/projects"
+            data-testid="back-link"
+            className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#A29CB4] hover:text-[#F5379B] transition-colors"
+          >
+            <ArrowLeft size={14} /> all projects
+          </Link>
+          <ProjectNav slug={r.slug} />
+        </div>
 
         <p className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.25em] mb-5" style={gradText}>
           <Sparkles size={13} /> {r.kind}

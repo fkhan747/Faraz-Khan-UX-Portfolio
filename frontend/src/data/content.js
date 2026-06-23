@@ -71,9 +71,9 @@ export const projects = [
   },
   {
     slug: "somethings-cooking",
-    title: "Something's Cooking",
+    title: "Jack of All Threads",
     subtitle: "A Recipe & Meal-Planning Experience",
-    client: "Something's Cooking",
+    client: "Jack of All Threads",
     role: "Product Designer",
     services: "Mobile App, Visual Design",
     year: "2023",

@@ -8,6 +8,7 @@ import Zoomable from "../components/Zoomable";
 import PhoneFrame from "../components/PhoneFrame";
 import FinvistaDesignSystem from "../components/FinvistaDesignSystem";
 import CaseStudyNav from "../components/CaseStudyNav";
+import ProjectNav from "../components/ProjectNav";
 import { Container } from "../components/Grid";
 
 /* -- Reusable section header in portfolio voice -- */
@@ -60,13 +61,16 @@ export default function FinvistaCaseStudy() {
           style={{ background: "linear-gradient(to bottom, rgba(16,2,16,0.55) 0%, rgba(16,2,16,0) 28%, rgba(16,2,16,0) 50%, rgba(16,2,16,0.92) 100%)" }}
         />
         <Container className="relative z-10 pt-12 pb-14">
-          <Link
-            to="/projects"
-            data-testid="back-link"
-            className="inline-flex items-center gap-2 mb-10 text-xs font-mono uppercase tracking-widest text-white/70 hover:text-[#F5379B] transition-colors"
-          >
-            <ArrowLeft size={14} /> all projects
-          </Link>
+          <div className="flex flex-wrap items-center justify-between gap-3 mb-10">
+            <Link
+              to="/projects"
+              data-testid="back-link"
+              className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-white/70 hover:text-[#F5379B] transition-colors"
+            >
+              <ArrowLeft size={14} /> all projects
+            </Link>
+            <ProjectNav slug="finvista" />
+          </div>
           <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-5">
             ux case study · featured
           </p>
