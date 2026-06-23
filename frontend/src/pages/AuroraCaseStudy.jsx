@@ -414,68 +414,37 @@ export default function AuroraCaseStudy() {
         </div>
       </SectionWrap>
 
-      {/* 07 VALIDATION */}
+      {/* 07 ITERATIVE TESTING */}
       <SectionWrap data-testid="section-validation">
-        <SectionLabel num="07" name="Validation" />
-        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-10">usability testing</h2>
+        <SectionLabel num="07" name="Iterative Testing" />
+        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">
+          {au.validation.headline}
+        </h2>
+        <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{au.validation.intro}</p>
 
-        <h3 className="font-display text-2xl md:text-3xl font-black mb-6">test setup</h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {au.validation.testSetup.map((s) => (
-            <div key={s.l} className="dark-card rounded-2xl p-5">
-              <p className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-2">{s.l}</p>
-              <p className="num text-base font-bold">{s.v}</p>
-            </div>
+        <ol className="mt-12 relative border-l-2 border-white/15 ml-2 space-y-8">
+          {au.validation.rounds.map((r) => (
+            <li key={r.n} className="pl-8 relative">
+              <span className="absolute -left-[14px] top-1 w-7 h-7 rounded-full bg-[#075EFD] text-white flex items-center justify-center font-display font-black text-sm border-4 border-[#100210]">
+                {r.n}
+              </span>
+              <h4 className="font-display text-xl font-black ">{r.t}</h4>
+              <p className="mt-2 text-base leading-relaxed max-w-5xl">{r.d}</p>
+            </li>
           ))}
-        </div>
+        </ol>
 
-        <h3 className="mt-12 font-display text-2xl md:text-3xl font-black mb-6">key results</h3>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {au.validation.keyResults.map((r) => (
-            <div key={r.l} className="rounded-3xl dark-card p-6">
-              <div className="font-display text-4xl md:text-5xl font-black text-[#075EFD] leading-none">{r.v}</div>
-              <div className="mt-3 font-display text-base font-bold ">{r.l}</div>
-              <div className="mt-1 text-xs font-mono uppercase tracking-widest text-[#F5379B]">{r.s}</div>
-            </div>
-          ))}
+        <div className="mt-12 rounded-3xl dark-card text-white p-8 md:p-10">
+          <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-white mb-3">outcome</p>
+          <p className="font-display text-xl md:text-2xl leading-snug max-w-6xl">{au.validation.outcome}</p>
         </div>
       </SectionWrap>
 
-      {/* 08 IMPACT */}
+      {/* 08 REFLECTION */}
       <SectionWrap data-testid="section-impact">
-        <SectionLabel num="08" name="Impact" />
-        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-10">outcomes & artifacts created</h2>
+        <SectionLabel num="08" name="Reflection" />
+        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-10">{au.impact.headline}</h2>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-          {au.impact.outcomes.map((m) => (
-            <div key={m.l} className="rounded-3xl dark-card p-6">
-              <div className="font-display text-4xl md:text-5xl font-black text-[#075EFD] leading-none">{m.v}</div>
-              <div className="mt-3 font-display text-base font-bold ">{m.l}</div>
-              <div className="mt-1 text-xs font-mono uppercase tracking-widest text-[#A29CB4]">{m.s}</div>
-            </div>
-          ))}
-        </div>
-
-        <h3 className="font-display text-2xl md:text-3xl font-black mb-6">artifacts created</h3>
-        <div className="grid md:grid-cols-2 gap-5">
-          {au.impact.artifacts.map((a) => (
-            <div key={a.t} className="dark-card rounded-3xl p-7">
-              <h4 className="font-display text-lg font-black mb-2">{a.t}</h4>
-              <p className="text-sm leading-relaxed">{a.d}</p>
-            </div>
-          ))}
-        </div>
-
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">sales talking points</h3>
-        <div className="rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
-          <ul className="space-y-3">
-            {au.impact.salesTalkingPoints.map((p) => (
-              <li key={p} className="flex items-start gap-3 text-base md:text-lg text-black"><span className="text-[#075EFD] font-bold mt-1">•</span>{p}</li>
-            ))}
-          </ul>
-        </div>
-
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-8">key learnings & reflection</h3>
         <div className="grid md:grid-cols-2 gap-5">
           <div className="dark-card rounded-3xl p-7">
             <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">what went well</p>

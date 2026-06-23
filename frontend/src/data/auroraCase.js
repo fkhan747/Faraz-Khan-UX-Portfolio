@@ -10,8 +10,8 @@ export const aurora = {
   hero: {
     stats: [
       { value: "3:1", label: "Clicks Reduced" },
-      { value: "−47%", label: "Setup Time" },
-      { value: "78", label: "SUS Score" },
+      { value: "52", label: "Components Shipped" },
+      { value: "3", label: "Surfaces Reused" },
     ],
   },
 
@@ -26,7 +26,7 @@ export const aurora = {
       { label: "Duration", value: "6 Months" },
       { label: "Team", value: "2 PMs, 5 Devs, 1 QA, 2 Designers" },
       { label: "Platform", value: "Web (B2B SaaS · Europe)" },
-      { label: "Tools", value: "Figma, Azure DevOps, Maze" },
+      { label: "Tools", value: "Figma, FigJam, Azure DevOps" },
     ],
     process: [
       { step: "01", title: "Discovery", duration: "3 weeks" },
@@ -260,55 +260,36 @@ export const aurora = {
   },
 
   // --- 07 VALIDATION ---
+  // --- 07 ITERATIVE TESTING ---
   validation: {
-    headline: "Validation",
-    testSetup: [
-      { l: "Participants", v: "18 users across 2 rounds" },
-      { l: "Method", v: "Moderated remote sessions (50 min)" },
-      { l: "Tasks", v: "5 core scenarios per session" },
-      { l: "Tools", v: "Figma prototype, Maze, Zoom, Dovetail" },
+    headline: "Refined through iterative design, not a formal usability study",
+    intro:
+      "I didn't run a formal usability study on this engagement. Instead the work was sharpened through repeated design iterations and reviews with product and engineering: rough sketches to pressure-test the concept, greybox wireframes to lock hierarchy, hi-fi against the new design system, and sign-off before handoff.",
+    rounds: [
+      { n: 1, t: "Concept sketches", d: "Sketched the tabbed configurator and the docked AI composer by hand to agree on the basic shape with product before committing to pixels." },
+      { n: 2, t: "Greybox wireframes", d: "Locked information hierarchy and density (the cadence pills, the per-day time table, the AI quick-action grid) in greyscale and reviewed them with PMs and stakeholders, so no one debated colour yet." },
+      { n: 3, t: "Hi-fi on the design system", d: "Applied the Aurora Engage UI kit and pressure-tested every component and state, surfacing gaps that fed straight back into the system tokens." },
+      { n: 4, t: "Migration-aligned refinement", d: "Worked alongside engineering through the AngularJS to Angular migration to keep the design implementable, refining edge cases like the Custom cadence that proved more complex than expected." },
+      { n: 5, t: "Stakeholder sign-off & handoff", d: "Walked the final Figma prototype through product and engineering for sign-off, with each frame linked to its user story before dev handoff." },
     ],
-    keyResults: [
-      { v: "91%", l: "Task Completion", s: "+33 pts from baseline" },
-      { v: "8.4 min", l: "Avg Setup Time", s: "−55% from baseline" },
-      { v: "9%", l: "Schedule Error Rate", s: "−78% from baseline" },
-      { v: "78/100", l: "Satisfaction (SUS)", s: "+27 pts from baseline" },
-    ],
+    outcome:
+      "The flow evolved from a cluttered, multi-action configurator into a focused tabbed journey with an in-canvas AI composer, signed off by product and engineering before handoff. The honest gap: without a formal usability study, the next step is validating the flow with real campaign managers.",
   },
 
-  // --- 08 IMPACT ---
+  // --- 08 REFLECTION ---
   impact: {
-    headline: "Impact",
-    outcomes: [
-      { v: "3:1", l: "Clicks Reduced", s: "campaign creation flow" },
-      { v: "52", l: "Components Shipped", s: "in Aurora Engage UI Kit" },
-      { v: "78", l: "SUS Score", s: "up from 51" },
-      { v: "−52%", l: "Off-Platform Drafting", s: "via post-launch survey" },
-    ],
-    artifacts: [
-      { t: "Figma Design System / UI Kit", d: "Tokens, components, variables and styles aligned with Helio's brand language." },
-      { t: "User Flows, Wireframes, Hi-Fi Designs", d: "Validated insights and screen designs to brief engineering." },
-      { t: "Dev-Ready Visual Assets", d: "Each Figma frame linked to Azure DevOps user stories for unambiguous handoff." },
-      { t: "Stakeholder Workshop Outputs", d: "Personas, journeys, and requirements documents shared with cross-functional partners." },
-    ],
-    salesTalkingPoints: [
-      "Delivered Helio's first unified digital commerce design system",
-      "Provided clear access to items having warnings and alerts",
-      "Visibility of longer journey names reduced cognitive load and improved efficiency",
-      "Visibility of status of all journeys eases the work flow for marketers as their time gets saved",
-      "Filter to see journeys of specific quarters provides quick access to journeys from past quarters",
-    ],
+    headline: "Key learnings & reflection",
     wentWell: [
-      "The three-tab structure passed pilot review in week 1. Engineering hadn't expected the green light that fast and kicked off implementation early",
-      "Helio AI integration shipped on schedule thanks to a streaming-first contract negotiated with backend in week 3",
-      "The cadence-summary copy (\"This will send every Wednesday at 9am\") was the single most-cited improvement in NPS verbatims post-launch",
-      "Aurora Engage UI Kit back-filled three other product surfaces with zero additional design work, pure leverage across the Helio portfolio",
+      "The three-tab structure passed product and engineering review in week 1, so implementation could start early.",
+      "Helio AI integration stayed on schedule thanks to a streaming-first contract negotiated with backend in week 3.",
+      "The plain-language cadence summary (\"This will send every Wednesday at 9am\") was the change product and stakeholders pointed to most as making the schedule unambiguous.",
+      "The Aurora Engage UI kit back-filled three other product surfaces with no extra design work, pure leverage across the Helio portfolio.",
     ],
     differently: [
-      "Would run a quantitative diary study before redesign rather than relying solely on moderated sessions for friction data",
-      "Should have prototyped the Custom cadence earlier. Its complexity surprised the team in week 6 and forced a re-spec",
-      "Would partner with Sales Engineering on a \"demo path\" so the new flow is faster to show, not just faster to use",
-      "More attention to non-English AI generation quality. We shipped English-only and left localization to a follow-up release",
+      "I didn't run a formal usability study on this project. Next time I'd validate the flow with real campaign managers before handoff, not just internal and stakeholder review.",
+      "Should have prototyped the Custom cadence earlier. Its complexity surprised the team in week 6 and forced a re-spec.",
+      "Would partner with Sales Engineering on a \"demo path\" so the new flow is faster to show, not just faster to use.",
+      "More attention to non-English AI generation quality. We shipped English-only and left localisation to a follow-up release.",
     ],
   },
 };
