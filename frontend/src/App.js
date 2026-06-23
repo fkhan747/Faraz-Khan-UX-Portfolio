@@ -16,6 +16,7 @@ import Contact from "./pages/Contact";
 import CaseStudy from "./pages/CaseStudy";
 import FinvistaCaseStudy from "./pages/FinvistaCaseStudy";
 import AuroraCaseStudy from "./pages/AuroraCaseStudy";
+import JoatCaseStudy from "./pages/JoatCaseStudy";
 import RecruitosConcept from "./pages/RecruitosConcept";
 import KnowledgeosConcept from "./pages/KnowledgeosConcept";
 import DecisionosConcept from "./pages/DecisionosConcept";
@@ -39,6 +40,7 @@ function App() {
             <Route path="/case/recruitos" element={<RecruitosConcept />} />
             <Route path="/case/knowledgeos" element={<KnowledgeosConcept />} />
             <Route path="/case/decisionos" element={<DecisionosConcept />} />
+            <Route path="/case/somethings-cooking" element={<JoatCaseStudy />} />
             <Route path="/case/:slug" element={<CaseStudy />} />
             <Route path="*" element={<Landing />} />
           </Routes>

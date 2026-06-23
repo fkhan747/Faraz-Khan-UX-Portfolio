@@ -82,7 +82,7 @@
   },
   "reactSnap": {
     "source": "build",
-    "include": ["/", "/projects", "/about", "/contact", "/case/finvista", "/case/aurora", "/case/recruitos", "/case/knowledgeos", "/case/decisionos"],
+    "include": ["/", "/projects", "/about", "/contact", "/case/finvista", "/case/aurora", "/case/recruitos", "/case/knowledgeos", "/case/decisionos", "/case/somethings-cooking"],
     "crawl": false,
     "inlineCss": false,
     "skipThirdPartyRequests": true,

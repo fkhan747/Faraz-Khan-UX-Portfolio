@@ -72,19 +72,18 @@ export const projects = [
   {
     slug: "somethings-cooking",
     title: "Jack of All Threads",
-    subtitle: "A Recipe & Meal-Planning Experience",
-    client: "Jack of All Threads",
-    role: "Product Designer",
-    services: "Mobile App, Visual Design",
-    year: "2023",
-    cover:
-      "https://images.pexels.com/photos/35052818/pexels-photo-35052818.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-    coverImg: "https://images.pexels.com/photos/35052818/pexels-photo-35052818.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=800&w=1200",
-    color: "#F7D6A3",
-    tag: "coming soon",
-    summary: "Case study coming soon. Stay tuned.",
-    detail: false,
-    comingSoon: true,
+    subtitle: "India's First Crowdfunding Platform for Custom Apparel",
+    client: "Jack of All Threads (Bangalore)",
+    role: "Product / UX Designer",
+    services: "Product Design, UX, Visual Design",
+    year: "2015",
+    cover: "/joat/cover.jpg",
+    coverImg: "/joat/cover.jpg",
+    color: "#F25C4D",
+    tag: "case study",
+    summary:
+      "Designed the end-to-end product for India's first t-shirt crowdfunding platform: an in-browser design studio, the campaign-creation flow, and the buyer + raiser journeys across desktop and mobile.",
+    detail: true,
   },
 ];
 
