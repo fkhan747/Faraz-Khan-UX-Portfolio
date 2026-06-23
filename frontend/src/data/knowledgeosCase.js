@@ -57,6 +57,12 @@ export const knowledgeos = {
     ],
   },
 
+  primaryUsers: [
+    { label: "Knowledge Seekers", desc: "The primary user: anyone on the team who needs an answer now and currently hunts across wikis, drives and Slack threads." },
+    { label: "Domain Experts", desc: "Hold the answers in their heads and are tired of being interrupted for things that should be self-serve." },
+    { label: "Knowledge Admins", desc: "Curate sources and permissions, keeping what the AI draws on trustworthy and current." },
+  ],
+
   // --- 01 PERSONAS ---
   personasSection: {
     headline: "Meet the people with the questions, and the answers.",

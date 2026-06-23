@@ -42,6 +42,12 @@ export const joat = {
       "You publicise. We produce. You keep the profit. The creator designs and promotes; JoaT handles production, shipping, payments and support; nobody pays upfront and nothing is printed until the campaign is funded.",
   },
 
+  primaryUsers: [
+    { label: "Campaign Raisers", desc: "Students, college clubs, bands, artists and small brands who design a tee and run a campaign to sell it, with no upfront cost and no inventory." },
+    { label: "Cause & NGO Raisers", desc: "Non-profits like CRY and the Akshaya Patra Foundation raising funds and awareness through merch campaigns." },
+    { label: "Buyers / Backers", desc: "Supporters who land on a campaign from a shared link or a Facebook ad and order the tee, which is what funds the run." },
+  ],
+
   // --- 02 PROBLEM ---
   problem: {
     headline: "Selling custom merch meant juggling a stack of tools",

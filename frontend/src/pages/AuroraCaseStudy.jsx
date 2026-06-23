@@ -129,6 +129,16 @@ export default function AuroraCaseStudy() {
           <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3 text-[#F5379B]">{au.overview.contextTitle}</p>
           <p className="font-display text-lg md:text-xl font-bold leading-snug text-black">{au.overview.contextBody}</p>
         </div>
+
+        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">Primary Users</h3>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {au.primaryUsers.map((u) => (
+            <div key={u.label} className="dark-card rounded-2xl p-6 border-l-4 border-[#075EFD]">
+              <h4 className="font-display text-lg font-black mb-2">{u.label}</h4>
+              <p className="text-sm leading-relaxed text-[#F4F3FA]/85">{u.desc}</p>
+            </div>
+          ))}
+        </div>
       </SectionWrap>
 
       {/* 02 PROBLEM */}

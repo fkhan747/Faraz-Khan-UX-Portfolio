@@ -72,6 +72,11 @@ export const finvista = {
   },
 
   // --- 02 PROBLEM ---
+  primaryUsers: [
+    { label: "Sales Centre Executives", desc: "Agents who process loans for customers over phone and app, juggling many applications at once and accountable for compliance." },
+    { label: "Loan Customers", desc: "First-time and repeat borrowers across urban and rural India, applying for two-wheeler and other loans on their own phone." },
+  ],
+
   problem: {
     headline:
       "A lending platform that needed to work for everyone, from tech-savvy urbanites to first-time borrowers in rural India",

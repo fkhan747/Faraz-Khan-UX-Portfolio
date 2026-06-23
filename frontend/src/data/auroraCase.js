@@ -52,6 +52,12 @@ export const aurora = {
   },
 
   // --- 02 PROBLEM ---
+  primaryUsers: [
+    { label: "CRM / Campaign Managers", desc: "Marketers who build and ship recurring campaigns and need setup to be fast and ROI easy to prove." },
+    { label: "Marketing Ops Leads", desc: "Owners of cadence and governance across many brand portfolios, who need standardization and audit trails." },
+    { label: "Copywriters", desc: "Writers producing on-brand copy who lean on the in-canvas AI composer to beat the blank page." },
+  ],
+
   problem: {
     headline: "The Problem",
     quote:

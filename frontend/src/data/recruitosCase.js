@@ -60,6 +60,12 @@ export const recruitos = {
     ],
   },
 
+  primaryUsers: [
+    { label: "Agency Recruiters", desc: "The primary user: sourcing, ranking and reaching out to candidates all day, drowning in manual outreach and tab-switching." },
+    { label: "Agency Owners", desc: "Run the desk and the numbers; want more placements per recruiter without adding headcount." },
+    { label: "Client Hiring Managers", desc: "Receive shortlists and give feedback; want fewer, better-fit candidates, faster." },
+  ],
+
   // --- 01 THE PEOPLE (Personas - research-informed archetypes) ---
   personasSection: {
     headline: "Three people, one broken workflow.",

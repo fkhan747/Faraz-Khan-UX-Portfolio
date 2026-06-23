@@ -57,6 +57,12 @@ export const decisionos = {
     ],
   },
 
+  primaryUsers: [
+    { label: "Executives", desc: "The primary user: the person who has to make and defend the call, weighing scattered signals under time pressure." },
+    { label: "Chiefs of Staff", desc: "Assemble the inputs and frame the decision; they want synthesis, not another dashboard to read." },
+    { label: "Exec Team Members", desc: "Contribute data and context, and need to see how their piece feeds the final call." },
+  ],
+
   // --- 01 PERSONAS ---
   personasSection: {
     headline: "Meet the people who have to make the call.",
