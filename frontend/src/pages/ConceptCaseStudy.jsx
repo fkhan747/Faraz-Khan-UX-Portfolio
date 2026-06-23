@@ -6,6 +6,7 @@ import {
 import { concepts, PROFILE } from "../data/content";
 import Seo from "../components/Seo";
 import Zoomable from "../components/Zoomable";
+import CaseStudyNav from "../components/CaseStudyNav";
 
 /**
  * Shared renderer for the AI-native OS-family concept case studies
@@ -114,6 +115,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
   return (
     <article data-testid={`${r.slug}-case-study`} className="pb-24">
       <Seo title={r.title} description={r.subtitle} />
+      <CaseStudyNav />
       {/* ============ TITLE BLOCK ============ */}
       <header className="px-6 md:px-10 lg:px-16 pt-12 pb-10">
         <Link

@@ -7,6 +7,7 @@ import Seo from "../components/Seo";
 import Zoomable from "../components/Zoomable";
 import PhoneFrame from "../components/PhoneFrame";
 import FinvistaDesignSystem from "../components/FinvistaDesignSystem";
+import CaseStudyNav from "../components/CaseStudyNav";
 import { Container } from "../components/Grid";
 
 /* -- Reusable section header in portfolio voice -- */
@@ -38,6 +39,7 @@ export default function FinvistaCaseStudy() {
   return (
     <article data-testid="finvista-case-study" className="pb-24">
       <Seo title={fv.title} description={fv.subtitle} />
+      <CaseStudyNav />
       {/* TITLE BLOCK over a darkened cover image */}
       <header className="relative overflow-hidden">
         <img

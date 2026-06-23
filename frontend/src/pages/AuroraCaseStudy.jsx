@@ -5,6 +5,7 @@ import { PROFILE } from "../data/content";
 import Seo from "../components/Seo";
 import Zoomable from "../components/Zoomable";
 import AuroraDesignSystem from "../components/AuroraDesignSystem";
+import CaseStudyNav from "../components/CaseStudyNav";
 import { Container } from "../components/Grid";
 
 const SectionLabel = ({ num, name }) => (
@@ -26,6 +27,7 @@ export default function AuroraCaseStudy() {
   return (
     <article data-testid="aurora-case-study" className="pb-24">
       <Seo title={au.title} description={au.subtitle} />
+      <CaseStudyNav />
       {/* TITLE BLOCK over a darkened cover image */}
       <header className="relative overflow-hidden">
         <img
