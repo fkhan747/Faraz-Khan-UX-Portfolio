@@ -93,7 +93,7 @@ export default function JoatCaseStudy() {
           <p className="relative font-display text-xl md:text-2xl leading-snug text-white/95 max-w-6xl">{j.overview.tldr}</p>
         </div>
 
-        <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+        <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3">
           {j.overview.facts.map((f) => (
             <div key={f.label} className="dark-card rounded-2xl p-5">
               <p className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-2">{f.label}</p>
@@ -170,9 +170,52 @@ export default function JoatCaseStudy() {
         </figure>
       </SectionWrap>
 
-      {/* 04 DESIGN STUDIO */}
+      {/* 04 INFORMATION ARCHITECTURE */}
+      <SectionWrap data-testid="section-ia">
+        <SectionLabel num="04" name="Information Architecture" />
+        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{j.ia.headline}</h2>
+        <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{j.ia.intro}</p>
+        <figure className="mt-12 rounded-3xl dark-card p-5 md:p-8">
+          <Zoomable src={j.ia.diagram} alt={j.ia.caption} caption={j.ia.caption} className="block">
+            <img src={j.ia.diagram} alt={j.ia.caption} loading="lazy" className="block w-full h-auto" />
+          </Zoomable>
+          <figcaption className="mt-5 text-xs font-mono uppercase tracking-widest text-[#A29CB4] text-center">{j.ia.caption}</figcaption>
+        </figure>
+      </SectionWrap>
+
+      {/* 05 USER FLOW */}
+      <SectionWrap data-testid="section-user-flow">
+        <SectionLabel num="05" name="User Flow" />
+        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{j.userFlow.headline}</h2>
+        <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{j.userFlow.intro}</p>
+        <figure className="mt-12 rounded-3xl dark-card p-5 md:p-8">
+          <Zoomable src={j.userFlow.diagram} alt={j.userFlow.caption} caption={j.userFlow.caption} className="block">
+            <img src={j.userFlow.diagram} alt={j.userFlow.caption} loading="lazy" className="block w-full h-auto" />
+          </Zoomable>
+          <figcaption className="mt-5 text-xs font-mono uppercase tracking-widest text-[#A29CB4] text-center">{j.userFlow.caption}</figcaption>
+        </figure>
+      </SectionWrap>
+
+      {/* 06 WIREFRAMES */}
+      <SectionWrap data-testid="section-wireframes">
+        <SectionLabel num="06" name="Wireframes" />
+        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{j.wireframes.headline}</h2>
+        <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-10">{j.wireframes.intro}</p>
+        <div className="space-y-6">
+          {j.wireframes.batches.map((b, i) => (
+            <figure key={i} className="rounded-3xl dark-card p-5 md:p-8">
+              <Zoomable src={b.src} alt={b.caption} caption={b.caption} className="block">
+                <img src={b.src} alt={b.caption} loading="lazy" className="block w-full h-auto" />
+              </Zoomable>
+              <figcaption className="mt-5 text-xs font-mono uppercase tracking-widest text-[#A29CB4] text-center">{b.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </SectionWrap>
+
+      {/* 07 DESIGN STUDIO */}
       <SectionWrap data-testid="section-studio">
-        <SectionLabel num="04" name="The Design Studio" />
+        <SectionLabel num="07" name="The Design Studio" />
         <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{j.studio.headline}</h2>
         <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{j.studio.intro}</p>
 
@@ -195,14 +238,14 @@ export default function JoatCaseStudy() {
 
       {/* 05 CAMPAIGN FLOW */}
       <SectionWrap data-testid="section-campaign">
-        <SectionLabel num="05" name="Campaign Flow" />
+        <SectionLabel num="08" name="Campaign Flow" />
         <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{j.campaign.headline}</h2>
         <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-10">{j.campaign.intro}</p>
 
         <div className="grid grid-cols-1 gap-6">
           {j.campaign.screens.map((s) => (
             <figure key={s.title} className="rounded-3xl dark-card overflow-hidden">
-              <Zoomable src={s.src} alt={s.title} caption={`${s.title} — ${s.desc}`} className="bg-white">
+              <Zoomable src={s.src} alt={s.title} caption={`${s.title}: ${s.desc}`} className="bg-white">
                 <img src={s.src} alt={s.title} loading="lazy" className="block w-full h-auto" />
               </Zoomable>
               <figcaption className="p-6">
@@ -216,14 +259,14 @@ export default function JoatCaseStudy() {
 
       {/* 06 RAISER DASHBOARD */}
       <SectionWrap data-testid="section-dashboard">
-        <SectionLabel num="06" name="Raiser Dashboard" />
+        <SectionLabel num="09" name="Raiser Dashboard" />
         <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{j.dashboard.headline}</h2>
         <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-10">{j.dashboard.intro}</p>
 
         <div className="grid md:grid-cols-2 gap-6">
           {j.dashboard.screens.map((s) => (
             <figure key={s.title} className="rounded-3xl dark-card overflow-hidden">
-              <Zoomable src={s.src} alt={s.title} caption={`${s.title} — ${s.desc}`} className="bg-white">
+              <Zoomable src={s.src} alt={s.title} caption={`${s.title}: ${s.desc}`} className="bg-white">
                 <img src={s.src} alt={s.title} loading="lazy" className="block w-full h-auto" />
               </Zoomable>
               <figcaption className="p-5">
@@ -237,7 +280,7 @@ export default function JoatCaseStudy() {
 
       {/* 07 RESPONSIVE */}
       <SectionWrap data-testid="section-responsive">
-        <SectionLabel num="07" name="Responsive" />
+        <SectionLabel num="10" name="Responsive" />
         <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{j.responsive.headline}</h2>
         <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-12">{j.responsive.intro}</p>
 
@@ -255,7 +298,7 @@ export default function JoatCaseStudy() {
 
       {/* 08 REFLECTION */}
       <SectionWrap data-testid="section-reflection">
-        <SectionLabel num="08" name="Reflection" />
+        <SectionLabel num="11" name="Reflection" />
         <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{j.reflection.headline}</h2>
 
         <div className="rounded-3xl dark-card text-white p-8 md:p-10">
