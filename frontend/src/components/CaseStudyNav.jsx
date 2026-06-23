@@ -81,9 +81,9 @@ export default function CaseStudyNav() {
   return (
     <nav
       aria-label="Jump to section"
-      className="hidden min-[1780px]:flex fixed left-3 top-1/2 -translate-y-1/2 z-40 w-[162px] flex-col gap-0.5 max-h-[82vh] overflow-y-auto rounded-2xl border border-white/10 bg-black/50 backdrop-blur-xl p-2 shadow-[0_8px_40px_rgba(0,0,0,0.55)]"
+      className="group/nav hidden xl:flex fixed left-3 top-1/2 -translate-y-1/2 z-40 w-[46px] min-[1780px]:w-[168px] hover:w-[168px] flex-col gap-0.5 max-h-[82vh] overflow-y-auto overflow-x-hidden rounded-2xl border border-white/10 bg-black/55 backdrop-blur-xl p-2 shadow-[0_8px_40px_rgba(0,0,0,0.55)] transition-[width] duration-200 ease-out"
     >
-      <p className="px-2.5 pt-1 pb-2 text-[9px] font-mono uppercase tracking-[0.22em] text-white/35">
+      <p className="hidden min-[1780px]:block group-hover/nav:block px-1.5 pt-1 pb-2 text-[9px] font-mono uppercase tracking-[0.22em] text-white/35 whitespace-nowrap">
         On this page
       </p>
       {items.map((it, i) => {
@@ -93,20 +93,21 @@ export default function CaseStudyNav() {
             key={i}
             type="button"
             onClick={() => jump(it.el)}
-            className={`group flex items-center gap-2.5 rounded-xl px-2.5 py-1.5 text-left transition-colors ${
+            title={it.name}
+            className={`group/item flex items-center gap-2.5 rounded-xl px-2.5 py-1.5 text-left transition-colors justify-center min-[1780px]:justify-start group-hover/nav:justify-start ${
               isActive ? "bg-white/10" : "hover:bg-white/5"
             }`}
           >
             <span
-              className={`font-mono text-[10px] tabular-nums transition-colors ${
-                isActive ? "text-[#F5379B]" : "text-white/35 group-hover:text-white/60"
+              className={`font-mono text-[10px] tabular-nums shrink-0 transition-colors ${
+                isActive ? "text-[#F5379B]" : "text-white/40 group-hover/item:text-white/70"
               }`}
             >
               {it.num || "•"}
             </span>
             <span
-              className={`text-[12px] font-medium leading-tight transition-colors ${
-                isActive ? "text-white" : "text-white/55 group-hover:text-white/80"
+              className={`hidden min-[1780px]:inline group-hover/nav:inline truncate whitespace-nowrap text-[12px] font-medium leading-tight transition-colors ${
+                isActive ? "text-white" : "text-white/55 group-hover/item:text-white/80"
               }`}
             >
               {it.name}
