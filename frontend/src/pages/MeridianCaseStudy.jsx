@@ -38,13 +38,14 @@ function IframeBlock({ src, h }) {
   );
 }
 
-/* scaled thumbnail of a full dashboard screen (1488x1144 app scaled to fit) */
-function ScreenThumb({ src, label }) {
+/* scaled thumbnail: the 1472-wide app (1440 + 16px padding) cropped to its own height */
+const TW = 1472, THUMB_W = 496, THUMB_SCALE = THUMB_W / TW;
+function ScreenThumb({ src, label, h }) {
   return (
     <figure>
-      <div style={{ width: 496, maxWidth: "100%", height: 384, borderRadius: 12, overflow: "hidden", border: "1px solid rgba(255,255,255,.12)", boxShadow: "0 22px 55px -30px rgba(0,0,0,.85)" }}>
+      <div style={{ width: THUMB_W, maxWidth: "100%", height: Math.round(h * THUMB_SCALE), borderRadius: 12, overflow: "hidden", border: "1px solid rgba(255,255,255,.12)", boxShadow: "0 22px 55px -30px rgba(0,0,0,.85)" }}>
         <iframe src={src} title={label} loading="lazy" scrolling="no"
-          style={{ width: 1488, height: 1144, border: 0, transform: "scale(0.3333)", transformOrigin: "top left", display: "block" }} />
+          style={{ width: TW, height: h, border: 0, transform: `scale(${THUMB_SCALE})`, transformOrigin: "top left", display: "block" }} />
       </div>
       <figcaption className="mt-3 font-mono text-[11px] uppercase tracking-[0.2em] text-white/55">{label}</figcaption>
     </figure>
@@ -52,13 +53,13 @@ function ScreenThumb({ src, label }) {
 }
 
 const SCREENS = [
-  { src: "/meridian-mocks/t2-ug-overview.html", label: "Undergraduate Overview" },
-  { src: "/meridian-mocks/t2-ug-geo.html", label: "Undergraduate Geo" },
-  { src: "/meridian-mocks/t2-funnel.html", label: "Funnel, yield & melt" },
-  { src: "/meridian-mocks/t2-grad-overview.html", label: "Graduate Overview" },
-  { src: "/meridian-mocks/t2-grad-geo.html", label: "Graduate Geo" },
-  { src: "/meridian-mocks/t2-research.html", label: "Research Intelligence" },
-  { src: "/meridian-mocks/t2-hr.html", label: "HR Workforce" },
+  { src: "/meridian-mocks/t2-ug-overview.html", label: "Undergraduate Overview", h: 910 },
+  { src: "/meridian-mocks/t2-ug-geo.html", label: "Undergraduate Geo", h: 950 },
+  { src: "/meridian-mocks/t2-funnel.html", label: "Funnel, yield & melt", h: 1227 },
+  { src: "/meridian-mocks/t2-grad-overview.html", label: "Graduate Overview", h: 923 },
+  { src: "/meridian-mocks/t2-grad-geo.html", label: "Graduate Geo", h: 949 },
+  { src: "/meridian-mocks/t2-research.html", label: "Research Intelligence", h: 1038 },
+  { src: "/meridian-mocks/t2-hr.html", label: "HR Workforce", h: 1133 },
 ];
 
 function inline(text) {
@@ -169,9 +170,9 @@ export default function MeridianCaseStudy() {
           <SectionLabel num="✦" name="The full walkthrough" />
           <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-5xl mb-6 case-keep">Eight screens, one system</h2>
           <p className="text-base md:text-lg leading-relaxed text-[#F4F3FA] max-w-4xl mb-10">You have seen the parts. Here is the whole product: the institutional cockpit, then the seven module screens it leads into, all on one design system.</p>
-          <div style={{ width: 1152, maxWidth: "100%", borderRadius: 18, overflow: "hidden", border: "1px solid rgba(255,255,255,.12)", height: 886, boxShadow: "0 40px 90px -40px rgba(0,0,0,.85)" }}>
+          <div style={{ width: 1152, maxWidth: "100%", borderRadius: 18, overflow: "hidden", border: "1px solid rgba(255,255,255,.12)", height: Math.round(1128 * 1152 / TW), boxShadow: "0 40px 90px -40px rgba(0,0,0,.85)" }}>
             <iframe src="/meridian-mocks/t2-overview.html" title="Meridian institutional overview" loading="lazy" scrolling="no"
-              style={{ width: 1488, height: 1144, border: 0, transform: "scale(0.7742)", transformOrigin: "top left", display: "block" }} />
+              style={{ width: TW, height: 1128, border: 0, transform: `scale(${1152 / TW})`, transformOrigin: "top left", display: "block" }} />
           </div>
           <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.2em] text-white/55">Institutional Overview, the cockpit</p>
           <div className="grid sm:grid-cols-2 gap-x-10 gap-y-10 mt-12">
