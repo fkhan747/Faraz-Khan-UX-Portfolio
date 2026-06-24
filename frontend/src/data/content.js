@@ -53,6 +53,22 @@ export const projects = [
     detail: true,
   },
   {
+    slug: "meridian",
+    title: "Meridian Analytics",
+    subtitle: "Re-imagining a University's Analytics Platform: One Cockpit for Admissions, Research & HR",
+    client: "Meridian Institute of Technology (anonymized)",
+    role: "Lead UX Designer",
+    services: "UX, Data Visualization, Design Systems",
+    year: "2024",
+    cover: "/meridian/cover.svg",
+    coverImg: "/meridian/cover.svg",
+    color: "#0E1430",
+    tag: "case study",
+    summary:
+      "Unified four siloed Power BI dashboards (undergraduate and graduate admissions, research, and HR) into one analytics platform with an overview-and-drill-down model and an optional AI layer.",
+    detail: true,
+  },
+  {
     slug: "next-gen-institute",
     title: "Next-Gen Institute",
     subtitle: "An Edtech Platform for India's Tier-2 Students",

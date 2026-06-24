@@ -1,0 +1,353 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=1440">
+<title>Meridian — Overview (Template 2 · SnowUI)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* brand maroon — left drawer (Meridian Red) */
+  --maroon:#A32638; --maroon-2:#8C1E2E;
+  --ink:#1B1C1D; --ink-2:#363D45; --muted:#7F7F7F; --faint:#A8A8A8;
+  --line:#E4E5E6; --line-2:#F2F2F2; --bg:#FFFFFF; --app:#F2F2F2;
+  /* Meridian data palette (exact codes) */
+  --navy:#004380; --blue:#4896CF; --orange:#E7842E; --gold:#E8B431; --green:#21BA45; --red:#DB2828; --dgray:#363D45;
+  /* official light tints — KPI cards */
+  --p-blue:#E7F2FB; --p-lav:#FFF2E8; --p-mint:#FFFAE6; --p-gray:#F2F2F2; --p-peach:#FFF2E8;
+  /* chart palette — Meridian categorical (Dark Blue, Blue, Orange, Gold, Dark Gray) */
+  --c-ink:#004380; --c-blue:#4896CF; --c-peri:#E7842E; --c-mint:#E8B431; --c-purple:#363D45; --c-soft:#E7F2FB; --c-dark:#1B1C1D;
+  --up:#21BA45; --down:#DB2828;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'IBM Plex Sans',system-ui,sans-serif;background:#E9EAEC;color:var(--ink);-webkit-font-smoothing:antialiased;font-size:14px;line-height:1.45;padding:24px}
+.app{width:1440px;margin:0 auto;display:flex;background:var(--bg);border-radius:16px;overflow:hidden;box-shadow:0 24px 70px -28px rgba(20,20,40,.4);border:1px solid #ECECEC}
+svg.i{width:18px;height:18px;flex-shrink:0;stroke:currentColor;stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round}
+svg.i.sm{width:16px;height:16px}
+.num{font-variant-numeric:tabular-nums}
+
+/* ---------- left sidebar ---------- */
+.side{width:212px;flex-shrink:0;background:linear-gradient(180deg,#A32638,#8C1E2E);border-right:1px solid #7A1A28;padding:18px 12px;display:flex;flex-direction:column}
+.ws{display:flex;align-items:center;gap:9px;padding:6px 8px 14px}
+.ws .av{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#95A4FC,#7B7BF5);display:grid;place-items:center;color:#fff;font-weight:700;font-size:11px}
+.ws .nm{font-size:14px;font-weight:600}
+.tabs{display:flex;gap:14px;padding:2px 8px 10px;font-size:13px;color:var(--faint)}
+.tabs span.on{color:var(--muted)}
+.sec{font-size:13px;color:var(--faint);padding:12px 10px 4px;font-weight:400}
+.nav{display:flex;flex-direction:column;gap:1px}
+.ni{display:flex;align-items:center;gap:9px;padding:7px 9px;border-radius:8px;color:var(--ink-2);text-decoration:none;font-size:14px;font-weight:400;position:relative}
+.ni .ch{width:14px;color:var(--faint);font-size:10px}
+.ni svg{color:var(--ink-2)}
+.ni:hover{background:var(--p-gray)}
+.ni.on{background:var(--p-gray);font-weight:500}
+.ni.on::before{content:"";position:absolute;left:0;top:8px;bottom:8px;width:3px;border-radius:3px;background:#1C1C1C}
+.side-foot{margin-top:auto;display:flex;align-items:center;gap:8px;padding:10px;color:var(--faint);font-size:13px}
+.side-foot .dot{width:18px;height:18px;border-radius:5px;background:linear-gradient(135deg,#BFD7FF,#9BB7F0)}
+
+/* ---------- main ---------- */
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+.topbar{height:60px;display:flex;align-items:center;gap:14px;padding:0 22px;border-bottom:1px solid var(--line)}
+.tb-l{display:flex;align-items:center;gap:12px;color:var(--muted)}
+.crumb{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted)}
+.crumb b{color:var(--ink);font-weight:500}
+.crumb .sl{color:var(--faint)}
+.tb-r{margin-left:auto;display:flex;align-items:center;gap:6px;color:var(--muted)}
+.search{display:flex;align-items:center;gap:8px;background:var(--p-gray);border-radius:8px;padding:7px 11px;width:180px;color:var(--faint);font-size:13px;margin-right:6px}
+.ic-btn{width:32px;height:32px;border-radius:8px;display:grid;place-items:center;color:var(--ink-2)}
+.ic-btn:hover{background:var(--p-gray)}
+
+.wrap{flex:1;display:flex;min-height:0}
+.content{flex:1;min-width:0;padding:22px 26px}
+.h-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.h-row h1{font-size:15px;font-weight:600}
+.seg{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--muted);background:var(--p-gray);padding:6px 11px;border-radius:8px}
+
+/* KPI cards */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:18px}
+.kpi{border-radius:16px;padding:20px 20px 18px}
+.kpi .lab{font-size:14px;font-weight:600;color:var(--ink)}
+.kpi .bot{display:flex;align-items:flex-end;justify-content:space-between;margin-top:18px}
+.kpi .val{font-size:24px;font-weight:700;letter-spacing:-.3px}
+.kpi .chg{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;color:var(--ink-2)}
+.kpi .chg svg{width:14px;height:14px}
+
+/* generic card */
+.card{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:20px}
+.card.soft{background:var(--p-gray);border-color:transparent}
+.grid{display:grid;gap:18px}
+.g-12{grid-template-columns:repeat(12,1fr)}
+.span-4{grid-column:span 4}.span-5{grid-column:span 5}.span-7{grid-column:span 7}.span-8{grid-column:span 8}.span-12{grid-column:span 12}
+.mt{margin-top:18px}
+.card-h{display:flex;align-items:center;gap:18px;margin-bottom:18px}
+.card-t{font-size:14px;font-weight:600}
+.tabsb{display:flex;align-items:center;gap:16px;font-size:13px;color:var(--faint)}
+.tabsb span.on{color:var(--ink);font-weight:500}
+.legend{margin-left:auto;display:flex;gap:14px;font-size:12px;color:var(--muted)}
+.legend i{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;vertical-align:middle}
+
+/* list with thin bars (applications by school) */
+.blist{display:flex;flex-direction:column;gap:15px}
+.brow{display:grid;grid-template-columns:96px 1fr auto;align-items:center;gap:12px;font-size:13px}
+.brow .nm{color:var(--ink-2)}
+.brow .tr{height:6px;border-radius:6px;background:var(--p-gray);overflow:hidden}
+.brow .tr i{display:block;height:100%;border-radius:6px}
+.brow .vv{color:var(--ink);font-weight:600;font-size:13px}
+
+/* pastel bars (rounded top) */
+.bars{display:flex;align-items:flex-end;gap:18px;height:196px;padding:0 4px}
+.bcol{flex:1;display:flex;flex-direction:column;align-items:center;gap:9px}
+.bcol .bar{width:100%;max-width:44px;border-radius:8px}
+.bcol .bl{font-size:12px;color:var(--muted)}
+
+/* donut */
+.donutwrap{display:flex;align-items:center;gap:24px}
+.donut{width:120px;height:120px;border-radius:50%;position:relative;flex-shrink:0}
+.donut::after{content:"";position:absolute;inset:30%;background:var(--bg);border-radius:50%}
+.dleg{display:flex;flex-direction:column;gap:11px;flex:1}
+.dleg .r{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--ink-2)}
+.dleg .r i{width:8px;height:8px;border-radius:50%}
+.dleg .r b{margin-left:auto;font-weight:600;color:var(--ink)}
+
+/* right rail */
+.rail{width:280px;flex-shrink:0;border-left:1px solid var(--line);padding:20px 18px;display:flex;flex-direction:column;gap:22px}
+.rail h3{font-size:14px;font-weight:600;margin-bottom:12px}
+.feed{display:flex;flex-direction:column;gap:14px}
+.fe{display:flex;gap:11px}
+.fe .ic{width:24px;height:24px;border-radius:7px;display:grid;place-items:center;flex-shrink:0}
+.fe .tx{font-size:13px;color:var(--ink-2);line-height:1.35}
+.fe .tx b{font-weight:600;color:var(--ink)}
+.fe .ti{font-size:12px;color:var(--faint);margin-top:2px}
+.aibox{border:1px dashed #C9C2F2;border-radius:12px;padding:13px;background:#FAF9FF}
+.aibox .h{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:#6C5CE0}
+.aibox .q{font-size:12.5px;color:var(--muted);margin-top:7px;line-height:1.4}
+
+/* --- maroon left drawer: rich-white contents --- */
+.side .ws .av{background:#FFFFFF;color:#A32638}
+.side .ws .nm{color:#FFFFFF;font-weight:700}
+.side .tabs{color:rgba(255,255,255,.7)}
+.side .tabs span.on{color:#FFFFFF;font-weight:600}
+.side .sec{color:rgba(255,255,255,.72);font-weight:500}
+.side .ni{color:#FFFFFF;font-weight:500}
+.side .ni svg{color:#FFFFFF;stroke-width:2}
+.side .ni .ch{color:rgba(255,255,255,.75)}
+.side .ni:hover{background:rgba(255,255,255,.14)}
+.side .ni.on{background:rgba(255,255,255,.18);font-weight:600;color:#FFFFFF}
+.side .ni.on svg{stroke-width:2.1}
+.side .ni.on::before{background:#FFFFFF}
+.side .side-foot{color:rgba(255,255,255,.72)}
+.side .side-foot .dot{background:rgba(255,255,255,.4)}
+/* squared chart geometry (real-dashboard look, not rounded) */
+.bcol .bar{border-radius:2px}
+.brow .tr,.brow .tr i{border-radius:2px}
+/* AI box on Meridian dark blue */
+.aibox{border-color:#BAD6EC;background:#F3F9FD}
+.aibox .h{color:#004380}
+/* data-refreshed indicator (top right) */
+.refreshed{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:500;color:var(--ink-2);background:var(--p-gray);padding:7px 11px;border-radius:8px;white-space:nowrap}
+.refreshed svg{color:#21BA45}
+/* user profile (bottom of maroon drawer) */
+.side-user{margin-top:auto;display:flex;align-items:center;gap:10px;padding:12px 9px 2px;border-top:1px solid rgba(255,255,255,.16)}
+.side-user .av{width:34px;height:34px;border-radius:50%;background:#FFFFFF;color:#A32638;display:grid;place-items:center;font-weight:700;font-size:12px;flex-shrink:0}
+.side-user .info{min-width:0;flex:1}
+.side-user .nm{font-size:13px;font-weight:600;color:#FFFFFF;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.side-user .rl{font-size:11px;color:rgba(255,255,255,.72);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.side-user .mo{color:rgba(255,255,255,.7);flex-shrink:0;cursor:pointer}
+/* bar value labels */
+.bcol .bv{font-size:12px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
+/* line-chart data points + hover tooltips */
+.lc .pt circle{fill:#004380;stroke:#fff;stroke-width:2;transition:r .12s}
+.lc .pt .tip{opacity:0;transition:opacity .12s;pointer-events:none}
+.lc .pt .tip rect{fill:#1B1C1D}
+.lc .pt .tip text{fill:#fff;font-size:11px;font-weight:600;text-anchor:middle;font-family:'IBM Plex Sans',sans-serif}
+.lc .pt:hover .tip,.lc .pt.show .tip{opacity:1}
+.lc .pt:hover circle{r:6}
+</style>
+</head><body>
+<svg style="display:none">
+  <symbol id="ic-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7.5" height="7.5" rx="1.6"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.6"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.6"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.6"/></symbol>
+  <symbol id="ic-cap" viewBox="0 0 24 24"><path d="M12 4 22 9 12 14 2 9Z"/><path d="M6 11v5c0 0 2.4 2 6 2s6-2 6-2v-5"/></symbol>
+  <symbol id="ic-layers" viewBox="0 0 24 24"><path d="M12 3 21 8 12 13 3 8Z"/><path d="M3 12.5 12 17.5 21 12.5"/><path d="M3 16.5 12 21.5 21 16.5"/></symbol>
+  <symbol id="ic-flask" viewBox="0 0 24 24"><path d="M9 3h6"/><path d="M10 3v6l-5 9.5A1.5 1.5 0 0 0 6.4 21h11.2a1.5 1.5 0 0 0 1.4-2.5L14 9V3"/><path d="M7.5 15h9"/></symbol>
+  <symbol id="ic-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.5 2.6-5.5 6-5.5s6 2 6 5.5"/><path d="M16 5.6a3 3 0 0 1 0 6"/><path d="M17 14.8c2.4.6 4 2.4 4 5.2"/></symbol>
+  <symbol id="ic-doc" viewBox="0 0 24 24"><path d="M6 3h8l5 5v13H6Z"/><path d="M14 3v5h5"/><path d="M9 13h7"/><path d="M9 17h7"/></symbol>
+  <symbol id="ic-up" viewBox="0 0 24 24"><path d="M7 17 17 7"/><path d="M9 7h8v8"/></symbol>
+  <symbol id="ic-down" viewBox="0 0 24 24"><path d="M7 7 17 17"/><path d="M17 9v8H9"/></symbol>
+  <symbol id="ic-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20 16 16"/></symbol>
+  <symbol id="ic-bell" viewBox="0 0 24 24"><path d="M6 9a6 6 0 0 1 12 0c0 6 2 8 2 8H4s2-2 2-8Z"/><path d="M10 20a2 2 0 0 0 4 0"/></symbol>
+  <symbol id="ic-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M5 5l1.8 1.8M17.2 17.2 19 19M19 5l-1.8 1.8M6.8 17.2 5 19"/></symbol>
+  <symbol id="ic-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="ic-panel" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M15 4v16"/></symbol>
+  <symbol id="ic-star" viewBox="0 0 24 24"><path d="M12 4l2.3 5 5.2.5-3.9 3.4 1.2 5.1L12 20.4 7.2 23l1.2-5.1L4.5 14.5l5.2-.5z"/></symbol>
+  <symbol id="ic-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="ic-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c3 4 3 14 0 18-3-4-3-14 0-18"/></symbol>
+  <symbol id="ic-inbox" viewBox="0 0 24 24"><path d="M4 13l2.5-8h11L20 13v6H4Z"/><path d="M4 13h5l1 2.5h4L15 13h5"/></symbol>
+  <symbol id="ic-alert" viewBox="0 0 24 24"><path d="M12 3 22 20H2Z"/><path d="M12 10v5"/><circle cx="12" cy="18" r="1" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="ic-spark" viewBox="0 0 24 24"><path d="M12 3c0 5 1 6 6 9-5 3-6 4-6 9 0-5-1-6-6-9 5-3 6-4 6-9Z"/></symbol>
+  <symbol id="ic-refresh" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v5h-5"/></symbol>
+  <symbol id="ic-dots" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.5" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="12" cy="19" r="1.5" fill="currentColor" stroke="none"/></symbol>
+</svg>
+
+<div class="app">
+  <!-- sidebar -->
+  <aside class="side">
+    <div class="ws"><span class="av">M</span><span class="nm">Meridian</span></div>
+    <div class="tabs"><span class="on">Favorites</span><span>Recently</span></div>
+    <div class="sec">Dashboards</div>
+    <nav class="nav">
+      <a class="ni on"><span class="ch"></span><svg class="i sm"><use href="#ic-grid"/></svg> Overview</a>
+      <a class="ni"><span class="ch">›</span><svg class="i sm"><use href="#ic-cap"/></svg> Undergraduate</a>
+      <a class="ni"><span class="ch">›</span><svg class="i sm"><use href="#ic-layers"/></svg> Graduate</a>
+      <a class="ni"><span class="ch">›</span><svg class="i sm"><use href="#ic-flask"/></svg> Research</a>
+      <a class="ni"><span class="ch">›</span><svg class="i sm"><use href="#ic-people"/></svg> Human Resources</a>
+    </nav>
+    <div class="sec">Pages</div>
+    <nav class="nav">
+      <a class="ni"><span class="ch">›</span><svg class="i sm"><use href="#ic-doc"/></svg> Reports</a>
+      <a class="ni"><span class="ch">›</span><svg class="i sm"><use href="#ic-grid"/></svg> Data sources</a>
+    </nav>
+    <div class="side-user">
+      <span class="av">FK</span>
+      <div class="info"><div class="nm">Faraz Khan</div><div class="rl">Institutional Research</div></div>
+      <svg class="i sm mo"><use href="#ic-dots"/></svg>
+    </div>
+  </aside>
+
+  <!-- main -->
+  <div class="main">
+    <div class="topbar">
+      <div class="tb-l">
+        <div class="ic-btn"><svg class="i"><use href="#ic-panel"/></svg></div>
+        <div class="ic-btn"><svg class="i"><use href="#ic-star"/></svg></div>
+        <div class="crumb">Dashboards <span class="sl">/</span> <b>Overview</b></div>
+      </div>
+      <div class="tb-r">
+        <div class="search"><svg class="i sm"><use href="#ic-search"/></svg> Search</div>
+        <div class="refreshed"><svg class="i sm"><use href="#ic-refresh"/></svg> Data refreshed Jun 24, 2024 · 6:00 AM</div>
+        <div class="ic-btn"><svg class="i"><use href="#ic-clock"/></svg></div>
+        <div class="ic-btn"><svg class="i"><use href="#ic-bell"/></svg></div>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <div class="content">
+        <div class="h-row"><h1>Overview</h1><span class="seg">Fall 2024 ▾</span></div>
+
+        <!-- KPI cards -->
+        <div class="kpis">
+          <div class="kpi" style="background:var(--p-blue)">
+            <div class="lab">Total applications</div>
+            <div class="bot"><div class="val num">14,722</div><div class="chg">+3.1% <svg class="i"><use href="#ic-up"/></svg></div></div>
+          </div>
+          <div class="kpi" style="background:var(--p-gray)">
+            <div class="lab">Overall admit rate</div>
+            <div class="bot"><div class="val num">49.2%</div><div class="chg">+5.8 pts <svg class="i"><use href="#ic-up"/></svg></div></div>
+          </div>
+          <div class="kpi" style="background:var(--p-lav)">
+            <div class="lab">New students enrolled</div>
+            <div class="bot"><div class="val num">1,610</div><div class="chg">+2.4% <svg class="i"><use href="#ic-up"/></svg></div></div>
+          </div>
+          <div class="kpi" style="background:var(--p-mint)">
+            <div class="lab">Blended yield</div>
+            <div class="bot"><div class="val num">21.3%</div><div class="chg">+1.1 pts <svg class="i"><use href="#ic-up"/></svg></div></div>
+          </div>
+        </div>
+
+        <!-- line chart + school list -->
+        <div class="grid g-12">
+          <div class="card span-8">
+            <div class="card-h">
+              <div class="tabsb"><span class="on">Cycle pace</span><span>Admits</span><span>Deposits</span></div>
+              <div class="legend"><span><i style="background:var(--c-ink)"></i>This cycle</span><span><i style="background:var(--c-blue)"></i>Last cycle</span></div>
+            </div>
+            <svg class="lc" width="100%" height="190" viewBox="0 0 548 190">
+              <defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#004380" stop-opacity="0.13"/><stop offset="1" stop-color="#004380" stop-opacity="0"/></linearGradient></defs>
+              <path d="M14,150 L118,128 L222,138 L326,98 L430,66 L534,36 L534,184 L14,184 Z" fill="url(#g1)"/>
+              <polyline points="14,158 118,140 222,148 326,116 430,84 534,60" fill="none" stroke="var(--c-blue)" stroke-width="2.2" stroke-dasharray="2 6" stroke-linecap="round"/>
+              <polyline points="14,150 118,128 222,138 326,98 430,66 534,36" fill="none" stroke="var(--c-ink)" stroke-width="2.6" stroke-linejoin="round"/>
+              <g class="pts">
+                <g class="pt"><circle cx="14" cy="150" r="4.5"/><g class="tip" transform="translate(14,150)"><rect x="-30" y="-33" width="60" height="22" rx="5"/><text x="0" y="-18">1,840</text></g></g>
+                <g class="pt"><circle cx="118" cy="128" r="4.5"/><g class="tip" transform="translate(118,128)"><rect x="-30" y="-33" width="60" height="22" rx="5"/><text x="0" y="-18">4,210</text></g></g>
+                <g class="pt"><circle cx="222" cy="138" r="4.5"/><g class="tip" transform="translate(222,138)"><rect x="-30" y="-33" width="60" height="22" rx="5"/><text x="0" y="-18">6,980</text></g></g>
+                <g class="pt"><circle cx="326" cy="98" r="4.5"/><g class="tip" transform="translate(326,98)"><rect x="-33" y="-33" width="66" height="22" rx="5"/><text x="0" y="-18">10,640</text></g></g>
+                <g class="pt show"><circle cx="430" cy="66" r="4.5"/><g class="tip" transform="translate(430,66)"><rect x="-33" y="-33" width="66" height="22" rx="5"/><text x="0" y="-18">13,210</text></g></g>
+                <g class="pt"><circle cx="534" cy="36" r="4.5"/><g class="tip" transform="translate(534,36)"><rect x="-66" y="-33" width="66" height="22" rx="5"/><text x="-33" y="-18">14,722</text></g></g>
+              </g>
+            </svg>
+            <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--faint);margin-top:8px"><span>Aug</span><span>Oct</span><span>Dec</span><span>Feb</span><span>Apr</span><span>Jun</span></div>
+          </div>
+          <div class="card span-4">
+            <div class="card-t" style="margin-bottom:18px">Applications by school</div>
+            <div class="blist">
+              <div class="brow"><span class="nm">Engineering</span><span class="tr"><i style="width:92%;background:var(--c-ink)"></i></span><span class="vv num">5,940</span></div>
+              <div class="brow"><span class="nm">Business</span><span class="tr"><i style="width:58%;background:var(--c-peri)"></i></span><span class="vv num">3,760</span></div>
+              <div class="brow"><span class="nm">Sciences</span><span class="tr"><i style="width:41%;background:var(--c-blue)"></i></span><span class="vv num">2,610</span></div>
+              <div class="brow"><span class="nm">Systems</span><span class="tr"><i style="width:28%;background:var(--c-mint)"></i></span><span class="vv num">1,820</span></div>
+              <div class="brow"><span class="nm">Arts &amp; Letters</span><span class="tr"><i style="width:9%;background:var(--c-purple)"></i></span><span class="vv num">592</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- stage bars + region donut -->
+        <div class="grid g-12 mt">
+          <div class="card span-7">
+            <div class="card-t" style="margin-bottom:18px">Applications by stage</div>
+            <div class="bars">
+              <div class="bcol"><div class="bv">14,722</div><div class="bar" style="height:130px;background:var(--c-blue)"></div><div class="bl">Applied</div></div>
+              <div class="bcol"><div class="bv">7,245</div><div class="bar" style="height:78px;background:var(--c-peri)"></div><div class="bl">Admitted</div></div>
+              <div class="bcol"><div class="bv">1,742</div><div class="bar" style="height:40px;background:var(--c-ink)"></div><div class="bl">Deposited</div></div>
+              <div class="bcol"><div class="bv">1,610</div><div class="bar" style="height:34px;background:var(--c-mint)"></div><div class="bl">Enrolled</div></div>
+              <div class="bcol"><div class="bv">132</div><div class="bar" style="height:14px;background:var(--c-purple)"></div><div class="bl">Melt</div></div>
+            </div>
+          </div>
+          <div class="card span-5">
+            <div class="card-t" style="margin-bottom:18px">International by region</div>
+            <div class="donutwrap">
+              <div class="donut" style="background:conic-gradient(var(--c-ink) 0 46%, var(--c-blue) 46% 64%, var(--c-peri) 64% 80%, var(--c-mint) 80% 90%, var(--c-purple) 90% 100%)"></div>
+              <div class="dleg">
+                <div class="r"><i style="background:var(--c-ink)"></i>South Asia <b>46%</b></div>
+                <div class="r"><i style="background:var(--c-blue)"></i>East Asia <b>18%</b></div>
+                <div class="r"><i style="background:var(--c-peri)"></i>Africa <b>16%</b></div>
+                <div class="r"><i style="background:var(--c-mint)"></i>Middle East <b>10%</b></div>
+                <div class="r"><i style="background:var(--c-purple)"></i>Other <b>10%</b></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- by department -->
+        <div class="card mt">
+          <div class="card-t" style="margin-bottom:18px">By department</div>
+          <div class="grid" style="grid-template-columns:repeat(4,1fr);gap:18px">
+            <div class="card soft"><div class="lab" style="font-size:13px;color:var(--muted)">Undergraduate</div><div class="bot" style="margin-top:10px"><div class="val num" style="font-size:20px">10,670</div><div class="chg" style="color:var(--up)">51% admit</div></div></div>
+            <div class="card soft"><div class="lab" style="font-size:13px;color:var(--muted)">Graduate</div><div class="bot" style="margin-top:10px"><div class="val num" style="font-size:20px">4,052</div><div class="chg" style="color:var(--up)">60% admit</div></div></div>
+            <div class="card soft"><div class="lab" style="font-size:13px;color:var(--muted)">Research awards</div><div class="bot" style="margin-top:10px"><div class="val num" style="font-size:20px">$52M</div><div class="chg" style="color:var(--up)">+8.6%</div></div></div>
+            <div class="card soft"><div class="lab" style="font-size:13px;color:var(--muted)">Workforce</div><div class="bot" style="margin-top:10px"><div class="val num" style="font-size:20px">1,363</div><div class="chg">95% filled</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- right rail -->
+      <aside class="rail">
+        <div>
+          <h3>Signals</h3>
+          <div class="feed">
+            <div class="fe"><span class="ic" style="background:var(--p-mint);color:var(--up)"><svg class="i sm"><use href="#ic-check"/></svg></span><div><div class="tx"><b>23 deposits</b> received, Engineering UG</div><div class="ti">12 min ago</div></div></div>
+            <div class="fe"><span class="ic" style="background:var(--p-blue);color:#5B86C9"><svg class="i sm"><use href="#ic-globe"/></svg></span><div><div class="tx">India applications <b>+11%</b> this week</div><div class="ti">1 hr ago</div></div></div>
+            <div class="fe"><span class="ic" style="background:var(--p-peach);color:var(--down)"><svg class="i sm"><use href="#ic-down"/></svg></span><div><div class="tx">Mechanical Eng. yield dipped <b>3%</b></div><div class="ti">2 hrs ago</div></div></div>
+            <div class="fe"><span class="ic" style="background:var(--p-lav);color:#6C5CE0"><svg class="i sm"><use href="#ic-inbox"/></svg></span><div><div class="tx"><b>586</b> grad apps awaiting documents</div><div class="ti">3 hrs ago</div></div></div>
+          </div>
+        </div>
+        <div>
+          <h3>Needs attention</h3>
+          <div class="feed">
+            <div class="fe"><span class="ic" style="background:var(--p-peach);color:var(--down)"><svg class="i sm"><use href="#ic-alert"/></svg></span><div><div class="tx">UG deposits trailing forecast by 4%</div><div class="ti">NY / NJ metro</div></div></div>
+            <div class="fe"><span class="ic" style="background:var(--p-blue);color:#5B86C9"><svg class="i sm"><use href="#ic-cap"/></svg></span><div><div class="tx">Cybersecurity (MS) demand surging</div><div class="ti">+7% wk, 63% admit</div></div></div>
+          </div>
+        </div>
+        <div class="aibox">
+          <div class="h"><svg class="i sm"><use href="#ic-spark"/></svg> Ask Meridian AI</div>
+          <div class="q">“Which source markets are most at risk of melt this cycle?”</div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+</body></html>

@@ -93,7 +93,8 @@
       "/case/recruitos",
       "/case/knowledgeos",
       "/case/decisionos",
-      "/case/somethings-cooking"
+      "/case/somethings-cooking",
+      "/case/meridian"
     ],
     "crawl": false,
     "inlineCss": false,

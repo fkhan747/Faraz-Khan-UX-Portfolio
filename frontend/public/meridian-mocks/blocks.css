@@ -1,0 +1,83 @@
+/* ============================================================
+   Meridian case study — before/after BLOCK styles (shared).
+   Dark case-study theme + light "after" Meridian widgets.
+   Each block HTML links this and supplies only its content.
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
+
+:root{
+  --bg:#100210; --ink:#F4F3FA; --muted:#A29CB4; --pink:#F5379B; --pink-2:#C71E73;
+  /* Meridian (after widgets) */
+  --maroon:#A32638; --navy:#004380; --blue:#4896CF; --orange:#E7842E; --gold:#E8B431;
+  --green:#21BA45; --red:#DB2828; --dgray:#363D45; --cink:#1B1C1D; --cmut:#7F7F7F;
+  --line:#E4E5E6; --t-blue:#E7F2FB; --t-gold:#FFFAE6; --t-orange:#FFF2E8; --t-gray:#F2F2F2;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;padding:42px 50px;line-height:1.6}
+.block{max-width:1000px;margin:0 auto}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--pink);margin-bottom:15px}
+h2{font-family:'Playfair Display',serif;font-size:32px;font-weight:800;line-height:1.14;letter-spacing:-.3px;max-width:780px;margin-bottom:15px}
+.lead{font-size:16.5px;color:var(--ink);max-width:760px;opacity:.92}
+.lead b{color:#fff;font-weight:600}
+
+/* before/after row */
+.ba{display:grid;grid-template-columns:1fr 54px 1fr;align-items:stretch;margin:28px 0 14px}
+.ba.solo{grid-template-columns:1fr}
+.ba-card{position:relative;display:flex;flex-direction:column;justify-content:center;background:#fff;border-radius:16px;padding:20px;box-shadow:0 20px 50px -24px rgba(0,0,0,.7);border:1px solid rgba(255,255,255,.06)}
+.ba-card img{width:100%;max-height:320px;object-fit:contain;display:block;border-radius:8px}
+.tag{position:absolute;top:-11px;left:18px;font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:999px;color:#fff}
+.tag.b{background:#8C8C8C}.tag.a{background:var(--navy)}
+.arrow{display:grid;place-items:center;color:var(--pink)}
+.arrow svg{width:28px;height:28px}
+.cap{font-size:14px;color:var(--muted);font-style:italic;margin-top:6px}
+.cap b{color:var(--pink);font-style:normal;font-weight:600}
+
+/* ---- light "after" widgets (Meridian / IBM Plex) ---- */
+.w{font-family:'IBM Plex Sans',sans-serif;color:var(--cink);width:100%}
+.w-t{font-size:14px;font-weight:600;margin-bottom:16px}
+.w-foot{font-size:11px;color:var(--cmut);margin-top:16px;border-top:1px solid var(--line);padding-top:10px}
+.num{font-variant-numeric:tabular-nums}
+
+/* horizontal bars */
+.hbars{display:flex;flex-direction:column;gap:14px}
+.hb{display:grid;grid-template-columns:92px 1fr 92px;align-items:center;gap:12px}
+.hb .l{font-size:13px;color:var(--cmut);font-weight:500;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hb .t{height:16px;background:#F2F2F2;border-radius:2px;overflow:hidden}
+.hb .t i{display:block;height:100%;border-radius:2px}
+.hb .v{font-size:13px;font-weight:600;color:var(--cink);text-align:right;font-variant-numeric:tabular-nums}
+
+/* funnel */
+.funnel{display:flex;flex-direction:column;gap:9px}
+.fst{display:grid;grid-template-columns:96px 1fr 92px;align-items:center;gap:12px}
+.fst .l{font-size:12.5px;color:var(--cmut);font-weight:500;text-align:right}
+.fst .bar{height:30px;border-radius:2px;display:flex;align-items:center;padding-left:11px;color:#fff;font-weight:600;font-size:12.5px}
+.fst .m{font-size:11px;color:var(--cmut);text-align:right;font-variant-numeric:tabular-nums}
+
+/* vertical bars */
+.vbars{display:flex;align-items:flex-end;gap:16px;height:170px;padding:0 4px}
+.vcol{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:8px}
+.vcol .bv{font-size:12px;font-weight:600;color:var(--cink);font-variant-numeric:tabular-nums}
+.vcol .bar{width:100%;max-width:46px;border-radius:2px}
+.vcol .bl{font-size:11.5px;color:var(--cmut)}
+
+/* KPI card */
+.kpi{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 17px;width:240px}
+.kpi.tint{border:none}
+.kpi .ic{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;margin-bottom:12px}
+.kpi .kv{font-size:27px;font-weight:700;letter-spacing:-.5px;line-height:1}
+.kpi .kl{font-size:12.5px;color:var(--cmut);font-weight:500;margin-top:5px}
+.kpi .kf{display:flex;align-items:center;gap:8px;margin-top:11px}
+.kpi .delta{font-size:11px;font-weight:600;padding:2px 7px;border-radius:5px;display:inline-flex;align-items:center;gap:3px}
+.kpi .delta.up{color:var(--green);background:#E7F7EC}
+.kpi .ks{font-size:11px;color:var(--cmut)}
+
+/* donut */
+.donutw{display:flex;align-items:center;gap:22px}
+.donut{width:118px;height:118px;border-radius:50%;position:relative;flex-shrink:0}
+.donut::after{content:"";position:absolute;inset:30%;background:#fff;border-radius:50%}
+.dleg{display:flex;flex-direction:column;gap:10px;flex:1}
+.dleg .r{display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--cmut)}
+.dleg .r i{width:9px;height:9px;border-radius:2px}
+.dleg .r b{margin-left:auto;color:var(--cink);font-weight:600;font-variant-numeric:tabular-nums}
+
+svg.ic{width:17px;height:17px;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
