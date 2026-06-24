@@ -8,7 +8,7 @@
      NOTE: --brand (not --primary) holds the brand accent, to avoid colliding with
      the shadcn HSL --primary token defined further down. */
   --bg-main: #100210;           /* near-black (purple-tinted) - page background */
-  --bg-card: #261E3A;           /* elevated dark (grained via .dark-card) - card / panel surface */
+  --bg-card: #181126;           /* elevated dark (grained via .dark-card) - card / panel surface */
   --bg-card-border: #2C2542;    /* subtle dark border / divider */
   --brand: #075EFD;             /* electric blue - primary accent */
   --brand-hover: #2E78FF;
@@ -135,7 +135,7 @@ html, body {
 .dark-card {
   position: relative;
   isolation: isolate;
-  background-color: #261E3A;
+  background-color: #181126;
 }
 /* fine grain, sits behind content, softer than before so it does not read as sandpaper */
 .dark-card::before {
