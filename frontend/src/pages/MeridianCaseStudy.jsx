@@ -1,3 +1,4 @@
+import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Mail } from "lucide-react";
 import { meridian as m } from "../data/meridianCase";
@@ -64,20 +65,33 @@ function artifactFor(headline = "") {
   if (h.includes("design system")) return <MeridianDesignSystem />;
   if (h.includes("undergraduate and graduate admissions")) return (<><IframeBlock src={B + "funnel.html"} h={660} /><IframeBlock src={B + "school.html"} h={640} /></>);
   if (h.includes("research and hr")) return (<><IframeBlock src={B + "research.html"} h={650} /><IframeBlock src={B + "hr.html"} h={650} /></>);
+  if (h.includes("funnel, yield")) return <ResponsiveScreen src="/meridian-mocks/t2-funnel.html" h={1227} label="Funnel, yield and melt, the redesigned screen" maxW={1040} rounded="rounded-3xl" />;
   if (h.includes("geo intelligence")) return <IframeBlock src={B + "geo.html"} h={845} />;
   return null;
 }
 
-/* scaled thumbnail of a full dashboard screen, framed in a dark card (1472 = 1440 + 16px padding) */
-const TW = 1472, THUMB_W = 496, THUMB_SCALE = THUMB_W / TW;
-function ScreenThumb({ src, label, h }) {
+/* full dashboard screen (1472 = 1440 + 16px padding) scaled responsively to its container,
+   so it fits on phones instead of clipping. */
+const TW = 1472;
+function ResponsiveScreen({ src, h, label, maxW = "100%", rounded = "rounded-2xl" }) {
+  const ref = useRef(null);
+  const [scale, setScale] = useState(0.34);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const update = () => setScale(el.clientWidth / TW);
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
   return (
-    <figure className="dark-card rounded-2xl overflow-hidden">
-      <div style={{ width: THUMB_W, maxWidth: "100%", height: Math.round(h * THUMB_SCALE), overflow: "hidden" }}>
-        <iframe src={src} title={label} loading="lazy" scrolling="no"
-          style={{ width: TW, height: h, border: 0, transform: `scale(${THUMB_SCALE})`, transformOrigin: "top left", display: "block" }} />
+    <figure className={`dark-card ${rounded} overflow-hidden`} style={{ width: "100%", maxWidth: maxW }}>
+      <div ref={ref} style={{ width: "100%", height: Math.round(h * scale), overflow: "hidden" }}>
+        <iframe src={src} title={label || "screen"} loading="lazy" scrolling="no"
+          style={{ width: TW, height: h, border: 0, transform: `scale(${scale})`, transformOrigin: "top left", display: "block" }} />
       </div>
-      <figcaption className="px-4 py-3 font-mono text-[11px] uppercase tracking-[0.2em] text-[#A29CB4]">{label}</figcaption>
+      {label && <figcaption className="px-4 py-3 font-mono text-[11px] uppercase tracking-[0.2em] text-[#A29CB4]">{label}</figcaption>}
     </figure>
   );
 }
@@ -229,15 +243,9 @@ export default function MeridianCaseStudy() {
           <SectionLabel num="✦" name="The full walkthrough" />
           <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-5xl mb-6 case-keep">Eight screens, one system</h2>
           <p className="text-base md:text-lg leading-relaxed text-[#F4F3FA] max-w-4xl mb-10">You have seen the parts. Here is the whole product: the institutional cockpit, then the seven module screens it leads into, all on one design system.</p>
-          <figure className="dark-card rounded-3xl overflow-hidden" style={{ width: 1152, maxWidth: "100%" }}>
-            <div style={{ width: 1152, maxWidth: "100%", height: Math.round(1128 * 1152 / TW), overflow: "hidden" }}>
-              <iframe src="/meridian-mocks/t2-overview.html" title="Meridian institutional overview" loading="lazy" scrolling="no"
-                style={{ width: TW, height: 1128, border: 0, transform: `scale(${1152 / TW})`, transformOrigin: "top left", display: "block" }} />
-            </div>
-            <figcaption className="px-5 py-3 font-mono text-[11px] uppercase tracking-[0.2em] text-[#A29CB4]">Institutional Overview, the cockpit</figcaption>
-          </figure>
+          <ResponsiveScreen src="/meridian-mocks/t2-overview.html" h={1128} label="Institutional Overview, the cockpit" maxW={1152} rounded="rounded-3xl" />
           <div className="grid sm:grid-cols-2 gap-x-10 gap-y-10 mt-12 items-start">
-            {SCREENS.map((s) => <ScreenThumb key={s.src} {...s} />)}
+            {SCREENS.map((s) => <ResponsiveScreen key={s.src} {...s} />)}
           </div>
         </Container>
       </section>
