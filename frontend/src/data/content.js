@@ -69,23 +69,6 @@ export const projects = [
     detail: true,
   },
   {
-    slug: "next-gen-institute",
-    title: "Next-Gen Institute",
-    subtitle: "An Edtech Platform for India's Tier-2 Students",
-    client: "Next-Gen Institute",
-    role: "Lead Product Designer",
-    services: "Product Design, UX Research",
-    year: "2023",
-    cover:
-      "https://images.unsplash.com/photo-1601972602237-8c79241e468b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDJ8MHwxfHNlYXJjaHw0fHxtb2JpbGUlMjBhcHAlMjBtb2NrdXB8ZW58MHx8fHwxNzgxMDEwMzczfDA&ixlib=rb-4.1.0&q=85",
-    coverImg: "https://images.unsplash.com/photo-1639322537228-f710d846310a?w=1200&q=80&auto=format&fit=crop",
-    color: "#C9DDEB",
-    tag: "coming soon",
-    summary: "Case study coming soon. Stay tuned.",
-    detail: false,
-    comingSoon: true,
-  },
-  {
     slug: "somethings-cooking",
     title: "Jack of All Threads",
     subtitle: "India's First Crowdfunding Platform for Custom Apparel",

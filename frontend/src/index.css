@@ -133,11 +133,21 @@ html, body {
 /* Dark card surface - lighter than the near-black page + a faint grain so cards
    read clearly. The grain is a background layer, so it sits behind card content. */
 .dark-card {
+  position: relative;
+  isolation: isolate;
   background-color: #261E3A;
-  background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='dc'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23dc)' opacity='0.45'/%3E%3C/svg%3E");
-  background-size: 160px 160px;
-  background-blend-mode: overlay;
+}
+/* sand grain, real fractal noise like the photo grain, sits behind card content */
+.dark-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: inherit;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='dcg'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23dcg)'/%3E%3C/svg%3E");
+  background-size: 150px 150px;
+  opacity: 0.17;
 }
 
 /* Dark, cool, blue-tinted duotone for portraits - dark enough that the white
