@@ -13,6 +13,11 @@ export const meridian = {
   hero: {
     eyebrow: "UX Case Study · Higher-Ed Analytics · Power BI",
     meta: "Role: Lead UX designer (UX + data viz)  ·  Domain: Higher-ed institutional analytics  ·  Platform: Web, aligned to Power BI",
+    facts: [
+      { label: "Role", value: "Lead UX designer (UX + data viz)" },
+      { label: "Domain", value: "Higher-ed institutional analytics" },
+      { label: "Platform", value: "Web, aligned to Power BI" },
+    ],
     stats: [
       { value: "4", label: "Departments unified" },
       { value: "~40", label: "Legacy views replaced" },
@@ -190,27 +195,7 @@ So level is structure, not an optional filter. The honest version of the story s
 
 Four legacy dashboards looked like four products built by four people. Same maroon, four layouts. The redesign is one component set, one rule set, everywhere. Learn to read one page and you can read them all.
 
-Calm, modern SaaS. The chrome stays quiet so the numbers get the contrast.
-
-### Foundations
-
-Light neutral canvas, soft cards, generous white space doing the separating. A geometric sans, plus mono for eyebrow labels and tabular KPI figures so numbers read like a ledger. One confident blue for emphasis, a fixed categorical palette, and status that means something: green healthy, amber watch, red risk. Maroon is now a quiet brand note, not a flood.
-
-### The chart kit
-
-Legacy decks leaned on pies nobody could read. I narrowed it to a small kit, one type per question, all aligned to what Power BI can render: KPI tiles, an admissions funnel, one careful donut, bars as the workhorse, lines for the multi-year story, one map for geography.
-
-Every chart shares the same title, legend, formatting, and empty state. A chart with no data says so instead of breaking. A dean can drill from overview into a program without relearning the page.
-
-### The AI layer
-
-The brief asked for AI; the research made me cautious. The Markup reported in 2021 that EAB's Navigate used race as a predictor of student success. So my rule was simple: AI assists, it does not decide. It never sits between a user and the numbers.
-
-It shows up in three restrained places: Ask Meridian AI returns a real chart plus a short read, grounded in the data contract; optional next-best-action cards that prompt you to look; and a quiet, dismissible signals feed.
-
-The guardrails are the design, not a disclaimer. Human-in-the-loop by default. Every feature shows what it looked at and links to the source. Any scoring is a guide to audit, never a verdict, and sensitive demographics are never predictors, the exact failure The Markup documented.
-
-The test I held it to: delete the AI entirely and the dashboards are still complete and trustworthy. AI earns its place by saving time, not by becoming the thing you have to trust.
+Calm, modern SaaS. The chrome stays quiet so the numbers get the contrast. Foundations, the chart kit, and the AI layer below.
 
 ## Module deep-dive: undergraduate and graduate admissions
 

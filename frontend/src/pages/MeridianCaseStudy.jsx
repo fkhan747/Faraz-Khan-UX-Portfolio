@@ -34,15 +34,15 @@ function IframeBlock({ src, h }) {
 }
 
 /* real legacy montage, a "before" screenshot framed in a dark card (FinVista pattern) */
-function LegacyMontage() {
+function LegacyMontage({ caption = "The four legacy dashboards, four offices, four visual languages, no shared layout" }) {
   const src = "/meridian/legacy/four-dashboards.png";
-  const cap = "The four legacy dashboards, four offices, four visual languages, no shared layout";
   return (
-    <figure className="dark-card rounded-3xl overflow-hidden max-w-4xl">
-      <Zoomable src={src} alt="The four legacy dashboards" caption={cap} className="bg-white p-3 block">
+    <figure className="dark-card rounded-3xl overflow-hidden max-w-4xl relative">
+      <span className="absolute z-10 m-4 font-mono text-[10px] font-semibold uppercase tracking-[0.1em] px-3 py-1 rounded-full text-white" style={{ background: "#8C8C8C" }}>Before</span>
+      <Zoomable src={src} alt="The four legacy dashboards" caption={caption} className="bg-white p-3 block">
         <img src={src} alt="The four legacy dashboards" loading="lazy" className="w-full h-auto block rounded-lg" />
       </Zoomable>
-      <figcaption className="px-5 py-3 font-mono text-[11px] uppercase tracking-[0.2em] text-[#A29CB4]">{cap}</figcaption>
+      <figcaption className="px-5 py-3 font-mono text-[11px] uppercase tracking-[0.2em] text-[#A29CB4]">{caption}</figcaption>
     </figure>
   );
 }
@@ -54,11 +54,17 @@ function artifactFor(headline = "") {
   if (h.includes("before and after")) return <MeridianFiveProblems />;
   if (h.includes("problem")) return <LegacyMontage />;
   if (h.includes("goals, success")) return <MeridianWireframes />;
-  if (h.includes("information architecture")) return (<><MeridianIA /><div className="mt-12"><MeridianFlow /></div></>);
+  if (h.includes("information architecture")) return (
+    <>
+      <LegacyMontage caption="The old model: four separate reports with no links between them" />
+      <div className="mt-12"><MeridianIA /></div>
+      <div className="mt-12"><MeridianFlow /></div>
+    </>
+  );
   if (h.includes("design system")) return <MeridianDesignSystem />;
   if (h.includes("undergraduate and graduate admissions")) return (<><IframeBlock src={B + "funnel.html"} h={660} /><IframeBlock src={B + "school.html"} h={640} /></>);
   if (h.includes("research and hr")) return (<><IframeBlock src={B + "research.html"} h={650} /><IframeBlock src={B + "hr.html"} h={650} /></>);
-  if (h.includes("geo intelligence")) return <IframeBlock src={B + "geo.html"} h={660} />;
+  if (h.includes("geo intelligence")) return <IframeBlock src={B + "geo.html"} h={845} />;
   return null;
 }
 
@@ -78,10 +84,10 @@ function ScreenThumb({ src, label, h }) {
 
 const SCREENS = [
   { src: "/meridian-mocks/t2-ug-overview.html", label: "Undergraduate Overview", h: 910 },
-  { src: "/meridian-mocks/t2-ug-geo.html", label: "Undergraduate Geo", h: 950 },
+  { src: "/meridian-mocks/t2-ug-geo.html", label: "Undergraduate Geo", h: 1029 },
   { src: "/meridian-mocks/t2-funnel.html", label: "Funnel, yield & melt", h: 1227 },
   { src: "/meridian-mocks/t2-grad-overview.html", label: "Graduate Overview", h: 923 },
-  { src: "/meridian-mocks/t2-grad-geo.html", label: "Graduate Geo", h: 949 },
+  { src: "/meridian-mocks/t2-grad-geo.html", label: "Graduate Geo", h: 1050 },
   { src: "/meridian-mocks/t2-research.html", label: "Research Intelligence", h: 1038 },
   { src: "/meridian-mocks/t2-hr.html", label: "HR Workforce", h: 1133 },
 ];
@@ -162,9 +168,18 @@ export default function MeridianCaseStudy() {
           <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-5" style={{ color: ACCENT }}>{m.hero.eyebrow}</p>
           <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[0.95] text-[#F7F5FF] max-w-5xl case-keep">{m.title}</h1>
           <p className="mt-7 max-w-3xl text-lg md:text-2xl text-[#F4F3FA] leading-snug font-light italic case-keep">{m.subtitle}</p>
-          {m.hero.meta && <p className="mt-5 max-w-3xl text-xs font-mono uppercase tracking-[0.18em] text-white/55 case-keep">{m.hero.meta}</p>}
+          {m.hero.facts && (
+            <div className="mt-9 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl">
+              {m.hero.facts.map((f) => (
+                <div key={f.label} className="rounded-2xl p-5 bg-[#100210]/55 backdrop-blur-md border border-white/12">
+                  <p className="text-[10px] font-mono uppercase tracking-widest text-[#F5379B] mb-2 case-keep">{f.label}</p>
+                  <p className="font-display text-base md:text-lg font-bold text-[#F4F3FA] leading-snug case-keep">{f.value}</p>
+                </div>
+              ))}
+            </div>
+          )}
           {m.hero.stats && (
-            <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl">
+            <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl">
               {m.hero.stats.map((s) => (
                 <div key={s.label} className="rounded-2xl p-5 md:p-6 bg-[#100210]/55 backdrop-blur-md border border-white/12">
                   <div className="num text-3xl md:text-4xl font-black text-[#075EFD] leading-none">{s.value}</div>
