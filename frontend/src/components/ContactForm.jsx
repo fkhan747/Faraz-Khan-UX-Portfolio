@@ -129,7 +129,7 @@ export default function ContactForm() {
       <div className="grid sm:grid-cols-2 gap-5">
         {/* Name */}
         <div>
-          <label htmlFor="cf-name" className="block text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-1.5">
+          <label htmlFor="cf-name" className="block text-sm font-mono uppercase tracking-widest text-white mb-1.5">
             Your name <span className="text-[#F5379B]">*</span>
           </label>
           <input
@@ -151,7 +151,7 @@ export default function ContactForm() {
 
         {/* Email */}
         <div>
-          <label htmlFor="cf-email" className="block text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-1.5">
+          <label htmlFor="cf-email" className="block text-sm font-mono uppercase tracking-widest text-white mb-1.5">
             Email <span className="text-[#F5379B]">*</span>
           </label>
           <input
@@ -174,7 +174,7 @@ export default function ContactForm() {
 
         {/* Inquiry type */}
         <div>
-          <label htmlFor="cf-inquiry" className="block text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-1.5">
+          <label htmlFor="cf-inquiry" className="block text-sm font-mono uppercase tracking-widest text-white mb-1.5">
             What’s this about? <span className="text-[#F5379B]">*</span>
           </label>
           <div className="relative">
@@ -205,7 +205,7 @@ export default function ContactForm() {
 
         {/* Company (required) */}
         <div>
-          <label htmlFor="cf-company" className="block text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-1.5">
+          <label htmlFor="cf-company" className="block text-sm font-mono uppercase tracking-widest text-white mb-1.5">
             Company or team <span className="text-[#F5379B]">*</span>
           </label>
           <input
@@ -228,7 +228,7 @@ export default function ContactForm() {
 
       {/* Message - full width below the 2-column grid */}
       <div className="mt-5">
-        <label htmlFor="cf-message" className="block text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-1.5">
+        <label htmlFor="cf-message" className="block text-sm font-mono uppercase tracking-widest text-white mb-1.5">
           Message <span className="text-[#6F6885]">(optional)</span>
         </label>
         <textarea

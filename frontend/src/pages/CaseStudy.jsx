@@ -14,7 +14,7 @@ export default function ComingSoonCase() {
           <Link
             to="/projects"
             data-testid="back-link"
-            className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#A29CB4] hover:text-[#F5379B] transition-colors"
+            className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-white hover:text-[#F5379B] transition-colors"
           >
             <ArrowLeft size={14} /> all projects
           </Link>

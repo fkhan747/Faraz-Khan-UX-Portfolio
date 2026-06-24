@@ -36,7 +36,7 @@ export default function Services() {
         {services.map((s, i) => (
           <div key={s.title} className="col-span-12 md:col-span-6 dark-card rounded-3xl p-8 hover:bg-[#D81F7E] transition-colors group" data-testid={`services-item-${i}`}>
             <div className="flex items-center justify-between mb-6">
-              <span className="font-mono text-xs uppercase tracking-widest text-[#A29CB4]">0{i + 1}</span>
+              <span className="font-mono text-xs uppercase tracking-widest text-white">0{i + 1}</span>
               <span className="w-2 h-2 rounded-full bg-[#075EFD] group-hover:scale-150 transition-transform" />
             </div>
             <h3 className="font-display text-3xl font-black mb-3">{s.title}</h3>
@@ -71,7 +71,7 @@ export default function Services() {
           {PACKAGES.map((p, i) => (
             <div key={p.name} className={`col-span-12 md:col-span-4 rounded-3xl p-8 ${i === 1 ? "bg-[#075EFD] text-white" : "dark-card"}`} data-testid={`package-${p.name}`}>
               <div className="flex items-center justify-between mb-6">
-                <span className={`text-xs font-mono uppercase tracking-widest ${i === 1 ? "text-white" : "text-[#A29CB4]"}`}>{p.duration}</span>
+                <span className={`text-xs font-mono uppercase tracking-widest ${i === 1 ? "text-white" : "text-white"}`}>{p.duration}</span>
                 {i === 1 && <span className="text-[10px] font-mono uppercase tracking-widest bg-[#F5379B] text-black px-3 py-1 rounded-full">most chosen</span>}
               </div>
               <h3 className="font-display text-3xl font-black mb-3">{p.name}</h3>

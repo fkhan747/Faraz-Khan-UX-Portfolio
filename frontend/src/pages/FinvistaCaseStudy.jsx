@@ -29,7 +29,7 @@ const SectionWrap = ({ children, className = "", ...rest }) => (
 
 const FactCell = ({ label, value }) => (
   <div className="dark-card rounded-2xl p-5">
-    <p className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-2">{label}</p>
+    <p className="text-sm font-mono uppercase tracking-widest text-white mb-2">{label}</p>
     <p className="font-display text-base md:text-lg font-bold">{value}</p>
   </div>
 );
@@ -128,7 +128,7 @@ export default function FinvistaCaseStudy() {
             <div key={p.step} className="dark-card rounded-2xl p-6">
               <div className="num text-5xl font-black text-[#075EFD]">{p.step}</div>
               <div className="mt-3 font-display text-xl font-bold ">{p.title}</div>
-              <div className="mt-1 text-xs font-mono uppercase tracking-widest text-[#A29CB4]">{p.duration}</div>
+              <div className="mt-1 text-xs font-mono uppercase tracking-widest text-white">{p.duration}</div>
             </div>
           ))}
         </div>
@@ -294,7 +294,7 @@ export default function FinvistaCaseStudy() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {fv.research.approach.map((a, i) => (
             <div key={a.title} className="dark-card rounded-3xl p-6 hover:bg-[#D81F7E] transition-colors">
-              <span className="font-mono text-[10px] uppercase tracking-widest text-[#A29CB4]">0{i + 1}</span>
+              <span className="font-mono text-sm uppercase tracking-widest text-white">0{i + 1}</span>
               <h3 className="mt-3 font-display text-lg font-black ">{a.title}</h3>
               <p className="mt-2 text-sm leading-relaxed">{a.desc}</p>
             </div>
@@ -320,7 +320,7 @@ export default function FinvistaCaseStudy() {
                 </div>
                 <div>
                   <h3 className="font-display text-xl font-black">{p.name}</h3>
-                  <p className="text-xs font-mono uppercase tracking-widest text-[#A29CB4]">{p.role}</p>
+                  <p className="text-xs font-mono uppercase tracking-widest text-white">{p.role}</p>
                 </div>
               </div>
               <p className="italic text-base leading-relaxed mb-6 text-[#F4F3FA] border-l-2 border-[#075EFD] pl-4">
@@ -356,7 +356,7 @@ export default function FinvistaCaseStudy() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {fv.insights.principles.map((p, i) => (
             <div key={p.t} className="dark-card rounded-3xl p-6">
-              <div className="font-mono text-[10px] uppercase tracking-widest text-[#A29CB4]">0{i + 1}</div>
+              <div className="font-mono text-sm uppercase tracking-widest text-white">0{i + 1}</div>
               <h3 className="mt-2 font-display text-lg font-black ">{p.t}</h3>
               <p className="mt-2 text-sm leading-relaxed">{p.d}</p>
             </div>
@@ -376,7 +376,7 @@ export default function FinvistaCaseStudy() {
         <Zoomable src={fv.flow.diagramSvg} alt={fv.flow.diagramCaption} caption={fv.flow.diagramCaption} className="mt-10 rounded-3xl dark-card p-6 md:p-10 overflow-x-auto">
           <img src={fv.flow.diagramSvg} alt={fv.flow.diagramCaption} loading="lazy" className="w-full h-auto" />
         </Zoomable>
-        <p className="mt-3 text-xs font-mono uppercase tracking-widest text-[#A29CB4] text-center">
+        <p className="mt-3 text-xs font-mono uppercase tracking-widest text-white text-center">
           {fv.flow.diagramCaption}
         </p>
 
@@ -413,7 +413,7 @@ export default function FinvistaCaseStudy() {
               <Zoomable src={b.src} alt={b.caption} caption={b.caption} className="block">
                 <img src={b.src} alt={b.caption} loading="lazy" className="w-full h-auto" />
               </Zoomable>
-              <figcaption className="mt-4 text-xs font-mono uppercase tracking-widest text-[#A29CB4] text-center">
+              <figcaption className="mt-4 text-xs font-mono uppercase tracking-widest text-white text-center">
                 {b.caption}
               </figcaption>
             </figure>
@@ -429,7 +429,7 @@ export default function FinvistaCaseStudy() {
               <Zoomable src={img.src} alt={img.caption} caption={img.caption} className="block">
                 <img src={img.src} alt={img.caption} loading="lazy" className="w-full h-auto" />
               </Zoomable>
-              <figcaption className="mt-4 text-xs font-mono uppercase tracking-widest text-[#A29CB4] text-center">
+              <figcaption className="mt-4 text-xs font-mono uppercase tracking-widest text-white text-center">
                 {img.caption}
               </figcaption>
             </figure>
@@ -521,7 +521,7 @@ export default function FinvistaCaseStudy() {
             <div key={m.l} className="rounded-3xl dark-card p-6 md:p-7">
               <div className="font-display text-4xl md:text-5xl font-black text-[#075EFD] leading-none">{m.v}</div>
               <div className="mt-3 font-display text-base font-bold ">{m.l}</div>
-              <div className="mt-1 text-xs font-mono uppercase tracking-widest text-[#A29CB4]">{m.s}</div>
+              <div className="mt-1 text-xs font-mono uppercase tracking-widest text-white">{m.s}</div>
             </div>
           ))}
         </div>

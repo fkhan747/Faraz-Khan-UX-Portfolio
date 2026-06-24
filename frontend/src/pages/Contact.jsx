@@ -60,7 +60,7 @@ export default function Contact() {
           <div className="flex items-center gap-3 rounded-2xl dark-card p-4 flex-auto" data-testid="contact-email">
             <span className="h-10 w-10 rounded-xl bg-[#075EFD] grid place-items-center flex-shrink-0 text-white"><Mail size={17} /></span>
             <a href={`mailto:${PROFILE.email}`} className="min-w-0 flex-1 group">
-              <p className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-0.5">email</p>
+              <p className="text-sm font-mono uppercase tracking-widest text-white mb-0.5">email</p>
               <p className="text-sm font-bold whitespace-nowrap group-hover:text-[#5B9BFF] transition-colors">{PROFILE.email}</p>
             </a>
             <CopyButton value={PROFILE.email} label="email" size={15} className="h-9 w-9 border border-white/15 text-[#F4F3FA] hover:bg-white/10 flex-shrink-0" />
@@ -69,7 +69,7 @@ export default function Contact() {
           <div className="flex items-center gap-3 rounded-2xl dark-card p-4 flex-auto" data-testid="contact-phone">
             <span className="h-10 w-10 rounded-xl bg-[#075EFD] grid place-items-center flex-shrink-0 text-white"><Phone size={17} /></span>
             <a href={telHref} className="min-w-0 flex-1 group">
-              <p className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-0.5">phone</p>
+              <p className="text-sm font-mono uppercase tracking-widest text-white mb-0.5">phone</p>
               <p className="text-sm font-bold whitespace-nowrap group-hover:text-[#5B9BFF] transition-colors">{PROFILE.phone}</p>
             </a>
             <CopyButton value={PROFILE.phone} label="phone" size={15} className="h-9 w-9 border border-white/15 text-[#F4F3FA] hover:bg-white/10 flex-shrink-0" />
@@ -78,7 +78,7 @@ export default function Contact() {
           <div className="flex items-center gap-3 rounded-2xl dark-card p-4 flex-auto" data-testid="contact-location">
             <span className="h-10 w-10 rounded-xl bg-[#075EFD] grid place-items-center flex-shrink-0 text-white"><MapPin size={17} /></span>
             <div className="min-w-0 flex-1">
-              <p className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-0.5">location</p>
+              <p className="text-sm font-mono uppercase tracking-widest text-white mb-0.5">location</p>
               <p className="text-sm font-bold whitespace-nowrap">{PROFILE.city}</p>
             </div>
           </div>
@@ -92,7 +92,7 @@ export default function Contact() {
           >
             <span className="h-10 w-10 rounded-xl bg-[#075EFD] grid place-items-center flex-shrink-0 text-white"><Linkedin size={17} /></span>
             <span className="min-w-0 flex-1">
-              <span className="block text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-0.5 group-hover:text-white/70 transition-colors">elsewhere</span>
+              <span className="block text-sm font-mono uppercase tracking-widest text-white mb-0.5 group-hover:text-white/70 transition-colors">elsewhere</span>
               <span className="block text-sm font-bold">LinkedIn</span>
             </span>
             <ArrowUpRight size={18} className="opacity-60 group-hover:opacity-100 group-hover:rotate-45 transition-all flex-shrink-0" />

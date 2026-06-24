@@ -44,7 +44,7 @@ function LegacyMontage({ caption = "The four legacy dashboards, four offices, fo
       <Zoomable src={src} alt="The four legacy dashboards" caption={caption} className="bg-white p-3 block">
         <img src={src} alt="The four legacy dashboards" loading="lazy" className="w-full h-auto block rounded-lg" />
       </Zoomable>
-      <figcaption className="px-5 py-3 font-mono text-[11px] uppercase tracking-[0.2em] text-[#A29CB4]">{caption}</figcaption>
+      <figcaption className="px-5 py-3 font-mono text-sm uppercase tracking-[0.2em] text-white">{caption}</figcaption>
     </figure>
   );
 }
@@ -130,7 +130,7 @@ function ResponsiveScreen({ src, h, label, maxW = "100%", rounded = "rounded-2xl
         <iframe src={src} title={label || "screen"} loading="lazy" scrolling="no"
           style={{ width: TW, height: h, border: 0, transform: `scale(${scale})`, transformOrigin: "top left", display: "block" }} />
       </div>
-      {label && <figcaption className="px-4 py-3 font-mono text-[11px] uppercase tracking-[0.2em] text-[#A29CB4]">{label}</figcaption>}
+      {label && <figcaption className="px-4 py-3 font-mono text-sm uppercase tracking-[0.2em] text-white">{label}</figcaption>}
     </figure>
   );
 }

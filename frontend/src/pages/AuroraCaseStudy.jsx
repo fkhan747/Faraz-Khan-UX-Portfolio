@@ -94,7 +94,7 @@ export default function AuroraCaseStudy() {
         <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
           {au.overview.facts.map((f) => (
             <div key={f.label} className="dark-card rounded-2xl p-5">
-              <p className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-2">{f.label}</p>
+              <p className="text-sm font-mono uppercase tracking-widest text-white mb-2">{f.label}</p>
               <p className="font-display text-base md:text-lg font-bold">{f.value}</p>
             </div>
           ))}
@@ -106,7 +106,7 @@ export default function AuroraCaseStudy() {
             <div key={p.step} className="dark-card rounded-2xl p-6">
               <div className="num text-4xl md:text-5xl font-black text-[#075EFD]">{p.step}</div>
               <div className="mt-3 font-display text-lg font-bold ">{p.title}</div>
-              <div className="mt-1 text-xs font-mono uppercase tracking-widest text-[#A29CB4]">{p.duration}</div>
+              <div className="mt-1 text-xs font-mono uppercase tracking-widest text-white">{p.duration}</div>
             </div>
           ))}
         </div>
@@ -119,7 +119,7 @@ export default function AuroraCaseStudy() {
         <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
           {au.overview.metadata.map((m) => (
             <div key={m.k} className="dark-card rounded-2xl p-5">
-              <p className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-2">{m.k}</p>
+              <p className="text-sm font-mono uppercase tracking-widest text-white mb-2">{m.k}</p>
               <p className="font-display text-sm md:text-base font-bold leading-snug">{m.v}</p>
             </div>
           ))}
@@ -267,7 +267,7 @@ export default function AuroraCaseStudy() {
             <div key={s.role} className="dark-card rounded-3xl p-7">
               <p className="text-[10px] font-mono uppercase tracking-widest text-[#F5379B] mb-3">{s.role}</p>
               <p className="italic text-base leading-relaxed border-l-2 border-[#075EFD] pl-4 mb-4">&ldquo;{s.quote}&rdquo;</p>
-              <div className="text-xs font-mono uppercase tracking-widest text-[#A29CB4]">priority</div>
+              <div className="text-xs font-mono uppercase tracking-widest text-white">priority</div>
               <div className="font-display text-base font-bold mt-1">{s.priority}</div>
             </div>
           ))}
@@ -319,7 +319,7 @@ export default function AuroraCaseStudy() {
                 <div className="w-14 h-14 rounded-full bg-[#075EFD] text-white flex items-center justify-center font-display font-black text-lg">{p.initials}</div>
                 <div>
                   <h3 className="font-display text-lg font-black">{p.name}</h3>
-                  <p className="text-xs font-mono uppercase tracking-widest text-[#A29CB4]">{p.role}</p>
+                  <p className="text-xs font-mono uppercase tracking-widest text-white">{p.role}</p>
                 </div>
               </div>
               <p className="text-[10px] font-mono uppercase tracking-widest text-[#F5379B] mb-2">goals</p>
@@ -338,7 +338,7 @@ export default function AuroraCaseStudy() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {au.insights.designGoals.map((g, i) => (
             <div key={g.t} className={`rounded-3xl p-6 ${i % 2 === 0 ? "dark-card" : "bg-white border-2 border-[#F5379B]"}`}>
-              <div className="font-mono text-[10px] uppercase tracking-widest text-[#A29CB4]">0{i + 1}</div>
+              <div className="font-mono text-sm uppercase tracking-widest text-white">0{i + 1}</div>
               <h3 className={`mt-2 font-display text-lg font-black ${i % 2 === 0 ? "" : "text-[#F5379B]"}`}>{g.t}</h3>
               <p className={`mt-2 text-sm leading-relaxed ${i % 2 === 0 ? "" : "text-black"}`}>{g.d}</p>
             </div>

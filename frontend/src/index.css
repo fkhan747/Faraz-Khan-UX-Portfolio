@@ -149,7 +149,7 @@ html, body {
   background-size: 130px 130px;
   opacity: 0.1;
 }
-/* glossy sheen, a soft specular highlight so the surface catches light instead of looking matte */
+/* subtle, flat top sheen, no corner spotlight or bottom shade, so cards do not read as embossed/3d */
 .dark-card::after {
   content: "";
   position: absolute;
@@ -157,10 +157,12 @@ html, body {
   z-index: -1;
   pointer-events: none;
   border-radius: inherit;
-  background-image:
-    radial-gradient(118% 78% at 18% -14%, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0) 52%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0) 16%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0) 82%, rgba(0, 0, 0, 0.12) 100%);
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.045) 0%, rgba(255, 255, 255, 0) 22%);
+}
+/* pills / chips (rounded-full) stay flat: no grain, no sheen */
+.dark-card.rounded-full::before,
+.dark-card.rounded-full::after {
+  display: none;
 }
 
 /* Dark, cool, blue-tinted duotone for portraits - dark enough that the white

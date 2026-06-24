@@ -185,7 +185,7 @@ export default function Resume() {
                     <span className="absolute -left-[2.1rem] top-1.5 h-3 w-3 rounded-full bg-[#F5379B] ring-4 ring-[#100210]" aria-hidden="true" />
                     <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                       <h3 className="font-display text-xl md:text-2xl font-black">{e.role}</h3>
-                      <span className="text-[11px] font-mono uppercase tracking-widest text-[#A29CB4]">{e.time}</span>
+                      <span className="text-sm font-mono uppercase tracking-widest text-white">{e.time}</span>
                     </div>
                     <p className="text-sm font-semibold text-[#F5379B] mt-0.5">{e.org} <span className="text-[#A29CB4] font-normal">· {e.place}</span></p>
                     <ul className="mt-3 space-y-2">
@@ -257,7 +257,7 @@ export default function Resume() {
       {/* Footer note */}
       <section className="pt-10">
         <Container>
-          <div className="border-t border-white/10 pt-8 flex items-center justify-between gap-4 flex-wrap text-xs font-mono uppercase tracking-widest text-[#A29CB4]">
+          <div className="border-t border-white/10 pt-8 flex items-center justify-between gap-4 flex-wrap text-xs font-mono uppercase tracking-widest text-white">
             <span>résumé · faraz khan · updated 2026</span>
             <a href={`mailto:${PROFILE.email}`} className="inline-flex items-center gap-2 hover:text-[#F5379B] transition-colors normal-case tracking-normal">
               <Mail size={14} /> {PROFILE.email}

@@ -96,7 +96,7 @@ export default function JoatCaseStudy() {
         <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3">
           {j.overview.facts.map((f) => (
             <div key={f.label} className="dark-card rounded-2xl p-5">
-              <p className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-2">{f.label}</p>
+              <p className="text-sm font-mono uppercase tracking-widest text-white mb-2">{f.label}</p>
               <p className="font-display text-sm md:text-base font-bold leading-snug">{f.value}</p>
             </div>
           ))}
@@ -176,7 +176,7 @@ export default function JoatCaseStudy() {
           <Zoomable src={j.howItWorks.image.src} alt={j.howItWorks.image.caption} caption={j.howItWorks.image.caption} className="bg-white">
             <img src={j.howItWorks.image.src} alt={j.howItWorks.image.caption} loading="lazy" className="block w-full h-auto" />
           </Zoomable>
-          <figcaption className="p-5 text-xs font-mono uppercase tracking-widest text-[#A29CB4] text-center">{j.howItWorks.image.caption}</figcaption>
+          <figcaption className="p-5 text-xs font-mono uppercase tracking-widest text-white text-center">{j.howItWorks.image.caption}</figcaption>
         </figure>
       </SectionWrap>
 
@@ -189,7 +189,7 @@ export default function JoatCaseStudy() {
           <Zoomable src={j.ia.diagram} alt={j.ia.caption} caption={j.ia.caption} className="block">
             <img src={j.ia.diagram} alt={j.ia.caption} loading="lazy" className="block w-full h-auto" />
           </Zoomable>
-          <figcaption className="mt-5 text-xs font-mono uppercase tracking-widest text-[#A29CB4] text-center">{j.ia.caption}</figcaption>
+          <figcaption className="mt-5 text-xs font-mono uppercase tracking-widest text-white text-center">{j.ia.caption}</figcaption>
         </figure>
       </SectionWrap>
 
@@ -202,7 +202,7 @@ export default function JoatCaseStudy() {
           <Zoomable src={j.userFlow.diagram} alt={j.userFlow.caption} caption={j.userFlow.caption} className="block">
             <img src={j.userFlow.diagram} alt={j.userFlow.caption} loading="lazy" className="block w-full h-auto" />
           </Zoomable>
-          <figcaption className="mt-5 text-xs font-mono uppercase tracking-widest text-[#A29CB4] text-center">{j.userFlow.caption}</figcaption>
+          <figcaption className="mt-5 text-xs font-mono uppercase tracking-widest text-white text-center">{j.userFlow.caption}</figcaption>
         </figure>
       </SectionWrap>
 
@@ -217,7 +217,7 @@ export default function JoatCaseStudy() {
               <Zoomable src={b.src} alt={b.caption} caption={b.caption} className="block">
                 <img src={b.src} alt={b.caption} loading="lazy" className="block w-full h-auto" />
               </Zoomable>
-              <figcaption className="mt-5 text-xs font-mono uppercase tracking-widest text-[#A29CB4] text-center">{b.caption}</figcaption>
+              <figcaption className="mt-5 text-xs font-mono uppercase tracking-widest text-white text-center">{b.caption}</figcaption>
             </figure>
           ))}
         </div>
@@ -233,7 +233,7 @@ export default function JoatCaseStudy() {
           <Zoomable src={j.studio.image.src} alt={j.studio.image.caption} caption={j.studio.image.caption} className="bg-white">
             <img src={j.studio.image.src} alt={j.studio.image.caption} loading="lazy" className="block w-full h-auto" />
           </Zoomable>
-          <figcaption className="p-5 text-xs font-mono uppercase tracking-widest text-[#A29CB4] text-center">{j.studio.image.caption}</figcaption>
+          <figcaption className="p-5 text-xs font-mono uppercase tracking-widest text-white text-center">{j.studio.image.caption}</figcaption>
         </figure>
 
         <div className="mt-8 grid md:grid-cols-3 gap-5">
@@ -300,7 +300,7 @@ export default function JoatCaseStudy() {
               <Zoomable src={s.src} alt={s.title} caption={s.title} className="block">
                 <PhoneFrame src={s.src} alt={s.title} />
               </Zoomable>
-              <figcaption className="mt-4 text-[11px] font-mono uppercase tracking-widest text-[#A29CB4] text-center">{s.title}</figcaption>
+              <figcaption className="mt-4 text-sm font-mono uppercase tracking-widest text-white text-center">{s.title}</figcaption>
             </figure>
           ))}
         </div>

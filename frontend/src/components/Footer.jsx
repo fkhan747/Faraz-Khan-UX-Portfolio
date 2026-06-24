@@ -33,7 +33,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 pt-6 border-t border-white/5 flex items-center justify-between gap-4 flex-wrap text-xs font-mono uppercase tracking-widest text-[#A29CB4]">
+        <div className="mt-10 pt-6 border-t border-white/5 flex items-center justify-between gap-4 flex-wrap text-xs font-mono uppercase tracking-widest text-white">
           <span>©{new Date().getFullYear()} {PROFILE.name}</span>
           <span>made with care, not with templates</span>
         </div>

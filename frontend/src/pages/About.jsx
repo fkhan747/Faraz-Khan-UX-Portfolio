@@ -235,8 +235,8 @@ export default function About() {
               className="photo-blue absolute inset-0 w-full h-full object-cover object-top"
             />
             <div className="absolute inset-0 grain-overlay pointer-events-none" aria-hidden="true" />
-            <div className="absolute inset-0 pointer-events-none sm:hidden" aria-hidden="true" style={{ background: "linear-gradient(to bottom, rgba(38,30,58,0) 45%, #261E3A 100%)" }} />
-            <div className="absolute inset-0 pointer-events-none hidden sm:block" aria-hidden="true" style={{ background: "linear-gradient(to right, rgba(38,30,58,0) 52%, #261E3A 100%)" }} />
+            <div className="absolute inset-0 pointer-events-none sm:hidden" aria-hidden="true" style={{ background: "linear-gradient(to bottom, rgba(24,17,38,0) 45%, #181126 100%)" }} />
+            <div className="absolute inset-0 pointer-events-none hidden sm:block" aria-hidden="true" style={{ background: "linear-gradient(to right, rgba(24,17,38,0) 52%, #181126 100%)" }} />
           </div>
           {/* Identity + bio */}
           <div className="flex-1 p-7 md:p-10 relative overflow-hidden">
@@ -248,7 +248,7 @@ export default function About() {
                   <p className="text-sm md:text-base text-[#A29CB4] mt-1">{PROFILE.role}</p>
                 </div>
                 <div className="text-sm text-[#A29CB4] sm:text-right flex-shrink-0 leading-snug">
-                  <span className="block text-[11px] font-mono uppercase tracking-[0.2em] text-[#A29CB4]">Currently at</span>
+                  <span className="block text-sm font-mono uppercase tracking-[0.2em] text-white">Currently at</span>
                   <strong className="block text-[#F4F3FA] font-semibold mt-0.5">{PROFILE.currentCompany}</strong>
                   <span className="block text-xs text-[#A29CB4] mt-0.5">since {PROFILE.currentSince}</span>
                 </div>
@@ -366,7 +366,7 @@ export default function About() {
               <span className="absolute -left-[2.1rem] top-1.5 h-3 w-3 rounded-full bg-[#F5379B] ring-4 ring-[#100210]" aria-hidden="true" />
               <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                 <h3 className="font-display text-xl md:text-2xl font-black">{e.role}</h3>
-                <span className="text-[11px] font-mono uppercase tracking-widest text-[#A29CB4]">{e.time}</span>
+                <span className="text-sm font-mono uppercase tracking-widest text-white">{e.time}</span>
               </div>
               <p className="text-sm font-semibold text-[#F5379B] mt-0.5">{e.org} <span className="text-[#A29CB4] font-normal">· {e.place}</span></p>
               <ul className="mt-3 space-y-2">

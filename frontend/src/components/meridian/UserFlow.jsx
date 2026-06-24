@@ -30,7 +30,7 @@ export default function MeridianFlow() {
         {steps.map((s, i) => (
           <div key={s.n} className="flex items-stretch flex-1 min-w-[150px]">
             <div className="dark-card rounded-2xl p-5 flex-1 min-w-[150px]">
-              <span className="font-mono text-[10px] uppercase tracking-widest text-[#A29CB4]">{s.n}</span>
+              <span className="font-mono text-sm uppercase tracking-widest text-white">{s.n}</span>
               <h3 className="mt-2 font-display text-base font-black text-[#F4F3FA]">{s.title}</h3>
               <p className="mt-1.5 text-[13px] leading-relaxed text-[#A29CB4]">{s.desc}</p>
             </div>

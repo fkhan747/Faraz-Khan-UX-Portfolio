@@ -5,7 +5,7 @@ const PLEX = { fontFamily: "'IBM Plex Sans',sans-serif" };
 const INK = "#1B1C1D", MUT = "#7F7F7F";
 
 const Eyebrow = ({ children, muted }) => (
-  <span className={`font-mono text-[10px] uppercase tracking-widest ${muted ? "text-[#A29CB4]" : "text-[#F5379B]"}`}>{children}</span>
+  <span className={`font-mono text-sm uppercase tracking-widest ${muted ? "text-white" : "text-[#F5379B]"}`}>{children}</span>
 );
 const Prose = ({ children }) => <p className="mt-3 text-sm leading-relaxed text-[#C9C5D6] max-w-3xl">{children}</p>;
 
@@ -48,7 +48,7 @@ const FoundationsCard = () => (
             </div>
           ))}
         </div>
-        <div className="mt-4 font-mono text-[9px] uppercase tracking-widest text-[#A29CB4] mb-2">Light tints, for KPI cards</div>
+        <div className="mt-4 font-mono text-[13px] uppercase tracking-widest text-white mb-2">Light tints, for KPI cards</div>
         <div className="grid grid-cols-4 gap-2.5">
           {TINTS.map((t) => (
             <div key={t.hex} className="rounded-lg overflow-hidden" style={{ background: "#1c1530" }}>
@@ -64,7 +64,7 @@ const FoundationsCard = () => (
       <div className="divide-y divide-white/10">
         {TYPE_ROWS.map((r) => (
           <div key={r.tag} className="flex items-baseline gap-4 py-3 first:pt-0 last:pb-0">
-            <span className="font-mono text-[10px] uppercase tracking-widest text-[#A29CB4] w-20 shrink-0">{r.tag}</span>
+            <span className="font-mono text-sm uppercase tracking-widest text-white w-20 shrink-0">{r.tag}</span>
             <span>{r.node}</span>
           </div>
         ))}

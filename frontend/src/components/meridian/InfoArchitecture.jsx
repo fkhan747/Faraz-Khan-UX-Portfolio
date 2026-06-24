@@ -47,7 +47,7 @@ export default function MeridianIA() {
 
   return (
     <div className="mt-2 flex flex-col items-center">
-      <p className="self-start font-mono text-[10px] uppercase tracking-widest text-[#A29CB4] mb-3">
+      <p className="self-start font-mono text-sm uppercase tracking-widest text-white mb-3">
         Data sources
       </p>
 

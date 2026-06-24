@@ -123,7 +123,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
           <Link
             to="/projects"
             data-testid="back-link"
-            className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#A29CB4] hover:text-[#F5379B] transition-colors"
+            className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-white hover:text-[#F5379B] transition-colors"
           >
             <ArrowLeft size={14} /> all projects
           </Link>
@@ -146,7 +146,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
           {r.hero.stats.map((s) => (
             <div key={s.label} className="dark-card rounded-2xl p-5 md:p-6">
               <div className="num text-3xl md:text-5xl font-black text-[#075EFD] leading-none">{s.value}</div>
-              <div className="mt-3 text-[10px] md:text-xs font-mono uppercase tracking-widest text-[#A29CB4]">{s.label}</div>
+              <div className="mt-3 text-sm md:text-xs font-mono uppercase tracking-widest text-white">{s.label}</div>
             </div>
           ))}
         </div>
@@ -169,7 +169,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
         <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
           {r.overview.facts.map((f) => (
             <div key={f.label} className="dark-card rounded-2xl p-5">
-              <p className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-2">{f.label}</p>
+              <p className="text-sm font-mono uppercase tracking-widest text-white mb-2">{f.label}</p>
               <p className="font-display text-base md:text-lg font-bold">{f.value}</p>
             </div>
           ))}
@@ -181,7 +181,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
             <div key={p.step} className="dark-card rounded-2xl p-6">
               <div className="num text-4xl md:text-5xl font-black text-[#075EFD]">{p.step}</div>
               <div className="mt-3 font-display text-lg font-bold ">{p.title}</div>
-              <div className="mt-1 text-xs font-mono uppercase tracking-widest text-[#A29CB4]">{p.duration}</div>
+              <div className="mt-1 text-xs font-mono uppercase tracking-widest text-white">{p.duration}</div>
             </div>
           ))}
         </div>
@@ -194,7 +194,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
         <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
           {r.overview.metadata.map((m) => (
             <div key={m.k} className="dark-card rounded-2xl p-5">
-              <p className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-2">{m.k}</p>
+              <p className="text-sm font-mono uppercase tracking-widest text-white mb-2">{m.k}</p>
               <p className="font-display text-sm md:text-base font-bold leading-snug">{m.v}</p>
             </div>
           ))}
@@ -233,7 +233,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
                 <div className="w-14 h-14 rounded-full bg-[#075EFD] text-white flex items-center justify-center font-display font-black text-lg">{p.initials}</div>
                 <div>
                   <h3 className="font-display text-lg font-black">{p.name}</h3>
-                  <p className="text-xs font-mono uppercase tracking-widest text-[#A29CB4]">{p.role}</p>
+                  <p className="text-xs font-mono uppercase tracking-widest text-white">{p.role}</p>
                 </div>
               </div>
               <p className="text-sm leading-relaxed text-[#F4F3FA]/90 mb-4">{p.context}</p>
@@ -249,9 +249,9 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
               </ul>
 
               <div className="mt-auto pt-4 border-t border-white/10">
-                <p className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-2">jobs to be done</p>
+                <p className="text-sm font-mono uppercase tracking-widest text-white mb-2">jobs to be done</p>
                 <p className="text-sm italic leading-snug mb-3">&ldquo;{p.jtbd}&rdquo;</p>
-                <p className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4]">{p.tools}</p>
+                <p className="text-sm font-mono uppercase tracking-widest text-white">{p.tools}</p>
               </div>
             </div>
           ))}
@@ -283,7 +283,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {r.research1.method.map((m) => (
             <div key={m.l} className="dark-card rounded-2xl p-5">
-              <p className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-2">{m.l}</p>
+              <p className="text-sm font-mono uppercase tracking-widest text-white mb-2">{m.l}</p>
               <p className="font-display text-sm md:text-base font-bold">{m.v}</p>
             </div>
           ))}
@@ -453,7 +453,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
         <div className="grid md:grid-cols-2 gap-5">
           {r.hypothesis.principles.map((p, idx) => (
             <div key={p.t} className={`rounded-3xl p-7 ${idx % 2 === 0 ? "dark-card" : "bg-white border-2 border-[#F5379B]"}`}>
-              <div className="font-mono text-[10px] uppercase tracking-widest text-[#A29CB4]">principle 0{idx + 1}</div>
+              <div className="font-mono text-sm uppercase tracking-widest text-white">principle 0{idx + 1}</div>
               <h3 className={`mt-2 font-display text-xl font-black ${idx % 2 === 0 ? "" : "text-[#F5379B]"}`}>{p.t}</h3>
               <p className={`mt-2 text-base leading-relaxed ${idx % 2 === 0 ? "" : "text-black"}`}>{p.d}</p>
               <p className={`mt-4 text-xs font-mono uppercase tracking-widest ${idx % 2 === 0 ? "text-[#F5379B]" : "text-[#C71E73]"}`}>{p.from}</p>
@@ -484,7 +484,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {r.ia.cardSort.map((c) => (
             <div key={c.l} className="dark-card rounded-2xl p-5">
-              <p className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-2">{c.l}</p>
+              <p className="text-sm font-mono uppercase tracking-widest text-white mb-2">{c.l}</p>
               <p className="font-display text-sm md:text-base font-bold">{c.v}</p>
             </div>
           ))}
@@ -546,7 +546,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full dark-card text-white font-semibold text-sm hover:bg-[#241B33] transition-colors">
                 View Prototype In Browser <Maximize2 size={14} />
               </a>
-              <span className="text-xs font-mono uppercase tracking-widest text-[#A29CB4]">click anything. it answers from your sources, cites every claim, and flags what's stale</span>
+              <span className="text-xs font-mono uppercase tracking-widest text-white">click anything. it answers from your sources, cites every claim, and flags what's stale</span>
             </div>
             <div className="rounded-3xl overflow-hidden border border-[#2C2542] bg-[#DDE3EC] shadow-[0_30px_70px_rgba(20,30,60,0.18)]">
               <iframe
@@ -711,7 +711,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
             </div>
 
             <h3 className="font-display text-2xl md:text-3xl font-black mb-2">{r.whereItStands.targetsTitle}</h3>
-            <p className="text-xs font-mono uppercase tracking-[0.2em] text-[#A29CB4] mb-6">{r.whereItStands.targetsNote}</p>
+            <p className="text-xs font-mono uppercase tracking-[0.2em] text-white mb-6">{r.whereItStands.targetsNote}</p>
             <div className="grid md:grid-cols-3 gap-5">
               {r.whereItStands.targets.map((t) => (
                 <div key={t.t} className="dark-card rounded-3xl p-7">
@@ -731,7 +731,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {r.validation.testSetup.map((s) => (
                 <div key={s.l} className="dark-card rounded-2xl p-5">
-                  <p className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-2">{s.l}</p>
+                  <p className="text-sm font-mono uppercase tracking-widest text-white mb-2">{s.l}</p>
                   <p className="num text-base font-bold">{s.v}</p>
                 </div>
               ))}
@@ -794,14 +794,14 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
           <>
             <SectionLabel num="10" name="The Numbers" />
             <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-6xl mb-4">{r.impact.headline}</h2>
-            <p className="text-sm font-mono uppercase tracking-widest text-[#A29CB4] max-w-6xl mb-10">{r.impact.note}</p>
+            <p className="text-sm font-mono uppercase tracking-widest text-white max-w-6xl mb-10">{r.impact.note}</p>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
               {r.impact.outcomes.map((m) => (
                 <div key={m.l} className="rounded-3xl dark-card p-6">
                   <div className="font-display text-3xl md:text-4xl font-black text-[#075EFD] leading-none">{m.v}</div>
                   <div className="mt-3 font-display text-base font-bold ">{m.l}</div>
-                  <div className="mt-1 text-xs font-mono uppercase tracking-widest text-[#A29CB4]">{m.s}</div>
+                  <div className="mt-1 text-xs font-mono uppercase tracking-widest text-white">{m.s}</div>
                 </div>
               ))}
             </div>
@@ -865,7 +865,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
                 <div>
                   <div className="flex items-baseline gap-3 mb-1">
                     <h3 className="font-display text-2xl font-black">{x.title}</h3>
-                    <span className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4]">{x.status}</span>
+                    <span className="text-sm font-mono uppercase tracking-widest text-white">{x.status}</span>
                   </div>
                   <p className="text-sm text-[#A29CB4]">{x.subtitle}</p>
                 </div>
