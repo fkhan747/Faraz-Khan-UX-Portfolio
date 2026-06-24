@@ -1,0 +1,38 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=1120">
+<title>User flow</title><link rel="stylesheet" href="../blocks.css">
+<style>
+.wide{max-width:1080px}
+.flow{display:flex;align-items:stretch;gap:0;margin-top:14px;flex-wrap:wrap}
+.step{flex:1;min-width:150px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:15px 14px;position:relative}
+.step .n{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--faint)}
+.step b{display:block;font-size:14px;color:#fff;font-weight:600;margin:6px 0 5px}
+.step span{font-size:12px;color:var(--muted);line-height:1.4}
+.arr{display:flex;align-items:center;color:var(--pink);padding:0 6px}
+.arr svg{width:22px;height:22px}
+.lane{margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.lanebox{border-radius:13px;padding:15px 17px;border:1px solid}
+.lanebox .lh{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+.lanebox p{font-size:13px;color:#E7E4F0;line-height:1.5}
+.g1{background:rgba(72,150,207,.08);border-color:rgba(72,150,207,.3)}.g1 .lh{color:#7FB2F0}
+.g2{background:rgba(245,55,155,.07);border-color:rgba(245,55,155,.28)}.g2 .lh{color:var(--pink)}
+</style></head><body>
+<div class="block wide">
+  <div class="eyebrow">User flow</div>
+  <h2>One path that serves a glance and a deep dive</h2>
+  <p class="lead" style="margin-bottom:6px">Everyone enters through the same cockpit. Leadership reads the headline and leaves. Analysts and enrollment leaders keep going, drilling to the cohort and out to an action.</p>
+  <div class="flow">
+    <div class="step"><span class="n">01</span><b>Open Meridian</b><span>Land on the overview cockpit, no filtering needed.</span></div>
+    <div class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"/><path d="M13 6l6 6-6 6"/></svg></div>
+    <div class="step"><span class="n">02</span><b>Read the headline</b><span>Up or down, against last year and plan, anything on fire.</span></div>
+    <div class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"/><path d="M13 6l6 6-6 6"/></svg></div>
+    <div class="step"><span class="n">03</span><b>Open a module</b><span>Undergraduate, Graduate, Research, or HR, segmented by level.</span></div>
+    <div class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"/><path d="M13 6l6 6-6 6"/></svg></div>
+    <div class="step"><span class="n">04</span><b>Filter to a cohort</b><span>Program, geography, test policy, term. The funnel updates.</span></div>
+    <div class="arr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"/><path d="M13 6l6 6-6 6"/></svg></div>
+    <div class="step"><span class="n">05</span><b>Act or export</b><span>Trigger outreach, flag a risk, or export for the board deck.</span></div>
+  </div>
+  <div class="lane">
+    <div class="lanebox g1"><div class="lh">Leadership, steps 1 to 2</div><p>Glance, trust, leave. The cockpit has already done the thinking, so a provost gets the headline in ninety seconds without touching a filter.</p></div>
+    <div class="lanebox g2"><div class="lh">Analysts &amp; enrollment, steps 1 to 5</div><p>Drill all the way down. Same entry point, but they pull the funnel apart by cohort, check it against peers, and leave with an action.</p></div>
+  </div>
+</div></body></html>

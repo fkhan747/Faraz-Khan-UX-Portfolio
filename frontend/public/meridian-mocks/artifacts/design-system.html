@@ -1,0 +1,85 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=1120">
+<title>Design system</title><link rel="stylesheet" href="../blocks.css">
+<style>
+.wide{max-width:1100px}
+.dsgrid{display:grid;grid-template-columns:1.05fr 1fr;gap:18px;margin-top:6px}
+.panel{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:18px}
+.panel h4{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.sw{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+.sw .c{border-radius:9px;height:54px;display:flex;align-items:flex-end;padding:7px;border:1px solid rgba(255,255,255,.08)}
+.sw .c span{font-family:'JetBrains Mono',monospace;font-size:9px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.5)}
+.sw .lbl{font-size:10.5px;color:var(--muted);margin-top:5px}
+.type .row{display:flex;align-items:baseline;gap:14px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.07)}
+.type .row:last-child{border:none}
+.type .tag{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--muted);width:74px;flex-shrink:0;text-transform:uppercase}
+.disp{font-family:'Playfair Display',serif;font-weight:800;color:#fff}
+.comp{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.lcard{background:#fff;border-radius:12px;padding:14px;font-family:'IBM Plex Sans',sans-serif;color:#1B1C1D}
+.lcard .t{font-size:11px;color:#7F7F7F;font-weight:600}
+.lcard .v{font-size:22px;font-weight:700;margin-top:3px}
+.lcard .d{font-size:10.5px;color:#21BA45;font-weight:600;margin-top:4px}
+.mbar{display:flex;align-items:flex-end;gap:8px;height:64px}
+.mbar i{flex:1;border-radius:2px}
+.mdonut{width:64px;height:64px;border-radius:50%;position:relative;margin:0 auto}
+.mdonut::after{content:"";position:absolute;inset:30%;background:#fff;border-radius:50%}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chips span{font-size:12px;color:#EDEBF5;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:6px 12px}
+</style></head><body>
+<div class="block wide">
+  <div class="eyebrow">Design system</div>
+  <h2>One visual language across four departments</h2>
+  <p class="lead" style="margin-bottom:6px">Built on the institution's own brand: maroon carries identity in the left drawer, a restrained data palette does the work on the right, and every chart is squared so it reads like real analytics.</p>
+  <div class="dsgrid">
+    <div class="panel">
+      <h4>Palette</h4>
+      <div class="sw">
+        <div><div class="c" style="background:#A32638"><span>#A32638</span></div><div class="lbl">Maroon</div></div>
+        <div><div class="c" style="background:#004380"><span>#004380</span></div><div class="lbl">Dark blue</div></div>
+        <div><div class="c" style="background:#4896CF"><span>#4896CF</span></div><div class="lbl">Blue</div></div>
+        <div><div class="c" style="background:#E7842E"><span>#E7842E</span></div><div class="lbl">Orange</div></div>
+        <div><div class="c" style="background:#E8B431"><span>#E8B431</span></div><div class="lbl">Gold</div></div>
+        <div><div class="c" style="background:#21BA45"><span>#21BA45</span></div><div class="lbl">Green</div></div>
+        <div><div class="c" style="background:#DB2828"><span>#DB2828</span></div><div class="lbl">Red</div></div>
+        <div><div class="c" style="background:#363D45"><span>#363D45</span></div><div class="lbl">Dark gray</div></div>
+      </div>
+      <h4 style="margin-top:18px">Light tints, for KPI cards</h4>
+      <div class="sw">
+        <div><div class="c" style="background:#E7F2FB"><span style="color:#1B1C1D">#E7F2FB</span></div><div class="lbl">Light blue</div></div>
+        <div><div class="c" style="background:#FFF2E8"><span style="color:#1B1C1D">#FFF2E8</span></div><div class="lbl">Light orange</div></div>
+        <div><div class="c" style="background:#FFFAE6"><span style="color:#1B1C1D">#FFFAE6</span></div><div class="lbl">Light gold</div></div>
+        <div><div class="c" style="background:#F2F2F2"><span style="color:#1B1C1D">#F2F2F2</span></div><div class="lbl">Light gray</div></div>
+      </div>
+    </div>
+    <div class="panel type">
+      <h4>Typography, IBM Plex Sans</h4>
+      <div class="row"><span class="tag">Display</span><span class="disp" style="font-size:30px">Aa 10,670</span></div>
+      <div class="row"><span class="tag">Heading</span><span style="font-family:'IBM Plex Sans';font-weight:600;font-size:18px;color:#fff">Applications by school</span></div>
+      <div class="row"><span class="tag">Body</span><span style="font-family:'IBM Plex Sans';font-size:14px;color:#D7D4E2">Segmented by level, every screen</span></div>
+      <div class="row"><span class="tag">Numbers</span><span style="font-family:'IBM Plex Sans';font-weight:700;font-size:15px;color:#fff;font-variant-numeric:tabular-nums">14,722 · 49.2% · $52M</span></div>
+    </div>
+  </div>
+
+  <div class="dsgrid" style="margin-top:18px">
+    <div class="panel">
+      <h4>Components</h4>
+      <div class="comp">
+        <div class="lcard"><div class="t">Total applications</div><div class="v num">14,722</div><div class="d">▲ 3.1% vs last cycle</div></div>
+        <div class="lcard"><div class="t" style="margin-bottom:10px">Applications by stage</div><div class="mbar"><i style="height:100%;background:#4896CF"></i><i style="height:58%;background:#E7842E"></i><i style="height:24%;background:#004380"></i><i style="height:20%;background:#E8B431"></i></div></div>
+        <div class="lcard"><div class="t" style="margin-bottom:10px">By region</div><div class="mdonut" style="background:conic-gradient(#004380 0 46%,#4896CF 46% 64%,#E7842E 64% 80%,#E8B431 80% 90%,#363D45 90% 100%)"></div></div>
+        <div class="lcard"><div class="t" style="margin-bottom:10px">Cycle pace</div><svg width="100%" height="58" viewBox="0 0 150 58"><polyline points="4,48 34,40 64,44 94,26 130,14" fill="none" stroke="#004380" stroke-width="2.2"/><circle cx="130" cy="14" r="3" fill="#004380"/></svg></div>
+      </div>
+    </div>
+    <div class="panel">
+      <h4>Principles</h4>
+      <div class="chips">
+        <span>Squared charts, no rounded bars</span>
+        <span>Segment by level, always</span>
+        <span>Multi-year by default</span>
+        <span>Forecasts flagged as forecasts</span>
+        <span>Maroon for brand, calm palette for data</span>
+        <span>Sorted, labelled, no legend hunt</span>
+        <span>AI as a guide, human in the loop</span>
+      </div>
+    </div>
+  </div>
+</div></body></html>
