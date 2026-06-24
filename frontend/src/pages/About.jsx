@@ -268,8 +268,8 @@ export default function About() {
         {/* Industry verticals */}
         <div className="mt-6 rounded-3xl dark-card p-6 md:p-7" data-testid="about-industries">
           <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
-            <p className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4]">industry verticals</p>
-            <p className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4]">{INDUSTRIES.length} sectors</p>
+            <p className="text-sm font-mono uppercase tracking-widest text-white">industry verticals</p>
+            <p className="text-sm font-mono uppercase tracking-widest text-white">{INDUSTRIES.length} sectors</p>
           </div>
           <div className="flex flex-wrap gap-2">
             {INDUSTRIES.map((i) => (
@@ -307,14 +307,14 @@ export default function About() {
 
         <Grid>
           <div className="col-span-12 md:col-span-4 dark-card rounded-3xl p-7">
-            <p className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-4">design tools</p>
+            <p className="text-sm font-mono uppercase tracking-widest text-white mb-4">design tools</p>
             <div className="flex flex-wrap gap-2">
               {TOOLS.design.map((t) => <ToolPill key={t.name} {...t} />)}
             </div>
           </div>
 
           <div className="col-span-12 md:col-span-4 dark-card rounded-3xl p-7">
-            <p className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-2">development</p>
+            <p className="text-sm font-mono uppercase tracking-widest text-white mb-2">development</p>
             <p className="text-xs italic text-[#A29CB4] mb-4">Basic understanding & familiarity with front-end technologies</p>
             <div className="flex flex-wrap gap-2">
               {TOOLS.development.map((t) => <ToolPill key={t.name} {...t} />)}
@@ -322,7 +322,7 @@ export default function About() {
           </div>
 
           <div className="col-span-12 md:col-span-4 dark-card rounded-3xl p-7">
-            <p className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4] mb-4">collaboration</p>
+            <p className="text-sm font-mono uppercase tracking-widest text-white mb-4">collaboration</p>
             <div className="flex flex-wrap gap-2">
               {TOOLS.collaboration.map((t) => <ToolPill key={t.name} {...t} />)}
             </div>
@@ -343,8 +343,8 @@ export default function About() {
 
         <div className="mt-6 rounded-3xl dark-card p-7" data-testid="about-core-skills">
           <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
-            <p className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4]">core skills</p>
-            <p className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4]">{CORE_SKILLS.length} disciplines</p>
+            <p className="text-sm font-mono uppercase tracking-widest text-white">core skills</p>
+            <p className="text-sm font-mono uppercase tracking-widest text-white">{CORE_SKILLS.length} disciplines</p>
           </div>
           <div className="flex flex-wrap gap-2">
             {CORE_SKILLS.map((s) => (
