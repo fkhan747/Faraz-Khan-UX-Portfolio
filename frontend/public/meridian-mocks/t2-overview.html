@@ -140,6 +140,14 @@ svg.i.sm{width:16px;height:16px}
 /* AI box on Meridian dark blue */
 .aibox{border-color:#BAD6EC;background:#F3F9FD}
 .aibox .h{color:#004380}
+/* Ask Meridian AI , invoke affordance */
+.aibox .ask-input{display:flex;align-items:center;gap:8px;margin-top:10px;background:#FFFFFF;border:1px solid #BAD6EC;border-radius:999px;padding:5px 5px 5px 12px}
+.aibox .ask-input input{flex:1;min-width:0;border:none;outline:none;background:transparent;font-family:'IBM Plex Sans',system-ui,sans-serif;font-size:12px;color:var(--ink);padding:2px 0}
+.aibox .ask-input input::placeholder{color:var(--faint)}
+.aibox .ask-send{flex-shrink:0;width:26px;height:26px;border-radius:50%;border:none;background:var(--navy);color:#FFFFFF;display:grid;place-items:center;cursor:pointer}
+.aibox .ask-send svg{width:14px;height:14px;stroke:#FFFFFF;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.aibox .ask-suggest{font-size:10.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);margin-top:10px}
+.aibox .ask-chip{display:inline-block;margin-top:6px;background:#E7F2FB;color:#004380;border:1px solid #BAD6EC;border-radius:999px;padding:5px 11px;font-size:12px;line-height:1.35;cursor:pointer}
 /* data-refreshed indicator (top right) */
 .refreshed{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:500;color:var(--ink-2);background:var(--p-gray);padding:7px 11px;border-radius:8px;white-space:nowrap}
 .refreshed svg{color:#21BA45}
@@ -344,7 +352,12 @@ svg.i.sm{width:16px;height:16px}
         </div>
         <div class="aibox">
           <div class="h"><svg class="i sm"><use href="#ic-spark"/></svg> Ask Meridian AI</div>
-          <div class="q">“Which source markets are most at risk of melt this cycle?”</div>
+          <div class="ask-input">
+            <input type="text" placeholder="Ask about any cohort, term, or program..." aria-label="Ask Meridian AI">
+            <button class="ask-send" type="button" aria-label="Send"><svg class="i sm"><use href="#ic-spark"/></svg></button>
+          </div>
+          <div class="ask-suggest">Suggested</div>
+          <button class="ask-chip" type="button">Which source markets are most at risk of melt this cycle?</button>
         </div>
       </aside>
     </div>

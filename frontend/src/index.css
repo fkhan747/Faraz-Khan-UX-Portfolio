@@ -135,10 +135,9 @@ html, body {
 .dark-card {
   background-color: #261E3A;
   background-image:
-    radial-gradient(rgba(255, 255, 255, 0.05) 0.5px, transparent 0.5px),
-    radial-gradient(rgba(255, 255, 255, 0.035) 0.5px, transparent 0.5px);
-  background-size: 3px 3px, 5px 5px;
-  background-position: 0 0, 2px 3px;
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='dc'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23dc)' opacity='0.45'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+  background-blend-mode: overlay;
 }
 
 /* Dark, cool, blue-tinted duotone for portraits - dark enough that the white

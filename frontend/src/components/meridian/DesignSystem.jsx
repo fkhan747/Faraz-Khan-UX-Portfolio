@@ -48,8 +48,17 @@ const FoundationsCard = () => (
             </div>
           ))}
         </div>
-        <div className="mt-3 grid grid-cols-4 gap-2.5">
-          {TINTS.map((t) => <div key={t.hex} className="rounded-lg h-9" style={{ backgroundColor: t.hex, boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.10)" }} title={`${t.name} ${t.hex}`} />)}
+        <div className="mt-4 font-mono text-[9px] uppercase tracking-widest text-[#A29CB4] mb-2">Light tints, for KPI cards</div>
+        <div className="grid grid-cols-4 gap-2.5">
+          {TINTS.map((t) => (
+            <div key={t.hex} className="rounded-lg overflow-hidden" style={{ background: "#1c1530" }}>
+              <div className="h-9 w-full" style={{ backgroundColor: t.hex, boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.10)" }} />
+              <div className="px-2 py-1.5">
+                <div className="text-[10.5px] font-semibold text-[#F4F3FA] leading-tight">{t.name}</div>
+                <div className="font-mono text-[9px] text-[#A29CB4]">{t.hex}</div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
       <div className="divide-y divide-white/10">

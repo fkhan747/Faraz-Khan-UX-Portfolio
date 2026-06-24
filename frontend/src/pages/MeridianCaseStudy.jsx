@@ -14,6 +14,7 @@ import MeridianFlow from "../components/meridian/UserFlow";
 import MeridianWireframes from "../components/meridian/Wireframes";
 import MeridianDesignSystem from "../components/meridian/DesignSystem";
 import MeridianFiveProblems from "../components/meridian/FiveProblems";
+import MeridianOutcome from "../components/meridian/Outcome";
 
 /* Meridian Institute of Technology, university analytics dashboard case study.
    Client anonymized. Built to the FinVista/Aurora benchmark: native React on the
@@ -57,16 +58,54 @@ function artifactFor(headline = "") {
   if (h.includes("goals, success")) return <MeridianWireframes />;
   if (h.includes("information architecture")) return (
     <>
-      <LegacyMontage caption="The old model: four separate reports with no links between them" />
-      <div className="mt-12"><MeridianIA /></div>
+      <MeridianIA />
       <div className="mt-12"><MeridianFlow /></div>
     </>
   );
   if (h.includes("design system")) return <MeridianDesignSystem />;
-  if (h.includes("undergraduate and graduate admissions")) return (<><IframeBlock src={B + "funnel.html"} h={660} /><IframeBlock src={B + "school.html"} h={640} /></>);
-  if (h.includes("research and hr")) return (<><IframeBlock src={B + "research.html"} h={650} /><IframeBlock src={B + "hr.html"} h={650} /></>);
+  if (h.includes("outcome")) return <MeridianOutcome />;
+  if (h.includes("undergraduate and graduate admissions")) return (
+    <>
+      <IframeBlock src={B + "funnel.html"} h={660} />
+      <IframeBlock src={B + "school.html"} h={640} />
+      <div className="mt-10 grid lg:grid-cols-2 gap-6">
+        <ResponsiveScreen src="/meridian-mocks/t2-ug-overview.html" h={910} label="Undergraduate Overview, the redesigned screen" />
+        <ResponsiveScreen src="/meridian-mocks/t2-grad-overview.html" h={923} label="Graduate Overview, the redesigned screen" />
+      </div>
+    </>
+  );
+  if (h.includes("research and hr")) return (
+    <>
+      <IframeBlock src={B + "research.html"} h={650} />
+      <IframeBlock src={B + "hr.html"} h={650} />
+      <div className="mt-10 grid lg:grid-cols-2 gap-6">
+        <ResponsiveScreen src="/meridian-mocks/t2-research.html" h={1038} label="Research Intelligence, the redesigned screen" />
+        <ResponsiveScreen src="/meridian-mocks/t2-hr.html" h={1133} label="HR Workforce, the redesigned screen" />
+      </div>
+    </>
+  );
   if (h.includes("funnel, yield")) return <ResponsiveScreen src="/meridian-mocks/t2-funnel.html" h={1227} label="Funnel, yield and melt, the redesigned screen" maxW={1040} rounded="rounded-3xl" />;
   if (h.includes("geo intelligence")) return <IframeBlock src={B + "geo.html"} h={845} />;
+  return null;
+}
+
+/* white accent callout, used for the one key statement per section (matches FinVista/Aurora) */
+function WhiteCallout({ label, children }) {
+  return (
+    <div className="mb-9 rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10 max-w-4xl">
+      <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#C71E73] mb-3">{label}</p>
+      <p className="font-display text-xl md:text-2xl font-bold leading-snug text-black">{children}</p>
+    </div>
+  );
+}
+function calloutFor(headline = "") {
+  const h = headline.toLowerCase();
+  if (h.includes("problem"))
+    return (
+      <WhiteCallout label="Core challenge">
+        The data was never wrong. It just took too long to find, so people spent the first minute of every visit orienting instead of reading. The job was to lead with the answer.
+      </WhiteCallout>
+    );
   return null;
 }
 
@@ -171,7 +210,9 @@ export default function MeridianCaseStudy() {
 
       {/* HERO */}
       <header className="relative overflow-hidden">
-        <div className="absolute inset-0" aria-hidden="true" style={{ background: "radial-gradient(120% 90% at 80% -10%, rgba(7,94,253,0.35) 0%, rgba(16,2,16,0) 55%), radial-gradient(90% 80% at 0% 110%, rgba(245,55,155,0.18) 0%, rgba(16,2,16,0) 50%), #100210" }} />
+        <img src="/meridian/cover.jpg" alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover cover-img" loading="eager" />
+        <div className="absolute inset-0" aria-hidden="true" style={{ background: "linear-gradient(105deg, rgba(16,2,16,0.95) 0%, rgba(16,2,16,0.72) 52%, rgba(16,2,16,0.5) 100%)" }} />
+        <div className="absolute inset-0" aria-hidden="true" style={{ background: "linear-gradient(to bottom, rgba(16,2,16,0.55) 0%, rgba(16,2,16,0) 30%, rgba(16,2,16,0) 52%, rgba(16,2,16,0.96) 100%)" }} />
         <Container className="relative z-10 pt-12 pb-14">
           <div className="flex flex-wrap items-center justify-between gap-3 mb-10">
             <Link to="/projects" data-testid="back-link" className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-white/70 hover:text-[#F5379B] transition-colors">
@@ -228,6 +269,7 @@ export default function MeridianCaseStudy() {
               ) : (
                 <>
                   <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-5xl mb-8 case-keep">{sec.headline}</h2>
+                  {calloutFor(sec.headline)}
                   <div className="space-y-6">{sec.blocks.map((b, i) => <SectionBlock key={i} b={b} />)}</div>
                   {artifact && <div className="mt-12">{artifact}</div>}
                 </>

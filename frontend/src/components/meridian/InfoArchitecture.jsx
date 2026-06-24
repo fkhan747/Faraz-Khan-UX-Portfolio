@@ -75,7 +75,7 @@ export default function MeridianIA() {
         }}
       >
         <p className="font-display text-lg font-black text-white">
-          Meridian Analytics
+          Meridian Institute Analytics
         </p>
         <p className="text-[11.5px] text-white/80 mt-0.5">
           one platform, one shared vocabulary

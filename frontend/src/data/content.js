@@ -54,14 +54,14 @@ export const projects = [
   },
   {
     slug: "meridian",
-    title: "Meridian Analytics",
+    title: "Meridian Institute Analytics",
     subtitle: "Re-imagining a University's Analytics Platform: One Cockpit for Admissions, Research & HR",
     client: "Meridian Institute of Technology (anonymized)",
     role: "Lead UX Designer",
     services: "UX, Data Visualization, Design Systems",
     year: "2024",
-    cover: "/meridian/cover.svg",
-    coverImg: "/meridian/cover.svg",
+    cover: "/meridian/cover.jpg",
+    coverImg: "/meridian/cover.jpg",
     color: "#0E1430",
     tag: "case study",
     summary:

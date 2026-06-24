@@ -127,6 +127,14 @@ svg.i.sm{width:16px;height:16px}
 .aibox{border:1px dashed #BAD6EC;border-radius:12px;padding:13px;background:#F3F9FD}
 .aibox .h{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:#004380}
 .aibox .q{font-size:12.5px;color:var(--muted);margin-top:7px;line-height:1.4}
+/* Ask Meridian AI , invoke affordance */
+.aibox .ask-input{display:flex;align-items:center;gap:8px;margin-top:10px;background:#FFFFFF;border:1px solid #BAD6EC;border-radius:999px;padding:5px 5px 5px 12px}
+.aibox .ask-input input{flex:1;min-width:0;border:none;outline:none;background:transparent;font-family:'IBM Plex Sans',system-ui,sans-serif;font-size:12px;color:var(--ink);padding:2px 0}
+.aibox .ask-input input::placeholder{color:var(--faint)}
+.aibox .ask-send{flex-shrink:0;width:26px;height:26px;border-radius:50%;border:none;background:var(--navy);color:#FFFFFF;display:grid;place-items:center;cursor:pointer}
+.aibox .ask-send svg{width:14px;height:14px;stroke:#FFFFFF;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.aibox .ask-suggest{font-size:10.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--faint);margin-top:10px}
+.aibox .ask-chip{display:inline-block;margin-top:6px;background:#E7F2FB;color:#004380;border:1px solid #BAD6EC;border-radius:999px;padding:5px 11px;font-size:12px;line-height:1.35;cursor:pointer}
 /* line chart points + tooltips */
 .lc .pt circle{fill:#004380;stroke:#fff;stroke-width:2;transition:r .12s}
 .lc .pt .tip{opacity:0;transition:opacity .12s;pointer-events:none}
