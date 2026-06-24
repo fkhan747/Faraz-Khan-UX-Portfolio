@@ -242,7 +242,7 @@ export default function About() {
           <div className="flex-1 p-7 md:p-10 relative overflow-hidden">
             <div className="absolute -top-10 -right-10 w-72 h-72 rounded-full bg-[#075EFD] blur-3xl opacity-20 pointer-events-none" aria-hidden="true" />
             <div className="relative">
-              <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2">
+              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
                 <div>
                   <h2 className="font-display text-2xl md:text-3xl font-black">Faraz Khan</h2>
                   <p className="text-sm md:text-base text-[#A29CB4] mt-1">{PROFILE.role}</p>
