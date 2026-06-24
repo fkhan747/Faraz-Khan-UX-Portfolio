@@ -46,21 +46,9 @@ Two reading modes had to live in one product. One group reads at a glance: ninet
 
 The legacy tools leaned all the way to drill-down and dumped everything on screen, so glance users burned their ninety seconds just orienting. The redesign serves both: an overview cockpit on top of deep, drillable module pages.
 
-### Primary users and what each one needs
+### Primary users
 
-I designed around six primary users.
-
-**Leadership and provost.** Glance, multi-year trends, forecasts. They almost never filter and need projections flagged so a forecast is never read as fact.
-
-**Enrollment leaders.** The most demanding audience. Their weekly story is strange: applications fell about 25% (14,170 to 10,500), yet admit rate rose (43% to 51%) and yield ticked up (17% to 21%). They need that without doing arithmetic across charts.
-
-**Deans and program directors.** Program-level demand versus capacity, because a healthy total can hide one program quietly falling off.
-
-**Research office.** The funding pipeline and output: funding around $21.4M, awards around $52M, H-index around 184, read as multi-year series.
-
-**HR leaders.** Headcount around 1,363, turnover, and composition, presented carefully.
-
-**IR analysts.** Designed for first, deliberately. They own the data, and everyone trusts them to vouch for it. They need exact definitions, clean lineage, and mapping to the Common Data Set and IPEDS. Win the analysts, and everyone downstream inherits that trust.
+I designed around six readers, from a provost who needs the headline in ninety seconds to an IR analyst who has to defend every number. Each one's first question drove the screen they land on. Win the analysts, who own the data, and everyone downstream inherits that trust.
 
 ## The problem: four dashboards that made you work before they told you anything
 
@@ -313,18 +301,6 @@ Two views cost a little but buy honesty. One blended map would say an average th
 ## Before and after
 
 The fastest way to show the change: old pain on the left, new answer on the right.
-
-### The five problems, and what replaced them
-
-**1. Clutter instead of hierarchy.** Legacy pages showed everything at once, so nothing was first. The redesign leads with headline KPIs, then trend, then detail. The most-asked question lives in the top band.
-
-**2. Pie overload instead of fit-for-purpose charts.** The old reports used pies even for things pies are bad at. I matched each chart to its question: shares stay donuts, comparisons became sorted bars, time became lines.
-
-**3. Navigation friction instead of overview-and-drill-down.** The old left-rail had no link between pages. Now one overview cockpit drills into each module. Click a stage, land there in context. Nothing is a dead end.
-
-**4. No emphasis instead of KPI-with-delta.** Legacy numbers were flat, no prior year, no direction. Every headline number now carries a delta and an up or down indicator, with multi-year context one glance away.
-
-**5. Orienting time instead of reading time.** Add the four up and users spent their first minutes orienting before they could read. The redesign spends that minute for them.
 
 ### Module by module
 

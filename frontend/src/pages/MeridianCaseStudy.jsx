@@ -1,53 +1,77 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Mail } from "lucide-react";
 import { meridian as m } from "../data/meridianCase";
+import { PROFILE } from "../data/content";
 import Seo from "../components/Seo";
+import Zoomable from "../components/Zoomable";
 import CaseStudyNav from "../components/CaseStudyNav";
 import ProjectNav from "../components/ProjectNav";
 import { Container } from "../components/Grid";
+import MeridianPersonas from "../components/meridian/Personas";
+import MeridianIA from "../components/meridian/InfoArchitecture";
+import MeridianFlow from "../components/meridian/UserFlow";
+import MeridianWireframes from "../components/meridian/Wireframes";
+import MeridianDesignSystem from "../components/meridian/DesignSystem";
+import MeridianFiveProblems from "../components/meridian/FiveProblems";
 
 /* Meridian Institute of Technology, university analytics dashboard case study.
-   Client anonymized. Prose from m.body (markdown), kept short. The narrative
-   interleaves live exhibits (iframed: before/after blocks + artifacts) at the
-   sections they illustrate, then reveals the eight full screens at the end. */
+   Client anonymized. Built to the FinVista/Aurora benchmark: native React on the
+   shared .dark-card surface. Conceptual artifacts are native components; the light
+   product (before/after dashboard pairs + the 8 full screens) sits in dark frames,
+   the way FinVista frames its app screenshots. Narrative prose comes from m.body. */
 
 const ACCENT = "#F5379B";
 const B = "/meridian-mocks/blocks/";
-const A = "/meridian-mocks/artifacts/";
 
-/* visual exhibits mapped to the section they illustrate (by headline) */
-function visualsFor(headline = "") {
-  const h = headline.toLowerCase();
-  if (h.includes("context and primary users")) return [{ src: A + "personas.html", h: 600 }];
-  if (h.includes("problem")) return [{ src: B + "gender.html", h: 660 }];
-  if (h.includes("goals, success")) return [{ src: A + "wireframes.html", h: 500 }];
-  if (h.includes("information architecture")) return [{ src: A + "ia.html", h: 700 }, { src: A + "flow.html", h: 520 }];
-  if (h.includes("design system")) return [{ src: A + "design-system.html", h: 700 }];
-  if (h.includes("undergraduate and graduate admissions")) return [{ src: B + "funnel.html", h: 660 }, { src: B + "school.html", h: 640 }];
-  if (h.includes("research and hr")) return [{ src: B + "research.html", h: 650 }, { src: B + "hr.html", h: 650 }];
-  if (h.includes("geo intelligence")) return [{ src: B + "geo.html", h: 660 }];
-  return [];
-}
-
+/* light product before/after exhibit (the real dashboards), framed on the dark page */
 function IframeBlock({ src, h }) {
   return (
     <div className="max-w-5xl mt-7">
-      <iframe src={src} title="Exhibit" loading="lazy" scrolling="no"
+      <iframe src={src} title="Before and after" loading="lazy" scrolling="no"
         className="w-full block rounded-2xl" style={{ height: h, border: 0, background: "#100210" }} />
     </div>
   );
 }
 
-/* scaled thumbnail: the 1472-wide app (1440 + 16px padding) cropped to its own height */
+/* real legacy montage, a "before" screenshot framed in a dark card (FinVista pattern) */
+function LegacyMontage() {
+  const src = "/meridian/legacy/four-dashboards.png";
+  const cap = "The four legacy dashboards, four offices, four visual languages, no shared layout";
+  return (
+    <figure className="dark-card rounded-3xl overflow-hidden max-w-4xl">
+      <Zoomable src={src} alt="The four legacy dashboards" caption={cap} className="bg-white p-3 block">
+        <img src={src} alt="The four legacy dashboards" loading="lazy" className="w-full h-auto block rounded-lg" />
+      </Zoomable>
+      <figcaption className="px-5 py-3 font-mono text-[11px] uppercase tracking-[0.2em] text-[#A29CB4]">{cap}</figcaption>
+    </figure>
+  );
+}
+
+/* the visual that belongs to a given section (native artifact, or product before/after) */
+function artifactFor(headline = "") {
+  const h = headline.toLowerCase();
+  if (h.includes("context and primary users")) return <MeridianPersonas />;
+  if (h.includes("before and after")) return <MeridianFiveProblems />;
+  if (h.includes("problem")) return <LegacyMontage />;
+  if (h.includes("goals, success")) return <MeridianWireframes />;
+  if (h.includes("information architecture")) return (<><MeridianIA /><div className="mt-12"><MeridianFlow /></div></>);
+  if (h.includes("design system")) return <MeridianDesignSystem />;
+  if (h.includes("undergraduate and graduate admissions")) return (<><IframeBlock src={B + "funnel.html"} h={660} /><IframeBlock src={B + "school.html"} h={640} /></>);
+  if (h.includes("research and hr")) return (<><IframeBlock src={B + "research.html"} h={650} /><IframeBlock src={B + "hr.html"} h={650} /></>);
+  if (h.includes("geo intelligence")) return <IframeBlock src={B + "geo.html"} h={660} />;
+  return null;
+}
+
+/* scaled thumbnail of a full dashboard screen, framed in a dark card (1472 = 1440 + 16px padding) */
 const TW = 1472, THUMB_W = 496, THUMB_SCALE = THUMB_W / TW;
 function ScreenThumb({ src, label, h }) {
   return (
-    <figure>
-      <div style={{ width: THUMB_W, maxWidth: "100%", height: Math.round(h * THUMB_SCALE), borderRadius: 12, overflow: "hidden", border: "1px solid rgba(255,255,255,.12)", boxShadow: "0 22px 55px -30px rgba(0,0,0,.85)" }}>
+    <figure className="dark-card rounded-2xl overflow-hidden">
+      <div style={{ width: THUMB_W, maxWidth: "100%", height: Math.round(h * THUMB_SCALE), overflow: "hidden" }}>
         <iframe src={src} title={label} loading="lazy" scrolling="no"
           style={{ width: TW, height: h, border: 0, transform: `scale(${THUMB_SCALE})`, transformOrigin: "top left", display: "block" }} />
       </div>
-      <figcaption className="mt-3 font-mono text-[11px] uppercase tracking-[0.2em] text-white/55">{label}</figcaption>
+      <figcaption className="px-4 py-3 font-mono text-[11px] uppercase tracking-[0.2em] text-[#A29CB4]">{label}</figcaption>
     </figure>
   );
 }
@@ -152,17 +176,37 @@ export default function MeridianCaseStudy() {
         </Container>
       </header>
 
-      {/* SECTIONS + woven exhibits */}
-      {sections.map((sec) => (
-        <section key={sec.num} data-testid={`section-${sec.num}`} className="py-16 md:py-20 border-t border-white/10">
-          <Container>
-            <SectionLabel num={sec.num} name={sec.name} />
-            <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-5xl mb-8 case-keep">{sec.headline}</h2>
-            <div className="space-y-6">{sec.blocks.map((b, i) => <SectionBlock key={i} b={b} />)}</div>
-            {visualsFor(sec.headline).map((v, i) => <IframeBlock key={i} {...v} />)}
-          </Container>
-        </section>
-      ))}
+      {/* SECTIONS + woven artifacts */}
+      {sections.map((sec) => {
+        const isTldr = sec.num === "01";
+        const artifact = artifactFor(sec.headline);
+        return (
+          <section key={sec.num} data-testid={`section-${sec.num}`} className="py-16 md:py-20 border-t border-white/10">
+            <Container>
+              <SectionLabel num={sec.num} name={sec.name} />
+              {isTldr ? (
+                <div className="rounded-3xl dark-card text-white p-8 md:p-12 relative overflow-hidden">
+                  <div className="absolute -top-12 -right-12 w-72 h-72 rounded-full bg-[#075EFD] blur-3xl opacity-30" aria-hidden="true" />
+                  <p className="relative text-[11px] font-mono uppercase tracking-[0.25em] text-white mb-5">in one minute</p>
+                  <div className="relative space-y-5">
+                    {sec.blocks.map((b, i) =>
+                      b.t === "p"
+                        ? <p key={i} className="font-display text-xl md:text-2xl leading-snug text-white/95 max-w-5xl">{inline(b.v)}</p>
+                        : <SectionBlock key={i} b={b} />
+                    )}
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-5xl mb-8 case-keep">{sec.headline}</h2>
+                  <div className="space-y-6">{sec.blocks.map((b, i) => <SectionBlock key={i} b={b} />)}</div>
+                  {artifact && <div className="mt-12">{artifact}</div>}
+                </>
+              )}
+            </Container>
+          </section>
+        );
+      })}
 
       {/* FINALE: full-screen reveal */}
       <section data-testid="section-reveal" className="py-16 md:py-20 border-t border-white/10">
@@ -170,24 +214,32 @@ export default function MeridianCaseStudy() {
           <SectionLabel num="✦" name="The full walkthrough" />
           <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-5xl mb-6 case-keep">Eight screens, one system</h2>
           <p className="text-base md:text-lg leading-relaxed text-[#F4F3FA] max-w-4xl mb-10">You have seen the parts. Here is the whole product: the institutional cockpit, then the seven module screens it leads into, all on one design system.</p>
-          <div style={{ width: 1152, maxWidth: "100%", borderRadius: 18, overflow: "hidden", border: "1px solid rgba(255,255,255,.12)", height: Math.round(1128 * 1152 / TW), boxShadow: "0 40px 90px -40px rgba(0,0,0,.85)" }}>
-            <iframe src="/meridian-mocks/t2-overview.html" title="Meridian institutional overview" loading="lazy" scrolling="no"
-              style={{ width: TW, height: 1128, border: 0, transform: `scale(${1152 / TW})`, transformOrigin: "top left", display: "block" }} />
-          </div>
-          <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.2em] text-white/55">Institutional Overview, the cockpit</p>
-          <div className="grid sm:grid-cols-2 gap-x-10 gap-y-10 mt-12">
+          <figure className="dark-card rounded-3xl overflow-hidden" style={{ width: 1152, maxWidth: "100%" }}>
+            <div style={{ width: 1152, maxWidth: "100%", height: Math.round(1128 * 1152 / TW), overflow: "hidden" }}>
+              <iframe src="/meridian-mocks/t2-overview.html" title="Meridian institutional overview" loading="lazy" scrolling="no"
+                style={{ width: TW, height: 1128, border: 0, transform: `scale(${1152 / TW})`, transformOrigin: "top left", display: "block" }} />
+            </div>
+            <figcaption className="px-5 py-3 font-mono text-[11px] uppercase tracking-[0.2em] text-[#A29CB4]">Institutional Overview, the cockpit</figcaption>
+          </figure>
+          <div className="grid sm:grid-cols-2 gap-x-10 gap-y-10 mt-12 items-start">
             {SCREENS.map((s) => <ScreenThumb key={s.src} {...s} />)}
           </div>
         </Container>
       </section>
 
-      {/* CLOSE */}
-      <section className="py-16 md:py-20 border-t border-white/10">
+      {/* FOOTER */}
+      <section className="py-16 md:py-24 border-t border-white/10 text-center">
         <Container>
-          <h2 className="font-display text-3xl md:text-4xl font-black mb-6 case-keep">Thank you for reading.</h2>
-          <Link to="/projects" className="inline-flex items-center gap-2 text-sm font-mono uppercase tracking-widest text-white/70 hover:text-[#F5379B] transition-colors">
-            <ArrowLeft size={14} /> back to all projects
-          </Link>
+          <h2 className="font-display text-3xl md:text-5xl font-black mb-6 case-keep">Thank you for reading.</h2>
+          <p className="text-lg text-[#A29CB4] mb-8">Want this kind of clarity for your analytics product?</p>
+          <div className="flex gap-4 justify-center flex-wrap">
+            <a href={`mailto:${PROFILE.email}`} data-testid="case-cta-email" className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-[#C71E73] font-semibold text-sm hover:bg-[#C71E73] hover:text-white transition-colors">
+              <Mail size={16} /> email me
+            </a>
+            <Link to="/projects" className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-[#F4F3FA] font-semibold text-sm hover:bg-[#261E3A] transition-colors">
+              view all projects
+            </Link>
+          </div>
         </Container>
       </section>
     </article>

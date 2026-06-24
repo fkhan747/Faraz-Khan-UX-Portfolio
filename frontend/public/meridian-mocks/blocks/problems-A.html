@@ -1,0 +1,267 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=1120">
+<title>Before/After · The five problems</title>
+<link rel="stylesheet" href="../blocks.css">
+<style>
+  /* ---- Approach A: the horizontal ledger ---- */
+  .block.wide{max-width:1080px}
+  .ledger{margin-top:30px;border-top:1px solid rgba(255,255,255,.12)}
+  .lrow{display:grid;grid-template-columns:38% 62%;gap:30px;align-items:center;
+        padding:26px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+
+  /* LEFT: the index column */
+  .lhead{min-width:0}
+  .lhead .lnum{font-family:'Playfair Display',serif;font-size:46px;font-weight:900;
+               line-height:.9;color:var(--pink);letter-spacing:-1px}
+  .lhead .llabel{font-size:17px;font-weight:600;color:#fff;margin-top:10px;letter-spacing:-.2px}
+  .lhead .ldesc{font-size:13.5px;color:var(--muted);margin-top:7px;line-height:1.5;max-width:330px}
+
+  /* RIGHT: before -> after comparison strip */
+  .compare{display:grid;grid-template-columns:1fr 38px 1fr;align-items:stretch;gap:0}
+  .mini{position:relative;background:#fff;border-radius:12px;padding:15px 15px 14px;
+        box-shadow:0 16px 40px -22px rgba(0,0,0,.75);display:flex;flex-direction:column;
+        min-height:178px}
+  .mtag{position:absolute;top:-10px;left:13px;font-family:'JetBrains Mono',monospace;
+        font-size:9.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+        padding:3px 10px;border-radius:999px;color:#fff}
+  .mtag.b{background:#8C8C8C}.mtag.a{background:var(--navy)}
+  .march{display:grid;place-items:center;color:var(--pink)}
+  .march svg{width:24px;height:24px}
+  .mt{font-family:'IBM Plex Sans',sans-serif;font-size:11.5px;font-weight:600;
+      color:var(--cink);margin-bottom:11px;letter-spacing:.1px}
+  .mini.before .mt{color:#8a8a8a}
+  .mfill{flex:1;display:flex;flex-direction:column;justify-content:center}
+
+  /* generic mini helpers (IBM Plex inside) */
+  .mw{font-family:'IBM Plex Sans',sans-serif}
+  .num{font-variant-numeric:tabular-nums}
+
+  /* 1. clutter -> hierarchy : tile field vs answer-first stack */
+  .tilefield{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+  .tilefield i{height:24px;background:#E2E2E2;border-radius:2px;display:block}
+  .stackh{display:flex;flex-direction:column;gap:7px}
+  .stackh .lead-kpi{background:var(--t-blue);border-radius:2px;padding:8px 10px}
+  .stackh .lead-kpi b{font-size:21px;font-weight:700;color:var(--navy);line-height:1}
+  .stackh .lead-kpi span{display:block;font-size:9.5px;color:var(--cmut);margin-top:2px}
+  .stackh .trend{height:22px;border-radius:2px;background:var(--t-gray);position:relative;overflow:hidden}
+  .stackh .trend svg{position:absolute;inset:0;width:100%;height:100%}
+  .stackh .detail{display:flex;gap:5px}
+  .stackh .detail i{flex:1;height:16px;background:#ECECEC;border-radius:2px}
+
+  /* 2. pie overload -> sorted bars */
+  .pie{width:84px;height:84px;border-radius:50%;margin:0 auto}
+  .barsort{display:flex;flex-direction:column;gap:8px}
+  .barsort .row{display:grid;grid-template-columns:46px 1fr;align-items:center;gap:8px}
+  .barsort .row .lb{font-size:10px;color:var(--cmut)}
+  .barsort .row .tk{height:13px;background:#F2F2F2;border-radius:2px;overflow:hidden}
+  .barsort .row .tk i{display:block;height:100%;border-radius:2px}
+
+  /* 3. navigation : disconnected boxes vs cockpit + drill-down */
+  .discon{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .discon i{height:30px;background:#E2E2E2;border-radius:2px;display:block}
+  .cockpit{display:flex;flex-direction:column;align-items:center;gap:9px}
+  .cockpit .hub{background:var(--navy);color:#fff;font-size:10.5px;font-weight:600;
+                padding:7px 14px;border-radius:2px}
+  .cockpit .fan{display:flex;gap:7px;position:relative;padding-top:13px;width:100%;justify-content:center}
+  .cockpit .fan::before{content:"";position:absolute;top:0;left:11%;right:11%;height:13px;
+                border-left:1.5px solid var(--blue);border-right:1.5px solid var(--blue);
+                border-top:1.5px solid var(--blue)}
+  .cockpit .mod{flex:1;max-width:62px;height:30px;background:var(--t-blue);
+                border:1px solid var(--blue);border-radius:2px;position:relative}
+  .cockpit .mod::after{content:"";position:absolute;top:-9px;left:50%;width:1.5px;height:7px;
+                background:var(--blue);transform:translateX(-50%)}
+
+  /* 4. flat number -> kpi with delta */
+  .flatnum{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
+           gap:6px;background:#EFEFEF;border-radius:2px;padding:16px}
+  .flatnum b{font-size:30px;font-weight:600;color:#9a9a9a;line-height:1}
+  .flatnum span{font-size:10px;color:#a8a8a8}
+  .kcard{background:#fff;border:1px solid var(--line);border-radius:2px;padding:14px 15px}
+  .kcard .kv{font-size:30px;font-weight:700;color:var(--cink);line-height:1;letter-spacing:-.5px}
+  .kcard .kl{font-size:10.5px;color:var(--cmut);margin-top:5px}
+  .kcard .kf{display:flex;align-items:center;gap:8px;margin-top:11px}
+  .kcard .delta{font-size:11px;font-weight:600;padding:2px 7px;border-radius:2px;
+                display:inline-flex;align-items:center;gap:3px;color:var(--green);background:#E7F7EC}
+  .kcard .delta svg{width:11px;height:11px}
+  .kcard .vs{font-size:10px;color:var(--cmut)}
+  .kcard .spark{margin-top:11px}
+  .kcard .spark svg{width:100%;height:26px;display:block}
+
+  /* 5. orienting time -> reading time : clock badge + dense vs clean */
+  .clockcard{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:11px}
+  .clockcard .badge{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:600;
+                    padding:5px 11px;border-radius:2px}
+  .clockcard .badge svg{width:15px;height:15px;flex-shrink:0}
+  .badge.slow{background:#EDEDED;color:#7a7a7a}
+  .badge.fast{background:#E7F7EC;color:#178a35}
+  .dense{display:grid;grid-template-columns:repeat(6,1fr);gap:3px;width:100%}
+  .dense i{height:9px;background:#E2E2E2;border-radius:1px;display:block}
+  .clean{display:flex;flex-direction:column;gap:7px;width:100%}
+  .clean .ans{background:var(--t-blue);border-radius:2px;height:30px}
+  .clean .sub{display:flex;gap:6px}
+  .clean .sub i{flex:1;height:11px;background:#ECECEC;border-radius:2px}
+</style>
+</head>
+<body>
+<div class="block wide">
+  <div class="eyebrow">The five problems</div>
+  <h2>The five problems, and what replaced them</h2>
+  <p class="lead">Five recurring failures in the legacy dashboards, each paired with the fix that shipped. Read every row left to right: the problem, the old pattern, then the version that answers the question first.</p>
+
+  <div class="ledger">
+
+    <!-- 1. Clutter -> Hierarchy -->
+    <div class="lrow">
+      <div class="lhead">
+        <div class="lnum">01</div>
+        <div class="llabel">Clutter &rarr; Hierarchy</div>
+        <div class="ldesc">A page of twelve equal weight tiles, where nothing is first. Lead with the answer: one headline KPI, then a trend, then the detail.</div>
+      </div>
+      <div class="compare">
+        <div class="mini before">
+          <span class="mtag b">Before</span>
+          <div class="mt">Twelve equal tiles</div>
+          <div class="mfill"><div class="tilefield mw">
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          </div></div>
+        </div>
+        <div class="march"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"/><path d="M13 6l6 6-6 6"/></svg></div>
+        <div class="mini after">
+          <span class="mtag a">After</span>
+          <div class="mt">Answer, then trend, then detail</div>
+          <div class="mfill"><div class="stackh mw">
+            <div class="lead-kpi"><b class="num">4,052</b><span>Total applications</span></div>
+            <div class="trend">
+              <svg viewBox="0 0 120 22" preserveAspectRatio="none"><polyline points="0,17 24,14 48,15 72,9 96,7 120,3" fill="none" stroke="#4896CF" stroke-width="2"/></svg>
+            </div>
+            <div class="detail"><i></i><i></i><i></i></div>
+          </div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Pie overload -> Fit-for-purpose charts -->
+    <div class="lrow">
+      <div class="lhead">
+        <div class="lnum">02</div>
+        <div class="llabel">Pie overload &rarr; Fit-for-purpose charts</div>
+        <div class="ldesc">A pie of near equal slices is hard to compare. The rule: shares stay donuts, comparisons become sorted bars, time becomes lines.</div>
+      </div>
+      <div class="compare">
+        <div class="mini before">
+          <span class="mtag b">Before</span>
+          <div class="mt">Five near equal slices</div>
+          <div class="mfill"><div class="pie mw" style="background:conic-gradient(#B8B8B8 0 22%,#CECECE 22% 43%,#A8A8A8 43% 62%,#DADADA 62% 80%,#C2C2C2 80% 100%)"></div></div>
+        </div>
+        <div class="march"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"/><path d="M13 6l6 6-6 6"/></svg></div>
+        <div class="mini after">
+          <span class="mtag a">After</span>
+          <div class="mt">Sorted high to low</div>
+          <div class="mfill"><div class="barsort mw">
+            <div class="row"><span class="lb">Eng</span><span class="tk"><i style="width:100%;background:var(--navy)"></i></span></div>
+            <div class="row"><span class="lb">Bus</span><span class="tk"><i style="width:78%;background:var(--blue)"></i></span></div>
+            <div class="row"><span class="lb">Arts</span><span class="tk"><i style="width:61%;background:var(--blue)"></i></span></div>
+            <div class="row"><span class="lb">Sci</span><span class="tk"><i style="width:47%;background:var(--orange)"></i></span></div>
+            <div class="row"><span class="lb">Law</span><span class="tk"><i style="width:33%;background:var(--gold)"></i></span></div>
+          </div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Navigation friction -> Overview and drill-down -->
+    <div class="lrow">
+      <div class="lhead">
+        <div class="lnum">03</div>
+        <div class="llabel">Navigation friction &rarr; Overview and drill-down</div>
+        <div class="ldesc">Four disconnected pages with no links between them. One overview cockpit drills down into four modules. Nothing is a dead end.</div>
+      </div>
+      <div class="compare">
+        <div class="mini before">
+          <span class="mtag b">Before</span>
+          <div class="mt">Four disconnected pages</div>
+          <div class="mfill"><div class="discon mw">
+            <i></i><i></i><i></i><i></i>
+          </div></div>
+        </div>
+        <div class="march"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"/><path d="M13 6l6 6-6 6"/></svg></div>
+        <div class="mini after">
+          <span class="mtag a">After</span>
+          <div class="mt">Cockpit, then drill-down</div>
+          <div class="mfill"><div class="cockpit mw">
+            <div class="hub">Overview</div>
+            <div class="fan"><span class="mod"></span><span class="mod"></span><span class="mod"></span><span class="mod"></span></div>
+          </div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. No emphasis -> KPI with delta -->
+    <div class="lrow">
+      <div class="lhead">
+        <div class="lnum">04</div>
+        <div class="llabel">No emphasis &rarr; KPI with delta</div>
+        <div class="ldesc">A flat gray number, no prior year, no direction. The fix carries the value, a colored delta, an arrow, a sparkline, and "vs last year".</div>
+      </div>
+      <div class="compare">
+        <div class="mini before">
+          <span class="mtag b">Before</span>
+          <div class="mt">Flat number, no context</div>
+          <div class="mfill"><div class="flatnum mw">
+            <b class="num">68.4%</b>
+            <span>Yield rate</span>
+          </div></div>
+        </div>
+        <div class="march"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"/><path d="M13 6l6 6-6 6"/></svg></div>
+        <div class="mini after">
+          <span class="mtag a">After</span>
+          <div class="mt">Value, delta, direction, trend</div>
+          <div class="mfill"><div class="kcard mw">
+            <div class="kv num">68.4%</div>
+            <div class="kl">Yield rate</div>
+            <div class="kf">
+              <span class="delta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>3.2 pts</span>
+              <span class="vs">vs last year</span>
+            </div>
+            <div class="spark">
+              <svg viewBox="0 0 160 26" preserveAspectRatio="none"><polyline points="0,20 32,18 64,19 96,12 128,9 160,4" fill="none" stroke="#21BA45" stroke-width="2"/></svg>
+            </div>
+          </div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Orienting time -> Reading time -->
+    <div class="lrow">
+      <div class="lhead">
+        <div class="lnum">05</div>
+        <div class="llabel">Orienting time &rarr; Reading time</div>
+        <div class="ldesc">A dense page spends the first minute orienting. The answer first page spends that minute for the user, so it reads instead.</div>
+      </div>
+      <div class="compare">
+        <div class="mini before">
+          <span class="mtag b">Before</span>
+          <div class="mt">Dense, spent orienting</div>
+          <div class="mfill"><div class="clockcard mw">
+            <span class="badge slow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>90s orienting</span>
+            <div class="dense">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+          </div></div>
+        </div>
+        <div class="march"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"/><path d="M13 6l6 6-6 6"/></svg></div>
+        <div class="mini after">
+          <span class="mtag a">After</span>
+          <div class="mt">Answer first, spent reading</div>
+          <div class="mfill"><div class="clockcard mw">
+            <span class="badge fast"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>90s reading</span>
+            <div class="clean">
+              <div class="ans"></div>
+              <div class="sub"><i></i><i></i><i></i></div>
+            </div>
+          </div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body></html>

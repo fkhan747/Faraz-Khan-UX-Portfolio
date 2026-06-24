@@ -1,0 +1,245 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=1120">
+<title>The five problems, and what replaced them</title>
+<link rel="stylesheet" href="../blocks.css">
+<style>
+  /* Variant C , real-legacy-crop strip. Five symmetric rows. */
+  .block.wide{max-width:1080px}
+  .rows{display:flex;flex-direction:column;gap:18px;margin-top:26px}
+
+  /* one row = before crop | arrow | after widget, equal heights */
+  .row{display:grid;grid-template-columns:1fr 50px 1fr;align-items:stretch;gap:0}
+  .pane{position:relative;background:#fff;border-radius:14px;padding:18px;box-shadow:0 18px 44px -24px rgba(0,0,0,.7);border:1px solid rgba(255,255,255,.06);display:flex;flex-direction:column}
+  .row .arrow{align-self:center}
+
+  /* row label sits above each row, on the dark page */
+  .rlab{display:flex;align-items:baseline;gap:12px;margin-bottom:-6px}
+  .rlab .no{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;color:var(--pink);letter-spacing:.06em}
+  .rlab .nm{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--ink)}
+  .rlab .nm em{font-style:normal;color:var(--muted);font-family:'Inter',sans-serif;font-size:13px;font-weight:500}
+
+  /* legacy screenshot crop, framed, cover-cropped so it reads as a real snippet */
+  .pane.crop{padding:0;overflow:hidden;justify-content:flex-start}
+  .crop .frame{position:relative;flex:1;min-height:206px;background:#EDEDED}
+  .crop .frame img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;filter:grayscale(1) contrast(.92) brightness(1.04)}
+  /* row 3 shows the disconnected-pages region, not the same crop as row 1 */
+  .crop .frame.nav img{object-position:center bottom}
+  .crop .frame::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08);pointer-events:none}
+  .crop .src{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.04em;color:#9A9A9A;background:#F6F6F6;border-top:1px solid #ECECEC;padding:6px 12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+  /* after pane keeps a consistent min height to match the crop */
+  .pane.after{min-height:226px;justify-content:flex-start}
+
+  .tag{position:absolute;top:-10px;left:16px;z-index:2}
+
+  /* compact widget helpers */
+  .wlab{font-family:'IBM Plex Sans',sans-serif;font-size:13px;font-weight:600;color:var(--cink);margin-bottom:12px}
+  .wnote{font-family:'IBM Plex Sans',sans-serif;font-size:10.5px;color:var(--cmut);margin-top:12px;border-top:1px solid var(--line);padding-top:8px;line-height:1.4}
+
+  /* row1 after: answer-first hierarchy stack */
+  .hier{display:flex;flex-direction:column;gap:10px}
+  .hier .head{font-family:'IBM Plex Sans',sans-serif;font-size:11px;font-weight:600;color:var(--navy);letter-spacing:.02em}
+  .hier .lead-num{font-family:'IBM Plex Sans',sans-serif;font-size:34px;font-weight:700;color:var(--cink);letter-spacing:-.6px;line-height:.95}
+  .hier .lead-sub{font-family:'IBM Plex Sans',sans-serif;font-size:11px;color:var(--cmut);margin-top:2px}
+  .hier .spark{display:flex;align-items:flex-end;gap:4px;height:30px;margin-top:4px}
+  .hier .spark i{flex:1;background:var(--t-blue);border-radius:1px}
+  .hier .spark i.on{background:var(--blue)}
+  .hier .detail{display:flex;gap:8px}
+  .hier .dchip{flex:1;background:var(--t-gray);border-radius:2px;padding:7px 9px}
+  .hier .dchip .k{font-family:'IBM Plex Sans',sans-serif;font-size:9px;color:var(--cmut);text-transform:uppercase;letter-spacing:.05em}
+  .hier .dchip .vv{font-family:'IBM Plex Sans',sans-serif;font-size:14px;font-weight:600;color:var(--cink);font-variant-numeric:tabular-nums}
+
+  /* row2 after: sorted horizontal bars (compact) */
+  .hb2{display:grid;grid-template-columns:60px 1fr 78px;align-items:center;gap:10px;font-family:'IBM Plex Sans',sans-serif;margin-bottom:11px}
+  .hb2 .l{font-size:11.5px;color:var(--cmut);text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .hb2 .t{height:15px;background:var(--t-gray);border-radius:2px;overflow:hidden}
+  .hb2 .t i{display:block;height:100%;border-radius:2px}
+  .hb2 .v{font-size:11.5px;font-weight:600;color:var(--cink);text-align:right;font-variant-numeric:tabular-nums}
+
+  /* row3 after: overview cockpit drilling into four modules */
+  .cockpit{display:flex;align-items:center;gap:14px;font-family:'IBM Plex Sans',sans-serif}
+  .cockpit .hub{flex-shrink:0;width:104px;background:var(--navy);color:#fff;border-radius:3px;padding:13px 11px;text-align:center}
+  .cockpit .hub .ht{font-size:9px;letter-spacing:.06em;text-transform:uppercase;opacity:.82}
+  .cockpit .hub .hn{font-size:13px;font-weight:600;margin-top:3px;line-height:1.15}
+  .cockpit .drill{display:grid;grid-template-columns:14px 1fr;align-items:center;gap:8px;flex:1}
+  .cockpit .drill .arr{color:var(--blue);display:flex;flex-direction:column;gap:9px}
+  .cockpit .mods{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+  .cockpit .mod{background:var(--t-blue);border:1px solid #CFE4F5;border-radius:2px;padding:7px 9px;font-size:11px;font-weight:600;color:var(--navy)}
+
+  /* row4 after: KPI card with delta + sparkline */
+  .kpi4{font-family:'IBM Plex Sans',sans-serif;background:var(--t-blue);border-radius:4px;padding:16px 17px;max-width:268px}
+  .kpi4 .kv{font-size:32px;font-weight:700;color:var(--cink);letter-spacing:-.6px;line-height:1;font-variant-numeric:tabular-nums}
+  .kpi4 .kl{font-size:12px;color:var(--navy);font-weight:600;margin-top:5px}
+  .kpi4 .kf{display:flex;align-items:center;gap:9px;margin-top:13px}
+  .kpi4 .delta{font-size:11px;font-weight:600;padding:3px 8px;border-radius:3px;display:inline-flex;align-items:center;gap:4px;color:var(--green);background:#E7F7EC}
+  .kpi4 .delta svg{width:11px;height:11px}
+  .kpi4 .ks{font-size:11px;color:var(--cmut)}
+  .kpi4 .spk{margin-top:13px}
+
+  /* row5: orienting clock badge (before) vs reading badge (after) */
+  .clk{font-family:'IBM Plex Sans',sans-serif;display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:600;padding:5px 10px;border-radius:999px}
+  .clk svg{width:13px;height:13px}
+  .clk.slow{background:#EDEDED;color:#6E6E6E}
+  .clk.fast{background:#E7F7EC;color:#178A33}
+  .crop .badge-over{position:absolute;top:10px;left:10px;z-index:2}
+  .pane.crop.r5{position:relative}
+
+  /* row5 after: answer-first clean page mini */
+  .clean{font-family:'IBM Plex Sans',sans-serif}
+  .clean .big{font-size:30px;font-weight:700;color:var(--cink);letter-spacing:-.5px;line-height:1;font-variant-numeric:tabular-nums}
+  .clean .ans{font-size:11.5px;color:var(--cmut);margin-top:4px}
+  .clean .ln{display:flex;align-items:flex-end;gap:5px;height:34px;margin-top:14px}
+  .clean .ln i{flex:1;background:var(--blue);border-radius:1px;opacity:.9}
+</style></head>
+<body>
+<div class="block wide">
+  <div class="eyebrow">The five problems</div>
+  <h2>The five problems, and what replaced them</h2>
+  <p class="lead">Each legacy pattern on the left is a real crop from the old dashboards. On the right is the rebuilt fix. Same data, read in seconds instead of squinted at.</p>
+
+  <div class="rows">
+
+    <!-- ROW 1 , Clutter -> Hierarchy -->
+    <div>
+      <div class="rlab"><span class="no">01</span><span class="nm">Clutter <em>becomes</em> Hierarchy</span></div>
+      <div class="row">
+        <figure class="pane crop">
+          <span class="tag b">Before</span>
+          <div class="frame"><img src="../../meridian/legacy/four-dashboards.png" alt="Legacy page of roughly twelve equal weight tiles, nothing reads first"></div>
+          <div class="src">legacy/four-dashboards.png</div>
+        </figure>
+        <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"/><path d="M13 6l6 6-6 6"/></svg></div>
+        <figure class="pane after">
+          <span class="tag a">After</span>
+          <div class="wlab">Lead with the answer</div>
+          <div class="hier">
+            <div class="head">HEADLINE KPI</div>
+            <div>
+              <div class="lead-num">4,052</div>
+              <div class="lead-sub">Total applications, this cycle</div>
+            </div>
+            <div class="spark"><i style="height:42%"></i><i style="height:55%"></i><i style="height:48%"></i><i style="height:66%"></i><i style="height:78%"></i><i class="on" style="height:100%"></i></div>
+            <div class="detail">
+              <div class="dchip"><div class="k">Admitted</div><div class="vv">2,423</div></div>
+              <div class="dchip"><div class="k">Enrolled</div><div class="vv">506</div></div>
+            </div>
+          </div>
+          <div class="wnote">One headline, then the trend, then the detail. The page has a clear first thing to read.</div>
+        </figure>
+      </div>
+    </div>
+
+    <!-- ROW 2 , Pie overload -> Fit-for-purpose charts -->
+    <div>
+      <div class="rlab"><span class="no">02</span><span class="nm">Pie overload <em>becomes</em> Fit for purpose charts</span></div>
+      <div class="row">
+        <figure class="pane crop">
+          <span class="tag b">Before</span>
+          <div class="frame"><img src="../../meridian/legacy/gender-pie.png" alt="Legacy pie chart with near equal slices that are hard to compare"></div>
+          <div class="src">legacy/gender-pie.png</div>
+        </figure>
+        <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"/><path d="M13 6l6 6-6 6"/></svg></div>
+        <figure class="pane after">
+          <span class="tag a">After</span>
+          <div class="wlab">Sorted, ranked, comparable</div>
+          <div class="hb2"><span class="l">Male</span><span class="t"><i style="width:100%;background:var(--navy)"></i></span><span class="v">2,821 · 70%</span></div>
+          <div class="hb2"><span class="l">Female</span><span class="t"><i style="width:40%;background:var(--blue)"></i></span><span class="v">1,143 · 28%</span></div>
+          <div class="hb2"><span class="l">Not declared</span><span class="t"><i style="width:3%;background:var(--orange)"></i></span><span class="v">88 · 2%</span></div>
+          <div class="wnote">The rule: shares stay donuts, comparisons become sorted bars, time becomes lines.</div>
+        </figure>
+      </div>
+    </div>
+
+    <!-- ROW 3 , Navigation friction -> Overview and drill-down -->
+    <div>
+      <div class="rlab"><span class="no">03</span><span class="nm">Navigation friction <em>becomes</em> Overview and drill down</span></div>
+      <div class="row">
+        <figure class="pane crop">
+          <span class="tag b">Before</span>
+          <div class="frame nav"><img src="../../meridian/legacy/four-dashboards.png" alt="Four disconnected legacy dashboard pages with no links between them"></div>
+          <div class="src">legacy/four-dashboards.png</div>
+        </figure>
+        <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"/><path d="M13 6l6 6-6 6"/></svg></div>
+        <figure class="pane after">
+          <span class="tag a">After</span>
+          <div class="wlab">One cockpit, four drill downs</div>
+          <div class="cockpit">
+            <div class="hub"><div class="ht">Overview</div><div class="hn">Cockpit</div></div>
+            <div class="drill">
+              <div class="arr">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+              </div>
+              <div class="mods">
+                <div class="mod">Admissions</div>
+                <div class="mod">Enrollment</div>
+                <div class="mod">Research</div>
+                <div class="mod">People</div>
+              </div>
+            </div>
+          </div>
+          <div class="wnote">Every module links back to the overview. Nothing is a dead end.</div>
+        </figure>
+      </div>
+    </div>
+
+    <!-- ROW 4 , No emphasis -> KPI with delta -->
+    <div>
+      <div class="rlab"><span class="no">04</span><span class="nm">No emphasis <em>becomes</em> KPI with delta</span></div>
+      <div class="row">
+        <figure class="pane crop">
+          <span class="tag b">Before</span>
+          <div class="frame"><img src="../../meridian/legacy/adm-summary.png" alt="Legacy flat gray number with no prior year and no direction"></div>
+          <div class="src">legacy/adm-summary.png</div>
+        </figure>
+        <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"/><path d="M13 6l6 6-6 6"/></svg></div>
+        <figure class="pane after">
+          <span class="tag a">After</span>
+          <div class="wlab">Value, direction, context</div>
+          <div class="kpi4">
+            <div class="kv">4,052</div>
+            <div class="kl">Total applications</div>
+            <div class="kf">
+              <span class="delta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 14l6-6 6 6"/></svg>8.4%</span>
+              <span class="ks">vs last year</span>
+            </div>
+            <div class="spk"><svg viewBox="0 0 130 30" width="130" height="30" preserveAspectRatio="none"><polyline points="0,24 22,21 44,22 66,15 88,12 110,7 130,4" fill="none" stroke="#4896CF" stroke-width="2"/></svg></div>
+          </div>
+          <div class="wnote">The number now carries its own answer: how much, which way, and against what.</div>
+        </figure>
+      </div>
+    </div>
+
+    <!-- ROW 5 , Orienting time -> Reading time -->
+    <div>
+      <div class="rlab"><span class="no">05</span><span class="nm">Orienting time <em>becomes</em> Reading time</span></div>
+      <div class="row">
+        <figure class="pane crop r5">
+          <span class="tag b">Before</span>
+          <span class="badge-over"><span class="clk slow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            90s orienting</span></span>
+          <div class="frame"><img src="../../meridian/legacy/adm-summary.png" alt="Dense legacy page where the first minute is spent orienting"></div>
+          <div class="src">legacy/adm-summary.png</div>
+        </figure>
+        <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15"/><path d="M13 6l6 6-6 6"/></svg></div>
+        <figure class="pane after">
+          <span class="tag a">After</span>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+            <div class="wlab" style="margin:0">An answer first page</div>
+            <span class="clk fast">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+              90s reading</span>
+          </div>
+          <div class="clean">
+            <div class="big">4,052</div>
+            <div class="ans">Applications are up 8.4% on last year</div>
+            <div class="ln"><i style="height:46%"></i><i style="height:58%"></i><i style="height:52%"></i><i style="height:70%"></i><i style="height:82%"></i><i style="height:100%"></i></div>
+          </div>
+          <div class="wnote">The redesign spends that first minute for the reader, so they spend theirs reading.</div>
+        </figure>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body></html>
