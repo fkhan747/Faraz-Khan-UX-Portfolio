@@ -16,7 +16,7 @@ export const decisionos = {
     stats: [
       { value: "1", label: "Decision Brief" },
       { value: "100%", label: "Traceable Reasoning" },
-      { value: "5", label: "Leaders Tested" },
+      { value: "3", label: "Core flows designed" },
     ],
   },
 
@@ -25,26 +25,26 @@ export const decisionos = {
     headline: "A decision tool that turns scattered signals into a clear, defensible call.",
     tldrTitle: "TL;DR · Concept Summary",
     tldr:
-      "Executives make high-stakes calls on fragmented information. A dashboard here, a deck there, a gut feel, a hallway conversation. Then they have to defend those calls to a board, a team, or themselves. Crux is a self-initiated concept that structures a decision. It gathers the relevant signals, lays out the options, and offers an AI recommendation with explicit reasoning and a confidence level, while keeping the executive unambiguously the decision-maker. I ran the full process: interviews with decision-makers, an audit of how executive decisions actually get made, IA built from the anatomy of a decision, three core flows, then polished hi-fi screens. Defensibility and reasoning-transparency were the load-bearing design problem throughout.",
+      "Executives make high-stakes calls on fragmented information, a dashboard here, a deck there, a gut feel, then have to defend them to a board or a team. Crux structures the decision: it gathers the signals, lays out the options, and offers an AI recommendation with explicit reasoning and a confidence level, while the executive stays the decision-maker. I built it as a self-initiated concept, reconstructed from secondary research, end to end through to hi-fi screens. Defensibility and reasoning-transparency were the load-bearing problem throughout.",
     badge: "Concept · self-initiated · not client work",
     facts: [
       { label: "Type", value: "AI-native product concept" },
       { label: "Role", value: "Sr. UX Lead (end-to-end)" },
-      { label: "Timeline", value: "Self-initiated · 2026" },
+      { label: "Basis", value: "Secondary research + teardown" },
       { label: "Platform", value: "Responsive web, desktop-first" },
-      { label: "Tools", value: "Figma, decision modelling, exec interviews" },
+      { label: "Tools", value: "Figma, decision modelling, desk research" },
     ],
     process: [
-      { step: "01", title: "Probe", duration: "Decision-maker interviews" },
+      { step: "01", title: "Probe", duration: "Decision-led lens" },
       { step: "02", title: "Audit", duration: "How decisions get made" },
       { step: "03", title: "Model", duration: "Anatomy of a decision" },
       { step: "04", title: "Design", duration: "Flows to hi-fi" },
-      { step: "05", title: "Test", duration: "5 leaders" },
+      { step: "05", title: "Validate", duration: "Planned next" },
     ],
     intro:
       "Crux is a self-initiated concept, not a client engagement. I chose executive decision-making because it's the highest-stakes, lowest-tooled workflow in any company. The decisions that matter most are made with the least structure. It's also the sharpest possible test of AI-trust design. The bar for an AI that influences a CEO's call is extraordinarily high. It has to be transparent, defensible, and humble about its own confidence, or it's worse than useless. Designing for that bar is the whole point.",
     intro2:
-      "A consequential decision is rarely a data problem. The signals usually exist somewhere. It's a synthesis-and-defensibility problem: pulling scattered evidence into a coherent picture, weighing options honestly, and being able to explain afterwards why this call and not another. The interesting design challenge isn't 'let AI decide'. It's designing an AI that makes a leader's reasoning sharper and more defensible while leaving the decision firmly theirs.",
+      "I didn't sit in on a real boardroom for this. It's a self-initiated concept, and I'd rather show the reasoning than claim research I didn't run. The problem is reconstructed from the public record: write-ups on how executives decide, post-mortems of consequential calls, and the gaps reviewers flag in BI tools and deck software. A consequential decision is rarely a data problem; the signals usually exist somewhere. It's a synthesis-and-defensibility problem: pulling scattered evidence into a coherent picture, weighing options honestly, and being able to explain afterwards why this call and not another. The job was to design an AI that makes a leader's reasoning sharper and more defensible while leaving the decision firmly theirs.",
     contextTitle: "Why this concept",
     contextBody:
       "Three reasons. It's the highest-stakes workflow with the least purpose-built tooling. Reasoning-transparency and defensibility are the hardest, most important AI-trust problems there are. And it lets the case study show a third distinct process, decision-led and high-stakes, alongside ethnographic Slate and systems-led Almanac.",
@@ -67,7 +67,7 @@ export const decisionos = {
   personasSection: {
     headline: "Meet the people who have to make the call.",
     intro:
-      "A consequential decision has a person who owns it, a person who prepares it, and a room that has to live with it. The executive carries the accountability. The chief of staff assembles the picture. The exec team needs to understand and trust the reasoning. Crux has to make the call sharper for the owner without taking the call away from them.",
+      "These aren't interview subjects. I didn't interview anyone for a self-initiated concept, and I won't pretend I did. They're archetypes built from public material: write-ups on how executives decide, accounts of consequential calls gone right and wrong, and reviews of the tools leaders reach for. A consequential decision has a person who owns it, a person who prepares it, and a room that has to live with it. The executive carries the accountability. The chief of staff assembles the picture. The exec team needs to understand and trust the reasoning. Crux has to make the call sharper for the owner without taking the call away from them.",
     personas: [
       {
         name: "Elena Vasquez",
@@ -86,7 +86,6 @@ export const decisionos = {
         ],
         jtbd: "When I face a consequential call, I want the signals and options structured with honest reasoning, so I can decide fast and defend it.",
         tools: "BI dashboards, decks, her exec team, gut",
-        hates: "“I don't need the machine to decide. I need it to make my reasoning sharper and my call defensible.”",
       },
       {
         name: "Tom Akintola",
@@ -105,7 +104,6 @@ export const decisionos = {
         ],
         jtbd: "When I prep a decision, I want the evidence and options assembled and balanced, so the exec gets the real trade-offs, fast.",
         tools: "Spreadsheets, BI tools, decks, calendar",
-        hates: "“I spend three days building the picture and ten minutes in the room where the call gets made.”",
       },
       {
         name: "Priya Nair",
@@ -124,33 +122,25 @@ export const decisionos = {
         ],
         jtbd: "When a decision is made, I want to see the reasoning and the options weighed, so I can align and commit with confidence.",
         tools: "Email, decks, the meeting",
-        hates: "“'Because I said so' doesn't help me carry the decision to my own team.”",
       },
-    ],
-    quoteWall: [
-      { q: "The data exists. Pulling it into a decision is the hard part.", a: "Executive, interview 2" },
-      { q: "By the time the analysis is ready, the moment's gone.", a: "Executive, interview 1" },
-      { q: "I can't tell a good recommendation from a confident one.", a: "Executive, interview 4" },
-      { q: "Three days building the deck, ten minutes making the call.", a: "Chief of staff, interview" },
-      { q: "I need to defend this to the board on Monday.", a: "Executive, interview 3" },
     ],
   },
 
   // --- 02 RESEARCH 1: how decisions get made ---
   research1: {
-    headline: "I sat in on how the call actually gets made.",
-    methodTitle: "Decision-maker interviews",
+    headline: "How the call actually gets made, reconstructed from the record.",
+    methodTitle: "A decision-led lens, from the public record",
     methodIntro:
-      "Rather than ask executives what a good decision looks like in theory, I reconstructed real ones: what the call was, what information they had, what they wished they'd had, how they weighed it, and how they later defended it. Five in-depth interviews with decision-makers and chiefs of staff, walking back through recent consequential calls from trigger to defence.",
+      "Rather than ask executives what a good decision looks like in theory, I reconstructed how real ones unfold: what the call is, what information they have, what they wish they'd had, how they weigh it, and how they later defend it. I pieced this together from secondary sources, write-ups on executive decision-making, accounts of consequential calls, and reviews of the tools leaders use, walking a decision from trigger to defence.",
     method: [
-      { l: "Participants", v: "5 decision-makers" },
-      { l: "Method", v: "Decision reconstruction interviews" },
-      { l: "Traced", v: "Real calls, trigger to defence" },
+      { l: "Basis", v: "Secondary research" },
+      { l: "Lens", v: "Decision reconstruction" },
+      { l: "Traced", v: "A call, trigger to defence" },
       { l: "Captured", v: "Signals, weighing, time pressure, defence" },
     ],
     timelineTitle: "The anatomy of a decision",
     timelineIntro:
-      "Walking back through one real decision showed where the friction and the risk concentrate, and why so much of the effort goes into assembling the picture rather than actually reasoning about it.",
+      "Walking back through one decision, reconstructed from the research, showed where the friction and the risk concentrate, and why so much of the effort goes into assembling the picture rather than actually reasoning about it.",
     timeline: [
       { time: "Step 1", label: "Trigger", note: "A consequential question lands: 'do we enter this market this quarter?'" },
       { time: "Step 2", label: "Signal hunt", note: "Chief of staff spends days pulling numbers from BI, decks, and a dozen people.", pain: true },
@@ -159,13 +149,13 @@ export const decisionos = {
       { time: "Step 5", label: "The call", note: "The executive decides, often on instinct the deck only partly informed.", pain: true },
       { time: "Step 6", label: "The defence", note: "Weeks later, has to justify the call to the board with reasoning that was never captured.", pain: true },
     ],
-    affinityTitle: "What the interviews clustered into",
+    affinityTitle: "What the research clustered into",
     affinityIntro:
-      "Observations across all five interviews affinity-mapped into four themes. Each is a place where consequential decisions lose rigour, speed, or defensibility.",
+      "The recurring problems from the research grouped into four themes. Each is a place where consequential decisions lose rigor, speed, or defensibility.",
     affinityThemes: [
       { t: "Assembly eats the time", d: "Most of the effort goes into gathering and formatting signals, not reasoning about them. The picture takes days; the decision takes minutes." },
       { t: "Decks argue, they don't weigh", d: "Under pressure, decision materials tilt toward a predetermined answer. Honest trade-offs get smoothed away in service of a recommendation." },
-      { t: "Confidence masquerades as quality", d: "Leaders can't easily separate a well-reasoned recommendation from a confidently-delivered one. Conviction is mistaken for rigour." },
+      { t: "A confident deck reads as a rigorous one", d: "Leaders kept treating a confident-sounding recommendation as a well-reasoned one, with no easy way to tell the two apart." },
       { t: "Reasoning isn't captured", d: "The why behind a call evaporates the moment it's made, leaving nothing to defend it with, or to learn from later." },
     ],
     insightsTitle: "Three insights that drove the design",
@@ -280,14 +270,14 @@ export const decisionos = {
       { t: "Decide", d: "The executive makes the call; reasoning is captured." },
       { t: "Review", d: "The decision and its outcome revisited, to learn." },
     ],
-    cardSortTitle: "Card sort: how leaders frame decisions",
+    cardSortTitle: "Deriving the structure",
     cardSortIntro:
-      "An open card sort with eight decision-makers tested whether they think in metrics or in decisions. They think in decisions. Participants grouped tasks around 'the call I have to make', not around data sources or dashboards. The sort also settled the top-level surfaces: Decisions, the Brief, Evidence, and a Review log.",
+      "With no users to card-sort for a self-initiated concept, and I won't claim a method I didn't run, I derived the information architecture from the problem itself: leaders arrive thinking in decisions, not in metrics or dashboards. So the structure organises around 'the call I have to make', which settled the top-level surfaces: Decisions, the Brief, Evidence, and a Review log.",
     cardSort: [
-      { l: "Participants", v: "8 decision-makers" },
-      { l: "Method", v: "Open card sort" },
-      { l: "Result", v: "Decision-first grouping confirmed" },
-      { l: "Bonus", v: "Settled the 4 top-level surfaces" },
+      { l: "Approach", v: "First-principles from the decision" },
+      { l: "Basis", v: "Public research + teardown" },
+      { l: "Organising unit", v: "The call to be made" },
+      { l: "To validate", v: "Card sort with real leaders (planned)" },
     ],
     iaDecisionsTitle: "Three IA decisions",
     iaDecisions: [
@@ -301,9 +291,9 @@ export const decisionos = {
   design: {
     headline: "Building it.",
     wireframesIntro:
-      "Low-fidelity, greyscale wireframes first, to lock structure and the decision-trust patterns before any colour or brand. The questions at this stage: how do options sit side by side, how does the recommendation share the frame with its counter-argument, and how do confidence and the human-call gate read without drama?",
+      "Low-fidelity, grayscale wireframes first, to lock structure and the decision-trust patterns before any color or brand. The questions at this stage: how do options sit side by side, how does the recommendation share the frame with its counter-argument, and how do confidence and the human-call gate read without drama?",
     wireframes: [
-      { src: S("wf-01-brief.png"), tag: "Lo-fi · 01", title: "Decision brief", desc: "The signature view in greyscale: options laid side by side, evidence beneath each, recommendation panel on the right. Locked the structure of a decision before any styling." },
+      { src: S("wf-01-brief.png"), tag: "Lo-fi · 01", title: "Decision brief", desc: "The signature view in grayscale: options laid side by side, evidence beneath each, recommendation panel on the right. Locked the structure of a decision before any styling." },
       { src: S("wf-02-recommendation.png"), tag: "Lo-fi · 02", title: "Recommendation + counter", desc: "The trust moment, structurally: the AI recommendation and its strongest counter-argument as adjacent, equal-weight panels, each with a confidence signal. Honesty by construction." },
       { src: S("wf-03-evidence.png"), tag: "Lo-fi · 03", title: "Evidence detail", desc: "Expanding a piece of evidence reveals its source, date, and how it weighs on each option. Reasoning made traceable, not asserted." },
       { src: S("wf-04-decide.png"), tag: "Lo-fi · 04", title: "Make the call", desc: "The decision as a deliberate, recorded act: choose the option, capture the reasoning, with the human-call gate explicit. AI advises; the executive decides." },
@@ -317,10 +307,10 @@ export const decisionos = {
       { t: "Brief → Make the call", d: "Weigh options → choose → capture the reasoning → decision recorded for defence and review. AI touchpoint: none, this step is human. Human gate: the executive makes and records the call." },
     ],
     finalIntro:
-      "From greyscale to a designed product. The screens below are the hi-fidelity design direction for Crux: a serious, executive-grade interface with a magenta accent reserved for the AI recommendation surface, the ✦ sparkle marking AI reasoning, and the counter-case given equal visual weight to the recommendation. These are concept screens, designed to be iterated into a build.",
+      "From grayscale to a designed product. The screens below are the hi-fidelity design direction for Crux: a serious, executive-grade interface with a magenta accent reserved for the AI recommendation surface, the ✦ sparkle marking AI reasoning, and the counter-case given equal visual weight to the recommendation. These are concept screens, designed to be iterated into a build.",
     finalScreens: [
-      { src: S("hi-01-brief.png"), tag: "Hi-fi · 01", title: "Decision brief", desc: "The hero. A consequential question, structured: options side by side with evidence, and an AI recommendation panel carrying its reasoning and a confidence signal. The deck, replaced by a decision." },
-      { src: S("hi-02-recommendation.png"), tag: "Hi-fi · 02", title: "Recommendation + the case against", desc: "The recommendation and its strongest counter-argument, adjacent and equal-weight, each with confidence and traceable evidence. Honesty designed in, not bolted on." },
+      { src: S("hi-01-brief.png"), tag: "Hi-fi · 01", title: "Decision brief", desc: "The hero. A consequential question, structured: options side by side with evidence, and an AI recommendation panel carrying its reasoning and a confidence signal. A structured brief in place of the usual deck." },
+      { src: S("hi-02-recommendation.png"), tag: "Hi-fi · 02", title: "Recommendation + the case against", desc: "The recommendation and its strongest counter-argument sit adjacent and equal-weight, each with confidence and traceable evidence, so the case against is impossible to skip." },
       { src: S("hi-03-decide.png"), tag: "Hi-fi · 03", title: "Make the call", desc: "The decision as a deliberate, recorded act: the executive chooses, captures the why, and the reasoning is preserved. Defensible to the board, reviewable later." },
     ],
   },
@@ -334,8 +324,8 @@ export const decisionos = {
       { id: "P1", t: "Reasoning + provenance", d: "Every recommendation exposes its full reasoning chain, and every claim in it traces to the specific evidence and date behind it. No verdict without its logic.", featured: true },
       { id: "P2", t: "The case against", d: "Each recommendation carries its own strongest counter-argument and the conditions under which it fails, presented with equal weight, impossible to skip.", featured: true },
       { id: "P3", t: "Confidence, honestly", d: "A clear confidence signal on the recommendation, calibrated to evidence strength. Low-confidence calls look different from high-confidence ones." },
-      { id: "P5", t: "Human makes the call", d: "The AI structures and advises; the decision is a deliberate, recorded human act. Command stays unambiguously with the executive." },
-      { id: "P8", t: "Graceful uncertainty", d: "When the evidence is thin or conflicting, the system says so and shows the gap, rather than manufacturing false conviction." },
+      { id: "P4", t: "Human makes the call", d: "The AI structures and advises; the decision is a deliberate, recorded human act. Command stays unambiguously with the executive." },
+      { id: "P5", t: "Graceful uncertainty", d: "When the evidence is thin or conflicting, the system says so and shows the gap, rather than manufacturing false conviction." },
     ],
     decisionsTitle: "AI design decisions",
     decisions: [
@@ -395,72 +385,71 @@ export const decisionos = {
       "Crux is the third of three concepts (after Slate and Almanac). It inherits the shared foundation of grid, spacing, motion, and the confidence-plus-provenance interaction patterns, and expresses it through a heavier, executive-grade magenta identity suited to high-stakes decisions.",
   },
 
-  // --- 09 VALIDATION ---
-  validation: {
-    headline: "Does it work?",
+  // --- 09 WHERE IT STANDS (honest about what's proven vs. what's next) ---
+  whereItStands: {
+    headline: "Where it stands.",
     intro:
-      "I tested the hi-fi design with five leaders, executives and chiefs of staff, walking the three core flows and probing the two things that make or break an executive decision tool: do they trust the reasoning enough to act on it, and does it sharpen their call without ever feeling like it took the call away?",
-    testSetup: [
-      { l: "Participants", v: "5 leaders" },
-      { l: "Method", v: "Moderated hi-fi walkthrough" },
-      { l: "Tasks", v: "3 core flows + trust probes" },
-      { l: "Focus", v: "Reasoning, counter-case, command" },
+      "Honest about what's proven and what isn't. Nothing here is claimed as measured. These are the targets the design is built to hit, and they'll be tested with real leaders, not asserted.",
+    doneTitle: "What's done",
+    done: [
+      "A defined problem reconstructed from secondary research: how consequential calls get made, where the effort goes, and why defensibility (not data access) is the real gap.",
+      "A competitive teardown across six tools, exposing the gap between BI (surfaces data) and AI copilots (recommend without showing reasoning).",
+      "An end-to-end design: a decision-centric IA, three core task flows, wireframes, and a full AI-native design system.",
+      "Hi-fi screens of the core surfaces: the decision brief, the recommendation-plus-counter-case, and the make-the-call step. The proof the design holds together as an experience.",
     ],
-    keyResults: [
-      { v: "5/5", l: "Stayed in command", s: "felt they made the call" },
-      { v: "5/5", l: "Valued the case against", s: "named it the standout" },
-      { v: "4/5", l: "Trusted the reasoning", s: "with traceable evidence" },
-      { v: "★", l: "Most-cited feature", s: "the equal-weight counter-case" },
-    ],
-    findingsTitle: "What the test surfaced",
-    findings: [
-      { t: "The case against built the trust", d: "Every leader pointed to the equal-weight counter-argument as the thing that made the recommendation credible. An AI willing to argue against itself was, paradoxically, the one they'd trust.", fix: "Validated: keep the counter-case structural and equal-weight." },
-      { t: "Command had to be unmistakable", d: "Leaders were emphatic that the decision stay theirs. The deliberate, recorded 'make the call' step was what made them comfortable letting AI structure the brief at all.", fix: "Validated: keep the call an explicit, human, recorded act." },
-      { t: "Confidence needed calibration cues", d: "A confidence signal alone wasn't enough. Leaders wanted to know what drove it. Why is this 'high confidence'? The basis needed to be visible.", fix: "Fixed: tied the confidence signal to a visible evidence-strength rationale." },
+    targetsTitle: "What I'm designing toward",
+    targetsNote: "Targets to validate, not outcomes achieved.",
+    targets: [
+      { t: "Trust the reasoning enough to act", d: "The success signal isn't a score; it's whether a leader acts on a recommendation after tracing its evidence. That's a usability question, and the first thing I'd test." },
+      { t: "The counter-case earns the trust", d: "The bet is that an AI willing to argue against itself is the one a leader will trust. Whether the equal-weight counter-case actually builds credibility needs real leaders to confirm." },
+      { t: "Command stays unmistakably human", d: "Does the deliberate, recorded 'make the call' step make a leader comfortable letting AI structure the brief? That's the deepest tension in the design, and only real use will settle it." },
     ],
   },
 
-  // --- 10 IMPACT ---
-  impact: {
-    headline: "The numbers & what this proves.",
-    note: "Concept work. Figures below are design targets and test outcomes, framed as such, not shipped production metrics.",
-    outcomes: [
-      { v: "1", l: "Structured Brief", s: "replaces the scattered deck" },
-      { v: "5/5", l: "Stayed in Command", s: "human made the call" },
-      { v: "3", l: "Core Flows", s: "designed end-to-end" },
-      { v: "P1–P8", l: "AI Patterns", s: "applied consistently" },
+  // --- 10 FUTURE VISION (concept → product roadmap + planned research) ---
+  futureVision: {
+    headline: "Future vision.",
+    intro:
+      "Crux is a concept I'd genuinely take further. Here's the path from where it is now to something real, and this is where the user-centred work I deliberately haven't done yet comes in, front and centre.",
+    phasesTitle: "From concept to product",
+    phases: [
+      {
+        phase: "Phase 1",
+        title: "Validate with real leaders",
+        items: [
+          "Decision-reconstruction interviews with executives and chiefs of staff. Walk back through recent consequential calls and pressure-test the decision-centric model against how they actually decide.",
+          "Usability testing of the hi-fi design. Do leaders trust the reasoning enough to act on it? Does the equal-weight counter-case build credibility or get skipped? Where do they hesitate?",
+          "Concept testing of the AI-trust patterns: the recommendation, the case against, calibrated confidence, and the recorded human-call gate. That's the riskiest, most important part of the design.",
+        ],
+      },
+      {
+        phase: "Phase 2",
+        title: "Prototype and pilot",
+        items: [
+          "An interactive prototype of the decision brief, to test the recommendation-and-counter-case interaction live rather than on static screens.",
+          "A small pilot with a few decision-makers, tracking whether structured briefs produce calls they can actually defend weeks later.",
+          "Measure the design targets from 'Where It Stands' against real use, not walkthroughs.",
+        ],
+      },
+      {
+        phase: "Phase 3",
+        title: "Design the hard states",
+        items: [
+          "The conflicting-evidence state in depth. It's the hardest and most valuable moment in a real decision, and a concept can only sketch it.",
+          "Bring a board member into the research. The defence audience shaped the product but has so far only been considered second-hand.",
+        ],
+      },
+      {
+        phase: "Phase 4",
+        title: "Bring the family together",
+        items: [
+          "Shared sign-in, shared memory, and one coherent AI-native suite across Slate, Almanac, and Crux, then the steady loop of shipping and learning.",
+        ],
+      },
     ],
-    provesTitle: "What this concept demonstrates",
-    proves: [
-      { t: "Designing AI for the highest stakes", d: "Reasoning transparency, an equal-weight counter-case, calibrated confidence, and human command. The concrete moves that make AI trustworthy where the stakes are highest." },
-      { t: "Reframing data as decisions", d: "A decision-centric IA, validated by a card sort, that treats data as evidence for a call rather than the thing you stare at." },
-      { t: "End-to-end ownership", d: "From decision-reconstruction interviews to a verified hi-fi design. The full arc, with defensibility designed in from the first principle." },
-      { t: "Completing the family", d: "Built on the shared foundation, proving the system spans recruitment, knowledge, and decisions while staying coherent." },
-    ],
-    artifacts: [
-      { t: "Hi-fidelity design", d: "The decision brief, the recommendation-plus-counter-case surface, and the make-the-call step. The designed product, ready to iterate into a build." },
-      { t: "Research synthesis", d: "Decision-reconstruction findings, the anatomy-of-a-decision map, affinity themes, decision-flow map, and competitive teardown." },
-      { t: "IA & flows", d: "Card-sort-validated, decision-centric information architecture and three core flows with AI touchpoints and human gates marked." },
-      { t: "AI-native design system", d: "An executive-grade foundation with a magenta AI-reserved gradient, recommendation and counter-case panels, and calibrated confidence signals." },
-    ],
-    nextTitle: "Where it goes next",
-    next: [
-      "An interactive prototype of the decision brief, to test the recommendation-and-counter-case interaction live",
-      "A decision-quality study tracking whether structured briefs produce measurably more defensible calls",
-      "Bringing the family together: shared sign-in, shared memory, one coherent AI-native suite across Slate, Almanac, and Crux",
-    ],
-    wentWell: [
-      "Reconstructing real decisions (not theorising about good ones) surfaced defensibility, not data access, as the true problem, which reframed the entire product",
-      "Giving the counter-case equal visual weight to the recommendation was the single highest-leverage trust decision, and every leader named it",
-      "Making the call a deliberate, recorded human act resolved the deepest tension, letting AI structure the decision without ever seeming to take it",
-      "The decision-centric IA held up under the card sort. Leaders genuinely think in calls, not dashboards",
-    ],
-    differently: [
-      "Would test with a live, consequential decision rather than a reconstructed one. Real stakes change how people weigh a recommendation",
-      "Should have designed the conflicting-evidence state in more depth. It's the hardest and most valuable moment in a real decision",
-      "Would prototype the confidence-calibration rationale earlier. The signal alone under-delivered until its basis was visible",
-      "Would involve a board member in research. The defence audience shaped the product but was studied only second-hand",
-    ],
+    closingTitle: "The honest summary",
+    closing:
+      "Crux today is a well-researched, fully-designed concept with hi-fi screens. Making it real means putting it in front of the leaders it's for, and the plan for doing that, rigorously, is above. That's the next chapter, and I'd be glad to write it.",
   },
 
   // No live prototype yet - hi-fi concept screens stand in for the build.

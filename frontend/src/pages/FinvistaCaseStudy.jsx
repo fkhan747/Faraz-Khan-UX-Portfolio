@@ -12,7 +12,7 @@ import ProjectNav from "../components/ProjectNav";
 import { Container } from "../components/Grid";
 
 /* -- Reusable section header in portfolio voice -- */
-const SectionLabel = ({ num, name, accent = "#5B9BFF" }) => (
+const SectionLabel = ({ num, name, accent = "#F5379B" }) => (
   <div className="flex items-center gap-4 mb-6">
     <span className="font-mono text-xs uppercase tracking-[0.25em]" style={{ color: accent }}>
       {num} · {name}
@@ -242,7 +242,7 @@ export default function FinvistaCaseStudy() {
         <div className="grid grid-cols-1 gap-6">
           {fv.research.competitive.map((c) => (
             <div key={c.name} className="dark-card rounded-3xl overflow-hidden">
-              <Zoomable src={c.image} alt={`${c.name} app teardown`} caption={`${c.name} — screen-by-screen teardown`} className="bg-white overflow-hidden">
+              <Zoomable src={c.image} alt={`${c.name} app teardown`} caption={`${c.name}: screen-by-screen teardown`} className="bg-white overflow-hidden">
                 <img src={c.image} alt={`${c.name} app teardown`} loading="lazy" className="block w-full h-auto" />
               </Zoomable>
               <div className="p-6">
@@ -273,7 +273,7 @@ export default function FinvistaCaseStudy() {
               {fv.research.findingsTable.rows.map((row, i) => (
                 <tr key={i} className="border-b border-white/5">
                   {row.map((cell, j) => (
-                    <td key={j} className={`p-4 ${j === 0 ? "font-medium" : "text-center font-display font-bold text-lg"} ${cell === "✓" ? "text-[#F5379B]" : cell === "–" ? "text-[#A29CB4]" : ""}`}>
+                    <td key={j} className={`p-4 ${j === 0 ? "font-medium" : "text-center font-display font-bold text-lg"} ${cell === "✓" ? "text-[#F5379B]" : cell === "-" ? "text-[#A29CB4]" : ""}`}>
                       {cell}
                     </td>
                   ))}
@@ -436,7 +436,7 @@ export default function FinvistaCaseStudy() {
           ))}
         </div>
 
-        {/* Final 17 screens */}
+        {/* Final 16 screens */}
         <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">final design: the two-wheeler journey</h3>
         <p className="text-base leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{fv.design.finalDesign.intro}</p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">

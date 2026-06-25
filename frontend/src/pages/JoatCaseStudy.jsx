@@ -84,7 +84,7 @@ export default function JoatCaseStudy() {
 
       {/* 01 OVERVIEW */}
       <SectionWrap data-testid="section-overview">
-        <SectionLabel num="01" name="Overview" />
+        <SectionLabel num="01" name="Project Overview" />
         <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{j.overview.headline}</h2>
 
         <div className="rounded-3xl dark-card text-white p-8 md:p-12 relative overflow-hidden">
@@ -343,7 +343,7 @@ export default function JoatCaseStudy() {
         <div className="flex gap-4 justify-center flex-wrap">
           <a href={`mailto:${PROFILE.email}`} data-testid="case-cta-email" className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-[#C71E73] font-semibold text-sm hover:bg-[#C71E73] hover:text-white transition-colors"><Mail size={16} /> email me</a>
           <Link to="/case/aurora" className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-[#F4F3FA] font-semibold text-sm hover:bg-[#261E3A] transition-colors">read aurora case study</Link>
-          <Link to="/projects" className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-[#F4F3FA] font-semibold text-sm hover:bg-[#261E3A] transition-colors">View All projects</Link>
+          <Link to="/projects" className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-[#F4F3FA] font-semibold text-sm hover:bg-[#261E3A] transition-colors">view all projects</Link>
         </div>
       </SectionWrap>
     </article>

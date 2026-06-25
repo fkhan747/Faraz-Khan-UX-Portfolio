@@ -103,7 +103,7 @@ function calloutFor(headline = "") {
   if (h.includes("problem"))
     return (
       <WhiteCallout label="Core challenge">
-        The data was never wrong. It just took too long to find, so people spent the first minute of every visit orienting instead of reading. The job was to lead with the answer.
+        The data was never wrong. It just took too long to find, so people spent about 90 seconds of every visit orienting instead of reading. The job was to lead with the answer.
       </WhiteCallout>
     );
   return null;
@@ -251,7 +251,7 @@ export default function MeridianCaseStudy() {
         const isTldr = sec.num === "01";
         const artifact = artifactFor(sec.headline);
         return (
-          <section key={sec.num} data-testid={`section-${sec.num}`} className="py-16 md:py-20 border-t border-white/10">
+          <section key={sec.num} data-testid={`section-${sec.num}`} className="py-20 md:py-24 border-t border-white/10">
             <Container>
               <SectionLabel num={sec.num} name={sec.name} />
               {isTldr ? (
@@ -280,7 +280,7 @@ export default function MeridianCaseStudy() {
       })}
 
       {/* FINALE: full-screen reveal */}
-      <section data-testid="section-reveal" className="py-16 md:py-20 border-t border-white/10">
+      <section data-testid="section-reveal" className="py-20 md:py-24 border-t border-white/10">
         <Container>
           <SectionLabel num="✦" name="The full walkthrough" />
           <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-5xl mb-6 case-keep">Eight screens, one system</h2>
@@ -293,7 +293,7 @@ export default function MeridianCaseStudy() {
       </section>
 
       {/* FOOTER */}
-      <section className="py-16 md:py-24 border-t border-white/10 text-center">
+      <section className="py-20 md:py-24 border-t border-white/10 text-center">
         <Container>
           <h2 className="font-display text-3xl md:text-5xl font-black mb-6 case-keep">Thank you for reading.</h2>
           <p className="text-lg text-[#A29CB4] mb-8">Want this kind of clarity for your analytics product?</p>

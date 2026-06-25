@@ -20,10 +20,10 @@ export const aurora = {
     headline: "Project Overview",
     tldrTitle: "TL;DR: Executive Summary",
     tldr:
-      "Aurora is a Helio marketing-tech company in Europe. It was migrating from AngularJS to Angular and used the migration window to fix a legacy, engineer-led UI. I led the redesign of the Recurring Batch Journey configurator and embedded the Helio AI composer into the email canvas, while building a Figma-based design system to align Aurora with Helio's unified brand language. Outcomes: 3:1 click reduction for campaign setup, dev-ready Figma assets linked to user stories, and a streamlined manual dealer-task purchase journey.",
+      "I cut campaign setup from three clicks to one and put an AI composer right inside the email canvas, so writers stopped pasting copy back and forth from ChatGPT. Aurora is a B2B marketing-tech product in Europe, acquired by its parent company Helio, and I used its AngularJS-to-Angular migration as the window to fix a legacy, engineer-led UI. I redesigned the Recurring Batch Journey configurator, embedded the Helio AI composer, and built a Figma design system that brought Aurora in line with Helio's brand and shipped dev-ready assets linked to user stories.",
     facts: [
       { label: "Role", value: "Lead Product Designer" },
-      { label: "Duration", value: "6 Months" },
+      { label: "Duration", value: "~5 Months" },
       { label: "Team", value: "2 PMs, 5 Devs, 1 QA, 2 Designers" },
       { label: "Platform", value: "Web (B2B SaaS · Europe)" },
       { label: "Tools", value: "Figma, FigJam, Azure DevOps" },
@@ -83,7 +83,7 @@ export const aurora = {
     ],
     outOfScope: [
       "Push notification & SMS composer redesigns",
-      "Backend scheduling engine & queue behaviour",
+      "Backend scheduling engine & queue behavior",
       "Audience builder & segmentation rules",
       "Reporting and analytics dashboards",
       "Salesforce Commerce Cloud integration UX",
@@ -180,7 +180,7 @@ export const aurora = {
       { t: "Design for Trust", d: "Surface contact counts, timezone resolution, dashboard warnings and alerts inline so users can verify what will happen before they ship." },
     ],
     keyInsight:
-      "Power CRM managers ran 4–6 campaigns per week but spent ~22 minutes on each. 14 of those minutes went to scheduling and copywriting, the two areas with zero in-product support.",
+      "Power CRM managers ran 4-6 campaigns per week but spent ~22 minutes on each. 14 of those minutes went to scheduling and copywriting, the two areas with zero in-product support.",
   },
 
   // --- 05 DESIGN ---
@@ -189,16 +189,16 @@ export const aurora = {
     sketchesIntro:
       "Early divergent exploration on paper before committing to a direction. Sketching let me move fast across layouts and AI-panel placements before locking the structure with the team.",
     sketches: [
-      { src: A("sketch_01_rbj_weekly.svg"), tag: "Hand-drawn", title: "Journey · Weekly Cadence", desc: "Tabbed configurator with persistent navigation. Audience, Timezone, Activation, Scheduling stacked as labelled blocks. Cadence pills (Min/Hr/Day/Wk/Mo/Custom) with day-of-week chips below." },
+      { src: A("sketch_01_rbj_weekly.svg"), tag: "Hand-drawn", title: "Journey · Weekly Cadence", desc: "Tabbed configurator with persistent navigation. Audience, Timezone, Activation, Scheduling stacked as labeled blocks. Cadence pills (Min/Hr/Day/Wk/Mo/Custom) with day-of-week chips below." },
       { src: A("sketch_02_helio_panel.svg"), tag: "Hand-drawn", title: "Composer · Helio AI Panel", desc: "Email canvas on the left with a selected text block, Helio AI panel docked on the right. Quick-action chips (Shorter / Tone / Re-write / Spelling), 5-variation generator, and explicit Insert-to-text-block CTA." },
     ],
     wireframesIntro:
-      "Greybox wireframes locked the information hierarchy and layout density before any visual styling. Used in week-3 reviews to validate flow with PMs and stakeholders without anyone debating colours.",
+      "Graybox wireframes locked the information hierarchy and layout density before any visual styling. Used in week-3 reviews to validate flow with PMs and stakeholders without anyone debating colors.",
     wireframes: [
       { src: A("wf_03_type_tab.svg"), tag: "Lo-fi · 01", title: "Journey · Type Tab", desc: "Asset selection, naming, folder path, labels & description, composed as discrete blocks to support per-field validation and progressive disclosure." },
       { src: A("wf_04_weekly_scheduling.svg"), tag: "Lo-fi · 02", title: "Journey · Weekly Scheduling", desc: "Cadence pill nav with chips for day selection and time-of-day inputs per day. Locked the table-of-times layout before applying Aurora brand styling." },
       { src: A("wf_05_helio_quick_actions.svg"), tag: "Lo-fi · 03", title: "Composer · AI Quick Actions", desc: "Composer left, Helio AI panel right. Action chip grid (Shorter / Tone / Re-write / Spelling) above the prompt input. Confirmed the 2x2 grid pattern over a vertical list." },
-      { src: A("wf_06_subject_variations.svg"), tag: "Lo-fi · 04", title: "Composer · Subject-Line Variations", desc: "Five-option variation picker stacked vertically. Locked the radio-style selection pattern and the regeneration button before colour and type pass." },
+      { src: A("wf_06_subject_variations.svg"), tag: "Lo-fi · 04", title: "Composer · Subject-Line Variations", desc: "Five-option variation picker stacked vertically. Locked the radio-style selection pattern and the regeneration button before color and type pass." },
     ],
     finalIntro:
       "Hi-fidelity screens shipped to engineering via Figma, with each frame linked to its Azure DevOps user story. Aurora brand teal (#2B8679) and the Aurora Engage component library applied uniformly. 11 screens across the Recurring Batch Journey configurator and the Helio AI composer.",
@@ -207,7 +207,7 @@ export const aurora = {
       { src: A("02_RBJ_Type_Tab_All_Fields.jpg"), tag: "Hi-fi · RBJ · 02", title: "RBJ · Type Tab: All Fields", desc: "\"All Fields\" view adds API Name, Labels, Description, Asset, and Campaign / Message analytics tags. Progressive disclosure for power users without bloating the default view." },
       { src: A("03_RBJ_Content_Tab.jpg"), tag: "Hi-fi · RBJ · 03", title: "RBJ · Content Tab", desc: "Asset selection from published messages, templates, mobile-push, or SMS. Live preview confirms the asset shape and links analytics tag pass-through to the tracker." },
       { src: A("04_RBJ_Properties_Weekly.jpg"), tag: "Hi-fi · RBJ · 04", title: "RBJ · Properties: Weekly Schedule", desc: "Audience + segment + timezone + activation window + Weekly cadence with day-of-week chips and per-day time inputs. Plain-language confirmation banner makes the schedule unambiguous." },
-      { src: A("05_RBJ_Properties_Monthly.jpg"), tag: "Hi-fi · RBJ · 05", title: "RBJ · Properties: Monthly Specific", desc: "Monthly cadence with the 1–31 day-grid selector. Timezone-resolved confirmation message: \"the scheduled time will be executed in Europe/Paris UTC+01:00\"." },
+      { src: A("05_RBJ_Properties_Monthly.jpg"), tag: "Hi-fi · RBJ · 05", title: "RBJ · Properties: Monthly Specific", desc: "Monthly cadence with the 1-31 day-grid selector. Timezone-resolved confirmation message: \"the scheduled time will be executed in Europe/Paris UTC+01:00\"." },
       { src: A("06_RBJ_Properties_Custom.jpg"), tag: "Hi-fi · RBJ · 06", title: "RBJ · Properties: Custom Cadence", desc: "Custom cadence for the long tail of edge-case schedules. Falls back to first-week-of-month, last-Sunday-of-quarter, and similar patterns marketers asked for in research." },
       { src: A("07_Composer_Empty_AI.jpg"), tag: "Hi-fi · Helio AI · 07", title: "Composer · Helio AI Empty State", desc: "\"How can I help you today?\" One text input, no clutter. The panel waits for the author to lead rather than presenting an option salad up front." },
       { src: A("08_Composer_Text_Block_Selected.jpg"), tag: "Hi-fi · Helio AI · 08", title: "Composer · Text Block Selected", desc: "Once a text block is highlighted in the canvas, the empty Helio AI panel surfaces with \"How can I help you today?\", ready to receive a prompt or quick-action click." },
@@ -260,7 +260,7 @@ export const aurora = {
       "Breadcrumbs", "Progress", "Date Picker", "Cards", "Modal", "Empty State", "Table",
     ],
     systemOutcomes:
-      "The Aurora Engage UI Kit shipped with 52 reusable components, 8 core token sets, and full coverage of the Recurring Batch Journey + Helio AI flows. Three other product surfaces (Audience Builder, Reports, Admin) back-filled from the kit with zero new design work. Pure leverage.",
+      "The Aurora Engage UI Kit shipped with 52 reusable components, 8 core token sets, and full coverage of the Recurring Batch Journey + Helio AI flows. Three other product surfaces (Audience Builder, Reports, Admin) back-filled from the kit with zero new design work.",
     crossProduct:
       "To break the silo problem, the Aurora Engage UI Kit was reviewed monthly with designers from other Helio products. Shared tokens and a documented contribution model ended the \"every new feature looks slightly different\" pattern that had eroded brand trust.",
   },
@@ -270,10 +270,10 @@ export const aurora = {
   validation: {
     headline: "Refined through iterative design, not a formal usability study",
     intro:
-      "I didn't run a formal usability study on this engagement. Instead the work was sharpened through repeated design iterations and reviews with product and engineering: rough sketches to pressure-test the concept, greybox wireframes to lock hierarchy, hi-fi against the new design system, and sign-off before handoff.",
+      "I didn't run a formal usability study on this engagement. Instead the work was sharpened through repeated design iterations and reviews with product and engineering: rough sketches to pressure-test the concept, graybox wireframes to lock hierarchy, hi-fi against the new design system, and sign-off before handoff.",
     rounds: [
       { n: 1, t: "Concept sketches", d: "Sketched the tabbed configurator and the docked AI composer by hand to agree on the basic shape with product before committing to pixels." },
-      { n: 2, t: "Greybox wireframes", d: "Locked information hierarchy and density (the cadence pills, the per-day time table, the AI quick-action grid) in greyscale and reviewed them with PMs and stakeholders, so no one debated colour yet." },
+      { n: 2, t: "Graybox wireframes", d: "Locked information hierarchy and density (the cadence pills, the per-day time table, the AI quick-action grid) in grayscale and reviewed them with PMs and stakeholders, so no one debated color yet." },
       { n: 3, t: "Hi-fi on the design system", d: "Applied the Aurora Engage UI kit and pressure-tested every component and state, surfacing gaps that fed straight back into the system tokens." },
       { n: 4, t: "Migration-aligned refinement", d: "Worked alongside engineering through the AngularJS to Angular migration to keep the design implementable, refining edge cases like the Custom cadence that proved more complex than expected." },
       { n: 5, t: "Stakeholder sign-off & handoff", d: "Walked the final Figma prototype through product and engineering for sign-off, with each frame linked to its user story before dev handoff." },
@@ -289,7 +289,7 @@ export const aurora = {
       "The three-tab structure passed product and engineering review in week 1, so implementation could start early.",
       "Helio AI integration stayed on schedule thanks to a streaming-first contract negotiated with backend in week 3.",
       "The plain-language cadence summary (\"This will send every Wednesday at 9am\") was the change product and stakeholders pointed to most as making the schedule unambiguous.",
-      "The Aurora Engage UI kit back-filled three other product surfaces with no extra design work, pure leverage across the Helio portfolio.",
+      "The Aurora Engage UI kit back-filled three other product surfaces with no extra design work across the Helio portfolio.",
     ],
     differently: [
       "I didn't run a formal usability study on this project. Next time I'd validate the flow with real campaign managers before handoff, not just internal and stakeholder review.",

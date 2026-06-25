@@ -50,7 +50,7 @@ const EXPERIENCE = [
 ];
 
 const EARLIER =
-  "Earlier roles: Sr. UX/UI Designer at Jack of All Threads, and Graphic Designer at Jainawin Retails & Prime Advertising (2011–2016).";
+  "Earlier roles: Sr. UX/UI Designer at Jack of All Threads, and Graphic Designer at Jainawin Retails & Prime Advertising (2011-2016).";
 
 const COMPETENCIES = [
   "UX Strategy & Leadership",
@@ -247,7 +247,7 @@ export default function Resume() {
 
               <RailCard icon={<GraduationCap size={14} />} title="education">
                 <p className="text-sm font-semibold">B.Sc. Multimedia</p>
-                <p className="text-xs text-[#A29CB4] mt-0.5">Vishwakarma Creative-i College, Pune · 2008–2011</p>
+                <p className="text-xs text-[#A29CB4] mt-0.5">Vishwakarma Creative-i College, Pune · 2008-2011</p>
               </RailCard>
             </div>
           </div>

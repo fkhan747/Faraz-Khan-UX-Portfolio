@@ -219,7 +219,7 @@ const CHARTS = {
   table: ChartTable,
 };
 
-// One labelled region: a hand-drawn box, a handwritten caption, and a chart.
+// One labeled region: a hand-drawn box, a handwritten caption, and a chart.
 function Region({ x, y, w, h, label, kind, seed }) {
   const Chart = CHARTS[kind];
   const labelY = y + 14;

@@ -87,7 +87,7 @@ export const finvista = {
     dimensions: [
       {
         title: "Multi-Persona Complexity",
-        desc: "Three distinct user groups: customers (DIY), sales centre executives, and dealership agents. Each had different goals, technical literacy, and interaction contexts.",
+        desc: "Two primary personas: customers applying on their own (DIY) and sales centre executives processing loans for them, with dealership agents working inside the same executive flow as a sub-mode. Each had different goals, technical literacy, and interaction contexts.",
       },
       {
         title: "Information Overload",
@@ -152,18 +152,18 @@ export const finvista = {
     findingsTable: {
       headers: ["Pattern", "Navi", "KreditBee", "Bajaj Finserv", "Home Credit", "Muthoot"],
       rows: [
-        ["Contextual navigation", "✓", "✓", "✓", "–", "–"],
-        ["One-step-at-a-time", "✓", "–", "✓", "✓", "–"],
-        ["Micro-assistive text", "✓", "✓", "–", "✓", "–"],
-        ["Progress tracking", "–", "✓", "✓", "–", "✓"],
-        ["Help always available", "✓", "✓", "✓", "✓", "–"],
-        ["Future process indication", "–", "✓", "–", "–", "–"],
-        ["Micro-interactions", "✓", "–", "✓", "–", "–"],
-        ["Multi-product support", "–", "–", "✓", "–", "–"],
+        ["Contextual navigation", "✓", "✓", "✓", "-", "-"],
+        ["One-step-at-a-time", "✓", "-", "✓", "✓", "-"],
+        ["Micro-assistive text", "✓", "✓", "-", "✓", "-"],
+        ["Progress tracking", "-", "✓", "✓", "-", "✓"],
+        ["Help always available", "✓", "✓", "✓", "✓", "-"],
+        ["Future process indication", "-", "✓", "-", "-", "-"],
+        ["Micro-interactions", "✓", "-", "✓", "-", "-"],
+        ["Multi-product support", "-", "-", "✓", "-", "-"],
       ],
     },
     keyInsight:
-      "Competitors excelled at single-product lending flows, but none had solved the multi-product, multi-persona challenge at scale. That became our main opportunity: one flexible system serving 6 products and 3 user types instead of 6 separate apps.",
+      "Competitors excelled at single-product lending flows, but none had solved the multi-product, multi-persona challenge at scale. That became our main opportunity: one flexible system serving 6 products and 2 primary personas, customers and executives, instead of 6 separate apps.",
     approach: [
       { title: "Material Design Foundation", desc: "Use Material Design with card-based layouts for better adoptability across Android's dominant user base." },
       { title: "Clean & Minimalistic", desc: "Keep the visual language uncluttered. This matters most for users with limited digital literacy." },
@@ -185,7 +185,7 @@ export const finvista = {
         name: "Rahul Sharma",
         role: "Sales Centre Executive",
         quote:
-          "I am focused on delivering exceptional customer service and facilitating a smooth loan application process for existing customers, leveraging both phone support and the mobile app to provide personalized assistance and guidance.",
+          "I am focused on giving existing customers a smooth loan application, using both phone support and the app to help them through it.",
         challenges: [
           { t: "Technical Issues", d: "May encounter glitches with the mobile app while assisting customers remotely. Needs reliable tech support and troubleshooting resources." },
           { t: "Time Constraints", d: "Often handles multiple customer inquiries simultaneously as a sales centre executive." },
@@ -196,7 +196,7 @@ export const finvista = {
           { t: "Efficient Assistance", d: "Provide prompt and effective assistance to existing customers applying for a loan, ensuring a positive experience." },
           { t: "Clear Communication", d: "Explain complex terms and procedures in a simple, understandable manner." },
           { t: "Personalized Service", d: "Tailor loan options and recommendations to each customer's unique financial needs and circumstances." },
-          { t: "Seamless Integration", d: "Seamless phone-to-app integration with access to customer information and application status updates in real-time." },
+          { t: "Phone-to-App Continuity", d: "Phone-to-app continuity, with customer information and live application status in one place." },
         ],
       },
       {
@@ -205,7 +205,7 @@ export const finvista = {
         quote:
           "I am looking for financial help via a transparent service that makes the loan application process convenient and efficient for my busy lifestyle.",
         challenges: [
-          { t: "Security Concerns", d: "Cautious about sharing personal and financial information online. Expects robust security measures to protect her data." },
+          { t: "Security Concerns", d: "Cautious about sharing personal and financial information online. Wants clear, visible safeguards before she hands over her data." },
           { t: "Understanding Loan Terms", d: "As a first-time applicant, not familiar with financial jargon. Needs clear explanations of terms and conditions to make informed decisions." },
           { t: "Customer Support", d: "Expects prompt and helpful support through the mobile app for any questions or issues during the application process." },
         ],
@@ -294,7 +294,7 @@ export const finvista = {
       ],
     },
     keyDecisions: [
-      { t: "No-Scroll Screen Design", d: "Adopted a no-scroll approach presenting precise, relevant information on a single screen. This reduced cognitive overload and created a focused interaction model, which mattered for agents processing 15–20 applications daily." },
+      { t: "No-Scroll Screen Design", d: "Adopted a no-scroll approach presenting precise, relevant information on a single screen. This reduced cognitive overload and created a focused interaction model, which mattered for agents processing 15-20 applications daily." },
       { t: "Dual Progress System", d: "A two-tier progress indicator: top-level percentage bar (\"45% Complete\") plus step-level indicator (\"Step 5 of 11\"). Keeps users oriented without overwhelming them with the full scope upfront." },
       { t: "Assistive Onboarding", d: "Each step opens with supportive messaging: \"Hello! Let's begin by reviewing the basic information.\" Conversational tone reduces anxiety for first-time borrowers navigating a bureaucratic process." },
       { t: "Pre-verified Data Display", d: "For existing customers, pre-populated fields display with verification checkmarks and edit icons. One-tap confirmation (\"Yes, that's right\") or update option reduces friction for repeat borrowers." },
@@ -306,9 +306,9 @@ export const finvista = {
     headline:
       "A component library built for scale, powering 6 products with consistent patterns",
     intro:
-      "I created a comprehensive design system with 100+ components in Figma, establishing a shared visual language across all loan products. Built with auto-layout, variants, and design tokens for seamless developer handoff.",
+      "I created a comprehensive design system with 100+ components in Figma, establishing a shared visual language across all loan products. Built with auto-layout, variants, and design tokens so developer handoff was clean.",
     panelsIntro:
-      "100+ components organized into foundational tokens, form controls, navigation patterns, and content containers. Built in Figma with auto-layout, variants, and design tokens for seamless developer handoff.",
+      "100+ components organized into foundational tokens, form controls, navigation patterns, and content containers. Built in Figma with auto-layout and variants so engineering could pull components straight into the build.",
     panels: [
       { src: F("022-foundation-color-palette-typography-scale-and-spacing-system.png"), caption: "Foundation: Color palette, typography scale, and spacing system" },
       { src: F("023-icons-illustrations-functional-icons-multi-color-variants-an.png"), caption: "Icons & Illustrations: Functional icons, multi-color variants, and contextual graphics" },

@@ -3,7 +3,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { projects, concepts } from "../data/content";
 
 /**
- * ProjectNav — compact Previous / Next project pager for the top of a case
+ * ProjectNav - compact Previous / Next project pager for the top of a case
  * study, sat on the same row as the "all projects" back-link (Next on the
  * right edge).
  *

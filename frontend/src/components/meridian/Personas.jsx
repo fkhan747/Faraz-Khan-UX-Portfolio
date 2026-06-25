@@ -5,7 +5,7 @@ import React from "react";
 const USERS = [
   {
     label: "Leadership & provost",
-    desc: "Reads at the highest altitude. Wants the headline across all four domains in ninety seconds, multi-year trends, and forecasts flagged as forecasts.",
+    desc: "Wants the whole institution in one glance: the headline across all four domains in ninety seconds, multi-year trends, and forecasts flagged as forecasts.",
   },
   {
     label: "Enrollment management",

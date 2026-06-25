@@ -510,7 +510,7 @@ const ToastsSection = () => (
 /* ---------- 09 · TEXT FIELDS ---------- */
 
 /* FinVista fields are underline / bottom-border style (label on top, value,
-   single bottom rule) — matching the live login + form screens. */
+   single bottom rule) - matching the live login + form screens. */
 const BORDER_BY_STATE = {
   default: "border-b border-[#DCDCDC]",
   focus: "border-b-2 border-[#0E8943]",

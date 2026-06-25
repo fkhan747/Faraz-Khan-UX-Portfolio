@@ -8,11 +8,8 @@ export const meridian = {
   title: "Meridian Institute Analytics",
   subtitle:
     "One analytics platform for an entire university, built so leaders can read it in seconds instead of minutes",
-  client: "Meridian Institute of Technology (anonymized)",
-  role: "Lead UX Designer",
   hero: {
-    eyebrow: "UX Case Study · Higher-Ed Analytics · Power BI",
-    meta: "Role: Lead UX designer (UX + data viz)  ·  Domain: Higher-ed institutional analytics  ·  Platform: Web, aligned to Power BI",
+    eyebrow: "UX Case Study · Higher-ed Analytics · Power BI",
     facts: [
       { label: "Role", value: "Lead UX designer (UX + data viz)" },
       { label: "Domain", value: "Higher-ed institutional analytics" },
@@ -21,7 +18,7 @@ export const meridian = {
     stats: [
       { value: "4", label: "Departments unified" },
       { value: "~40", label: "Legacy views replaced" },
-      { value: "14,700", label: "Applications tracked" },
+      { value: "14,170", label: "Applications tracked" },
       { value: "10+ yrs", label: "Of history in one view" },
     ],
   },
@@ -31,7 +28,7 @@ Meridian's leaders ran the place off four disconnected Power BI dashboards. The 
 
 The redesign: one platform, one visual language, a cockpit on top, consistent drill-downs underneath. Eight screens, defaulting to multi-year trends.
 
-Leaders glance and trust it. Analysts drill to the cohort.
+Leaders can glance and trust it, while analysts drill down to the cohort.
 
 ## Context and primary users
 
@@ -53,7 +50,7 @@ I designed around six readers, from a provost who needs the headline in ninety s
 
 ## The problem: four dashboards that made you work before they told you anything
 
-Four Power BI reports. Same maroon, no shared layout, filter logic, or chart language. Leadership never said the data was wrong, just that it took too long to find what they came for. People burned 30 to 60 seconds every visit just orienting.
+Four Power BI reports. Same maroon, no shared layout, filter logic, or chart language. Leadership never said the data was wrong, just that it took too long to find what they came for. People burned about 90 seconds every visit just orienting.
 
 So I audited all four against Nielsen's heuristics on a 0 to 4 severity scale, every finding tied to a real user and task.
 
@@ -123,7 +120,7 @@ Success was behavioral. A first-time user names any screen's headline in about f
 
 Six passes, looping back often. The discipline: align with what Power BI can render before drawing anything pretty.
 
-I audited the four legacy dashboards, mapped every idea to native behavior (drill-through, not a custom framework), then collapsed them into one spine, greyscale first.
+I audited the four legacy dashboards, mapped every idea to native behavior (drill-through, not a custom framework), then collapsed them into one spine, grayscale first.
 
 AI came last, on purpose. Ask Meridian AI stays optional, audited for bias, human in the loop. A guide, not the decision-maker.
 
@@ -171,7 +168,7 @@ One "admissions" template would have been easier. I chose not to. Undergrad opti
 
 ## Module deep-dive: research and HR
 
-Undergrad and grad are one pipeline. Research and HR are different animals. Research is a money-and-output story told over years. HR is a workforce story where the key numbers are also the most sensitive. Both legacy dashboards had admissions' disease (maroon chrome, pies, tiny type), but the cure differed because the questions did.
+Undergrad and grad are one pipeline. Research and HR are different problems. Research is a money-and-output story told over years, while HR is a workforce story where the key numbers are also the most sensitive. Both legacy dashboards had the same flaws as admissions, with maroon chrome, pies, and tiny type, but the fix differed because the questions did.
 
 I kept the overview-and-drill-down spine, then changed the top-line KPIs, the time horizon, and how I handled demographic data.
 

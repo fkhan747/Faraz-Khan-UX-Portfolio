@@ -17,7 +17,7 @@ export const recruitos = {
   hero: {
     // Concept work -> research-backed figures, framed honestly as such in copy.
     stats: [
-      { value: "5–12", label: "Tools per desk" },
+      { value: "5-12", label: "Tools per desk" },
       { value: "40%+", label: "Time lost to admin" },
       { value: "~17 hrs", label: "Reclaimable / week" },
     ],
@@ -28,7 +28,7 @@ export const recruitos = {
     headline: "An AI recruiting workspace for staffing agencies, built around how recruiters actually work.",
     tldrTitle: "TL;DR / Concept Summary",
     tldr:
-      "A recruiter's day is a tab-juggling act: an ATS, LinkedIn, three job boards, a spreadsheet, two inboxes, and somewhere in the middle, a person to actually call. The job stopped being recruiting and became data entry. Recruiters now lose 40%+ of their time to non-recruiting work like updating systems and writing status reports (Aqore, 2026). Slate rebuilds the desk around one idea, the project rather than the tool, with an AI copilot underneath that sources, ranks, drafts the outreach, and writes the client update. The catch I cared about most: the AI never sends anything. It proposes, the recruiter decides. Every suggestion shows its confidence and links back to where it came from. I built this from desk research, not a brief. It's a real, documented problem, re-framed and designed end to end, through to a working interactive prototype.",
+      "A recruiter's day is a tab-juggling act across an ATS, LinkedIn, job boards, and spreadsheets, until the job becomes data entry. Recruiters lose 40%+ of their time to non-recruiting work (Aqore, 2026). Slate rebuilds the desk around the project, not the tool, with an AI copilot that sources, ranks, and drafts, but never sends. The recruiter decides, and every suggestion shows its confidence and links to its source. Built from desk research, end to end, through to a working prototype.",
     badge: "Concept · self-initiated · not client work",
     facts: [
       { label: "Type", value: "AI-native product concept" },
@@ -76,7 +76,7 @@ export const recruitos = {
         name: "Meera Joshi",
         initials: "MJ",
         role: "Agency Recruiter · primary",
-        context: "Runs 8–12 open roles at once across 3–4 client accounts. Lives in her inbox, LinkedIn, and the ATS, usually all at once. Resents all three.",
+        context: "Runs 8-12 open roles at once across 3-4 client accounts. Lives in her inbox, LinkedIn, and the ATS, usually all at once. Resents all three.",
         goals: [
           "Get a qualified shortlist in front of the client before a competitor does",
           "Stop wasting hours screening candidates who were never a fit",
@@ -94,7 +94,7 @@ export const recruitos = {
         name: "Daniel Okafor",
         initials: "DO",
         role: "Agency Owner",
-        context: "Runs a 14-person agency. Watches margin leak into a stack of tools that don't talk to each other. The research pegs that leakage at 15–25% (Aqore, 2026).",
+        context: "Runs a 14-person agency. Watches margin leak into a stack of tools that don't talk to each other. The research pegs that leakage at 15-25% (Aqore, 2026).",
         goals: [
           "Keep relationships and pipeline knowledge when a recruiter leaves",
           "See where every role actually stands without chasing people",
@@ -112,7 +112,7 @@ export const recruitos = {
         name: "Priya Raman",
         initials: "PR",
         role: "Client · Hiring Manager",
-        context: "A hiring manager at a client company, briefing 2–3 agencies on the same role and judging them on speed and signal.",
+        context: "A hiring manager at a client company, briefing 2-3 agencies on the same role and judging them on speed and signal.",
         goals: [
           "Get a small, high-signal shortlist, not a flood of CVs",
           "Understand why each candidate was put forward",
@@ -157,19 +157,19 @@ export const recruitos = {
     affinityIntro:
       "The recurring problems from the research grouped into four themes. Each one is a place where the workflow leaks time or trust.",
     affinityThemes: [
-      { t: "The tool tax", d: "Agency recruiters run across 5–12 separate tools with no shared context. The same candidate gets typed in four times; nothing syncs." },
+      { t: "The tool tax", d: "Agency recruiters run across 5-12 separate tools with no shared context. The same candidate gets typed in four times; nothing syncs." },
       { t: "The admin sinkhole", d: "40%+ of a recruiter's time goes to non-recruiting tasks: data entry, scheduling, status reports. Time-to-hire has crept to 44 days." },
       { t: "Volume over signal", d: "Pressure to look busy pushes recruiters toward sending CV volume instead of a reasoned shortlist, which clients quietly resent." },
       { t: "The memory leak", d: "Relationships, client quirks, and pipeline context are individual, not institutional. When a recruiter leaves, the business loses it." },
     ],
     insightsTitle: "Three insights that drove the design",
     insights: [
-      { t: "The job isn't sourcing, it's judgement", d: "Recruiters add value by judging fit and managing relationships. Sourcing and admin are necessary friction. AI should absorb the friction and amplify the judgement, never replace it.", link: "→ AI proposes, recruiter disposes (Principle 1)" },
+      { t: "The job isn't sourcing, it's judgement", d: "Recruiters add value by judging fit and managing relationships. Sourcing and admin are necessary friction. AI should take the grunt work off the desk so the recruiter spends the time judging fit, not doing data entry.", link: "→ AI proposes, recruiter disposes (Principle 1)" },
       { t: "The unit of work is the engagement, not the candidate", d: "Recruiters think in roles and accounts, but tools are built around candidate records or job postings. The mental model and the IA are misaligned.", link: "→ Project-centric architecture (Principle 2)" },
       { t: "Trust is earned by showing your work", d: "A sceptical professional won't accept an AI score on faith. Every AI output needs a confidence level and a traceable reason, or it gets ignored.", link: "→ Confidence + provenance on every AI output (Principle 3)" },
     ],
     keyInsight:
-      "Recruiters don't need software that does the recruiting. They need software that does the admin, surfaces the signal, and gets out of the way of the judgement, visibly enough that they trust it.",
+      "Recruiters don't need software that does the recruiting. They need software that handles the admin and points them at the candidates worth their time, without hiding how it got there.",
   },
 
   // --- 03 THE BROKEN STACK (Ecosystem + heuristics + teardown) ---
@@ -230,7 +230,7 @@ export const recruitos = {
       "Slate is an AI recruiting workspace for staffing agencies, not HR departments. It organises everything around the engagement and gives recruiters an AI copilot that sources, ranks, drafts, and reports. The recruiter stays the decision-maker on everything that matters. It is not an HRIS, not a job board, and not an ATS with a chatbot stapled on.",
     isItList: [
       "A project-centric workspace where every engagement is a project",
-      "An AI copilot that does the admin and surfaces the signal",
+      "An AI copilot that does the admin and flags the candidates worth a look",
       "A system that earns trust by showing confidence + provenance",
     ],
     isNotList: [
@@ -254,8 +254,8 @@ export const recruitos = {
     principles: [
       { t: "AI proposes, recruiter disposes", d: "Every consequential action is gated behind a human: sending outreach, advancing a candidate, sharing a shortlist. The AI does the work up to the moment of consequence, then hands the decision back.", from: "Trust is the #1 barrier to AI adoption in hiring." },
       { t: "Project-centric over record-centric", d: "Organise by engagement, not by candidate or job. The architecture matches how recruiters already think, so nothing has to be relearned.", from: "The unit of work is the engagement, not the candidate." },
-      { t: "Show your work, always", d: "No AI output without a confidence level and clickable provenance. Trust is a feature you build, not a tone you adopt.", from: "A sceptical professional won't act on a score they can't check." },
-      { t: "Absorb the admin, amplify the signal", d: "Automate re-entry, summarisation, and reporting; spend the saved attention surfacing what matters. Fast and human, not heavy and clever.", from: "40%+ of the desk's time is lost to non-recruiting work." },
+      { t: "Show your work, always", d: "No AI output without a confidence level and clickable provenance. So every AI suggestion ships with how sure it is and a link back to where it came from.", from: "A sceptical professional won't act on a score they can't check." },
+      { t: "Do the admin, free up the judgement", d: "Automate re-entry, summarisation, and reporting; spend the saved attention on the candidates that matter. Fast and human, not heavy and clever.", from: "40%+ of the desk's time is lost to non-recruiting work." },
     ],
   },
 
@@ -295,9 +295,9 @@ export const recruitos = {
   design: {
     headline: "Building it.",
     wireframesIntro:
-      "Low-fidelity, greyscale wireframes first, to lock structure and the AI-trust patterns before any colour or brand. The questions at this stage: where does the copilot live, how does a confidence score read at a glance, and how does provenance expand without burying the decision?",
+      "Low-fidelity, grayscale wireframes first, to lock structure and the AI-trust patterns before any color or brand. The questions at this stage: where does the copilot live, how does a confidence score read at a glance, and how does provenance expand without burying the decision?",
     wireframes: [
-      { src: S("wf-01-workspace.png"), tag: "Lo-fi · 01", title: "Project workspace", desc: "The signature view in greyscale: ranked candidate table left, AI copilot rail right. Locked the two-column relationship and the at-a-glance fit column before styling." },
+      { src: S("wf-01-workspace.png"), tag: "Lo-fi · 01", title: "Project workspace", desc: "The signature view in grayscale: ranked candidate table left, AI copilot rail right. Locked the two-column relationship and the at-a-glance fit column before styling." },
       { src: S("wf-02-analysis.png"), tag: "Lo-fi · 02", title: "AI candidate analysis", desc: "The 'wow' moment, structurally: summary, fit score, skills, and red flags, each with a confidence chip and an expandable 'why'. Provenance as a first-class block, not a tooltip afterthought." },
       { src: S("wf-03-outreach.png"), tag: "Lo-fi · 03", title: "AI outreach composer", desc: "AI-drafted message with the human gate explicit. Edit and send are the recruiter's, never automatic. Established the propose-then-approve pattern reused across the product." },
       { src: S("wf-04-report.png"), tag: "Lo-fi · 04", title: "Client report generator", desc: "One-click status assembled from project state, with the recruiter reviewing before it's shared. Killed the dreaded Friday copy-paste." },
@@ -311,7 +311,7 @@ export const recruitos = {
       { t: "Project → Client update", d: "Project state → AI generates status report → recruiter reviews → shared with client. AI touchpoint: generation. Human gate: review before share." },
     ],
     finalIntro:
-      "From greyscale to a working, clickable product. The screens below are captured from the live Slate prototype: Google / Material-3 design language, a Gemini-style gradient reserved exclusively for AI surfaces, and the ✦ sparkle marking every AI action. This is not a mock-up of screens; it's the real prototype you can open and click through. It demonstrates intent. It doesn't claim results.",
+      "From grayscale to a working, clickable product. The screens below are captured from the live Slate prototype: Google / Material-3 design language, a Gemini-style gradient reserved exclusively for AI surfaces, and the ✦ sparkle marking every AI action. It's the real prototype, not a screen mock-up: you can open it and click through. It shows the intent without claiming results.",
     finalScreens: [
       { src: S("01-overview.png"), tag: "Prototype · 01", title: "Overview", desc: "The agency at a glance: active projects, pipeline health, and what the copilot thinks needs attention today. The global layer above the project workspace." },
       { src: S("02-projects.png"), tag: "Prototype · 02", title: "Projects", desc: "Every engagement as a project, the home base of the whole product. Status, client, and candidate counts in one scannable list." },
@@ -335,13 +335,13 @@ export const recruitos = {
       { id: "P1", t: "Confidence + provenance", d: "Every AI output, whether a fit score, summary, or red flag, carries a confidence level and a clickable trail to the source it came from. The single most important trust move in the product.", featured: true },
       { id: "P2", t: "Human in the loop", d: "Consequential actions (send outreach, advance a candidate, share a report) are always gated behind a person. The AI proposes; the recruiter approves.", featured: true },
       { id: "P3", t: "Progressive disclosure", d: "AI reasoning starts collapsed and expands on demand. A glanceable answer for the fast path, the full 'why' one click away for when it matters." },
-      { id: "P5", t: "Editable AI output", d: "Nothing the AI writes is final. Drafts and summaries are starting points the recruiter shapes, keeping the human voice and judgement in the loop." },
-      { id: "P8", t: "Graceful uncertainty", d: "When the AI isn't sure, it says so: low-confidence states, 'not enough signal' messages, and honest gaps instead of confident-sounding guesses." },
+      { id: "P4", t: "Editable AI output", d: "Nothing the AI writes is final. Drafts and summaries are starting points the recruiter shapes, keeping the human voice and judgement in the loop." },
+      { id: "P5", t: "Graceful uncertainty", d: "When the AI isn't sure, it says so: low-confidence states, 'not enough signal' messages, and honest gaps instead of confident-sounding guesses." },
     ],
     decisionsTitle: "AI design decisions",
     decisions: [
       { t: "A gradient reserved for AI", d: "A Gemini-style gradient and the ✦ sparkle appear only on AI surfaces, so users always know, at a glance, when they're looking at a machine's output versus their own data." },
-      { t: "Confidence as a chip, not a number dump", d: "Confidence is shown as a calm high/medium/low chip with colour, not a false-precision percentage. It stays honest about the fuzziness without overstating it." },
+      { t: "Confidence as a chip, not a number dump", d: "Confidence is shown as a calm high/medium/low chip with color, not a false-precision percentage. It stays honest about the fuzziness without overstating it." },
       { t: "Provenance you can click", d: "Every AI claim links back to the resume line, profile, or note it drew from, turning 'trust me' into 'check for yourself'." },
     ],
   },
@@ -437,7 +437,7 @@ export const recruitos = {
         phase: "Phase 2",
         title: "Pilot with a few agencies",
         items: [
-          "A small private beta with 5–10 independent recruiters, the beachhead the research points to.",
+          "A small private beta with 5-10 independent recruiters, the beachhead the research points to.",
           "Diary studies and real-workflow testing over weeks, not minutes. It's the only way to know whether the admin time actually comes back and the memory holds.",
           "Measure the design targets from 'Where It Stands' against real use.",
         ],

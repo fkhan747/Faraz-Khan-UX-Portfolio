@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 /**
- * CaseStudyNav — a floating, in-page section jumper specific to a case study.
+ * CaseStudyNav - a floating, in-page section jumper specific to a case study.
  *
  * Auto-derives its items from the page itself: every <section data-testid="section-*">
  * with a SectionLabel eyebrow ("01 · Overview") becomes a link. Clicking scrolls to

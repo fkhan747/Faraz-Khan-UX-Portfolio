@@ -109,20 +109,20 @@ export default function MeridianFiveProblems() {
       Before: () => (
         <div className="flex flex-col items-start justify-center gap-1.5 rounded-[2px] p-4" style={{ background: "#EFEFEF" }}>
           <b className="text-[30px] font-semibold leading-none tabular-nums" style={{ color: "#9A9A9A" }}>51%</b>
-          <span className="text-[10px]" style={{ color: "#A8A8A8" }}>Yield rate</span>
+          <span className="text-[10px]" style={{ color: "#A8A8A8" }}>Admit rate</span>
         </div>
       ),
       After: () => (
         <div className="rounded-[2px] px-3.5 py-3.5" style={{ background: "#FFFFFF", border: "1px solid #F2F2F2" }}>
           <div className="text-[30px] font-bold leading-none tracking-tight tabular-nums" style={{ color: "#1B1C1D" }}>51%</div>
-          <div className="mt-1.5 text-[10.5px]" style={{ color: "#6B7280" }}>Yield rate</div>
+          <div className="mt-1.5 text-[10.5px]" style={{ color: "#6B7280" }}>Admit rate</div>
           <div className="mt-2.5 flex items-center gap-2">
             <span
               className="inline-flex items-center gap-[3px] rounded-[2px] px-1.5 py-0.5 text-[11px] font-semibold"
               style={{ color: "#21BA45", background: "#E7F7EC" }}
             >
               <ArrowUp className="w-[11px] h-[11px]" strokeWidth={3} />
-              3.2 pts
+              8 pts
             </span>
             <span className="text-[10px]" style={{ color: "#6B7280" }}>vs last year</span>
           </div>
@@ -137,7 +137,7 @@ export default function MeridianFiveProblems() {
     {
       num: "05",
       label: "Orienting time to reading time",
-      desc: "A dense page spends the first minute orienting. The answer first page spends that minute for the user, so it reads instead.",
+      desc: "A dense page spends its first 90 seconds orienting. The answer first page spends that time for the user, so it reads instead.",
       beforeTitle: "Dense, spent orienting",
       afterTitle: "Answer first, spent reading",
       Before: () => (

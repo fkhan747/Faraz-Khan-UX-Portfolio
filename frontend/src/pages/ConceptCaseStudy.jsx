@@ -38,7 +38,7 @@ const SectionWrap = ({ children, className = "", ...rest }) => (
 
 const scoreColor = (cell) =>
   cell === "Yes" ? "text-[#F5379B]" :
-  cell === "No" ? "text-[#5B9BFF]" :
+  cell === "No" ? "text-[#075EFD]" :
   cell === "Partial" ? "text-[#D97706]" : "";
 
 export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
@@ -155,7 +155,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
       {/* ============ 00 OVERVIEW ============ */}
       <SectionWrap data-testid="section-overview">
         <SectionLabel num="00" name="Overview" />
-        <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-6xl mb-6">{r.overview.headline}</h2>
+        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{r.overview.headline}</h2>
 
         <div className="rounded-3xl dark-card text-white p-8 md:p-12 relative overflow-hidden">
           <div className="absolute -top-10 -right-10 w-72 h-72 rounded-full blur-3xl opacity-40" style={{ background: AI_GRAD }} />
@@ -223,7 +223,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
       {/* ============ 01 PERSONAS ============ */}
       <SectionWrap data-testid="section-personas">
         <SectionLabel num="01" name="The People" />
-        <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-6xl mb-6">{r.personasSection.headline}</h2>
+        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{r.personasSection.headline}</h2>
         <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-10">{r.personasSection.intro}</p>
 
         <div className="grid md:grid-cols-3 gap-5">
@@ -276,7 +276,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
       {/* ============ 02 RESEARCH 1 ============ */}
       <SectionWrap data-testid="section-research-1">
         <SectionLabel num="02" name="The Workflow" />
-        <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-6xl mb-6">{r.research1.headline}</h2>
+        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{r.research1.headline}</h2>
 
         <h3 className="mt-10 font-display text-2xl md:text-3xl font-black mb-4">{r.research1.methodTitle}</h3>
         <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-6">{r.research1.methodIntro}</p>
@@ -342,7 +342,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
       {/* ============ 03 RESEARCH 2 ============ */}
       <SectionWrap data-testid="section-research-2">
         <SectionLabel num="03" name="The Broken Stack" />
-        <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-6xl mb-6">{r.research2.headline}</h2>
+        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{r.research2.headline}</h2>
 
         <h3 className="mt-10 font-display text-2xl md:text-3xl font-black mb-4">{r.research2.ecoTitle}</h3>
         <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{r.research2.ecoIntro}</p>
@@ -404,7 +404,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
       {/* ============ 04 HYPOTHESIS ============ */}
       <SectionWrap data-testid="section-hypothesis">
         <SectionLabel num="04" name="The Hypothesis" />
-        <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-6xl mb-6">{r.hypothesis.headline}</h2>
+        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{r.hypothesis.headline}</h2>
 
         <div className="rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10 mb-10">
           <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3 text-[#C71E73]">{r.hypothesis.positioningTitle}</p>
@@ -465,7 +465,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
       {/* ============ 05 IA ============ */}
       <SectionWrap data-testid="section-ia">
         <SectionLabel num="05" name="How It Thinks" />
-        <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-6xl mb-6">{r.ia.headline}</h2>
+        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{r.ia.headline}</h2>
 
         <h3 className="mt-10 font-display text-2xl md:text-3xl font-black mb-4">{r.ia.taskTitle}</h3>
         <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{r.ia.taskIntro}</p>
@@ -506,7 +506,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
       {/* ============ 06 BUILDING IT ============ */}
       <SectionWrap data-testid="section-design">
         <SectionLabel num="06" name="Building It" />
-        <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-6xl mb-6">{r.design.headline}</h2>
+        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{r.design.headline}</h2>
 
         <h3 className="mt-10 font-display text-2xl md:text-3xl font-black mb-4">low-fidelity wireframes</h3>
         <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{r.design.wireframesIntro}</p>
@@ -587,7 +587,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
       {/* ============ 07 THE AI LAYER ============ */}
       <SectionWrap data-testid="section-ai-layer">
         <SectionLabel num="07" name="The AI Layer" />
-        <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-6xl mb-6">{r.aiLayer.headline}</h2>
+        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{r.aiLayer.headline}</h2>
         <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-10">{r.aiLayer.intro}</p>
 
         <div className="grid md:grid-cols-2 gap-5">
@@ -617,7 +617,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
       {/* ============ 08 DESIGN SYSTEM ============ */}
       <SectionWrap data-testid="section-design-system">
         <SectionLabel num="08" name="Design System" />
-        <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-6xl mb-6">{r.designSystem.headline}</h2>
+        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{r.designSystem.headline}</h2>
         <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{r.designSystem.intro}</p>
 
         <div className="mt-10 rounded-3xl overflow-hidden">
@@ -678,7 +678,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
         </div>
 
         <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">component library</h3>
-        <p className="text-base leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">A Material-grade component set, extended with the AI-specific pieces that make the product trustworthy. These are the patterns that carry the confidence-and-provenance language across the OS family.</p>
+        <p className="text-base leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">A complete component set, extended with the AI-specific pieces that make the product trustworthy. These are the patterns that carry the confidence-and-provenance language across the OS family.</p>
         <div className="flex flex-wrap gap-2">
           {r.designSystem.componentCategories.map((c) => (
             <span key={c} className="px-4 py-2 rounded-full dark-card text-sm font-medium hover:bg-[#D81F7E] transition-colors cursor-default">{c}</span>
@@ -700,7 +700,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
         {r.whereItStands ? (
           <>
             <SectionLabel num="09" name="Where It Stands" />
-            <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-6xl mb-6">{r.whereItStands.headline}</h2>
+            <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{r.whereItStands.headline}</h2>
             <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-10">{r.whereItStands.intro}</p>
 
             <h3 className="font-display text-2xl md:text-3xl font-black mb-6">{r.whereItStands.doneTitle}</h3>
@@ -724,7 +724,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
         ) : (
           <>
             <SectionLabel num="09" name="Does It Work?" />
-            <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-6xl mb-6">{r.validation.headline}</h2>
+            <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{r.validation.headline}</h2>
             <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-10">{r.validation.intro}</p>
 
             <h3 className="font-display text-2xl md:text-3xl font-black mb-6">test setup</h3>
@@ -767,7 +767,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
         {r.futureVision ? (
           <>
             <SectionLabel num="10" name="Future Vision" />
-            <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-6xl mb-4">{r.futureVision.headline}</h2>
+            <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-4">{r.futureVision.headline}</h2>
             <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-10">{r.futureVision.intro}</p>
 
             <h3 className="font-display text-2xl md:text-3xl font-black mb-6">{r.futureVision.phasesTitle}</h3>
@@ -793,7 +793,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
         ) : (
           <>
             <SectionLabel num="10" name="The Numbers" />
-            <h2 className="font-display text-3xl md:text-5xl font-black leading-tight max-w-6xl mb-4">{r.impact.headline}</h2>
+            <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-4">{r.impact.headline}</h2>
             <p className="text-sm font-mono uppercase tracking-widest text-white max-w-6xl mb-10">{r.impact.note}</p>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
@@ -887,7 +887,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
         <p className="text-lg text-[#A29CB4] mb-8">{r.title} is a self-initiated concept. If you&apos;d like to talk through the process, or where it goes next, I&apos;d love to connect.</p>
         <div className="flex gap-4 justify-center flex-wrap">
           <a href={`mailto:${PROFILE.email}`} data-testid="case-cta-email" className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-[#C71E73] font-semibold text-sm hover:bg-[#C71E73] hover:text-white transition-colors"><Mail size={16} /> email me</a>
-          <Link to="/projects" className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-[#F4F3FA] font-semibold text-sm hover:bg-[#261E3A] transition-colors">View All projects</Link>
+          <Link to="/projects" className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-[#F4F3FA] font-semibold text-sm hover:bg-[#261E3A] transition-colors">view all projects</Link>
         </div>
       </SectionWrap>
     </article>

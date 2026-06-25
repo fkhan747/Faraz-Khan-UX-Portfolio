@@ -8,7 +8,7 @@ import React from "react";
  * LIGHT app, so every real component renders on white sub-panels inside
  * the dark sections.
  *
- * Generic placeholder content only — no client/product names.
+ * Generic placeholder content only - no client/product names.
  */
 
 const ROBOTO = { fontFamily: "Roboto, sans-serif" };
@@ -53,7 +53,7 @@ const SpecLabel = ({ children }) => (
   </p>
 );
 
-/* White product panel — the "canvas" the real components live on. */
+/* White product panel - the "canvas" the real components live on. */
 const WhitePanel = ({ children, className = "" }) => (
   <div className={`rounded-2xl bg-white p-6 md:p-8 ${className}`} style={ROBOTO}>
     {children}
