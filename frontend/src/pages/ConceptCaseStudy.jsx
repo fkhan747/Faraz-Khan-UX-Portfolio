@@ -861,7 +861,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
         <Reveal as="p" className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">more concepts</Reveal>
         <Reveal as="h2" delay={0.08} className="font-display text-3xl md:text-4xl font-black mb-8">the rest of the OS family &rarr;</Reveal>
         <div className="grid md:grid-cols-2 gap-6">
-          {concepts.filter((x) => x.slug !== r.slug).map((x, i) => {
+          {concepts.filter((x) => x.slug !== r.slug && x.live !== false).map((x, i) => {
             const card = (
               <div className="rounded-3xl dark-card p-7 flex items-start justify-between gap-6 h-full">
                 <div>

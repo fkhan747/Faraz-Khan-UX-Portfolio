@@ -9,7 +9,7 @@ import Seo from "../components/Seo";
 export default function Projects() {
   return (
     <div data-testid="projects-page">
-      <Seo title="My Work" description="Selected UX case studies by Faraz Khan: FinVista, Aurora, and self-initiated AI-native product concepts (Slate, Almanac, Crux)." />
+      <Seo title="My Work" description="Selected UX case studies by Faraz Khan: FinVista, Aurora, Meridian, Jack of All Threads, and the Slate AI-native product concept." />
       <section className="pt-12 pb-10">
         <Container>
         <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-6">selected work</p>
@@ -59,7 +59,7 @@ export default function Projects() {
         </p>
 
         <Grid>
-          {concepts.map((c, i) => (
+          {concepts.filter((c) => c.live !== false).map((c, i) => (
             <div
               key={c.slug}
               data-testid={`concept-card-${c.slug}`}

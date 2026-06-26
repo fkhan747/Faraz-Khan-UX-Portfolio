@@ -393,7 +393,7 @@ export const recruitos = {
     systemOutcomes:
       "The system is intentionally restrained so the AI layer carries the visual weight. Reserving one gradient and one icon (✦) exclusively for AI means a user can always tell, instantly, whether they're looking at their own data or the machine's interpretation of it. It's a trust decision encoded directly into the design tokens.",
     crossProduct:
-      "Because Slate is the first of three planned concepts (Almanac and Crux follow), the foundation is built as a shared base: the same grid, spacing, motion, and AI-interaction patterns carry across all three, each taking its own accent within the AI-native language.",
+      "Slate is the first of a planned family of AI-native concepts, so the foundation is built as a shared base: the same grid, spacing, motion, and AI-interaction patterns will carry across each one, with its own accent inside the AI-native language.",
   },
 
   // --- 09 WHERE IT STANDS (honest targets, not fabricated results) ---

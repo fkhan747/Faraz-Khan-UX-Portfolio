@@ -15,7 +15,9 @@ import { projects, concepts } from "../data/content";
  *   the email button and Next can flank the "view all projects" button).
  * variant="top": the legacy compact pager (kept for safety; no longer placed).
  */
-const ORDER = [...projects, ...concepts].map((p) => ({
+// Dormant concepts (live === false) are skipped, so prev/next never lands on
+// them. Their case-study route still works if someone visits it directly.
+const ORDER = [...projects, ...concepts.filter((c) => c.live !== false)].map((p) => ({
   slug: p.slug,
   title: p.title,
   href: p.href || `/case/${p.slug}`,

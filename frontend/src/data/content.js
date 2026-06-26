@@ -118,7 +118,7 @@ export const concepts = [
     summary:
       "Turning institutional memory into something teams can actually ask, not just search through.",
     href: "/case/knowledgeos",
-    live: true,
+    live: false,                          // dormant, may revive later
   },
   {
     slug: "decisionos",
@@ -134,7 +134,7 @@ export const concepts = [
     summary:
       "Turning scattered signals into a clear, defensible call for the people who have to make it.",
     href: "/case/decisionos",
-    live: true,
+    live: false,                          // dormant, may revive later
   },
 ];
 
