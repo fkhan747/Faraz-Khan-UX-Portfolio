@@ -71,6 +71,25 @@ function RealScreen({ src, w, h, label, maxW = "100%", badge = "After" }) {
   );
 }
 
+/* Captured Meridian dashboard screen, embedded as a static PNG inside a
+   dark-card frame. Replaces the old iframe approach so the image has its
+   natural height and the floating Ask AI button does not bleed outside
+   the frame. Width 1472 at 2x DPR; height auto. */
+function MeridianShot({ name, label, maxW = "100%", badge = "After" }) {
+  const src = `/meridian-mocks/real/png/${name}.png`;
+  return (
+    <figure className="dark-card rounded-3xl overflow-hidden relative" style={{ width: "100%", maxWidth: maxW }}>
+      {badge && (
+        <span className="absolute z-10 m-4 font-mono text-[10px] font-semibold uppercase tracking-[0.1em] px-3 py-1 rounded-full text-white" style={{ background: "#C71E73" }}>{badge}</span>
+      )}
+      <Zoomable src={src} alt={label} caption={label} className="bg-white p-3 block">
+        <img src={src} alt={label} loading="lazy" className="w-full h-auto block rounded-lg" />
+      </Zoomable>
+      {label && <figcaption className="px-5 py-3 font-mono text-sm uppercase tracking-[0.2em] text-white">{label}</figcaption>}
+    </figure>
+  );
+}
+
 /* the visual that belongs to a given section (native artifact, or product before/after) */
 function artifactFor(headline = "") {
   const h = headline.toLowerCase();
@@ -91,10 +110,10 @@ function artifactFor(headline = "") {
       <IframeBlock src={B + "funnel.html"} h={660} />
       <IframeBlock src={B + "school.html"} h={640} />
       <div className="mt-10">
-        <ResponsiveScreen src="/meridian-mocks/real/ug-summary.html" h={1850} maxW={1040} rounded="rounded-3xl" label="The Undergraduate tab, with the international-applications map leaders loved" />
+        <MeridianShot name="ug-summary" maxW={1040} label="The Undergraduate tab, with the international-applications map leaders loved" />
       </div>
       <div className="mt-8">
-        <ResponsiveScreen src="/meridian-mocks/real/grad-summary.html" h={1850} maxW={1040} rounded="rounded-3xl" label="The Graduate tab, where stage conversion and source-country mix come first" />
+        <MeridianShot name="grad-summary" maxW={1040} label="The Graduate tab, where stage conversion and source-country mix come first" />
       </div>
     </>
   );
@@ -103,13 +122,13 @@ function artifactFor(headline = "") {
       <IframeBlock src={B + "research.html"} h={650} />
       <IframeBlock src={B + "hr.html"} h={650} />
       <div className="mt-10 grid lg:grid-cols-2 gap-6">
-        <ResponsiveScreen src="/meridian-mocks/real/research-summary.html" h={1700} label="The Research tab, money over time, output to one side" />
-        <ResponsiveScreen src="/meridian-mocks/real/hr-summary.html" h={900} label="The HR tab, plain and protective" />
+        <MeridianShot name="research-summary" label="The Research tab, money over time, output to one side" />
+        <MeridianShot name="hr-summary" label="The HR tab, plain and protective" />
       </div>
     </>
   );
-  if (h.includes("funnel, yield")) return <ResponsiveScreen src="/meridian-mocks/real/overview.html" h={1900} label="The Overview cockpit, with the institutional funnel" maxW={1040} rounded="rounded-3xl" />;
-  if (h.includes("geo intelligence")) return <ResponsiveScreen src="/meridian-mocks/real/ug-summary.html" h={1850} label="The world-map view, sized by application volume" maxW={1040} rounded="rounded-3xl" />;
+  if (h.includes("funnel, yield")) return <MeridianShot name="overview" maxW={1040} label="The Overview cockpit, with the institutional funnel" />;
+  if (h.includes("geo intelligence")) return <MeridianShot name="ug-summary" maxW={1040} label="The world-map view, sized by application volume" />;
   return null;
 }
 
@@ -160,12 +179,14 @@ function ResponsiveScreen({ src, h, label, maxW = "100%", rounded = "rounded-2xl
 }
 
 const SCREENS = [
-  { src: "/meridian-mocks/real/ug-summary.html", label: "Undergraduate, Summary, with the world map", h: 1850 },
-  { src: "/meridian-mocks/real/grad-summary.html", label: "Graduate, Summary, with melt and concentration", h: 1850 },
-  { src: "/meridian-mocks/real/hr-summary.html", label: "HR, Summary, plain and protective", h: 900 },
-  { src: "/meridian-mocks/real/hr-headcount.html", label: "HR, Trends Headcount, ten-year combo", h: 700 },
-  { src: "/meridian-mocks/real/research-summary.html", label: "Research, Summary, money over time", h: 1700 },
-  { src: "/meridian-mocks/real/research-expenditures.html", label: "Research, Expenditures, brackets and PIs", h: 2400 },
+  { name: "ug-summary", label: "Undergraduate, Summary, with the world map" },
+  { name: "ug-totals", label: "Undergraduate, Application Totals, with the cycle trend" },
+  { name: "grad-summary", label: "Graduate, Summary, with melt and concentration" },
+  { name: "hr-summary", label: "HR, Summary, plain and protective" },
+  { name: "hr-headcount", label: "HR, Trends Headcount, ten-year combo" },
+  { name: "research-summary", label: "Research, Summary, money over time" },
+  { name: "research-hindex", label: "Research, H-Index, faculty citation distribution" },
+  { name: "research-expenditures", label: "Research, Expenditures, brackets and PIs" },
 ];
 
 function inline(text) {
@@ -371,12 +392,16 @@ export default function MeridianCaseStudy() {
             <p className="text-base md:text-lg leading-relaxed text-[#F4F3FA] max-w-6xl mb-10">You've seen the parts. Here's the whole thing: the Overview cockpit, then the tabs it leads into, all on one design system.</p>
           </Reveal>
           <Reveal delay={0.06}>
-            <ResponsiveScreen src="/meridian-mocks/real/overview.html" h={1900} maxW={1100} rounded="rounded-3xl"
+            <MeridianShot name="overview" maxW={1100}
               label="The Overview tab, the cockpit that rolls the whole institution into one read" />
           </Reveal>
           <div className="grid sm:grid-cols-2 gap-x-10 gap-y-10 mt-12 items-start">
-            {SCREENS.map((s, i) => <Reveal key={s.src} delay={(i % 2) * 0.06}><ResponsiveScreen {...s} /></Reveal>)}
+            {SCREENS.map((s, i) => <Reveal key={s.name} delay={(i % 2) * 0.06}><MeridianShot {...s} /></Reveal>)}
           </div>
+          <Reveal delay={0.06} className="mt-12">
+            <MeridianShot name="overview-ai-open" maxW={1100} badge="AI"
+              label="Ask Meridian AI, a rounded modal over the dashboard, not baked into the chrome" />
+          </Reveal>
         </Container>
       </section>
 
