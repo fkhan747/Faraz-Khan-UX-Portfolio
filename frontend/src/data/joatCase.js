@@ -3,6 +3,7 @@
 // in the real product screens + contemporaneous press (The Hindu, Deccan Herald,
 // DNA, YourStory, Inc42). No fabricated performance metrics; press-reported
 // traction is attributed. Faraz's role on the project: Senior UX / UI Designer.
+// Image w/h are intrinsic pixel sizes (reserve space, prevent layout shift).
 
 const J = (f) => `/joat/${f}`;
 
@@ -26,7 +27,7 @@ export const joat = {
     headline: "Project Overview",
     tldrTitle: "TL;DR",
     tldr:
-      "Jack of All Threads (JoaT) was India's first crowdfunding platform for custom apparel, out of Bangalore: design a tee in the browser, set a goal, and sell it before a single shirt is printed. I led the UX and visual redesign of the whole product, from the Design Studio and campaign flow to the buyer journey and the Raiser dashboards.",
+      "Jack of All Threads (JoaT) was India's first crowdfunding platform for custom apparel, out of Bangalore: design a tee in the browser, set a goal, and sell it before a single shirt is printed. I led the UX and visual redesign end to end: the Design Studio, the campaign flow, the buyer journey, and the Raiser dashboards.",
     facts: [
       { label: "Role", value: "Senior UX / UI Designer" },
       { label: "Company", value: "Jack of All Threads, Bangalore" },
@@ -34,12 +35,12 @@ export const joat = {
       { label: "Scope", value: "End-to-end product redesign" },
     ],
     intro:
-      "JoaT grew out of a college project into India's first t-shirt crowdfunding platform, covered by The Hindu, Deccan Herald, DNA and YourStory and used by causes like CRY and the Akshaya Patra Foundation. I owned the interface end to end and reframed the product as a single, cohesive platform.",
+      "JoaT grew out of a college project into India's first t-shirt crowdfunding platform. The Hindu, Deccan Herald, DNA and YourStory covered it, and causes like CRY and the Akshaya Patra Foundation used it. I owned the interface end to end and reframed the product as a single, cohesive platform.",
     intro2:
-      "The redesign had one job at its centre: take a process that used to span half a dozen disconnected tools and vendors, and make it feel like one calm flow that anyone could finish in an afternoon.",
+      "The redesign had one job at its center: take a process that used to span six disconnected tools and vendors, and make it feel like one calm flow that anyone could finish in an afternoon.",
     contextTitle: "The model in one line",
     contextBody:
-      "You publicise. We produce. You keep the profit. The creator designs and promotes; JoaT handles production, shipping, payments and support; nobody pays upfront and nothing is printed until the campaign is funded.",
+      "You publicize. We produce. You keep the profit. The creator designs and promotes; JoaT handles production, shipping, payments and support; nobody pays upfront and nothing is printed until the campaign is funded.",
   },
 
   primaryUsers: [
@@ -75,7 +76,7 @@ export const joat = {
       { n: "02", t: "Set your price and promote", d: "Choose a sales goal, an end date and a per-tee price; the flow shows the minimum profit before you launch. Share the campaign link and drive traffic with Facebook ads and social." },
       { n: "03", t: "We produce, you profit", d: "If the goal is met, JoaT prints, ships to every buyer, and transfers the profit. The raiser pays nothing upfront and nothing if the campaign falls short, so there is no inventory and no risk." },
     ],
-    image: { src: J("01-homepage.jpg"), caption: "Homepage: the model explained to a first-time raiser, with live campaigns and press credibility." },
+    image: { src: J("01-homepage.jpg"), w: 1400, h: 3920, caption: "Homepage: the model explained to a first-time raiser, with live campaigns and press credibility." },
   },
 
   // --- 04 INFORMATION ARCHITECTURE ---
@@ -84,6 +85,8 @@ export const joat = {
     intro:
       "The information architecture had to hold a creator tool, a public storefront, and a back office in one place without any of them feeling bolted on. I organized everything around three jobs: create a campaign, back a campaign, and manage what you have launched.",
     diagram: J("ia.svg"),
+    diagramW: 1080,
+    diagramH: 560,
     caption: "Information architecture: the creator studio, the buyer storefront, and the raiser back office under one roof.",
   },
 
@@ -93,6 +96,8 @@ export const joat = {
     intro:
       "A campaign has two flows that meet on the public campaign page. The raiser designs, prices and launches; the buyer arrives from an ad or a shared link and orders. Everything in between, production, payments and shipping, is the platform's job, not theirs.",
     diagram: J("flow.svg"),
+    diagramW: 1080,
+    diagramH: 440,
     caption: "The raiser and buyer journeys, meeting at the live campaign page.",
   },
 
@@ -102,9 +107,9 @@ export const joat = {
     intro:
       "Before any visual design, I blocked out the heaviest screens in grayscale to settle structure and hierarchy. Each one was a few layout options pressure-tested on its core job.",
     batches: [
-      { src: J("wf-studio.svg"), caption: "Design Studio: controls in a left rail vs a top toolbar vs floating panels. The left rail won, keeping the live tee preview central." },
-      { src: J("wf-campaign.svg"), caption: "Set Price and Goal: economics buried in a form vs surfaced as a live profit panel beside the tee. The live panel made the money obvious before launch." },
-      { src: J("wf-home.svg"), caption: "Homepage: explain-then-browse vs browse-first vs a single hero. Explain-then-browse won, since most visitors had never seen crowdfunded tees." },
+      { src: J("wf-studio.svg"), w: 1080, h: 580, caption: "Design Studio: controls in a left rail vs a top toolbar vs floating panels. The left rail won, keeping the live tee preview central." },
+      { src: J("wf-campaign.svg"), w: 1080, h: 580, caption: "Set Price and Goal: economics buried in a form vs surfaced as a live profit panel beside the tee. The live panel made the money obvious before launch." },
+      { src: J("wf-home.svg"), w: 1080, h: 580, caption: "Homepage: explain-then-browse vs browse-first vs a single hero. Explain-then-browse won, since most visitors had never seen crowdfunded tees." },
     ],
   },
 
@@ -112,8 +117,8 @@ export const joat = {
   studio: {
     headline: "The Design Studio: design in the browser, nothing to install",
     intro:
-      "Instead of opening design software, exporting a file and emailing a printer, a creator designs right here. Pick a product and color, then Add Artwork, Pick a Layout, Add Text, Upload Image or Pick a Background, with a live preview and a running base cost. It is one step inside a single flow that ends in a live campaign, not a handoff to the next tool.",
-    image: { src: J("02-design-studio.jpg"), caption: "Design Studio: central live preview, one controls rail, and base cost surfaced as you design." },
+      "Instead of opening design software, exporting a file and emailing a printer, a creator designs right here. Pick a product and color, then add artwork, a layout, text, an upload or a background, with a live preview and a running base cost. It's one step inside a single flow that ends in a live campaign, not a handoff to the next tool.",
+    image: { src: J("02-design-studio.jpg"), w: 1400, h: 870, caption: "Design Studio: central live preview, one controls rail, and base cost surfaced as you design." },
     points: [
       { t: "No installs, no handoffs", d: "Design in the browser. The file never leaves the platform on its way to print, so there is nothing to export, email or re-upload." },
       { t: "Live tee preview", d: "Front and back, real product colors, and a curated artwork library so a blank tee becomes a finished design fast." },
@@ -125,11 +130,11 @@ export const joat = {
   campaign: {
     headline: "Making the money obvious",
     intro:
-      "Design is step one of three: Design your tee, Set your price, Add a description. The pricing step is where most platforms hide the economics; I pulled them into the open. A goal slider, an end date and a per-tee price drive a live minimum-profit figure, with the reassurance that matters most, pay nothing even if the campaign fails, stated right there.",
+      "Design is step one of three: Design your tee, Set your price, Add a description. The pricing step is where most platforms hide the economics; I pulled them into the open. A goal slider, an end date and a per-tee price update a live minimum-profit figure. The reassurance that matters most, pay nothing even if the campaign fails, sits right beside the CTA.",
     screens: [
-      { src: J("03-set-price.jpg"), title: "Set Your Price", desc: "Goal slider, campaign end date and selling price drive a live minimum-profit calc; the no-risk promise sits beside the CTA." },
-      { src: J("04-add-description.jpg"), title: "Add a Description", desc: "The final step before launch, the story and details that make a campaign shareable." },
-      { src: J("05-campaign.jpg"), title: "Campaign Page", desc: "The public campaign page a raiser shares into Facebook ads and social to convert cold traffic into buyers." },
+      { src: J("03-set-price.jpg"), w: 1400, h: 870, title: "Set Your Price", desc: "Goal slider, campaign end date and selling price drive a live minimum-profit calc; the no-risk promise sits beside the CTA." },
+      { src: J("04-add-description.jpg"), w: 1400, h: 870, title: "Add a Description", desc: "The final step before launch, the story and details that make a campaign shareable." },
+      { src: J("05-campaign.jpg"), w: 1400, h: 870, title: "Campaign Page", desc: "The public campaign page a raiser shares into Facebook ads and social to convert cold traffic into buyers." },
     ],
   },
 
@@ -139,10 +144,10 @@ export const joat = {
     intro:
       "Once live, a raiser needs to track orders, watch progress toward the goal, manage their account, and get paid. The dashboards stayed in the same calm, single-focus visual language as the studio.",
     screens: [
-      { src: J("06-dashboard.jpg"), title: "Order Tracking", desc: "Where a raiser follows orders and campaign progress at a glance." },
-      { src: J("07-payout.jpg"), title: "Payout", desc: "The profit transfer view, the moment the whole model pays off for the creator." },
-      { src: J("08-stories.jpg"), title: "Stories", desc: "Real campaigns and causes, doubling as social proof for the next raiser." },
-      { src: J("10-account.jpg"), title: "Account", desc: "Profile and settings, kept light so the focus stays on creating and selling." },
+      { src: J("06-dashboard.jpg"), w: 1400, h: 922, title: "Order Tracking", desc: "Where a raiser follows orders and campaign progress at a glance." },
+      { src: J("07-payout.jpg"), w: 1400, h: 808, title: "Payout", desc: "The profit transfer view, the moment the whole model pays off for the creator." },
+      { src: J("08-stories.jpg"), w: 1400, h: 1891, title: "Stories", desc: "Real campaigns and causes, doubling as social proof for the next raiser." },
+      { src: J("10-account.jpg"), w: 1400, h: 808, title: "Account", desc: "Profile and settings, kept light so the focus stays on creating and selling." },
     ],
   },
 
@@ -150,7 +155,7 @@ export const joat = {
   responsive: {
     headline: "Desktop to mobile",
     intro:
-      "The studio and storefront were designed to scale from a wide desktop canvas down to a single-column phone layout. On mobile the model collapses to the same three promises, Design in Minutes, Set Your Price and Sell, We Produce You Profit, so a campaign discovered on a phone (where most ad traffic landed) still makes sense in one scroll.",
+      "I designed the studio and storefront to scale from a wide desktop canvas down to a single-column phone layout. On mobile the model collapses to the same three promises: Design in Minutes, Set Your Price and Sell, We Produce You Profit. So a campaign discovered on a phone, where most ad traffic landed, still makes sense in one scroll.",
     screens: [
       { src: J("m-home.jpg"), title: "Mobile · Home" },
       { src: J("m-stories.jpg"), title: "Mobile · Stories" },

@@ -10,6 +10,9 @@ import FinvistaDesignSystem from "../components/FinvistaDesignSystem";
 import CaseStudyNav from "../components/CaseStudyNav";
 import ProjectNav from "../components/ProjectNav";
 import { Container } from "../components/Grid";
+import Reveal from "../components/Reveal";
+
+const FOCUS = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F5379B] focus-visible:ring-offset-2 focus-visible:ring-offset-[#100210]";
 
 /* -- Reusable section header in portfolio voice -- */
 const SectionLabel = ({ num, name, accent = "#F5379B" }) => (
@@ -69,25 +72,24 @@ export default function FinvistaCaseStudy() {
             >
               <ArrowLeft size={14} /> all projects
             </Link>
-            <ProjectNav slug="finvista" />
           </div>
-          <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-5">
+          <Reveal as="p" delay={0} className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-5">
             ux case study · featured
-          </p>
-          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9] case-keep text-[#F7F5FF]">
+          </Reveal>
+          <Reveal as="h1" delay={0.08} className="font-display text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9] case-keep text-[#F7F5FF]">
             Finv<span className="dot-o">i</span>sta
-          </h1>
-          <p className="mt-8 max-w-3xl text-xl md:text-2xl text-[#F4F3FA] leading-snug font-light italic">
+          </Reveal>
+          <Reveal as="p" delay={0.16} className="mt-8 max-w-3xl text-xl md:text-2xl text-[#F4F3FA] leading-snug font-light italic">
             {fv.subtitle}
-          </p>
+          </Reveal>
 
           {/* Hero stats */}
           <div className="mt-12 grid grid-cols-3 gap-4 max-w-4xl">
-            {fv.hero.stats.map((s) => (
-              <div key={s.label} className="rounded-2xl p-5 md:p-6 bg-[#100210]/55 backdrop-blur-md border border-white/12">
+            {fv.hero.stats.map((s, i) => (
+              <Reveal key={s.label} delay={0.24 + i * 0.06} className="rounded-2xl p-5 md:p-6 bg-[#100210]/55 backdrop-blur-md border border-white/12">
                 <div className="num text-3xl md:text-5xl font-black text-[#075EFD] leading-none">{s.value}</div>
                 <div className="mt-3 text-[10px] md:text-xs font-mono uppercase tracking-widest text-white/70">{s.label}</div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </Container>
@@ -96,15 +98,17 @@ export default function FinvistaCaseStudy() {
       {/* 01 PROJECT OVERVIEW */}
       <SectionWrap data-testid="section-overview">
         <SectionLabel num="01" name="Project Overview" />
-        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">
-          {fv.overview.headline}
-        </h2>
-        <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">
+        <Reveal>
+          <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">
+            {fv.overview.headline}
+          </h2>
+        </Reveal>
+        <Reveal as="p" delay={0.08} className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">
           {fv.overview.intro}
-        </p>
+        </Reveal>
 
         {/* TL;DR */}
-        <div className="mt-12 rounded-3xl dark-card text-white p-8 md:p-12 relative overflow-hidden">
+        <Reveal delay={0.06} className="mt-12 rounded-3xl dark-card text-white p-8 md:p-12 relative overflow-hidden">
           <div className="absolute -top-10 -right-10 w-72 h-72 rounded-full bg-[#075EFD] blur-3xl opacity-30" />
           <p className="relative text-[11px] font-mono uppercase tracking-[0.25em] text-white mb-4">
             {fv.overview.tldrTitle}
@@ -112,36 +116,39 @@ export default function FinvistaCaseStudy() {
           <p className="relative font-display text-xl md:text-2xl leading-snug text-white/95 max-w-6xl">
             {fv.overview.tldr}
           </p>
-        </div>
+        </Reveal>
 
         {/* Facts */}
         <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
-          {fv.overview.facts.map((f) => (
-            <FactCell key={f.label} label={f.label} value={f.value} />
+          {fv.overview.facts.map((f, i) => (
+            <Reveal key={f.label} delay={(i % 2) * 0.06}>
+              <FactCell label={f.label} value={f.value} />
+            </Reveal>
           ))}
         </div>
 
         {/* Process */}
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-8">design process</h3>
+        <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-8">design process</Reveal>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {fv.overview.process.map((p) => (
-            <div key={p.step} className="dark-card rounded-2xl p-6">
+          {fv.overview.process.map((p, i) => (
+            <Reveal key={p.step} delay={(i % 2) * 0.06} className="dark-card rounded-2xl p-6">
               <div className="num text-5xl font-black text-[#075EFD]">{p.step}</div>
               <div className="mt-3 font-display text-xl font-bold ">{p.title}</div>
               <div className="mt-1 text-xs font-mono uppercase tracking-widest text-white">{p.duration}</div>
-            </div>
+            </Reveal>
           ))}
         </div>
 
         {/* Product Landscape */}
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">product landscape</h3>
-        <p className="text-base md:text-lg leading-relaxed max-w-6xl mb-8 text-[#F4F3FA]">
+        <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">product landscape</Reveal>
+        <Reveal as="p" delay={0.08} className="text-base md:text-lg leading-relaxed max-w-6xl mb-8 text-[#F4F3FA]">
           {fv.overview.productLandscape.intro}
-        </p>
+        </Reveal>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {fv.overview.productLandscape.products.map((p, i) => (
-            <div
+            <Reveal
               key={p.name}
+              delay={(i % 2) * 0.06}
               className={`rounded-3xl p-6 ${i === 0 ? "bg-white border-2 border-[#F5379B]" : "dark-card text-[#F4F3FA]"}`}
             >
               {p.badge && (
@@ -151,17 +158,17 @@ export default function FinvistaCaseStudy() {
               )}
               <h3 className={`font-display text-xl font-black mb-3 ${i === 0 ? "text-[#F5379B]" : ""}`}>{p.name}</h3>
               <p className={`text-sm leading-relaxed ${i === 0 ? "text-black" : ""}`}>{p.desc}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
 
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">Primary Users</h3>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {fv.primaryUsers.map((u) => (
-            <div key={u.label} className="dark-card rounded-2xl p-6 border-l-4 border-[#075EFD]">
+        <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">Primary Users</Reveal>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {fv.primaryUsers.map((u, i) => (
+            <Reveal key={u.label} delay={(i % 2) * 0.06} className="dark-card rounded-2xl p-5 border-l-4 border-[#075EFD]">
               <h3 className="font-display text-lg font-black mb-2">{u.label}</h3>
               <p className="text-sm leading-relaxed text-[#F4F3FA]/85">{u.desc}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </SectionWrap>
@@ -169,32 +176,34 @@ export default function FinvistaCaseStudy() {
       {/* 02 PROBLEM */}
       <SectionWrap data-testid="section-problem">
         <SectionLabel num="02" name="The Problem" />
-        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">
-          {fv.problem.headline}
-        </h2>
-        <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{fv.problem.intro}</p>
+        <Reveal>
+          <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">
+            {fv.problem.headline}
+          </h2>
+        </Reveal>
+        <Reveal as="p" delay={0.08} className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{fv.problem.intro}</Reveal>
 
-        <div className="mt-10 rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
+        <Reveal delay={0.06} className="mt-10 rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
           <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3 text-[#F5379B]">core challenge</p>
           <p className="font-display text-xl md:text-2xl font-bold leading-snug max-w-6xl text-black">
             {fv.problem.coreChallenge}
           </p>
-        </div>
+        </Reveal>
 
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-8">problem dimensions</h3>
+        <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-8">problem dimensions</Reveal>
         <div className="grid md:grid-cols-2 gap-5">
           {fv.problem.dimensions.map((d, i) => (
-            <div key={d.title} className="dark-card rounded-3xl p-7">
+            <Reveal key={d.title} delay={(i % 2) * 0.06} className="dark-card rounded-3xl p-7">
               <div className="font-display text-5xl font-black text-[#075EFD] leading-none">{String(i + 1).padStart(2, "0")}</div>
               <h3 className="mt-4 font-display text-xl font-black ">{d.title}</h3>
               <p className="mt-2 text-base leading-relaxed">{d.desc}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
 
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-8">scope definition</h3>
+        <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-8">scope definition</Reveal>
         <div className="grid md:grid-cols-2 gap-5">
-          <div className="dark-card rounded-3xl p-7">
+          <Reveal className="dark-card rounded-3xl p-7">
             <div className="flex items-center gap-2 mb-4">
               <span className="w-2 h-2 rounded-full bg-[#F5379B]" />
               <p className="font-mono text-xs uppercase tracking-widest">in scope</p>
@@ -207,8 +216,8 @@ export default function FinvistaCaseStudy() {
                 </li>
               ))}
             </ul>
-          </div>
-          <div className="dark-card rounded-3xl p-7">
+          </Reveal>
+          <Reveal delay={0.06} className="dark-card rounded-3xl p-7">
             <div className="flex items-center gap-2 mb-4">
               <span className="w-2 h-2 rounded-full bg-[#075EFD]" />
               <p className="font-mono text-xs uppercase tracking-widest">out of scope</p>
@@ -221,27 +230,29 @@ export default function FinvistaCaseStudy() {
                 </li>
               ))}
             </ul>
-          </div>
+          </Reveal>
         </div>
       </SectionWrap>
 
       {/* 03 RESEARCH */}
       <SectionWrap data-testid="section-research">
         <SectionLabel num="03" name="Research" />
-        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">
-          {fv.research.headline}
-        </h2>
-        <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{fv.research.intro}</p>
+        <Reveal>
+          <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">
+            {fv.research.headline}
+          </h2>
+        </Reveal>
+        <Reveal as="p" delay={0.08} className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{fv.research.intro}</Reveal>
 
         {/* Competitive */}
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">competitive analysis</h3>
-        <p className="text-base leading-relaxed max-w-5xl text-[#F4F3FA] mb-8">
+        <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">competitive analysis</Reveal>
+        <Reveal as="p" delay={0.08} className="text-base leading-relaxed max-w-5xl text-[#F4F3FA] mb-8">
           I benchmarked five leading lending apps for their UX patterns, information architecture, and interaction design. Navi and KreditBee, the two closest to FinVista's audience, got full screen-by-screen teardowns. All five are then compared feature by feature in the table that follows.
-        </p>
+        </Reveal>
         <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">in-depth teardowns · 2 of 5</p>
         <div className="grid grid-cols-1 gap-6">
-          {fv.research.competitive.map((c) => (
-            <div key={c.name} className="dark-card rounded-3xl overflow-hidden">
+          {fv.research.competitive.map((c, i) => (
+            <Reveal key={c.name} delay={i * 0.05} className="dark-card rounded-3xl overflow-hidden">
               <Zoomable src={c.image} alt={`${c.name} app teardown`} caption={`${c.name}: screen-by-screen teardown`} className="bg-white overflow-hidden">
                 <img src={c.image} alt={`${c.name} app teardown`} loading="lazy" className="block w-full h-auto" />
               </Zoomable>
@@ -249,16 +260,16 @@ export default function FinvistaCaseStudy() {
                 <h3 className="font-display text-xl font-black mb-2">{c.name}</h3>
                 <p className="text-sm leading-relaxed">{c.notes}</p>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
 
         {/* Findings table */}
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">findings across 5 competitors</h3>
-        <p className="text-base leading-relaxed max-w-5xl text-[#F4F3FA] mb-8">
+        <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">findings across 5 competitors</Reveal>
+        <Reveal as="p" delay={0.08} className="text-base leading-relaxed max-w-5xl text-[#F4F3FA] mb-8">
           The full benchmark, including Bajaj Finserv, Home Credit, and Muthoot alongside the two teardowns above.
-        </p>
-        <div className="rounded-3xl dark-card overflow-x-auto">
+        </Reveal>
+        <Reveal delay={0.06} className="rounded-3xl dark-card overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-white/10">
@@ -281,23 +292,23 @@ export default function FinvistaCaseStudy() {
               ))}
             </tbody>
           </table>
-        </div>
+        </Reveal>
 
         {/* Key insight */}
-        <div className="mt-10 rounded-3xl dark-card text-white p-8 md:p-10">
+        <Reveal delay={0.06} className="mt-10 rounded-3xl dark-card text-white p-8 md:p-10">
           <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-white mb-3">key insight</p>
           <p className="font-display text-xl md:text-2xl leading-snug max-w-6xl">{fv.research.keyInsight}</p>
-        </div>
+        </Reveal>
 
         {/* Approach */}
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-8">design approach & considerations</h3>
+        <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-8">design approach & considerations</Reveal>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {fv.research.approach.map((a, i) => (
-            <div key={a.title} className="dark-card rounded-3xl p-6 hover:bg-[#D81F7E] transition-colors">
+            <Reveal key={a.title} delay={(i % 2) * 0.06} className="dark-card rounded-3xl p-6 hover:bg-[#D81F7E] transition-colors">
               <span className="font-mono text-sm uppercase tracking-widest text-white">0{i + 1}</span>
               <h3 className="mt-3 font-display text-lg font-black ">{a.title}</h3>
               <p className="mt-2 text-sm leading-relaxed">{a.desc}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </SectionWrap>
@@ -305,15 +316,17 @@ export default function FinvistaCaseStudy() {
       {/* 04 INSIGHTS */}
       <SectionWrap data-testid="section-insights">
         <SectionLabel num="04" name="Insights" />
-        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">
-          {fv.insights.headline}
-        </h2>
-        <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{fv.insights.intro}</p>
+        <Reveal>
+          <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">
+            {fv.insights.headline}
+          </h2>
+        </Reveal>
+        <Reveal as="p" delay={0.08} className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{fv.insights.intro}</Reveal>
 
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-8">user personas</h3>
+        <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-8">user personas</Reveal>
         <div className="grid md:grid-cols-2 gap-6">
-          {fv.insights.personas.map((p) => (
-            <div key={p.name} className="dark-card rounded-3xl p-7 md:p-8">
+          {fv.insights.personas.map((p, i) => (
+            <Reveal key={p.name} delay={(i % 2) * 0.06} className="dark-card rounded-3xl p-7 md:p-8">
               <div className="flex items-center gap-4 mb-5">
                 <div className="w-14 h-14 rounded-full bg-[#075EFD] text-white flex items-center justify-center font-display font-black text-xl">
                   {p.name.split(" ").map((x) => x[0]).join("")}
@@ -348,18 +361,18 @@ export default function FinvistaCaseStudy() {
                   </ul>
                 </div>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
 
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-8">design principles</h3>
+        <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-8">design principles</Reveal>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {fv.insights.principles.map((p, i) => (
-            <div key={p.t} className="dark-card rounded-3xl p-6">
+            <Reveal key={p.t} delay={(i % 2) * 0.06} className="dark-card rounded-3xl p-6">
               <div className="font-mono text-sm uppercase tracking-widest text-white">0{i + 1}</div>
               <h3 className="mt-2 font-display text-lg font-black ">{p.t}</h3>
               <p className="mt-2 text-sm leading-relaxed">{p.d}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </SectionWrap>
@@ -367,23 +380,27 @@ export default function FinvistaCaseStudy() {
       {/* 05 USER FLOW & TASKS */}
       <SectionWrap data-testid="section-flow">
         <SectionLabel num="05" name="User Flow & Tasks" />
-        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">
-          {fv.flow.headline}
-        </h2>
-        <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{fv.flow.intro}</p>
+        <Reveal>
+          <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">
+            {fv.flow.headline}
+          </h2>
+        </Reveal>
+        <Reveal as="p" delay={0.08} className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{fv.flow.intro}</Reveal>
 
         {/* Flow SVG */}
-        <Zoomable src={fv.flow.diagramSvg} alt={fv.flow.diagramCaption} caption={fv.flow.diagramCaption} className="mt-10 rounded-3xl dark-card p-6 md:p-10 overflow-x-auto">
-          <img src={fv.flow.diagramSvg} alt={fv.flow.diagramCaption} loading="lazy" className="w-full h-auto" />
-        </Zoomable>
-        <p className="mt-3 text-xs font-mono uppercase tracking-widest text-white text-center">
-          {fv.flow.diagramCaption}
-        </p>
+        <Reveal delay={0.06}>
+          <Zoomable src={fv.flow.diagramSvg} alt={fv.flow.diagramCaption} caption={fv.flow.diagramCaption} className="mt-10 rounded-3xl dark-card p-6 md:p-10 overflow-x-auto">
+            <img src={fv.flow.diagramSvg} alt={fv.flow.diagramCaption} loading="lazy" className="w-full h-auto" />
+          </Zoomable>
+          <p className="mt-3 text-xs font-mono uppercase tracking-widest text-white text-center">
+            {fv.flow.diagramCaption}
+          </p>
+        </Reveal>
 
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-8">user tasks by step</h3>
+        <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-8">user tasks by step</Reveal>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {fv.flow.tasks.map((t) => (
-            <div key={t.n} className="dark-card rounded-2xl p-5 flex gap-4 items-start">
+          {fv.flow.tasks.map((t, i) => (
+            <Reveal key={t.n} delay={(i % 2) * 0.06} className="dark-card rounded-2xl p-5 flex gap-4 items-start">
               <span className="flex-shrink-0 w-10 h-10 rounded-full bg-[#075EFD] text-white flex items-center justify-center font-display font-black">
                 {t.n}
               </span>
@@ -391,7 +408,7 @@ export default function FinvistaCaseStudy() {
                 <h3 className="font-display text-base font-black ">{t.t}</h3>
                 <p className="text-sm mt-1 leading-relaxed text-[#F4F3FA]/85">{t.d}</p>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </SectionWrap>
@@ -399,49 +416,51 @@ export default function FinvistaCaseStudy() {
       {/* 06 DESIGN */}
       <SectionWrap data-testid="section-design">
         <SectionLabel num="06" name="Design" />
-        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">
-          {fv.design.headline}
-        </h2>
-        <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{fv.design.intro}</p>
+        <Reveal>
+          <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">
+            {fv.design.headline}
+          </h2>
+        </Reveal>
+        <Reveal as="p" delay={0.08} className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{fv.design.intro}</Reveal>
 
         {/* Wireframes */}
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">wireframes</h3>
-        <p className="text-base leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{fv.design.wireframes.intro}</p>
+        <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">wireframes</Reveal>
+        <Reveal as="p" delay={0.08} className="text-base leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{fv.design.wireframes.intro}</Reveal>
         <div className="space-y-8">
           {fv.design.wireframes.batches.map((b, i) => (
-            <figure key={i} className="rounded-3xl dark-card p-6 md:p-8">
+            <Reveal key={i} as="figure" delay={i * 0.05} className="rounded-3xl dark-card p-6 md:p-8">
               <Zoomable src={b.src} alt={b.caption} caption={b.caption} className="block">
                 <img src={b.src} alt={b.caption} loading="lazy" className="w-full h-auto" />
               </Zoomable>
               <figcaption className="mt-4 text-xs font-mono uppercase tracking-widest text-white text-center">
                 {b.caption}
               </figcaption>
-            </figure>
+            </Reveal>
           ))}
         </div>
 
         {/* Explorations */}
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">design explorations</h3>
-        <p className="text-base leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{fv.design.explorations.intro}</p>
+        <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">design explorations</Reveal>
+        <Reveal as="p" delay={0.08} className="text-base leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{fv.design.explorations.intro}</Reveal>
         <div className="space-y-6">
           {fv.design.explorations.images.map((img, i) => (
-            <figure key={i} className="rounded-3xl dark-card p-6 md:p-8">
+            <Reveal key={i} as="figure" delay={i * 0.05} className="rounded-3xl dark-card p-6 md:p-8">
               <Zoomable src={img.src} alt={img.caption} caption={img.caption} className="block">
                 <img src={img.src} alt={img.caption} loading="lazy" className="w-full h-auto" />
               </Zoomable>
               <figcaption className="mt-4 text-xs font-mono uppercase tracking-widest text-white text-center">
                 {img.caption}
               </figcaption>
-            </figure>
+            </Reveal>
           ))}
         </div>
 
         {/* Final 16 screens */}
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">final design: the two-wheeler journey</h3>
-        <p className="text-base leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{fv.design.finalDesign.intro}</p>
+        <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">final design: the two-wheeler journey</Reveal>
+        <Reveal as="p" delay={0.08} className="text-base leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{fv.design.finalDesign.intro}</Reveal>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {fv.design.finalDesign.screens.map((s) => (
-            <figure key={s.title} className="rounded-3xl dark-card p-5">
+          {fv.design.finalDesign.screens.map((s, i) => (
+            <Reveal key={s.title} as="figure" delay={(i % 2) * 0.06} className="rounded-3xl dark-card p-5">
               <Zoomable src={s.src} alt={s.title} caption={s.desc} className="block">
                 <PhoneFrame src={s.src} alt={s.title} />
               </Zoomable>
@@ -449,18 +468,18 @@ export default function FinvistaCaseStudy() {
                 <h3 className="font-display text-base font-black ">{s.title}</h3>
                 <p className="text-sm mt-1 leading-relaxed text-[#F4F3FA]/85">{s.desc}</p>
               </figcaption>
-            </figure>
+            </Reveal>
           ))}
         </div>
 
         {/* Key decisions */}
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-8">key design decisions</h3>
+        <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-8">key design decisions</Reveal>
         <div className="grid md:grid-cols-2 gap-5">
           {fv.design.keyDecisions.map((k, i) => (
-            <div key={k.t} className={`rounded-3xl p-7 ${i % 2 === 0 ? "dark-card" : "bg-white border-2 border-[#F5379B]"}`}>
+            <Reveal key={k.t} delay={(i % 2) * 0.06} className={`rounded-3xl p-7 ${i % 2 === 0 ? "dark-card" : "bg-white border-2 border-[#F5379B]"}`}>
               <h3 className={`font-display text-xl font-black mb-3 ${i % 2 === 0 ? "" : "text-[#F5379B]"}`}>{k.t}</h3>
               <p className={`text-base leading-relaxed ${i % 2 === 0 ? "" : "text-black"}`}>{k.d}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </SectionWrap>
@@ -468,67 +487,73 @@ export default function FinvistaCaseStudy() {
       {/* 07 DESIGN SYSTEM */}
       <SectionWrap data-testid="section-design-system">
         <SectionLabel num="07" name="Design System" />
-        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">
-          {fv.designSystem.headline}
-        </h2>
-        <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{fv.designSystem.intro}</p>
+        <Reveal>
+          <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">
+            {fv.designSystem.headline}
+          </h2>
+        </Reveal>
+        <Reveal as="p" delay={0.08} className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{fv.designSystem.intro}</Reveal>
 
-        <div className="mt-16">
+        <Reveal delay={0.06} className="mt-16">
           <FinvistaDesignSystem />
-        </div>
+        </Reveal>
 
-        <div className="mt-10 rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
+        <Reveal delay={0.06} className="mt-10 rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
           <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-3">system impact</p>
           <p className="font-display text-xl md:text-2xl leading-snug max-w-6xl text-black">{fv.designSystem.systemImpact}</p>
-        </div>
+        </Reveal>
       </SectionWrap>
 
       {/* 08 VALIDATION */}
       <SectionWrap data-testid="section-validation">
         <SectionLabel num="08" name="Validation" />
-        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">
-          {fv.validation.headline}
-        </h2>
-        <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{fv.validation.intro}</p>
+        <Reveal>
+          <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">
+            {fv.validation.headline}
+          </h2>
+        </Reveal>
+        <Reveal as="p" delay={0.08} className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{fv.validation.intro}</Reveal>
 
         <ol className="mt-12 relative border-l-2 border-white/15 ml-2 space-y-8">
-          {fv.validation.rounds.map((r) => (
-            <li key={r.n} className="pl-8 relative">
+          {fv.validation.rounds.map((r, i) => (
+            <Reveal as="li" key={r.n} delay={i * 0.05} className="pl-8 relative">
               <span className="absolute -left-[14px] top-1 w-7 h-7 rounded-full bg-[#075EFD] text-white flex items-center justify-center font-display font-black text-sm border-4 border-[#100210]">
                 {r.n}
               </span>
               <h3 className="font-display text-xl font-black ">{r.t}</h3>
               <p className="mt-2 text-base leading-relaxed max-w-5xl">{r.d}</p>
-            </li>
+            </Reveal>
           ))}
         </ol>
 
-        <div className="mt-12 rounded-3xl dark-card text-white p-8 md:p-10">
+        <Reveal delay={0.06} className="mt-12 rounded-3xl dark-card text-white p-8 md:p-10">
           <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-white mb-3">outcome</p>
           <p className="font-display text-xl md:text-2xl leading-snug max-w-6xl">{fv.validation.outcome}</p>
-        </div>
+        </Reveal>
       </SectionWrap>
 
       {/* 09 IMPACT */}
       <SectionWrap data-testid="section-impact">
         <SectionLabel num="09" name="Impact" />
-        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-10">
-          {fv.impact.headline}
-        </h2>
+        <Reveal>
+          <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-10">
+            {fv.impact.headline}
+          </h2>
+        </Reveal>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {fv.impact.metrics.map((m) => (
-            <div key={m.l} className="rounded-3xl dark-card p-6 md:p-7">
+          {fv.impact.metrics.map((m, i) => (
+            <Reveal key={m.l} delay={(i % 2) * 0.06} className="rounded-3xl dark-card p-6 md:p-7">
               <div className="font-display text-4xl md:text-5xl font-black text-[#075EFD] leading-none">{m.v}</div>
               <div className="mt-3 font-display text-base font-bold ">{m.l}</div>
               <div className="mt-1 text-xs font-mono uppercase tracking-widest text-white">{m.s}</div>
-            </div>
+            </Reveal>
           ))}
         </div>
 
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-8">key learnings & reflection</h3>
+        <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-8">key learnings & reflection</Reveal>
         <div className="grid md:grid-cols-2 gap-5">
-          <div className="dark-card rounded-3xl p-7">
+          <Reveal className="dark-card rounded-3xl p-7">
             <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">what went well</p>
             <ul className="space-y-3">
               {fv.impact.wentWell.map((x) => (
@@ -538,8 +563,8 @@ export default function FinvistaCaseStudy() {
                 </li>
               ))}
             </ul>
-          </div>
-          <div className="dark-card rounded-3xl p-7">
+          </Reveal>
+          <Reveal delay={0.06} className="dark-card rounded-3xl p-7">
             <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">what I&apos;d do differently</p>
             <ul className="space-y-3">
               {fv.impact.differently.map((x) => (
@@ -549,28 +574,30 @@ export default function FinvistaCaseStudy() {
                 </li>
               ))}
             </ul>
-          </div>
+          </Reveal>
         </div>
       </SectionWrap>
 
       {/* 10 SCREEN GALLERY */}
       <SectionWrap data-testid="section-gallery">
         <SectionLabel num="10" name="Screen Gallery" />
-        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">
-          {fv.gallery.headline}
-        </h2>
-        <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{fv.gallery.intro}</p>
+        <Reveal>
+          <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">
+            {fv.gallery.headline}
+          </h2>
+        </Reveal>
+        <Reveal as="p" delay={0.08} className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{fv.gallery.intro}</Reveal>
 
         <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-          {fv.gallery.representative.map((s) => (
-            <figure key={s.title} className="rounded-2xl dark-card overflow-hidden">
+          {fv.gallery.representative.map((s, i) => (
+            <Reveal key={s.title} as="figure" delay={(i % 2) * 0.06} className="rounded-2xl dark-card overflow-hidden">
               <Zoomable src={s.src} alt={s.title} caption={s.title} className="aspect-[9/16] bg-white p-2 flex items-center justify-center">
                 <img src={s.src} alt={s.title} loading="lazy" className="max-w-full max-h-full object-contain" />
               </Zoomable>
               <figcaption className="px-3 py-3 text-[11px] font-mono uppercase tracking-wider text-[#F4F3FA]">
                 {s.title}
               </figcaption>
-            </figure>
+            </Reveal>
           ))}
           {showAll &&
             fv.gallery.all.map((s) => (
@@ -597,24 +624,26 @@ export default function FinvistaCaseStudy() {
 
       {/* Footer */}
       <SectionWrap className="text-center">
-        <h2 className="font-display text-3xl md:text-5xl font-black mb-6">thank you for reading.</h2>
-        <p className="text-lg text-[#A29CB4] mb-8">
+        <Reveal as="h2" className="font-display text-3xl md:text-5xl font-black mb-6">thank you for reading.</Reveal>
+        <Reveal as="p" delay={0.08} className="text-lg text-[#A29CB4] mb-8">
           Want to see what FinVista taught me applied to your product?
-        </p>
-        <div className="flex gap-4 justify-center flex-wrap">
+        </Reveal>
+        <div className="flex gap-4 justify-center flex-wrap items-center">
+          <ProjectNav slug="finvista" variant="footer" which="prev" />
           <a
             href={`mailto:${PROFILE.email}`}
             data-testid="case-cta-email"
-            className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-[#C71E73] font-semibold text-sm hover:bg-[#C71E73] hover:text-white transition-colors"
+            className={`inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-[#C71E73] font-semibold text-sm hover:bg-[#C71E73] hover:text-white transition-[background-color,color,transform] duration-200 active:scale-[0.97] ${FOCUS}`}
           >
             <Mail size={16} /> email me
           </a>
           <Link
             to="/projects"
-            className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-[#F4F3FA] font-semibold text-sm hover:bg-[#261E3A] transition-colors"
+            className={`inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-[#F4F3FA] font-semibold text-sm hover:bg-[#261E3A] transition-[background-color,color,transform] duration-200 active:scale-[0.97] ${FOCUS}`}
           >
             view all projects
           </Link>
+          <ProjectNav slug="finvista" variant="footer" which="next" />
         </div>
       </SectionWrap>
     </article>

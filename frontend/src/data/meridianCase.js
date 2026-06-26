@@ -1,7 +1,7 @@
 // Meridian Institute of Technology, university analytics dashboard case study.
 // CLIENT IS ANONYMIZED (real client confidential). Never surface the real name or logo.
-// Body is markdown, rendered by MeridianCaseStudy.jsx. Screens are placeholders until
-// the high-fidelity designs are added. No em-dashes (house rule).
+// Body is markdown, rendered by MeridianCaseStudy.jsx. Voice: first-person,
+// conversational, crisp (owltastic-inspired). No em-dashes (house rule).
 
 export const meridian = {
   slug: "meridian",
@@ -24,169 +24,169 @@ export const meridian = {
   },
   body: `## TL;DR
 
-Meridian's leaders ran the place off four disconnected Power BI dashboards. The data was there; they just spent more time orienting than reading.
+Meridian's leaders ran a whole university off a sprawl of disconnected Power BI reports that never talked to each other. The data was all there. They just spent more time hunting for it than reading it.
 
-The redesign: one platform, one visual language, a cockpit on top, consistent drill-downs underneath. Eight screens, defaulting to multi-year trends.
+So I rebuilt it as one dashboard with five tabs: Overview, Undergraduate, Graduate, HR, and Research. One navigation, one visual language. The Overview tab is the cockpit that rolls the whole institution into a single read; each other tab drills into its own area, and every view defaults to multi-year trends.
 
-Leaders can glance and trust it, while analysts drill down to the cohort.
+Now a provost can land on the Overview and trust it, and an analyst can switch to a tab and pull a cohort apart. One dashboard, both jobs.
 
 ## Context and primary users
 
-Meridian is small, research-heavy, and split almost 50/50 undergrad/grad (about 4,200 and 4,160 in Fall 2024). Any "total" hides two stories. Four domains, four owners, four Power BI dashboards that never talked.
+Meridian is small, research-heavy, and split almost evenly between undergrad and grad (about 4,200 and 4,160 in Fall 2024). That split matters more than it sounds: any "total" quietly hides two different stories. Four domains, four owners, four dashboards that never spoke to each other.
 
-### Why one cockpit was needed
+### One question, four files
 
-Leadership questions cross domains; the tools stopped at the borders. A provost asks "is enrollment softening, is research strong enough to carry us, is headcount outgrowing revenue" in one breath. The old setup needed three sittings.
+Leadership thinks across domains. The tools didn't. A provost asks "is enrollment softening, is research strong enough to carry us, is headcount outrunning revenue?" in a single breath, and the old setup needed three separate sittings to answer it.
 
-Every dashboard spoke its own dialect too. Grad is about 48% international, undergrad about 4%, so a blended number is meaningless. Split by level, by default, everywhere.
+Every dashboard spoke its own dialect, too. Grad is about 48% international, undergrad about 4%. Blend them and the number means nothing. So I split by level, by default, everywhere.
 
-### The dual-audience challenge: glance vs. drill-down
+### Two ways of reading, one product
 
-Two reading modes, one product. Some read at a glance: ninety seconds, headline plus anything on fire. Others drill, pulling a pool apart by gender, country, test policy. The legacy tools dumped everything on screen, so glance users burned their ninety seconds just orienting.
+People read this in two modes. Some glance: ninety seconds, give me the headline and anything on fire. Others drill: pull a pool apart by gender, country, test policy. The legacy tools dumped it all on screen at once, so the glance crowd burned their ninety seconds just figuring out where to look.
 
-### Primary users
+### Who I designed for
 
-I designed around six readers, from a provost who needs the headline in ninety seconds to an IR analyst who defends every number. Win the analysts, who own the data, and everyone downstream inherits that trust.
+I designed around six readers, from a provost who needs the headline in ninety seconds to an IR analyst who has to defend every number to the state. My bet: win the analysts who own the data, and everyone downstream inherits that trust.
 
 ## The problem: four dashboards that made you work before they told you anything
 
-Four Power BI reports. Same maroon, no shared layout, filter logic, or chart language. Leadership never said the data was wrong, just that it took too long to find what they came for. People burned about 90 seconds every visit just orienting.
+Four Power BI reports. Same maroon, but no shared layout, no shared filters, no shared chart language. Nobody ever said the data was wrong. They said it took too long to find what they came for, about 90 seconds of orienting every single visit.
 
-So I audited all four against Nielsen's heuristics on a 0 to 4 severity scale, every finding tied to a real user and task.
+So I audited all four against Nielsen's heuristics on a 0 to 4 severity scale, and tied every finding to a real person and a real task.
 
-### The four reports, and what each one actually did
+### Four reports, four mental models
 
-Undergraduate Admissions, Graduate Admissions, Research, HR. Four domains, four mental models, four visual languages. A provost wanting a Monday read had to open four files and stitch the story in their head.
+Undergraduate Admissions, Graduate Admissions, Research, HR. Four domains, four mental models, four visual languages. A provost who just wanted a Monday-morning read had to open four files and stitch the story together in their head.
 
-### What was actually broken (heuristic + severity audit)
+### What was actually broken
 
-Everything showed at once, nothing telling your eye where to start.
+Everything showed at once, and nothing told your eye where to start.
 
-The biggest failure: treating the institution as one population. Enrollment is near 50/50 (about 4,200 undergraduate, 4,160 graduate). "Percent international" is around 48% graduate but only 4% undergraduate, so a blended number lies. I segmented by level everywhere.
+The biggest miss was treating the whole institution as one population. Enrollment is near 50/50 (about 4,200 undergrad, 4,160 grad). "Percent international" is around 48% for grad but only 4% for undergrad, so a blended number is a lie with a decimal point. I segmented by level everywhere.
 
-### Why this mattered for this institution specifically
+### Why it hit this school harder
 
-The story leaders most needed to watch was tense: applications fell from roughly 14,170 to 10,500, the admit rate rose (43% to 51%), yield ticked up (17% to 21%). The legacy layout could not tell that three-variable story. The numbers lived on different tiles, in different styles, with no shared timeline. Some people had quietly stopped looking. The redesign set out to stop making people orient and start leading with the answer.
+The story leaders most needed to watch was a tense one: applications fell from roughly 14,170 to 10,670, the admit rate climbed (43% to 51%), yield ticked up (17% to 21%). The old layout could not tell that three-variable story. The numbers lived on different tiles, in different styles, with no shared timeline. Some people had quietly stopped looking. The whole redesign was about ending the orienting and leading with the answer.
 
 ## Research and domain landscape
 
-Before I drew a box, I learned the sector. Every finding here became a design decision.
+Before I drew a single box, I went and learned the sector. Every finding here turned into a design decision.
 
-### Where a dashboard actually sits: the CRM / SIS / BI stack
+### Where a dashboard actually sits
 
-The dashboard is the last mile of a CRM and SIS pipeline. Slate runs about half the enrollment CRM market and holds both funnels, so it's the source of truth. I built to real Power BI capabilities and collapsed four legacy dashboards into one.
+The dashboard is the last mile of a CRM and SIS pipeline. Slate runs about half the enrollment-CRM market and holds both funnels, so that is the source of truth. I designed to what Power BI can actually render, and collapsed four legacy dashboards into one.
 
-### Analytics here is longitudinal, not a single snapshot
+### It's a trajectory, not a snapshot
 
-Leaders watch trajectories, not photographs. Meridian proves it: fewer applications, higher admit rate, better yield, all at once. So every view defaults to a multi-year trend, pairs the funnel with yield, and flags projections as forecasts.
+Leaders watch where things are heading, not a single photograph. Meridian is the proof: fewer applications, higher admit rate, better yield, all at the same time. So every view defaults to a multi-year trend, pairs the funnel with yield, and labels projections as forecasts.
 
-### The enrollment cliff is regional, not uniform
+### The enrollment cliff is regional
 
-The college-age population is shrinking in the Northeast, Midwest, and West while the South grows. A Northeast STEM school feels this sharply. So geography is a first-class, drillable dimension, regional for undergrad and global for grad.
+The college-age population is shrinking in the Northeast, Midwest, and West, and growing in the South. A Northeast STEM school feels that sharply. So geography is a first-class, drillable dimension: regional for undergrad, global for grad.
 
-### International share is meaningless until you split by level
+### International share lies until you split it
 
-Grad is about 48% international, undergrad about 4%. A blended number averages two unrelated populations, so I segment by level everywhere. There is no global "students" view.
+Grad is about 48% international, undergrad about 4%. A blended number averages two unrelated populations. So I segment by level everywhere. There is no global "students" view, on purpose.
 
-### Test-optional is reversing, so test policy is a cohort dimension
+### Test-optional is reversing
 
-Comparing yield across years now means comparing across policy regimes. So test policy is a filterable dimension a user can hold constant.
+Comparing yield across years now means comparing across policy regimes. So test policy is a dimension you can hold constant, not a footnote.
 
-### Post-SFFA, demographic data is shrinking and politically sensitive
+### Post-SFFA, demographic data is sensitive
 
-After the 2023 ruling, public release of disaggregated data collapsed. So demographic views degrade gracefully when a category is suppressed, and stay inside the platform.
+After the 2023 ruling, public release of disaggregated data dropped off sharply. So demographic views degrade gracefully when a category is suppressed, and they stay inside the platform.
 
-### Predictive analytics carries a documented bias risk
+### Predictive analytics carries a real bias risk
 
-In 2021, The Markup reported EAB's Navigate used race to predict student success, bias shipped into real guidance. So AI is a guide, never the decision-maker. Every output is a signal a human evaluates, inputs visible, sensitive attributes out of scoring.
+In 2021, The Markup reported that EAB's Navigate used race to predict student success, bias shipped straight into real advising. So here, AI is a guide, never the decision-maker. Every output is a signal a human weighs, inputs visible, sensitive attributes kept out of the scoring.
 
 ### What the research locked in
 
-One product shape: a funnel paired with yield, then geography, program mix, demographics, and deposits. Built on Common Data Set and IPEDS, defaulting to multi-year trends and segmenting by level.
+One product shape: a funnel paired with yield, then geography, program mix, demographics, and deposits. Built on Common Data Set and IPEDS, defaulting to multi-year trends, always split by level.
 
 ## Goals, success criteria, and process
 
-### What we were actually trying to fix
+### What we were really fixing
 
-The Institute had a reading problem, not a data problem. The numbers were right, but scattered across four Power BI dashboards. Deans burned the first minutes of every meeting hunting for the page, the filter, the current version.
+The Institute had a reading problem, not a data problem. The numbers were right; they were scattered across four dashboards. Deans burned the first few minutes of every meeting hunting for the page, the filter, the current version.
 
 The brief was not "prettier charts." It was: make these numbers fast to read and safe to trust, for people who open this between meetings and need an answer in under a minute.
 
 ### What success looked like
 
-Success was behavioral. A first-time user names any screen's headline in about five seconds. A returning user answers a routine question with at most one filter change. One definition per metric. A forecast always reads as a forecast. And the analysts sign off that the surface matches their data contract. That sign-off was the real acceptance test.
+I made success behavioral, not decorative. A first-time user names any screen's headline in about five seconds. A returning user answers a routine question with one filter change at most. One definition per metric. A forecast always reads as a forecast. And the analysts sign off that the surface matches their data contract. That sign-off was the real acceptance test.
 
-### Approach and process
+### How I worked
 
-Six passes, looping back often. The discipline: align with what Power BI can render before drawing anything pretty.
+Six passes, looping back often. The discipline I held myself to: agree with what Power BI can render before drawing anything pretty.
 
-I audited the four legacy dashboards, mapped every idea to native behavior (drill-through, not a custom framework), then collapsed them into one spine, grayscale first.
+I audited the four legacy dashboards, mapped every idea to native behavior (drill-through, not some custom framework), then collapsed them into one spine, grayscale first.
 
-AI came last, on purpose. Ask Meridian AI stays optional, audited for bias, human in the loop. A guide, not the decision-maker.
+AI came last, on purpose. Ask Meridian AI is optional, audited for bias, human in the loop. A guide, not the decision-maker.
 
 ## Information architecture and navigation model
 
-One product, one navigation model, one set of filters that act the same everywhere. Shallow by design: an Overview cockpit up top, then five owner-aligned areas, each opening on a summary before drilling into named sub-views. Filters carry over, so the drill-down continues the question you were already asking.
+One product, one navigation model, one set of filters that behave the same everywhere. Shallow on purpose: an Overview cockpit up top, then five owner-aligned areas, each opening on a summary before you drill into named sub-views. Filters carry over, so the drill-down continues the question you were already asking.
 
-Two calls shaped it. Undergrad and Grad stay split (not one "Admissions" toggle) because the funnels differ, roughly 48% international versus 4%, with volumes 2x apart. One layout would always look wrong for one of them.
+Two calls shaped it. Undergrad and Grad stay split (not one "Admissions" toggle) because the funnels are genuinely different: roughly 48% international versus 4%, volumes 2x apart. One layout would always look wrong for one of them.
 
-And one rule runs through it: segment by level, always. No lone "total enrollment", no blended "percent international". Both would describe a student who doesn't exist.
+And one rule runs through the whole thing: segment by level, always. No lone "total enrollment," no blended "percent international." Both would describe a student who does not exist.
 
 ## Design system and visual language
 
-Four old dashboards, four layouts, one maroon. I rebuilt them as one component set with one rule set. Learn one page, you can read them all.
+Four old dashboards, four layouts, one shade of maroon. I rebuilt them as one component set with one set of rules. Learn one page and you can read them all.
 
-Calm, modern SaaS. Quiet chrome so the numbers get the contrast. Foundations, chart kit, and AI layer sit below.
+The vibe is calm, modern SaaS. Quiet chrome, so the numbers get the contrast. Foundations and the chart kit sit underneath; Ask Meridian AI is the one floating affordance, on top, never baked in.
 
-## Module deep-dive: undergraduate and graduate admissions
+## Inside the undergraduate and graduate tabs
 
-These two modules are the platform's heart, and they break the same rule: one number lies. Grad students are ~48% international, undergrads ~4%. A single Institute-wide "percent international" describes no one.
+These two are the heart of the platform, and they both break the same rule: one number lies. Grad students are about 48% international, undergrads about 4%. A single Institute-wide "percent international" describes nobody.
 
 So the rule came first: segment by level, everywhere. Each gets its own overview, geography, and funnel. Shared chrome, never shared data.
 
 ### Undergraduate admissions
 
-The undergrad story is a tension, not a headline. Over two years the funnel both tightened and loosened.
+The undergrad story is a tension, not a headline. Over two years the funnel both tightened and loosened at once.
 
-- Applications fell ~14,170 to ~10,500.
+- Applications fell ~14,170 to ~10,670.
 - Admit rate rose ~43% to ~51%.
 - Yield ticked up ~17% to ~21%.
 
-Fewer applications, easier admit, slightly better yield. Every KPI carries a year-over-year delta, because "10,500 applications" tells a dean nothing and "down ~25%" starts a conversation. Single-cycle blindness is exactly what the legacy Power BI dashboards got wrong.
+Fewer applications, easier admit, slightly better yield. Every KPI carries a year-over-year delta, because "10,670 applications" tells a dean nothing and "down ~25%" starts a conversation. That single-cycle blindness is exactly what the legacy dashboards got wrong.
 
 ### Graduate admissions
 
-Graduate runs on a different engine: smaller pool, dramatic international skew, heavy loss between admitted and enrolled. So it's built around stage conversion, not multi-year trends.
+Graduate runs on a different engine: smaller pool, dramatic international skew, heavy loss between admitted and enrolled. So I built it around stage conversion, not multi-year trends.
 
 The funnel makes the real problem legible: more than two thirds of admitted applicants decline. That gap, not the application count, is where the yield work lives.
 
-At ~48% international with source markets concentrated (India by far the largest), concentration is a risk as much as a strength. When one country supplies a big share, a visa-policy change is an enrollment event.
+At about 48% international with source markets concentrated (India by far the largest), that concentration is a risk as much as a strength. When one country supplies a big share of a class, a visa-policy change becomes an enrollment event.
 
-### Why the two modules deliberately diverge
+### Why I let the two diverge
 
-One "admissions" template would have been easier. I chose not to. Undergrad optimizes for multi-year tension; grad for stage conversion and source-market concentration. The chrome, navigation, and AI layer are shared so it feels like one tool. The analysis is split because the two populations genuinely are. That is the one decision the legacy dashboards never made.
+One "admissions" template would have been easier. I chose not to. Undergrad is built for multi-year tension; grad for stage conversion and source-market concentration. The chrome, navigation, and the Ask AI affordance are shared so it still feels like one tool. The analysis splits because the two populations genuinely are different. That is the one call the legacy dashboards never made.
 
-## Module deep-dive: research and HR
+## Inside the research and HR tabs
 
-Undergrad and grad are one pipeline. Research and HR are different problems. Research is a money-and-output story told over years, while HR is a workforce story where the key numbers are also the most sensitive. Both legacy dashboards had the same flaws as admissions, with maroon chrome, pies, and tiny type, but the fix differed because the questions did.
+Undergrad and grad are one pipeline. Research and HR are different animals. Research is a money-and-output story told over years; HR is a workforce story where the key numbers are also the most sensitive. Both legacy dashboards had the same flaws as admissions (maroon chrome, pie charts, tiny type), but the fix was different because the questions were different.
 
 I kept the overview-and-drill-down spine, then changed the top-line KPIs, the time horizon, and how I handled demographic data.
 
 ### Research Intelligence
 
-This office does not ask "how many proposals this month." It asks "is the funding pipeline healthier than three years ago." So I led with money over time.
+This office does not ask "how many proposals this month." It asks "is the funding pipeline healthier than it was three years ago." So I led with money, over time.
 
-The KPI band separates three numbers people kept confusing: **funding (new) ~$21.4M** (did we win), **awards (active) ~$52M** (what we manage), **expenditures ~$35.5M** (are we using it). Legacy split these across separate pies, so people compared slices and drew the wrong conclusion. Side by side, one definition each, was the highest-value fix.
+The KPI band pulls apart three numbers people kept confusing: **funding (new) ~$21.4M** (did we win it), **awards (active) ~$52M** (what we manage), **expenditures ~$35.5M** (are we spending it). The legacy version split these across separate pies, so people compared slices and drew the wrong conclusion. Putting them side by side, one definition each, was the single highest-value fix.
 
-The decade trend anchors the page: a single year says almost nothing; the ten-year slope tells you growing, flat, or sliding. Output (publications, patents, H-index ~184) sits apart as the lagging proxy it is.
+The decade trend anchors the page: one year tells you almost nothing; the ten-year slope tells you growing, flat, or sliding. Output (publications, patents, H-index ~184) sits off to the side as the lagging proxy it is.
 
 ### HR Workforce
 
 HR needed the most restraint: do less, more clearly, and treat people's data with care.
 
-The KPI band is deliberately plain: **headcount ~1,363**, split at once into **faculty ~708** and **staff ~655**, two populations run by different rules. New hires and turnover sit beside it so headcount reads as a flow.
+The KPI band is deliberately plain: **headcount ~1,363**, split right away into **faculty ~708** and **staff ~655**, two populations run by different rules. New hires and turnover sit next to it so headcount reads as a flow, not a still.
 
-The body answers three questions an HR leader actually asks: who we have now, how the workforce is changing, and who we have by demographics, split faculty versus staff.
+The body answers the three questions an HR leader actually asks: who we have now, how the workforce is changing, and who we have by demographics, faculty versus staff.
 
 The demographic panels are where I designed most carefully:
 
@@ -196,49 +196,49 @@ The demographic panels are where I designed most carefully:
 
 ### Why these two share a pattern
 
-Both are longitudinal stories the legacy dashboards flattened into single-year pies. Both have a headline number that misleads alone and only helps once you split it. Admissions taught me to lead with the funnel; these taught me to lead with the multi-year arc, and to know when not to compute.
+Both are longitudinal stories the legacy dashboards flattened into single-year pies. Both have a headline number that misleads on its own and only helps once you split it. Admissions taught me to lead with the funnel; these taught me to lead with the multi-year arc, and to know when not to compute at all.
 
 ## Funnel, yield, and melt
 
 A lean intro, then the spine of each point.
 
-The funnel is the whole job for enrollment leaders, so it sits up top.
+The funnel is the whole job for enrollment leaders, so it sits right up top.
 
-Five stages, plus a sixth most dashboards skip: summer melt, where yield quietly leaks.
+Five stages, plus a sixth most dashboards skip: summer melt, where yield quietly leaks out.
 
 ### Why funnel and yield share a screen
 
-One number is meaningless without the other. Year one: applications fell 25%, but admit rate rose 43% to 51% and yield 17% to 21%. Narrower at the top, more efficient at the bottom.
+One is meaningless without the other. Year one: applications fell 25%, but admit rate rose 43% to 51% and yield 17% to 21%. Narrower at the top, more efficient at the bottom.
 
 ### The melt band
 
-Real money that rarely gets a home. Deposited-versus-enrolled as its own delta gives leaders a number to plan against.
+Real money that rarely gets a home. Showing deposited-versus-enrolled as its own delta gives leaders a number they can actually plan against.
 
 ## Geo intelligence
 
-Geography is the second lens. "Percent international" means nothing until you split it by level, so each gets its own view.
+Geography is the second lens. "Percent international" means nothing until you split it by level, so each level gets its own map.
 
 ### Undergraduate Geo
 
-At 4% international, the domestic story is the story. I lead with a US map, because the enrollment cliff is regional and Meridian sits in the Northeast.
+At 4% international, the domestic story is the story. I lead with a US map, because the enrollment cliff is regional and Meridian sits right in the Northeast.
 
 ### Graduate Geo
 
-At ~48% international, the source-market world map leads. The pipeline is concentrated, and that is the risk: one visa shift can move a whole class.
+At about 48% international, the source-market world map leads. The pipeline is concentrated, and that is the risk: one visa shift can move a whole class.
 
 ## Before and after
 
-The fastest proof: old pain on the left, new answer on the right.
+The fastest proof: the old pain on the left, the new answer on the right.
 
-### Module by module
+### Tab by tab
 
-**Undergraduate Admissions.** Applications fell 14,170 to 10,500, admit rate climbed 43% to 51%. A Northeast school feels the demographic decline harder, so geography earned its own screen.
+**Undergraduate Admissions.** Applications fell 14,170 to 10,670, admit rate climbed 43% to 51%. A Northeast school feels the demographic decline harder, so geography earned its own screen.
 
-**Graduate Admissions.** The worst of the pie problem. International share now splits by level: ~48% of grad students, only ~4% of undergrads.
+**Graduate Admissions.** The worst of the pie problem. International share now splits by level: about 48% of grad students, only about 4% of undergrads.
 
 **Research.** A dense grid of fiscal-year tables became a proposals-to-awards pipeline with flagged trends.
 
-**HR.** Headcount 1,363, 72 new hires. Glance up top, detail below.
+**HR.** Headcount 1,363, 124 new hires. Glance up top, detail below.
 
 ### What carried across all four
 
@@ -246,5 +246,5 @@ One platform, not four prettier reports. The same patterns everywhere: KPIs with
 
 ## Outcome, reflection, and forward outlook
 
-What shipped, what I'd redo, and where Meridian goes next.`,
+What shipped, what I would redo, and where Meridian goes next.`,
 };

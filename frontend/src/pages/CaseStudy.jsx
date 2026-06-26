@@ -18,7 +18,6 @@ export default function ComingSoonCase() {
           >
             <ArrowLeft size={14} /> all projects
           </Link>
-          <ProjectNav slug={slug} />
         </div>
         <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-6">case study · drafting</p>
         <h1 className="font-display text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.95]">
@@ -71,6 +70,13 @@ export default function ComingSoonCase() {
             <ArrowUpRight className="opacity-60 group-hover:opacity-100 group-hover:rotate-45 transition-all" size={28} />
           </div>
         </Link>
+      </section>
+
+      <section className="px-6 md:px-10 lg:px-16 pb-20">
+        <div className="flex gap-3 justify-center flex-wrap items-center">
+          <ProjectNav slug={slug} variant="footer" which="prev" />
+          <ProjectNav slug={slug} variant="footer" which="next" />
+        </div>
       </section>
     </div>
   );

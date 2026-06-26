@@ -9,6 +9,9 @@ import CaseStudyNav from "../components/CaseStudyNav";
 import ProjectNav from "../components/ProjectNav";
 import { Container } from "../components/Grid";
 
+// Shared focus-visible ring for interactive elements on the dark page.
+const FOCUS = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F5379B] focus-visible:ring-offset-2 focus-visible:ring-offset-[#100210]";
+
 const SectionLabel = ({ num, name }) => (
   <div className="flex items-center gap-4 mb-6">
     <span className="font-mono text-xs uppercase tracking-[0.25em] text-[#F5379B]">
@@ -54,11 +57,10 @@ export default function JoatCaseStudy() {
             <Link
               to="/projects"
               data-testid="back-link"
-              className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-white/70 hover:text-[#F5379B] transition-colors"
+              className={`inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-white/70 hover:text-[#F5379B] rounded transition-[color,transform] duration-200 active:scale-[0.97] ${FOCUS}`}
             >
               <ArrowLeft size={14} /> all projects
             </Link>
-            <ProjectNav slug={j.slug} />
           </div>
 
           <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-5">
@@ -116,7 +118,7 @@ export default function JoatCaseStudy() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {j.primaryUsers.map((u) => (
             <div key={u.label} className="dark-card rounded-2xl p-6 border-l-4 border-[#075EFD]">
-              <h3 className="font-display text-lg font-black mb-2">{u.label}</h3>
+              <h4 className="font-display text-lg font-black mb-2">{u.label}</h4>
               <p className="text-sm leading-relaxed text-[#F4F3FA]/85">{u.desc}</p>
             </div>
           ))}
@@ -174,7 +176,7 @@ export default function JoatCaseStudy() {
 
         <figure className="mt-12 rounded-3xl dark-card overflow-hidden">
           <Zoomable src={j.howItWorks.image.src} alt={j.howItWorks.image.caption} caption={j.howItWorks.image.caption} className="bg-white">
-            <img src={j.howItWorks.image.src} alt={j.howItWorks.image.caption} loading="lazy" className="block w-full h-auto" />
+            <img src={j.howItWorks.image.src} alt={j.howItWorks.image.caption} width={j.howItWorks.image.w} height={j.howItWorks.image.h} loading="lazy" className="block w-full h-auto" />
           </Zoomable>
           <figcaption className="p-5 text-xs font-mono uppercase tracking-widest text-white text-center">{j.howItWorks.image.caption}</figcaption>
         </figure>
@@ -187,7 +189,7 @@ export default function JoatCaseStudy() {
         <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{j.ia.intro}</p>
         <figure className="mt-12 rounded-3xl dark-card p-5 md:p-8">
           <Zoomable src={j.ia.diagram} alt={j.ia.caption} caption={j.ia.caption} className="block">
-            <img src={j.ia.diagram} alt={j.ia.caption} loading="lazy" className="block w-full h-auto" />
+            <img src={j.ia.diagram} alt={j.ia.caption} width={j.ia.diagramW} height={j.ia.diagramH} loading="lazy" className="block w-full h-auto" />
           </Zoomable>
           <figcaption className="mt-5 text-xs font-mono uppercase tracking-widest text-white text-center">{j.ia.caption}</figcaption>
         </figure>
@@ -200,7 +202,7 @@ export default function JoatCaseStudy() {
         <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{j.userFlow.intro}</p>
         <figure className="mt-12 rounded-3xl dark-card p-5 md:p-8">
           <Zoomable src={j.userFlow.diagram} alt={j.userFlow.caption} caption={j.userFlow.caption} className="block">
-            <img src={j.userFlow.diagram} alt={j.userFlow.caption} loading="lazy" className="block w-full h-auto" />
+            <img src={j.userFlow.diagram} alt={j.userFlow.caption} width={j.userFlow.diagramW} height={j.userFlow.diagramH} loading="lazy" className="block w-full h-auto" />
           </Zoomable>
           <figcaption className="mt-5 text-xs font-mono uppercase tracking-widest text-white text-center">{j.userFlow.caption}</figcaption>
         </figure>
@@ -215,7 +217,7 @@ export default function JoatCaseStudy() {
           {j.wireframes.batches.map((b, i) => (
             <figure key={i} className="rounded-3xl dark-card p-5 md:p-8">
               <Zoomable src={b.src} alt={b.caption} caption={b.caption} className="block">
-                <img src={b.src} alt={b.caption} loading="lazy" className="block w-full h-auto" />
+                <img src={b.src} alt={b.caption} width={b.w} height={b.h} loading="lazy" className="block w-full h-auto" />
               </Zoomable>
               <figcaption className="mt-5 text-xs font-mono uppercase tracking-widest text-white text-center">{b.caption}</figcaption>
             </figure>
@@ -231,7 +233,7 @@ export default function JoatCaseStudy() {
 
         <figure className="mt-12 rounded-3xl dark-card overflow-hidden">
           <Zoomable src={j.studio.image.src} alt={j.studio.image.caption} caption={j.studio.image.caption} className="bg-white">
-            <img src={j.studio.image.src} alt={j.studio.image.caption} loading="lazy" className="block w-full h-auto" />
+            <img src={j.studio.image.src} alt={j.studio.image.caption} width={j.studio.image.w} height={j.studio.image.h} loading="lazy" className="block w-full h-auto" />
           </Zoomable>
           <figcaption className="p-5 text-xs font-mono uppercase tracking-widest text-white text-center">{j.studio.image.caption}</figcaption>
         </figure>
@@ -246,7 +248,7 @@ export default function JoatCaseStudy() {
         </div>
       </SectionWrap>
 
-      {/* 05 CAMPAIGN FLOW */}
+      {/* 08 CAMPAIGN FLOW */}
       <SectionWrap data-testid="section-campaign">
         <SectionLabel num="08" name="Campaign Flow" />
         <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{j.campaign.headline}</h2>
@@ -256,7 +258,7 @@ export default function JoatCaseStudy() {
           {j.campaign.screens.map((s) => (
             <figure key={s.title} className="rounded-3xl dark-card overflow-hidden">
               <Zoomable src={s.src} alt={s.title} caption={`${s.title}: ${s.desc}`} className="bg-white">
-                <img src={s.src} alt={s.title} loading="lazy" className="block w-full h-auto" />
+                <img src={s.src} alt={s.title} width={s.w} height={s.h} loading="lazy" className="block w-full h-auto" />
               </Zoomable>
               <figcaption className="p-6">
                 <h3 className="font-display text-lg font-black">{s.title}</h3>
@@ -267,7 +269,7 @@ export default function JoatCaseStudy() {
         </div>
       </SectionWrap>
 
-      {/* 06 RAISER DASHBOARD */}
+      {/* 09 RAISER DASHBOARD */}
       <SectionWrap data-testid="section-dashboard">
         <SectionLabel num="09" name="Raiser Dashboard" />
         <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{j.dashboard.headline}</h2>
@@ -277,7 +279,7 @@ export default function JoatCaseStudy() {
           {j.dashboard.screens.map((s) => (
             <figure key={s.title} className="rounded-3xl dark-card overflow-hidden">
               <Zoomable src={s.src} alt={s.title} caption={`${s.title}: ${s.desc}`} className="bg-white">
-                <img src={s.src} alt={s.title} loading="lazy" className="block w-full h-auto" />
+                <img src={s.src} alt={s.title} width={s.w} height={s.h} loading="lazy" className="block w-full h-auto" />
               </Zoomable>
               <figcaption className="p-5">
                 <h3 className="font-display text-base font-black">{s.title}</h3>
@@ -288,7 +290,7 @@ export default function JoatCaseStudy() {
         </div>
       </SectionWrap>
 
-      {/* 07 RESPONSIVE */}
+      {/* 10 RESPONSIVE */}
       <SectionWrap data-testid="section-responsive">
         <SectionLabel num="10" name="Responsive" />
         <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{j.responsive.headline}</h2>
@@ -306,7 +308,7 @@ export default function JoatCaseStudy() {
         </div>
       </SectionWrap>
 
-      {/* 08 REFLECTION */}
+      {/* 11 REFLECTION */}
       <SectionWrap data-testid="section-reflection">
         <SectionLabel num="11" name="Reflection" />
         <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{j.reflection.headline}</h2>
@@ -340,10 +342,12 @@ export default function JoatCaseStudy() {
       <SectionWrap className="text-center">
         <h2 className="font-display text-3xl md:text-4xl font-black mb-6">thank you for reading.</h2>
         <p className="text-lg text-[#A29CB4] mb-8">If you&apos;d like to talk through this project or how I approach end-to-end product design, I&apos;d love to connect.</p>
-        <div className="flex gap-4 justify-center flex-wrap">
-          <a href={`mailto:${PROFILE.email}`} data-testid="case-cta-email" className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-[#C71E73] font-semibold text-sm hover:bg-[#C71E73] hover:text-white transition-colors"><Mail size={16} /> email me</a>
-          <Link to="/case/aurora" className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-[#F4F3FA] font-semibold text-sm hover:bg-[#261E3A] transition-colors">read aurora case study</Link>
-          <Link to="/projects" className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-[#F4F3FA] font-semibold text-sm hover:bg-[#261E3A] transition-colors">view all projects</Link>
+        <div className="flex gap-4 justify-center flex-wrap items-center">
+          <ProjectNav slug={j.slug} variant="footer" which="prev" />
+          <a href={`mailto:${PROFILE.email}`} data-testid="case-cta-email" className={`inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-[#C71E73] font-semibold text-sm hover:bg-[#C71E73] hover:text-white transition-[background-color,color,transform] duration-200 active:scale-[0.97] ${FOCUS}`}><Mail size={16} /> email me</a>
+          <Link to="/case/aurora" className={`inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-[#F4F3FA] font-semibold text-sm hover:bg-[#261E3A] transition-[background-color,transform] duration-200 active:scale-[0.97] ${FOCUS}`}>read aurora case study</Link>
+          <Link to="/projects" className={`inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-[#F4F3FA] font-semibold text-sm hover:bg-[#261E3A] transition-[background-color,transform] duration-200 active:scale-[0.97] ${FOCUS}`}>view all projects</Link>
+          <ProjectNav slug={j.slug} variant="footer" which="next" />
         </div>
       </SectionWrap>
     </article>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Meridian Institute Analytics — Undergraduate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ds-real.css" />
+</head>
+<body>
+<div class="shell">
+
+  <aside class="rail">
+    <div class="side-brand">
+      <div class="side-mark">M</div>
+      <div><div class="bn">Meridian</div><div class="bs">Analytics</div></div>
+    </div>
+    <div class="side-label">Dashboards</div>
+    <nav class="side-nav">
+      <a class="nav-item" href="overview.html"><svg class="icon"><use href="_sprite.svg#i-overview"/></svg> Overview</a>
+      <button class="nav-item nav-toggle is-active open" type="button"><svg class="icon"><use href="_sprite.svg#i-undergraduate"/></svg> Undergraduate <svg class="chev"><use href="_sprite.svg#i-chevron"/></svg></button>
+      <div class="side-sub">
+        <a href="ug-summary.html" class="is-active">Summary</a>
+        <a href="ug-yoy.html">Year to Year</a>
+        <a href="#">School / Program</a>
+        <a href="ug-totals.html">Application Totals</a>
+        <a href="#">LINK Only</a>
+      </div>
+      <button class="nav-item nav-toggle" type="button"><svg class="icon"><use href="_sprite.svg#i-graduate"/></svg> Graduate <svg class="chev"><use href="_sprite.svg#i-chevron"/></svg></button>
+      <div class="side-sub">
+        <a href="grad-summary.html">Summary</a>
+        <a href="#">Year to Year</a>
+        <a href="#">School / Program</a>
+        <a href="#">Application Totals</a>
+        <a href="#">LINK Only</a>
+      </div>
+      <button class="nav-item nav-toggle" type="button"><svg class="icon"><use href="_sprite.svg#i-hr"/></svg> HR <svg class="chev"><use href="_sprite.svg#i-chevron"/></svg></button>
+      <div class="side-sub">
+        <a href="hr-summary.html">Summary</a>
+        <a href="hr-headcount.html">Trends Headcount</a>
+        <a href="#">Trends Turnover</a>
+        <a href="#">Workforce Composition</a>
+      </div>
+      <button class="nav-item nav-toggle" type="button"><svg class="icon"><use href="_sprite.svg#i-research"/></svg> Research <svg class="chev"><use href="_sprite.svg#i-chevron"/></svg></button>
+      <div class="side-sub">
+        <a href="research-summary.html">Summary</a>
+        <a href="research-expenditures.html">Expenditures</a>
+        <a href="#">Year Over Year</a>
+        <a href="research-hindex.html">H-Index</a>
+      </div>
+    </nav>
+    <div class="rail-foot">
+      <div class="rail-user">
+        <span class="avatar">JE</span>
+        <div><div class="name">Jordan Ellis</div><div class="role">Institutional Research</div></div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <div class="pagehead">
+      <div>
+        <div class="eyebrow">Undergraduate</div>
+        <h1 class="pagetitle">Summary</h1>
+        <p class="pagesub">First-year applications, Fall 2024 cycle.</p>
+      </div>
+      <div class="refresh">
+        <div class="updated">Last refreshed<b>Today, 8:00 AM</b></div>
+        <button class="control ctl-icon" title="Refresh data"><svg class="ic" style="width:18px;height:18px;color:var(--ink-soft)"><use href="_sprite.svg#i-refresh"/></svg></button>
+      </div>
+    </div>
+<div class="filterbar">
+      <span class="control">Decision Plan <svg class="ic" style="width:14px;height:14px;color:var(--ink-faint)"><use href="_sprite.svg#i-chevron"/></svg></span>
+      <span class="control">Gender <svg class="ic" style="width:14px;height:14px;color:var(--ink-faint)"><use href="_sprite.svg#i-chevron"/></svg></span>
+      <span class="control">School <svg class="ic" style="width:14px;height:14px;color:var(--ink-faint)"><use href="_sprite.svg#i-chevron"/></svg></span>
+    </div>
+
+    <!-- KPI band -->
+    <div class="kpis">
+      <div class="kpi"><div class="kpi__label">Total Applications</div><div class="kpi__value">10,670</div><div class="kpi__foot"><span class="delta down"><span class="arr">&#x25BC;</span> 24.7%</span><span class="kpi-sub">vs 14,170</span></div><svg class="kpi__spark" viewBox="0 0 200 20" preserveAspectRatio="none"><polyline fill="none" stroke="#CBC6CC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="0,4 50,6 100,8 150,13 200,17"/></svg></div>
+      <div class="kpi"><div class="kpi__label">Accepted</div><div class="kpi__value">5,462</div><div class="kpi__foot"><span class="delta up"><span class="arr">&#x25B2;</span> 12.3%</span><span class="kpi-sub">vs 4,864</span></div><svg class="kpi__spark" viewBox="0 0 200 20" preserveAspectRatio="none"><polyline fill="none" stroke="#CBC6CC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="0,14 50,12 100,10 150,7 200,5"/></svg></div>
+      <div class="kpi"><div class="kpi__label">Acceptance Rate</div><div class="kpi__value">51.2%</div><div class="kpi__foot"><span class="delta up"><span class="arr">&#x25B2;</span> 8.2 pts</span><span class="kpi-sub">vs 43.0%</span></div><svg class="kpi__spark" viewBox="0 0 200 20" preserveAspectRatio="none"><polyline fill="none" stroke="#CBC6CC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="0,15 50,12 100,10 150,7 200,4"/></svg></div>
+      <div class="kpi"><div class="kpi__label">Deposited</div><div class="kpi__value">1,540</div><div class="kpi__foot"><span class="delta down"><span class="arr">&#x25BC;</span> 4.5%</span><span class="kpi-sub">vs 1,612</span></div><svg class="kpi__spark" viewBox="0 0 200 20" preserveAspectRatio="none"><polyline fill="none" stroke="#CBC6CC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="0,8 50,7 100,9 150,11 200,14"/></svg></div>
+      <div class="kpi"><div class="kpi__label">Yield Rate</div><div class="kpi__value">21.0%</div><div class="kpi__foot"><span class="delta up"><span class="arr">&#x25B2;</span> 4.0 pts</span><span class="kpi-sub">vs 17.0%</span></div><svg class="kpi__spark" viewBox="0 0 200 20" preserveAspectRatio="none"><polyline fill="none" stroke="#CBC6CC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="0,15 50,13 100,11 150,8 200,5"/></svg></div>
+    </div>
+
+    <!-- chart pair 1 -->
+    <div class="grid-2" style="margin-bottom:16px">
+      <div class="card chart-card" data-chart="ug-by-school">
+        <div class="card-hd"><div><div class="card-title">Applications by school</div><div class="card-sub">Fall 2024 first-year</div></div>
+          <div class="card-tools"><div class="seg-toggle"><button class="js-chart on" title="Chart view"><svg class="ic"><use href="_sprite.svg#i-chart"/></svg></button><button class="js-table" title="Table view"><svg class="ic"><use href="_sprite.svg#i-table"/></svg></button></div><button class="tool-btn js-fs" title="Full screen"><svg class="ic"><use href="_sprite.svg#i-fullscreen"/></svg></button></div>
+        </div>
+        <div class="card-bd">
+          <div class="view-chart"><div class="bars">
+            <div class="bar-row"><span class="bar-lab">Business</span><div class="bar-track"><div class="bar-fill" style="width:18.3%;background:#6D54C9"></div></div><span class="bar-val num">1,541</span></div>
+            <div class="bar-row"><span class="bar-lab">Humanities</span><div class="bar-track"><div class="bar-fill" style="width:4.6%;background:#21B5A8"></div></div><span class="bar-val num">386</span></div>
+            <div class="bar-row"><span class="bar-lab">Eng &amp; Sci</span><div class="bar-track"><div class="bar-fill" style="width:100%;background:#E7842E"></div></div><span class="bar-val num">8,428</span></div>
+            <div class="bar-row"><span class="bar-lab">Systems</span><div class="bar-track"><div class="bar-fill" style="width:3.7%;background:#C0397E"></div></div><span class="bar-val num">315</span></div>
+          </div></div>
+          <div class="view-table"><table class="tbl"><thead><tr><th>School</th><th>Applications</th><th>Accepted</th></tr></thead><tbody>
+            <tr><td>Business</td><td>1,541</td><td>812</td></tr><tr><td>Humanities &amp; Social Sciences</td><td>386</td><td>214</td></tr><tr><td>Engineering &amp; Science</td><td>8,428</td><td>4,103</td></tr><tr><td>Systems &amp; Enterprises</td><td>315</td><td>333</td></tr>
+          </tbody></table><div class="tbl-foot"><button class="btn-download js-dl"><svg class="ic"><use href="_sprite.svg#i-download"/></svg> Download CSV</button></div></div>
+        </div>
+      </div>
+
+      <div class="card chart-card" data-chart="ug-by-geography">
+        <div class="card-hd"><div><div class="card-title">Applications by geography</div><div class="card-sub">Residency mix</div></div>
+          <div class="card-tools"><div class="seg-toggle"><button class="js-chart on" title="Chart view"><svg class="ic"><use href="_sprite.svg#i-chart"/></svg></button><button class="js-table" title="Table view"><svg class="ic"><use href="_sprite.svg#i-table"/></svg></button></div><button class="tool-btn js-fs" title="Full screen"><svg class="ic"><use href="_sprite.svg#i-fullscreen"/></svg></button></div>
+        </div>
+        <div class="card-bd">
+          <div class="view-chart"><div class="donut-wrap">
+            <div class="donut"><svg viewBox="0 0 40 40" width="120" height="120"><circle class="ring" cx="20" cy="20" r="15.915"/><circle class="seg" cx="20" cy="20" r="15.915" stroke="#6D54C9" stroke-dasharray="38 62" stroke-dashoffset="0"/><circle class="seg" cx="20" cy="20" r="15.915" stroke="#21B5A8" stroke-dasharray="50 50" stroke-dashoffset="-38"/><circle class="seg" cx="20" cy="20" r="15.915" stroke="#E7842E" stroke-dasharray="12 88" stroke-dashoffset="-88"/></svg><div class="donut-center"><div class="dc-val num">10,670</div><div class="dc-lab">apps</div></div></div>
+            <div class="legend"><div class="legend-i"><span class="dot" style="background:#6D54C9"></span>In state <b>38%</b></div><div class="legend-i"><span class="dot" style="background:#21B5A8"></span>Out of state <b>50%</b></div><div class="legend-i"><span class="dot" style="background:#E7842E"></span>International <b>12%</b></div></div>
+          </div></div>
+          <div class="view-table"><table class="tbl"><thead><tr><th>Residency</th><th>Applications</th><th>Share</th></tr></thead><tbody>
+            <tr><td>In state</td><td>4,108</td><td>38%</td></tr><tr><td>Out of state</td><td>5,282</td><td>50%</td></tr><tr><td>International</td><td>1,280</td><td>12%</td></tr>
+          </tbody></table><div class="tbl-foot"><button class="btn-download js-dl"><svg class="ic"><use href="_sprite.svg#i-download"/></svg> Download CSV</button></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- chart pair 2 -->
+    <div class="grid-2" style="margin-bottom:16px">
+      <div class="card chart-card" data-chart="ug-by-round">
+        <div class="card-hd"><div><div class="card-title">Applications by round</div><div class="card-sub">Decision plan</div></div>
+          <div class="card-tools"><div class="seg-toggle"><button class="js-chart on" title="Chart view"><svg class="ic"><use href="_sprite.svg#i-chart"/></svg></button><button class="js-table" title="Table view"><svg class="ic"><use href="_sprite.svg#i-table"/></svg></button></div><button class="tool-btn js-fs" title="Full screen"><svg class="ic"><use href="_sprite.svg#i-fullscreen"/></svg></button></div>
+        </div>
+        <div class="card-bd">
+          <div class="view-chart"><div class="bars">
+            <div class="bar-row"><span class="bar-lab">Early Dec I</span><div class="bar-track"><div class="bar-fill" style="width:3.8%;background:#6D54C9"></div></div><span class="bar-val num">214</span></div>
+            <div class="bar-row"><span class="bar-lab">Early Dec II</span><div class="bar-track"><div class="bar-fill" style="width:1.7%;background:#21B5A8"></div></div><span class="bar-val num">95</span></div>
+            <div class="bar-row"><span class="bar-lab">Early Action</span><div class="bar-track"><div class="bar-fill" style="width:86%;background:#E7842E"></div></div><span class="bar-val num">4,790</span></div>
+            <div class="bar-row"><span class="bar-lab">Regular</span><div class="bar-track"><div class="bar-fill" style="width:100%;background:#C0397E"></div></div><span class="bar-val num">5,571</span></div>
+          </div></div>
+          <div class="view-table"><table class="tbl"><thead><tr><th>Round</th><th>Applications</th></tr></thead><tbody>
+            <tr><td>Early Decision I</td><td>214</td></tr><tr><td>Early Decision II</td><td>95</td></tr><tr><td>Early Action</td><td>4,790</td></tr><tr><td>Regular Decision</td><td>5,571</td></tr>
+          </tbody></table><div class="tbl-foot"><button class="btn-download js-dl"><svg class="ic"><use href="_sprite.svg#i-download"/></svg> Download CSV</button></div></div>
+        </div>
+      </div>
+
+      <div class="card chart-card" data-chart="ug-by-territory">
+        <div class="card-hd"><div><div class="card-title">Applications by territory</div><div class="card-sub">Top recruiting regions</div></div>
+          <div class="card-tools"><div class="seg-toggle"><button class="js-chart on" title="Chart view"><svg class="ic"><use href="_sprite.svg#i-chart"/></svg></button><button class="js-table" title="Table view"><svg class="ic"><use href="_sprite.svg#i-table"/></svg></button></div><button class="tool-btn js-fs" title="Full screen"><svg class="ic"><use href="_sprite.svg#i-fullscreen"/></svg></button></div>
+        </div>
+        <div class="card-bd">
+          <div class="view-chart"><div class="donut-wrap">
+            <div class="donut"><svg viewBox="0 0 40 40" width="120" height="120"><circle class="ring" cx="20" cy="20" r="15.915"/><circle class="seg" cx="20" cy="20" r="15.915" stroke="#6D54C9" stroke-dasharray="33 67" stroke-dashoffset="0"/><circle class="seg" cx="20" cy="20" r="15.915" stroke="#21B5A8" stroke-dasharray="18 82" stroke-dashoffset="-33"/><circle class="seg" cx="20" cy="20" r="15.915" stroke="#E7842E" stroke-dasharray="17 83" stroke-dashoffset="-51"/><circle class="seg" cx="20" cy="20" r="15.915" stroke="#C9C4CA" stroke-dasharray="32 68" stroke-dashoffset="-68"/></svg><div class="donut-center"><div class="dc-val num">8</div><div class="dc-lab">regions</div></div></div>
+            <div class="legend"><div class="legend-i"><span class="dot" style="background:#6D54C9"></span>Mid-Atlantic <b>33%</b></div><div class="legend-i"><span class="dot" style="background:#21B5A8"></span>Northeast <b>18%</b></div><div class="legend-i"><span class="dot" style="background:#E7842E"></span>International <b>17%</b></div><div class="legend-i"><span class="dot" style="background:#C9C4CA"></span>Other <b>32%</b></div></div>
+          </div></div>
+          <div class="view-table"><table class="tbl"><thead><tr><th>Territory</th><th>Share</th></tr></thead><tbody>
+            <tr><td>Mid-Atlantic</td><td>33%</td></tr><tr><td>Northeast</td><td>18%</td></tr><tr><td>International</td><td>17%</td></tr><tr><td>Other regions</td><td>32%</td></tr>
+          </tbody></table><div class="tbl-foot"><button class="btn-download js-dl"><svg class="ic"><use href="_sprite.svg#i-download"/></svg> Download CSV</button></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- world map -->
+    <div class="card chart-card" data-chart="ug-international-by-country">
+      <div class="card-hd"><div><div class="card-title">International applications by country</div><div class="card-sub">Where the international pool comes from, Fall 2024</div></div>
+        <div class="card-tools"><div class="seg-toggle"><button class="js-chart on" title="Map view"><svg class="ic"><use href="_sprite.svg#i-chart"/></svg></button><button class="js-table" title="Table view"><svg class="ic"><use href="_sprite.svg#i-table"/></svg></button></div><button class="tool-btn js-fs" title="Full screen"><svg class="ic"><use href="_sprite.svg#i-fullscreen"/></svg></button></div>
+      </div>
+      <div class="card-bd">
+        <div class="view-chart">
+          <div class="map-wrap" style="max-width:1060px">
+            <img src="/meridian/real/map.png" alt="International applications by country" style="width:100%;display:block;border-radius:10px" />
+          </div>
+        </div>
+        <div class="view-table"><table class="tbl"><thead><tr><th>Country</th><th>Applications</th><th>Share of international</th></tr></thead><tbody>
+          <tr><td>India</td><td>312</td><td>24.4%</td></tr>
+          <tr><td>China</td><td>224</td><td>17.5%</td></tr>
+          <tr><td>Nigeria</td><td>110</td><td>8.6%</td></tr>
+          <tr><td>South Korea</td><td>96</td><td>7.5%</td></tr>
+          <tr><td>Canada</td><td>88</td><td>6.9%</td></tr>
+          <tr><td>Pakistan</td><td>84</td><td>6.6%</td></tr>
+          <tr><td>Vietnam</td><td>72</td><td>5.6%</td></tr>
+          <tr><td>Brazil</td><td>64</td><td>5.0%</td></tr>
+          <tr><td>Turkey</td><td>58</td><td>4.5%</td></tr>
+          <tr><td>All other countries</td><td>172</td><td>13.4%</td></tr>
+        </tbody></table><div class="tbl-foot"><button class="btn-download js-dl"><svg class="ic"><use href="_sprite.svg#i-download"/></svg> Download CSV</button></div></div>
+      </div>
+    </div>
+
+    <div class="foot"><span>Data as of Tuesday, 20 February. First-year applicants only.</span><span>Meridian Institute Analytics</span></div>
+
+  </main>
+</div>
+
+<button class="ai-fab" id="aiOpen"><svg class="ic"><use href="_sprite.svg#i-ai"/></svg> Ask AI</button>
+
+<div class="ai-overlay">
+  <div class="ai-dim" data-aiclose></div>
+  <div class="ai-modal">
+    <div class="ai-modal-hd">
+      <div class="t"><span class="badge"><svg class="ic"><use href="_sprite.svg#i-ai"/></svg></span><div><h2>Meridian AI</h2><div class="sub">Grounded in your dashboards</div></div></div>
+      <button class="tool-btn" data-aiclose title="Close"><svg class="ic"><use href="_sprite.svg#i-close"/></svg></button>
+    </div>
+    <div class="ai-modal-body">
+      <div class="ai-stage">
+        <div class="ai-hello">
+          <h2>Undergraduate, Fall 2024</h2>
+          <p>Ask about the first-year pool, or start with one of these.</p>
+          <div class="prompt-chips">
+            <span class="chip"><svg class="ic"><use href="_sprite.svg#i-ai"/></svg> Why is Engineering &amp; Science so dominant?</span>
+            <span class="chip"><svg class="ic"><use href="_sprite.svg#i-ai"/></svg> How concentrated is the international pool?</span>
+          </div>
+        </div>
+        <div class="msg user"><span class="ava">JE</span><div class="body">How concentrated is our international undergraduate pool, and is that a risk?</div></div>
+        <div class="msg ai"><span class="ava"><svg class="ic"><use href="_sprite.svg#i-ai"/></svg></span><div class="body"><div class="ai-answer">
+          <p>International applicants are <b>12% of the first-year pool</b> (1,280 of 10,670), and they cluster hard. India and China alone are <b>42%</b> of all international applications.</p>
+          <div class="ai-callout"><div><div class="k">Top two countries</div><div class="big num">42%</div></div><div><div class="k">Top five countries</div><div class="big num">65%</div></div></div>
+          <p>That concentration is efficient for recruiting but fragile: a visa-policy change or a single market shift moves the whole international number. Worth diversifying source countries before the next cycle.</p>
+          <div class="ai-sources"><span class="src">Undergraduate tab</span><span class="src">Common Data Set 2024</span><span class="src">IIE Open Doors</span></div>
+        </div></div></div>
+      </div>
+    </div>
+    <div class="ai-modal-foot"><div class="composer-in"><svg class="ic" style="width:19px;height:19px;color:var(--maroon-500);margin-left:4px"><use href="_sprite.svg#i-ai"/></svg><input type="text" placeholder="Ask about any metric, cohort, or trend..." /><button class="composer-send"><svg class="ic"><use href="_sprite.svg#i-send"/></svg></button></div></div>
+  </div>
+</div>
+
+<script>
+document.querySelectorAll('[data-chart]').forEach(function(card){
+  var bC = card.querySelector('.js-chart'), bT = card.querySelector('.js-table');
+  if (bC && bT) {
+    bC.addEventListener('click', function(){ card.classList.remove('show-table'); bC.classList.add('on'); bT.classList.remove('on'); });
+    bT.addEventListener('click', function(){ card.classList.add('show-table'); bT.classList.add('on'); bC.classList.remove('on'); });
+  }
+  var fs = card.querySelector('.js-fs');
+  if (fs) fs.addEventListener('click', function(){ if (document.fullscreenElement) { document.exitFullscreen(); } else if (card.requestFullscreen) { card.requestFullscreen().catch(function(){}); } });
+  var dl = card.querySelector('.js-dl');
+  if (dl) dl.addEventListener('click', function(){
+    var t = card.querySelector('.view-table table'); if (!t) return;
+    var csv = [].slice.call(t.querySelectorAll('tr')).map(function(r){ return [].slice.call(r.children).map(function(c){ return '"'+c.textContent.trim().replace(/"/g,'""')+'"'; }).join(','); }).join('\n');
+    var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv'})); a.download = (card.getAttribute('data-chart')||'data')+'.csv'; document.body.appendChild(a); a.click(); a.remove();
+  });
+});
+var aiOpen = document.getElementById('aiOpen');
+if (aiOpen) aiOpen.addEventListener('click', function(){ document.body.classList.add('ai-open'); });
+document.querySelectorAll('[data-aiclose]').forEach(function(el){ el.addEventListener('click', function(){ document.body.classList.remove('ai-open'); }); });
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape') document.body.classList.remove('ai-open'); });
+
+document.querySelectorAll('.nav-toggle').forEach(function(b){ b.addEventListener('click', function(){ b.classList.toggle('open'); }); });
+</script>
+<script src="_heatmap.js"></script>
+</body>
+</html>

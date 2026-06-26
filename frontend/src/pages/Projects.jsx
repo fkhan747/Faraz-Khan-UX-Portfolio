@@ -3,6 +3,7 @@ import { Sparkles, ArrowUpRight } from "lucide-react";
 import { projects, concepts } from "../data/content";
 import { Container, Grid } from "../components/Grid";
 import CaseCover from "../components/CaseCover";
+import AgenticFeature from "../components/AgenticFeature";
 import Seo from "../components/Seo";
 
 export default function Projects() {
@@ -20,6 +21,9 @@ export default function Projects() {
         </p>
         </Container>
       </section>
+
+      {/* FEATURED: agentic audit live demo, above the case studies */}
+      <AgenticFeature className="pb-20" />
 
       {/* Client work - equal 2-column grid */}
       <section className="pb-24" data-testid="client-work-section">

@@ -21,6 +21,7 @@ import MeridianCaseStudy from "./pages/MeridianCaseStudy";
 import RecruitosConcept from "./pages/RecruitosConcept";
 import KnowledgeosConcept from "./pages/KnowledgeosConcept";
 import DecisionosConcept from "./pages/DecisionosConcept";
+import AgenticWorkflow from "./pages/AgenticWorkflow";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
             <Route path="/case/decisionos" element={<DecisionosConcept />} />
             <Route path="/case/somethings-cooking" element={<JoatCaseStudy />} />
             <Route path="/case/meridian" element={<MeridianCaseStudy />} />
+            <Route path="/agentic-workflow" element={<AgenticWorkflow />} />
             <Route path="/case/:slug" element={<CaseStudy />} />
             <Route path="*" element={<Landing />} />
           </Routes>

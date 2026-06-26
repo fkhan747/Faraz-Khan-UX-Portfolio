@@ -3,6 +3,7 @@ import { ArrowRight, Mail, Briefcase, User, Star, Quote } from "lucide-react";
 import { PROFILE, projects, testimonials } from "../data/content";
 import { Container, Grid } from "../components/Grid";
 import CaseCover from "../components/CaseCover";
+import AgenticFeature from "../components/AgenticFeature";
 import Seo from "../components/Seo";
 
 export default function Landing() {
@@ -65,6 +66,9 @@ export default function Landing() {
           </div>
         </Container>
       </section>
+
+      {/* FEATURED: agentic audit live demo — compact band above the case studies */}
+      <AgenticFeature compact className="pb-10" />
 
       {/* FEATURED CASE STUDIES - the two fully-built case studies, side by side */}
       <section className="pb-16" data-testid="featured-project">

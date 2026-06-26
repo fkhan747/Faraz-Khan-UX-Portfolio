@@ -3,7 +3,7 @@ import { Check, Star, ArrowUpRight } from "lucide-react";
 
 /* The funnel story, now legible at a glance */
 const SHIFTS = [
-  { from: "14,170", to: "10,500", label: "Applications, over two years" },
+  { from: "14,170", to: "10,670", label: "Applications, over two years" },
   { from: "43%", to: "51%", label: "Admit rate" },
   { from: "17%", to: "21%", label: "Yield" },
 ];

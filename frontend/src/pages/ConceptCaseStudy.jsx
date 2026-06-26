@@ -8,6 +8,9 @@ import Seo from "../components/Seo";
 import Zoomable from "../components/Zoomable";
 import CaseStudyNav from "../components/CaseStudyNav";
 import ProjectNav from "../components/ProjectNav";
+import Reveal from "../components/Reveal";
+
+const FOCUS = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F5379B] focus-visible:ring-offset-2 focus-visible:ring-offset-[#100210]";
 
 /**
  * Shared renderer for the AI-native OS-family concept case studies
@@ -127,27 +130,26 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
           >
             <ArrowLeft size={14} /> all projects
           </Link>
-          <ProjectNav slug={r.slug} />
         </div>
 
-        <p className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.25em] mb-5" style={gradText}>
+        <Reveal as="p" delay={0} className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.25em] mb-5" style={gradText}>
           <Sparkles size={13} /> {r.kind}
-        </p>
+        </Reveal>
 
-        <h1 className="font-display text-6xl md:text-7xl lg:text-[8rem] font-black tracking-tighter leading-[0.9] case-keep">
+        <Reveal as="h1" delay={0.08} className="font-display text-6xl md:text-7xl lg:text-[8rem] font-black tracking-tighter leading-[0.9] case-keep">
           {wordmark}
-        </h1>
+        </Reveal>
 
-        <p className="mt-8 max-w-5xl text-xl md:text-2xl text-[#F4F3FA] leading-snug font-light italic">
+        <Reveal as="p" delay={0.16} className="mt-8 max-w-5xl text-xl md:text-2xl text-[#F4F3FA] leading-snug font-light italic">
           {r.subtitle}
-        </p>
+        </Reveal>
 
         <div className="mt-12 grid grid-cols-3 gap-4 max-w-5xl">
-          {r.hero.stats.map((s) => (
-            <div key={s.label} className="dark-card rounded-2xl p-5 md:p-6">
+          {r.hero.stats.map((s, i) => (
+            <Reveal key={s.label} delay={0.24 + i * 0.06} className="dark-card rounded-2xl p-5 md:p-6">
               <div className="num text-3xl md:text-5xl font-black text-[#075EFD] leading-none">{s.value}</div>
               <div className="mt-3 text-sm md:text-xs font-mono uppercase tracking-widest text-white">{s.label}</div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </header>
@@ -155,65 +157,65 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
       {/* ============ 00 OVERVIEW ============ */}
       <SectionWrap data-testid="section-overview">
         <SectionLabel num="00" name="Overview" />
-        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{r.overview.headline}</h2>
+        <Reveal as="h2" className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{r.overview.headline}</Reveal>
 
-        <div className="rounded-3xl dark-card text-white p-8 md:p-12 relative overflow-hidden">
+        <Reveal delay={0.06} className="rounded-3xl dark-card text-white p-8 md:p-12 relative overflow-hidden">
           <div className="absolute -top-10 -right-10 w-72 h-72 rounded-full blur-3xl opacity-40" style={{ background: AI_GRAD }} />
           <p className="relative text-[11px] font-mono uppercase tracking-[0.25em] text-white mb-4">{r.overview.tldrTitle}</p>
           <p className="relative font-display text-xl md:text-2xl leading-snug text-white/95 max-w-6xl">{r.overview.tldr}</p>
           <p className="relative mt-6 inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-white/70">
             <Sparkles size={13} /> {r.overview.badge}
           </p>
-        </div>
+        </Reveal>
 
         <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-          {r.overview.facts.map((f) => (
-            <div key={f.label} className="dark-card rounded-2xl p-5">
+          {r.overview.facts.map((f, i) => (
+            <Reveal key={f.label} delay={(i % 2) * 0.06} className="dark-card rounded-2xl p-5">
               <p className="text-sm font-mono uppercase tracking-widest text-white mb-2">{f.label}</p>
               <p className="font-display text-base md:text-lg font-bold">{f.value}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
 
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-8">process</h3>
+        <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-8">process</Reveal>
         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-          {r.overview.process.map((p) => (
-            <div key={p.step} className="dark-card rounded-2xl p-6">
+          {r.overview.process.map((p, i) => (
+            <Reveal key={p.step} delay={(i % 2) * 0.06} className="dark-card rounded-2xl p-6">
               <div className="num text-4xl md:text-5xl font-black text-[#075EFD]">{p.step}</div>
               <div className="mt-3 font-display text-lg font-bold ">{p.title}</div>
               <div className="mt-1 text-xs font-mono uppercase tracking-widest text-white">{p.duration}</div>
-            </div>
+            </Reveal>
           ))}
         </div>
 
-        <div className="mt-16 space-y-5 text-base md:text-lg leading-relaxed text-[#F4F3FA]">
+        <Reveal delay={0.08} className="mt-16 space-y-5 text-base md:text-lg leading-relaxed text-[#F4F3FA]">
           <p>{r.overview.intro}</p>
           <p>{r.overview.intro2}</p>
-        </div>
+        </Reveal>
 
         <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
-          {r.overview.metadata.map((m) => (
-            <div key={m.k} className="dark-card rounded-2xl p-5">
+          {r.overview.metadata.map((m, i) => (
+            <Reveal key={m.k} delay={(i % 2) * 0.06} className="dark-card rounded-2xl p-5">
               <p className="text-sm font-mono uppercase tracking-widest text-white mb-2">{m.k}</p>
               <p className="font-display text-sm md:text-base font-bold leading-snug">{m.v}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
 
-        <div className="mt-8 rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
+        <Reveal delay={0.06} className="mt-8 rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
           <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3 text-[#C71E73]">{r.overview.contextTitle}</p>
           <p className="font-display text-lg md:text-xl font-bold leading-snug text-black">{r.overview.contextBody}</p>
-        </div>
+        </Reveal>
 
         {r.primaryUsers && (
           <>
-            <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">Primary Users</h3>
+            <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">Primary Users</Reveal>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {r.primaryUsers.map((u) => (
-                <div key={u.label} className="dark-card rounded-2xl p-6 border-l-4 border-[#075EFD]">
+              {r.primaryUsers.map((u, i) => (
+                <Reveal key={u.label} delay={(i % 2) * 0.06} className="dark-card rounded-2xl p-6 border-l-4 border-[#075EFD]">
                   <h3 className="font-display text-lg font-black mb-2">{u.label}</h3>
                   <p className="text-sm leading-relaxed text-[#F4F3FA]/85">{u.desc}</p>
-                </div>
+                </Reveal>
               ))}
             </div>
           </>
@@ -223,12 +225,12 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
       {/* ============ 01 PERSONAS ============ */}
       <SectionWrap data-testid="section-personas">
         <SectionLabel num="01" name="The People" />
-        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{r.personasSection.headline}</h2>
-        <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-10">{r.personasSection.intro}</p>
+        <Reveal as="h2" className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{r.personasSection.headline}</Reveal>
+        <Reveal as="p" delay={0.08} className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-10">{r.personasSection.intro}</Reveal>
 
         <div className="grid md:grid-cols-3 gap-5">
-          {r.personasSection.personas.map((p) => (
-            <div key={p.name} className="dark-card rounded-3xl p-7 flex flex-col">
+          {r.personasSection.personas.map((p, i) => (
+            <Reveal key={p.name} delay={(i % 2) * 0.06} className="dark-card rounded-3xl p-7 flex flex-col">
               <div className="flex items-center gap-4 mb-5">
                 <div className="w-14 h-14 rounded-full bg-[#075EFD] text-white flex items-center justify-center font-display font-black text-lg">{p.initials}</div>
                 <div>
@@ -253,20 +255,20 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
                 <p className="text-sm italic leading-snug mb-3">&ldquo;{p.jtbd}&rdquo;</p>
                 <p className="text-sm font-mono uppercase tracking-widest text-white">{p.tools}</p>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
 
         {r.personasSection.quoteWall && (
           <>
-            <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">in their words</h3>
+            <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">in their words</Reveal>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {r.personasSection.quoteWall.map((q) => (
-                <blockquote key={q.q} className="rounded-3xl dark-card text-white p-6 flex flex-col">
+              {r.personasSection.quoteWall.map((q, i) => (
+                <Reveal key={q.q} as="blockquote" delay={(i % 2) * 0.06} className="rounded-3xl dark-card text-white p-6 flex flex-col">
                   <Quote size={18} className="text-white mb-3" />
                   <p className="font-display text-lg leading-snug mb-3">&ldquo;{q.q}&rdquo;</p>
                   <footer className="mt-auto text-[10px] font-mono uppercase tracking-widest text-white/50">{q.a}</footer>
-                </blockquote>
+                </Reveal>
               ))}
             </div>
           </>
@@ -276,22 +278,22 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
       {/* ============ 02 RESEARCH 1 ============ */}
       <SectionWrap data-testid="section-research-1">
         <SectionLabel num="02" name="The Workflow" />
-        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{r.research1.headline}</h2>
+        <Reveal as="h2" className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{r.research1.headline}</Reveal>
 
-        <h3 className="mt-10 font-display text-2xl md:text-3xl font-black mb-4">{r.research1.methodTitle}</h3>
-        <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-6">{r.research1.methodIntro}</p>
+        <Reveal as="h3" className="mt-10 font-display text-2xl md:text-3xl font-black mb-4">{r.research1.methodTitle}</Reveal>
+        <Reveal as="p" delay={0.08} className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-6">{r.research1.methodIntro}</Reveal>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {r.research1.method.map((m) => (
-            <div key={m.l} className="dark-card rounded-2xl p-5">
+          {r.research1.method.map((m, i) => (
+            <Reveal key={m.l} delay={(i % 2) * 0.06} className="dark-card rounded-2xl p-5">
               <p className="text-sm font-mono uppercase tracking-widest text-white mb-2">{m.l}</p>
               <p className="font-display text-sm md:text-base font-bold">{m.v}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
 
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">{r.research1.timelineTitle}</h3>
-        <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{r.research1.timelineIntro}</p>
-        <div className="rounded-3xl dark-card p-6 md:p-8">
+        <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">{r.research1.timelineTitle}</Reveal>
+        <Reveal as="p" delay={0.08} className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{r.research1.timelineIntro}</Reveal>
+        <Reveal delay={0.06} className="rounded-3xl dark-card p-6 md:p-8">
           <div className="relative pl-6 md:pl-8">
             <span className="absolute left-1 md:left-2 top-2 bottom-2 w-px bg-black/15" />
             <ul className="space-y-5">
@@ -308,61 +310,61 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
               ))}
             </ul>
           </div>
-        </div>
+        </Reveal>
 
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">{r.research1.affinityTitle}</h3>
-        <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{r.research1.affinityIntro}</p>
+        <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">{r.research1.affinityTitle}</Reveal>
+        <Reveal as="p" delay={0.08} className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{r.research1.affinityIntro}</Reveal>
         <div className="grid md:grid-cols-2 gap-5">
-          {r.research1.affinityThemes.map((t) => (
-            <div key={t.t} className="dark-card rounded-3xl p-7 border-l-4 border-[#075EFD]">
+          {r.research1.affinityThemes.map((t, i) => (
+            <Reveal key={t.t} delay={(i % 2) * 0.06} className="dark-card rounded-3xl p-7 border-l-4 border-[#075EFD]">
               <h3 className="font-display text-xl font-black mb-2">{t.t}</h3>
               <p className="text-base leading-relaxed">{t.d}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
 
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">{r.research1.insightsTitle}</h3>
+        <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">{r.research1.insightsTitle}</Reveal>
         <div className="grid md:grid-cols-3 gap-5">
           {r.research1.insights.map((i, idx) => (
-            <div key={i.t} className="dark-card rounded-3xl p-7 flex flex-col">
+            <Reveal key={i.t} delay={(idx % 2) * 0.06} className="dark-card rounded-3xl p-7 flex flex-col">
               <div className="font-display text-5xl font-black text-[#075EFD] leading-none mb-3">0{idx + 1}</div>
               <h3 className="font-display text-lg font-black mb-2">{i.t}</h3>
               <p className="text-sm leading-relaxed mb-4">{i.d}</p>
               <p className="mt-auto text-xs font-mono uppercase tracking-widest text-[#F5379B]">{i.link}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
 
-        <div className="mt-12 rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
+        <Reveal delay={0.06} className="mt-12 rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
           <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3 text-[#C71E73]">★ key insight</p>
           <p className="font-display text-xl md:text-2xl font-bold leading-snug max-w-6xl text-black">{r.research1.keyInsight}</p>
-        </div>
+        </Reveal>
       </SectionWrap>
 
       {/* ============ 03 RESEARCH 2 ============ */}
       <SectionWrap data-testid="section-research-2">
         <SectionLabel num="03" name="The Broken Stack" />
-        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{r.research2.headline}</h2>
+        <Reveal as="h2" className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{r.research2.headline}</Reveal>
 
-        <h3 className="mt-10 font-display text-2xl md:text-3xl font-black mb-4">{r.research2.ecoTitle}</h3>
-        <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{r.research2.ecoIntro}</p>
+        <Reveal as="h3" className="mt-10 font-display text-2xl md:text-3xl font-black mb-4">{r.research2.ecoTitle}</Reveal>
+        <Reveal as="p" delay={0.08} className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{r.research2.ecoIntro}</Reveal>
         <div className="relative">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {r.research2.ecosystem.map((e) => (
-              <div key={e.name} className="dark-card rounded-2xl p-5 text-center">
+            {r.research2.ecosystem.map((e, i) => (
+              <Reveal key={e.name} delay={(i % 2) * 0.06} className="dark-card rounded-2xl p-5 text-center">
                 <div className="font-display text-base font-black">{e.name}</div>
                 <div className="mt-2 text-xs text-[#A29CB4] leading-snug">{e.role}</div>
-              </div>
+              </Reveal>
             ))}
           </div>
-          <div className="mt-6 rounded-3xl bg-white border-2 border-[#F5379B] p-7 text-center">
+          <Reveal delay={0.06} className="mt-6 rounded-3xl bg-white border-2 border-[#F5379B] p-7 text-center">
             <p className="font-display text-lg md:text-xl font-bold leading-snug max-w-5xl mx-auto text-black">{r.research2.ecoGap}</p>
-          </div>
+          </Reveal>
         </div>
 
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">{r.research2.heuristicTitle}</h3>
-        <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-6">{r.research2.heuristicIntro}</p>
-        <div className="rounded-3xl dark-card divide-y divide-black/10">
+        <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">{r.research2.heuristicTitle}</Reveal>
+        <Reveal as="p" delay={0.08} className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-6">{r.research2.heuristicIntro}</Reveal>
+        <Reveal delay={0.06} className="rounded-3xl dark-card divide-y divide-black/10">
           {r.research2.heuristics.map((h) => (
             <div key={h.t} className="p-5 md:p-6 grid grid-cols-12 gap-4 items-center">
               <div className="col-span-12 md:col-span-4 font-display font-bold text-base ">{h.t}</div>
@@ -370,11 +372,11 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
               <div className="col-span-3 md:col-span-2 text-right font-display font-black text-2xl text-[#075EFD]">{h.s}</div>
             </div>
           ))}
-        </div>
+        </Reveal>
 
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">{r.research2.teardownTitle}</h3>
-        <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-6">{r.research2.teardownIntro}</p>
-        <div className="rounded-3xl dark-card overflow-x-auto">
+        <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">{r.research2.teardownTitle}</Reveal>
+        <Reveal as="p" delay={0.08} className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-6">{r.research2.teardownIntro}</Reveal>
+        <Reveal delay={0.06} className="rounded-3xl dark-card overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-white/10">
@@ -393,26 +395,26 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
               ))}
             </tbody>
           </table>
-        </div>
+        </Reveal>
 
-        <div className="mt-10 rounded-3xl dark-card text-white p-8 md:p-10">
+        <Reveal delay={0.06} className="mt-10 rounded-3xl dark-card text-white p-8 md:p-10">
           <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-white mb-3">{r.research2.gapTitle}</p>
           <p className="font-display text-xl md:text-2xl leading-snug max-w-6xl">{r.research2.gap}</p>
-        </div>
+        </Reveal>
       </SectionWrap>
 
       {/* ============ 04 HYPOTHESIS ============ */}
       <SectionWrap data-testid="section-hypothesis">
         <SectionLabel num="04" name="The Hypothesis" />
-        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{r.hypothesis.headline}</h2>
+        <Reveal as="h2" className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{r.hypothesis.headline}</Reveal>
 
-        <div className="rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10 mb-10">
+        <Reveal delay={0.06} className="rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10 mb-10">
           <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3 text-[#C71E73]">{r.hypothesis.positioningTitle}</p>
           <p className="font-display text-xl md:text-2xl font-bold leading-snug max-w-6xl text-black">{r.hypothesis.positioning}</p>
-        </div>
+        </Reveal>
 
         <div className="grid md:grid-cols-2 gap-5">
-          <div className="dark-card rounded-3xl p-7">
+          <Reveal delay={0} className="dark-card rounded-3xl p-7">
             <div className="flex items-center gap-2 mb-4">
               <span className="w-2 h-2 rounded-full bg-[#F5379B]" />
               <p className="font-mono text-xs uppercase tracking-widest">what it is</p>
@@ -420,8 +422,8 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
             <ul className="space-y-3">
               {r.hypothesis.isItList.map((s) => (<li key={s} className="flex items-start gap-3 text-base"><Check className="flex-shrink-0 mt-1 text-[#F5379B]" size={16} />{s}</li>))}
             </ul>
-          </div>
-          <div className="dark-card rounded-3xl p-7">
+          </Reveal>
+          <Reveal delay={0.06} className="dark-card rounded-3xl p-7">
             <div className="flex items-center gap-2 mb-4">
               <span className="w-2 h-2 rounded-full bg-[#075EFD]" />
               <p className="font-mono text-xs uppercase tracking-widest">what it's not</p>
@@ -429,12 +431,12 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
             <ul className="space-y-3">
               {r.hypothesis.isNotList.map((s) => (<li key={s} className="flex items-start gap-3 text-base"><X className="flex-shrink-0 mt-1 text-[#075EFD]" size={16} />{s}</li>))}
             </ul>
-          </div>
+          </Reveal>
         </div>
 
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">{r.hypothesis.modelTitle}</h3>
-        <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{r.hypothesis.modelIntro}</p>
-        <div className="rounded-3xl dark-card p-7 md:p-9">
+        <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">{r.hypothesis.modelTitle}</Reveal>
+        <Reveal as="p" delay={0.08} className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{r.hypothesis.modelIntro}</Reveal>
+        <Reveal delay={0.06} className="rounded-3xl dark-card p-7 md:p-9">
           <div className="flex flex-wrap items-stretch justify-center gap-3 md:gap-4">
             {r.hypothesis.modelNodes.map((n, idx) => (
               <div key={n.t} className="flex items-center gap-3 md:gap-4">
@@ -446,18 +448,18 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
               </div>
             ))}
           </div>
-        </div>
+        </Reveal>
 
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">{r.hypothesis.principlesTitle}</h3>
-        <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{r.hypothesis.principlesIntro}</p>
+        <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">{r.hypothesis.principlesTitle}</Reveal>
+        <Reveal as="p" delay={0.08} className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{r.hypothesis.principlesIntro}</Reveal>
         <div className="grid md:grid-cols-2 gap-5">
           {r.hypothesis.principles.map((p, idx) => (
-            <div key={p.t} className={`rounded-3xl p-7 ${idx % 2 === 0 ? "dark-card" : "bg-white border-2 border-[#F5379B]"}`}>
+            <Reveal key={p.t} delay={(idx % 2) * 0.06} className={`rounded-3xl p-7 ${idx % 2 === 0 ? "dark-card" : "bg-white border-2 border-[#F5379B]"}`}>
               <div className="font-mono text-sm uppercase tracking-widest text-white">principle 0{idx + 1}</div>
               <h3 className={`mt-2 font-display text-xl font-black ${idx % 2 === 0 ? "" : "text-[#F5379B]"}`}>{p.t}</h3>
               <p className={`mt-2 text-base leading-relaxed ${idx % 2 === 0 ? "" : "text-black"}`}>{p.d}</p>
               <p className={`mt-4 text-xs font-mono uppercase tracking-widest ${idx % 2 === 0 ? "text-[#F5379B]" : "text-[#C71E73]"}`}>{p.from}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </SectionWrap>
@@ -465,40 +467,40 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
       {/* ============ 05 IA ============ */}
       <SectionWrap data-testid="section-ia">
         <SectionLabel num="05" name="How It Thinks" />
-        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{r.ia.headline}</h2>
+        <Reveal as="h2" className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{r.ia.headline}</Reveal>
 
-        <h3 className="mt-10 font-display text-2xl md:text-3xl font-black mb-4">{r.ia.taskTitle}</h3>
-        <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{r.ia.taskIntro}</p>
+        <Reveal as="h3" className="mt-10 font-display text-2xl md:text-3xl font-black mb-4">{r.ia.taskTitle}</Reveal>
+        <Reveal as="p" delay={0.08} className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{r.ia.taskIntro}</Reveal>
         <div className="grid grid-cols-1 md:grid-cols-7 gap-3">
           {r.ia.lifecycle.map((t, idx) => (
-            <div key={t.t} className="dark-card rounded-2xl p-5">
+            <Reveal key={t.t} delay={(idx % 2) * 0.06} className="dark-card rounded-2xl p-5">
               <div className="font-mono text-[10px] uppercase tracking-widest text-[#F5379B] mb-2">step {idx + 1}</div>
               <div className="font-display text-sm font-black ">{t.t}</div>
               <div className="mt-1.5 text-xs leading-snug text-[#F4F3FA]/80">{t.d}</div>
-            </div>
+            </Reveal>
           ))}
         </div>
 
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">{r.ia.cardSortTitle}</h3>
-        <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-6">{r.ia.cardSortIntro}</p>
+        <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">{r.ia.cardSortTitle}</Reveal>
+        <Reveal as="p" delay={0.08} className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-6">{r.ia.cardSortIntro}</Reveal>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {r.ia.cardSort.map((c) => (
-            <div key={c.l} className="dark-card rounded-2xl p-5">
+          {r.ia.cardSort.map((c, i) => (
+            <Reveal key={c.l} delay={(i % 2) * 0.06} className="dark-card rounded-2xl p-5">
               <p className="text-sm font-mono uppercase tracking-widest text-white mb-2">{c.l}</p>
               <p className="font-display text-sm md:text-base font-bold">{c.v}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
 
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">{r.ia.iaDecisionsTitle}</h3>
+        <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">{r.ia.iaDecisionsTitle}</Reveal>
         <div className="grid md:grid-cols-3 gap-5">
           {r.ia.iaDecisions.map((d, idx) => (
-            <div key={d.t} className="dark-card rounded-3xl p-7 flex flex-col">
+            <Reveal key={d.t} delay={(idx % 2) * 0.06} className="dark-card rounded-3xl p-7 flex flex-col">
               <div className="font-display text-4xl font-black text-[#075EFD] leading-none mb-3">0{idx + 1}</div>
               <h3 className="font-display text-lg font-black mb-2">{d.t}</h3>
               <p className="text-sm leading-relaxed mb-3"><span className="font-semibold">Chose: </span>{d.chose}</p>
               <p className="mt-auto text-xs leading-relaxed text-[#F4F3FA]/70 italic">{d.alt}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </SectionWrap>
@@ -506,13 +508,13 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
       {/* ============ 06 BUILDING IT ============ */}
       <SectionWrap data-testid="section-design">
         <SectionLabel num="06" name="Building It" />
-        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{r.design.headline}</h2>
+        <Reveal as="h2" className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{r.design.headline}</Reveal>
 
-        <h3 className="mt-10 font-display text-2xl md:text-3xl font-black mb-4">low-fidelity wireframes</h3>
-        <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{r.design.wireframesIntro}</p>
+        <Reveal as="h3" className="mt-10 font-display text-2xl md:text-3xl font-black mb-4">low-fidelity wireframes</Reveal>
+        <Reveal as="p" delay={0.08} className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{r.design.wireframesIntro}</Reveal>
         <div className="grid md:grid-cols-2 gap-6">
-          {r.design.wireframes.map((w) => (
-            <figure key={w.title} className="rounded-3xl dark-card overflow-hidden">
+          {r.design.wireframes.map((w, i) => (
+            <Reveal key={w.title} as="figure" delay={(i % 2) * 0.06} className="rounded-3xl dark-card overflow-hidden">
               <Zoomable src={w.src} alt={w.title} caption={w.desc} className="bg-white p-4 md:p-6 border-b border-white/5">
                 <img src={w.src} alt={w.title} loading="lazy" className="w-full h-auto" />
               </Zoomable>
@@ -521,29 +523,29 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
                 <h3 className="mt-2 font-display text-lg font-black ">{w.title}</h3>
                 <p className="mt-2 text-sm leading-relaxed">{w.desc}</p>
               </figcaption>
-            </figure>
+            </Reveal>
           ))}
         </div>
 
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">{r.design.flowsTitle}</h3>
-        <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{r.design.flowsIntro}</p>
+        <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">{r.design.flowsTitle}</Reveal>
+        <Reveal as="p" delay={0.08} className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{r.design.flowsIntro}</Reveal>
         <div className="grid md:grid-cols-3 gap-5">
           {r.design.flows.map((f, idx) => (
-            <div key={f.t} className="dark-card text-white rounded-3xl p-7">
+            <Reveal key={f.t} delay={(idx % 2) * 0.06} className="dark-card text-white rounded-3xl p-7">
               <div className="font-mono text-[10px] uppercase tracking-widest text-white mb-3">flow 0{idx + 1}</div>
               <h3 className="font-display text-lg font-black mb-3" style={gradText}>{f.t}</h3>
               <p className="text-sm leading-relaxed text-white/85">{f.d}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
 
         {r.prototypeUrl && (
           <>
-            <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">the live prototype</h3>
-            <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-6">{r.design.finalIntro}</p>
+            <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">the live prototype</Reveal>
+            <Reveal as="p" delay={0.08} className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-6">{r.design.finalIntro}</Reveal>
             <div className="mb-4 flex flex-wrap items-center gap-3">
               <a href={r.prototypeUrl} target="_blank" rel="noreferrer" data-testid="open-fullscreen"
-                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full dark-card text-white font-semibold text-sm hover:bg-[#241B33] transition-colors">
+                 className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full dark-card text-white font-semibold text-sm hover:bg-[#241B33] transition-[background-color,color,transform] duration-200 active:scale-[0.97] ${FOCUS}`}>
                 View Prototype In Browser <Maximize2 size={14} />
               </a>
               <span className="text-xs font-mono uppercase tracking-widest text-white">click anything. it answers from your sources, cites every claim, and flags what's stale</span>
@@ -562,13 +564,13 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
           </>
         )}
 
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">{r.prototypeUrl ? "key screens" : "hi-fidelity design"}</h3>
+        <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">{r.prototypeUrl ? "key screens" : "hi-fidelity design"}</Reveal>
         {!r.prototypeUrl && (
-          <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{r.design.finalIntro}</p>
+          <Reveal as="p" delay={0.08} className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{r.design.finalIntro}</Reveal>
         )}
         <div className="space-y-6">
-          {r.design.finalScreens.map((s) => (
-            <figure key={s.title} className="rounded-3xl dark-card overflow-hidden">
+          {r.design.finalScreens.map((s, i) => (
+            <Reveal key={s.title} as="figure" delay={i * 0.05} className="rounded-3xl dark-card overflow-hidden">
               <Zoomable src={s.src} alt={s.title} caption={s.desc} className="bg-white p-4 md:p-6 border-b border-white/5">
                 <img src={s.src} alt={s.title} loading="lazy" className="w-full h-auto rounded-lg" />
               </Zoomable>
@@ -579,7 +581,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
                 </div>
                 <p className="mt-2 md:mt-0 text-sm md:text-base leading-relaxed text-[#F4F3FA]/85">{s.desc}</p>
               </figcaption>
-            </figure>
+            </Reveal>
           ))}
         </div>
       </SectionWrap>
@@ -587,29 +589,29 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
       {/* ============ 07 THE AI LAYER ============ */}
       <SectionWrap data-testid="section-ai-layer">
         <SectionLabel num="07" name="The AI Layer" />
-        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{r.aiLayer.headline}</h2>
-        <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-10">{r.aiLayer.intro}</p>
+        <Reveal as="h2" className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{r.aiLayer.headline}</Reveal>
+        <Reveal as="p" delay={0.08} className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-10">{r.aiLayer.intro}</Reveal>
 
         <div className="grid md:grid-cols-2 gap-5">
-          {r.aiLayer.patterns.map((p) => (
-            <div key={p.id} className={`rounded-3xl p-7 ${p.featured ? "text-white" : "dark-card"}`} style={p.featured ? { background: AI_GRAD } : {}}>
+          {r.aiLayer.patterns.map((p, i) => (
+            <Reveal key={p.id} delay={(i % 2) * 0.06} className={`rounded-3xl p-7 ${p.featured ? "text-white" : "dark-card"}`} style={p.featured ? { background: AI_GRAD } : {}}>
               <div className="flex items-center gap-3 mb-3">
                 <span className={`font-mono text-xs font-bold px-2 py-1 rounded-full ${p.featured ? "bg-white/20 text-white" : "dark-card text-white"}`}>{p.id}</span>
                 {p.featured && <span className="inline-flex items-center gap-1 text-[10px] font-mono uppercase tracking-widest text-white/90"><Sparkles size={12} /> centrepiece</span>}
               </div>
               <h3 className={`font-display text-xl font-black mb-2 ${p.featured ? "text-white" : ""}`}>{p.t}</h3>
               <p className={`text-base leading-relaxed ${p.featured ? "text-white/90" : ""}`}>{p.d}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
 
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">{r.aiLayer.decisionsTitle}</h3>
+        <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">{r.aiLayer.decisionsTitle}</Reveal>
         <div className="grid md:grid-cols-3 gap-5">
-          {r.aiLayer.decisions.map((d) => (
-            <div key={d.t} className="dark-card rounded-3xl p-7">
+          {r.aiLayer.decisions.map((d, i) => (
+            <Reveal key={d.t} delay={(i % 2) * 0.06} className="dark-card rounded-3xl p-7">
               <h3 className="font-display text-lg font-black mb-2">{d.t}</h3>
               <p className="text-sm leading-relaxed">{d.d}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </SectionWrap>
@@ -617,50 +619,50 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
       {/* ============ 08 DESIGN SYSTEM ============ */}
       <SectionWrap data-testid="section-design-system">
         <SectionLabel num="08" name="Design System" />
-        <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{r.designSystem.headline}</h2>
-        <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{r.designSystem.intro}</p>
+        <Reveal as="h2" className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{r.designSystem.headline}</Reveal>
+        <Reveal as="p" delay={0.08} className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{r.designSystem.intro}</Reveal>
 
-        <div className="mt-10 rounded-3xl overflow-hidden">
+        <Reveal delay={0.06} className="mt-10 rounded-3xl overflow-hidden">
           <div className="h-28 md:h-36 flex items-center justify-center" style={{ background: r.designSystem.aiGradient }}>
             <span className="font-display text-2xl md:text-3xl font-black text-white flex items-center gap-3"><Sparkles size={26} /> the AI gradient. reserved for AI only</span>
           </div>
-        </div>
+        </Reveal>
 
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">color foundations</h3>
+        <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">color foundations</Reveal>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {r.designSystem.colors.map((c) => (
-            <div key={c.name} className="dark-card rounded-2xl overflow-hidden">
+          {r.designSystem.colors.map((c, i) => (
+            <Reveal key={c.name} delay={(i % 2) * 0.06} className="dark-card rounded-2xl overflow-hidden">
               <div className="aspect-[3/2]" style={{ background: c.hex }} />
               <div className="p-4">
                 <div className="font-display text-sm font-bold">{c.name}</div>
                 <div className="font-mono text-xs text-[#A29CB4] mt-1">{c.hex}</div>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
 
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">typography scale</h3>
-        <div className="rounded-3xl dark-card divide-y divide-black/10">
+        <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">typography scale</Reveal>
+        <Reveal delay={0.06} className="rounded-3xl dark-card divide-y divide-black/10">
           {r.designSystem.typography.map((t) => (
             <div key={t.t} className="p-5 flex items-center justify-between gap-4">
               <span className="font-display text-base font-bold">{t.t}</span>
               <span className="font-mono text-sm text-[#A29CB4]">{t.v}</span>
             </div>
           ))}
-        </div>
+        </Reveal>
 
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">spacing scale (8pt grid)</h3>
+        <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">spacing scale (8pt grid)</Reveal>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {r.designSystem.spacing.map((s) => (
-            <div key={s.t} className="dark-card rounded-2xl p-5">
+          {r.designSystem.spacing.map((s, i) => (
+            <Reveal key={s.t} delay={(i % 2) * 0.06} className="dark-card rounded-2xl p-5">
               <div className="font-mono text-xs uppercase tracking-widest text-[#F5379B]">{s.t}</div>
               <div className="mt-2 num text-lg font-bold">{s.v}</div>
-            </div>
+            </Reveal>
           ))}
         </div>
 
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">design tokens</h3>
-        <div className="rounded-3xl dark-card overflow-x-auto">
+        <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">design tokens</Reveal>
+        <Reveal delay={0.06} className="rounded-3xl dark-card overflow-x-auto">
           <table className="w-full text-sm">
             <thead><tr className="border-b border-white/10">
               <th className="p-4 text-left font-mono uppercase text-[10px] tracking-widest">Token</th>
@@ -675,24 +677,24 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
               ))}
             </tbody>
           </table>
-        </div>
+        </Reveal>
 
-        <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">component library</h3>
-        <p className="text-base leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">A complete component set, extended with the AI-specific pieces that make the product trustworthy. These are the patterns that carry the confidence-and-provenance language across the OS family.</p>
+        <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-4">component library</Reveal>
+        <Reveal as="p" delay={0.08} className="text-base leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">A complete component set, extended with the AI-specific pieces that make the product trustworthy. These are the patterns that carry the confidence-and-provenance language across the OS family.</Reveal>
         <div className="flex flex-wrap gap-2">
           {r.designSystem.componentCategories.map((c) => (
             <span key={c} className="px-4 py-2 rounded-full dark-card text-sm font-medium hover:bg-[#D81F7E] transition-colors cursor-default">{c}</span>
           ))}
         </div>
 
-        <div className="mt-12 rounded-3xl dark-card text-white p-8 md:p-10">
+        <Reveal delay={0.06} className="mt-12 rounded-3xl dark-card text-white p-8 md:p-10">
           <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-white mb-3">system outcomes</p>
           <p className="font-display text-xl md:text-2xl leading-snug max-w-6xl">{r.designSystem.systemOutcomes}</p>
-        </div>
-        <div className="mt-6 rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
+        </Reveal>
+        <Reveal delay={0.06} className="mt-6 rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
           <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3 text-[#C71E73]">a shared OS-family base</p>
           <p className="font-display text-lg md:text-xl font-bold leading-snug max-w-6xl text-black">{r.designSystem.crossProduct}</p>
-        </div>
+        </Reveal>
       </SectionWrap>
 
       {/* ============ 09 VALIDATION ============ */}
@@ -700,62 +702,62 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
         {r.whereItStands ? (
           <>
             <SectionLabel num="09" name="Where It Stands" />
-            <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{r.whereItStands.headline}</h2>
-            <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-10">{r.whereItStands.intro}</p>
+            <Reveal as="h2" className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{r.whereItStands.headline}</Reveal>
+            <Reveal as="p" delay={0.08} className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-10">{r.whereItStands.intro}</Reveal>
 
-            <h3 className="font-display text-2xl md:text-3xl font-black mb-6">{r.whereItStands.doneTitle}</h3>
-            <div className="rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10 mb-12">
+            <Reveal as="h3" className="font-display text-2xl md:text-3xl font-black mb-6">{r.whereItStands.doneTitle}</Reveal>
+            <Reveal delay={0.06} className="rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10 mb-12">
               <ul className="space-y-3">
                 {r.whereItStands.done.map((x) => (<li key={x} className="flex items-start gap-3 text-base md:text-lg text-black"><Check className="flex-shrink-0 mt-1 text-[#F5379B]" size={18} /><span>{x}</span></li>))}
               </ul>
-            </div>
+            </Reveal>
 
-            <h3 className="font-display text-2xl md:text-3xl font-black mb-2">{r.whereItStands.targetsTitle}</h3>
-            <p className="text-xs font-mono uppercase tracking-[0.2em] text-white mb-6">{r.whereItStands.targetsNote}</p>
+            <Reveal as="h3" className="font-display text-2xl md:text-3xl font-black mb-2">{r.whereItStands.targetsTitle}</Reveal>
+            <Reveal as="p" delay={0.08} className="text-xs font-mono uppercase tracking-[0.2em] text-white mb-6">{r.whereItStands.targetsNote}</Reveal>
             <div className="grid md:grid-cols-3 gap-5">
-              {r.whereItStands.targets.map((t) => (
-                <div key={t.t} className="dark-card rounded-3xl p-7">
+              {r.whereItStands.targets.map((t, i) => (
+                <Reveal key={t.t} delay={(i % 2) * 0.06} className="dark-card rounded-3xl p-7">
                   <h3 className="font-display text-lg font-black mb-2">{t.t}</h3>
                   <p className="text-sm leading-relaxed">{t.d}</p>
-                </div>
+                </Reveal>
               ))}
             </div>
           </>
         ) : (
           <>
             <SectionLabel num="09" name="Does It Work?" />
-            <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{r.validation.headline}</h2>
-            <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-10">{r.validation.intro}</p>
+            <Reveal as="h2" className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{r.validation.headline}</Reveal>
+            <Reveal as="p" delay={0.08} className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-10">{r.validation.intro}</Reveal>
 
-            <h3 className="font-display text-2xl md:text-3xl font-black mb-6">test setup</h3>
+            <Reveal as="h3" className="font-display text-2xl md:text-3xl font-black mb-6">test setup</Reveal>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {r.validation.testSetup.map((s) => (
-                <div key={s.l} className="dark-card rounded-2xl p-5">
+              {r.validation.testSetup.map((s, i) => (
+                <Reveal key={s.l} delay={(i % 2) * 0.06} className="dark-card rounded-2xl p-5">
                   <p className="text-sm font-mono uppercase tracking-widest text-white mb-2">{s.l}</p>
                   <p className="num text-base font-bold">{s.v}</p>
-                </div>
+                </Reveal>
               ))}
             </div>
 
-            <h3 className="mt-12 font-display text-2xl md:text-3xl font-black mb-6">key results</h3>
+            <Reveal as="h3" className="mt-12 font-display text-2xl md:text-3xl font-black mb-6">key results</Reveal>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {r.validation.keyResults.map((res) => (
-                <div key={res.l} className="rounded-3xl dark-card p-6">
+              {r.validation.keyResults.map((res, i) => (
+                <Reveal key={res.l} delay={(i % 2) * 0.06} className="rounded-3xl dark-card p-6">
                   <div className="font-display text-4xl md:text-5xl font-black text-[#075EFD] leading-none">{res.v}</div>
                   <div className="mt-3 font-display text-base font-bold ">{res.l}</div>
                   <div className="mt-1 text-xs font-mono uppercase tracking-widest text-[#F5379B]">{res.s}</div>
-                </div>
+                </Reveal>
               ))}
             </div>
 
-            <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">{r.validation.findingsTitle}</h3>
+            <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">{r.validation.findingsTitle}</Reveal>
             <div className="grid md:grid-cols-3 gap-5">
-              {r.validation.findings.map((f) => (
-                <div key={f.t} className="dark-card rounded-3xl p-7 flex flex-col">
+              {r.validation.findings.map((f, i) => (
+                <Reveal key={f.t} delay={(i % 2) * 0.06} className="dark-card rounded-3xl p-7 flex flex-col">
                   <h3 className="font-display text-lg font-black mb-2">{f.t}</h3>
                   <p className="text-sm leading-relaxed mb-4">{f.d}</p>
                   <p className="mt-auto text-xs font-mono uppercase tracking-widest text-[#F5379B]">{f.fix}</p>
-                </div>
+                </Reveal>
               ))}
             </div>
           </>
@@ -767,13 +769,13 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
         {r.futureVision ? (
           <>
             <SectionLabel num="10" name="Future Vision" />
-            <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-4">{r.futureVision.headline}</h2>
-            <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-10">{r.futureVision.intro}</p>
+            <Reveal as="h2" className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-4">{r.futureVision.headline}</Reveal>
+            <Reveal as="p" delay={0.08} className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-10">{r.futureVision.intro}</Reveal>
 
-            <h3 className="font-display text-2xl md:text-3xl font-black mb-6">{r.futureVision.phasesTitle}</h3>
+            <Reveal as="h3" className="font-display text-2xl md:text-3xl font-black mb-6">{r.futureVision.phasesTitle}</Reveal>
             <div className="space-y-5 mb-12">
-              {r.futureVision.phases.map((ph) => (
-                <div key={ph.phase} className="dark-card rounded-3xl p-7">
+              {r.futureVision.phases.map((ph, i) => (
+                <Reveal key={ph.phase} delay={i * 0.05} className="dark-card rounded-3xl p-7">
                   <div className="flex items-baseline gap-3 mb-4">
                     <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B]">{ph.phase}</span>
                     <h3 className="font-display text-xl font-black ">{ph.title}</h3>
@@ -781,74 +783,74 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
                   <ul className="space-y-2.5">
                     {ph.items.map((it) => (<li key={it} className="flex items-start gap-3 text-sm md:text-base"><span className="text-[#075EFD] font-bold mt-0.5">&rarr;</span><span>{it}</span></li>))}
                   </ul>
-                </div>
+                </Reveal>
               ))}
             </div>
 
-            <div className="rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
+            <Reveal delay={0.06} className="rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
               <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#C71E73] mb-3">{r.futureVision.closingTitle}</p>
               <p className="font-display text-lg md:text-xl font-bold leading-snug text-black">{r.futureVision.closing}</p>
-            </div>
+            </Reveal>
           </>
         ) : (
           <>
             <SectionLabel num="10" name="The Numbers" />
-            <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-4">{r.impact.headline}</h2>
-            <p className="text-sm font-mono uppercase tracking-widest text-white max-w-6xl mb-10">{r.impact.note}</p>
+            <Reveal as="h2" className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-4">{r.impact.headline}</Reveal>
+            <Reveal as="p" delay={0.08} className="text-sm font-mono uppercase tracking-widest text-white max-w-6xl mb-10">{r.impact.note}</Reveal>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-              {r.impact.outcomes.map((m) => (
-                <div key={m.l} className="rounded-3xl dark-card p-6">
+              {r.impact.outcomes.map((m, i) => (
+                <Reveal key={m.l} delay={(i % 2) * 0.06} className="rounded-3xl dark-card p-6">
                   <div className="font-display text-3xl md:text-4xl font-black text-[#075EFD] leading-none">{m.v}</div>
                   <div className="mt-3 font-display text-base font-bold ">{m.l}</div>
                   <div className="mt-1 text-xs font-mono uppercase tracking-widest text-white">{m.s}</div>
-                </div>
+                </Reveal>
               ))}
             </div>
 
-            <h3 className="font-display text-2xl md:text-3xl font-black mb-6">{r.impact.provesTitle}</h3>
+            <Reveal as="h3" className="font-display text-2xl md:text-3xl font-black mb-6">{r.impact.provesTitle}</Reveal>
             <div className="grid md:grid-cols-2 gap-5 mb-12">
-              {r.impact.proves.map((p) => (
-                <div key={p.t} className="dark-card rounded-3xl p-7">
+              {r.impact.proves.map((p, i) => (
+                <Reveal key={p.t} delay={(i % 2) * 0.06} className="dark-card rounded-3xl p-7">
                   <h3 className="font-display text-lg font-black mb-2">{p.t}</h3>
                   <p className="text-sm leading-relaxed">{p.d}</p>
-                </div>
+                </Reveal>
               ))}
             </div>
 
-            <h3 className="font-display text-2xl md:text-3xl font-black mb-6">artifacts created</h3>
+            <Reveal as="h3" className="font-display text-2xl md:text-3xl font-black mb-6">artifacts created</Reveal>
             <div className="grid md:grid-cols-2 gap-5 mb-12">
-              {r.impact.artifacts.map((a) => (
-                <div key={a.t} className="dark-card rounded-3xl p-7">
+              {r.impact.artifacts.map((a, i) => (
+                <Reveal key={a.t} delay={(i % 2) * 0.06} className="dark-card rounded-3xl p-7">
                   <h3 className="font-display text-lg font-black mb-2">{a.t}</h3>
                   <p className="text-sm leading-relaxed">{a.d}</p>
-                </div>
+                </Reveal>
               ))}
             </div>
 
-            <h3 className="font-display text-2xl md:text-3xl font-black mb-6">where it goes next</h3>
-            <div className="rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10 mb-16">
+            <Reveal as="h3" className="font-display text-2xl md:text-3xl font-black mb-6">where it goes next</Reveal>
+            <Reveal delay={0.06} className="rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10 mb-16">
               <ul className="space-y-3">
                 {r.impact.next.map((p) => (
                   <li key={p} className="flex items-start gap-3 text-base md:text-lg text-black"><span className="text-[#075EFD] font-bold mt-1">&rarr;</span>{p}</li>
                 ))}
               </ul>
-            </div>
+            </Reveal>
 
-            <h3 className="font-display text-2xl md:text-3xl font-black mb-8">key learnings & reflection</h3>
+            <Reveal as="h3" className="font-display text-2xl md:text-3xl font-black mb-8">key learnings & reflection</Reveal>
             <div className="grid md:grid-cols-2 gap-5">
-              <div className="dark-card rounded-3xl p-7">
+              <Reveal delay={0} className="dark-card rounded-3xl p-7">
                 <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">what went well</p>
                 <ul className="space-y-3">
                   {r.impact.wentWell.map((x) => (<li key={x} className="flex items-start gap-3 text-base"><Check className="flex-shrink-0 mt-1 text-[#F5379B]" size={16} /><span>{x}</span></li>))}
                 </ul>
-              </div>
-              <div className="dark-card rounded-3xl p-7">
+              </Reveal>
+              <Reveal delay={0.06} className="dark-card rounded-3xl p-7">
                 <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">what I&apos;d do differently</p>
                 <ul className="space-y-3">
                   {r.impact.differently.map((x) => (<li key={x} className="flex items-start gap-3 text-base"><Star className="flex-shrink-0 mt-1 text-[#075EFD]" size={16} /><span>{x}</span></li>))}
                 </ul>
-              </div>
+              </Reveal>
             </div>
           </>
         )}
@@ -856,10 +858,10 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
 
       {/* ============ MORE CONCEPTS ============ */}
       <SectionWrap>
-        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">more concepts</p>
-        <h2 className="font-display text-3xl md:text-4xl font-black mb-8">the rest of the OS family &rarr;</h2>
+        <Reveal as="p" className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">more concepts</Reveal>
+        <Reveal as="h2" delay={0.08} className="font-display text-3xl md:text-4xl font-black mb-8">the rest of the OS family &rarr;</Reveal>
         <div className="grid md:grid-cols-2 gap-6">
-          {concepts.filter((x) => x.slug !== r.slug).map((x) => {
+          {concepts.filter((x) => x.slug !== r.slug).map((x, i) => {
             const card = (
               <div className="rounded-3xl dark-card p-7 flex items-start justify-between gap-6 h-full">
                 <div>
@@ -873,9 +875,11 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
               </div>
             );
             return x.live && x.href ? (
-              <Link key={x.slug} to={x.href} className="block hover:-translate-y-0.5 transition-transform">{card}</Link>
+              <Reveal key={x.slug} delay={(i % 2) * 0.06}>
+                <Link to={x.href} className={`block hover:-translate-y-0.5 transition-transform ${FOCUS}`}>{card}</Link>
+              </Reveal>
             ) : (
-              <div key={x.slug}>{card}</div>
+              <Reveal key={x.slug} delay={(i % 2) * 0.06}>{card}</Reveal>
             );
           })}
         </div>
@@ -883,11 +887,13 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
 
       {/* ============ FOOTER ============ */}
       <SectionWrap className="text-center">
-        <h2 className="font-display text-3xl md:text-5xl font-black mb-6">thank you for reading.</h2>
-        <p className="text-lg text-[#A29CB4] mb-8">{r.title} is a self-initiated concept. If you&apos;d like to talk through the process, or where it goes next, I&apos;d love to connect.</p>
-        <div className="flex gap-4 justify-center flex-wrap">
-          <a href={`mailto:${PROFILE.email}`} data-testid="case-cta-email" className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-[#C71E73] font-semibold text-sm hover:bg-[#C71E73] hover:text-white transition-colors"><Mail size={16} /> email me</a>
-          <Link to="/projects" className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-[#F4F3FA] font-semibold text-sm hover:bg-[#261E3A] transition-colors">view all projects</Link>
+        <Reveal as="h2" className="font-display text-3xl md:text-5xl font-black mb-6">thank you for reading.</Reveal>
+        <Reveal as="p" delay={0.08} className="text-lg text-[#A29CB4] mb-8">{r.title} is a self-initiated concept. If you&apos;d like to talk through the process, or where it goes next, I&apos;d love to connect.</Reveal>
+        <div className="flex gap-4 justify-center flex-wrap items-center">
+          <ProjectNav slug={r.slug} variant="footer" which="prev" />
+          <a href={`mailto:${PROFILE.email}`} data-testid="case-cta-email" className={`inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-[#C71E73] font-semibold text-sm hover:bg-[#C71E73] hover:text-white transition-[background-color,color,transform] duration-200 active:scale-[0.97] ${FOCUS}`}><Mail size={16} /> email me</a>
+          <Link to="/projects" className={`inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-[#F4F3FA] font-semibold text-sm hover:bg-[#261E3A] transition-[background-color,color,transform] duration-200 active:scale-[0.97] ${FOCUS}`}>view all projects</Link>
+          <ProjectNav slug={r.slug} variant="footer" which="next" />
         </div>
       </SectionWrap>
     </article>
