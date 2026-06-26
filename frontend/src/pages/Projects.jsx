@@ -1,10 +1,61 @@
 import { Link } from "react-router-dom";
-import { Sparkles, ArrowUpRight } from "lucide-react";
+import { Sparkles, ArrowUpRight, ArrowRight, Check, ShieldCheck } from "lucide-react";
 import { projects, concepts } from "../data/content";
 import { Container, Grid } from "../components/Grid";
 import CaseCover from "../components/CaseCover";
-import AgenticFeature from "../components/AgenticFeature";
 import Seo from "../components/Seo";
+
+const AGENTS = ["Accessibility", "Content & voice", "Visual hierarchy", "IA & nav", "Performance", "Mobile"];
+
+/* Compact agentic-feature card, sized to sit alongside a concept card in a
+   2-column grid. Same visual language as the larger banner that used to live
+   above the case studies (dark card + glow blobs + audit panel). */
+function AgenticCard() {
+  return (
+    <Link
+      to="/agentic-workflow"
+      data-testid="agentic-feature-link"
+      className="group block relative overflow-hidden rounded-3xl dark-card p-7 md:p-8 lift h-full"
+    >
+      <div className="absolute -top-16 -right-10 w-64 h-64 rounded-full bg-[#075EFD] blur-3xl opacity-30 pointer-events-none" aria-hidden="true" />
+      <div className="absolute -bottom-20 left-1/4 w-56 h-56 rounded-full bg-[#F5379B] blur-3xl opacity-20 pointer-events-none" aria-hidden="true" />
+      <div className="relative flex flex-col h-full">
+        <span className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-5">
+          <Sparkles size={13} /> featured · interactive demo
+        </span>
+        <h3 className="font-display text-2xl md:text-3xl font-black leading-[1.05] tracking-tight text-[#F7F5FF] case-keep">
+          Point a swarm of AI agents at any website.
+        </h3>
+        <p className="mt-4 text-sm md:text-base text-[#A29CB4] leading-relaxed">
+          A live demo of an agentic audit workflow I designed. Specialist agents fan out in parallel, adversarially verify every finding, then synthesize one prioritized report.
+        </p>
+
+        {/* mini audit panel */}
+        <div className="mt-6 rounded-2xl p-4" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.1)" }}>
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4]">audit · acme.com</span>
+            <span className="text-[10px] font-mono text-[#21BA45]">12 confirmed</span>
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            {AGENTS.map((a) => (
+              <div key={a} className="flex items-center gap-2 rounded-lg px-2.5 py-1.5" style={{ background: "rgba(255,255,255,0.04)" }}>
+                <Check size={11} className="text-[#21BA45] flex-shrink-0" />
+                <span className="text-[11px] text-[#F4F3FA]/85 truncate case-keep">{a}</span>
+              </div>
+            ))}
+          </div>
+          <div className="mt-3 flex items-center gap-2 text-[10px] font-mono text-[#A29CB4]">
+            <ShieldCheck size={12} className="text-[#075EFD]" /> verified, 1 prioritized report
+          </div>
+        </div>
+
+        <span className="mt-auto pt-7 inline-flex items-center gap-2 text-[#F5379B] text-sm font-semibold group-hover:gap-3 transition-[gap]">
+          Try the live demo <ArrowRight size={16} />
+        </span>
+      </div>
+    </Link>
+  );
+}
 
 export default function Projects() {
   return (
@@ -21,9 +72,6 @@ export default function Projects() {
         </p>
         </Container>
       </section>
-
-      {/* FEATURED: agentic audit live demo, above the case studies */}
-      <AgenticFeature className="pb-20" />
 
       {/* Client work - equal 2-column grid */}
       <section className="pb-24" data-testid="client-work-section">
@@ -44,26 +92,27 @@ export default function Projects() {
         </Container>
       </section>
 
-      {/* AI-native concepts - section title treated like the rest; dark cards in one row */}
+      {/* Self-initiated AI work: Slate (concept) + the AI agent live demo, side by side */}
       <section className="pb-24" data-testid="concepts-section">
         <Container>
         <p className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-6">
-          <Sparkles size={13} /> self-initiated · ai-native concepts
+          <Sparkles size={13} /> self-initiated · ai-native
         </p>
         <h2 className="font-display font-black leading-[0.95] text-4xl md:text-6xl tracking-tighter mb-4">
-          what these products look like, AI-first.
+          what AI-first products look like.
         </h2>
         <p className="max-w-2xl text-lg md:text-xl text-[#F4F3FA] mb-12">
-          A separate track from my client work. These are products I designed end-to-end to find out what an
-          AI-native version of a workflow actually feels like to use.
+          A separate track from my client work. One end-to-end product concept and one live demo of an
+          agentic workflow I designed and shipped.
         </p>
 
         <Grid>
+          {/* Slate concept card */}
           {concepts.filter((c) => c.live !== false).map((c, i) => (
             <div
               key={c.slug}
               data-testid={`concept-card-${c.slug}`}
-              className={`relative col-span-12 md:col-span-4 rise rise-${(i % 6) + 1}`}
+              className={`relative col-span-12 md:col-span-6 rise rise-${(i % 6) + 1}`}
             >
               <Link to={c.href} className="group block rounded-3xl overflow-hidden lift">
                 <CaseCover img={c.coverImg} title={c.title} subtitle={c.subtitle} />
@@ -81,6 +130,11 @@ export default function Projects() {
               )}
             </div>
           ))}
+
+          {/* Agentic-audit live demo card */}
+          <div className="col-span-12 md:col-span-6 rise rise-2">
+            <AgenticCard />
+          </div>
         </Grid>
         </Container>
       </section>
