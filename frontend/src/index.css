@@ -40,10 +40,16 @@ html, body {
 .font-display {
   font-family: 'Playfair Display', serif;
   letter-spacing: -0.03em;
-  /* Site-wide: display headings render in Title Case, not forced lowercase. */
-  text-transform: capitalize;
   /* Use even-height lining figures so any numbers sit on the baseline. */
   font-variant-numeric: lining-nums tabular-nums;
+}
+/* Title Case is for HEADINGS only. Body paragraphs that use .font-display
+   (TL;DR card, white-callout body, etc.) stay in the case they are authored
+   in. The grep target before this rule was applying capitalize to every
+   .font-display element which Title-Cased body prose. */
+h1.font-display, h2.font-display, h3.font-display, h4.font-display,
+h5.font-display, h6.font-display {
+  text-transform: capitalize;
 }
 
 /* Numbers (stats, step counters) - a clean sans with even, baseline-aligned
