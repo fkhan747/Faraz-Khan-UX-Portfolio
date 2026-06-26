@@ -43,10 +43,9 @@ const SCREENS = [
     await page.evaluate(() => document.fonts && document.fonts.ready);
     // measure natural content height
     const h = await page.evaluate(() => document.documentElement.scrollHeight);
-    // resize viewport to full content, AND drop the position:fixed Ask AI FAB
-    // (we want a clean dashboard shot; one separate "with AI" shot is captured below)
+    // resize viewport to full content height; keep the floating Ask AI FAB
+    // (it belongs in every shot at its natural bottom-right position).
     await page.setViewport({ width: W, height: h, deviceScaleFactor: 2 });
-    await page.evaluate(() => { const f = document.querySelector('.ai-fab'); if (f) f.style.display = 'none'; });
     await new Promise(r => setTimeout(r, 250));
     const file = path.join(OUT, `${name}.png`);
     await page.screenshot({ path: file, type: 'png' });
