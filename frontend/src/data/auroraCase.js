@@ -20,7 +20,7 @@ export const aurora = {
     headline: "Project Overview",
     tldrTitle: "TL;DR: Executive Summary",
     tldr:
-      "I cut campaign setup from three clicks to one and put an AI composer right inside the email canvas, so writers stopped pasting copy back and forth from ChatGPT. Aurora is a B2B marketing-tech product in Europe, acquired by its parent company Helio, and I used its AngularJS-to-Angular migration as the window to fix a legacy, engineer-led UI. I redesigned the Recurring Batch Journey configurator, embedded the Helio AI composer, and built a Figma design system that brought Aurora in line with Helio's brand and shipped dev-ready assets linked to user stories.",
+      "I cut campaign setup from three clicks to one. I put an AI composer right inside the email canvas, so writers stopped pasting copy back and forth from ChatGPT. Aurora is a B2B marketing-tech product in Europe, acquired by its parent company Helio. I used its AngularJS-to-Angular migration as the window to fix a legacy, engineer-led UI. I redesigned the Recurring Batch Journey configurator, embedded the Helio AI composer, and built a Figma design system that brought Aurora in line with Helio's brand. Every asset shipped dev-ready, linked to a user story.",
     facts: [
       { label: "Role", value: "Lead Product Designer" },
       { label: "Duration", value: "~5 Months" },
@@ -36,9 +36,9 @@ export const aurora = {
       { step: "05", title: "Handoff", duration: "2 weeks" },
     ],
     intro:
-      "Aurora is a B2B marketing technology platform serving large enterprises across Europe, focused on digital marketing and relationship management. After being acquired by Helio (a parent company assembling a suite of marketing-tech products), Aurora inherited an opportunity: align its legacy product with Helio's unified UX vision while completing a long-planned migration from AngularJS to the modern Angular framework.",
+      "Aurora is a B2B marketing-tech platform for large European enterprises. Helio acquired it to build out a suite of marketing products. That gave us an opening. We could align Aurora with Helio's UX vision while we finished a long-planned move from AngularJS to modern Angular.",
     intro2:
-      "The legacy product was engineer-led. It worked, but it was inconsistent, dense, and visually fragmented. Marketers managing recurring campaigns navigated cluttered configuration panels, and copywriters had no AI assistance inside the composer, forcing context-switches to ChatGPT and back.",
+      "The legacy product was engineer-led. It worked, but it was dense, inconsistent, and visually fragmented. Marketers fought cluttered config panels to ship a recurring campaign. Copywriters had no AI in the composer, so they wrote in ChatGPT and pasted back.",
     contextTitle: "Project Context",
     contextBody:
       "The product was migrating from AngularJS to Angular; the platform team treated that engineering work as a once-in-a-decade window to also reduce cognitive load, simplify the flows, and create a consistent brand experience aligned with Helio's design language.",
@@ -64,13 +64,13 @@ export const aurora = {
       "I spend more time configuring the schedule than I do writing the actual campaign. By the time the cadence is set, I've lost the creative momentum.",
     quoteAttribution: "Senior CRM Manager, Hospitality client (Discovery interview, Week 2)",
     challenges: [
-      { t: "No Cohesive Brand Language", d: "Aurora's UI looked completely fragmented with no consistency. Customers had already raised tickets about unclear flows and confusing UI, and those issues only compounded once Helio's parent brand introduced a unified design language." },
-      { t: "Need for Enhanced Features", d: "Many features used for the most important use cases were still basic. Customers had requested specific enhancements that would help them create more nuanced, sophisticated campaigns the legacy UI couldn't express." },
-      { t: "Inconsistent User Experience", d: "Similar functions had different flows and approaches with different UI elements, making the experience confusing. Without a unified design system, every new feature looked and behaved slightly differently. That frustrated customers and eroded brand trust." },
-      { t: "Design in Silos", d: "Designers across different Helio products often worked in silos. There were also differences in flows and UI of different Helio products. Without cross-product design collaboration, a lot of different experiences were being created." },
+      { t: "No Cohesive Brand Language", d: "The UI was fragmented, nothing matched. Customers were already filing tickets about confusing flows, and it got worse once Helio rolled out a unified brand language Aurora didn't share." },
+      { t: "Need for Enhanced Features", d: "The features for the most important use cases were still basic. Customers kept asking for the depth that would let them run nuanced campaigns, and the legacy UI just couldn't express it." },
+      { t: "Inconsistent User Experience", d: "The same job had different flows and different UI depending on where you landed. With no shared system, every new feature looked and behaved a little differently. That wore down customer trust." },
+      { t: "Design in Silos", d: "Designers on other Helio products worked in silos, so flows and UI drifted apart across the suite. No cross-product collaboration meant a different experience everywhere you looked." },
     ],
     scopeIntro:
-      "We set clear boundaries to deliver the most impact within the AngularJS-to-Angular migration window. We focused on the two highest-friction surfaces, recurring journey configuration and the email composer, and built a reusable design system in parallel.",
+      "I drew a hard box around the work. The migration window was finite, so I went after the two highest-friction surfaces only: recurring journey configuration and the email composer. I built a reusable design system in parallel.",
     inScope: [
       "Recurring Batch Journey configuration workflow",
       "Tabbed Type / Content / Properties structure",
@@ -92,7 +92,7 @@ export const aurora = {
     ],
     hypothesisTitle: "Primary Hypothesis",
     hypothesis:
-      "We believe that consolidating recurring journey setup into a three-tab guided flow (Type → Content → Properties), embedding Helio AI directly in the composer, and backing both with a unified Figma design system will reduce clicks, prevent scheduling errors, and align Aurora with Helio's brand experience.",
+      "My bet was simple: collapse journey setup into a three-tab guided flow (Type, Content, Properties), drop Helio AI right into the composer, and back both with one Figma design system. Do that and clicks fall, scheduling errors drop, and Aurora finally feels like Helio.",
     hypothesisBullets: [
       "3:1 click reduction for setup",
       "Schedule error rate below 15%",
@@ -122,12 +122,12 @@ export const aurora = {
     headline: "Research",
     auditTitle: "UX Audit",
     auditIntro:
-      "A systematic audit of the existing Recurring Batch Journey and message composer revealed usability issues across setup, scheduling comprehension, and content authoring. The legacy AngularJS codebase's inflexibility made each one harder to fix.",
+      "I audited the existing Recurring Batch Journey and the message composer end to end. The same three failures kept showing up: setup, scheduling comprehension, and content authoring. The rigid AngularJS codebase made each one harder to fix.",
     auditFindings: [
-      { t: "Cluttered Journey Form", d: "14 fields visible on first load with no progressive disclosure, no contextual help, and no validation feedback until submission. New users abandoned at the audience step (33%)." },
-      { t: "Hidden Schedule Logic", d: "\"Custom\" cadence was the default selection but never explained. Users could pick weekdays from two different controls with conflicting interpretations of timezone." },
-      { t: "Composer Friction", d: "The text block had no formatting helpers, no AI, no variation tools, and no way to test tone. It was pure freeform. Subject-line authoring offered no support beyond a 50-character input." },
-      { t: "Accessibility Gaps", d: "Form labels not associated with inputs, focus order broken between left rail and main panel, and the schedule grid was unreachable via keyboard. WCAG AA failed on 7 of 12 audited screens." },
+      { t: "Cluttered Journey Form", d: "14 fields on first load, no progressive disclosure, no help, no validation until you hit submit, and 33% of new users bailed at the audience step." },
+      { t: "Hidden Schedule Logic", d: "\"Custom\" cadence was the default but never explained, and weekdays could be set from two controls that disagreed on timezone." },
+      { t: "Composer Friction", d: "The text block was pure freeform with no formatting, no AI, no variations, no tone check, and subject lines got nothing past a 50-character box." },
+      { t: "Accessibility Gaps", d: "Labels weren't tied to inputs, focus order broke between rail and panel, the schedule grid was unreachable by keyboard, and WCAG AA failed on 7 of 12 screens." },
     ],
     heuristics: [
       { t: "Visibility of System Status", d: "No schedule preview, no live contact count when filters change, no indication of save state", s: "4/10" },
@@ -154,12 +154,12 @@ export const aurora = {
       ],
     },
     findings: [
-      { t: "Three Clicks to One", d: "Mapping the existing journey-creation flow revealed users took on average 3 distinct clicks to perform what could be a single decision. Consolidating the configuration into the new tabbed flow brought it to a 1-click experience for common cases." },
-      { t: "Composer Workarounds", d: "64% of CRM managers admitted to drafting copy in ChatGPT or Google Docs first, then pasting back. As Participant 7 put it, \"the tool is for sending, ChatGPT is for writing.\"" },
-      { t: "Failed Test Queries", d: "Marketers wanted alerts from lists, journeys, and tasks, but the dashboard only showed failed test queries. That's useful for QA and useless for daily marketing operations. Dashboard utility was a strong unmet need." },
-      { t: "Tooltip Truncation", d: "The journey name is important but gets truncated, so users had to hover to see the full name in a tooltip. Marketers used long names to specify a journey's purpose, and the truncation defeated that workflow entirely." },
-      { t: "Yesterday-Only Dashboard", d: "Dashboards only showed journeys executed yesterday. Marketers needed visibility into past FY quarters to assess yearly performance. It was a frequent ask, and it drove customers to export data and analyze elsewhere." },
-      { t: "Setup Anxiety", d: "71% of test users mis-configured the cadence on their first attempt due to ambiguous \"Custom\" defaults and no plain-language summary of what would actually be sent." },
+      { t: "Three Clicks to One", d: "I mapped the create-a-journey flow and found people spending 3 clicks on what was really one decision, so the tabbed flow brought common cases down to a single click." },
+      { t: "Composer Workarounds", d: "64% of CRM managers drafted in ChatGPT or Google Docs first and pasted back, and Participant 7 said it plainly: \"the tool is for sending, ChatGPT is for writing.\"" },
+      { t: "Failed Test Queries", d: "The dashboard only surfaced failed test queries, which is fine for QA and useless for the alerts marketers actually wanted from lists, journeys, and tasks." },
+      { t: "Tooltip Truncation", d: "Marketers packed the journey name with its purpose, then watched it get truncated, so they had to hover for a tooltip just to read what they'd written." },
+      { t: "Yesterday-Only Dashboard", d: "Dashboards showed only yesterday's journeys, so anyone judging a full FY quarter had to export the data and analyze it somewhere else." },
+      { t: "Setup Anxiety", d: "71% of test users got the cadence wrong on the first try, thanks to a vague \"Custom\" default and no plain-language summary of what would send." },
     ],
   },
 
@@ -203,17 +203,17 @@ export const aurora = {
     finalIntro:
       "Hi-fidelity screens shipped to engineering via Figma, with each frame linked to its Azure DevOps user story. Aurora brand teal (#2B8679) and the Aurora Engage component library applied uniformly. 11 screens across the Recurring Batch Journey configurator and the Helio AI composer.",
     finalScreens: [
-      { src: A("01_RBJ_Type_Tab_Basic_Fields.jpg"), tag: "Hi-fi · RBJ · 01", title: "RBJ · Type Tab: Basic Fields", desc: "Entry point of the 3-tab creation flow. Name, folder path, and asset selection only. Basic fields surface first, and advanced fields tuck behind the \"All Fields\" toggle." },
-      { src: A("02_RBJ_Type_Tab_All_Fields.jpg"), tag: "Hi-fi · RBJ · 02", title: "RBJ · Type Tab: All Fields", desc: "\"All Fields\" view adds API Name, Labels, Description, Asset, and Campaign / Message analytics tags. Progressive disclosure for power users without bloating the default view." },
-      { src: A("03_RBJ_Content_Tab.jpg"), tag: "Hi-fi · RBJ · 03", title: "RBJ · Content Tab", desc: "Asset selection from published messages, templates, mobile-push, or SMS. Live preview confirms the asset shape and links analytics tag pass-through to the tracker." },
-      { src: A("04_RBJ_Properties_Weekly.jpg"), tag: "Hi-fi · RBJ · 04", title: "RBJ · Properties: Weekly Schedule", desc: "Audience + segment + timezone + activation window + Weekly cadence with day-of-week chips and per-day time inputs. Plain-language confirmation banner makes the schedule unambiguous." },
-      { src: A("05_RBJ_Properties_Monthly.jpg"), tag: "Hi-fi · RBJ · 05", title: "RBJ · Properties: Monthly Specific", desc: "Monthly cadence with the 1-31 day-grid selector. Timezone-resolved confirmation message: \"the scheduled time will be executed in Europe/Paris UTC+01:00\"." },
-      { src: A("06_RBJ_Properties_Custom.jpg"), tag: "Hi-fi · RBJ · 06", title: "RBJ · Properties: Custom Cadence", desc: "Custom cadence for the long tail of edge-case schedules. Falls back to first-week-of-month, last-Sunday-of-quarter, and similar patterns marketers asked for in research." },
-      { src: A("07_Composer_Empty_AI.jpg"), tag: "Hi-fi · Helio AI · 07", title: "Composer · Helio AI Empty State", desc: "\"How can I help you today?\" One text input, no clutter. The panel waits for the author to lead rather than presenting an option salad up front." },
-      { src: A("08_Composer_Text_Block_Selected.jpg"), tag: "Hi-fi · Helio AI · 08", title: "Composer · Text Block Selected", desc: "Once a text block is highlighted in the canvas, the empty Helio AI panel surfaces with \"How can I help you today?\", ready to receive a prompt or quick-action click." },
-      { src: A("09_Helio_AI_Make_Shorter_Response.jpg"), tag: "Hi-fi · Helio AI · 09", title: "Helio AI · Make Shorter Response", desc: "Streaming AI response inline. The original \"You\" message with the editable prompt stays visible above so the writer can compare. Quick-action chips below offer follow-up moves." },
-      { src: A("10_Composer_Open_with_AI_Context_Menu.jpg"), tag: "Hi-fi · Helio AI · 10", title: "Composer · Open with AI Menu", desc: "Right-click any text block to surface the Helio AI shortcut menu: Open with AI / Make it shorter / Change the tone / Check spelling / Re-write the text. Saves a trip to the side panel for common one-shot edits." },
-      { src: A("11_Composer_Blocks_Library_Panel.jpg"), tag: "Hi-fi · Helio AI · 11", title: "Composer · Blocks Library Panel", desc: "The right-rail Blocks library holds Rows (1/2/3/4 columns) and Content (Text, Image, Spacer, Divider, etc.). Style / Variables / Links / Attachments tabs above give deeper control. Writers compose without leaving the canvas." },
+      { src: A("01_RBJ_Type_Tab_Basic_Fields.jpg"), tag: "Hi-fi · RBJ · 01", title: "RBJ · Type Tab: Basic Fields", desc: "The flow opens on just name, folder path, and asset, with everything advanced tucked behind the \"All Fields\" toggle." },
+      { src: A("02_RBJ_Type_Tab_All_Fields.jpg"), tag: "Hi-fi · RBJ · 02", title: "RBJ · Type Tab: All Fields", desc: "\"All Fields\" adds API Name, Labels, Description, Asset, and the Campaign / Message analytics tags for power users, without bloating the default view." },
+      { src: A("03_RBJ_Content_Tab.jpg"), tag: "Hi-fi · RBJ · 03", title: "RBJ · Content Tab", desc: "You pick an asset from published messages, templates, mobile-push, or SMS, and a live preview confirms its shape and the analytics tag pass-through." },
+      { src: A("04_RBJ_Properties_Weekly.jpg"), tag: "Hi-fi · RBJ · 04", title: "RBJ · Properties: Weekly Schedule", desc: "Audience, segment, timezone, and activation window sit above a weekly cadence with day chips and per-day times, and a plain-language banner spells out exactly what sends." },
+      { src: A("05_RBJ_Properties_Monthly.jpg"), tag: "Hi-fi · RBJ · 05", title: "RBJ · Properties: Monthly Specific", desc: "Monthly cadence uses a 1-31 day grid with a timezone-resolved line: \"the scheduled time will be executed in Europe/Paris UTC+01:00\"." },
+      { src: A("06_RBJ_Properties_Custom.jpg"), tag: "Hi-fi · RBJ · 06", title: "RBJ · Properties: Custom Cadence", desc: "Custom cadence catches the long tail marketers asked for: first-week-of-month, last-Sunday-of-quarter, and the rest." },
+      { src: A("07_Composer_Empty_AI.jpg"), tag: "Hi-fi · Helio AI · 07", title: "Composer · Helio AI Empty State", desc: "One input, \"How can I help you today?\", and nothing else, so the panel waits for the writer to lead instead of throwing an option salad up front." },
+      { src: A("08_Composer_Text_Block_Selected.jpg"), tag: "Hi-fi · Helio AI · 08", title: "Composer · Text Block Selected", desc: "Highlight a text block and the Helio AI panel wakes up with \"How can I help you today?\", ready for a prompt or a quick-action click." },
+      { src: A("09_Helio_AI_Make_Shorter_Response.jpg"), tag: "Hi-fi · Helio AI · 09", title: "Helio AI · Make Shorter Response", desc: "The response streams in inline while your editable prompt stays pinned above it, so you can compare and follow up with the quick-action chips below." },
+      { src: A("10_Composer_Open_with_AI_Context_Menu.jpg"), tag: "Hi-fi · Helio AI · 10", title: "Composer · Open with AI Menu", desc: "Right-click a text block for the shortcut menu (Open with AI, Make it shorter, Change the tone, Check spelling, Re-write) and skip the trip to the side panel." },
+      { src: A("11_Composer_Blocks_Library_Panel.jpg"), tag: "Hi-fi · Helio AI · 11", title: "Composer · Blocks Library Panel", desc: "The right-rail Blocks library, with Rows, Content, and the Style / Variables / Links / Attachments tabs, lets writers build the email without ever leaving the canvas." },
     ],
   },
 

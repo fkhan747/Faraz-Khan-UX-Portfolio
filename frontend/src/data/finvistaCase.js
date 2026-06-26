@@ -45,27 +45,27 @@ export const finvista = {
         {
           name: "Two-Wheeler Loan",
           badge: "PRIMARY FOCUS",
-          desc: "Loans for new and used two-wheelers: bikes, scooters, electric, and mopeds. Available via agent-assisted or customer DIY flows. The highest-volume product.",
+          desc: "New and used bikes, scooters, electric, and mopeds. Runs in both agent-assisted and customer DIY modes. Our highest-volume product, so I made it the proving ground.",
         },
         {
           name: "Consumer Durable Loan",
-          desc: "Financing for mobiles, refrigerators, and washing machines. Completed by agents in stores or via customer-initiated DIY scheduling.",
+          desc: "Mobiles, fridges, washing machines. Agents close it in-store, or customers schedule it themselves.",
         },
         {
           name: "Cross-Sell Personal Loan",
-          desc: "Pre-approved personal loans for existing customers based on eligibility. Assisted or self-service via the app.",
+          desc: "Pre-approved personal loans for existing customers who already qualify. Agent-assisted or self-service.",
         },
         {
           name: "Used Car Loan",
-          desc: "Financing for used four-wheelers, available for agents and customers. Supports new and existing customer onboarding.",
+          desc: "Used four-wheelers, for agents and customers alike. Onboards new and existing borrowers.",
         },
         {
           name: "Tractor Loan",
-          desc: "Comprehensive financing for brand-new tractors with up to 90% funding and streamlined documentation.",
+          desc: "Brand-new tractors, up to 90% funded, with the paperwork trimmed down.",
         },
         {
           name: "Three-Wheeler Loan",
-          desc: "Financing for new three-wheelers via dealership agents or customer self-service.",
+          desc: "New three-wheelers, through dealership agents or customer self-service.",
         },
       ],
     },
@@ -73,8 +73,8 @@ export const finvista = {
 
   // --- 02 PROBLEM ---
   primaryUsers: [
-    { label: "Sales Centre Executives", desc: "Agents who process loans for customers over phone and app, juggling many applications at once and accountable for compliance." },
-    { label: "Loan Customers", desc: "First-time and repeat borrowers across urban and rural India, applying for two-wheeler and other loans on their own phone." },
+    { label: "Sales Centre Executives", desc: "They process loans over phone and app, juggle a dozen applications at once, and own the compliance. Speed is their whole job." },
+    { label: "Loan Customers", desc: "First-time and repeat borrowers across urban and rural India, applying for a two-wheeler loan on their own phone. Often their first time doing this digitally." },
   ],
 
   problem: {
@@ -87,27 +87,27 @@ export const finvista = {
     dimensions: [
       {
         title: "Multi-Persona Complexity",
-        desc: "Two primary personas: customers applying on their own (DIY) and sales centre executives processing loans for them, with dealership agents working inside the same executive flow as a sub-mode. Each had different goals, technical literacy, and interaction contexts.",
+        desc: "Two personas pulling opposite ways: customers applying solo, and executives processing loans for them, with dealership agents riding inside the executive flow as a sub-mode. Different goals, different literacy, same screens.",
       },
       {
         title: "Information Overload",
-        desc: "Loan applications involve 40+ data fields across personal details, KYC, employment, income, vehicle selection, and bank verification. Presenting this on mobile without overwhelming users required careful IA.",
+        desc: "One application is 40+ fields: personal, KYC, employment, income, vehicle, bank. All of it on a small phone. Fit that without drowning anyone and the IA does the heavy lifting.",
       },
       {
         title: "Device & Network Diversity",
-        desc: "Users range from latest flagships on 5G to entry-level Android devices on 2G connections in rural areas. The app needed to perform reliably across this entire spectrum.",
+        desc: "One user is on a flagship and 5G. The next is on an entry-level Android and 2G in a village. The app has to hold up across that whole gap.",
       },
       {
         title: "Trust & Security",
-        desc: "First-time borrowers are cautious about sharing financial information digitally. The interface needed to build trust at every step while complying with RBI regulations.",
+        desc: "First-time borrowers hesitate before handing over financial data on a phone. So the interface has to earn trust at every step, and stay RBI-compliant doing it.",
       },
       {
         title: "Product Scalability",
-        desc: "Six distinct loan products, each with different data requirements and eligibility criteria, needed a shared component foundation that still left room for product-specific variations.",
+        desc: "Six products, each with its own fields and eligibility rules. They all needed one shared foundation that still bent to fit each journey.",
       },
       {
         title: "Accessibility Gaps",
-        desc: "A mobile-first approach has drawbacks for complex processes like loan applications: discoverability, varied user preferences, performance, and technical constraints.",
+        desc: "Mobile-first cuts both ways for something this heavy. Discoverability suffers, preferences vary, performance bites, and the hardware sets hard limits.",
       },
     ],
     inScope: [
@@ -165,12 +165,12 @@ export const finvista = {
     keyInsight:
       "Competitors excelled at single-product lending flows, but none had solved the multi-product, multi-persona challenge at scale. That became our main opportunity: one flexible system serving 6 products and 2 primary personas, customers and executives, instead of 6 separate apps.",
     approach: [
-      { title: "Material Design Foundation", desc: "Use Material Design with card-based layouts for better adoptability across Android's dominant user base." },
-      { title: "Clean & Minimalistic", desc: "Keep the visual language uncluttered. This matters most for users with limited digital literacy." },
-      { title: "Contextual Graphics", desc: "Use illustrations and icons to provide context and reduce reliance on text-heavy instructions." },
-      { title: "Visual Hierarchy", desc: "Consistent hierarchy for primary actions, titles, and informational content." },
-      { title: "Progress Visibility", desc: "Show progress upfront so users always know where they are and what's coming next." },
-      { title: "Intuitive Multi-color Icons", desc: "Multi-color icons for better recognition and a more engaging visual experience." },
+      { title: "Material Design Foundation", desc: "I built on Material and card layouts. It's what Android users already know, so adoption comes for free." },
+      { title: "Clean & Minimalistic", desc: "I kept the surface uncluttered. That matters most for the borrower with little digital literacy." },
+      { title: "Contextual Graphics", desc: "I leaned on illustrations and icons to carry context, so the screens lean less on walls of text." },
+      { title: "Visual Hierarchy", desc: "One consistent hierarchy for primary actions, titles, and supporting info, everywhere." },
+      { title: "Progress Visibility", desc: "I show progress upfront, so users always know where they are and what's next." },
+      { title: "Intuitive Multi-color Icons", desc: "Multi-color icons read faster and make the journey feel less clinical." },
     ],
   },
 
@@ -179,7 +179,7 @@ export const finvista = {
     headline:
       "Two personas, one journey: bridging agent efficiency and customer empowerment",
     intro:
-      "Research revealed two primary user archetypes whose needs shaped every design decision. The platform needed to serve both without forcing either into the other's workflow.",
+      "Research handed me two archetypes, and they shaped every call I made. The trick was serving both without forcing either into the other's workflow.",
     personas: [
       {
         name: "Rahul Sharma",
@@ -218,12 +218,12 @@ export const finvista = {
       },
     ],
     principles: [
-      { t: "Progressive Disclosure", d: "Break complex data entry into focused, single-purpose screens. One category of information at a time to reduce cognitive load." },
-      { t: "Information Chunking", d: "Group related fields as digestible chunks. KYC, employment, and income details each get their own step." },
-      { t: "Assistive Context", d: "Micro-copy and contextual explanations at every step. First-time borrowers should never feel lost." },
-      { t: "Trust at Every Step", d: "Data security badges, transparent consent, and clear explanations of why each piece of information is needed." },
-      { t: "Dual-Mode Flexibility", d: "Agent-assisted and customer DIY flows. Agents need speed; customers need guidance. Same system, adaptive UX." },
-      { t: "Scalable Patterns", d: "Every component works across 6 loan products. Design for the most complex (TW), simplify for others." },
+      { t: "Progressive Disclosure", d: "I broke the data entry into focused, single-purpose screens. One category at a time, so the load never spikes." },
+      { t: "Information Chunking", d: "I grouped related fields into digestible chunks. KYC, employment, income each get their own step." },
+      { t: "Assistive Context", d: "Micro-copy and plain explanations sit on every step. A first-time borrower should never feel lost." },
+      { t: "Trust at Every Step", d: "Security badges, transparent consent, and a plain reason for every field I ask them to fill." },
+      { t: "Dual-Mode Flexibility", d: "Agents need speed, customers need guidance. Same system, the UX just adapts to who's holding the phone." },
+      { t: "Scalable Patterns", d: "Every component has to clear all 6 products. I designed for the hardest one (TW) and simplified down." },
     ],
   },
 
@@ -231,7 +231,7 @@ export const finvista = {
   flow: {
     headline: "Mapping the Two-Wheeler loan journey from entry to disbursement",
     intro:
-      "The TW loan application is structured as an 11-step journey, bookended by onboarding and post-submission processing. Each step is a focused, single-screen interaction with clear progress indication.",
+      "I shaped the TW application as 11 steps, with onboarding on one end and processing on the other. Every step is a single screen with a single job, and progress always on view.",
     diagramSvg: F("svg-12.svg"),
     diagramCaption:
       "Two-Wheeler loan journey: 11-step application flow from welcome to disbursement",
@@ -254,7 +254,7 @@ export const finvista = {
   design: {
     headline: "From wireframes to production: the Two-Wheeler journey",
     intro:
-      "The design evolved through three distinct phases: low-fidelity wireframing to validate information architecture, mid-fidelity explorations to test visual approaches, and high-fidelity final screens refined through stakeholder feedback.",
+      "I moved through three phases. Low-fi wireframes to lock the IA, mid-fi to test the visual direction, then high-fi screens I sharpened against stakeholder feedback.",
     wireframes: {
       intro:
         "Before any visual polish, I explored the hardest screens in grayscale, weighing a few layout directions for each. Putting the options side by side is how the final structure earned its shape.",
@@ -306,9 +306,9 @@ export const finvista = {
     headline:
       "A component library built for scale, powering 6 products with consistent patterns",
     intro:
-      "I created a comprehensive design system with 100+ components in Figma, establishing a shared visual language across all loan products. Built with auto-layout, variants, and design tokens so developer handoff was clean.",
+      "I built a 100+ component system in Figma, one shared visual language across all six products. I built it on auto-layout, variants, and tokens, so handoff to engineering stayed clean.",
     panelsIntro:
-      "100+ components organized into foundational tokens, form controls, navigation patterns, and content containers. Built in Figma with auto-layout and variants so engineering could pull components straight into the build.",
+      "I organized the 100+ components into tokens, form controls, navigation, and content containers. I built them on auto-layout and variants, so engineering could pull each one straight into the build.",
     panels: [
       { src: F("022-foundation-color-palette-typography-scale-and-spacing-system.png"), caption: "Foundation: Color palette, typography scale, and spacing system" },
       { src: F("023-icons-illustrations-functional-icons-multi-color-variants-an.png"), caption: "Icons & Illustrations: Functional icons, multi-color variants, and contextual graphics" },

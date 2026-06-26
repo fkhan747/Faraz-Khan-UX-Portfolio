@@ -25,7 +25,7 @@ export const recruitos = {
 
   // --- 00 OVERVIEW ---
   overview: {
-    headline: "An AI recruiting workspace for staffing agencies, built around how recruiters actually work.",
+    headline: "I built the desk around the engagement, not the tool, because that's how recruiters actually think.",
     tldrTitle: "TL;DR / Concept Summary",
     tldr:
       "A recruiter's day is a tab-juggling act across an ATS, LinkedIn, job boards, and spreadsheets, until the job becomes data entry. Recruiters lose 40%+ of their time to non-recruiting work (Aqore, 2026). Slate rebuilds the desk around the project, not the tool, with an AI copilot that sources, ranks, and drafts, but never sends. The recruiter decides, and every suggestion shows its confidence and links to its source. Built from desk research, end to end, through to a working prototype.",
@@ -45,12 +45,12 @@ export const recruitos = {
       { step: "05", title: "Validate", duration: "Planned next" },
     ],
     intro:
-      "Slate is a self-initiated concept, not a client engagement. I chose agency recruitment because it's one of the last knowledge-work domains still run on a patchwork of single-purpose tools, and because it's a genuine test of AI-trust design: recruiters will not hand decisions to a black box, but they badly need the leverage AI can give them. The interesting design problem isn't 'add AI.' It's 'add AI a sceptical professional under time pressure will actually trust.'",
+      "This one is self-initiated, not client work, and I won't pretend otherwise. I didn't interview anyone. I reconstructed the problem from the public record: industry time-studies, the complaints in recruiting communities, agency job descriptions, and the gaps reviewers flag in the incumbent tools. I'd rather show that reasoning than claim research I didn't run.",
     intro2:
-      "I didn't sit beside a recruiter for this. It's a self-initiated concept, and I'd rather show the reasoning than claim research I didn't run. The problem is reconstructed from the public record: industry time-studies, the complaints in recruiting communities, agency job descriptions, and the gaps reviewers flag in the incumbent tools. The picture that emerges is consistent and quietly expensive, and it's what the whole design answers to.",
+      "I chose agency recruitment on purpose. It's one of the last knowledge-work domains still run on a patchwork of single-purpose tools, and it's a real test of AI-trust design. Recruiters won't hand decisions to a black box, but they badly need the leverage. So the problem isn't 'add AI.' It's 'add AI a sceptical professional under time pressure will actually trust.'",
     contextTitle: "Why this concept",
     contextBody:
-      "Three reasons. It's a domain where AI offers real leverage but trust is the gating factor. Its project-centric structure is a genuine information-architecture problem rather than a reskin of an ATS. And it lets the case study show a visibly different process, research-led and workflow-shaped, from a survey-driven or a high-stakes-decision project.",
+      "Three reasons. Real AI leverage, but trust is the gating factor. A genuine IA problem, not a reskinned ATS. And a chance to show a different process: research-led and workflow-shaped.",
     metadata: [
       { k: "Domain", v: "Staffing & Recruitment" },
       { k: "Primary user", v: "Agency Recruiter (the desk)" },
@@ -68,24 +68,24 @@ export const recruitos = {
 
   // --- 01 THE PEOPLE (Personas - research-informed archetypes) ---
   personasSection: {
-    headline: "Three people, one broken workflow.",
+    headline: "I designed around three people the research kept pointing at.",
     intro:
-      "These aren't interview subjects. I didn't interview anyone for a self-initiated concept, and I won't pretend I did. They're archetypes built from public material: recruiting forums, agency job descriptions, product reviews of the incumbent tools, and published industry research. They're who the research points to. The recruiter is the primary user; the other two shape what 'good' has to mean.",
+      "Archetypes, not interview subjects, built from recruiting forums, agency job descriptions, product reviews, and published research. The recruiter is the primary user. The other two shape what 'good' has to mean.",
     personas: [
       {
         name: "Meera Joshi",
         initials: "MJ",
         role: "Agency Recruiter · primary",
-        context: "Runs 8-12 open roles at once across 3-4 client accounts. Lives in her inbox, LinkedIn, and the ATS, usually all at once. Resents all three.",
+        context: "8-12 open roles, 3-4 client accounts. Lives in inbox, LinkedIn, and the ATS at once. Resents all three.",
         goals: [
-          "Get a qualified shortlist in front of the client before a competitor does",
-          "Stop wasting hours screening candidates who were never a fit",
-          "Look on top of every account without working until midnight",
+          "Shortlist in front of the client before a competitor",
+          "Stop screening candidates who were never a fit",
+          "On top of every account, without the midnight finish",
         ],
         frustrations: [
-          "Re-enters the same candidate data into three different tools",
-          "Loses pipeline context every time she switches accounts",
-          "Spends evenings writing client status updates by hand",
+          "Same candidate data, re-typed into three tools",
+          "Pipeline context lost on every account switch",
+          "Status updates, hand-written, every evening",
         ],
         jtbd: "When I take a new role from a client, I want a qualified shortlist in front of them fast, so I can fill it before a competitor does.",
         tools: "ATS · LinkedIn Recruiter · Gmail · WhatsApp · 2 spreadsheets",
@@ -94,16 +94,16 @@ export const recruitos = {
         name: "Daniel Okafor",
         initials: "DO",
         role: "Agency Owner",
-        context: "Runs a 14-person agency. Watches margin leak into a stack of tools that don't talk to each other. The research pegs that leakage at 15-25% (Aqore, 2026).",
+        context: "14-person agency. Watches margin leak into a stack of tools that don't talk. Research pegs that leak at 15-25% (Aqore, 2026).",
         goals: [
-          "Keep relationships and pipeline knowledge when a recruiter leaves",
-          "See where every role actually stands without chasing people",
+          "Keep relationships and pipeline when a recruiter leaves",
+          "See where every role stands, without chasing people",
           "Protect margins by cutting time-to-fill",
         ],
         frustrations: [
-          "When a recruiter quits, months of pipeline and client context walk out the door",
-          "No single view of the agency's real status, because it lives in inboxes",
-          "Reporting is a Friday-afternoon scramble of copy-paste",
+          "A recruiter quits, months of pipeline walk out the door",
+          "No single view of status: it lives in inboxes",
+          "Reporting is a Friday copy-paste scramble",
         ],
         jtbd: "When a recruiter leaves, I want their relationships and knowledge to stay in the business, so I don't lose months of pipeline.",
         tools: "ATS exports · spreadsheets · the team's word",
@@ -112,16 +112,16 @@ export const recruitos = {
         name: "Priya Raman",
         initials: "PR",
         role: "Client · Hiring Manager",
-        context: "A hiring manager at a client company, briefing 2-3 agencies on the same role and judging them on speed and signal.",
+        context: "Hiring manager at a client company. Briefs 2-3 agencies on the same role, judges them on speed and signal.",
         goals: [
-          "Get a small, high-signal shortlist, not a flood of CVs",
-          "Understand why each candidate was put forward",
-          "Know where the role stands without sending a chasing email",
+          "A small, high-signal shortlist, not a flood of CVs",
+          "A reason each candidate was put forward",
+          "Status without sending a chasing email",
         ],
         frustrations: [
-          "Agencies send volume to look busy, not signal",
-          "No rationale attached to candidates, just a CV and a name",
-          "Has to ask for a status update every single time",
+          "Volume to look busy, not signal",
+          "No rationale, just a CV and a name",
+          "Has to ask for status every single time",
         ],
         jtbd: "When I brief an agency, I want a small shortlist with clear reasoning, so I can trust the recommendation and move fast.",
         tools: "Email · the agency's PDF shortlist",
@@ -131,10 +131,10 @@ export const recruitos = {
 
   // --- 02 THE WORKFLOW (Desk research → reconstructed day → insights) ---
   research1: {
-    headline: "A day at the desk, reconstructed from the research.",
+    headline: "Before I drew a single screen, I mapped where a recruiter's day actually goes.",
     methodTitle: "Reconstructing the desk",
     methodIntro:
-      "To design the workflow, I mapped how an agency recruiter actually spends a day. Not from sitting beside one, but from the public record: industry time-studies, the complaints in recruiting communities, and the feature gaps reviewers call out in the incumbent tools. Three things came up over and over.",
+      "I rebuilt one recruiter's day from the public record. Three things came up over and over, and each one became something the design had to answer.",
     method: [
       { l: "Basis", v: "Secondary research" },
       { l: "Sources", v: "Time-studies · forums · tool reviews" },
@@ -174,7 +174,7 @@ export const recruitos = {
 
   // --- 03 THE BROKEN STACK (Ecosystem + heuristics + teardown) ---
   research2: {
-    headline: "Why the tools recruiters already pay for don't fix this.",
+    headline: "I tore down the tools recruiters already pay for, and found the same hole in each.",
     ecoTitle: "The tool sprawl",
     ecoIntro:
       "I mapped every tool a recruiter touches in a typical week. The picture is the problem: a recruiter is the only integration layer connecting an ATS, a CRM, job boards, LinkedIn, email, a comms app, spreadsheets, and a reporting deck. Manually, all day.",
@@ -203,7 +203,7 @@ export const recruitos = {
     ],
     teardownTitle: "Competitive teardown",
     teardownIntro:
-      "Six tools across the category, scored on eight capabilities. The pattern: incumbents are records systems with AI bolted on; newer point tools do one thing well but don't own the workflow. Nothing combines a project-centric model with trustworthy, end-to-end AI. It's a real opening, with ~20,000 independent staffing agencies in the US alone, most under 20 recruiters.",
+      "Six tools, eight capabilities. The pattern is clear: incumbents are records systems with AI bolted on; point tools do one thing well but don't own the workflow. Nothing combines a project-centric model with trustworthy, end-to-end AI. A real opening, with ~20,000 independent staffing agencies in the US alone, most under 20 recruiters.",
     competitiveTable: {
       headers: ["Capability", "Slate", "Bullhorn", "Recruit CRM", "LinkedIn Rcl", "Greenhouse", "Loxo"],
       rows: [
@@ -219,15 +219,15 @@ export const recruitos = {
     },
     gapTitle: "The gap statement",
     gap:
-      "No existing tool combines a project-centric workflow model with end-to-end AI that recruiters actually trust. Incumbents are systems of record with AI bolted on; point tools own a feature, not the workflow. The space between them is the opportunity.",
+      "I couldn't find a single tool that combined a project-centric workflow with end-to-end AI recruiters actually trust. Incumbents are systems of record with AI bolted on; point tools own a feature, not the workflow. I designed Slate for the space between them.",
   },
 
   // --- 04 THE HYPOTHESIS (Positioning + mental model + principles) ---
   hypothesis: {
-    headline: "The hypothesis.",
+    headline: "So I made one bet: organise the whole product around the engagement.",
     positioningTitle: "Positioning",
     positioning:
-      "Slate is an AI recruiting workspace for staffing agencies, not HR departments. It organises everything around the engagement and gives recruiters an AI copilot that sources, ranks, drafts, and reports. The recruiter stays the decision-maker on everything that matters. It is not an HRIS, not a job board, and not an ATS with a chatbot stapled on.",
+      "I aimed this at staffing agencies, not HR departments. I organised everything around the engagement and gave recruiters an AI copilot that sources, ranks, drafts, and reports, while keeping the recruiter the decision-maker on everything that matters. I deliberately didn't build an HRIS, a job board, or an ATS with a chatbot stapled on.",
     isItList: [
       "A project-centric workspace where every engagement is a project",
       "An AI copilot that does the admin and flags the candidates worth a look",
@@ -252,16 +252,16 @@ export const recruitos = {
     principlesIntro:
       "Each principle is a tension resolved in a direction, and each one earns its place from the research.",
     principles: [
-      { t: "AI proposes, recruiter disposes", d: "Every consequential action is gated behind a human: sending outreach, advancing a candidate, sharing a shortlist. The AI does the work up to the moment of consequence, then hands the decision back.", from: "Trust is the #1 barrier to AI adoption in hiring." },
-      { t: "Project-centric over record-centric", d: "Organise by engagement, not by candidate or job. The architecture matches how recruiters already think, so nothing has to be relearned.", from: "The unit of work is the engagement, not the candidate." },
-      { t: "Show your work, always", d: "No AI output without a confidence level and clickable provenance. So every AI suggestion ships with how sure it is and a link back to where it came from.", from: "A sceptical professional won't act on a score they can't check." },
-      { t: "Do the admin, free up the judgement", d: "Automate re-entry, summarisation, and reporting; spend the saved attention on the candidates that matter. Fast and human, not heavy and clever.", from: "40%+ of the desk's time is lost to non-recruiting work." },
+      { t: "AI proposes, recruiter disposes", d: "I gated every consequential action behind a person: sending outreach, advancing a candidate, sharing a shortlist. The AI works up to the moment of consequence, then I hand the decision back.", from: "Trust is the #1 barrier to AI adoption in hiring." },
+      { t: "Project-centric over record-centric", d: "I organised by engagement, not by candidate or job, so the architecture matches how recruiters already think and nothing has to be relearned.", from: "The unit of work is the engagement, not the candidate." },
+      { t: "Show your work, always", d: "I let no AI output ship without a confidence level and clickable provenance, because a score you can't check is a score you ignore.", from: "A sceptical professional won't act on a score they can't check." },
+      { t: "Do the admin, free up the judgement", d: "I automated re-entry, summarisation, and reporting so the saved attention goes to the candidates that matter. Fast and human, not heavy and clever.", from: "40%+ of the desk's time is lost to non-recruiting work." },
     ],
   },
 
   // --- 05 HOW IT THINKS (Task analysis + IA, derived from first principles) ---
   ia: {
-    headline: "How it thinks: architecture & flows.",
+    headline: "I broke the work into tasks first, then built the IA around the sequence.",
     taskTitle: "The recruitment lifecycle, as tasks",
     taskIntro:
       "Before any IA, I broke the recruitment lifecycle into discrete tasks with their dependencies, so the structure would be organised around the actual sequence of work, not around database tables.",
@@ -276,7 +276,7 @@ export const recruitos = {
     ],
     cardSortTitle: "Deriving the structure",
     cardSortIntro:
-      "With no users to card-sort for a self-initiated concept, and I won't claim a method I didn't run, I derived the information architecture from the problem itself and the project-centric bet. The model is deliberately flat and recruiter-shaped, organised around the engagement rather than the candidate record.",
+      "I derived the architecture from the problem and the project-centric bet, then kept it deliberately flat and recruiter-shaped: organised around the engagement, not the candidate record. A card sort with real recruiters is on the validation list, not done.",
     cardSort: [
       { l: "Approach", v: "First-principles from the workflow" },
       { l: "Basis", v: "Public research + teardown" },
@@ -293,7 +293,7 @@ export const recruitos = {
 
   // --- 06 BUILDING IT (Wireframes → flows → prototype screens) ---
   design: {
-    headline: "Building it.",
+    headline: "I started in grayscale, so structure had to win before color.",
     wireframesIntro:
       "Low-fidelity, grayscale wireframes first, to lock structure and the AI-trust patterns before any color or brand. The questions at this stage: where does the copilot live, how does a confidence score read at a glance, and how does provenance expand without burying the decision?",
     wireframes: [
@@ -328,9 +328,9 @@ export const recruitos = {
 
   // --- 07 THE AI LAYER (AI patterns) ---
   aiLayer: {
-    headline: "Designing an AI recruiters will actually trust.",
+    headline: "Recruiters have been burned by 'AI matching', so I made this AI show its work.",
     intro:
-      "Recruiters have been burned by 'AI matching' before: black-box scores that surface the wrong people with total confidence. So the AI here earns its keep differently. It shows its work, and it never has the last word. Slate leans on a small set of AI-interaction patterns, applied consistently, so the AI feels like a transparent colleague rather than an oracle. Every pattern below appears in the prototype.",
+      "Black-box scores surface the wrong people with total confidence. So I designed the AI to earn its keep differently: it shows its work, and it never has the last word. I leaned on a small set of interaction patterns, applied consistently, so it reads as a transparent colleague, not an oracle. Every pattern below is in the prototype.",
     patterns: [
       { id: "P1", t: "Confidence + provenance", d: "Every AI output, whether a fit score, summary, or red flag, carries a confidence level and a clickable trail to the source it came from. The single most important trust move in the product.", featured: true },
       { id: "P2", t: "Human in the loop", d: "Consequential actions (send outreach, advance a candidate, share a report) are always gated behind a person. The AI proposes; the recruiter approves.", featured: true },
@@ -348,9 +348,9 @@ export const recruitos = {
 
   // --- 08 DESIGN SYSTEM ---
   designSystem: {
-    headline: "Design system.",
+    headline: "I kept the chrome quiet, so the AI moments get the contrast.",
     intro:
-      "A recruiter's screen is dense: pipelines, cards, candidate detail, an AI panel, all at once. Slate uses a Google / Material-3 foundation, chosen deliberately so the product reads as calm, familiar, and enterprise-trustworthy, letting the AI moments stand out rather than the chrome. A single Gemini-style gradient is reserved exclusively for AI surfaces; everything else is restrained and functional. Plus Jakarta Sans for display, Inter for body, Roboto Mono for data and labels.",
+      "A recruiter's screen is dense: pipelines, cards, candidate detail, an AI panel, all at once. I chose a Google / Material-3 foundation so it reads calm, familiar, and enterprise-trustworthy, and reserved one Gemini-style gradient for AI surfaces alone. Everything else stays restrained. Plus Jakarta Sans for display, Inter for body, Roboto Mono for data.",
     colors: [
       { name: "Surface / bg", hex: "#F7F9FC" },
       { name: "Ink / 900", hex: "#1F1F1F" },
@@ -391,16 +391,16 @@ export const recruitos = {
       "Empty state", "Skeleton / loading", "AI-thinking state",
     ],
     systemOutcomes:
-      "The system is intentionally restrained so the AI layer carries the visual weight. Reserving one gradient and one icon (✦) exclusively for AI means a user can always tell, instantly, whether they're looking at their own data or the machine's interpretation of it. It's a trust decision encoded directly into the design tokens.",
+      "I kept the system restrained so the AI layer carries the visual weight. By reserving one gradient and one icon (✦) for AI alone, I made it so a user can always tell, instantly, whether they're looking at their own data or the machine's read of it. A trust decision, encoded straight into the tokens.",
     crossProduct:
-      "Slate is the first of a planned family of AI-native concepts, so the foundation is built as a shared base: the same grid, spacing, motion, and AI-interaction patterns will carry across each one, with its own accent inside the AI-native language.",
+      "I built the foundation as a shared base, since Slate is the first of a planned family of AI-native concepts. The same grid, spacing, motion, and AI-interaction patterns carry across each one, each with its own accent inside the shared language.",
   },
 
   // --- 09 WHERE IT STANDS (honest targets, not fabricated results) ---
   whereItStands: {
-    headline: "Where it stands.",
+    headline: "I'm separating what I proved from what I still have to test.",
     intro:
-      "Honest about what's proven and what isn't. Nothing here is claimed as measured. These are the targets the design is built to hit, and they'll be tested, not asserted.",
+      "Nothing here is claimed as measured. These are the targets the design is built to hit, and they'll be tested, not asserted.",
     doneTitle: "What's done",
     done: [
       "A researched, defined problem, reconstructed from public time-studies, recruiting communities, and tool reviews.",
@@ -419,7 +419,7 @@ export const recruitos = {
 
   // --- 10 FUTURE VISION (concept → product roadmap + planned research) ---
   futureVision: {
-    headline: "Future vision.",
+    headline: "If I took this further, I'd lead with the research I deliberately skipped.",
     intro:
       "Slate is a concept I'd genuinely take further. Here's the path from where it is now to something real, and this is where the user-centred work I deliberately haven't done yet comes in, front and centre.",
     phasesTitle: "From concept to product",

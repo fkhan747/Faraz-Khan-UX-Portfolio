@@ -70,7 +70,7 @@ export const joat = {
   howItWorks: {
     headline: "How a campaign works",
     intro:
-      "The whole product is one loop, surfaced plainly on the homepage so a first-time raiser understands it before signing up.",
+      "I surfaced the whole product as one loop, right on the homepage, so a first-time raiser gets it before they ever sign up.",
     steps: [
       { n: "01", t: "Design in minutes", d: "Pick a product and color, drop in artwork, text or an upload, and preview it live on the tee. A base cost appears instantly for different quantities." },
       { n: "02", t: "Set your price and promote", d: "Choose a sales goal, an end date and a per-tee price; the flow shows the minimum profit before you launch. Share the campaign link and drive traffic with Facebook ads and social." },
@@ -83,7 +83,7 @@ export const joat = {
   ia: {
     headline: "Structuring a stack of tools into one platform",
     intro:
-      "The information architecture had to hold a creator tool, a public storefront, and a back office in one place without any of them feeling bolted on. I organized everything around three jobs: create a campaign, back a campaign, and manage what you have launched.",
+      "The IA had to hold a creator tool, a public storefront, and a back office in one place, none of them feeling bolted on. So I organized everything around three jobs: create a campaign, back a campaign, and manage what you have launched.",
     diagram: J("ia.svg"),
     diagramW: 1080,
     diagramH: 560,
@@ -94,7 +94,7 @@ export const joat = {
   userFlow: {
     headline: "One journey, two sides",
     intro:
-      "A campaign has two flows that meet on the public campaign page. The raiser designs, prices and launches; the buyer arrives from an ad or a shared link and orders. Everything in between, production, payments and shipping, is the platform's job, not theirs.",
+      "I split the journey in two so neither side carries the other's weight. The raiser designs, prices and launches. The buyer arrives from an ad or a shared link and orders. Everything in between, production, payments, shipping, is the platform's job, not theirs.",
     diagram: J("flow.svg"),
     diagramW: 1080,
     diagramH: 440,
@@ -142,7 +142,7 @@ export const joat = {
   dashboard: {
     headline: "Running the campaign after launch",
     intro:
-      "Once live, a raiser needs to track orders, watch progress toward the goal, manage their account, and get paid. The dashboards stayed in the same calm, single-focus visual language as the studio.",
+      "Once a campaign is live, the raiser needs to track orders, watch the goal, manage their account, and get paid. I kept the dashboards in the same calm, single-focus language as the studio, so going live never felt like switching to a different product.",
     screens: [
       { src: J("06-dashboard.jpg"), w: 1400, h: 922, title: "Order Tracking", desc: "Where a raiser follows orders and campaign progress at a glance." },
       { src: J("07-payout.jpg"), w: 1400, h: 808, title: "Payout", desc: "The profit transfer view, the moment the whole model pays off for the creator." },
