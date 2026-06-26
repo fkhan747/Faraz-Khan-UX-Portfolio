@@ -211,12 +211,129 @@ function ChartTable({ x, y, w, h, seed }) {
   );
 }
 
+/* combo: stacked columns + a line overlay (matches HR Trends Headcount) */
+function ChartCombo({ x, y, w, h, seed }) {
+  const heights = [0.7, 0.66, 0.62, 0.58, 0.55, 0.52, 0.48, 0.45];
+  const n = heights.length;
+  const gap = 3;
+  const bw = (w - gap * (n - 1)) / n;
+  // line points across the top of each column
+  const pts = [0.3, 0.34, 0.32, 0.28, 0.22, 0.26, 0.32, 0.38];
+  let d = "";
+  pts.forEach((p, i) => {
+    const px = x + i * (bw + gap) + bw / 2;
+    const py = y + h * p + jitter(seed, i, 1.4);
+    d += `${i === 0 ? "M" : "L"} ${px} ${py} `;
+  });
+  return (
+    <g>
+      <HandLine x1={x} y1={y + h} x2={x + w} y2={y + h} seed={seed + "axis"} sw={1.3} />
+      {heights.map((hh, i) => {
+        const bh = h * hh;
+        // 3 stacked segments per bar
+        const a = bh * 0.45, b = bh * 0.3;
+        return (
+          <g key={i}>
+            <HandRect x={x + i * (bw + gap)} y={y + h - bh} w={bw} h={a} seed={seed + "a" + i} sw={1.2} />
+            <HandRect x={x + i * (bw + gap)} y={y + h - bh + a} w={bw} h={b} seed={seed + "b" + i} sw={1.2} />
+            <HandRect x={x + i * (bw + gap)} y={y + h - bh + a + b} w={bw} h={bh - a - b} seed={seed + "c" + i} sw={1.2} />
+          </g>
+        );
+      })}
+      <path d={d} fill="none" stroke={INK} strokeWidth={1.8} strokeLinecap="round" />
+    </g>
+  );
+}
+
+/* histogram: right-skewed bars with a bell curve overlay (H-Index distribution) */
+function ChartHistogram({ x, y, w, h, seed }) {
+  const heights = [0.95, 0.85, 0.62, 0.45, 0.32, 0.24, 0.18, 0.14, 0.1, 0.08, 0.06, 0.05];
+  const n = heights.length;
+  const gap = 1.5;
+  const bw = (w - gap * (n - 1)) / n;
+  // bell curve overlay (rough Gaussian shape)
+  const steps = 24;
+  let d = "";
+  for (let i = 0; i <= steps; i++) {
+    const px = x + (w / steps) * i;
+    const t = (i / steps) * 3.5 - 0.3;
+    const py = y + h - h * 0.95 * Math.exp(-Math.pow(t - 0.5, 2) / 0.18) + jitter(seed, i, 1.2);
+    d += `${i === 0 ? "M" : "L"} ${px} ${py} `;
+  }
+  return (
+    <g>
+      <HandLine x1={x} y1={y + h} x2={x + w} y2={y + h} seed={seed + "axis"} sw={1.3} />
+      {heights.map((hh, i) => (
+        <HandRect key={i} x={x + i * (bw + gap)} y={y + h - h * hh} w={bw} h={h * hh} seed={seed + i} sw={1.1} />
+      ))}
+      <path d={d} fill="none" stroke={INK} strokeWidth={1.6} strokeLinecap="round" />
+    </g>
+  );
+}
+
+/* world map: a rough sketched continent silhouette to suggest "geographic view" */
+function ChartMap({ x, y, w, h, seed }) {
+  // 4 blob-shaped paths roughly placed like continents, then a few dots for bubbles
+  const cx = x + w / 2, cy = y + h / 2;
+  const blob = (bx, by, bw, bh, s) => {
+    const j = (i, a = 2.5) => jitter(s, i, a);
+    return `M ${bx + j(0)} ${by + bh * 0.45 + j(1)}
+      C ${bx + bw * 0.1} ${by + j(2)}, ${bx + bw * 0.6} ${by + j(3)}, ${bx + bw + j(4)} ${by + bh * 0.5 + j(5)}
+      C ${bx + bw * 0.9} ${by + bh + j(6)}, ${bx + bw * 0.3} ${by + bh + j(7)}, ${bx + j(8)} ${by + bh * 0.45 + j(1)} Z`;
+  };
+  return (
+    <g>
+      <path d={blob(x + w * 0.05, y + h * 0.18, w * 0.30, h * 0.55, seed + "na")} fill="none" stroke={INK} strokeWidth={1.4} />
+      <path d={blob(x + w * 0.20, y + h * 0.55, w * 0.20, h * 0.40, seed + "sa")} fill="none" stroke={INK} strokeWidth={1.4} />
+      <path d={blob(x + w * 0.42, y + h * 0.18, w * 0.18, h * 0.32, seed + "eu")} fill="none" stroke={INK} strokeWidth={1.4} />
+      <path d={blob(x + w * 0.42, y + h * 0.45, w * 0.20, h * 0.40, seed + "af")} fill="none" stroke={INK} strokeWidth={1.4} />
+      <path d={blob(x + w * 0.55, y + h * 0.18, w * 0.40, h * 0.55, seed + "as")} fill="none" stroke={INK} strokeWidth={1.4} />
+      <path d={blob(x + w * 0.78, y + h * 0.65, w * 0.16, h * 0.22, seed + "oc")} fill="none" stroke={INK} strokeWidth={1.4} />
+      {/* application bubbles, sized to suggest top source countries */}
+      <circle cx={x + w * 0.72} cy={y + h * 0.42} r={Math.min(w, h) * 0.08} fill="none" stroke={INK} strokeWidth={1.4} />
+      <circle cx={x + w * 0.83} cy={y + h * 0.34} r={Math.min(w, h) * 0.06} fill="none" stroke={INK} strokeWidth={1.4} />
+      <circle cx={x + w * 0.18} cy={y + h * 0.36} r={Math.min(w, h) * 0.04} fill="none" stroke={INK} strokeWidth={1.4} />
+      <circle cx={x + w * 0.50} cy={y + h * 0.55} r={Math.min(w, h) * 0.035} fill="none" stroke={INK} strokeWidth={1.4} />
+    </g>
+  );
+}
+
+/* small multiples: a 3x2 grid of mini-cards, each with two stacked bars
+   (matches the Research/Expenditure by-school small multiples) */
+function ChartMultiples({ x, y, w, h, seed }) {
+  const cols = 3, rows = 2;
+  const gap = 4;
+  const cw = (w - gap * (cols - 1)) / cols;
+  const ch = (h - gap * (rows - 1)) / rows;
+  const cells = [];
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      const cx = x + c * (cw + gap), cy = y + r * (ch + gap);
+      const s = seed + r + "-" + c;
+      cells.push(
+        <g key={s}>
+          <HandRect x={cx} y={cy} w={cw} h={ch} seed={s + "f"} sw={1.2} />
+          <HandLine x1={cx + 4} y1={cy + 8} x2={cx + cw * 0.5} y2={cy + 8} seed={s + "t"} sw={1} color={INK_SOFT} />
+          {/* two narrow bars per card */}
+          <HandRect x={cx + 6} y={cy + ch * 0.45} w={cw * (0.5 + (r + c) * 0.07)} h={ch * 0.12} seed={s + "1"} sw={1.1} />
+          <HandRect x={cx + 6} y={cy + ch * 0.65} w={cw * (0.3 + (r + c) * 0.05)} h={ch * 0.12} seed={s + "2"} sw={1.1} />
+        </g>
+      );
+    }
+  }
+  return <g>{cells}</g>;
+}
+
 const CHARTS = {
   bars: ChartBars,
   line: ChartLine,
   donut: ChartDonut,
   funnel: ChartFunnel,
   table: ChartTable,
+  combo: ChartCombo,
+  histogram: ChartHistogram,
+  map: ChartMap,
+  multiples: ChartMultiples,
 };
 
 // One labeled region: a hand-drawn box, a handwritten caption, and a chart.
@@ -242,23 +359,21 @@ function Region({ x, y, w, h, label, kind, seed }) {
 const VB_W = 460;
 const VB_H = 300;
 
-function Sketch({ id, regions }) {
+function Sketch({ id, regions, kpiN = 5 }) {
   const filterId = `wobble-${id}`;
-  // canvas layout
+  // canvas layout (no right rail now; Ask AI is a small floating pill bottom-right)
   const sideX = 10;
-  const sideW = 34;
-  const railW = 52;
-  const railX = VB_W - railW - 10;
+  const sideW = 50;                              // wider sidebar = the new floating maroon rail with sub-nav
   const bodyX = sideX + sideW + 10;
-  const bodyW = railX - bodyX - 10;
+  const bodyW = VB_W - bodyX - 12;
   const topY = 12;
   const topH = 18;
+  const hasKpis = kpiN > 0;
   const kpiY = topY + topH + 8;
   const kpiH = 34;
-  const kpiN = 4;
-  const kpiGap = 6;
-  const kpiW = (bodyW - kpiGap * (kpiN - 1)) / kpiN;
-  const gridTop = kpiY + kpiH + 10;
+  const kpiGap = 5;
+  const kpiW = hasKpis ? (bodyW - kpiGap * (kpiN - 1)) / kpiN : 0;
+  const gridTop = hasKpis ? kpiY + kpiH + 10 : topY + topH + 10;
   const gridBottom = VB_H - 12;
   const gridH = gridBottom - gridTop;
 
@@ -315,34 +430,45 @@ function Sketch({ id, regions }) {
         </defs>
 
         <g filter={`url(#${filterId})`}>
-          {/* sidebar */}
+          {/* floating sidebar (the maroon rail), with a logo block + 5 module nav rows.
+              On the active module, a few thin sub-nav ticks suggest the expanded accordion. */}
           <HandRect x={sideX} y={topY} w={sideW} h={VB_H - topY - 12} seed={`${id}-side`} sw={1.6} />
-          <circle cx={sideX + sideW / 2} cy={topY + 14} r={6} fill="none" stroke={INK} strokeWidth={1.5} />
-          {[0, 1, 2, 3, 4].map((i) => (
-            <HandLine
-              key={i}
-              x1={sideX + 6}
-              y1={topY + 36 + i * 22}
-              x2={sideX + sideW - 6}
-              y2={topY + 36 + i * 22}
-              seed={`${id}-nav${i}`}
-              sw={1.5}
-            />
-          ))}
+          <HandRect x={sideX + 5} y={topY + 5} w={sideW - 10} h={14} seed={`${id}-brand`} sw={1.4} />
+          <Ink x={sideX + 9} y={topY + 15} size={9} color={INK} weight={700}>M Meridian</Ink>
+          {[0, 1, 2, 3, 4].map((i) => {
+            const active = i === 1;
+            const ny = topY + 28 + i * 16;
+            return (
+              <g key={i}>
+                {active && <HandRect x={sideX + 4} y={ny - 5} w={sideW - 8} h={10} seed={`${id}-act${i}`} sw={1.2} />}
+                <HandLine x1={sideX + 7} y1={ny} x2={sideX + sideW - 7} y2={ny} seed={`${id}-nav${i}`} sw={1.4} />
+                {/* expanded sub-nav under the active module */}
+                {active && [0, 1, 2].map((j) => (
+                  <HandLine key={j} x1={sideX + 14} y1={ny + 10 + j * 7} x2={sideX + sideW - 9} y2={ny + 10 + j * 7} seed={`${id}-sub${j}`} sw={1.1} color={INK_SOFT} />
+                ))}
+              </g>
+            );
+          })}
+          {/* user chip at bottom */}
+          <HandRect x={sideX + 4} y={VB_H - 30} w={sideW - 8} h={16} seed={`${id}-user`} sw={1.3} />
 
-          {/* top bar */}
-          <HandRect x={bodyX} y={topY} w={bodyW} h={topH} seed={`${id}-top`} sw={1.5} />
-          <HandLine x1={bodyX + 8} y1={topY + topH / 2} x2={bodyX + 70} y2={topY + topH / 2} seed={`${id}-title`} sw={1.6} />
-          <circle cx={bodyX + bodyW - 12} cy={topY + topH / 2} r={5} fill="none" stroke={INK} strokeWidth={1.5} />
+          {/* top bar: page title left, refresh + filters chips right */}
+          <HandLine x1={bodyX} y1={topY + topH / 2} x2={bodyX + 50} y2={topY + topH / 2} seed={`${id}-title`} sw={1.8} />
+          <Ink x={bodyX} y={topY + topH + 6} size={9} color={INK_SOFT}>Fall 2024 cycle</Ink>
+          <HandRect x={bodyX + bodyW - 90} y={topY + 3} w={28} h={topH - 6} seed={`${id}-flt1`} sw={1.2} />
+          <HandRect x={bodyX + bodyW - 58} y={topY + 3} w={28} h={topH - 6} seed={`${id}-flt2`} sw={1.2} />
+          <circle cx={bodyX + bodyW - 14} cy={topY + topH / 2} r={5} fill="none" stroke={INK} strokeWidth={1.5} />
 
           {/* KPI row */}
-          {Array.from({ length: kpiN }).map((_, i) => {
+          {hasKpis && Array.from({ length: kpiN }).map((_, i) => {
             const kx = bodyX + i * (kpiW + kpiGap);
             return (
               <g key={i}>
                 <HandRect x={kx} y={kpiY} w={kpiW} h={kpiH} seed={`${id}-kpi${i}`} sw={1.5} />
-                <HandLine x1={kx + 6} y1={kpiY + 11} x2={kx + kpiW * 0.62} y2={kpiY + 11} seed={`${id}-kl${i}`} sw={1.2} color={INK_SOFT} />
-                <Squiggle x={kx + 6} y={kpiY + 24} w={kpiW * 0.7} seed={`${id}-sq${i}`} />
+                <HandLine x1={kx + 5} y1={kpiY + 10} x2={kx + kpiW * 0.62} y2={kpiY + 10} seed={`${id}-kl${i}`} sw={1.2} color={INK_SOFT} />
+                <Squiggle x={kx + 5} y={kpiY + 22} w={kpiW * 0.7} seed={`${id}-sq${i}`} />
+                {/* delta pill */}
+                <HandRect x={kx + 5} y={kpiY + 25} w={kpiW * 0.32} h={6} seed={`${id}-d${i}`} sw={1} />
               </g>
             );
           })}
@@ -352,17 +478,9 @@ function Sketch({ id, regions }) {
             <Region key={r.key} x={r.x} y={r.y} w={r.w} h={r.h} label={r.label} kind={r.kind} seed={r.seed} />
           ))}
 
-          {/* right rail: signals + Ask AI */}
-          <HandRect x={railX} y={topY} w={railW} h={VB_H - topY - 12} seed={`${id}-rail`} sw={1.6} />
-          <Ink x={railX + 6} y={topY + 16} size={13}>signals</Ink>
-          {[0, 1, 2, 3].map((i) => (
-            <g key={i}>
-              <HandRect x={railX + 6} y={topY + 24 + i * 26} w={railW - 12} h={20} seed={`${id}-sig${i}`} sw={1.3} />
-              <HandLine x1={railX + 10} y1={topY + 34 + i * 26} x2={railX + railW - 12} y2={topY + 34 + i * 26} seed={`${id}-sl${i}`} sw={1.1} color={INK_SOFT} />
-            </g>
-          ))}
-          <HandRect x={railX + 6} y={VB_H - 52} w={railW - 12} h={34} seed={`${id}-ai`} sw={1.6} dashed />
-          <Ink x={railX + railW / 2} y={VB_H - 30} size={13} anchor="middle" color={INK} weight={700}>
+          {/* floating Ask AI pill at the bottom-right corner of the body */}
+          <HandRect x={bodyX + bodyW - 56} y={VB_H - 26} w={50} h={16} seed={`${id}-ai`} sw={1.5} />
+          <Ink x={bodyX + bodyW - 31} y={VB_H - 15} size={11} anchor="middle" color={INK} weight={700}>
             {"✦ Ask AI"}
           </Ink>
         </g>
@@ -373,77 +491,67 @@ function Sketch({ id, regions }) {
 
 /* ---- the eight screens + their distinguishing layouts ---- */
 
+/* The 8 wireframes mirror the new dashboard IA exactly:
+   one dashboard with five tabs (Overview, Undergraduate, Graduate, HR, Research),
+   each tab has sub-tabs, the chart shapes match what each screen actually renders. */
 const screens = [
   {
-    id: "s1",
-    tag: "screen 01",
-    title: "Institutional Overview",
+    id: "s1", tag: "screen 01", title: "Overview, the institutional cockpit", kpiN: 6,
     regions: [
-      { fr: 1, cells: [{ label: "cycle pace", kind: "line", fr: 1.6 }, { label: "by school", kind: "bars", fr: 1 }] },
-      { fr: 1, cells: [{ label: "stage funnel", kind: "funnel", fr: 1 }, { label: "by region", kind: "donut", fr: 1 }] },
+      { fr: 1, cells: [{ label: "applications + yield, 5 cycles", kind: "line", fr: 1.5 }, { label: "admissions funnel", kind: "funnel", fr: 1 }] },
+      { fr: 1, cells: [{ label: "undergrad rollup", kind: "bars", fr: 1 }, { label: "graduate rollup", kind: "donut", fr: 1 }] },
+      { fr: 1, cells: [{ label: "research rollup", kind: "bars", fr: 1 }, { label: "HR rollup", kind: "donut", fr: 1 }] },
     ],
   },
   {
-    id: "s2",
-    tag: "screen 02",
-    title: "Undergraduate Overview",
+    id: "s2", tag: "screen 02", title: "Undergraduate, Summary, with the world map", kpiN: 5,
     regions: [
-      { fr: 1, cells: [{ label: "application funnel", kind: "funnel", fr: 1.4 }, { label: "by school", kind: "bars", fr: 1 }] },
-      { fr: 1, cells: [{ label: "applicant mix", kind: "donut", fr: 1 }, { label: "year over year", kind: "line", fr: 1.4 }] },
+      { fr: 1, cells: [{ label: "applications by school", kind: "bars", fr: 1 }, { label: "by geography", kind: "donut", fr: 1 }] },
+      { fr: 1, cells: [{ label: "by round", kind: "bars", fr: 1 }, { label: "by territory", kind: "donut", fr: 1 }] },
+      { fr: 1.4, cells: [{ label: "international applications by country", kind: "map", fr: 1 }] },
     ],
   },
   {
-    id: "s3",
-    tag: "screen 03",
-    title: "Undergraduate Geo",
+    id: "s3", tag: "screen 03", title: "Undergraduate, Application Totals", kpiN: 4,
     regions: [
-      { fr: 1, cells: [{ label: "by region", kind: "bars", fr: 1.5 }, { label: "domestic / intl", kind: "donut", fr: 1 }] },
-      { fr: 1, cells: [{ label: "top states", kind: "table", fr: 1 }] },
+      { fr: 1, cells: [{ label: "applications, last four cycles", kind: "bars", fr: 1 }, { label: "international by country, ranked", kind: "bars", fr: 1 }] },
+      { fr: 1, cells: [{ label: "by decision plan", kind: "bars", fr: 1 }, { label: "by program", kind: "bars", fr: 1 }] },
+      { fr: 1, cells: [{ label: "by gender", kind: "donut", fr: 1 }, { label: "by geography", kind: "bars", fr: 1 }] },
     ],
   },
   {
-    id: "s4",
-    tag: "screen 04",
-    title: "Funnel, Yield & Melt",
+    id: "s4", tag: "screen 04", title: "Graduate, Summary, with the world map", kpiN: 5,
     regions: [
-      { fr: 1.1, cells: [{ label: "yield funnel", kind: "funnel", fr: 1 }] },
-      { fr: 1, cells: [{ label: "deposit pace", kind: "line", fr: 1.2 }, { label: "segments", kind: "table", fr: 1 }] },
+      { fr: 1, cells: [{ label: "domestic vs international", kind: "donut", fr: 1 }, { label: "applications by school", kind: "bars", fr: 1 }] },
+      { fr: 1, cells: [{ label: "admission funnel", kind: "funnel", fr: 1 }, { label: "top 5 source countries", kind: "bars", fr: 1 }] },
+      { fr: 1.4, cells: [{ label: "international applications by country", kind: "map", fr: 1 }] },
     ],
   },
   {
-    id: "s5",
-    tag: "screen 05",
-    title: "Graduate Overview",
+    id: "s5", tag: "screen 05", title: "HR, Summary, plain and protective", kpiN: 5,
     regions: [
-      { fr: 1, cells: [{ label: "funnel", kind: "funnel", fr: 1.3 }, { label: "by school", kind: "bars", fr: 1 }] },
-      { fr: 1, cells: [{ label: "composition", kind: "donut", fr: 1 }, { label: "review queue", kind: "table", fr: 1.3 }] },
+      { fr: 1, cells: [{ label: "current headcount", kind: "bars", fr: 0.8 }, { label: "family group & time type", kind: "bars", fr: 1.4 }, { label: "gender", kind: "donut", fr: 1 }] },
+      { fr: 1, cells: [{ label: "race / ethnicity", kind: "bars", fr: 1.5 }, { label: "academic population", kind: "donut", fr: 1 }] },
     ],
   },
   {
-    id: "s6",
-    tag: "screen 06",
-    title: "Graduate Geo",
+    id: "s6", tag: "screen 06", title: "HR, Trends Headcount, ten-year combo", kpiN: 5,
     regions: [
-      { fr: 1, cells: [{ label: "source markets", kind: "bars", fr: 1.5 }, { label: "by region", kind: "donut", fr: 1 }] },
-      { fr: 1, cells: [{ label: "country performance", kind: "table", fr: 1 }] },
+      { fr: 1, cells: [{ label: "active / filled jobs and fall students by year", kind: "combo", fr: 1 }] },
     ],
   },
   {
-    id: "s7",
-    tag: "screen 07",
-    title: "Research Intelligence",
+    id: "s7", tag: "screen 07", title: "Research, Summary, money over time", kpiN: 5,
     regions: [
-      { fr: 1, cells: [{ label: "funding trend", kind: "line", fr: 1.4 }, { label: "awards", kind: "bars", fr: 1 }] },
-      { fr: 1, cells: [{ label: "by college", kind: "bars", fr: 1 }, { label: "expenditure", kind: "line", fr: 1 }] },
+      { fr: 1, cells: [{ label: "funded, awards, expenditures, 3 yr", kind: "bars", fr: 1 }, { label: "active and graduated PhD students", kind: "bars", fr: 1 }] },
+      { fr: 1, cells: [{ label: "funding by school, small multiples", kind: "multiples", fr: 1 }] },
     ],
   },
   {
-    id: "s8",
-    tag: "screen 08",
-    title: "HR Workforce",
+    id: "s8", tag: "screen 08", title: "Research, H-Index distribution", kpiN: 0,
     regions: [
-      { fr: 1, cells: [{ label: "headcount trend", kind: "line", fr: 1.4 }, { label: "turnover", kind: "bars", fr: 1 }] },
-      { fr: 1, cells: [{ label: "composition", kind: "donut", fr: 1 }] },
+      { fr: 1, cells: [{ label: "faculty H-index by school, all time", kind: "histogram", fr: 1 }] },
+      { fr: 1, cells: [{ label: "faculty H-index by school, last 5 years", kind: "histogram", fr: 1 }] },
     ],
   },
 ];
@@ -466,7 +574,7 @@ export default function MeridianWireframes() {
         {screens.map((s) => (
           <figure key={s.id} className="dark-card rounded-3xl overflow-hidden">
             <div className="p-3 md:p-4" style={{ background: PAPER }}>
-              <Sketch id={s.id} regions={s.regions} />
+              <Sketch id={s.id} regions={s.regions} kpiN={s.kpiN ?? 5} />
             </div>
             <figcaption className="p-5">
               <span className="font-mono text-[10px] uppercase tracking-widest text-[#F5379B]">{s.tag}</span>
