@@ -49,9 +49,11 @@ function AgenticCard() {
           </div>
         </div>
 
-        <span className="mt-auto pt-7 inline-flex items-center gap-2 text-[#F5379B] text-sm font-semibold group-hover:gap-3 transition-[gap]">
-          Try the live demo <ArrowRight size={16} />
-        </span>
+        <div className="mt-auto pt-6">
+          <span className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-white text-[#C71E73] text-sm font-semibold group-hover:bg-[#F5379B] group-hover:text-white transition-colors">
+            Try the live demo <ArrowRight size={16} />
+          </span>
+        </div>
       </div>
     </Link>
   );
@@ -99,23 +101,46 @@ export default function Projects() {
           <Sparkles size={13} /> self-initiated · ai-native
         </p>
         <h2 className="font-display font-black leading-[0.95] text-4xl md:text-6xl tracking-tighter mb-4">
-          what AI-first products look like.
+          what I can do with AI.
         </h2>
         <p className="max-w-2xl text-lg md:text-xl text-[#F4F3FA] mb-12">
-          A separate track from my client work. One end-to-end product concept and one live demo of an
-          agentic workflow I designed and shipped.
+          On my own time, away from client work, I build to find out what AI-native really feels like. One
+          product I designed end to end, and a live multi-agent demo you can point at any website.
         </p>
 
         <Grid>
-          {/* Slate concept card */}
+          {/* Slate concept card - full height image card with a sleek blurb */}
           {concepts.filter((c) => c.live !== false).map((c, i) => (
             <div
               key={c.slug}
               data-testid={`concept-card-${c.slug}`}
-              className={`relative col-span-12 md:col-span-6 rise rise-${(i % 6) + 1}`}
+              className={`relative col-span-12 md:col-span-6 h-full rise rise-${(i % 6) + 1}`}
             >
-              <Link to={c.href} className="group block rounded-3xl overflow-hidden lift">
-                <CaseCover img={c.coverImg} title={c.title} subtitle={c.subtitle} />
+              <Link
+                to={c.href}
+                className="group relative flex flex-col h-full min-h-[420px] rounded-3xl overflow-hidden lift bg-[#15101F]"
+              >
+                <img
+                  src={c.coverImg}
+                  alt={c.title}
+                  loading="lazy"
+                  className="cover-img absolute inset-0 w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-700"
+                />
+                {/* brand tint */}
+                <div className="absolute inset-0 pointer-events-none" aria-hidden="true" style={{ background: "linear-gradient(135deg, rgba(7,94,253,0.40), rgba(245,55,155,0.34))" }} />
+                {/* readability scrim - stronger so the blurb stays legible */}
+                <div className="absolute inset-0 pointer-events-none" aria-hidden="true" style={{ background: "linear-gradient(to top, rgba(13,3,18,0.97) 6%, rgba(13,3,18,0.62) 40%, rgba(13,3,18,0) 74%)" }} />
+                {/* bottom content */}
+                <div className="relative mt-auto p-6 md:p-8">
+                  <div className="flex items-start justify-between gap-4">
+                    <h3 className="font-display text-3xl md:text-4xl font-black text-white leading-none case-keep">{c.title}</h3>
+                    <ArrowUpRight className="flex-shrink-0 text-white/85 group-hover:rotate-45 transition-transform mt-1" size={24} />
+                  </div>
+                  <p className="mt-2 text-sm md:text-base text-white/80">{c.subtitle}</p>
+                  {c.blurb && (
+                    <p className="mt-4 text-sm leading-relaxed text-white/65 max-w-md case-keep">{c.blurb}</p>
+                  )}
+                </div>
               </Link>
               {c.prototypeUrl && (
                 <a
