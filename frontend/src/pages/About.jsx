@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import {
   Mail,
   Linkedin,
+  Calendar,
   Download,
   Lightbulb,
   Users,
@@ -18,10 +19,8 @@ import {
 } from "lucide-react";
 import { PROFILE } from "../data/content";
 import { Container, Grid } from "../components/Grid";
-import CopyButton from "../components/CopyButton";
+import BookCallButton from "../components/BookCallButton";
 import Seo from "../components/Seo";
-
-const telHref = "tel:" + PROFILE.phone.replace(/[^+\d]/g, "");
 
 const COMPETENCIES = [
   { icon: Lightbulb, t: "User Experience Strategy & Leadership", d: "Setting UX vision, OKRs, and design culture across multi-product orgs." },
@@ -436,35 +435,25 @@ export default function About() {
         </Container>
       </section>
 
-      {/* CTA */}
-      <section className="py-24">
+      {/* FINAL CTA - identical to the Landing page banner */}
+      <section className="py-16 md:py-20" data-testid="final-cta">
         <Container>
-        <div className="rounded-3xl dark-card text-white p-10 md:p-16 relative overflow-hidden">
-          <div className="absolute -top-10 -right-10 w-72 h-72 rounded-full bg-[#075EFD] blur-3xl opacity-30" />
-          <h2 className="relative font-display text-4xl md:text-6xl font-black leading-tight max-w-5xl">
-            ready to build <span className="italic font-light text-white">something</span> together?
+        <div className="rounded-3xl dark-card text-white p-8 md:p-12 relative overflow-hidden">
+          <div className="absolute -top-10 -right-10 w-72 h-72 rounded-full bg-[#075EFD] blur-3xl opacity-40" />
+          <div className="absolute -bottom-12 -left-10 w-72 h-72 rounded-full bg-[#F5379B] blur-3xl opacity-30" />
+          <p className="relative text-[11px] font-mono uppercase tracking-[0.25em] text-white mb-4">let's build</p>
+          <h2 className="relative font-display text-4xl md:text-6xl font-black leading-[1.0] md:whitespace-nowrap">
+            have an idea <span className="italic font-light text-white">worth</span> shipping?
           </h2>
-          <p className="relative mt-6 text-base md:text-lg text-white/80 max-w-xl">
-            Open to UX Lead and Senior Product Design roles across India and the Middle East. Open for global relocation or remote opportunities.
-          </p>
-          <div className="relative mt-8 flex gap-3 flex-wrap">
-            {/* Email - with copy icon */}
-            <div className="inline-flex items-center rounded-full border border-white text-white pr-1.5">
-              <a href={`mailto:${PROFILE.email}`} data-testid="about-final-cta" className="inline-flex items-center gap-2 pl-7 pr-3 py-4 font-semibold text-sm break-all hover:text-white transition-colors">
-                {PROFILE.email}
-              </a>
-              <CopyButton value={PROFILE.email} label="email" size={15} className="h-9 w-9 text-white hover:bg-white/10" />
-            </div>
-            {/* Phone - added after email, with copy icon */}
-            <div className="inline-flex items-center rounded-full border border-white text-white pr-1.5">
-              <a href={telHref} data-testid="about-phone" className="inline-flex items-center gap-2 pl-7 pr-3 py-4 font-semibold text-sm hover:text-white transition-colors">
-                {PROFILE.phone}
-              </a>
-              <CopyButton value={PROFILE.phone} label="phone" size={15} className="h-9 w-9 text-white hover:bg-white/10" />
-            </div>
-            {/* LinkedIn */}
-            <a href={PROFILE.social.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-white font-semibold text-sm hover:bg-white/10 transition-colors">
-              <Linkedin size={16} /> LinkedIn profile
+          <div className="relative mt-8 flex gap-4 flex-wrap">
+            <Link to="/contact" data-testid="cta-contact" className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-white font-semibold text-sm hover:bg-white/10 transition-colors">
+              <Mail size={16} /> Get in Touch
+            </Link>
+            <BookCallButton data-testid="cta-book-call" className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-white font-semibold text-sm hover:bg-white/10 transition-colors">
+              <Calendar size={16} /> Book a Call
+            </BookCallButton>
+            <a href={PROFILE.social.linkedin} target="_blank" rel="noopener noreferrer" data-testid="cta-linkedin" className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-white font-semibold text-sm hover:bg-white/10 transition-colors">
+              <Linkedin size={16} /> LinkedIn
             </a>
           </div>
         </div>
