@@ -22,6 +22,38 @@ export const meridian = {
       { value: "10+ yrs", label: "Of history in one view" },
     ],
   },
+  responsibilities: [
+    "Research",
+    "Information architecture",
+    "UI design",
+    "Design system",
+    "Power BI alignment",
+    "AI interaction patterns",
+  ],
+  principles: [
+    { t: "Segment by level, always", d: "Grad is ~48% international, undergrad ~4%. A blended number describes a student who doesn't exist, so there's no Institute-wide total anywhere." },
+    { t: "Lead with the answer", d: "End the 90-second orienting. Headline first, drill second. Every screen names its takeaway before it shows the detail." },
+    { t: "Design to what Power BI renders", d: "Agree with the engine before drawing anything pretty. Native drill-through, not a custom framework the team can't actually ship." },
+    { t: "Trends by default, deltas everywhere", d: "One year tells you nothing. Every view defaults to a multi-year trend, and every KPI carries a year-over-year delta." },
+    { t: "AI is a guide, never the decider", d: "Human in the loop, inputs visible, sensitive attributes kept out of any scoring. Ask Meridian AI summarizes; it never ranks or predicts." },
+  ],
+  constraints: [
+    { t: "Power BI rendering limits", d: "I designed to native behavior, drill-through and standard visuals, not a bespoke framework, so engineering could actually build it." },
+    { t: "The existing data model", d: "Slate (the enrollment CRM) and the SIS were the source of truth. I designed to the live data contract, not an idealized one." },
+    { t: "Post-SFFA data sensitivity", d: "After the 2023 ruling, disaggregated demographic data is restricted. Those views suppress small counts and degrade gracefully when a category is withheld." },
+    { t: "Scope honesty", d: "The Overview is hi-fi; the other tabs carried through IA, greybox, and hi-fi. Designed and demonstrated, not shipped and measured." },
+  ],
+  validation: [
+    { t: "Heuristic audit", d: "I scored all four legacy dashboards against Nielsen's heuristics on a 0 to 4 severity scale, and tied every finding to a real person and a real task." },
+    { t: "Analyst sign-off", d: "The IR analysts who own and defend the data confirmed the surface matched their data contract. That sign-off was the real acceptance test." },
+    { t: "Honest scope", d: "Expert review and stakeholder sign-off, not a formal usability study. Validating task-times with real provosts and deans is the next step." },
+  ],
+  expectedOutcomes: [
+    "Faster executive scanning, the headline in seconds instead of minutes",
+    "Fewer dashboard switches, one platform instead of four separate files",
+    "Better KPI discoverability, one definition per metric, a delta on every tile",
+    "Consistent reporting, learn one page and you can read them all",
+  ],
   body: `## TL;DR
 
 Meridian's leaders ran a whole university off a sprawl of disconnected Power BI reports that never talked to each other. The data was all there. They just spent more time hunting for it than reading it.
@@ -104,6 +136,10 @@ In 2021, The Markup reported that EAB's Navigate used race to predict student su
 
 One product shape: a funnel paired with yield, then geography, program mix, demographics, and deposits. Built on Common Data Set and IPEDS, defaulting to multi-year trends, always split by level.
 
+## Design principles
+
+Five rules did the deciding. If a screen broke one, it went back to grayscale.
+
 ## Goals, success criteria, and process
 
 ### What we were really fixing
@@ -123,6 +159,10 @@ Six passes, looping back often. The discipline I held myself to: agree with what
 I audited the four legacy dashboards, mapped every idea to native behavior (drill-through, not some custom framework), then collapsed them into one spine, grayscale first.
 
 AI came last, on purpose. Ask Meridian AI is optional, audited for bias, human in the loop. A guide, not the decision-maker.
+
+## Constraints I designed within
+
+Enterprise work, so the box was real before I drew anything. These shaped every call.
 
 ## Information architecture and navigation model
 
@@ -243,6 +283,10 @@ The fastest proof: the old pain on the left, the new answer on the right.
 ### What carried across all four
 
 One platform, not four prettier reports. The same patterns everywhere: KPIs with deltas, trends by default, charts chosen for the question, one predictable drill path.
+
+## How I validated, and what it should produce
+
+No formal usability lab on this one, and I won't pretend otherwise. Here is what I actually leaned on, and the outcomes the design is built to produce.
 
 ## Outcome, reflection, and forward outlook
 
