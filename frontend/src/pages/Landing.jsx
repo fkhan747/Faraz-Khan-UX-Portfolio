@@ -25,7 +25,7 @@ export default function Landing() {
                 Senior UX Lead · design · data · development
               </p>
               <h1 className="font-display font-black leading-[1.03] text-4xl sm:text-5xl lg:text-[3.6rem] xl:text-[4rem] tracking-tight rise rise-2" data-testid="hero-headline">
-                Hi, I&apos;m <span className="italic font-light">Faraz</span>. I make complex products feel <span className="italic font-light">obvious</span>.
+                Hi, I&apos;m <span className="italic font-light">Faraz</span>. I make complex products feel <span className="italic font-light">obvious</span>. Footballer on weekends, gamer after dark, and forever <span className="italic font-light">47 tabs deep</span> into the internet.
               </h1>
               <p className="mt-6 max-w-xl text-base md:text-lg text-[#A29CB4] leading-relaxed rise rise-3" data-testid="hero-sub">
                 12+ years across design, data &amp; development. Big believer in clarity over decoration, <span className="text-[#F4F3FA] underline decoration-[#075EFD] decoration-2 underline-offset-4">facts over feelings</span>, and design that gets out of your way. Turns out treating people well is also great for business. Who knew.
