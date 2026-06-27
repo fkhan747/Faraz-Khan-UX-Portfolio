@@ -7,6 +7,18 @@ import AgenticFeature from "../components/AgenticFeature";
 import BookCallButton from "../components/BookCallButton";
 import Seo from "../components/Seo";
 
+// The highlighted hero words are bold upright (the rest of the headline is
+// italic). The thick magenta marker underline sits on just the first two
+// letters of each word (and on "47" for "47 Tabs Deep"), touching the text.
+const HERO_UL = "underline decoration-[#F5379B] decoration-[6px] underline-offset-[1px] [text-decoration-skip-ink:none]";
+function Accent({ lead, rest = "" }) {
+  return (
+    <span className="not-italic font-black">
+      <span className={HERO_UL}>{lead}</span>{rest}
+    </span>
+  );
+}
+
 export default function Landing() {
   // The two fully-built case studies (FinVista, Aurora) are featured on the home
   // page, side by side. The full list lives on the "My Work" page.
@@ -24,11 +36,21 @@ export default function Landing() {
               <p className="font-mono text-xs md:text-sm uppercase tracking-[0.25em] text-[#F5379B] font-medium mb-5 rise rise-1" data-testid="hero-designation">
                 Senior UX Lead · design · data · development
               </p>
-              <h1 className="font-display font-black leading-[1.03] text-4xl sm:text-5xl lg:text-[3.6rem] xl:text-[4rem] tracking-tight rise rise-2" data-testid="hero-headline">
-                Hi, I&apos;m <span className="italic font-light">Faraz</span>. I make complex products feel <span className="italic font-light">obvious</span>. Footballer on weekends, gamer after dark, and forever <span className="italic font-light">47 tabs deep</span> into the internet.
+              <h1
+                className="font-display case-keep italic font-light leading-[1.08] text-[2.5rem] sm:text-5xl lg:text-[3.2rem] xl:text-[3.6rem] rise rise-2"
+                data-testid="hero-headline"
+                style={{ letterSpacing: "0.02em" }}
+              >
+                I&apos;m <Accent lead="Fa" rest="raz" />.<br className="hidden xl:block" />{" "}
+                I Make Complex <Accent lead="Pr" rest="oducts" /><br className="hidden xl:block" />{" "}
+                Feel Obvious. <Accent lead="Fo" rest="otballer" /><br className="hidden xl:block" />{" "}
+                on Weekends, <Accent lead="Ga" rest="mer" /><br className="hidden xl:block" />{" "}
+                After Dark &amp; Forever.<br className="hidden xl:block" />{" "}
+                <Accent lead="47" rest=" Tabs Deep" />,<br className="hidden xl:block" />{" "}
+                Dreaming in Internet Waves.
               </h1>
               <p className="mt-6 max-w-xl text-base md:text-lg text-[#A29CB4] leading-relaxed rise rise-3" data-testid="hero-sub">
-                12+ years across design, data &amp; development. Big believer in clarity over decoration, <span className="text-[#F4F3FA] underline decoration-[#075EFD] decoration-2 underline-offset-4">facts over feelings</span>, and design that gets out of your way. Turns out treating people well is also great for business. Who knew.
+                12+ years across Graphic/Brand design, UX, data &amp; development. Big believer in clarity over decoration, <span className="text-[#F4F3FA] underline decoration-[#075EFD] decoration-2 underline-offset-4">facts over feelings</span>, and design that gets out of your way. Turns out treating people well is also great for business. Who knew.
               </p>
               <div className="mt-9 flex items-center gap-4 flex-wrap rise rise-3">
                 <Link
