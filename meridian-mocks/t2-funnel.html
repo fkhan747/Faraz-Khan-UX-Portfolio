@@ -1,0 +1,185 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=1440">
+<title>Meridian ,  Funnel, yield and melt (Template 2)</title>
+<link rel="stylesheet" href="ds.css">
+</head><body>
+<svg style="display:none">
+  <symbol id="ic-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7.5" height="7.5" rx="1.6"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.6"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.6"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.6"/></symbol>
+  <symbol id="ic-cap" viewBox="0 0 24 24"><path d="M12 4 22 9 12 14 2 9Z"/><path d="M6 11v5c0 0 2.4 2 6 2s6-2 6-2v-5"/></symbol>
+  <symbol id="ic-layers" viewBox="0 0 24 24"><path d="M12 3 21 8 12 13 3 8Z"/><path d="M3 12.5 12 17.5 21 12.5"/><path d="M3 16.5 12 21.5 21 16.5"/></symbol>
+  <symbol id="ic-flask" viewBox="0 0 24 24"><path d="M9 3h6"/><path d="M10 3v6l-5 9.5A1.5 1.5 0 0 0 6.4 21h11.2a1.5 1.5 0 0 0 1.4-2.5L14 9V3"/><path d="M7.5 15h9"/></symbol>
+  <symbol id="ic-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.5 2.6-5.5 6-5.5s6 2 6 5.5"/><path d="M16 5.6a3 3 0 0 1 0 6"/><path d="M17 14.8c2.4.6 4 2.4 4 5.2"/></symbol>
+  <symbol id="ic-doc" viewBox="0 0 24 24"><path d="M6 3h8l5 5v13H6Z"/><path d="M14 3v5h5"/><path d="M9 13h7"/><path d="M9 17h7"/></symbol>
+  <symbol id="ic-up" viewBox="0 0 24 24"><path d="M7 17 17 7"/><path d="M9 7h8v8"/></symbol>
+  <symbol id="ic-down" viewBox="0 0 24 24"><path d="M7 7 17 17"/><path d="M17 9v8H9"/></symbol>
+  <symbol id="ic-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20 16 16"/></symbol>
+  <symbol id="ic-bell" viewBox="0 0 24 24"><path d="M6 9a6 6 0 0 1 12 0c0 6 2 8 2 8H4s2-2 2-8Z"/><path d="M10 20a2 2 0 0 0 4 0"/></symbol>
+  <symbol id="ic-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M5 5l1.8 1.8M17.2 17.2 19 19M19 5l-1.8 1.8M6.8 17.2 5 19"/></symbol>
+  <symbol id="ic-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="ic-panel" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M15 4v16"/></symbol>
+  <symbol id="ic-star" viewBox="0 0 24 24"><path d="M12 4l2.3 5 5.2.5-3.9 3.4 1.2 5.1L12 20.4 7.2 23l1.2-5.1L4.5 14.5l5.2-.5z"/></symbol>
+  <symbol id="ic-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="ic-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c3 4 3 14 0 18-3-4-3-14 0-18"/></symbol>
+  <symbol id="ic-inbox" viewBox="0 0 24 24"><path d="M4 13l2.5-8h11L20 13v6H4Z"/><path d="M4 13h5l1 2.5h4L15 13h5"/></symbol>
+  <symbol id="ic-alert" viewBox="0 0 24 24"><path d="M12 3 22 20H2Z"/><path d="M12 10v5"/><circle cx="12" cy="18" r="1" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="ic-spark" viewBox="0 0 24 24"><path d="M12 3c0 5 1 6 6 9-5 3-6 4-6 9 0-5-1-6-6-9 5-3 6-4 6-9Z"/></symbol>
+  <symbol id="ic-refresh" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v5h-5"/></symbol>
+  <symbol id="ic-dots" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.5" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="12" cy="19" r="1.5" fill="currentColor" stroke="none"/></symbol>
+</svg>
+
+<div class="app">
+  <!-- sidebar -->
+  <aside class="side">
+    <div class="ws"><span class="av">M</span><span class="nm">Meridian</span></div>
+    <div class="tabs"><span class="on">Favorites</span><span>Recently</span></div>
+    <div class="sec">Dashboards</div>
+    <nav class="nav">
+      <a class="ni"><span class="ch"></span><svg class="i sm"><use href="#ic-grid"/></svg> Overview</a>
+      <a class="ni on"><span class="ch">›</span><svg class="i sm"><use href="#ic-cap"/></svg> Undergraduate</a>
+      <a class="ni"><span class="ch">›</span><svg class="i sm"><use href="#ic-layers"/></svg> Graduate</a>
+      <a class="ni"><span class="ch">›</span><svg class="i sm"><use href="#ic-flask"/></svg> Research</a>
+      <a class="ni"><span class="ch">›</span><svg class="i sm"><use href="#ic-people"/></svg> Human Resources</a>
+    </nav>
+    <div class="sec">Pages</div>
+    <nav class="nav">
+      <a class="ni"><span class="ch">›</span><svg class="i sm"><use href="#ic-doc"/></svg> Reports</a>
+      <a class="ni"><span class="ch">›</span><svg class="i sm"><use href="#ic-grid"/></svg> Data sources</a>
+    </nav>
+    <div class="side-user">
+      <span class="av">FK</span>
+      <div class="info"><div class="nm">Faraz Khan</div><div class="rl">Institutional Research</div></div>
+      <svg class="i sm mo"><use href="#ic-dots"/></svg>
+    </div>
+  </aside>
+
+  <!-- main -->
+  <div class="main">
+    <div class="topbar">
+      <div class="tb-l">
+        <div class="ic-btn"><svg class="i"><use href="#ic-panel"/></svg></div>
+        <div class="ic-btn"><svg class="i"><use href="#ic-star"/></svg></div>
+        <div class="crumb">Dashboards <span class="sl">/</span> Undergraduate <span class="sl">/</span> <b>Funnel, yield, melt</b></div>
+      </div>
+      <div class="tb-r">
+        <div class="search"><svg class="i sm"><use href="#ic-search"/></svg> Search</div>
+        <div class="refreshed"><svg class="i sm"><use href="#ic-refresh"/></svg> Data refreshed Jun 24, 2024 · 6:00 AM</div>
+        <div class="ic-btn"><svg class="i"><use href="#ic-clock"/></svg></div>
+        <div class="ic-btn"><svg class="i"><use href="#ic-bell"/></svg></div>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <div class="content">
+        <div class="h-row"><h1>Funnel, yield and melt, Fall 2024</h1><span class="seg">Fall 2024 ▾</span></div>
+
+        <!-- sub-tabs -->
+        <div class="tabsb" style="margin-bottom:18px"><span>Summary</span><span>Geo</span><span class="on">Funnel</span><span>Applicant segments</span></div>
+
+        <!-- KPI cards -->
+        <div class="kpis">
+          <div class="kpi" style="background:var(--p-blue)">
+            <div class="lab">Yield</div>
+            <div class="bot"><div class="val num">21%</div><div class="chg">+1.1 pts <svg class="i"><use href="#ic-up"/></svg></div></div>
+          </div>
+          <div class="kpi" style="background:var(--p-gray)">
+            <div class="lab">Deposits</div>
+            <div class="bot"><div class="val num">1,180</div><div class="chg">to enroll</div></div>
+          </div>
+          <div class="kpi" style="background:var(--p-lav)">
+            <div class="lab">Summer melt</div>
+            <div class="bot"><div class="val num">76</div><div class="chg">6.4% melt rate</div></div>
+          </div>
+          <div class="kpi" style="background:var(--p-mint)">
+            <div class="lab">Net enrolled</div>
+            <div class="bot"><div class="val num">1,104</div><div class="chg">after melt</div></div>
+          </div>
+        </div>
+
+        <!-- Row A: application funnel -->
+        <div class="grid g-12">
+          <div class="card span-12">
+            <div class="card-h"><div class="card-t">Application funnel</div><div class="legend"><span>Admitted to enrolled, Fall 2024</span></div></div>
+            <div class="funnel">
+              <div class="fst"><span class="l">Applied</span><span class="bar" style="width:100%;background:var(--c-ink)"><span class="num">10,670</span></span><span class="m">100%</span></div>
+              <div class="fst"><span class="l">Admitted</span><span class="bar" style="width:51%;background:var(--c-blue)"><span class="num">5,442</span></span><span class="m">51%</span></div>
+              <div class="fst"><span class="l">Deposited</span><span class="bar" style="width:22%;background:var(--c-peri)"><span class="num">1,180</span></span><span class="m">22% of admits</span></div>
+              <div class="fst"><span class="l" style="color:var(--down)">Melt</span><span class="bar" style="width:6%;background:var(--down)"><span class="num">76</span></span><span class="m">6.4% of deposits</span></div>
+              <div class="fst"><span class="l">Enrolled</span><span class="bar" style="width:21%;background:var(--c-mint)"><span class="num">1,104</span></span><span class="m">Net enrolled</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row B: deposit pace + yield by segment -->
+        <div class="grid g-12 mt">
+          <div class="card span-6">
+            <div class="card-h">
+              <div class="card-t">Deposit pace to goal</div>
+              <div class="legend"><span><i style="background:var(--c-ink)"></i>Deposits</span><span><i style="background:var(--c-blue)"></i>Goal</span></div>
+            </div>
+            <svg class="lc" width="100%" height="190" viewBox="0 0 420 190">
+              <defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#004380" stop-opacity="0.13"/><stop offset="1" stop-color="#004380" stop-opacity="0"/></linearGradient></defs>
+              <path d="M14,158 L114,120 L214,86 L314,52 L406,38 L406,184 L14,184 Z" fill="url(#g1)"/>
+              <polyline points="14,150 114,116 214,84 314,54 406,28" fill="none" stroke="var(--c-blue)" stroke-width="2.2" stroke-dasharray="2 6" stroke-linecap="round"/>
+              <polyline points="14,158 114,120 214,86 314,52 406,38" fill="none" stroke="var(--c-ink)" stroke-width="2.6" stroke-linejoin="round"/>
+              <g class="pts">
+                <g class="pt"><circle cx="14" cy="158" r="4.5"/><g class="tip" transform="translate(14,158)"><rect x="-30" y="-33" width="60" height="22" rx="5"/><text x="0" y="-18">210</text></g></g>
+                <g class="pt"><circle cx="114" cy="120" r="4.5"/><g class="tip" transform="translate(114,120)"><rect x="-30" y="-33" width="60" height="22" rx="5"/><text x="0" y="-18">520</text></g></g>
+                <g class="pt"><circle cx="214" cy="86" r="4.5"/><g class="tip" transform="translate(214,86)"><rect x="-30" y="-33" width="60" height="22" rx="5"/><text x="0" y="-18">820</text></g></g>
+                <g class="pt"><circle cx="314" cy="52" r="4.5"/><g class="tip" transform="translate(314,52)"><rect x="-33" y="-33" width="66" height="22" rx="5"/><text x="0" y="-18">1,060</text></g></g>
+                <g class="pt show"><circle cx="406" cy="38" r="4.5"/><g class="tip" transform="translate(406,38)"><rect x="-66" y="-33" width="66" height="22" rx="5"/><text x="-33" y="-18">1,180</text></g></g>
+              </g>
+            </svg>
+            <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--faint);margin-top:8px"><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span></div>
+            <div style="font-size:12px;color:var(--muted);margin-top:10px">Current <b class="num" style="color:var(--ink)">1,180</b> of goal <b class="num" style="color:var(--ink)">1,250</b></div>
+          </div>
+          <div class="card span-6">
+            <div class="card-t" style="margin-bottom:18px">Yield by segment</div>
+            <div class="blist">
+              <div class="brow"><span class="nm">In-state</span><span class="tr"><i style="width:84%;background:var(--c-ink)"></i></span><span class="vv num">26%</span></div>
+              <div class="brow"><span class="nm">Out-of-state</span><span class="tr"><i style="width:58%;background:var(--c-blue)"></i></span><span class="vv num">18%</span></div>
+              <div class="brow"><span class="nm">International</span><span class="tr"><i style="width:100%;background:var(--c-peri)"></i></span><span class="vv num">31%</span></div>
+              <div class="brow"><span class="nm">First-gen</span><span class="tr"><i style="width:61%;background:var(--c-mint)"></i></span><span class="vv num">19%</span></div>
+              <div class="brow"><span class="nm">Transfer</span><span class="tr"><i style="width:77%;background:var(--c-purple)"></i></span><span class="vv num">24%</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row C: summer melt by segment -->
+        <div class="card mt">
+          <div class="card-t" style="margin-bottom:14px">Summer melt by segment</div>
+          <table class="tbl">
+            <thead><tr><th>SEGMENT</th><th class="n">DEPOSITED</th><th class="n">MELTED</th><th class="n">MELT RATE</th></tr></thead>
+            <tbody>
+              <tr><td>Out-of-state</td><td class="n">410</td><td class="n">34</td><td class="n">8.3%</td></tr>
+              <tr><td>International</td><td class="n">360</td><td class="n">22</td><td class="n">6.1%</td></tr>
+              <tr><td>In-state</td><td class="n">410</td><td class="n">20</td><td class="n">4.9%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- right rail -->
+      <aside class="rail">
+        <div>
+          <h3>Signals</h3>
+          <div class="feed">
+            <div class="fe"><span class="ic" style="background:var(--p-peach);color:var(--down)"><svg class="i sm"><use href="#ic-alert"/></svg></span><div><div class="tx">Out-of-state melt at <b>8.3%</b>, above target</div><div class="ti">Deposit risk · 34 melted</div></div></div>
+            <div class="fe"><span class="ic" style="background:var(--p-blue);color:#5B86C9"><svg class="i sm"><use href="#ic-people"/></svg></span><div><div class="tx">Counselor outreach to <b>120</b> at-risk deposits</div><div class="ti">Started 2 hrs ago</div></div></div>
+            <div class="fe"><span class="ic" style="background:var(--p-mint);color:var(--up)"><svg class="i sm"><use href="#ic-check"/></svg></span><div><div class="tx">In-state melt steady at <b>4.9%</b></div><div class="ti">On forecast</div></div></div>
+            <div class="fe"><span class="ic" style="background:var(--p-lav);color:#6C5CE0"><svg class="i sm"><use href="#ic-globe"/></svg></span><div><div class="tx">International yield strong at <b>31%</b></div><div class="ti">Best of any segment</div></div></div>
+          </div>
+        </div>
+        <div class="aibox">
+          <div class="h"><svg class="i sm"><use href="#ic-spark"/></svg> Ask Meridian AI</div>
+          <div class="ask-input">
+            <input type="text" placeholder="Ask about any cohort, term, or program..." aria-label="Ask Meridian AI">
+            <button class="ask-send" type="button" aria-label="Send"><svg class="i sm"><use href="#ic-spark"/></svg></button>
+          </div>
+          <div class="ask-suggest">Suggested</div>
+          <button class="ask-chip" type="button">Where is summer melt risk highest?</button>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+</body></html>

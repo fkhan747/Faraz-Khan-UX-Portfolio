@@ -1,0 +1,131 @@
+<svg style="width:100%;background:#f1f0ec;border-radius:12px" viewBox="0 0 1080 580" xmlns="http://www.w3.org/2000/svg">
+<defs>
+ <filter id="sk" x="-3%" y="-3%" width="106%" height="106%">
+  <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed="7" result="n"/>
+  <feDisplacementMap in="SourceGraphic" in2="n" scale="3.2" xChannelSelector="R" yChannelSelector="G"/>
+ </filter>
+</defs>
+<style>
+ text{font-family:Inter,system-ui,-apple-system,sans-serif}
+ .frame{fill:#fcfcfb;stroke:#b1b1a9;stroke-width:2}
+ .chrome{fill:#d3d3cd}
+ .bar{fill:#e4e4df}
+ .bar2{fill:#d5d5cf}
+ .fld{fill:#ffffff;stroke:#bdbdb6;stroke-width:1.4;stroke-dasharray:5 3}
+ .btn{fill:#b9b9b2}
+ .opt{font-size:13px;font-weight:700;fill:#6a6a64}
+ .ann{font-size:10.5px;fill:#8f8f88}
+ .lbl{font-family:'Roboto Mono',monospace;font-size:11px;letter-spacing:.1em;fill:#9a9a93}
+ .chosen{fill:#5c5c56}
+ .chev{fill:#a8a8a2}
+</style>
+
+<text class="lbl" x="40" y="32">COMPOSER &#183; SUBJECT-LINE VARIATIONS &#183; LAYOUT EXPLORATION</text>
+
+<text class="opt" x="40" y="70">Option A</text>
+<text class="opt" x="380" y="70">Option B</text>
+<text class="opt" x="720" y="70">Option C</text>
+
+<g transform="translate(248,53)"><rect class="chosen" width="92" height="18" rx="9"/><text x="46" y="13" text-anchor="middle" style="font-size:9px;fill:#fff;font-weight:600">&#10003; chosen</text></g>
+
+<g filter="url(#sk)">
+ <!-- ===== Option A: radio-style vertical list ===== -->
+ <rect class="frame" x="40" y="80" width="300" height="430" rx="6"/>
+ <rect class="chrome" x="40" y="80" width="300" height="30" rx="6"/>
+ <rect class="bar2" x="58" y="90" width="120" height="10" rx="5"/>
+ <rect class="bar" x="58" y="128" width="150" height="9" rx="4.5"/>
+
+ <!-- row 1 -->
+ <circle class="chev" cx="70" cy="168" r="9" fill="none" stroke="#7c7c76" stroke-width="2"/>
+ <circle cx="70" cy="168" r="4" fill="#5c5c56"/>
+ <rect class="bar" x="90" y="156" width="210" height="9" rx="4.5"/>
+ <rect class="bar" x="90" y="171" width="150" height="9" rx="4.5"/>
+ <!-- row 2 -->
+ <circle class="chev" cx="70" cy="222" r="9" fill="none" stroke="#7c7c76" stroke-width="2"/>
+ <rect class="bar" x="90" y="210" width="200" height="9" rx="4.5"/>
+ <rect class="bar" x="90" y="225" width="170" height="9" rx="4.5"/>
+ <!-- row 3 -->
+ <circle class="chev" cx="70" cy="276" r="9" fill="none" stroke="#7c7c76" stroke-width="2"/>
+ <rect class="bar" x="90" y="264" width="215" height="9" rx="4.5"/>
+ <rect class="bar" x="90" y="279" width="140" height="9" rx="4.5"/>
+ <!-- row 4 -->
+ <circle class="chev" cx="70" cy="330" r="9" fill="none" stroke="#7c7c76" stroke-width="2"/>
+ <rect class="bar" x="90" y="318" width="195" height="9" rx="4.5"/>
+ <rect class="bar" x="90" y="333" width="165" height="9" rx="4.5"/>
+ <!-- row 5 -->
+ <circle class="chev" cx="70" cy="384" r="9" fill="none" stroke="#7c7c76" stroke-width="2"/>
+ <rect class="bar" x="90" y="372" width="205" height="9" rx="4.5"/>
+ <rect class="bar" x="90" y="387" width="155" height="9" rx="4.5"/>
+
+ <!-- regenerate pill -->
+ <rect class="btn" x="58" y="448" width="130" height="32" rx="16"/>
+ <circle cx="78" cy="464" r="7" fill="none" stroke="#fcfcfb" stroke-width="2"/>
+ <rect x="92" y="460" width="74" height="8" rx="4" fill="#fcfcfb"/>
+
+ <!-- ===== Option B: card grid, 2 columns ===== -->
+ <rect class="frame" x="380" y="80" width="300" height="430" rx="6"/>
+ <rect class="chrome" x="380" y="80" width="300" height="30" rx="6"/>
+ <rect class="bar2" x="398" y="90" width="120" height="10" rx="5"/>
+ <rect class="bar" x="398" y="128" width="150" height="9" rx="4.5"/>
+
+ <!-- card top-left -->
+ <rect class="frame" x="398" y="152" width="128" height="120" rx="6"/>
+ <rect class="bar2" x="412" y="166" width="60" height="9" rx="4.5"/>
+ <rect class="bar" x="412" y="186" width="100" height="8" rx="4"/>
+ <rect class="bar" x="412" y="200" width="88" height="8" rx="4"/>
+ <rect class="bar" x="412" y="214" width="96" height="8" rx="4"/>
+ <circle class="chev" cx="421" cy="252" r="7" fill="none" stroke="#7c7c76" stroke-width="2"/>
+ <!-- card top-right -->
+ <rect class="frame" x="538" y="152" width="128" height="120" rx="6"/>
+ <rect class="bar2" x="552" y="166" width="60" height="9" rx="4.5"/>
+ <rect class="bar" x="552" y="186" width="100" height="8" rx="4"/>
+ <rect class="bar" x="552" y="200" width="84" height="8" rx="4"/>
+ <rect class="bar" x="552" y="214" width="94" height="8" rx="4"/>
+ <circle class="chev" cx="561" cy="252" r="7" fill="none" stroke="#7c7c76" stroke-width="2"/>
+
+ <!-- partial cards below the fold (clipped feel) -->
+ <rect class="frame" x="398" y="288" width="128" height="120" rx="6"/>
+ <rect class="bar2" x="412" y="302" width="60" height="9" rx="4.5"/>
+ <rect class="bar" x="412" y="322" width="100" height="8" rx="4"/>
+ <rect class="bar" x="412" y="336" width="88" height="8" rx="4"/>
+ <rect class="frame" x="538" y="288" width="128" height="120" rx="6"/>
+ <rect class="bar2" x="552" y="302" width="60" height="9" rx="4.5"/>
+ <rect class="bar" x="552" y="322" width="100" height="8" rx="4"/>
+ <rect class="bar" x="552" y="336" width="84" height="8" rx="4"/>
+
+ <!-- scroll hint -->
+ <rect class="chev" x="652" y="160" width="6" height="240" rx="3"/>
+
+ <rect class="btn" x="398" y="448" width="130" height="32" rx="16"/>
+ <circle cx="418" cy="464" r="7" fill="none" stroke="#fcfcfb" stroke-width="2"/>
+ <rect x="432" y="460" width="74" height="8" rx="4" fill="#fcfcfb"/>
+
+ <!-- ===== Option C: single dropdown select ===== -->
+ <rect class="frame" x="720" y="80" width="300" height="430" rx="6"/>
+ <rect class="chrome" x="720" y="80" width="300" height="30" rx="6"/>
+ <rect class="bar2" x="738" y="90" width="120" height="10" rx="5"/>
+ <rect class="bar" x="738" y="140" width="150" height="9" rx="4.5"/>
+
+ <!-- collapsed select field -->
+ <rect class="fld" x="738" y="170" width="264" height="40" rx="6"/>
+ <rect class="bar" x="754" y="186" width="160" height="9" rx="4.5"/>
+ <path d="M970 187 l10 0 l-5 9 z" class="chev"/>
+
+ <!-- emptiness below to show hidden options -->
+ <rect class="bar" x="738" y="250" width="110" height="8" rx="4"/>
+ <rect class="bar" x="738" y="268" width="90" height="8" rx="4"/>
+
+ <rect class="btn" x="738" y="448" width="130" height="32" rx="16"/>
+ <circle cx="758" cy="464" r="7" fill="none" stroke="#fcfcfb" stroke-width="2"/>
+ <rect x="772" y="460" width="74" height="8" rx="4" fill="#fcfcfb"/>
+</g>
+
+<text class="ann" x="40" y="540">Radio list of 5 options.</text>
+<text class="ann" x="40" y="556">Compare at a glance. Shipped.</text>
+
+<text class="ann" x="380" y="540">Cards, two per row.</text>
+<text class="ann" x="380" y="556">Ate space, only 2 visible at once.</text>
+
+<text class="ann" x="720" y="540">Dropdown of variations.</text>
+<text class="ann" x="720" y="556">Hid the comparison entirely.</text>
+</svg>

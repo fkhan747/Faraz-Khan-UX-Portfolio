@@ -1,0 +1,213 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=1440">
+<title>Meridian ,  Human Resources (Template 2 · SnowUI)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ds.css">
+</head><body>
+<svg style="display:none">
+  <symbol id="ic-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7.5" height="7.5" rx="1.6"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.6"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.6"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.6"/></symbol>
+  <symbol id="ic-cap" viewBox="0 0 24 24"><path d="M12 4 22 9 12 14 2 9Z"/><path d="M6 11v5c0 0 2.4 2 6 2s6-2 6-2v-5"/></symbol>
+  <symbol id="ic-layers" viewBox="0 0 24 24"><path d="M12 3 21 8 12 13 3 8Z"/><path d="M3 12.5 12 17.5 21 12.5"/><path d="M3 16.5 12 21.5 21 16.5"/></symbol>
+  <symbol id="ic-flask" viewBox="0 0 24 24"><path d="M9 3h6"/><path d="M10 3v6l-5 9.5A1.5 1.5 0 0 0 6.4 21h11.2a1.5 1.5 0 0 0 1.4-2.5L14 9V3"/><path d="M7.5 15h9"/></symbol>
+  <symbol id="ic-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.5 2.6-5.5 6-5.5s6 2 6 5.5"/><path d="M16 5.6a3 3 0 0 1 0 6"/><path d="M17 14.8c2.4.6 4 2.4 4 5.2"/></symbol>
+  <symbol id="ic-doc" viewBox="0 0 24 24"><path d="M6 3h8l5 5v13H6Z"/><path d="M14 3v5h5"/><path d="M9 13h7"/><path d="M9 17h7"/></symbol>
+  <symbol id="ic-up" viewBox="0 0 24 24"><path d="M7 17 17 7"/><path d="M9 7h8v8"/></symbol>
+  <symbol id="ic-down" viewBox="0 0 24 24"><path d="M7 7 17 17"/><path d="M17 9v8H9"/></symbol>
+  <symbol id="ic-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20 16 16"/></symbol>
+  <symbol id="ic-bell" viewBox="0 0 24 24"><path d="M6 9a6 6 0 0 1 12 0c0 6 2 8 2 8H4s2-2 2-8Z"/><path d="M10 20a2 2 0 0 0 4 0"/></symbol>
+  <symbol id="ic-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M5 5l1.8 1.8M17.2 17.2 19 19M19 5l-1.8 1.8M6.8 17.2 5 19"/></symbol>
+  <symbol id="ic-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="ic-panel" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M15 4v16"/></symbol>
+  <symbol id="ic-star" viewBox="0 0 24 24"><path d="M12 4l2.3 5 5.2.5-3.9 3.4 1.2 5.1L12 20.4 7.2 23l1.2-5.1L4.5 14.5l5.2-.5z"/></symbol>
+  <symbol id="ic-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="ic-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c3 4 3 14 0 18-3-4-3-14 0-18"/></symbol>
+  <symbol id="ic-inbox" viewBox="0 0 24 24"><path d="M4 13l2.5-8h11L20 13v6H4Z"/><path d="M4 13h5l1 2.5h4L15 13h5"/></symbol>
+  <symbol id="ic-alert" viewBox="0 0 24 24"><path d="M12 3 22 20H2Z"/><path d="M12 10v5"/><circle cx="12" cy="18" r="1" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="ic-spark" viewBox="0 0 24 24"><path d="M12 3c0 5 1 6 6 9-5 3-6 4-6 9 0-5-1-6-6-9 5-3 6-4 6-9Z"/></symbol>
+  <symbol id="ic-refresh" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v5h-5"/></symbol>
+  <symbol id="ic-dots" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.5" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/><circle cx="12" cy="19" r="1.5" fill="currentColor" stroke="none"/></symbol>
+</svg>
+
+<div class="app">
+  <!-- sidebar -->
+  <aside class="side">
+    <div class="ws"><span class="av">M</span><span class="nm">Meridian</span></div>
+    <div class="tabs"><span class="on">Favorites</span><span>Recently</span></div>
+    <div class="sec">Dashboards</div>
+    <nav class="nav">
+      <a class="ni"><span class="ch"></span><svg class="i sm"><use href="#ic-grid"/></svg> Overview</a>
+      <a class="ni"><span class="ch">›</span><svg class="i sm"><use href="#ic-cap"/></svg> Undergraduate</a>
+      <a class="ni"><span class="ch">›</span><svg class="i sm"><use href="#ic-layers"/></svg> Graduate</a>
+      <a class="ni"><span class="ch">›</span><svg class="i sm"><use href="#ic-flask"/></svg> Research</a>
+      <a class="ni on"><span class="ch">›</span><svg class="i sm"><use href="#ic-people"/></svg> Human Resources</a>
+    </nav>
+    <div class="sec">Pages</div>
+    <nav class="nav">
+      <a class="ni"><span class="ch">›</span><svg class="i sm"><use href="#ic-doc"/></svg> Reports</a>
+      <a class="ni"><span class="ch">›</span><svg class="i sm"><use href="#ic-grid"/></svg> Data sources</a>
+    </nav>
+    <div class="side-user">
+      <span class="av">FK</span>
+      <div class="info"><div class="nm">Faraz Khan</div><div class="rl">Institutional Research</div></div>
+      <svg class="i sm mo"><use href="#ic-dots"/></svg>
+    </div>
+  </aside>
+
+  <!-- main -->
+  <div class="main">
+    <div class="topbar">
+      <div class="tb-l">
+        <div class="ic-btn"><svg class="i"><use href="#ic-panel"/></svg></div>
+        <div class="ic-btn"><svg class="i"><use href="#ic-star"/></svg></div>
+        <div class="crumb">Dashboards <span class="sl">/</span> Human Resources <span class="sl">/</span> <b>Overview</b></div>
+      </div>
+      <div class="tb-r">
+        <div class="search"><svg class="i sm"><use href="#ic-search"/></svg> Search</div>
+        <div class="refreshed"><svg class="i sm"><use href="#ic-refresh"/></svg> Data refreshed Jun 24, 2024 · 6:00 AM</div>
+        <div class="ic-btn"><svg class="i"><use href="#ic-clock"/></svg></div>
+        <div class="ic-btn"><svg class="i"><use href="#ic-bell"/></svg></div>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <div class="content">
+        <div class="h-row"><h1>Human Resources, Fall 2024</h1><span class="seg">Fall 2024 ▾</span></div>
+
+        <!-- sub-tabs -->
+        <div class="tabsb" style="margin-bottom:18px">
+          <span class="on">Summary</span>
+          <span>Trends headcount</span>
+          <span>Trends turnover</span>
+          <span>Workforce composition</span>
+        </div>
+
+        <!-- KPI cards -->
+        <div class="kpis">
+          <div class="kpi" style="background:var(--p-blue)">
+            <div class="lab">Current headcount</div>
+            <div class="bot"><div class="val num">1,363</div><div class="chg">+3.1% <svg class="i"><use href="#ic-up"/></svg></div></div>
+          </div>
+          <div class="kpi" style="background:var(--p-gray)">
+            <div class="lab">Faculty</div>
+            <div class="bot"><div class="val num">708</div><div class="chg">52% of staff</div></div>
+          </div>
+          <div class="kpi" style="background:var(--p-lav)">
+            <div class="lab">Staff</div>
+            <div class="bot"><div class="val num">655</div><div class="chg">48% of staff</div></div>
+          </div>
+          <div class="kpi" style="background:var(--p-mint)">
+            <div class="lab">New hires</div>
+            <div class="bot"><div class="val num">72</div><div class="chg">this term</div></div>
+          </div>
+        </div>
+
+        <!-- Row A: job family + gender -->
+        <div class="grid g-12">
+          <div class="card span-7">
+            <div class="card-t" style="margin-bottom:18px">Job family and time type</div>
+            <div class="blist">
+              <div class="brow"><span class="nm">Faculty full-time</span><span class="tr"><i style="width:100%;background:var(--c-ink)"></i></span><span class="vv num">759</span></div>
+              <div class="brow"><span class="nm">Faculty part-time</span><span class="tr"><i style="width:16%;background:var(--c-blue)"></i></span><span class="vv num">119</span></div>
+              <div class="brow"><span class="nm">Staff full-time</span><span class="tr"><i style="width:76%;background:var(--c-peri)"></i></span><span class="vv num">577</span></div>
+              <div class="brow"><span class="nm">Staff part-time</span><span class="tr"><i style="width:6%;background:var(--c-mint)"></i></span><span class="vv num">47</span></div>
+            </div>
+          </div>
+          <div class="card span-5">
+            <div class="card-t" style="margin-bottom:18px">Gender</div>
+            <div class="donutwrap">
+              <div class="donut" style="background:conic-gradient(var(--c-ink) 0 53.9%, var(--c-blue) 53.9% 99.7%, var(--c-peri) 99.7% 100%)"></div>
+              <div class="dleg">
+                <div class="r"><i style="background:var(--c-ink)"></i>Male <b>53.9%</b></div>
+                <div class="r"><i style="background:var(--c-blue)"></i>Female <b>45.8%</b></div>
+                <div class="r"><i style="background:var(--c-peri)"></i>Undeclared <b>0.3%</b></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row B: race/ethnicity + academic population -->
+        <div class="grid g-12 mt">
+          <div class="card span-6">
+            <div class="card-t" style="margin-bottom:18px">Race and ethnicity</div>
+            <div class="donutwrap">
+              <div class="donut" style="background:conic-gradient(var(--c-ink) 0 56.8%, var(--c-blue) 56.8% 76.7%, var(--c-peri) 76.7% 87.6%, var(--c-mint) 87.6% 93.3%, var(--c-purple) 93.3% 98.7%, var(--c-soft) 98.7% 100%)"></div>
+              <div class="dleg">
+                <div class="r"><i style="background:var(--c-ink)"></i>White <b>56.8%</b></div>
+                <div class="r"><i style="background:var(--c-blue)"></i>Asian <b>19.9%</b></div>
+                <div class="r"><i style="background:var(--c-peri)"></i>Hispanic <b>10.9%</b></div>
+                <div class="r"><i style="background:var(--c-mint)"></i>Black <b>5.7%</b></div>
+                <div class="r"><i style="background:var(--c-purple)"></i>Not specified <b>5.4%</b></div>
+                <div class="r"><i style="background:var(--c-soft)"></i>Other <b>1.3%</b></div>
+              </div>
+            </div>
+          </div>
+          <div class="card span-6">
+            <div class="card-t" style="margin-bottom:18px">Academic population</div>
+            <div class="donutwrap">
+              <div class="donut" style="background:conic-gradient(var(--c-ink) 0 26.9%, var(--c-blue) 26.9% 48.1%, var(--c-peri) 48.1% 67.3%, var(--c-mint) 67.3% 85.2%, var(--c-purple) 85.2% 98.2%, var(--c-soft) 98.2% 100%)"></div>
+              <div class="dleg">
+                <div class="r"><i style="background:var(--c-ink)"></i>Non-tenure track <b>26.9%</b></div>
+                <div class="r"><i style="background:var(--c-blue)"></i>Tenured <b>21.2%</b></div>
+                <div class="r"><i style="background:var(--c-peri)"></i>Tenure track <b>19.2%</b></div>
+                <div class="r"><i style="background:var(--c-mint)"></i>Adjunct <b>17.9%</b></div>
+                <div class="r"><i style="background:var(--c-purple)"></i>Staff instructor <b>13%</b></div>
+                <div class="r"><i style="background:var(--c-soft)"></i>Visiting <b>0.5%</b></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row C: active and filled jobs by year -->
+        <div class="card mt">
+          <div class="card-h">
+            <div class="card-t">Active and filled jobs by year</div>
+            <div class="legend"><span><i style="background:var(--c-ink)"></i>Filled jobs</span></div>
+          </div>
+          <div class="bars">
+            <div class="bcol"><div class="bv">1,438</div><div class="bar" style="height:190px;background:var(--c-ink)"></div><div class="bl">2015</div></div>
+            <div class="bcol"><div class="bv">1,402</div><div class="bar" style="height:178px;background:var(--c-ink)"></div><div class="bl">2016</div></div>
+            <div class="bcol"><div class="bv">1,371</div><div class="bar" style="height:168px;background:var(--c-ink)"></div><div class="bl">2017</div></div>
+            <div class="bcol"><div class="bv">1,389</div><div class="bar" style="height:174px;background:var(--c-ink)"></div><div class="bl">2018</div></div>
+            <div class="bcol"><div class="bv">1,344</div><div class="bar" style="height:159px;background:var(--c-blue)"></div><div class="bl">2019</div></div>
+            <div class="bcol"><div class="bv">1,298</div><div class="bar" style="height:144px;background:var(--c-blue)"></div><div class="bl">2020</div></div>
+            <div class="bcol"><div class="bv">1,311</div><div class="bar" style="height:148px;background:var(--c-blue)"></div><div class="bl">2021</div></div>
+            <div class="bcol"><div class="bv">1,329</div><div class="bar" style="height:154px;background:var(--c-ink)"></div><div class="bl">2022</div></div>
+            <div class="bcol"><div class="bv">1,348</div><div class="bar" style="height:160px;background:var(--c-ink)"></div><div class="bl">2023</div></div>
+            <div class="bcol"><div class="bv">1,363</div><div class="bar" style="height:165px;background:var(--c-ink)"></div><div class="bl">2024</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- right rail -->
+      <aside class="rail">
+        <div>
+          <h3>Signals</h3>
+          <div class="feed">
+            <div class="fe"><span class="ic" style="background:var(--p-mint);color:var(--up)"><svg class="i sm"><use href="#ic-check"/></svg></span><div><div class="tx"><b>72 new hires</b> onboarded this term</div><div class="ti">14 min ago</div></div></div>
+            <div class="fe"><span class="ic" style="background:var(--p-peach);color:var(--down)"><svg class="i sm"><use href="#ic-down"/></svg></span><div><div class="tx">Staff turnover ticked up <b>1.4 pts</b></div><div class="ti">1 hr ago</div></div></div>
+            <div class="fe"><span class="ic" style="background:var(--p-blue);color:#5B86C9"><svg class="i sm"><use href="#ic-people"/></svg></span><div><div class="tx">Faculty headcount steady at <b>708</b></div><div class="ti">2 hrs ago</div></div></div>
+            <div class="fe"><span class="ic" style="background:var(--p-lav);color:#6C5CE0"><svg class="i sm"><use href="#ic-inbox"/></svg></span><div><div class="tx"><b>9 reqs</b> awaiting hiring approval</div><div class="ti">3 hrs ago</div></div></div>
+          </div>
+        </div>
+        <div>
+          <h3>Needs attention</h3>
+          <div class="feed">
+            <div class="fe"><span class="ic" style="background:var(--p-peach);color:var(--down)"><svg class="i sm"><use href="#ic-alert"/></svg></span><div><div class="tx">Part-time faculty share down 2 pts YoY</div><div class="ti">Adjunct pool</div></div></div>
+            <div class="fe"><span class="ic" style="background:var(--p-blue);color:#5B86C9"><svg class="i sm"><use href="#ic-cap"/></svg></span><div><div class="tx">Tenure-track pipeline below target</div><div class="ti">19.2% of academics</div></div></div>
+          </div>
+        </div>
+        <div class="aibox">
+          <div class="h"><svg class="i sm"><use href="#ic-spark"/></svg> Ask Meridian AI</div>
+          <div class="ask-input">
+            <input type="text" placeholder="Ask about any cohort, term, or program..." aria-label="Ask Meridian AI">
+            <button class="ask-send" type="button" aria-label="Send"><svg class="i sm"><use href="#ic-spark"/></svg></button>
+          </div>
+          <div class="ask-suggest">Suggested</div>
+          <button class="ask-chip" type="button">Which units are most at risk of turnover?</button>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+</body></html>
