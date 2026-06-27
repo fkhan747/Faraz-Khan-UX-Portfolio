@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Mail, Briefcase, User, Star, Quote } from "lucide-react";
+import { ArrowRight, Mail, Calendar, Linkedin, Briefcase, User, Star, Quote } from "lucide-react";
 import { PROFILE, projects, testimonials } from "../data/content";
 import { Container, Grid } from "../components/Grid";
 import CaseCover from "../components/CaseCover";
 import AgenticFeature from "../components/AgenticFeature";
+import BookCallButton from "../components/BookCallButton";
 import Seo from "../components/Seo";
 
 export default function Landing() {
@@ -67,11 +68,8 @@ export default function Landing() {
         </Container>
       </section>
 
-      {/* FEATURED: agentic audit live demo — compact band above the case studies */}
-      <AgenticFeature compact className="pb-10" />
-
       {/* FEATURED CASE STUDIES - the two fully-built case studies, side by side */}
-      <section className="pb-16" data-testid="featured-project">
+      <section className="pb-12" data-testid="featured-project">
         <Container>
         <div className="flex items-baseline justify-between mb-6">
           <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B]">featured case studies</span>
@@ -89,6 +87,9 @@ export default function Landing() {
         </div>
         </Container>
       </section>
+
+      {/* FEATURED: agentic audit live demo — compact band, below the case studies */}
+      <AgenticFeature compact className="pb-16" />
 
       {/* MARQUEE */}
       <section className="py-12 border-y border-white/10 overflow-hidden dark-card" data-testid="marquee">
@@ -140,22 +141,25 @@ export default function Landing() {
       )}
 
       {/* FINAL CTA */}
-      <section className="py-24 md:py-32" data-testid="final-cta">
+      <section className="py-16 md:py-20" data-testid="final-cta">
         <Container>
-        <div className="rounded-3xl dark-card text-white p-10 md:p-16 lg:p-20 relative overflow-hidden">
+        <div className="rounded-3xl dark-card text-white p-8 md:p-12 relative overflow-hidden">
           <div className="absolute -top-10 -right-10 w-72 h-72 rounded-full bg-[#075EFD] blur-3xl opacity-40" />
           <div className="absolute -bottom-12 -left-10 w-72 h-72 rounded-full bg-[#F5379B] blur-3xl opacity-30" />
-          <p className="relative text-[11px] font-mono uppercase tracking-[0.25em] text-white mb-6">let's build</p>
-          <h2 className="relative font-display text-5xl md:text-7xl font-black leading-[0.95] max-w-4xl">
+          <p className="relative text-[11px] font-mono uppercase tracking-[0.25em] text-white mb-4">let's build</p>
+          <h2 className="relative font-display text-4xl md:text-6xl font-black leading-[1.0] md:whitespace-nowrap">
             have an idea <span className="italic font-light text-white">worth</span> shipping?
           </h2>
-          <div className="relative mt-10 flex gap-4 flex-wrap">
-            <a href={`mailto:${PROFILE.email}`} data-testid="cta-email" className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-[#C71E73] font-semibold text-sm hover:bg-[#C71E73] hover:text-white transition-colors">
-              <Mail size={16} /> Start A Project
-            </a>
+          <div className="relative mt-8 flex gap-4 flex-wrap">
             <Link to="/contact" data-testid="cta-contact" className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-white font-semibold text-sm hover:bg-white/10 transition-colors">
-              Other Ways To Reach Me
+              <Mail size={16} /> Get in Touch
             </Link>
+            <BookCallButton data-testid="cta-book-call" className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-white font-semibold text-sm hover:bg-white/10 transition-colors">
+              <Calendar size={16} /> Book a Call
+            </BookCallButton>
+            <a href={PROFILE.social.linkedin} target="_blank" rel="noopener noreferrer" data-testid="cta-linkedin" className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-white font-semibold text-sm hover:bg-white/10 transition-colors">
+              <Linkedin size={16} /> LinkedIn
+            </a>
           </div>
         </div>
         </Container>

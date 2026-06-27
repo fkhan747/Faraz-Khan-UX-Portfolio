@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { PROFILE } from "../data/content";
 import { Container } from "./Grid";
+import Logo from "./Logo";
 
 const RESUME_PATH = "/files/Faraz_Khan_Resume.pdf";
 
@@ -15,14 +16,19 @@ export default function Footer() {
       <Container className="py-12">
         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-8">
           {/* Identity + internal nav */}
-          <div>
-            <Link to="/" className="font-display text-2xl font-black lowercase">faraz khan</Link>
-            <p className="mt-2 text-sm text-[#A29CB4]">Senior UX Lead · {PROFILE.city}</p>
-            <nav className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold">
-              <Link to="/projects" className="text-[#A29CB4] hover:text-[#F4F3FA] transition-colors">My Work</Link>
-              <Link to="/about" className="text-[#A29CB4] hover:text-[#F4F3FA] transition-colors">This is Me</Link>
-              <Link to="/contact" className="text-[#A29CB4] hover:text-[#F4F3FA] transition-colors">Get in Touch</Link>
-            </nav>
+          <div className="flex items-start gap-4 md:gap-5">
+            <Link to="/" aria-label="Faraz Khan, home" className="flex-shrink-0">
+              <Logo className="h-24 w-auto" fill="#FFFFFF" />
+            </Link>
+            <div>
+              <Link to="/" className="font-display text-2xl font-black case-keep">Faraz Khan</Link>
+              <p className="mt-2 text-sm text-[#A29CB4]">Senior UX Lead · {PROFILE.city}</p>
+              <nav className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold">
+                <Link to="/projects" className="text-[#A29CB4] hover:text-[#F4F3FA] transition-colors">My Work</Link>
+                <Link to="/about" className="text-[#A29CB4] hover:text-[#F4F3FA] transition-colors">This is Me</Link>
+                <Link to="/contact" className="text-[#A29CB4] hover:text-[#F4F3FA] transition-colors">Get in Touch</Link>
+              </nav>
+            </div>
           </div>
 
           {/* Actions */}

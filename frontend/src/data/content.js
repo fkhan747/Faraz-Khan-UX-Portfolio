@@ -101,6 +101,8 @@ export const concepts = [
     prototypeUrl: "/recruitos/",
     summary:
       "A recruitment workspace where the AI sources, ranks, and drafts outreach while the recruiter stays the decision-maker. Designed end-to-end and built as an interactive prototype.",
+    blurb:
+      "The AI sources candidates, ranks them, and drafts the outreach. The recruiter stays the one who decides. Designed end to end and built as a working prototype.",
     href: "/case/recruitos",
     live: true,
   },
