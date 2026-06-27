@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Mail } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
-import { meridian as m } from "../data/meridianCase";
+import { meridian } from "../data/meridianCase";
 import { PROFILE } from "../data/content";
 import Seo from "../components/Seo";
 import Reveal from "../components/Reveal";
@@ -91,8 +91,11 @@ function MeridianShot({ name, label, maxW = "100%", badge = "After" }) {
 }
 
 /* the visual that belongs to a given section (native artifact, or product before/after) */
-function artifactFor(headline = "") {
+function artifactFor(headline = "", data = {}) {
   const h = headline.toLowerCase();
+  if (h.includes("design principles")) return <Principles items={data.principles} />;
+  if (h.includes("constraints i designed")) return <Constraints items={data.constraints} />;
+  if (h.includes("how i validated")) return <Validation items={data.validation} outcomes={data.expectedOutcomes} />;
   if (h.includes("context and primary users")) return <MeridianPersonas />;
   if (h.includes("before and after")) return <MeridianFiveProblems />;
   if (h.includes("problem")) return <LegacyMontage />;
@@ -130,6 +133,82 @@ function artifactFor(headline = "") {
   if (h.includes("funnel, yield")) return <MeridianShot name="overview" maxW={1040} label="The Overview cockpit, with the institutional funnel" />;
   if (h.includes("geo intelligence")) return <MeridianShot name="ug-summary" maxW={1040} label="The world-map view, sized by application volume" />;
   return null;
+}
+
+/* ---- v2-only "truthful win" blocks (only render when the data file carries them) ---- */
+
+/* "What I owned" responsibility chips, shown in the hero. */
+function Responsibilities({ items = [] }) {
+  return (
+    <div className="mt-7 max-w-4xl">
+      <p className="text-[10px] font-mono uppercase tracking-widest text-[#F5379B] mb-3">What I owned</p>
+      <div className="flex flex-wrap gap-2.5">
+        {items.map((x, i) => (
+          <Reveal key={x} as="span" delay={0.4 + i * 0.04} className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-[#100210]/55 backdrop-blur-md px-4 py-2 text-sm font-semibold text-[#F4F3FA]">
+            <span className="h-1.5 w-1.5 rounded-full" style={{ background: ACCENT }} />{x}
+          </Reveal>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* Numbered design-principle cards (the north stars, collected from the prose). */
+function Principles({ items = [] }) {
+  return (
+    <div className="grid sm:grid-cols-2 gap-5">
+      {items.map((p, i) => (
+        <Reveal key={p.t} delay={(i % 2) * 0.06} className="dark-card rounded-3xl p-7 h-full">
+          <div className="font-display text-3xl font-black text-[#075EFD] leading-none">{String(i + 1).padStart(2, "0")}</div>
+          <h3 className="mt-4 font-display text-xl font-black text-white case-keep">{p.t}</h3>
+          <p className="mt-2 text-base leading-relaxed text-[#F4F3FA]">{p.d}</p>
+        </Reveal>
+      ))}
+    </div>
+  );
+}
+
+/* Constraint cards (the real enterprise box the design lived inside). */
+function Constraints({ items = [] }) {
+  return (
+    <div className="grid sm:grid-cols-2 gap-5">
+      {items.map((c, i) => (
+        <Reveal key={c.t} delay={(i % 2) * 0.06} className="dark-card rounded-3xl p-7 h-full border-l-4 border-[#F5379B]">
+          <h3 className="font-display text-lg font-black text-white case-keep">{c.t}</h3>
+          <p className="mt-2 text-base leading-relaxed text-[#F4F3FA]">{c.d}</p>
+        </Reveal>
+      ))}
+    </div>
+  );
+}
+
+/* Validation cards + the honest "expected UX outcomes" list (no fabricated metrics). */
+function Validation({ items = [], outcomes = [] }) {
+  return (
+    <div className="space-y-10">
+      <div className="grid sm:grid-cols-3 gap-5">
+        {items.map((v, i) => (
+          <Reveal key={v.t} delay={(i % 3) * 0.06} className="dark-card rounded-3xl p-7 h-full">
+            <h3 className="font-display text-lg font-black text-white case-keep">{v.t}</h3>
+            <p className="mt-2 text-base leading-relaxed text-[#F4F3FA]">{v.d}</p>
+          </Reveal>
+        ))}
+      </div>
+      {outcomes.length > 0 && (
+        <Reveal>
+          <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">Expected UX outcomes, designed for, not yet measured</p>
+          <ul className="grid sm:grid-cols-2 gap-3 max-w-5xl">
+            {outcomes.map((o) => (
+              <li key={o} className="flex gap-3 text-base md:text-lg leading-relaxed text-[#F4F3FA]">
+                <span className="mt-2.5 h-1.5 w-1.5 rounded-full flex-shrink-0" style={{ background: ACCENT }} />
+                <span>{o}</span>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
+      )}
+    </div>
+  );
 }
 
 /* white accent callout, used for the one key statement per section (matches FinVista/Aurora) */
@@ -270,7 +349,8 @@ function researchGroups(blocks) {
   return { intro, findings, synthesis };
 }
 
-export default function MeridianCaseStudy() {
+export default function MeridianCaseStudy({ data = meridian }) {
+  const m = data;
   const sections = getSections(m.body);
   return (
     <article data-testid="meridian-case-study" className="pb-24">
@@ -301,6 +381,7 @@ export default function MeridianCaseStudy() {
               ))}
             </div>
           )}
+          {m.responsibilities && <Responsibilities items={m.responsibilities} />}
           {m.hero.stats && (
             <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl">
               {m.hero.stats.map((s, i) => (
@@ -318,7 +399,7 @@ export default function MeridianCaseStudy() {
       {sections.map((sec) => {
         const isTldr = sec.num === "01";
         const isResearch = sec.headline.toLowerCase().includes("research and domain landscape");
-        const artifact = artifactFor(sec.headline);
+        const artifact = artifactFor(sec.headline, m);
         const rg = isResearch ? researchGroups(sec.blocks) : null;
         return (
           <section key={sec.num} data-testid={`section-${sec.num}`} className="py-20 md:py-24 border-t border-white/10">

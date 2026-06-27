@@ -18,6 +18,7 @@ import FinvistaCaseStudy from "./pages/FinvistaCaseStudy";
 import AuroraCaseStudy from "./pages/AuroraCaseStudy";
 import JoatCaseStudy from "./pages/JoatCaseStudy";
 import MeridianCaseStudy from "./pages/MeridianCaseStudy";
+import MeridianCaseStudyV2 from "./pages/MeridianCaseStudyV2";
 import RecruitosConcept from "./pages/RecruitosConcept";
 import KnowledgeosConcept from "./pages/KnowledgeosConcept";
 import DecisionosConcept from "./pages/DecisionosConcept";
@@ -44,6 +45,7 @@ function App() {
             <Route path="/case/decisionos" element={<DecisionosConcept />} />
             <Route path="/case/somethings-cooking" element={<JoatCaseStudy />} />
             <Route path="/case/meridian" element={<MeridianCaseStudy />} />
+            <Route path="/case/meridian-v2" element={<MeridianCaseStudyV2 />} />
             <Route path="/agentic-workflow" element={<AgenticWorkflow />} />
             <Route path="/case/:slug" element={<CaseStudy />} />
             <Route path="*" element={<Landing />} />

@@ -94,7 +94,8 @@
       "/case/knowledgeos",
       "/case/decisionos",
       "/case/somethings-cooking",
-      "/case/meridian"
+      "/case/meridian",
+      "/case/meridian-v2"
     ],
     "crawl": false,
     "inlineCss": false,
