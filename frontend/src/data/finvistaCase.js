@@ -8,6 +8,11 @@ export const finvista = {
   subtitle:
     "Re-imagining a digital lending platform for quick, hassle-free finance, serving millions across urban and rural India.",
   hero: {
+    facts: [
+      { label: "Role", value: "Sr. UX Lead" },
+      { label: "Domain", value: "Fintech · digital lending" },
+      { label: "Platform", value: "Native Android app" },
+    ],
     stats: [
       { value: "6", label: "Loan Products Designed" },
       { value: "11", label: "Step Loan Journey" },

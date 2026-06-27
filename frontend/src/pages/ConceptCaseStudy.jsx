@@ -144,9 +144,20 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
           {r.subtitle}
         </Reveal>
 
-        <div className="mt-12 grid grid-cols-3 gap-4 max-w-5xl">
+        {r.hero.facts && (
+          <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-5xl">
+            {r.hero.facts.map((f, i) => (
+              <Reveal key={f.label} delay={0.24 + i * 0.06} className="dark-card rounded-2xl p-5">
+                <p className="text-[10px] font-mono uppercase tracking-widest text-[#F5379B] mb-2">{f.label}</p>
+                <p className="font-display text-base md:text-lg font-bold text-[#F4F3FA] leading-snug">{f.value}</p>
+              </Reveal>
+            ))}
+          </div>
+        )}
+
+        <div className="mt-4 grid grid-cols-3 gap-4 max-w-5xl">
           {r.hero.stats.map((s, i) => (
-            <Reveal key={s.label} delay={0.24 + i * 0.06} className="dark-card rounded-2xl p-5 md:p-6">
+            <Reveal key={s.label} delay={0.42 + i * 0.06} className="dark-card rounded-2xl p-5 md:p-6">
               <div className="num text-3xl md:text-5xl font-black text-[#075EFD] leading-none">{s.value}</div>
               <div className="mt-3 text-sm md:text-xs font-mono uppercase tracking-widest text-white">{s.label}</div>
             </Reveal>

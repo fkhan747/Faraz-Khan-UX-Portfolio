@@ -12,8 +12,8 @@ export const meridian = {
     eyebrow: "UX Case Study · Higher-ed Analytics · Power BI",
     facts: [
       { label: "Role", value: "Lead UX designer (UX + data viz)" },
-      { label: "Domain", value: "Higher-ed institutional analytics" },
-      { label: "Platform", value: "Web, aligned to Power BI" },
+      { label: "Domain", value: "Education tech" },
+      { label: "Platform", value: "Power BI, Data Visualization and Data Analytics" },
     ],
     stats: [
       { value: "4", label: "Departments unified" },

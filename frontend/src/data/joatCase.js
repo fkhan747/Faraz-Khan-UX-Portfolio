@@ -15,6 +15,11 @@ export const joat = {
 
   hero: {
     cover: "/joat/cover.jpg",
+    facts: [
+      { label: "Role", value: "Senior UX / UI Designer" },
+      { label: "Domain", value: "Crowdfunding commerce" },
+      { label: "Platform", value: "Responsive web + mobile" },
+    ],
     stats: [
       { value: "1st", label: "Crowdfunding platform for custom apparel in India" },
       { value: "₹0", label: "Upfront cost to the creator" },

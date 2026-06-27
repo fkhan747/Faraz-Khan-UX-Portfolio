@@ -8,6 +8,11 @@ export const aurora = {
   subtitle:
     "Transforming the experience of a marketing campaign platform. I redesigned the Recurring Batch Journey configurator and embedded an in-canvas AI composer (Helio AI) during a parallel AngularJS-to-Angular migration. The work cut clicks for campaign setup 3:1 and brought the product in line with Helio's unified brand language.",
   hero: {
+    facts: [
+      { label: "Role", value: "Lead Product Designer" },
+      { label: "Domain", value: "Marketing technology" },
+      { label: "Platform", value: "Web · B2B SaaS" },
+    ],
     stats: [
       { value: "3:1", label: "Clicks Reduced" },
       { value: "52", label: "Components Shipped" },

@@ -16,6 +16,11 @@ export const recruitos = {
 
   hero: {
     // Concept work -> research-backed figures, framed honestly as such in copy.
+    facts: [
+      { label: "Role", value: "Sr. UX Lead (end-to-end)" },
+      { label: "Domain", value: "Staffing & recruitment" },
+      { label: "Platform", value: "Responsive web (concept)" },
+    ],
     stats: [
       { value: "5-12", label: "Tools per desk" },
       { value: "40%+", label: "Time lost to admin" },
