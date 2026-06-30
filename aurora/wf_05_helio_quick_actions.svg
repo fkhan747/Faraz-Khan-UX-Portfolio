@@ -1,0 +1,101 @@
+<svg style="width:100%;background:#f1f0ec;border-radius:12px" viewBox="0 0 1080 580" xmlns="http://www.w3.org/2000/svg">
+<defs>
+ <filter id="sk" x="-3%" y="-3%" width="106%" height="106%">
+  <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed="7" result="n"/>
+  <feDisplacementMap in="SourceGraphic" in2="n" scale="3.2" xChannelSelector="R" yChannelSelector="G"/>
+ </filter>
+</defs>
+<style>
+ text{font-family:Inter,system-ui,-apple-system,sans-serif}
+ .frame{fill:#fcfcfb;stroke:#b1b1a9;stroke-width:2}
+ .chrome{fill:#d3d3cd}
+ .bar{fill:#e4e4df}
+ .bar2{fill:#d5d5cf}
+ .fld{fill:#ffffff;stroke:#bdbdb6;stroke-width:1.4;stroke-dasharray:5 3}
+ .btn{fill:#b9b9b2}
+ .opt{font-size:13px;font-weight:700;fill:#6a6a64}
+ .ann{font-size:10.5px;fill:#8f8f88}
+ .lbl{font-family:'Roboto Mono',monospace;font-size:11px;letter-spacing:.1em;fill:#9a9a93}
+ .chosen{fill:#5c5c56}
+ .chev{fill:#a8a8a2}
+</style>
+
+<text class="lbl" x="40" y="32">COMPOSER · AI QUICK ACTIONS · LAYOUT EXPLORATION</text>
+
+<text class="opt" x="40" y="68">Option A</text>
+<text class="opt" x="380" y="68">Option B</text>
+<g transform="translate(588,53)"><rect class="chosen" width="92" height="18" rx="9"/><text x="46" y="13" text-anchor="middle" style="font-size:9px;fill:#fff;font-weight:600">&#10003; chosen</text></g>
+<text class="opt" x="720" y="68">Option C</text>
+
+<g filter="url(#sk)">
+ <!-- ============ OPTION A : vertical list ============ -->
+ <rect class="frame" x="40" y="80" width="300" height="430" rx="8"/>
+ <!-- panel header -->
+ <rect class="chrome" x="40" y="80" width="300" height="38" rx="8"/>
+ <rect class="bar2" x="60" y="93" width="120" height="12" rx="6"/>
+ <circle class="chev" cx="320" cy="99" r="6"/>
+ <!-- 4 stacked full-width action rows -->
+ <rect class="bar2" x="60" y="138" width="260" height="44" rx="6"/>
+ <rect class="bar" x="76" y="155" width="150" height="10" rx="5"/>
+ <rect class="bar2" x="60" y="194" width="260" height="44" rx="6"/>
+ <rect class="bar" x="76" y="211" width="120" height="10" rx="5"/>
+ <rect class="bar2" x="60" y="250" width="260" height="44" rx="6"/>
+ <rect class="bar" x="76" y="267" width="170" height="10" rx="5"/>
+ <rect class="bar2" x="60" y="306" width="260" height="44" rx="6"/>
+ <rect class="bar" x="76" y="323" width="135" height="10" rx="5"/>
+ <!-- prompt input -->
+ <rect class="fld" x="60" y="380" width="260" height="86" rx="6"/>
+ <rect class="bar" x="76" y="396" width="140" height="9" rx="4"/>
+ <rect class="btn" x="252" y="436" width="56" height="20" rx="10"/>
+
+ <!-- ============ OPTION B : 2x2 grid (CHOSEN) ============ -->
+ <rect class="frame" x="380" y="80" width="300" height="430" rx="8"/>
+ <rect class="chrome" x="380" y="80" width="300" height="38" rx="8"/>
+ <rect class="bar2" x="400" y="93" width="120" height="12" rx="6"/>
+ <circle class="chev" cx="660" cy="99" r="6"/>
+ <!-- 2x2 grid of action chips -->
+ <rect class="bar2" x="400" y="142" width="125" height="58" rx="8"/>
+ <rect class="bar" x="416" y="164" width="80" height="10" rx="5"/>
+ <rect class="bar2" x="535" y="142" width="125" height="58" rx="8"/>
+ <rect class="bar" x="551" y="164" width="70" height="10" rx="5"/>
+ <rect class="bar2" x="400" y="210" width="125" height="58" rx="8"/>
+ <rect class="bar" x="416" y="232" width="88" height="10" rx="5"/>
+ <rect class="bar2" x="535" y="210" width="125" height="58" rx="8"/>
+ <rect class="bar" x="551" y="232" width="74" height="10" rx="5"/>
+ <!-- prompt input -->
+ <rect class="fld" x="400" y="300" width="260" height="100" rx="6"/>
+ <rect class="bar" x="416" y="318" width="150" height="9" rx="4"/>
+ <rect class="bar" x="416" y="336" width="110" height="9" rx="4"/>
+ <!-- send button -->
+ <rect class="btn" x="586" y="368" width="58" height="22" rx="11"/>
+
+ <!-- ============ OPTION C : inline toolbar ============ -->
+ <rect class="frame" x="720" y="80" width="300" height="430" rx="8"/>
+ <rect class="chrome" x="720" y="80" width="300" height="38" rx="8"/>
+ <rect class="bar2" x="740" y="93" width="120" height="12" rx="6"/>
+ <circle class="chev" cx="1000" cy="99" r="6"/>
+ <!-- single horizontal toolbar of 4 small chips -->
+ <rect class="bar2" x="740" y="142" width="62" height="30" rx="15"/>
+ <rect class="bar" x="750" y="153" width="38" height="8" rx="4"/>
+ <rect class="bar2" x="808" y="142" width="62" height="30" rx="15"/>
+ <rect class="bar" x="818" y="153" width="38" height="8" rx="4"/>
+ <rect class="bar2" x="876" y="142" width="62" height="30" rx="15"/>
+ <rect class="bar" x="886" y="153" width="38" height="8" rx="4"/>
+ <rect class="bar2" x="944" y="142" width="62" height="30" rx="15"/>
+ <rect class="bar" x="954" y="153" width="32" height="8" rx="4"/>
+ <!-- prompt input -->
+ <rect class="fld" x="740" y="194" width="260" height="100" rx="6"/>
+ <rect class="bar" x="756" y="212" width="150" height="9" rx="4"/>
+ <rect class="bar" x="756" y="230" width="120" height="9" rx="4"/>
+ <rect class="btn" x="926" y="262" width="58" height="22" rx="11"/>
+</g>
+
+<text class="ann" x="40" y="540">Vertical list of actions.</text>
+<text class="ann" x="40" y="556">Scanned slowly, ate vertical space.</text>
+
+<text class="ann" x="380" y="540">2x2 grid of action chips.</text>
+<text class="ann" x="380" y="556">Balanced + scannable. Shipped.</text>
+
+<text class="ann" x="720" y="540">Inline toolbar of actions.</text>
+<text class="ann" x="720" y="556">Crowded + clipped at small widths.</text>
+</svg>

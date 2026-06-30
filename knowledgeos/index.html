@@ -1,0 +1,1840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>KnowledgeOS - Interactive Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;background:#e7eaf0;
+  font-family:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+
+/* frame label */
+.koframe-label{max-width:1440px;margin:16px auto 9px;padding:0 8px;
+  font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.07em;
+  text-transform:uppercase;color:#727b8c;display:flex;align-items:center;gap:9px;}
+.koframe-label b{color:#3a4252;}
+.koframe-label .dot{width:6px;height:6px;border-radius:50%;
+  background:linear-gradient(135deg,#0E9CA6,#4589ff,#a56eff);}
+
+/* scaler wrapper + app */
+.kowrap{width:100%;display:flex;justify-content:center;align-items:flex-start;overflow:hidden;}
+.koapp{width:1440px;height:1024px;flex-shrink:0;transform-origin:top center;display:flex;
+  background:#f2f4f8;border-radius:16px;overflow:hidden;position:relative;
+  box-shadow:0 28px 64px rgba(20,30,60,.26),0 4px 14px rgba(20,30,60,.10);
+  border:1px solid rgba(255,255,255,.6);}
+
+/* rail keeps its own inline dark styling; add height + nav states */
+.korail{height:100%!important;}
+.koni{cursor:pointer;transition:background .13s ease,color .13s ease;}
+.koni:hover{background:rgba(255,255,255,.055)!important;color:#dfe5ef!important;}
+.koni.active{background:rgba(69,137,255,.12)!important;color:#fff!important;}
+.koni.active::before{content:'';position:absolute;left:0;top:7px;bottom:7px;width:3px;
+  border-radius:3px;background:linear-gradient(180deg,#0E9CA6,#4589ff,#a56eff);}
+.kologo{transition:opacity .13s;}
+.kologo:hover{opacity:.82;}
+
+/* content stage */
+.kostage{flex:1;min-width:0;height:100%;display:flex;}
+.koview{flex:1;min-width:0;height:100%;display:flex;overflow:hidden;}
+.koview ::-webkit-scrollbar{width:10px;height:10px;}
+.koview ::-webkit-scrollbar-thumb{background:#cdd3dd;border-radius:6px;border:3px solid transparent;background-clip:content-box;}
+.koview ::-webkit-scrollbar-thumb:hover{background:#b6bdc9;background-clip:content-box;}
+.koview [style*="IBM Plex Mono"]{font-family:'IBM Plex Mono',ui-monospace,monospace !important;}
+.koni,.kologo{ -webkit-tap-highlight-color:transparent; }
+
+/* ---------- copilot launcher (FAB) ---------- */
+.kocb-fab{position:absolute;right:26px;bottom:26px;width:54px;height:54px;border:none;border-radius:50%;
+  cursor:pointer;z-index:40;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#0E9CA6 0%,#4589ff 52%,#a56eff 100%);
+  box-shadow:0 10px 26px rgba(69,137,255,.42);transition:transform .15s,box-shadow .15s;}
+.kocb-fab:hover{transform:translateY(-2px) scale(1.04);box-shadow:0 14px 32px rgba(69,137,255,.5);}
+.kocb-fab svg{width:23px;height:23px;}
+
+/* ---------- copilot drawer ---------- */
+.kocb{position:absolute;top:0;right:0;width:384px;max-width:88%;height:100%;background:#fff;z-index:60;
+  display:flex;flex-direction:column;transform:translateX(105%);transition:transform .32s cubic-bezier(.4,0,.2,1);
+  box-shadow:-18px 0 50px rgba(20,30,60,.20);}
+.kocb.open{transform:translateX(0);}
+.kocb-head{flex-shrink:0;padding:16px 18px;display:flex;align-items:center;gap:11px;
+  background:linear-gradient(135deg,#0E9CA6 0%,#4589ff 52%,#a56eff 100%);color:#fff;}
+.kocb-head .mk{width:30px;height:30px;border-radius:8px;background:rgba(255,255,255,.2);
+  display:flex;align-items:center;justify-content:center;}
+.kocb-head .ti{font-size:14px;font-weight:600;line-height:1.2;}
+.kocb-head .sub{font-size:11px;opacity:.85;}
+.kocb-x{margin-left:auto;width:30px;height:30px;border:none;background:rgba(255,255,255,.16);border-radius:8px;
+  cursor:pointer;color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px;line-height:1;}
+.kocb-x:hover{background:rgba(255,255,255,.28);}
+.kocb-msgs{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:14px;background:#f7f8fa;}
+.kocb-m{display:flex;gap:9px;align-items:flex-start;}
+.kocb-m.me{flex-direction:row-reverse;}
+.kocb-av{width:26px;height:26px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-size:9.5px;font-weight:700;color:#fff;}
+.kocb-av.ai{background:linear-gradient(135deg,#0E9CA6,#4589ff,#a56eff);}
+.kocb-av.me{background:linear-gradient(135deg,#1192e8,#a56eff);}
+.kocb-bub{max-width:80%;padding:10px 13px;border-radius:13px;font-size:13px;line-height:1.5;color:#21272a;
+  background:#fff;border:1px solid #e9edf2;}
+.kocb-m.me .kocb-bub{background:#21272a;color:#fff;border-color:#21272a;}
+.kocb-bub b{font-weight:600;}
+.kocb-did{margin-top:8px;font-size:11px;font-weight:600;color:#0E9CA6;
+  display:inline-flex;align-items:center;gap:5px;background:rgba(14,156,166,.09);
+  padding:4px 9px;border-radius:7px;}
+.kocb-chips{flex-shrink:0;padding:10px 14px 0;display:flex;flex-wrap:wrap;gap:7px;background:#fff;}
+.kocb-chip{font-size:12px;font-weight:500;color:#2f6df0;background:#eef3ff;border:1px solid #dce6ff;
+  padding:7px 11px;border-radius:18px;cursor:pointer;transition:background .12s;}
+.kocb-chip:hover{background:#e0eaff;}
+.kocb-in{flex-shrink:0;padding:12px 14px 14px;display:flex;gap:8px;background:#fff;border-top:1px solid #eef0f3;}
+.kocb-in input{flex:1;height:40px;border:1px solid #dde2e9;border-radius:10px;padding:0 13px;font-size:13px;
+  font-family:inherit;outline:none;color:#21272a;}
+.kocb-in input:focus{border-color:#4589ff;box-shadow:0 0 0 3px rgba(69,137,255,.14);}
+.kocb-in button{width:40px;height:40px;border:none;border-radius:10px;cursor:pointer;flex-shrink:0;
+  background:linear-gradient(135deg,#0E9CA6,#4589ff,#a56eff);display:flex;align-items:center;justify-content:center;}
+.kocb-in button svg{width:17px;height:17px;}
+.kodots{display:inline-flex;gap:4px;align-items:center;padding:2px 0;}
+.kodots span{width:6px;height:6px;border-radius:50%;background:#9aa3b2;animation:kobounce 1.2s infinite;}
+.kodots span:nth-child(2){animation-delay:.18s;}
+.kodots span:nth-child(3){animation-delay:.36s;}
+@keyframes kobounce{0%,60%,100%{transform:translateY(0);opacity:.45;}30%{transform:translateY(-4px);opacity:1;}}
+
+/* ---------- toast ---------- */
+.kotoast{position:fixed;left:50%;bottom:30px;transform:translate(-50%,18px);z-index:200;
+  background:#21272a;color:#fff;font-size:13px;font-weight:500;padding:12px 18px;border-radius:10px;
+  box-shadow:0 12px 30px rgba(0,0,0,.28);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;
+  max-width:80vw;text-align:center;}
+.kotoast.show{opacity:1;transform:translate(-50%,0);}
+
+@media(max-width:560px){
+  .koframe-label{font-size:10px;}
+  .kocb{width:100%;}
+}
+
+</style>
+</head>
+<body>
+
+<div class="koframe-label"><span class="dot"></span>KnowledgeOS · Interactive prototype - <b>click anything</b>; use the rail to move around, or open the assistant&nbsp;✦</div>
+
+<div id="kowrap" class="kowrap">
+  <div id="koapp" class="koapp">
+
+    <aside style="width:256px;flex-shrink:0;height:100%;display:flex;flex-direction:column;background:linear-gradient(170deg,#131b30 0%,#0e1422 55%,#0b101c 100%);color:#f4f4f4;padding:16px 12px;border-right:1px solid rgba(255,255,255,.04);">
+
+    <div class="kologo" data-nav="overview" style="display:flex;align-items:center;gap:10px;padding:6px 6px 14px;cursor:pointer;">
+      <div style="width:34px;height:34px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0E9CA6 0%,#4589ff 52%,#a56eff 100%);box-shadow:0 4px 12px rgba(69,137,255,.35);">
+        <svg width="17" height="17" viewBox="0 0 16 16" fill="#fff"><path d="M8 1l1.55 4.35L14 7l-4.45 1.65L8 13l-1.55-4.35L2 7l4.45-1.65z"></path></svg>
+      </div>
+      <div style="line-height:1.15;">
+        <div style="font-size:14px;font-weight:600;letter-spacing:-.01em;">KnowledgeOS</div>
+        <div style="font-size:11.5px;color:#8a93a6;">Acme Corp</div>
+      </div>
+    </div>
+
+    <button data-nav="ask" style="width:100%;height:40px;border:none;cursor:pointer;border-radius:8px;display:flex;align-items:center;gap:9px;padding:0 14px;color:#fff;font-family:inherit;font-size:13.5px;font-weight:600;background:linear-gradient(135deg,#0E9CA6 0%,#4589ff 52%,#a56eff 100%);box-shadow:0 6px 16px rgba(69,137,255,.3);">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"><path d="M8 3.2v9.6M3.2 8h9.6"></path></svg>
+      New question
+    </button>
+
+    <nav style="margin-top:20px;display:flex;flex-direction:column;gap:2px;">
+      <div style="font-size:10.5px;font-weight:600;letter-spacing:.08em;color:#5d6679;text-transform:uppercase;padding:0 12px 8px;">Navigate</div>
+
+      <div class="koni" data-nav="overview" data-view="overview" style="position:relative;display:flex;align-items:center;gap:11px;height:38px;padding:0 12px;border-radius:8px;color:#aab2c2;font-size:13.5px;font-weight:500;"><svg width="17" height="17" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="4.6" height="4.6" rx="1"></rect><rect x="8.9" y="2.5" width="4.6" height="4.6" rx="1"></rect><rect x="2.5" y="8.9" width="4.6" height="4.6" rx="1"></rect><rect x="8.9" y="8.9" width="4.6" height="4.6" rx="1"></rect></svg> Overview</div>
+
+      <div class="koni" data-nav="ask" data-view="ask" style="position:relative;display:flex;align-items:center;gap:11px;height:38px;padding:0 12px;border-radius:8px;color:#aab2c2;font-size:13.5px;font-weight:500;"><svg width="17" height="17" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 3.3h11v7.2H6.7L4 12.8v-2.3H2.5z"></path><path d="M6 6.6h4M6 8.3h2.6"></path></svg> Ask</div>
+
+      <div class="koni" data-nav="saved" data-view="saved" style="position:relative;display:flex;align-items:center;gap:11px;height:38px;padding:0 12px;border-radius:8px;color:#aab2c2;font-size:13.5px;font-weight:500;"><svg width="17" height="17" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.6h8v11l-4-2.6-4 2.6z"></path></svg> Saved answers</div>
+
+      <div class="koni" data-nav="sources" data-view="sources" style="position:relative;display:flex;align-items:center;gap:11px;height:38px;padding:0 12px;border-radius:8px;color:#aab2c2;font-size:13.5px;font-weight:500;"><svg width="17" height="17" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="8" cy="4" rx="5" ry="2"></ellipse><path d="M3 4v8c0 1.05 2.24 1.9 5 1.9s5-.85 5-1.9V4M3 8c0 1.05 2.24 1.9 5 1.9s5-.85 5-1.9"></path></svg> Sources</div>
+
+      <div class="koni" data-nav="insights" data-view="insights" style="position:relative;display:flex;align-items:center;gap:11px;height:38px;padding:0 12px;border-radius:8px;color:#aab2c2;font-size:13.5px;font-weight:500;"><svg width="17" height="17" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M2.6 13.2V2.8M2.6 13.2h10.8"></path><path d="M5.2 11V8.4M8 11V5.2M10.8 11V6.8"></path></svg> Insights</div>
+    </nav>
+
+    <div data-nav="insights" style="cursor:pointer;margin-top:18px;border-radius:8px;padding:13px 14px;background:linear-gradient(135deg,rgba(14,156,166,.16),rgba(165,110,255,.16));border:1px solid rgba(255,255,255,.08);">
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <span style="font-size:11.5px;color:#aab2c2;font-weight:500;">Knowledge health</span>
+        <span style="font-size:14px;font-weight:700;background:linear-gradient(90deg,#2ad0c0,#7aa8ff,#c79bff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">82%</span>
+      </div>
+      <div style="margin-top:9px;height:5px;border-radius:3px;background:rgba(255,255,255,.1);overflow:hidden;">
+        <div style="width:82%;height:100%;border-radius:3px;background:linear-gradient(90deg,#0E9CA6,#4589ff,#a56eff);"></div>
+      </div>
+    </div>
+
+    <div style="flex:1;"></div>
+
+    <div style="display:flex;align-items:center;gap:11px;height:38px;padding:0 12px;border-radius:8px;color:#aab2c2;font-size:13.5px;font-weight:500;">
+      <svg width="17" height="17" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="2.1"></circle><path d="M8 1.6v1.7M8 12.7v1.7M14.4 8h-1.7M3.3 8H1.6M12.5 3.5l-1.2 1.2M4.7 11.3l-1.2 1.2M12.5 12.5l-1.2-1.2M4.7 4.7L3.5 3.5"></path></svg>
+      Settings
+    </div>
+
+    <div style="margin-top:8px;display:flex;align-items:center;gap:11px;padding:10px 8px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.05);">
+      <div style="width:32px;height:32px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#fff;background:linear-gradient(135deg,#1192e8,#a56eff);">SO</div>
+      <div style="line-height:1.25;min-width:0;flex:1;">
+        <div style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Sam Okonkwo</div>
+        <div style="font-size:11px;color:#8a93a6;">Product Ops · Admin</div>
+      </div>
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="#6b7488" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4l4 4-4 4"></path></svg>
+    </div>
+  </aside>
+
+    <div class="kostage">
+      <div id="koview" class="koview"></div>
+    </div>
+
+    <!-- copilot launcher -->
+    <button id="kocbBtn" class="kocb-fab" aria-label="Ask KnowledgeOS"><svg viewBox="0 0 16 16" fill="#fff"><path d="M8 1l1.55 4.35L14 7l-4.45 1.65L8 13l-1.55-4.35L2 7l4.45-1.65z"></path></svg></button>
+
+    <!-- copilot drawer -->
+    <div id="kocb" class="kocb">
+      <div class="kocb-head">
+        <span class="mk"><svg viewBox="0 0 16 16" fill="#fff"><path d="M8 1l1.55 4.35L14 7l-4.45 1.65L8 13l-1.55-4.35L2 7l4.45-1.65z"></path></svg></span>
+        <div>
+          <div class="ti">KnowledgeOS AI</div>
+          <div class="sub">Answers from Acme Corp's sources</div>
+        </div>
+        <button id="kocbClose" class="kocb-x" aria-label="Close">&times;</button>
+      </div>
+      <div id="kocbMsgs" class="kocb-msgs"></div>
+      <div id="kocbChips" class="kocb-chips"></div>
+      <div class="kocb-in">
+        <input id="kocbIn" type="text" placeholder="Ask about Acme's knowledge…" autocomplete="off">
+        <button id="kocbSend" aria-label="Send"><svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 8L2.5 2.8 4.3 8l-1.8 5.2z"></path><path d="M4.3 8H14"></path></svg></button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="kotoast" class="kotoast"></div>
+
+<script type="text/html" data-view="overview">
+<!-- ============ MAIN ============ -->
+  <div style="flex:1;height:100%;display:flex;flex-direction:column;min-width:0;">
+
+    <header style="height:48px;flex-shrink:0;background:#fff;border-bottom:1px solid #dde1e6;display:flex;align-items:center;justify-content:space-between;padding:0 24px;">
+      <div style="display:flex;align-items:center;gap:8px;font-size:13px;">
+        <span style="color:#697077;">Workspace</span>
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#a2a9b0" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 4l4 4-4 4"></path></svg>
+        <span style="color:#161616;font-weight:600;">Overview</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;">
+        <button style="width:34px;height:34px;border:none;background:transparent;cursor:pointer;border-radius:8px;display:flex;align-items:center;justify-content:center;position:relative;">
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#42484f" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2a3.4 3.4 0 0 0-3.4 3.4c0 2.9-1.2 3.9-1.2 3.9h9.2s-1.2-1-1.2-3.9A3.4 3.4 0 0 0 8 2z"></path><path d="M6.7 12.5a1.4 1.4 0 0 0 2.6 0"></path></svg>
+          <span style="position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:#ee5396;border:1.5px solid #fff;"></span>
+        </button>
+        <div style="width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:600;color:#fff;background:linear-gradient(135deg,#1192e8,#a56eff);">SO</div>
+      </div>
+    </header>
+
+    <!-- Scroll content: main + aside -->
+    <div style="flex:1;overflow:auto;display:flex;gap:24px;padding:26px 24px 30px;">
+
+      <!-- MAIN COLUMN -->
+      <div style="flex:1;min-width:0;">
+
+        <!-- HERO -->
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:20px;">
+          <div style="min-width:0;">
+            <h1 style="margin:0;font-size:27px;font-weight:600;letter-spacing:-.02em;">Good morning, Sam</h1>
+            <div style="margin-top:8px;display:flex;align-items:flex-start;gap:9px;max-width:680px;">
+              <div style="width:22px;height:22px;border-radius:50%;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0E9CA6 0%,#4589ff 52%,#a56eff 100%);box-shadow:0 3px 8px rgba(69,137,255,.28);">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="#fff"><path d="M8 1l1.55 4.35L14 7l-4.45 1.65L8 13l-1.55-4.35L2 7l4.45-1.65z"></path></svg>
+              </div>
+              <p style="margin:0;font-size:13.5px;line-height:1.6;color:#42484f;">Knowledge health dipped 3 points this week - 2 stale sources and a rising data-residency gap are dragging it down. <strong style="font-weight:600;color:#21272a;">3 things are worth doing today.</strong></p>
+            </div>
+          </div>
+          <div style="flex-shrink:0;text-align:right;padding-top:4px;">
+            <div style="font-size:12.5px;font-weight:500;color:#697077;white-space:nowrap;">Monday, 16 June 2026</div>
+          </div>
+        </div>
+
+        <!-- KPI CARDS -->
+        <div style="margin-top:22px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
+
+          <div style="border-radius:8px;padding:15px 17px;color:#fff;background:linear-gradient(135deg,#4589ff 0%,#1192e8 100%);box-shadow:0 8px 20px rgba(17,146,232,.18);cursor:pointer;">
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+              <span style="font-size:11.5px;font-weight:500;color:rgba(255,255,255,.88);">Questions answered</span>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3.5h10v6H7l-3 2.3V9.5H3z"></path><path d="M6.3 6.4c0-.9.7-1.5 1.7-1.5s1.7.6 1.7 1.4c0 1.2-1.5 1-1.5 1.9"></path><path d="M8 8.9v.05"></path></svg>
+            </div>
+            <div style="margin-top:11px;font-size:28px;font-weight:600;letter-spacing:-.02em;line-height:1;font-family:'IBM Plex Mono',monospace;">1,284</div>
+            <div style="margin-top:9px;display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;padding:2px 7px;border-radius:6px;background:rgba(255,255,255,.18);">
+              <svg width="9" height="9" viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12.5V4M4.5 7L8 3.5 11.5 7"></path></svg>18% vs last week
+            </div>
+          </div>
+
+          <div style="border-radius:8px;padding:15px 17px;color:#fff;background:linear-gradient(135deg,#1192e8 0%,#0E9CA6 100%);box-shadow:0 8px 20px rgba(17,146,232,.18);cursor:pointer;">
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+              <span style="font-size:11.5px;font-weight:500;color:rgba(255,255,255,.88);">Active people this week</span>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="5.5" r="2.2"></circle><path d="M2.4 12.5c0-2 1.6-3.3 3.6-3.3s3.6 1.3 3.6 3.3"></path><path d="M10.5 4.2a2 2 0 0 1 0 3.7M11.2 12.5c0-1.6-.7-2.8-1.8-3.3"></path></svg>
+            </div>
+            <div style="margin-top:11px;font-size:28px;font-weight:600;letter-spacing:-.02em;line-height:1;font-family:'IBM Plex Mono',monospace;">312</div>
+            <div style="margin-top:9px;display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;padding:2px 7px;border-radius:6px;background:rgba(255,255,255,.18);">
+              <svg width="9" height="9" viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12.5V4M4.5 7L8 3.5 11.5 7"></path></svg>24
+            </div>
+          </div>
+
+          <div style="border-radius:8px;padding:15px 17px;color:#fff;background:linear-gradient(135deg,#0E9CA6 0%,#42be65 100%);box-shadow:0 8px 20px rgba(14,156,166,.18);cursor:pointer;">
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+              <span style="font-size:11.5px;font-weight:500;color:rgba(255,255,255,.88);">Avg. confidence</span>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2l5 1.8v4.1c0 3.3-2.5 5.4-5 6.5-2.5-1.1-5-3.2-5-6.5V3.8z"></path><path d="M5.8 8.2l1.6 1.6L10.5 6"></path></svg>
+            </div>
+            <div style="margin-top:11px;font-size:28px;font-weight:600;letter-spacing:-.02em;line-height:1;font-family:'IBM Plex Mono',monospace;">86%</div>
+            <div style="margin-top:9px;display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;padding:2px 7px;border-radius:6px;background:rgba(255,255,255,.18);">
+              <svg width="9" height="9" viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8h9"></path></svg>steady
+            </div>
+          </div>
+
+          <div style="border-radius:8px;padding:15px 17px;color:#fff;background:linear-gradient(135deg,#a56eff 0%,#ee5396 100%);box-shadow:0 8px 20px rgba(165,110,255,.18);cursor:pointer;">
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+              <span style="font-size:11.5px;font-weight:500;color:rgba(255,255,255,.88);">Knowledge health</span>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M2.6 13.2V2.8M2.6 13.2h10.8"></path><path d="M5.2 11V8.4M8 11V5.2M10.8 11V6.8"></path></svg>
+            </div>
+            <div style="margin-top:11px;font-size:28px;font-weight:600;letter-spacing:-.02em;line-height:1;font-family:'IBM Plex Mono',monospace;">82%</div>
+            <div style="margin-top:9px;display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;padding:2px 7px;border-radius:6px;background:rgba(0,0,0,.18);color:#ffe0e9;">
+              <svg width="9" height="9" viewBox="0 0 16 16" fill="none" stroke="#ffd1de" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3.5V12M4.5 9L8 12.5 11.5 9"></path></svg>3 pts
+            </div>
+          </div>
+        </div>
+
+        <!-- NEEDS YOUR ATTENTION -->
+        <div style="margin-top:28px;display:flex;align-items:baseline;justify-content:space-between;">
+          <h2 style="margin:0;font-size:15px;font-weight:600;letter-spacing:-.01em;">Needs your attention</h2>
+          <span style="font-size:12px;color:#697077;">4 items</span>
+        </div>
+
+        <div style="margin-top:14px;display:grid;grid-template-columns:repeat(2,1fr);gap:16px;">
+
+          <!-- Card 1: warning -->
+          <div style="position:relative;background:#fff;border:1px solid #dde1e6;border-radius:8px;padding:16px;box-shadow:0 1px 2px rgba(16,24,40,.04);display:flex;flex-direction:column;">
+            <button style="position:absolute;top:12px;right:12px;width:24px;height:24px;border:none;background:transparent;cursor:pointer;border-radius:6px;display:flex;align-items:center;justify-content:center;"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#a2a9b0" stroke-width="1.5" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8"></path></svg></button>
+            <div style="display:flex;gap:11px;padding-right:24px;">
+              <div style="width:30px;height:30px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#fff4e2;">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#b8740b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 1.8l6.4 11.2H1.6z"></path><path d="M8 6.4v3.1M8 11.4v.05"></path></svg>
+              </div>
+              <div style="flex:1;min-width:0;">
+                <div style="font-size:13.5px;font-weight:600;line-height:1.4;color:#21272a;">5 topics asked repeatedly with no source</div>
+                <div style="margin-top:4px;font-size:12px;color:#697077;line-height:1.5;">PTO carry-over · parental-leave top-up · 3 more</div>
+              </div>
+            </div>
+            <div style="flex:1;min-height:12px;"></div>
+            <button style="align-self:flex-start;display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 14px;border-radius:8px;border:1px solid #d0d5dd;background:#fff;color:#21272a;font-family:inherit;font-size:12.5px;font-weight:600;cursor:pointer;">Review gaps</button>
+          </div>
+
+          <!-- Card 2: warning -->
+          <div style="position:relative;background:#fff;border:1px solid #dde1e6;border-radius:8px;padding:16px;box-shadow:0 1px 2px rgba(16,24,40,.04);display:flex;flex-direction:column;">
+            <button style="position:absolute;top:12px;right:12px;width:24px;height:24px;border:none;background:transparent;cursor:pointer;border-radius:6px;display:flex;align-items:center;justify-content:center;"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#a2a9b0" stroke-width="1.5" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8"></path></svg></button>
+            <div style="display:flex;gap:11px;padding-right:24px;">
+              <div style="width:30px;height:30px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#fff4e2;">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#b8740b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 1.8l6.4 11.2H1.6z"></path><path d="M8 6.4v3.1M8 11.4v.05"></path></svg>
+              </div>
+              <div style="flex:1;min-width:0;">
+                <div style="font-size:13.5px;font-weight:600;line-height:1.4;color:#21272a;">2024 Enterprise Agreement is 8 months stale</div>
+                <div style="margin-top:4px;font-size:12px;color:#697077;line-height:1.5;">Cited in 14 recent answers · <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;">enterprise-msa-2024.docx</span></div>
+              </div>
+            </div>
+            <div style="flex:1;min-height:12px;"></div>
+            <button style="align-self:flex-start;display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 14px;border-radius:8px;border:1px solid #d0d5dd;background:#fff;color:#21272a;font-family:inherit;font-size:12.5px;font-weight:600;cursor:pointer;">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#697077" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 8a5 5 0 1 1-1.5-3.5M13 2.5V5h-2.5"></path></svg>
+              Re-sync source
+            </button>
+          </div>
+
+          <!-- Card 3: AI -->
+          <div style="position:relative;background:#fff;border:1px solid #cfe0ff;border-radius:8px;padding:16px;box-shadow:0 1px 2px rgba(16,24,40,.04);display:flex;flex-direction:column;overflow:hidden;">
+            <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,#0E9CA6,#4589ff,#a56eff);"></div>
+            <button style="position:absolute;top:12px;right:12px;width:24px;height:24px;border:none;background:transparent;cursor:pointer;border-radius:6px;display:flex;align-items:center;justify-content:center;"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#a2a9b0" stroke-width="1.5" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8"></path></svg></button>
+            <div style="display:flex;gap:11px;padding-right:24px;">
+              <div style="width:30px;height:30px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0E9CA6 0%,#4589ff 52%,#a56eff 100%);box-shadow:0 3px 8px rgba(69,137,255,.28);">
+                <svg width="15" height="15" viewBox="0 0 16 16" fill="#fff"><path d="M8 1l1.55 4.35L14 7l-4.45 1.65L8 13l-1.55-4.35L2 7l4.45-1.65z"></path></svg>
+              </div>
+              <div style="flex:1;min-width:0;">
+                <div style="font-size:13.5px;font-weight:600;line-height:1.4;color:#21272a;">Data-residency answers are averaging 61% confidence</div>
+                <div style="margin-top:4px;font-size:12px;color:#697077;line-height:1.5;">Below your 80% target - add an authoritative source</div>
+              </div>
+            </div>
+            <div style="flex:1;min-height:12px;"></div>
+            <button style="align-self:flex-start;display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 14px;border-radius:8px;border:none;color:#fff;font-family:inherit;font-size:12.5px;font-weight:600;cursor:pointer;background:linear-gradient(135deg,#0E9CA6 0%,#4589ff 52%,#a56eff 100%);box-shadow:0 4px 10px rgba(69,137,255,.26);">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round"><path d="M8 3.5v9M3.5 8h9"></path></svg>
+              Add a source
+            </button>
+          </div>
+
+          <!-- Card 4: success -->
+          <div style="position:relative;background:#fff;border:1px solid #dde1e6;border-radius:8px;padding:16px;box-shadow:0 1px 2px rgba(16,24,40,.04);display:flex;flex-direction:column;">
+            <button style="position:absolute;top:12px;right:12px;width:24px;height:24px;border:none;background:transparent;cursor:pointer;border-radius:6px;display:flex;align-items:center;justify-content:center;"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#a2a9b0" stroke-width="1.5" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8"></path></svg></button>
+            <div style="display:flex;gap:11px;padding-right:24px;">
+              <div style="width:30px;height:30px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#e3f6e9;">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#1f8a4c" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8.4l3 3 6-6.4"></path></svg>
+              </div>
+              <div style="flex:1;min-width:0;">
+                <div style="font-size:13.5px;font-weight:600;line-height:1.4;color:#21272a;">Revenue Ops Handbook re-synced</div>
+                <div style="margin-top:4px;font-size:12px;color:#697077;line-height:1.5;">12 changes · 6 saved answers may have changed</div>
+              </div>
+            </div>
+            <div style="flex:1;min-height:12px;"></div>
+            <button style="align-self:flex-start;display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 14px;border-radius:8px;border:1px solid #d0d5dd;background:#fff;color:#21272a;font-family:inherit;font-size:12.5px;font-weight:600;cursor:pointer;">Review impact</button>
+          </div>
+        </div>
+
+        <!-- MOST-ASKED TOPICS -->
+        <div style="margin-top:28px;display:flex;align-items:baseline;justify-content:space-between;">
+          <h2 style="margin:0;font-size:15px;font-weight:600;letter-spacing:-.01em;">Most-asked topics this week</h2>
+          <a style="font-size:12.5px;color:#2563d6;font-weight:500;text-decoration:none;cursor:pointer;display:inline-flex;align-items:center;gap:4px;">View all 41 topics<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 4l4 4-4 4"></path></svg></a>
+        </div>
+
+        <div style="margin-top:13px;background:#fff;border:1px solid #dde1e6;border-radius:8px;overflow:hidden;box-shadow:0 1px 2px rgba(16,24,40,.04);">
+          
+            <div style="display:flex;align-items:center;gap:14px;padding:13px 18px;border-bottom:1px solid #f0f2f5;">
+              <span style="flex:1;min-width:0;font-size:13.5px;font-weight:500;color:#21272a;">Refund & credits policy</span>
+              <span style="font-size:13px;font-weight:600;font-family:'IBM Plex Mono',monospace;color:#161616;width:74px;text-align:right;">142</span>
+              <span style="display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 11px;border-radius:8px;font-size:11.5px;font-weight:600;background:#e3f6e9;color:#1f8a4c;white-space:nowrap;min-width:150px;">
+                <span style="width:6px;height:6px;border-radius:50%;background:#42be65;"></span>Well covered · 95%
+              </span>
+            </div>
+          
+            <div style="display:flex;align-items:center;gap:14px;padding:13px 18px;border-bottom:1px solid #f0f2f5;">
+              <span style="flex:1;min-width:0;font-size:13.5px;font-weight:500;color:#21272a;">Expense & reimbursement</span>
+              <span style="font-size:13px;font-weight:600;font-family:'IBM Plex Mono',monospace;color:#161616;width:74px;text-align:right;">98</span>
+              <span style="display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 11px;border-radius:8px;font-size:11.5px;font-weight:600;background:#fff4e2;color:#9a6608;white-space:nowrap;min-width:150px;">
+                <span style="width:6px;height:6px;border-radius:50%;background:#f1a527;"></span>Partial
+              </span>
+            </div>
+          
+            <div style="display:flex;align-items:center;gap:14px;padding:13px 18px;border-bottom:1px solid #f0f2f5;">
+              <span style="flex:1;min-width:0;font-size:13.5px;font-weight:500;color:#21272a;">Data residency & compliance</span>
+              <span style="font-size:13px;font-weight:600;font-family:'IBM Plex Mono',monospace;color:#161616;width:74px;text-align:right;">76</span>
+              <span style="display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 11px;border-radius:8px;font-size:11.5px;font-weight:600;background:#fdecef;color:#c21d4e;white-space:nowrap;min-width:150px;">
+                <span style="width:6px;height:6px;border-radius:50%;background:#ee5396;"></span>Coverage gap
+              </span>
+            </div>
+          
+            <div style="display:flex;align-items:center;gap:14px;padding:13px 18px;border-bottom:1px solid #f0f2f5;">
+              <span style="flex:1;min-width:0;font-size:13.5px;font-weight:500;color:#21272a;">Parental & leave policy</span>
+              <span style="font-size:13px;font-weight:600;font-family:'IBM Plex Mono',monospace;color:#161616;width:74px;text-align:right;">54</span>
+              <span style="display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 11px;border-radius:8px;font-size:11.5px;font-weight:600;background:#fdecef;color:#c21d4e;white-space:nowrap;min-width:150px;">
+                <span style="width:6px;height:6px;border-radius:50%;background:#ee5396;"></span>No source
+              </span>
+            </div>
+          
+            <div style="display:flex;align-items:center;gap:14px;padding:13px 18px;border-bottom:1px solid #f0f2f5;">
+              <span style="flex:1;min-width:0;font-size:13.5px;font-weight:500;color:#21272a;">Security review SLA</span>
+              <span style="font-size:13px;font-weight:600;font-family:'IBM Plex Mono',monospace;color:#161616;width:74px;text-align:right;">38</span>
+              <span style="display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 11px;border-radius:8px;font-size:11.5px;font-weight:600;background:#fff4e2;color:#9a6608;white-space:nowrap;min-width:150px;">
+                <span style="width:6px;height:6px;border-radius:50%;background:#f1a527;"></span>Partial
+              </span>
+            </div>
+          
+        </div>
+      </div>
+
+      <!-- RIGHT ASIDE -->
+      <aside style="width:320px;flex-shrink:0;display:flex;flex-direction:column;gap:20px;">
+
+        <!-- AI briefing -->
+        <div style="border-radius:8px;padding:1.5px;background:linear-gradient(135deg,#0E9CA6,#4589ff,#a56eff);box-shadow:0 10px 26px rgba(69,137,255,.16);">
+          <div style="background:#fff;border-radius:7px;padding:16px 17px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;">
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div style="width:30px;height:30px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0E9CA6 0%,#4589ff 52%,#a56eff 100%);box-shadow:0 4px 10px rgba(69,137,255,.28);">
+                  <svg width="15" height="15" viewBox="0 0 16 16" fill="#fff"><path d="M8 1l1.55 4.35L14 7l-4.45 1.65L8 13l-1.55-4.35L2 7l4.45-1.65z"></path></svg>
+                </div>
+                <div style="line-height:1.2;">
+                  <div style="font-size:13px;font-weight:600;">AI briefing</div>
+                  <div style="font-size:11px;color:#697077;">Updated just now</div>
+                </div>
+              </div>
+              <span style="display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:600;color:#1f8a4c;padding:3px 8px;border-radius:8px;background:#e3f6e9;"><span style="width:6px;height:6px;border-radius:50%;background:#42be65;"></span>Live</span>
+            </div>
+            <p style="margin:13px 0 0;font-size:12.5px;line-height:1.65;color:#21272a;">Health is down <strong style="font-weight:600;color:#c21d4e;">3 pts</strong>, driven mostly by the stale 2024 Enterprise Agreement (8 mo) and a 61%-confidence cluster on data residency. Re-syncing one source and adding a data-residency doc would recover most of it.</p>
+            <p style="margin:10px 0 0;font-size:12.5px;line-height:1.6;color:#697077;">Want me to draft a re-sync request to the owner?</p>
+            <button style="margin-top:14px;display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 15px;border-radius:8px;border:none;color:#fff;font-family:inherit;font-size:12.5px;font-weight:600;cursor:pointer;background:linear-gradient(135deg,#0E9CA6 0%,#4589ff 52%,#a56eff 100%);box-shadow:0 4px 10px rgba(69,137,255,.26);">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h5l3 3v8H4z"></path><path d="M9 2.5v3h3"></path><path d="M6 9h4M6 11h2.8"></path></svg>
+              Draft request
+            </button>
+          </div>
+        </div>
+
+        <!-- Activity feed -->
+        <div style="background:#fff;border:1px solid #dde1e6;border-radius:8px;box-shadow:0 1px 2px rgba(16,24,40,.04);overflow:hidden;">
+          <div style="padding:14px 17px 12px;border-bottom:1px solid #eaedf1;display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:13.5px;font-weight:600;">Activity</span>
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:600;color:#697077;"><span style="width:6px;height:6px;border-radius:50%;background:#42be65;"></span>Live</span>
+          </div>
+          <div style="padding:4px 17px 8px;">
+            
+              <div style="display:flex;gap:11px;padding:11px 0;border-bottom:1px solid #f4f6f8;">
+                <div style="width:24px;height:24px;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:rgba(165,110,255,.13);">
+                  <span style="display:flex;align-items:center;justify-content:center;"><svg width="13" height="13" viewBox="0 0 16 16" fill="#7d3ec9"><path d="M8 1l1.55 4.35L14 7l-4.45 1.65L8 13l-1.55-4.35L2 7l4.45-1.65z"></path></svg></span>
+                </div>
+                <div style="flex:1;min-width:0;">
+                  <div style="font-size:12.5px;line-height:1.5;color:#21272a;">Answered “What’s our refund SLA?” · cited 3 sources</div>
+                  <div style="margin-top:3px;font-size:11px;color:#a2a9b0;">4 min ago</div>
+                </div>
+              </div>
+            
+              <div style="display:flex;gap:11px;padding:11px 0;border-bottom:1px solid #f4f6f8;">
+                <div style="width:24px;height:24px;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:rgba(69,137,255,.13);">
+                  <span style="display:flex;align-items:center;justify-content:center;"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#2563d6" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M13 8a5 5 0 1 1-1.5-3.5M13 2.5V5h-2.5"></path></svg></span>
+                </div>
+                <div style="flex:1;min-width:0;">
+                  <div style="font-size:12.5px;line-height:1.5;color:#21272a;">Synced Revenue Ops Handbook · 12 changes</div>
+                  <div style="margin-top:3px;font-size:11px;color:#a2a9b0;">1 hour ago</div>
+                </div>
+              </div>
+            
+              <div style="display:flex;gap:11px;padding:11px 0;border-bottom:1px solid #f4f6f8;">
+                <div style="width:24px;height:24px;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#fff4e2;">
+                  <span style="display:flex;align-items:center;justify-content:center;"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#b8740b" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M8 1.8l6.4 11.2H1.6z"></path><path d="M8 6.4v3.1M8 11.4v.05"></path></svg></span>
+                </div>
+                <div style="flex:1;min-width:0;">
+                  <div style="font-size:12.5px;line-height:1.5;color:#21272a;">Flagged data-residency coverage gap</div>
+                  <div style="margin-top:3px;font-size:11px;color:#a2a9b0;">2 hours ago</div>
+                </div>
+              </div>
+            
+              <div style="display:flex;gap:11px;padding:11px 0;border-bottom:1px solid #f4f6f8;">
+                <div style="width:24px;height:24px;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:rgba(165,110,255,.13);">
+                  <span style="display:flex;align-items:center;justify-content:center;"><svg width="13" height="13" viewBox="0 0 16 16" fill="#7d3ec9"><path d="M8 1l1.55 4.35L14 7l-4.45 1.65L8 13l-1.55-4.35L2 7l4.45-1.65z"></path></svg></span>
+                </div>
+                <div style="flex:1;min-width:0;">
+                  <div style="font-size:12.5px;line-height:1.5;color:#21272a;">Saved “Parental leave top-up” to workspace</div>
+                  <div style="margin-top:3px;font-size:11px;color:#a2a9b0;">3 hours ago</div>
+                </div>
+              </div>
+            
+              <div style="display:flex;gap:11px;padding:11px 0;border-bottom:1px solid #f4f6f8;">
+                <div style="width:24px;height:24px;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#e3f6e9;">
+                  <span style="display:flex;align-items:center;justify-content:center;"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#1f8a4c" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M3.5 8.4l3 3 6-6.4"></path></svg></span>
+                </div>
+                <div style="flex:1;min-width:0;">
+                  <div style="font-size:12.5px;line-height:1.5;color:#21272a;">Enterprise Refund Policy re-verified by owner</div>
+                  <div style="margin-top:3px;font-size:11px;color:#a2a9b0;">5 hours ago</div>
+                </div>
+              </div>
+            
+              <div style="display:flex;gap:11px;padding:11px 0;border-bottom:1px solid #f4f6f8;">
+                <div style="width:24px;height:24px;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:rgba(69,137,255,.13);">
+                  <span style="display:flex;align-items:center;justify-content:center;"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#2563d6" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M13 8a5 5 0 1 1-1.5-3.5M13 2.5V5h-2.5"></path></svg></span>
+                </div>
+                <div style="flex:1;min-width:0;">
+                  <div style="font-size:12.5px;line-height:1.5;color:#21272a;">Re-indexed 2024 Enterprise Agreement</div>
+                  <div style="margin-top:3px;font-size:11px;color:#a2a9b0;">Yesterday</div>
+                </div>
+              </div>
+            
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</script>
+<script type="text/html" data-view="ask">
+<!-- ============ MAIN ============ -->
+  <div style="flex:1;height:100%;display:flex;flex-direction:column;min-width:0;">
+
+    <!-- Top bar -->
+    <header style="height:48px;flex-shrink:0;background:#fff;border-bottom:1px solid #dde1e6;display:flex;align-items:center;justify-content:space-between;padding:0 24px;">
+      <div style="display:flex;align-items:center;gap:8px;font-size:13px;">
+        <span style="color:#697077;">Workspace</span>
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#a2a9b0" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 4l4 4-4 4"></path></svg>
+        <span style="color:#161616;font-weight:600;">Ask</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;">
+        <button style="width:34px;height:34px;border:none;background:transparent;cursor:pointer;border-radius:8px;display:flex;align-items:center;justify-content:center;position:relative;">
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#42484f" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2a3.4 3.4 0 0 0-3.4 3.4c0 2.9-1.2 3.9-1.2 3.9h9.2s-1.2-1-1.2-3.9A3.4 3.4 0 0 0 8 2z"></path><path d="M6.7 12.5a1.4 1.4 0 0 0 2.6 0"></path></svg>
+          <span style="position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:#ee5396;border:1.5px solid #fff;"></span>
+        </button>
+        <div style="width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:600;color:#fff;background:linear-gradient(135deg,#1192e8,#a56eff);">SO</div>
+      </div>
+    </header>
+
+    <!-- Scroll content -->
+    <div style="flex:1;overflow:auto;padding:28px 24px 32px;">
+
+      <!-- Heading -->
+      <h1 style="margin:0;font-size:26px;font-weight:600;letter-spacing:-.02em;">Ask anything.</h1>
+      <p style="margin:5px 0 0;font-size:14px;color:#697077;">One answer, every source - across Acme Corp's knowledge base.</p>
+
+      <!-- KPI cards -->
+      <div style="margin-top:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+
+        <div style="border-radius:8px;padding:16px 18px;color:#fff;background:linear-gradient(135deg,#4589ff 0%,#1192e8 100%);box-shadow:0 8px 20px rgba(17,146,232,.18);">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:12.5px;font-weight:500;color:rgba(255,255,255,.88);">Questions this week</span>
+            <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3.5h10v6H7l-3 2.3V9.5H3z"></path><path d="M6.3 6.4c0-.9.7-1.5 1.7-1.5s1.7.6 1.7 1.4c0 1.2-1.5 1-1.5 1.9"></path><path d="M8 8.9v.05"></path></svg>
+          </div>
+          <div style="margin-top:10px;display:flex;align-items:flex-end;gap:8px;">
+            <span style="font-size:30px;font-weight:600;letter-spacing:-.02em;line-height:1;">1,284</span>
+            <span style="display:inline-flex;align-items:center;gap:3px;font-size:11.5px;font-weight:600;padding:2px 6px;border-radius:6px;background:rgba(255,255,255,.18);margin-bottom:3px;">
+              <svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12.5V4M4.5 7L8 3.5 11.5 7"></path></svg>12%
+            </span>
+          </div>
+        </div>
+
+        <div style="border-radius:8px;padding:16px 18px;color:#fff;background:linear-gradient(135deg,#0E9CA6 0%,#42be65 100%);box-shadow:0 8px 20px rgba(14,156,166,.18);">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:12.5px;font-weight:500;color:rgba(255,255,255,.88);">Answer coverage</span>
+            <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2l5 1.8v4.1c0 3.3-2.5 5.4-5 6.5-2.5-1.1-5-3.2-5-6.5V3.8z"></path><path d="M5.8 8.2l1.6 1.6L10.5 6"></path></svg>
+          </div>
+          <div style="margin-top:10px;display:flex;align-items:flex-end;gap:8px;">
+            <span style="font-size:30px;font-weight:600;letter-spacing:-.02em;line-height:1;">82%</span>
+            <span style="font-size:11.5px;color:rgba(255,255,255,.82);margin-bottom:4px;">of questions answered</span>
+          </div>
+        </div>
+
+        <div style="border-radius:8px;padding:16px 18px;color:#fff;background:linear-gradient(135deg,#a56eff 0%,#ee5396 100%);box-shadow:0 8px 20px rgba(165,110,255,.18);">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:12.5px;font-weight:500;color:rgba(255,255,255,.88);">Sources indexed</span>
+            <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.2l5.5 2.8L8 7.8 2.5 5z"></path><path d="M2.5 8L8 10.8 13.5 8M2.5 11L8 13.8 13.5 11"></path></svg>
+          </div>
+          <div style="margin-top:10px;display:flex;align-items:flex-end;gap:8px;">
+            <span style="font-size:30px;font-weight:600;letter-spacing:-.02em;line-height:1;">143</span>
+            <span style="font-size:11.5px;color:rgba(255,255,255,.82);margin-bottom:4px;">· 14 stale</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search bar -->
+      <div style="margin-top:22px;border-radius:8px;padding:1.5px;background:linear-gradient(120deg,#0E9CA6,#4589ff,#a56eff);box-shadow:0 10px 28px rgba(69,137,255,.16);">
+        <div style="display:flex;align-items:center;gap:12px;background:#fff;border-radius:7px;padding:0 8px 0 16px;height:54px;">
+          <svg width="19" height="19" viewBox="0 0 16 16" fill="none" stroke="#697077" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="4.3"></circle><path d="M10.2 10.2L14 14"></path></svg>
+          <span style="flex:1;font-size:15px;color:#21272a;">What's our refund policy for enterprise customers?<span style="display:inline-block;width:1.5px;height:17px;background:#4589ff;margin-left:2px;vertical-align:-3px;"></span></span>
+          <button style="height:40px;border:none;cursor:pointer;border-radius:8px;display:flex;align-items:center;gap:8px;padding:0 20px;color:#fff;font-family:inherit;font-size:14px;font-weight:600;background:linear-gradient(135deg,#0E9CA6 0%,#4589ff 52%,#a56eff 100%);box-shadow:0 4px 12px rgba(69,137,255,.3);">
+            Ask
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h9M8.5 4.5L12 8l-3.5 3.5"></path></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- 12-col split -->
+      <div style="margin-top:22px;display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:start;">
+
+        <!-- LEFT: answer + follow-ups (8 cols) -->
+        <div style="grid-column:span 8;">
+
+          <!-- Answer card -->
+          <div style="background:#fff;border:1px solid #dde1e6;border-radius:8px;overflow:hidden;box-shadow:0 1px 2px rgba(16,24,40,.04);">
+            <div style="height:4px;background:linear-gradient(90deg,#0E9CA6,#4589ff,#a56eff);"></div>
+            <div style="padding:18px 22px 20px;">
+
+              <!-- Sender row -->
+              <div style="display:flex;align-items:center;justify-content:space-between;">
+                <div style="display:flex;align-items:center;gap:11px;">
+                  <div style="width:36px;height:36px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0E9CA6 0%,#4589ff 52%,#a56eff 100%);box-shadow:0 4px 10px rgba(69,137,255,.28);">
+                    <svg width="18" height="18" viewBox="0 0 16 16" fill="#fff"><path d="M8 1l1.55 4.35L14 7l-4.45 1.65L8 13l-1.55-4.35L2 7l4.45-1.65z"></path></svg>
+                  </div>
+                  <div style="line-height:1.3;">
+                    <div style="font-size:13.5px;font-weight:600;">KnowledgeOS AI</div>
+                    <div style="font-size:11.5px;color:#697077;">synthesized from 3 sources · just now</div>
+                  </div>
+                </div>
+                <!-- confidence -->
+                <div style="display:flex;align-items:center;gap:8px;padding:5px 10px 5px 11px;border-radius:8px;background:#f2f7f3;border:1px solid #d6ecdc;">
+                  <span style="font-size:11px;color:#697077;font-weight:500;">Confidence</span>
+                  <span style="display:flex;align-items:flex-end;gap:2px;height:13px;">
+                    <span style="width:3px;height:6px;border-radius:1px;background:#42be65;"></span>
+                    <span style="width:3px;height:9px;border-radius:1px;background:#42be65;"></span>
+                    <span style="width:3px;height:13px;border-radius:1px;background:#42be65;"></span>
+                  </span>
+                  <span style="font-size:12px;font-weight:700;color:#24a148;">High</span>
+                </div>
+              </div>
+
+              <!-- Prose -->
+              <div style="margin-top:16px;font-size:14.5px;line-height:1.7;color:#21272a;">
+                Enterprise customers are eligible for a <strong style="font-weight:600;">full refund within 30 days</strong> of the initial contract start date<span style="display:inline-flex;align-items:center;justify-content:center;min-width:16px;height:16px;padding:0 4px;margin:0 1px;border-radius:6px;font-size:10.5px;font-weight:600;font-family:'IBM Plex Mono',monospace;vertical-align:1px;background:rgba(14,156,166,.12);color:#0a7c84;">1</span>. After 30 days, refunds are <strong style="font-weight:600;">prorated</strong> based on unused subscription time and require approval from the Revenue Operations team<span style="display:inline-flex;align-items:center;justify-content:center;min-width:16px;height:16px;padding:0 4px;margin:0 1px;border-radius:6px;font-size:10.5px;font-weight:600;font-family:'IBM Plex Mono',monospace;vertical-align:1px;background:rgba(69,137,255,.12);color:#2563d6;">2</span>. Mid-contract cancellations outside the refund window are handled as <strong style="font-weight:600;">account credits</strong> rather than cash refunds, per the 2024 enterprise agreement update<span style="display:inline-flex;align-items:center;justify-content:center;min-width:16px;height:16px;padding:0 4px;margin:0 1px;border-radius:6px;font-size:10.5px;font-weight:600;font-family:'IBM Plex Mono',monospace;vertical-align:1px;background:rgba(241,142,40,.16);color:#b86a14;">3</span>.
+              </div>
+
+              <!-- Action row -->
+              <div style="margin-top:20px;padding-top:16px;border-top:1px solid #eaedf1;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                <button style="display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;border:1px solid #d0d5dd;background:#fff;color:#21272a;font-family:inherit;font-size:12.5px;font-weight:500;cursor:pointer;">
+                  <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#4589ff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.2h10M3 7h10M4.5 9.8h7M6 12.6h4"></path></svg>
+                  Summarize
+                </button>
+                <button style="display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;border:1px solid #d0d5dd;background:#fff;color:#21272a;font-family:inherit;font-size:12.5px;font-weight:500;cursor:pointer;">
+                  <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#a56eff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.2A3.7 3.7 0 0 0 5.6 9c.45.4.7.95.7 1.55v.25h3.4v-.25c0-.6.25-1.15.7-1.55A3.7 3.7 0 0 0 8 2.2z"></path><path d="M6.5 13h3M6.9 14.4h2.2"></path></svg>
+                  Explain simpler
+                </button>
+                <button style="display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;border:1px solid #d0d5dd;background:#fff;color:#21272a;font-family:inherit;font-size:12.5px;font-weight:500;cursor:pointer;">
+                  <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#0E9CA6" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="4" cy="8" r="1.7"></circle><circle cx="12" cy="4" r="1.7"></circle><circle cx="12" cy="12" r="1.7"></circle><path d="M5.5 7.2l5-2.4M5.5 8.8l5 2.4"></path></svg>
+                  Find related
+                </button>
+                <button style="display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;border:1px solid #d0d5dd;background:#fff;color:#21272a;font-family:inherit;font-size:12.5px;font-weight:500;cursor:pointer;">
+                  <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#1192e8" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h5l3 3v8H4z"></path><path d="M9 2.5v3h3"></path><path d="M6 9h4M6 11h2.8"></path></svg>
+                  Draft a doc
+                </button>
+                <div style="flex:1;"></div>
+                <button style="display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;border:1px solid #d0d5dd;background:#fff;color:#42484f;font-family:inherit;font-size:12.5px;font-weight:500;cursor:pointer;">
+                  <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.6h8v11l-4-2.6-4 2.6z"></path></svg>
+                  Save
+                </button>
+                <button style="display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;border:1px solid #d0d5dd;background:#fff;color:#42484f;font-family:inherit;font-size:12.5px;font-weight:500;cursor:pointer;">
+                  <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5.2" y="5.2" width="8" height="8" rx="1.4"></rect><path d="M2.8 10.8V2.8h8"></path></svg>
+                  Copy
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ask a follow-up -->
+          <div style="margin-top:18px;font-size:12.5px;font-weight:600;color:#42484f;">Ask a follow-up</div>
+          <div style="margin-top:10px;display:flex;gap:9px;flex-wrap:wrap;">
+            <button style="display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;border:1px solid #d0d5dd;background:#fff;color:#21272a;font-family:inherit;font-size:12.5px;cursor:pointer;">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#697077" stroke-width="1.5" stroke-linecap="round"><path d="M8 3.5v9M3.5 8h9"></path></svg>
+              What about mid-contract downgrades?
+            </button>
+            <button style="display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;border:1px solid #d0d5dd;background:#fff;color:#21272a;font-family:inherit;font-size:12.5px;cursor:pointer;">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#697077" stroke-width="1.5" stroke-linecap="round"><path d="M8 3.5v9M3.5 8h9"></path></svg>
+              Who approves refund exceptions?
+            </button>
+            <button style="display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;border:1px solid #d0d5dd;background:#fff;color:#21272a;font-family:inherit;font-size:12.5px;cursor:pointer;">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#697077" stroke-width="1.5" stroke-linecap="round"><path d="M8 3.5v9M3.5 8h9"></path></svg>
+              Show the policy document
+            </button>
+          </div>
+        </div>
+
+        <!-- RIGHT: sources card (4 cols) -->
+        <div style="grid-column:span 4;background:#fff;border:1px solid #dde1e6;border-radius:8px;box-shadow:0 1px 2px rgba(16,24,40,.04);display:flex;flex-direction:column;">
+          <div style="padding:15px 18px 13px;border-bottom:1px solid #eaedf1;display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:13.5px;font-weight:600;">Sources</span>
+            <span style="font-size:11.5px;font-weight:500;color:#697077;padding:3px 8px;border-radius:6px;background:#f2f4f8;">3 used</span>
+          </div>
+
+          <div style="padding:6px 14px 4px;">
+
+            <!-- Source 1 -->
+            <div style="padding:13px 6px;border-bottom:1px solid #f0f2f5;">
+              <div style="display:flex;gap:11px;">
+                <div style="width:22px;height:22px;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;font-family:'IBM Plex Mono',monospace;color:#fff;background:#0E9CA6;">1</div>
+                <div style="flex:1;min-width:0;">
+                  <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+                    <span style="font-size:13px;font-weight:600;color:#161616;">Enterprise Refund Policy</span>
+                    <span style="display:inline-flex;align-items:center;gap:4px;font-size:10.5px;color:#24a148;font-weight:500;white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#42be65;"></span>Fresh</span>
+                  </div>
+                  <div style="margin-top:8px;height:4px;border-radius:3px;background:#eef0f3;overflow:hidden;"><div style="width:95%;height:100%;border-radius:3px;background:linear-gradient(90deg,#0E9CA6,#4589ff);"></div></div>
+                  <div style="margin-top:8px;display:flex;align-items:center;justify-content:space-between;">
+                    <span style="font-size:11px;font-family:'IBM Plex Mono',monospace;color:#697077;">refund-policy-2024.pdf</span>
+                    <span style="font-size:10.5px;font-weight:600;color:#42484f;">95%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Source 2 -->
+            <div style="padding:13px 6px;border-bottom:1px solid #f0f2f5;">
+              <div style="display:flex;gap:11px;">
+                <div style="width:22px;height:22px;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;font-family:'IBM Plex Mono',monospace;color:#fff;background:#4589ff;">2</div>
+                <div style="flex:1;min-width:0;">
+                  <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+                    <span style="font-size:13px;font-weight:600;color:#161616;">Revenue Ops Handbook</span>
+                    <span style="display:inline-flex;align-items:center;gap:4px;font-size:10.5px;color:#24a148;font-weight:500;white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#42be65;"></span>Fresh</span>
+                  </div>
+                  <div style="margin-top:8px;height:4px;border-radius:3px;background:#eef0f3;overflow:hidden;"><div style="width:88%;height:100%;border-radius:3px;background:linear-gradient(90deg,#4589ff,#a56eff);"></div></div>
+                  <div style="margin-top:8px;display:flex;align-items:center;justify-content:space-between;">
+                    <span style="font-size:11px;font-family:'IBM Plex Mono',monospace;color:#697077;">revops-handbook.md</span>
+                    <span style="font-size:10.5px;font-weight:600;color:#42484f;">88%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Source 3 (stale) -->
+            <div style="padding:13px 6px;">
+              <div style="display:flex;gap:11px;">
+                <div style="width:22px;height:22px;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;font-family:'IBM Plex Mono',monospace;color:#fff;background:#f18e28;">3</div>
+                <div style="flex:1;min-width:0;">
+                  <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+                    <span style="font-size:13px;font-weight:600;color:#161616;">2024 Enterprise Agreement</span>
+                    <span style="display:inline-flex;align-items:center;gap:4px;font-size:10.5px;color:#b86a14;font-weight:600;white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#f1c21b;"></span>Stale · 8 mo</span>
+                  </div>
+                  <div style="margin-top:8px;height:4px;border-radius:3px;background:#eef0f3;overflow:hidden;"><div style="width:72%;height:100%;border-radius:3px;background:linear-gradient(90deg,#f1c21b,#ee5396);"></div></div>
+                  <div style="margin-top:8px;display:flex;align-items:center;justify-content:space-between;">
+                    <span style="font-size:11px;font-family:'IBM Plex Mono',monospace;color:#697077;">enterprise-msa-2024.docx</span>
+                    <span style="font-size:10.5px;font-weight:600;color:#42484f;">72%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="padding:12px 14px 14px;margin-top:auto;border-top:1px solid #eaedf1;">
+            <button style="width:100%;height:38px;display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:8px;border:1px solid #4589ff;background:#fff;color:#2563d6;font-family:inherit;font-size:12.5px;font-weight:600;cursor:pointer;">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="4.3"></circle><path d="M10.2 10.2L14 14"></path></svg>
+              Search within these sources
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent across workspace -->
+      <div style="margin-top:30px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <h2 style="margin:0;font-size:15px;font-weight:600;letter-spacing:-.01em;">Recent across your workspace</h2>
+          <a style="font-size:12.5px;color:#2563d6;font-weight:500;text-decoration:none;cursor:pointer;display:inline-flex;align-items:center;gap:4px;">View all<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 4l4 4-4 4"></path></svg></a>
+        </div>
+
+        <div style="margin-top:14px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
+
+          <div style="background:#fff;border:1px solid #dde1e6;border-radius:8px;padding:16px;box-shadow:0 1px 2px rgba(16,24,40,.04);display:flex;flex-direction:column;min-height:138px;">
+            <div style="font-size:13.5px;font-weight:600;line-height:1.4;color:#21272a;text-wrap:pretty;">How do we handle GDPR data deletion requests?</div>
+            <div style="flex:1;"></div>
+            <div style="margin-top:14px;display:flex;align-items:center;justify-content:space-between;">
+              <div style="display:flex;align-items:center;gap:7px;">
+                <div style="width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:600;color:#fff;background:#0E9CA6;">MR</div>
+                <span style="font-size:11.5px;color:#697077;">Maya R.</span>
+              </div>
+              <span style="font-size:11px;color:#a2a9b0;">2h ago</span>
+            </div>
+            <div style="margin-top:11px;padding-top:11px;border-top:1px solid #f0f2f5;display:flex;align-items:center;gap:6px;font-size:11px;color:#697077;">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#a56eff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.2l5.5 2.8L8 7.8 2.5 5z"></path><path d="M2.5 8L8 10.8 13.5 8"></path></svg>
+              4 sources
+            </div>
+          </div>
+
+          <div style="background:#fff;border:1px solid #dde1e6;border-radius:8px;padding:16px;box-shadow:0 1px 2px rgba(16,24,40,.04);display:flex;flex-direction:column;min-height:138px;">
+            <div style="font-size:13.5px;font-weight:600;line-height:1.4;color:#21272a;text-wrap:pretty;">What's the SLA for enterprise support tiers?</div>
+            <div style="flex:1;"></div>
+            <div style="margin-top:14px;display:flex;align-items:center;justify-content:space-between;">
+              <div style="display:flex;align-items:center;gap:7px;">
+                <div style="width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:600;color:#fff;background:#4589ff;">DK</div>
+                <span style="font-size:11.5px;color:#697077;">Devon K.</span>
+              </div>
+              <span style="font-size:11px;color:#a2a9b0;">5h ago</span>
+            </div>
+            <div style="margin-top:11px;padding-top:11px;border-top:1px solid #f0f2f5;display:flex;align-items:center;gap:6px;font-size:11px;color:#697077;">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#a56eff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.2l5.5 2.8L8 7.8 2.5 5z"></path><path d="M2.5 8L8 10.8 13.5 8"></path></svg>
+              2 sources
+            </div>
+          </div>
+
+          <div style="background:#fff;border:1px solid #dde1e6;border-radius:8px;padding:16px;box-shadow:0 1px 2px rgba(16,24,40,.04);display:flex;flex-direction:column;min-height:138px;">
+            <div style="font-size:13.5px;font-weight:600;line-height:1.4;color:#21272a;text-wrap:pretty;">Which regions are approved for data residency?</div>
+            <div style="flex:1;"></div>
+            <div style="margin-top:14px;display:flex;align-items:center;justify-content:space-between;">
+              <div style="display:flex;align-items:center;gap:7px;">
+                <div style="width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:600;color:#fff;background:#a56eff;">PN</div>
+                <span style="font-size:11.5px;color:#697077;">Priya N.</span>
+              </div>
+              <span style="font-size:11px;color:#a2a9b0;">Yesterday</span>
+            </div>
+            <div style="margin-top:11px;padding-top:11px;border-top:1px solid #f0f2f5;display:flex;align-items:center;gap:6px;font-size:11px;color:#697077;">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#a56eff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.2l5.5 2.8L8 7.8 2.5 5z"></path><path d="M2.5 8L8 10.8 13.5 8"></path></svg>
+              3 sources
+            </div>
+          </div>
+
+          <div style="background:#fff;border:1px solid #dde1e6;border-radius:8px;padding:16px;box-shadow:0 1px 2px rgba(16,24,40,.04);display:flex;flex-direction:column;min-height:138px;">
+            <div style="font-size:13.5px;font-weight:600;line-height:1.4;color:#21272a;text-wrap:pretty;">Onboarding checklist for new enterprise accounts?</div>
+            <div style="flex:1;"></div>
+            <div style="margin-top:14px;display:flex;align-items:center;justify-content:space-between;">
+              <div style="display:flex;align-items:center;gap:7px;">
+                <div style="width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:600;color:#fff;background:#ee5396;">LB</div>
+                <span style="font-size:11.5px;color:#697077;">Liam B.</span>
+              </div>
+              <span style="font-size:11px;color:#a2a9b0;">2d ago</span>
+            </div>
+            <div style="margin-top:11px;padding-top:11px;border-top:1px solid #f0f2f5;display:flex;align-items:center;gap:6px;font-size:11px;color:#697077;">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#a56eff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.2l5.5 2.8L8 7.8 2.5 5z"></path><path d="M2.5 8L8 10.8 13.5 8"></path></svg>
+              5 sources
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</script>
+<script type="text/html" data-view="provenance">
+<!-- ============ MAIN ============ -->
+  <div style="flex:1;height:100%;display:flex;flex-direction:column;min-width:0;">
+
+    <!-- Top bar -->
+    <header style="height:48px;flex-shrink:0;background:#fff;border-bottom:1px solid #dde1e6;display:flex;align-items:center;justify-content:space-between;padding:0 24px;">
+      <div style="display:flex;align-items:center;gap:8px;font-size:13px;">
+        <span style="color:#697077;">Workspace</span>
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#a2a9b0" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 4l4 4-4 4"></path></svg>
+        <span style="color:#161616;font-weight:600;">Ask</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;">
+        <button style="width:34px;height:34px;border:none;background:transparent;cursor:pointer;border-radius:8px;display:flex;align-items:center;justify-content:center;position:relative;">
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#42484f" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2a3.4 3.4 0 0 0-3.4 3.4c0 2.9-1.2 3.9-1.2 3.9h9.2s-1.2-1-1.2-3.9A3.4 3.4 0 0 0 8 2z"></path><path d="M6.7 12.5a1.4 1.4 0 0 0 2.6 0"></path></svg>
+          <span style="position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:#ee5396;border:1.5px solid #fff;"></span>
+        </button>
+        <div style="width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:600;color:#fff;background:linear-gradient(135deg,#1192e8,#a56eff);">SO</div>
+      </div>
+    </header>
+
+    <!-- Scroll content -->
+    <div style="flex:1;overflow:auto;padding:28px 24px 32px;">
+
+      <!-- Heading -->
+      <h1 style="margin:0;font-size:26px;font-weight:600;letter-spacing:-.02em;">Ask anything.</h1>
+      <p style="margin:5px 0 0;font-size:14px;color:#697077;">One answer, every source - across Acme Corp's knowledge base.</p>
+
+      <!-- KPI cards -->
+      <div style="margin-top:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+
+        <div style="border-radius:8px;padding:16px 18px;color:#fff;background:linear-gradient(135deg,#4589ff 0%,#1192e8 100%);box-shadow:0 8px 20px rgba(17,146,232,.18);">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:12.5px;font-weight:500;color:rgba(255,255,255,.88);">Questions this week</span>
+            <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3.5h10v6H7l-3 2.3V9.5H3z"></path><path d="M6.3 6.4c0-.9.7-1.5 1.7-1.5s1.7.6 1.7 1.4c0 1.2-1.5 1-1.5 1.9"></path><path d="M8 8.9v.05"></path></svg>
+          </div>
+          <div style="margin-top:10px;display:flex;align-items:flex-end;gap:8px;">
+            <span style="font-size:30px;font-weight:600;letter-spacing:-.02em;line-height:1;">1,284</span>
+            <span style="display:inline-flex;align-items:center;gap:3px;font-size:11.5px;font-weight:600;padding:2px 6px;border-radius:6px;background:rgba(255,255,255,.18);margin-bottom:3px;">
+              <svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12.5V4M4.5 7L8 3.5 11.5 7"></path></svg>12%
+            </span>
+          </div>
+        </div>
+
+        <div style="border-radius:8px;padding:16px 18px;color:#fff;background:linear-gradient(135deg,#0E9CA6 0%,#42be65 100%);box-shadow:0 8px 20px rgba(14,156,166,.18);">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:12.5px;font-weight:500;color:rgba(255,255,255,.88);">Answer coverage</span>
+            <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2l5 1.8v4.1c0 3.3-2.5 5.4-5 6.5-2.5-1.1-5-3.2-5-6.5V3.8z"></path><path d="M5.8 8.2l1.6 1.6L10.5 6"></path></svg>
+          </div>
+          <div style="margin-top:10px;display:flex;align-items:flex-end;gap:8px;">
+            <span style="font-size:30px;font-weight:600;letter-spacing:-.02em;line-height:1;">82%</span>
+            <span style="font-size:11.5px;color:rgba(255,255,255,.82);margin-bottom:4px;">of questions answered</span>
+          </div>
+        </div>
+
+        <div style="border-radius:8px;padding:16px 18px;color:#fff;background:linear-gradient(135deg,#a56eff 0%,#ee5396 100%);box-shadow:0 8px 20px rgba(165,110,255,.18);">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:12.5px;font-weight:500;color:rgba(255,255,255,.88);">Sources indexed</span>
+            <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.2l5.5 2.8L8 7.8 2.5 5z"></path><path d="M2.5 8L8 10.8 13.5 8M2.5 11L8 13.8 13.5 11"></path></svg>
+          </div>
+          <div style="margin-top:10px;display:flex;align-items:flex-end;gap:8px;">
+            <span style="font-size:30px;font-weight:600;letter-spacing:-.02em;line-height:1;">143</span>
+            <span style="font-size:11.5px;color:rgba(255,255,255,.82);margin-bottom:4px;">· 14 stale</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search bar -->
+      <div style="margin-top:22px;border-radius:8px;padding:1.5px;background:linear-gradient(120deg,#0E9CA6,#4589ff,#a56eff);box-shadow:0 10px 28px rgba(69,137,255,.16);">
+        <div style="display:flex;align-items:center;gap:12px;background:#fff;border-radius:7px;padding:0 8px 0 16px;height:54px;">
+          <svg width="19" height="19" viewBox="0 0 16 16" fill="none" stroke="#697077" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="4.3"></circle><path d="M10.2 10.2L14 14"></path></svg>
+          <span style="flex:1;font-size:15px;color:#21272a;">What's our refund policy for enterprise customers?<span style="display:inline-block;width:1.5px;height:17px;background:#4589ff;margin-left:2px;vertical-align:-3px;"></span></span>
+          <button style="height:40px;border:none;cursor:pointer;border-radius:8px;display:flex;align-items:center;gap:8px;padding:0 20px;color:#fff;font-family:inherit;font-size:14px;font-weight:600;background:linear-gradient(135deg,#0E9CA6 0%,#4589ff 52%,#a56eff 100%);box-shadow:0 4px 12px rgba(69,137,255,.3);">
+            Ask
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h9M8.5 4.5L12 8l-3.5 3.5"></path></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- 12-col split -->
+      <div style="margin-top:22px;display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:start;">
+
+        <!-- LEFT: answer + follow-ups (8 cols) -->
+        <div style="grid-column:span 8;">
+
+          <!-- Answer card -->
+          <div style="background:#fff;border:1px solid #dde1e6;border-radius:8px;overflow:hidden;box-shadow:0 1px 2px rgba(16,24,40,.04);">
+            <div style="height:4px;background:linear-gradient(90deg,#0E9CA6,#4589ff,#a56eff);"></div>
+            <div style="padding:18px 22px 20px;">
+
+              <!-- Sender row -->
+              <div style="display:flex;align-items:center;justify-content:space-between;">
+                <div style="display:flex;align-items:center;gap:11px;">
+                  <div style="width:36px;height:36px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0E9CA6 0%,#4589ff 52%,#a56eff 100%);box-shadow:0 4px 10px rgba(69,137,255,.28);">
+                    <svg width="18" height="18" viewBox="0 0 16 16" fill="#fff"><path d="M8 1l1.55 4.35L14 7l-4.45 1.65L8 13l-1.55-4.35L2 7l4.45-1.65z"></path></svg>
+                  </div>
+                  <div style="line-height:1.3;">
+                    <div style="font-size:13.5px;font-weight:600;">KnowledgeOS AI</div>
+                    <div style="font-size:11.5px;color:#697077;">synthesized from 3 sources · just now</div>
+                  </div>
+                </div>
+                <!-- confidence -->
+                <div style="display:flex;align-items:center;gap:8px;padding:5px 10px 5px 11px;border-radius:8px;background:#f2f7f3;border:1px solid #d6ecdc;">
+                  <span style="font-size:11px;color:#697077;font-weight:500;">Confidence</span>
+                  <span style="display:flex;align-items:flex-end;gap:2px;height:13px;">
+                    <span style="width:3px;height:6px;border-radius:1px;background:#42be65;"></span>
+                    <span style="width:3px;height:9px;border-radius:1px;background:#42be65;"></span>
+                    <span style="width:3px;height:13px;border-radius:1px;background:#42be65;"></span>
+                  </span>
+                  <span style="font-size:12px;font-weight:700;color:#24a148;">High</span>
+                </div>
+              </div>
+
+              <!-- Prose -->
+              <div style="margin-top:16px;font-size:14.5px;line-height:1.7;color:#21272a;">
+                Enterprise customers are eligible for a <strong style="font-weight:600;">full refund within 30 days</strong> of the initial contract start date<span style="display:inline-flex;align-items:center;justify-content:center;min-width:17px;height:17px;padding:0 4px;margin:0 1px;border-radius:6px;font-size:10.5px;font-weight:600;font-family:'IBM Plex Mono',monospace;vertical-align:1px;background:#0E9CA6;color:#fff;box-shadow:0 0 0 3px rgba(14,156,166,.18);">1</span>. After 30 days, refunds are <strong style="font-weight:600;">prorated</strong> based on unused subscription time and require approval from the Revenue Operations team<span style="display:inline-flex;align-items:center;justify-content:center;min-width:16px;height:16px;padding:0 4px;margin:0 1px;border-radius:6px;font-size:10.5px;font-weight:600;font-family:'IBM Plex Mono',monospace;vertical-align:1px;background:rgba(69,137,255,.12);color:#2563d6;">2</span>. Mid-contract cancellations outside the refund window are handled as <strong style="font-weight:600;">account credits</strong> rather than cash refunds, per the 2024 enterprise agreement update<span style="display:inline-flex;align-items:center;justify-content:center;min-width:16px;height:16px;padding:0 4px;margin:0 1px;border-radius:6px;font-size:10.5px;font-weight:600;font-family:'IBM Plex Mono',monospace;vertical-align:1px;background:rgba(241,142,40,.16);color:#b86a14;">3</span>.
+              </div>
+
+              <!-- Provenance panel (citation [1] opened) -->
+              <div style="margin-top:16px;border:1px solid #b8e3e6;border-radius:8px;overflow:hidden;background:linear-gradient(180deg,#f3fbfb 0%,#fbfdfd 60%);box-shadow:0 6px 18px rgba(14,156,166,.1);">
+                <div style="display:flex;align-items:flex-start;gap:11px;padding:14px 16px 0;">
+                  <div style="width:22px;height:22px;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;font-family:'IBM Plex Mono',monospace;color:#fff;background:#0E9CA6;box-shadow:0 2px 6px rgba(14,156,166,.4);">1</div>
+                  <div style="flex:1;min-width:0;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
+                      <span style="font-size:13.5px;font-weight:600;color:#0a5a60;">Source 1 · Enterprise Refund Policy</span>
+                      <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;color:#0a7c84;padding:3px 9px;border-radius:8px;background:rgba(14,156,166,.12);"><span style="width:6px;height:6px;border-radius:50%;background:#42be65;"></span>Fresh · 95%</span>
+                    </div>
+                    <div style="margin-top:5px;display:flex;align-items:center;gap:7px;flex-wrap:wrap;font-size:11.5px;color:#5a6570;">
+                      <span style="font-family:'IBM Plex Mono',monospace;color:#0a7c84;">refund-policy-2024.pdf</span>
+                      <span style="color:#c2ccd4;">·</span><span>owned by Revenue Operations</span>
+                      <span style="color:#c2ccd4;">·</span><span>updated 3 months ago</span>
+                    </div>
+                  </div>
+                </div>
+                <div style="padding:14px 16px 4px 49px;">
+                  <blockquote style="margin:0;padding:13px 16px;border-left:3px solid #0E9CA6;border-radius:0 8px 8px 0;background:rgba(14,156,166,.07);font-size:13.5px;line-height:1.65;color:#21343a;">
+                    “Enterprise accounts are eligible for a full refund where cancellation is requested within thirty (30) days of the contract effective date, provided cumulative usage has not exceeded the agreed trial allotment specified in <span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;">Schedule&nbsp;A</span>.”
+                  </blockquote>
+                </div>
+                <div style="padding:10px 16px 15px 49px;">
+                  <a style="display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:#0a7c84;text-decoration:none;cursor:pointer;">
+                    View document
+                    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h9M8.5 4.5L12 8l-3.5 3.5"></path></svg>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Action row -->
+              <div style="margin-top:20px;padding-top:16px;border-top:1px solid #eaedf1;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                <button style="display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;border:1px solid #d0d5dd;background:#fff;color:#21272a;font-family:inherit;font-size:12.5px;font-weight:500;cursor:pointer;">
+                  <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#4589ff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.2h10M3 7h10M4.5 9.8h7M6 12.6h4"></path></svg>
+                  Summarize
+                </button>
+                <button style="display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;border:1px solid #d0d5dd;background:#fff;color:#21272a;font-family:inherit;font-size:12.5px;font-weight:500;cursor:pointer;">
+                  <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#a56eff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.2A3.7 3.7 0 0 0 5.6 9c.45.4.7.95.7 1.55v.25h3.4v-.25c0-.6.25-1.15.7-1.55A3.7 3.7 0 0 0 8 2.2z"></path><path d="M6.5 13h3M6.9 14.4h2.2"></path></svg>
+                  Explain simpler
+                </button>
+                <button style="display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;border:1px solid #d0d5dd;background:#fff;color:#21272a;font-family:inherit;font-size:12.5px;font-weight:500;cursor:pointer;">
+                  <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#0E9CA6" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="4" cy="8" r="1.7"></circle><circle cx="12" cy="4" r="1.7"></circle><circle cx="12" cy="12" r="1.7"></circle><path d="M5.5 7.2l5-2.4M5.5 8.8l5 2.4"></path></svg>
+                  Find related
+                </button>
+                <button style="display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;border:1px solid #d0d5dd;background:#fff;color:#21272a;font-family:inherit;font-size:12.5px;font-weight:500;cursor:pointer;">
+                  <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#1192e8" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h5l3 3v8H4z"></path><path d="M9 2.5v3h3"></path><path d="M6 9h4M6 11h2.8"></path></svg>
+                  Draft a doc
+                </button>
+                <div style="flex:1;"></div>
+                <button style="display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;border:1px solid #d0d5dd;background:#fff;color:#42484f;font-family:inherit;font-size:12.5px;font-weight:500;cursor:pointer;">
+                  <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.6h8v11l-4-2.6-4 2.6z"></path></svg>
+                  Save
+                </button>
+                <button style="display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;border:1px solid #d0d5dd;background:#fff;color:#42484f;font-family:inherit;font-size:12.5px;font-weight:500;cursor:pointer;">
+                  <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5.2" y="5.2" width="8" height="8" rx="1.4"></rect><path d="M2.8 10.8V2.8h8"></path></svg>
+                  Copy
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Inline warning: stale source -->
+          <div style="margin-top:16px;display:flex;gap:12px;background:#fff8ec;border:1px solid #f5d9a8;border-left:3px solid #f1a527;border-radius:8px;padding:13px 15px;">
+            <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#b8740b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:1px;"><path d="M8 1.8l6.4 11.2H1.6z"></path><path d="M8 6.4v3.1M8 11.4v.05"></path></svg>
+            <div style="flex:1;min-width:0;">
+              <div style="font-size:13px;line-height:1.55;color:#5a4416;"><strong style="font-weight:600;color:#3d2e0c;">Source 3 · 2024 Enterprise Agreement</strong> is 8 months old - the clause it supports may be superseded by a newer Order Form. Verify before relying on it for annual plans.</div>
+            </div>
+            <button style="flex-shrink:0;align-self:center;display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 13px;border-radius:8px;border:1px solid #e0b878;background:#fff;color:#9a6608;font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;">Review source</button>
+          </div>
+
+          <!-- Ask a follow-up -->
+          <div style="margin-top:18px;font-size:12.5px;font-weight:600;color:#42484f;">Ask a follow-up</div>
+          <div style="margin-top:10px;display:flex;gap:9px;flex-wrap:wrap;">
+            <button style="display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;border:1px solid #d0d5dd;background:#fff;color:#21272a;font-family:inherit;font-size:12.5px;cursor:pointer;">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#697077" stroke-width="1.5" stroke-linecap="round"><path d="M8 3.5v9M3.5 8h9"></path></svg>
+              What about mid-contract downgrades?
+            </button>
+            <button style="display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;border:1px solid #d0d5dd;background:#fff;color:#21272a;font-family:inherit;font-size:12.5px;cursor:pointer;">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#697077" stroke-width="1.5" stroke-linecap="round"><path d="M8 3.5v9M3.5 8h9"></path></svg>
+              Who approves refund exceptions?
+            </button>
+            <button style="display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:8px;border:1px solid #d0d5dd;background:#fff;color:#21272a;font-family:inherit;font-size:12.5px;cursor:pointer;">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#697077" stroke-width="1.5" stroke-linecap="round"><path d="M8 3.5v9M3.5 8h9"></path></svg>
+              Show the policy document
+            </button>
+          </div>
+        </div>
+
+        <!-- RIGHT: sources card (4 cols) -->
+        <div style="grid-column:span 4;background:#fff;border:1px solid #dde1e6;border-radius:8px;box-shadow:0 1px 2px rgba(16,24,40,.04);display:flex;flex-direction:column;">
+          <div style="padding:15px 18px 13px;border-bottom:1px solid #eaedf1;display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:13.5px;font-weight:600;">Sources</span>
+            <span style="font-size:11.5px;font-weight:500;color:#697077;padding:3px 8px;border-radius:6px;background:#f2f4f8;">3 used</span>
+          </div>
+
+          <div style="padding:6px 14px 4px;">
+
+            <!-- Source 1 (selected) -->
+            <div style="position:relative;margin:6px 0 8px;padding:13px 12px;border:1px solid #9ed8dc;border-radius:8px;background:linear-gradient(180deg,#f3fbfb,#fbfdfd);box-shadow:0 4px 12px rgba(14,156,166,.1);">
+              <div style="position:absolute;left:0;top:11px;bottom:11px;width:3px;border-radius:3px;background:#0E9CA6;"></div>
+              <div style="display:flex;gap:11px;">
+                <div style="width:22px;height:22px;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;font-family:'IBM Plex Mono',monospace;color:#fff;background:#0E9CA6;">1</div>
+                <div style="flex:1;min-width:0;">
+                  <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+                    <span style="font-size:13px;font-weight:600;color:#161616;">Enterprise Refund Policy</span>
+                    <span style="display:inline-flex;align-items:center;gap:4px;font-size:10.5px;color:#24a148;font-weight:500;white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#42be65;"></span>Fresh</span>
+                  </div>
+                  <div style="margin-top:8px;height:4px;border-radius:3px;background:#eef0f3;overflow:hidden;"><div style="width:95%;height:100%;border-radius:3px;background:linear-gradient(90deg,#0E9CA6,#4589ff);"></div></div>
+                  <div style="margin-top:8px;display:flex;align-items:center;justify-content:space-between;">
+                    <span style="font-size:11px;font-family:'IBM Plex Mono',monospace;color:#697077;">refund-policy-2024.pdf</span>
+                    <span style="font-size:10.5px;font-weight:600;color:#42484f;">95%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Source 2 -->
+            <div style="padding:13px 6px;border-bottom:1px solid #f0f2f5;">
+              <div style="display:flex;gap:11px;">
+                <div style="width:22px;height:22px;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;font-family:'IBM Plex Mono',monospace;color:#fff;background:#4589ff;">2</div>
+                <div style="flex:1;min-width:0;">
+                  <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+                    <span style="font-size:13px;font-weight:600;color:#161616;">Revenue Ops Handbook</span>
+                    <span style="display:inline-flex;align-items:center;gap:4px;font-size:10.5px;color:#24a148;font-weight:500;white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#42be65;"></span>Fresh</span>
+                  </div>
+                  <div style="margin-top:8px;height:4px;border-radius:3px;background:#eef0f3;overflow:hidden;"><div style="width:88%;height:100%;border-radius:3px;background:linear-gradient(90deg,#4589ff,#a56eff);"></div></div>
+                  <div style="margin-top:8px;display:flex;align-items:center;justify-content:space-between;">
+                    <span style="font-size:11px;font-family:'IBM Plex Mono',monospace;color:#697077;">revops-handbook.md</span>
+                    <span style="font-size:10.5px;font-weight:600;color:#42484f;">88%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Source 3 (stale) -->
+            <div style="padding:13px 6px;">
+              <div style="display:flex;gap:11px;">
+                <div style="width:22px;height:22px;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;font-family:'IBM Plex Mono',monospace;color:#fff;background:#f18e28;">3</div>
+                <div style="flex:1;min-width:0;">
+                  <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+                    <span style="font-size:13px;font-weight:600;color:#161616;">2024 Enterprise Agreement</span>
+                    <span style="display:inline-flex;align-items:center;gap:4px;font-size:10.5px;color:#b86a14;font-weight:600;white-space:nowrap;"><span style="width:6px;height:6px;border-radius:50%;background:#f1c21b;"></span>Stale · 8 mo</span>
+                  </div>
+                  <div style="margin-top:8px;height:4px;border-radius:3px;background:#eef0f3;overflow:hidden;"><div style="width:72%;height:100%;border-radius:3px;background:linear-gradient(90deg,#f1c21b,#ee5396);"></div></div>
+                  <div style="margin-top:8px;display:flex;align-items:center;justify-content:space-between;">
+                    <span style="font-size:11px;font-family:'IBM Plex Mono',monospace;color:#697077;">enterprise-msa-2024.docx</span>
+                    <span style="font-size:10.5px;font-weight:600;color:#42484f;">72%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="padding:12px 14px 14px;margin-top:auto;border-top:1px solid #eaedf1;">
+            <button style="width:100%;height:38px;display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:8px;border:1px solid #4589ff;background:#fff;color:#2563d6;font-family:inherit;font-size:12.5px;font-weight:600;cursor:pointer;">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="7" r="4.3"></circle><path d="M10.2 10.2L14 14"></path></svg>
+              Search within these sources
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent across workspace -->
+      <div style="margin-top:30px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <h2 style="margin:0;font-size:15px;font-weight:600;letter-spacing:-.01em;">Recent across your workspace</h2>
+          <a style="font-size:12.5px;color:#2563d6;font-weight:500;text-decoration:none;cursor:pointer;display:inline-flex;align-items:center;gap:4px;">View all<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 4l4 4-4 4"></path></svg></a>
+        </div>
+
+        <div style="margin-top:14px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
+
+          <div style="background:#fff;border:1px solid #dde1e6;border-radius:8px;padding:16px;box-shadow:0 1px 2px rgba(16,24,40,.04);display:flex;flex-direction:column;min-height:138px;">
+            <div style="font-size:13.5px;font-weight:600;line-height:1.4;color:#21272a;text-wrap:pretty;">How do we handle GDPR data deletion requests?</div>
+            <div style="flex:1;"></div>
+            <div style="margin-top:14px;display:flex;align-items:center;justify-content:space-between;">
+              <div style="display:flex;align-items:center;gap:7px;">
+                <div style="width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:600;color:#fff;background:#0E9CA6;">MR</div>
+                <span style="font-size:11.5px;color:#697077;">Maya R.</span>
+              </div>
+              <span style="font-size:11px;color:#a2a9b0;">2h ago</span>
+            </div>
+            <div style="margin-top:11px;padding-top:11px;border-top:1px solid #f0f2f5;display:flex;align-items:center;gap:6px;font-size:11px;color:#697077;">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#a56eff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.2l5.5 2.8L8 7.8 2.5 5z"></path><path d="M2.5 8L8 10.8 13.5 8"></path></svg>
+              4 sources
+            </div>
+          </div>
+
+          <div style="background:#fff;border:1px solid #dde1e6;border-radius:8px;padding:16px;box-shadow:0 1px 2px rgba(16,24,40,.04);display:flex;flex-direction:column;min-height:138px;">
+            <div style="font-size:13.5px;font-weight:600;line-height:1.4;color:#21272a;text-wrap:pretty;">What's the SLA for enterprise support tiers?</div>
+            <div style="flex:1;"></div>
+            <div style="margin-top:14px;display:flex;align-items:center;justify-content:space-between;">
+              <div style="display:flex;align-items:center;gap:7px;">
+                <div style="width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:600;color:#fff;background:#4589ff;">DK</div>
+                <span style="font-size:11.5px;color:#697077;">Devon K.</span>
+              </div>
+              <span style="font-size:11px;color:#a2a9b0;">5h ago</span>
+            </div>
+            <div style="margin-top:11px;padding-top:11px;border-top:1px solid #f0f2f5;display:flex;align-items:center;gap:6px;font-size:11px;color:#697077;">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#a56eff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.2l5.5 2.8L8 7.8 2.5 5z"></path><path d="M2.5 8L8 10.8 13.5 8"></path></svg>
+              2 sources
+            </div>
+          </div>
+
+          <div style="background:#fff;border:1px solid #dde1e6;border-radius:8px;padding:16px;box-shadow:0 1px 2px rgba(16,24,40,.04);display:flex;flex-direction:column;min-height:138px;">
+            <div style="font-size:13.5px;font-weight:600;line-height:1.4;color:#21272a;text-wrap:pretty;">Which regions are approved for data residency?</div>
+            <div style="flex:1;"></div>
+            <div style="margin-top:14px;display:flex;align-items:center;justify-content:space-between;">
+              <div style="display:flex;align-items:center;gap:7px;">
+                <div style="width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:600;color:#fff;background:#a56eff;">PN</div>
+                <span style="font-size:11.5px;color:#697077;">Priya N.</span>
+              </div>
+              <span style="font-size:11px;color:#a2a9b0;">Yesterday</span>
+            </div>
+            <div style="margin-top:11px;padding-top:11px;border-top:1px solid #f0f2f5;display:flex;align-items:center;gap:6px;font-size:11px;color:#697077;">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#a56eff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.2l5.5 2.8L8 7.8 2.5 5z"></path><path d="M2.5 8L8 10.8 13.5 8"></path></svg>
+              3 sources
+            </div>
+          </div>
+
+          <div style="background:#fff;border:1px solid #dde1e6;border-radius:8px;padding:16px;box-shadow:0 1px 2px rgba(16,24,40,.04);display:flex;flex-direction:column;min-height:138px;">
+            <div style="font-size:13.5px;font-weight:600;line-height:1.4;color:#21272a;text-wrap:pretty;">Onboarding checklist for new enterprise accounts?</div>
+            <div style="flex:1;"></div>
+            <div style="margin-top:14px;display:flex;align-items:center;justify-content:space-between;">
+              <div style="display:flex;align-items:center;gap:7px;">
+                <div style="width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:600;color:#fff;background:#ee5396;">LB</div>
+                <span style="font-size:11.5px;color:#697077;">Liam B.</span>
+              </div>
+              <span style="font-size:11px;color:#a2a9b0;">2d ago</span>
+            </div>
+            <div style="margin-top:11px;padding-top:11px;border-top:1px solid #f0f2f5;display:flex;align-items:center;gap:6px;font-size:11px;color:#697077;">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#a56eff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.2l5.5 2.8L8 7.8 2.5 5z"></path><path d="M2.5 8L8 10.8 13.5 8"></path></svg>
+              5 sources
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</script>
+<script type="text/html" data-view="insights">
+<!-- ============ MAIN ============ -->
+  <div style="flex:1;height:100%;display:flex;flex-direction:column;min-width:0;">
+
+    <header style="height:48px;flex-shrink:0;background:#fff;border-bottom:1px solid #dde1e6;display:flex;align-items:center;justify-content:space-between;padding:0 24px;">
+      <div style="display:flex;align-items:center;gap:8px;font-size:13px;">
+        <span style="color:#697077;">Workspace</span>
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#a2a9b0" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 4l4 4-4 4"></path></svg>
+        <span style="color:#161616;font-weight:600;">Insights</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;">
+        <button style="width:34px;height:34px;border:none;background:transparent;cursor:pointer;border-radius:8px;display:flex;align-items:center;justify-content:center;position:relative;">
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#42484f" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2a3.4 3.4 0 0 0-3.4 3.4c0 2.9-1.2 3.9-1.2 3.9h9.2s-1.2-1-1.2-3.9A3.4 3.4 0 0 0 8 2z"></path><path d="M6.7 12.5a1.4 1.4 0 0 0 2.6 0"></path></svg>
+          <span style="position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:#ee5396;border:1.5px solid #fff;"></span>
+        </button>
+        <div style="width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:600;color:#fff;background:linear-gradient(135deg,#1192e8,#a56eff);">SO</div>
+      </div>
+    </header>
+
+    <!-- Scroll content -->
+    <div style="flex:1;overflow:auto;padding:28px 24px 32px;">
+
+      <h1 style="margin:0;font-size:26px;font-weight:600;letter-spacing:-.02em;">Insights</h1>
+      <p style="margin:5px 0 0;font-size:14px;color:#697077;">What your team is asking - and where the knowledge base is thin.</p>
+
+      <!-- 4 KPI cards -->
+      <div style="margin-top:20px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
+
+        <div style="border-radius:8px;padding:16px 18px;color:#fff;background:linear-gradient(135deg,#4589ff 0%,#1192e8 100%);box-shadow:0 8px 20px rgba(17,146,232,.18);">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:12px;font-weight:500;color:rgba(255,255,255,.88);">Questions this week</span>
+            <svg width="17" height="17" viewBox="0 0 16 16" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3.5h10v6H7l-3 2.3V9.5H3z"></path><path d="M6.3 6.4c0-.9.7-1.5 1.7-1.5s1.7.6 1.7 1.4c0 1.2-1.5 1-1.5 1.9"></path><path d="M8 8.9v.05"></path></svg>
+          </div>
+          <div style="margin-top:10px;display:flex;align-items:flex-end;gap:8px;">
+            <span style="font-size:28px;font-weight:600;letter-spacing:-.02em;line-height:1;">1,284</span>
+            <span style="display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:600;padding:2px 6px;border-radius:6px;background:rgba(255,255,255,.18);margin-bottom:3px;">
+              <svg width="10" height="10" viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12.5V4M4.5 7L8 3.5 11.5 7"></path></svg>12%
+            </span>
+          </div>
+        </div>
+
+        <div style="border-radius:8px;padding:16px 18px;color:#fff;background:linear-gradient(135deg,#0E9CA6 0%,#42be65 100%);box-shadow:0 8px 20px rgba(14,156,166,.18);">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:12px;font-weight:500;color:rgba(255,255,255,.88);">Answer coverage</span>
+            <svg width="17" height="17" viewBox="0 0 16 16" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2l5 1.8v4.1c0 3.3-2.5 5.4-5 6.5-2.5-1.1-5-3.2-5-6.5V3.8z"></path><path d="M5.8 8.2l1.6 1.6L10.5 6"></path></svg>
+          </div>
+          <div style="margin-top:10px;display:flex;align-items:flex-end;gap:8px;">
+            <span style="font-size:28px;font-weight:600;letter-spacing:-.02em;line-height:1;">82%</span>
+            <span style="font-size:11px;color:rgba(255,255,255,.82);margin-bottom:4px;">answered</span>
+          </div>
+        </div>
+
+        <div style="border-radius:8px;padding:16px 18px;color:#fff;background:linear-gradient(135deg,#a56eff 0%,#ee5396 100%);box-shadow:0 8px 20px rgba(165,110,255,.18);">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:12px;font-weight:500;color:rgba(255,255,255,.88);">Sources indexed</span>
+            <svg width="17" height="17" viewBox="0 0 16 16" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.2l5.5 2.8L8 7.8 2.5 5z"></path><path d="M2.5 8L8 10.8 13.5 8M2.5 11L8 13.8 13.5 11"></path></svg>
+          </div>
+          <div style="margin-top:10px;display:flex;align-items:flex-end;gap:8px;">
+            <span style="font-size:28px;font-weight:600;letter-spacing:-.02em;line-height:1;">143</span>
+            <span style="font-size:11px;color:rgba(255,255,255,.82);margin-bottom:4px;">· 14 stale</span>
+          </div>
+        </div>
+
+        <div style="border-radius:8px;padding:16px 18px;color:#fff;background:linear-gradient(135deg,#1192e8 0%,#a56eff 100%);box-shadow:0 8px 20px rgba(17,146,232,.18);">
+          <div style="display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:12px;font-weight:500;color:rgba(255,255,255,.88);">Avg. confidence</span>
+            <svg width="17" height="17" viewBox="0 0 16 16" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 1.6l1.9 3.9 4.3.6-3.1 3 .73 4.27L8 11.3 4.17 13.4 4.9 9.1 1.8 6.1l4.3-.6z"></path></svg>
+          </div>
+          <div style="margin-top:10px;display:flex;align-items:flex-end;gap:8px;">
+            <span style="font-size:28px;font-weight:600;letter-spacing:-.02em;line-height:1;">High</span>
+            <span style="font-size:11px;color:rgba(255,255,255,.82);margin-bottom:4px;">78% of answers</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main split: table (8) + side column (4) -->
+      <div style="margin-top:24px;display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:start;">
+
+        <!-- LEFT 8: Carbon data table -->
+        <div style="grid-column:span 8;">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;">
+            <h2 style="margin:0;font-size:15px;font-weight:600;letter-spacing:-.01em;">Top unanswered questions</h2>
+            <span style="font-size:12px;color:#697077;">6 of 41</span>
+          </div>
+
+          <div style="margin-top:13px;background:#fff;border:1px solid #dde1e6;border-radius:8px;overflow:hidden;box-shadow:0 1px 2px rgba(16,24,40,.04);">
+            <!-- header row -->
+            <div style="display:grid;grid-template-columns:1fr 78px 116px 124px;background:#f2f4f8;border-bottom:1px solid #dde1e6;">
+              <div style="padding:11px 18px;font-size:11px;font-weight:600;letter-spacing:.02em;color:#42484f;text-transform:uppercase;">Question</div>
+              <div style="padding:11px 8px;font-size:11px;font-weight:600;letter-spacing:.02em;color:#42484f;text-transform:uppercase;text-align:right;">Asked</div>
+              <div style="padding:11px 14px;font-size:11px;font-weight:600;letter-spacing:.02em;color:#42484f;text-transform:uppercase;">Last asked</div>
+              <div style="padding:11px 16px;font-size:11px;font-weight:600;letter-spacing:.02em;color:#42484f;text-transform:uppercase;">Status</div>
+            </div>
+
+            
+              <div style="display:grid;grid-template-columns:1fr 78px 116px 124px;align-items:center;border-bottom:1px solid #f0f2f5;min-height:52px;">
+                <div style="padding:12px 18px;font-size:13.5px;font-weight:500;color:#21272a;">What's the PTO carry-over limit?</div>
+                <div style="padding:12px 8px;text-align:right;">
+                  <span style="font-size:13px;font-weight:600;font-family:'IBM Plex Mono',monospace;color:#161616;">47×</span>
+                </div>
+                <div style="padding:12px 14px;font-size:12.5px;color:#697077;">2 days ago</div>
+                <div style="padding: 12px 16px; width: 362px; height: 41px">
+                  <span style="display: inline-flex; align-items: center; gap: 6px; height: 27px; padding: 0 10px; border-radius: 8px; font-size: 11.5px; font-weight: 600; background: #fdecef; color: #c21d4e">
+                    <span style="width:6px;height:6px;border-radius:50%;background:#ee5396;"></span>No source
+                  </span>
+                </div>
+              </div>
+            
+              <div style="display:grid;grid-template-columns:1fr 78px 116px 124px;align-items:center;border-bottom:1px solid #f0f2f5;min-height:52px;">
+                <div style="padding:12px 18px;font-size:13.5px;font-weight:500;color:#21272a;">How do I expense a home-office purchase?</div>
+                <div style="padding:12px 8px;text-align:right;">
+                  <span style="font-size:13px;font-weight:600;font-family:'IBM Plex Mono',monospace;color:#161616;">38×</span>
+                </div>
+                <div style="padding:12px 14px;font-size:12.5px;color:#697077;">Today</div>
+                <div style="padding: 12px 16px; width: 362px; height: 41px">
+                  <span style="display: inline-flex; align-items: center; gap: 6px; height: 27px; padding: 0 10px; border-radius: 8px; font-size: 11.5px; font-weight: 600; background: #fbe9f4; color: #b8267e">
+                    <span style="width:6px;height:6px;border-radius:50%;background:#d62598;"></span>Coverage gap
+                  </span>
+                </div>
+              </div>
+            
+              <div style="display:grid;grid-template-columns:1fr 78px 116px 124px;align-items:center;border-bottom:1px solid #f0f2f5;min-height:52px;">
+                <div style="padding:12px 18px;font-size:13.5px;font-weight:500;color:#21272a;">Which regions support data residency?</div>
+                <div style="padding:12px 8px;text-align:right;">
+                  <span style="font-size:13px;font-weight:600;font-family:'IBM Plex Mono',monospace;color:#161616;">31×</span>
+                </div>
+                <div style="padding:12px 14px;font-size:12.5px;color:#697077;">1 day ago</div>
+                <div style="padding: 12px 16px; width: 362px; height: 41px">
+                  <span style="display: inline-flex; align-items: center; gap: 6px; height: 27px; padding: 0 10px; border-radius: 8px; font-size: 11.5px; font-weight: 600; background: #e4f4f5; color: #0a7c84">
+                    <span style="width:6px;height:6px;border-radius:50%;background:#0E9CA6;"></span>Partial
+                  </span>
+                </div>
+              </div>
+            
+              <div style="display:grid;grid-template-columns:1fr 78px 116px 124px;align-items:center;border-bottom:1px solid #f0f2f5;min-height:52px;">
+                <div style="padding:12px 18px;font-size:13.5px;font-weight:500;color:#21272a;">What's the parental-leave top-up policy?</div>
+                <div style="padding:12px 8px;text-align:right;">
+                  <span style="font-size:13px;font-weight:600;font-family:'IBM Plex Mono',monospace;color:#161616;">29×</span>
+                </div>
+                <div style="padding:12px 14px;font-size:12.5px;color:#697077;">3 days ago</div>
+                <div style="padding: 12px 16px; width: 362px; height: 41px">
+                  <span style="display: inline-flex; align-items: center; gap: 6px; height: 27px; padding: 0 10px; border-radius: 8px; font-size: 11.5px; font-weight: 600; background: #fdecef; color: #c21d4e">
+                    <span style="width:6px;height:6px;border-radius:50%;background:#ee5396;"></span>No source
+                  </span>
+                </div>
+              </div>
+            
+              <div style="display:grid;grid-template-columns:1fr 78px 116px 124px;align-items:center;border-bottom:1px solid #f0f2f5;min-height:52px;">
+                <div style="padding:12px 18px;font-size:13.5px;font-weight:500;color:#21272a;">Do we reimburse co-working memberships?</div>
+                <div style="padding:12px 8px;text-align:right;">
+                  <span style="font-size:13px;font-weight:600;font-family:'IBM Plex Mono',monospace;color:#161616;">22×</span>
+                </div>
+                <div style="padding:12px 14px;font-size:12.5px;color:#697077;">Today</div>
+                <div style="padding: 12px 16px; width: 362px; height: 41px">
+                  <span style="display: inline-flex; align-items: center; gap: 6px; height: 27px; padding: 0 10px; border-radius: 8px; font-size: 11.5px; font-weight: 600; background: #fbe9f4; color: #b8267e">
+                    <span style="width:6px;height:6px;border-radius:50%;background:#d62598;"></span>Coverage gap
+                  </span>
+                </div>
+              </div>
+            
+              <div style="display:grid;grid-template-columns:1fr 78px 116px 124px;align-items:center;border-bottom:1px solid #f0f2f5;min-height:52px;">
+                <div style="padding:12px 18px;font-size:13.5px;font-weight:500;color:#21272a;">How long is the security-review SLA?</div>
+                <div style="padding:12px 8px;text-align:right;">
+                  <span style="font-size:13px;font-weight:600;font-family:'IBM Plex Mono',monospace;color:#161616;">18×</span>
+                </div>
+                <div style="padding:12px 14px;font-size:12.5px;color:#697077;">Yesterday</div>
+                <div style="padding: 12px 16px; width: 362px; height: 41px">
+                  <span style="display: inline-flex; align-items: center; gap: 6px; height: 27px; padding: 0 10px; border-radius: 8px; font-size: 11.5px; font-weight: 600; background: #e4f4f5; color: #0a7c84">
+                    <span style="width:6px;height:6px;border-radius:50%;background:#0E9CA6;"></span>Partial
+                  </span>
+                </div>
+              </div>
+            
+          </div>
+
+          <!-- Coverage gaps -->
+          <h2 style="margin:26px 0 0;font-size:15px;font-weight:600;letter-spacing:-.01em;">Coverage gaps</h2>
+          <p style="margin:4px 0 0;font-size:12.5px;color:#697077;">Topic clusters where questions outpace available sources.</p>
+          <div style="margin-top:13px;display:flex;gap:10px;flex-wrap:wrap;">
+            
+              <span style="display:inline-flex;align-items:center;gap:8px;height:34px;padding:0 8px 0 13px;border-radius:8px;border:1px solid #d0d5dd;background:#fff;font-size:13px;font-weight:500;color:#21272a;">
+                Benefits & leave
+                <span style="display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:20px;padding:0 6px;border-radius:6px;font-size:11.5px;font-weight:700;font-family:'IBM Plex Mono',monospace;background:rgba(238,83,150,.12);color:#c21d4e;">98</span>
+              </span>
+            
+              <span style="display:inline-flex;align-items:center;gap:8px;height:34px;padding:0 8px 0 13px;border-radius:8px;border:1px solid #d0d5dd;background:#fff;font-size:13px;font-weight:500;color:#21272a;">
+                Expenses
+                <span style="display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:20px;padding:0 6px;border-radius:6px;font-size:11.5px;font-weight:700;font-family:'IBM Plex Mono',monospace;background:rgba(165,110,255,.13);color:#7d3ec9;">61</span>
+              </span>
+            
+              <span style="display:inline-flex;align-items:center;gap:8px;height:34px;padding:0 8px 0 13px;border-radius:8px;border:1px solid #d0d5dd;background:#fff;font-size:13px;font-weight:500;color:#21272a;">
+                Data residency
+                <span style="display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:20px;padding:0 6px;border-radius:6px;font-size:11.5px;font-weight:700;font-family:'IBM Plex Mono',monospace;background:rgba(14,156,166,.13);color:#0a7c84;">44</span>
+              </span>
+            
+              <span style="display:inline-flex;align-items:center;gap:8px;height:34px;padding:0 8px 0 13px;border-radius:8px;border:1px solid #d0d5dd;background:#fff;font-size:13px;font-weight:500;color:#21272a;">
+                Security SLAs
+                <span style="display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:20px;padding:0 6px;border-radius:6px;font-size:11.5px;font-weight:700;font-family:'IBM Plex Mono',monospace;background:rgba(69,137,255,.13);color:#2563d6;">31</span>
+              </span>
+            
+              <span style="display:inline-flex;align-items:center;gap:8px;height:34px;padding:0 8px 0 13px;border-radius:8px;border:1px solid #d0d5dd;background:#fff;font-size:13px;font-weight:500;color:#21272a;">
+                Procurement
+                <span style="display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:20px;padding:0 6px;border-radius:6px;font-size:11.5px;font-weight:700;font-family:'IBM Plex Mono',monospace;background:rgba(66,190,101,.16);color:#1f8a4c;">19</span>
+              </span>
+            
+          </div>
+        </div>
+
+        <!-- RIGHT 4: stale alerts + AI suggestion -->
+        <div style="grid-column:span 4;">
+
+          <h2 style="margin:0;font-size:15px;font-weight:600;letter-spacing:-.01em;">Stale-source alerts</h2>
+          <div style="margin-top:13px;display:flex;flex-direction:column;gap:11px;">
+
+            <div style="display:flex;gap:11px;background:#fff8ec;border:1px solid #f5d9a8;border-left:3px solid #f1a527;border-radius:8px;padding:13px 14px;">
+              <svg width="17" height="17" viewBox="0 0 16 16" fill="none" stroke="#b8740b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:1px;"><path d="M8 1.8l6.4 11.2H1.6z"></path><path d="M8 6.4v3.1M8 11.4v.05"></path></svg>
+              <div style="flex:1;min-width:0;">
+                <div style="font-size:12.5px;font-weight:600;color:#3d2e0c;">Refund Terms 2025</div>
+                <div style="margin-top:2px;font-size:11.5px;line-height:1.5;color:#6b5520;">Last updated 5 months ago · 3 published answers depend on it</div>
+                <a style="margin-top:7px;display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;color:#9a6608;text-decoration:none;cursor:pointer;">Review<svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h9M8.5 4.5L12 8l-3.5 3.5"></path></svg></a>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:11px;background:#fff8ec;border:1px solid #f5d9a8;border-left:3px solid #f1a527;border-radius:8px;padding:13px 14px;">
+              <svg width="17" height="17" viewBox="0 0 16 16" fill="none" stroke="#b8740b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:1px;"><path d="M8 1.8l6.4 11.2H1.6z"></path><path d="M8 6.4v3.1M8 11.4v.05"></path></svg>
+              <div style="flex:1;min-width:0;">
+                <div style="font-size:12.5px;font-weight:600;color:#3d2e0c;">2024 Enterprise Agreement</div>
+                <div style="margin-top:2px;font-size:11.5px;line-height:1.5;color:#6b5520;">8 months old · flagged in 7 answers</div>
+                <a style="margin-top:7px;display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;color:#9a6608;text-decoration:none;cursor:pointer;">Review<svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h9M8.5 4.5L12 8l-3.5 3.5"></path></svg></a>
+              </div>
+            </div>
+
+            <div style="display:flex;gap:11px;background:#fff8ec;border:1px solid #f5d9a8;border-left:3px solid #f1a527;border-radius:8px;padding:13px 14px;">
+              <svg width="17" height="17" viewBox="0 0 16 16" fill="none" stroke="#b8740b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:1px;"><path d="M8 1.8l6.4 11.2H1.6z"></path><path d="M8 6.4v3.1M8 11.4v.05"></path></svg>
+              <div style="flex:1;min-width:0;">
+                <div style="font-size:12.5px;font-weight:600;color:#3d2e0c;">Travel &amp; Expense Guide</div>
+                <div style="margin-top:2px;font-size:11.5px;line-height:1.5;color:#6b5520;">Owner left the company · no reviewer assigned</div>
+                <a style="margin-top:7px;display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:600;color:#9a6608;text-decoration:none;cursor:pointer;">Review<svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h9M8.5 4.5L12 8l-3.5 3.5"></path></svg></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- AI suggestion card -->
+          <div style="margin-top:20px;border-radius:8px;padding:1.5px;background:linear-gradient(135deg,#0E9CA6,#4589ff,#a56eff);box-shadow:0 10px 26px rgba(69,137,255,.16);">
+            <div style="background:#fff;border-radius:7px;padding:16px 17px;">
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div style="width:30px;height:30px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0E9CA6 0%,#4589ff 52%,#a56eff 100%);box-shadow:0 4px 10px rgba(69,137,255,.28);">
+                  <svg width="15" height="15" viewBox="0 0 16 16" fill="#fff"><path d="M8 1l1.55 4.35L14 7l-4.45 1.65L8 13l-1.55-4.35L2 7l4.45-1.65z"></path></svg>
+                </div>
+                <div style="line-height:1.25;">
+                  <div style="font-size:13px;font-weight:600;">KnowledgeOS AI</div>
+                  <div style="font-size:11px;color:#697077;">Suggested action</div>
+                </div>
+              </div>
+              <p style="margin:13px 0 0;font-size:13px;line-height:1.6;color:#21272a;">Publishing a single <strong style="font-weight:600;">PTO &amp; leave policy</strong> document would resolve an estimated <strong style="font-weight:600;color:#0a7c84;">12%</strong> of this week's unanswered questions - 98 asks across 4 related topics, all currently returning “no source.”</p>
+              <button style="margin-top:15px;width:100%;height:38px;border:none;cursor:pointer;border-radius:8px;display:flex;align-items:center;justify-content:center;gap:8px;color:#fff;font-family:inherit;font-size:13px;font-weight:600;background:linear-gradient(135deg,#0E9CA6 0%,#4589ff 52%,#a56eff 100%);box-shadow:0 4px 12px rgba(69,137,255,.3);">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2.5h5l3 3v8H4z"></path><path d="M9 2.5v3h3"></path><path d="M6 9h4M6 11h2.8"></path></svg>
+                Draft a content request
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</script>
+<script type="text/html" data-view="saved">
+  <div style="flex:1;height:100%;display:flex;flex-direction:column;min-width:0;">
+    <header style="height:48px;flex-shrink:0;background:#fff;border-bottom:1px solid #dde1e6;display:flex;align-items:center;justify-content:space-between;padding:0 24px;">
+      <div style="display:flex;align-items:center;gap:8px;font-size:13px;"><span data-nav="overview" style="color:#697077;cursor:pointer;">Workspace</span><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#a2a9b0" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 4l4 4-4 4"></path></svg><span style="color:#161616;font-weight:600;">Saved answers</span></div>
+      <div style="display:flex;align-items:center;gap:6px;">
+        <button data-toast="3 notifications · 2 stale sources, 1 new coverage gap" style="width:34px;height:34px;border:none;background:transparent;cursor:pointer;border-radius:8px;display:flex;align-items:center;justify-content:center;position:relative;">
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#42484f" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2a3.4 3.4 0 0 0-3.4 3.4c0 2.9-1.2 3.9-1.2 3.9h9.2s-1.2-1-1.2-3.9A3.4 3.4 0 0 0 8 2z"></path><path d="M6.7 12.5a1.4 1.4 0 0 0 2.6 0"></path></svg>
+          <span style="position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:#ee5396;border:1.5px solid #fff;"></span>
+        </button>
+        <div data-toast="Sam Okonkwo · Product Ops · Admin" style="width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:600;color:#fff;cursor:pointer;background:linear-gradient(135deg,#1192e8,#a56eff);">SO</div>
+      </div>
+    </header><div style="flex:1;overflow-y:auto;background:#f2f4f8;padding:26px 32px;"><div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:6px;"><h1 style="font-size:24px;font-weight:600;color:#161616;letter-spacing:-.01em;">Saved answers</h1><span data-toast="12 answers saved" style="font-size:12px;color:#697077;font-weight:600;font-family:'IBM Plex Mono',ui-monospace,monospace;background:#fff;border:1px solid #e4e8ee;border-radius:8px;padding:6px 12px;cursor:pointer;">12 saved</span></div><p style="font-size:13.5px;color:#697077;margin:0 0 20px;max-width:640px;">Answers you've saved to the Acme Corp workspace. Re-open any to see its sources and provenance.</p><div style="display:flex;align-items:center;gap:9px;margin-bottom:18px;flex-wrap:wrap;"><span style="display:inline-flex;align-items:center;height:30px;padding:0 14px;border-radius:8px;font-size:12.5px;font-weight:600;color:#fff;background:#21272a;cursor:pointer;">All</span><span data-toast="Filter: Compliance" style="display:inline-flex;align-items:center;height:30px;padding:0 14px;border-radius:8px;font-size:12.5px;font-weight:500;color:#42484f;background:#fff;border:1px solid #e4e8ee;cursor:pointer;">Compliance</span><span data-toast="Filter: HR" style="display:inline-flex;align-items:center;height:30px;padding:0 14px;border-radius:8px;font-size:12.5px;font-weight:500;color:#42484f;background:#fff;border:1px solid #e4e8ee;cursor:pointer;">HR</span><span data-toast="Filter: Refunds" style="display:inline-flex;align-items:center;height:30px;padding:0 14px;border-radius:8px;font-size:12.5px;font-weight:500;color:#42484f;background:#fff;border:1px solid #e4e8ee;cursor:pointer;">Refunds</span><span data-toast="Filter: Security" style="display:inline-flex;align-items:center;height:30px;padding:0 14px;border-radius:8px;font-size:12.5px;font-weight:500;color:#42484f;background:#fff;border:1px solid #e4e8ee;cursor:pointer;">Security</span><span style="flex:1;"></span><div data-toast="Search saved answers (demo)" style="display:flex;align-items:center;gap:8px;height:34px;padding:0 12px;background:#fff;border:1px solid #e4e8ee;border-radius:8px;cursor:text;min-width:200px;"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#a2a9b0" stroke-width="1.4"><circle cx="7" cy="7" r="4.5"></circle><path d="M13 13l-2.5-2.5"></path></svg><span style="font-size:12.5px;color:#a2a9b0;">Search saved answers…</span></div></div><div style="display:flex;flex-direction:column;gap:12px;"><div data-nav="ask" style="background:#fff;border:1px solid #e4e8ee;border-radius:8px;padding:16px 18px;cursor:pointer;transition:border-color .12s,box-shadow .12s;">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+    <span style="width:20px;height:20px;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0E9CA6 0%,#4589ff 52%,#a56eff 100%);box-shadow:0 3px 9px rgba(69,137,255,.3);"><svg width="12" height="12" viewBox="0 0 16 16" fill="#fff"><path d="M8 1l1.55 4.35L14 7l-4.45 1.65L8 13l-1.55-4.35L2 7l4.45-1.65z"></path></svg></span>
+    <div style="font-size:14.5px;font-weight:600;color:#161616;flex:1;min-width:0;">How do we handle GDPR data deletion requests?</div>
+    <span style="font-size:11.5px;color:#8a93a6;white-space:nowrap;">Saved 2 days ago</span>
+  </div>
+  <div style="font-size:13px;color:#697077;line-height:1.5;margin-bottom:12px;">When a verified deletion request comes in, Revenue Ops logs it, and Engineering purges the record within 30 days across primary and backup stores…</div>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <span style="display:inline-flex;align-items:center;gap:6px;font-size:11.5px;color:#42484f;font-weight:500;"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#697077" stroke-width="1.3"><path d="M4 2.6h8v11l-4-2.6-4 2.6z"></path></svg>3 sources</span>
+    <span style="display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:8px;font-size:11.5px;font-weight:600;background:#e4f4f5;color:#0a7c84;">Compliance</span><span style="display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:8px;font-size:11.5px;font-weight:600;background:#e4f4f5;color:#0a7c84;">Data</span>
+    <span style="flex:1;"></span>
+    <button data-toast="Share link copied to clipboard" style="height:28px;padding:0 10px;border:1px solid #e4e8ee;background:#fff;border-radius:8px;font-size:11.5px;font-weight:600;color:#42484f;cursor:pointer;">Share</button>
+    <button data-toast="Removed from saved answers (demo)" style="height:28px;width:28px;border:1px solid #e4e8ee;background:#fff;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#c21d4e" stroke-width="1.4"><path d="M3 4.5h10M6.5 4.5V3.2h3v1.3M5 4.5l.6 8h4.8l.6-8"></path></svg></button>
+  </div>
+</div><div data-nav="ask" style="background:#fff;border:1px solid #e4e8ee;border-radius:8px;padding:16px 18px;cursor:pointer;transition:border-color .12s,box-shadow .12s;">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+    <span style="width:20px;height:20px;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0E9CA6 0%,#4589ff 52%,#a56eff 100%);box-shadow:0 3px 9px rgba(69,137,255,.3);"><svg width="12" height="12" viewBox="0 0 16 16" fill="#fff"><path d="M8 1l1.55 4.35L14 7l-4.45 1.65L8 13l-1.55-4.35L2 7l4.45-1.65z"></path></svg></span>
+    <div style="font-size:14.5px;font-weight:600;color:#161616;flex:1;min-width:0;">What's our refund SLA for enterprise accounts?</div>
+    <span style="font-size:11.5px;color:#8a93a6;white-space:nowrap;">Saved 4 days ago</span>
+  </div>
+  <div style="font-size:13px;color:#697077;line-height:1.5;margin-bottom:12px;">Enterprise refunds are processed as account credits within 5 business days, per the 2024 enterprise agreement update…</div>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <span style="display:inline-flex;align-items:center;gap:6px;font-size:11.5px;color:#42484f;font-weight:500;"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#697077" stroke-width="1.3"><path d="M4 2.6h8v11l-4-2.6-4 2.6z"></path></svg>2 sources</span>
+    <span style="display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:8px;font-size:11.5px;font-weight:600;background:#e4f4f5;color:#0a7c84;">Refunds</span>
+    <span style="flex:1;"></span>
+    <button data-toast="Share link copied to clipboard" style="height:28px;padding:0 10px;border:1px solid #e4e8ee;background:#fff;border-radius:8px;font-size:11.5px;font-weight:600;color:#42484f;cursor:pointer;">Share</button>
+    <button data-toast="Removed from saved answers (demo)" style="height:28px;width:28px;border:1px solid #e4e8ee;background:#fff;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#c21d4e" stroke-width="1.4"><path d="M3 4.5h10M6.5 4.5V3.2h3v1.3M5 4.5l.6 8h4.8l.6-8"></path></svg></button>
+  </div>
+</div><div data-nav="ask" style="background:#fff;border:1px solid #e4e8ee;border-radius:8px;padding:16px 18px;cursor:pointer;transition:border-color .12s,box-shadow .12s;">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+    <span style="width:20px;height:20px;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0E9CA6 0%,#4589ff 52%,#a56eff 100%);box-shadow:0 3px 9px rgba(69,137,255,.3);"><svg width="12" height="12" viewBox="0 0 16 16" fill="#fff"><path d="M8 1l1.55 4.35L14 7l-4.45 1.65L8 13l-1.55-4.35L2 7l4.45-1.65z"></path></svg></span>
+    <div style="font-size:14.5px;font-weight:600;color:#161616;flex:1;min-width:0;">What's the parental-leave top-up policy?</div>
+    <span style="font-size:11.5px;color:#8a93a6;white-space:nowrap;">Saved 1 week ago</span>
+  </div>
+  <div style="font-size:13px;color:#697077;line-height:1.5;margin-bottom:12px;">This answer was low-confidence when saved - a source has since been added.</div>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <span style="display:inline-flex;align-items:center;gap:6px;font-size:11.5px;color:#42484f;font-weight:500;"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#697077" stroke-width="1.3"><path d="M4 2.6h8v11l-4-2.6-4 2.6z"></path></svg>1 sources</span>
+    <span style="display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:8px;font-size:11.5px;font-weight:600;background:#e4f4f5;color:#0a7c84;">HR</span>
+    <span style="flex:1;"></span>
+    <button data-toast="Share link copied to clipboard" style="height:28px;padding:0 10px;border:1px solid #e4e8ee;background:#fff;border-radius:8px;font-size:11.5px;font-weight:600;color:#42484f;cursor:pointer;">Share</button>
+    <button data-toast="Removed from saved answers (demo)" style="height:28px;width:28px;border:1px solid #e4e8ee;background:#fff;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#c21d4e" stroke-width="1.4"><path d="M3 4.5h10M6.5 4.5V3.2h3v1.3M5 4.5l.6 8h4.8l.6-8"></path></svg></button>
+  </div><div style="display:flex;align-items:center;gap:7px;margin-top:10px;height:26px;padding:0 10px;border-radius:8px;background:#fbf0dd;color:#9a6a00;font-size:11.5px;font-weight:600;width:fit-content;"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 5.5v3.2M8 11h.01"></path><circle cx="8" cy="8" r="6"></circle></svg>A source was added since you saved this</div>
+</div><div data-nav="ask" style="background:#fff;border:1px solid #e4e8ee;border-radius:8px;padding:16px 18px;cursor:pointer;transition:border-color .12s,box-shadow .12s;">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+    <span style="width:20px;height:20px;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0E9CA6 0%,#4589ff 52%,#a56eff 100%);box-shadow:0 3px 9px rgba(69,137,255,.3);"><svg width="12" height="12" viewBox="0 0 16 16" fill="#fff"><path d="M8 1l1.55 4.35L14 7l-4.45 1.65L8 13l-1.55-4.35L2 7l4.45-1.65z"></path></svg></span>
+    <div style="font-size:14.5px;font-weight:600;color:#161616;flex:1;min-width:0;">Which regions support data residency?</div>
+    <span style="font-size:11.5px;color:#8a93a6;white-space:nowrap;">Saved 1 week ago</span>
+  </div>
+  <div style="font-size:13px;color:#697077;line-height:1.5;margin-bottom:12px;">EU, UK, and US data residency are fully supported; APAC is partial and routed through the Singapore region…</div>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <span style="display:inline-flex;align-items:center;gap:6px;font-size:11.5px;color:#42484f;font-weight:500;"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#697077" stroke-width="1.3"><path d="M4 2.6h8v11l-4-2.6-4 2.6z"></path></svg>2 sources</span>
+    <span style="display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:8px;font-size:11.5px;font-weight:600;background:#e4f4f5;color:#0a7c84;">Compliance</span>
+    <span style="flex:1;"></span>
+    <button data-toast="Share link copied to clipboard" style="height:28px;padding:0 10px;border:1px solid #e4e8ee;background:#fff;border-radius:8px;font-size:11.5px;font-weight:600;color:#42484f;cursor:pointer;">Share</button>
+    <button data-toast="Removed from saved answers (demo)" style="height:28px;width:28px;border:1px solid #e4e8ee;background:#fff;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#c21d4e" stroke-width="1.4"><path d="M3 4.5h10M6.5 4.5V3.2h3v1.3M5 4.5l.6 8h4.8l.6-8"></path></svg></button>
+  </div>
+</div><div data-nav="ask" style="background:#fff;border:1px solid #e4e8ee;border-radius:8px;padding:16px 18px;cursor:pointer;transition:border-color .12s,box-shadow .12s;">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+    <span style="width:20px;height:20px;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0E9CA6 0%,#4589ff 52%,#a56eff 100%);box-shadow:0 3px 9px rgba(69,137,255,.3);"><svg width="12" height="12" viewBox="0 0 16 16" fill="#fff"><path d="M8 1l1.55 4.35L14 7l-4.45 1.65L8 13l-1.55-4.35L2 7l4.45-1.65z"></path></svg></span>
+    <div style="font-size:14.5px;font-weight:600;color:#161616;flex:1;min-width:0;">How long is the security-review SLA for new vendors?</div>
+    <span style="font-size:11.5px;color:#8a93a6;white-space:nowrap;">Saved 2 weeks ago</span>
+  </div>
+  <div style="font-size:13px;color:#697077;line-height:1.5;margin-bottom:12px;">Standard vendor security reviews complete within 10 business days; expedited reviews within 3…</div>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <span style="display:inline-flex;align-items:center;gap:6px;font-size:11.5px;color:#42484f;font-weight:500;"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#697077" stroke-width="1.3"><path d="M4 2.6h8v11l-4-2.6-4 2.6z"></path></svg>2 sources</span>
+    <span style="display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:8px;font-size:11.5px;font-weight:600;background:#e4f4f5;color:#0a7c84;">Security</span>
+    <span style="flex:1;"></span>
+    <button data-toast="Share link copied to clipboard" style="height:28px;padding:0 10px;border:1px solid #e4e8ee;background:#fff;border-radius:8px;font-size:11.5px;font-weight:600;color:#42484f;cursor:pointer;">Share</button>
+    <button data-toast="Removed from saved answers (demo)" style="height:28px;width:28px;border:1px solid #e4e8ee;background:#fff;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#c21d4e" stroke-width="1.4"><path d="M3 4.5h10M6.5 4.5V3.2h3v1.3M5 4.5l.6 8h4.8l.6-8"></path></svg></button>
+  </div>
+</div></div></div>
+  </div>
+</script>
+<script type="text/html" data-view="sources">
+  <div style="flex:1;height:100%;display:flex;flex-direction:column;min-width:0;">
+    <header style="height:48px;flex-shrink:0;background:#fff;border-bottom:1px solid #dde1e6;display:flex;align-items:center;justify-content:space-between;padding:0 24px;">
+      <div style="display:flex;align-items:center;gap:8px;font-size:13px;"><span data-nav="overview" style="color:#697077;cursor:pointer;">Workspace</span><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#a2a9b0" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 4l4 4-4 4"></path></svg><span style="color:#161616;font-weight:600;">Sources</span></div>
+      <div style="display:flex;align-items:center;gap:6px;">
+        <button data-toast="3 notifications · 2 stale sources, 1 new coverage gap" style="width:34px;height:34px;border:none;background:transparent;cursor:pointer;border-radius:8px;display:flex;align-items:center;justify-content:center;position:relative;">
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#42484f" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2a3.4 3.4 0 0 0-3.4 3.4c0 2.9-1.2 3.9-1.2 3.9h9.2s-1.2-1-1.2-3.9A3.4 3.4 0 0 0 8 2z"></path><path d="M6.7 12.5a1.4 1.4 0 0 0 2.6 0"></path></svg>
+          <span style="position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:#ee5396;border:1.5px solid #fff;"></span>
+        </button>
+        <div data-toast="Sam Okonkwo · Product Ops · Admin" style="width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:600;color:#fff;cursor:pointer;background:linear-gradient(135deg,#1192e8,#a56eff);">SO</div>
+      </div>
+    </header><div style="flex:1;overflow-y:auto;background:#f2f4f8;padding:26px 32px;"><div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:6px;"><h1 style="font-size:24px;font-weight:600;color:#161616;letter-spacing:-.01em;">Sources</h1><button data-nav="add-source" style="display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 16px;border:none;border-radius:8px;color:#fff;font-size:13px;font-weight:600;cursor:pointer;background:linear-gradient(135deg,#0E9CA6 0%,#4589ff 52%,#a56eff 100%);box-shadow:0 6px 16px rgba(69,137,255,.28);"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"><path d="M8 3.2v9.6M3.2 8h9.6"></path></svg>Add source</button></div><p style="font-size:13.5px;color:#697077;margin:0 0 20px;max-width:640px;">Every document KnowledgeOS can answer from. Answers cite these, and freshness here drives Knowledge health.</p><div style="display:flex;align-items:center;gap:9px;margin-bottom:16px;flex-wrap:wrap;"><span style="display:inline-flex;align-items:center;height:30px;padding:0 14px;border-radius:8px;font-size:12.5px;font-weight:600;color:#fff;background:#21272a;cursor:pointer;">All sources</span><span data-toast="Filter: Fresh" style="display:inline-flex;align-items:center;height:30px;padding:0 14px;border-radius:8px;font-size:12.5px;font-weight:500;color:#42484f;background:#fff;border:1px solid #e4e8ee;cursor:pointer;">Fresh</span><span data-toast="Filter: Stale" style="display:inline-flex;align-items:center;height:30px;padding:0 14px;border-radius:8px;font-size:12.5px;font-weight:500;color:#42484f;background:#fff;border:1px solid #e4e8ee;cursor:pointer;">Stale</span><span data-toast="Filter: By owner" style="display:inline-flex;align-items:center;height:30px;padding:0 14px;border-radius:8px;font-size:12.5px;font-weight:500;color:#42484f;background:#fff;border:1px solid #e4e8ee;cursor:pointer;">By owner</span><span style="flex:1;"></span><span data-toast="6 sources · 5 fresh, 1 stale" style="font-size:12px;color:#697077;font-weight:600;font-family:'IBM Plex Mono',ui-monospace,monospace;">6 sources</span></div><div style="background:#fff;border:1px solid #e4e8ee;border-radius:8px;overflow:hidden;"><div style="display:grid;grid-template-columns:1fr 150px 130px 130px 96px;padding:11px 16px;background:#f7f8fa;border-bottom:1px solid #e4e8ee;font-size:11px;font-weight:600;letter-spacing:.02em;color:#697077;text-transform:uppercase;"><div>Source</div><div>Owner</div><div>Last synced</div><div>Status</div><div style="text-align:right;">Cited in</div></div><div data-nav="provenance" style="display:grid;grid-template-columns:1fr 150px 130px 130px 96px;align-items:center;padding:12px 16px;border-bottom:1px solid #f0f2f5;cursor:pointer;">
+  <div style="display:flex;align-items:center;gap:12px;min-width:0;"><span style="width:32px;height:32px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#d4604f1a;color:#d4604f;font-size:9px;font-weight:700;font-family:'IBM Plex Mono',ui-monospace,monospace;text-transform:uppercase;">pdf</span><div style="min-width:0;"><div style="font-size:13.5px;font-weight:600;color:#21272a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Enterprise Refund Policy</div><div style="font-size:11.5px;color:#8a93a6;font-family:'IBM Plex Mono',ui-monospace,monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">refund-policy-2024.pdf</div></div></div>
+  <div style="font-size:12.5px;color:#42484f;">Revenue Operations</div>
+  <div style="font-size:12.5px;color:#697077;">2h ago</div>
+  <div><span style="display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:8px;font-size:11.5px;font-weight:600;background:#e4f4ec;color:#0a7c4a;"><span style="width:6px;height:6px;border-radius:50%;background:#1f9d57;"></span>Fresh</span></div>
+  <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px;">
+    <span style="font-size:12.5px;font-weight:600;color:#161616;font-family:'IBM Plex Mono',ui-monospace,monospace;">42</span>
+    <button data-toast="Re-indexing Enterprise Refund Policy (demo)" style="height:28px;width:28px;border:1px solid #e4e8ee;background:#fff;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="#42484f" stroke-width="1.4" stroke-linecap="round"><path d="M13 5a5.5 5.5 0 1 0 .9 4"></path><path d="M13 2v3h-3"></path></svg></button>
+  </div>
+</div><div data-nav="provenance" style="display:grid;grid-template-columns:1fr 150px 130px 130px 96px;align-items:center;padding:12px 16px;border-bottom:1px solid #f0f2f5;cursor:pointer;">
+  <div style="display:flex;align-items:center;gap:12px;min-width:0;"><span style="width:32px;height:32px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#0E9CA61a;color:#0E9CA6;font-size:9px;font-weight:700;font-family:'IBM Plex Mono',ui-monospace,monospace;text-transform:uppercase;">md</span><div style="min-width:0;"><div style="font-size:13.5px;font-weight:600;color:#21272a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Revenue Ops Handbook</div><div style="font-size:11.5px;color:#8a93a6;font-family:'IBM Plex Mono',ui-monospace,monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">revops-handbook.md</div></div></div>
+  <div style="font-size:12.5px;color:#42484f;">Revenue Operations</div>
+  <div style="font-size:12.5px;color:#697077;">1h ago</div>
+  <div><span style="display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:8px;font-size:11.5px;font-weight:600;background:#e4f4ec;color:#0a7c4a;"><span style="width:6px;height:6px;border-radius:50%;background:#1f9d57;"></span>Fresh</span></div>
+  <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px;">
+    <span style="font-size:12.5px;font-weight:600;color:#161616;font-family:'IBM Plex Mono',ui-monospace,monospace;">38</span>
+    <button data-toast="Re-indexing Revenue Ops Handbook (demo)" style="height:28px;width:28px;border:1px solid #e4e8ee;background:#fff;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="#42484f" stroke-width="1.4" stroke-linecap="round"><path d="M13 5a5.5 5.5 0 1 0 .9 4"></path><path d="M13 2v3h-3"></path></svg></button>
+  </div>
+</div><div data-nav="provenance" style="display:grid;grid-template-columns:1fr 150px 130px 130px 96px;align-items:center;padding:12px 16px;border-bottom:1px solid #f0f2f5;cursor:pointer;">
+  <div style="display:flex;align-items:center;gap:12px;min-width:0;"><span style="width:32px;height:32px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#2b6cb01a;color:#2b6cb0;font-size:9px;font-weight:700;font-family:'IBM Plex Mono',ui-monospace,monospace;text-transform:uppercase;">docx</span><div style="min-width:0;"><div style="font-size:13.5px;font-weight:600;color:#21272a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">2024 Enterprise Agreement</div><div style="font-size:11.5px;color:#8a93a6;font-family:'IBM Plex Mono',ui-monospace,monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">enterprise-msa-2024.docx</div></div></div>
+  <div style="font-size:12.5px;color:#42484f;">Legal</div>
+  <div style="font-size:12.5px;color:#697077;">8 mo ago</div>
+  <div><span style="display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:8px;font-size:11.5px;font-weight:600;background:#fbf0dd;color:#9a6a00;"><span style="width:6px;height:6px;border-radius:50%;background:#d59a17;"></span>Stale · 8 mo</span></div>
+  <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px;">
+    <span style="font-size:12.5px;font-weight:600;color:#161616;font-family:'IBM Plex Mono',ui-monospace,monospace;">14</span>
+    <button data-toast="Re-indexing 2024 Enterprise Agreement (demo)" style="height:28px;width:28px;border:1px solid #e4e8ee;background:#fff;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="#42484f" stroke-width="1.4" stroke-linecap="round"><path d="M13 5a5.5 5.5 0 1 0 .9 4"></path><path d="M13 2v3h-3"></path></svg></button>
+  </div>
+</div><div data-nav="provenance" style="display:grid;grid-template-columns:1fr 150px 130px 130px 96px;align-items:center;padding:12px 16px;border-bottom:1px solid #f0f2f5;cursor:pointer;">
+  <div style="display:flex;align-items:center;gap:12px;min-width:0;"><span style="width:32px;height:32px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#d4604f1a;color:#d4604f;font-size:9px;font-weight:700;font-family:'IBM Plex Mono',ui-monospace,monospace;text-transform:uppercase;">pdf</span><div style="min-width:0;"><div style="font-size:13.5px;font-weight:600;color:#21272a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">HR Benefits & Leave Policy</div><div style="font-size:11.5px;color:#8a93a6;font-family:'IBM Plex Mono',ui-monospace,monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">hr-benefits-2024.pdf</div></div></div>
+  <div style="font-size:12.5px;color:#42484f;">People Ops</div>
+  <div style="font-size:12.5px;color:#697077;">3 days ago</div>
+  <div><span style="display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:8px;font-size:11.5px;font-weight:600;background:#e4f4ec;color:#0a7c4a;"><span style="width:6px;height:6px;border-radius:50%;background:#1f9d57;"></span>Fresh</span></div>
+  <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px;">
+    <span style="font-size:12.5px;font-weight:600;color:#161616;font-family:'IBM Plex Mono',ui-monospace,monospace;">27</span>
+    <button data-toast="Re-indexing HR Benefits & Leave Policy (demo)" style="height:28px;width:28px;border:1px solid #e4e8ee;background:#fff;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="#42484f" stroke-width="1.4" stroke-linecap="round"><path d="M13 5a5.5 5.5 0 1 0 .9 4"></path><path d="M13 2v3h-3"></path></svg></button>
+  </div>
+</div><div data-nav="provenance" style="display:grid;grid-template-columns:1fr 150px 130px 130px 96px;align-items:center;padding:12px 16px;border-bottom:1px solid #f0f2f5;cursor:pointer;">
+  <div style="display:flex;align-items:center;gap:12px;min-width:0;"><span style="width:32px;height:32px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#4589ff1a;color:#4589ff;font-size:9px;font-weight:700;font-family:'IBM Plex Mono',ui-monospace,monospace;text-transform:uppercase;">conf</span><div style="min-width:0;"><div style="font-size:13.5px;font-weight:600;color:#21272a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Security & Compliance Wiki</div><div style="font-size:11.5px;color:#8a93a6;font-family:'IBM Plex Mono',ui-monospace,monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">security-wiki · Confluence</div></div></div>
+  <div style="font-size:12.5px;color:#42484f;">Security</div>
+  <div style="font-size:12.5px;color:#697077;">5h ago</div>
+  <div><span style="display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:8px;font-size:11.5px;font-weight:600;background:#e4f4ec;color:#0a7c4a;"><span style="width:6px;height:6px;border-radius:50%;background:#1f9d57;"></span>Fresh</span></div>
+  <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px;">
+    <span style="font-size:12.5px;font-weight:600;color:#161616;font-family:'IBM Plex Mono',ui-monospace,monospace;">19</span>
+    <button data-toast="Re-indexing Security & Compliance Wiki (demo)" style="height:28px;width:28px;border:1px solid #e4e8ee;background:#fff;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="#42484f" stroke-width="1.4" stroke-linecap="round"><path d="M13 5a5.5 5.5 0 1 0 .9 4"></path><path d="M13 2v3h-3"></path></svg></button>
+  </div>
+</div><div data-nav="provenance" style="display:grid;grid-template-columns:1fr 150px 130px 130px 96px;align-items:center;padding:12px 16px;border-bottom:1px solid #f0f2f5;cursor:pointer;">
+  <div style="display:flex;align-items:center;gap:12px;min-width:0;"><span style="width:32px;height:32px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#1f9d571a;color:#1f9d57;font-size:9px;font-weight:700;font-family:'IBM Plex Mono',ui-monospace,monospace;text-transform:uppercase;">xlsx</span><div style="min-width:0;"><div style="font-size:13.5px;font-weight:600;color:#21272a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Data Residency Matrix</div><div style="font-size:11.5px;color:#8a93a6;font-family:'IBM Plex Mono',ui-monospace,monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">data-residency.xlsx</div></div></div>
+  <div style="font-size:12.5px;color:#42484f;">Infrastructure</div>
+  <div style="font-size:12.5px;color:#697077;">1 day ago</div>
+  <div><span style="display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:8px;font-size:11.5px;font-weight:600;background:#e4f4f5;color:#0a7c84;"><span style="width:6px;height:6px;border-radius:50%;background:#0E9CA6;"></span>Partial</span></div>
+  <div style="display:flex;align-items:center;justify-content:flex-end;gap:8px;">
+    <span style="font-size:12.5px;font-weight:600;color:#161616;font-family:'IBM Plex Mono',ui-monospace,monospace;">11</span>
+    <button data-toast="Re-indexing Data Residency Matrix (demo)" style="height:28px;width:28px;border:1px solid #e4e8ee;background:#fff;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="#42484f" stroke-width="1.4" stroke-linecap="round"><path d="M13 5a5.5 5.5 0 1 0 .9 4"></path><path d="M13 2v3h-3"></path></svg></button>
+  </div>
+</div></div></div>
+  </div>
+</script>
+<script type="text/html" data-view="add-source">
+  <div style="flex:1;height:100%;display:flex;flex-direction:column;min-width:0;">
+    <header style="height:48px;flex-shrink:0;background:#fff;border-bottom:1px solid #dde1e6;display:flex;align-items:center;justify-content:space-between;padding:0 24px;">
+      <div style="display:flex;align-items:center;gap:8px;font-size:13px;"><span data-nav="overview" style="color:#697077;cursor:pointer;">Workspace</span><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#a2a9b0" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 4l4 4-4 4"></path></svg><span data-nav="sources" style="color:#697077;cursor:pointer;">Sources</span><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="#a2a9b0" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 4l4 4-4 4"></path></svg><span style="color:#161616;font-weight:600;">Add source</span></div>
+      <div style="display:flex;align-items:center;gap:6px;">
+        <button data-toast="3 notifications · 2 stale sources, 1 new coverage gap" style="width:34px;height:34px;border:none;background:transparent;cursor:pointer;border-radius:8px;display:flex;align-items:center;justify-content:center;position:relative;">
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#42484f" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2a3.4 3.4 0 0 0-3.4 3.4c0 2.9-1.2 3.9-1.2 3.9h9.2s-1.2-1-1.2-3.9A3.4 3.4 0 0 0 8 2z"></path><path d="M6.7 12.5a1.4 1.4 0 0 0 2.6 0"></path></svg>
+          <span style="position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:#ee5396;border:1.5px solid #fff;"></span>
+        </button>
+        <div data-toast="Sam Okonkwo · Product Ops · Admin" style="width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:600;color:#fff;cursor:pointer;background:linear-gradient(135deg,#1192e8,#a56eff);">SO</div>
+      </div>
+    </header><div style="flex:1;overflow-y:auto;background:#f2f4f8;padding:26px 32px;"><div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:6px;"><h1 style="font-size:24px;font-weight:600;color:#161616;letter-spacing:-.01em;">Add a source</h1></div><p style="font-size:13.5px;color:#697077;margin:0 0 20px;max-width:640px;">Connect a document or workspace. KnowledgeOS indexes it and starts citing it in answers - usually within a couple of minutes.</p><div style="font-size:11px;font-weight:600;letter-spacing:.04em;color:#8a93a6;text-transform:uppercase;margin-bottom:11px;">Connect</div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px;"><div data-toast="Connecting Upload a file (demo)" style="background:#fff;border:1px solid #e4e8ee;border-radius:8px;padding:16px;cursor:pointer;display:flex;align-items:center;gap:13px;transition:border-color .12s,box-shadow .12s;"><span style="width:38px;height:38px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#0E9CA61a;color:#0E9CA6;font-weight:700;font-size:15px;">↑</span><div style="min-width:0;"><div style="font-size:13.5px;font-weight:600;color:#161616;">Upload a file</div><div style="font-size:11.5px;color:#8a93a6;">PDF, DOCX, MD, TXT</div></div></div><div data-toast="Connecting Google Drive (demo)" style="background:#fff;border:1px solid #e4e8ee;border-radius:8px;padding:16px;cursor:pointer;display:flex;align-items:center;gap:13px;transition:border-color .12s,box-shadow .12s;"><span style="width:38px;height:38px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#4589ff1a;color:#4589ff;font-weight:700;font-size:15px;">G</span><div style="min-width:0;"><div style="font-size:13.5px;font-weight:600;color:#161616;">Google Drive</div><div style="font-size:11.5px;color:#8a93a6;">Docs, Sheets, Slides</div></div></div><div data-toast="Connecting Notion (demo)" style="background:#fff;border:1px solid #e4e8ee;border-radius:8px;padding:16px;cursor:pointer;display:flex;align-items:center;gap:13px;transition:border-color .12s,box-shadow .12s;"><span style="width:38px;height:38px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#21272a1a;color:#21272a;font-weight:700;font-size:15px;">N</span><div style="min-width:0;"><div style="font-size:13.5px;font-weight:600;color:#161616;">Notion</div><div style="font-size:11.5px;color:#8a93a6;">Pages & databases</div></div></div><div data-toast="Connecting Confluence (demo)" style="background:#fff;border:1px solid #e4e8ee;border-radius:8px;padding:16px;cursor:pointer;display:flex;align-items:center;gap:13px;transition:border-color .12s,box-shadow .12s;"><span style="width:38px;height:38px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#2b6cb01a;color:#2b6cb0;font-weight:700;font-size:15px;">C</span><div style="min-width:0;"><div style="font-size:13.5px;font-weight:600;color:#161616;">Confluence</div><div style="font-size:11.5px;color:#8a93a6;">Spaces & pages</div></div></div><div data-toast="Connecting SharePoint (demo)" style="background:#fff;border:1px solid #e4e8ee;border-radius:8px;padding:16px;cursor:pointer;display:flex;align-items:center;gap:13px;transition:border-color .12s,box-shadow .12s;"><span style="width:38px;height:38px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#0a7c4a1a;color:#0a7c4a;font-weight:700;font-size:15px;">S</span><div style="min-width:0;"><div style="font-size:13.5px;font-weight:600;color:#161616;">SharePoint</div><div style="font-size:11.5px;color:#8a93a6;">Sites & libraries</div></div></div><div data-toast="Connecting Web URL (demo)" style="background:#fff;border:1px solid #e4e8ee;border-radius:8px;padding:16px;cursor:pointer;display:flex;align-items:center;gap:13px;transition:border-color .12s,box-shadow .12s;"><span style="width:38px;height:38px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#a56eff1a;color:#a56eff;font-weight:700;font-size:15px;">↗</span><div style="min-width:0;"><div style="font-size:13.5px;font-weight:600;color:#161616;">Web URL</div><div style="font-size:11.5px;color:#8a93a6;">Any public page</div></div></div></div><div style="font-size:11px;font-weight:600;letter-spacing:.04em;color:#8a93a6;text-transform:uppercase;margin-bottom:11px;">Or paste a link</div><div style="background:#fff;border:1px solid #e4e8ee;border-radius:8px;padding:16px 18px;margin-bottom:20px;"><div style="display:flex;gap:10px;"><div data-toast="Paste a URL to index (demo)" style="flex:1;display:flex;align-items:center;gap:9px;height:42px;padding:0 14px;background:#f7f8fa;border:1px solid #e4e8ee;border-radius:8px;cursor:text;"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#a2a9b0" stroke-width="1.4"><path d="M6.5 9.5a3 3 0 0 0 4.2 0l1.8-1.8a3 3 0 0 0-4.2-4.2l-1 1"></path><path d="M9.5 6.5a3 3 0 0 0-4.2 0L3.5 8.3a3 3 0 0 0 4.2 4.2l1-1"></path></svg><span style="font-size:13px;color:#a2a9b0;">https://… or a Google Drive link</span></div><button data-action="add-source-submit" style="height:42px;padding:0 20px;border:none;border-radius:8px;color:#fff;font-size:13px;font-weight:600;cursor:pointer;background:linear-gradient(135deg,#0E9CA6 0%,#4589ff 52%,#a56eff 100%);">Add &amp; index</button></div></div><div style="display:flex;align-items:flex-start;gap:11px;padding:14px 16px;border-radius:8px;background:linear-gradient(135deg,rgba(14,156,166,.10),rgba(165,110,255,.10));border:1px solid #e0e7f0;margin-bottom:24px;"><span style="width:22px;height:22px;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0E9CA6 0%,#4589ff 52%,#a56eff 100%);box-shadow:0 3px 9px rgba(69,137,255,.3);"><svg width="13" height="13" viewBox="0 0 16 16" fill="#fff"><path d="M8 1l1.55 4.35L14 7l-4.45 1.65L8 13l-1.55-4.35L2 7l4.45-1.65z"></path></svg></span><div style="font-size:13px;color:#42484f;line-height:1.5;">I'll index it and make it answerable in about two minutes. Every answer it supports will cite it - and it'll start counting toward your <b style="color:#161616;">Knowledge health</b> score.</div></div><div style="display:flex;align-items:center;justify-content:flex-end;gap:10px;border-top:1px solid #e4e8ee;padding-top:18px;"><button data-nav="sources" style="height:38px;padding:0 18px;border:1px solid #e4e8ee;background:#fff;border-radius:8px;font-size:13px;font-weight:600;color:#42484f;cursor:pointer;">Cancel</button><button data-action="add-source-submit" style="height:38px;padding:0 18px;border:none;border-radius:8px;color:#fff;font-size:13px;font-weight:600;cursor:pointer;background:linear-gradient(135deg,#0E9CA6 0%,#4589ff 52%,#a56eff 100%);">Add source</button></div></div>
+  </div>
+</script>
+
+<script>
+(function(){
+  var VIEWS = ['overview','ask','provenance','insights','saved','sources','add-source'];
+  var SECTION_OF = {overview:'overview', ask:'ask', provenance:'ask', insights:'insights', saved:'saved', sources:'sources', 'add-source':'sources'};
+  function $(id){return document.getElementById(id);}
+  function $all(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+  function txt(el){return (el.textContent||'').replace(/\s+/g,' ').trim();}
+  var tpl = {};
+
+  /* ---------------- toast ---------------- */
+  var toastTimer;
+  function toast(msg){
+    var t=$('kotoast'); if(!t) return;
+    t.textContent=msg; t.classList.add('show');
+    clearTimeout(toastTimer); toastTimer=setTimeout(function(){t.classList.remove('show');},2600);
+  }
+
+  /* ---------------- scaler ---------------- */
+  function fit(){
+    var stage=$('kowrap'), app=$('koapp'); if(!stage||!app) return;
+    var s=Math.min(1, stage.clientWidth/1440);
+    app.style.transform='scale('+s+')';
+    stage.style.height=(1024*s+40)+'px';
+  }
+
+  /* ---------------- router ---------------- */
+  function setActiveNav(view){
+    var sec=SECTION_OF[view]||view;
+    $all('.koni').forEach(function(n){ n.classList.toggle('active', n.getAttribute('data-view')===sec); });
+  }
+  function go(view){
+    if(VIEWS.indexOf(view)<0) view='overview';
+    var host=$('koview'); if(!host) return;
+    host.innerHTML = tpl[view] || '';
+    setActiveNav(view);
+    host.scrollTop=0;
+    try{ wireReused(view); }catch(e){}
+    if(location.hash!=='#'+view){ try{history.replaceState(null,'','#'+view);}catch(e){} }
+  }
+  window.go=go;
+
+  /* ------------- reused-screen navigations (text-matched, pixel-exact content) ------------- */
+  function innermost(scope, text, contains){
+    var all=$all('*',scope).filter(function(el){
+      var t=txt(el);
+      return contains ? (t.indexOf(text)>=0 && t.length<text.length+44 && el.children.length<=5) : (t===text);
+    });
+    return all.filter(function(el){return !all.some(function(o){return o!==el && el.contains(o);});});
+  }
+  function pointerUp(el, scope){
+    var node=el, hops=0;
+    while(node && node!==scope && hops<6){
+      try{ if(getComputedStyle(node).cursor==='pointer') return node; }catch(e){}
+      node=node.parentElement; hops++;
+    }
+    return el;
+  }
+  function nav(scope, text, view, contains, climb){
+    innermost(scope, text, contains).forEach(function(el){
+      var target = climb ? pointerUp(el, scope) : el;
+      if(target.__nav) return; target.__nav=1;
+      target.style.cursor='pointer';
+      target.addEventListener('click', function(e){ e.stopPropagation(); go(view); });
+    });
+  }
+  function actByText(scope, text, fn, contains){
+    innermost(scope, text, contains).forEach(function(el){
+      if(el.__act) return; el.__act=1;
+      el.style.cursor='pointer';
+      el.addEventListener('click', function(e){ e.stopPropagation(); fn(); });
+    });
+  }
+  function wireReused(view){
+    var host=$('koview');
+    if(view==='overview'){
+      ['Questions answered','Active people','Avg. confidence','Knowledge health'].forEach(function(k){ nav(host,k,'insights',false,true); });
+      nav(host,'Review gaps','insights',false,true);
+      nav(host,'Re-sync source','provenance',false,true);
+      nav(host,'Add a source','add-source',false,true);
+      nav(host,'Review impact','provenance',false,true);
+      nav(host,'View all 41 topics','insights',true,true);
+      ['Refund & credits','Expense & reimbursement','Data residency','Parental & leave','Security review'].forEach(function(t){ nav(host,t,'ask',true,true); });
+    }
+    if(view==='ask'){
+      ['Enterprise Refund Policy','Revenue Ops Handbook','2024 Enterprise Agreement'].forEach(function(n){ nav(host,n,'provenance',true,true); });
+      // inline citation chips: leaf nodes whose text is exactly 1/2/3
+      $all('*',host).filter(function(el){return el.children.length===0 && /^[1-3]$/.test(txt(el));})
+        .forEach(function(el){ if(el.__nav)return; el.__nav=1; el.style.cursor='pointer'; el.addEventListener('click',function(e){e.stopPropagation();go('provenance');}); });
+      actByText(host,'Save',function(){ toast('Answer saved to Saved answers'); setTimeout(function(){go('saved');},550); },false);
+    }
+    if(view==='provenance'){
+      nav(host,'Answer','ask',false,true);
+    }
+    if(view==='insights'){
+      ['PTO carry-over','home-office purchase','data residency','parental-leave top-up','co-working membership','security-review SLA']
+        .forEach(function(kw){ nav(host,kw,'ask',true,true); });
+    }
+  }
+
+  /* ---------------- copilot ---------------- */
+  function openCopilot(){ $('kocb').classList.add('open'); setTimeout(function(){var i=$('kocbIn'); if(i)i.focus();},220); }
+  function closeCopilot(){ $('kocb').classList.remove('open'); }
+  function cbPush(role, html){
+    var m=$('kocbMsgs');
+    var av = role==='ai'
+      ? '<span class="kocb-av ai"><svg width="11" height="11" viewBox="0 0 16 16" fill="#fff"><path d="M8 1l1.55 4.35L14 7l-4.45 1.65L8 13l-1.55-4.35L2 7l4.45-1.65z"></path></svg></span>'
+      : '<span class="kocb-av me">SO</span>';
+    m.insertAdjacentHTML('beforeend','<div class="kocb-m '+role+'">'+av+'<div class="kocb-bub">'+html+'</div></div>');
+    m.scrollTop=m.scrollHeight;
+  }
+  function cbChips(list){ $('kocbChips').innerHTML=list.map(function(c){return '<span class="kocb-chip" data-chip="'+c.replace(/"/g,'')+'">'+c+'</span>';}).join(''); }
+  function cbType(){ var m=$('kocbMsgs'); m.insertAdjacentHTML('beforeend','<div class="kocb-m ai" id="kocbType"><span class="kocb-av ai"><svg width="11" height="11" viewBox="0 0 16 16" fill="#fff"><path d="M8 1l1.55 4.35L14 7l-4.45 1.65L8 13l-1.55-4.35L2 7l4.45-1.65z"></path></svg></span><div class="kocb-bub"><span class="kodots"><span></span><span></span><span></span></span></div></div>'); m.scrollTop=m.scrollHeight; }
+  function cbStop(){ var t=$('kocbType'); if(t)t.remove(); }
+  function cbSend(){
+    var inp=$('kocbIn'); var q=(inp.value||'').trim(); if(!q) return;
+    cbPush('me', q.replace(/</g,'&lt;')); inp.value=''; cbType();
+    setTimeout(function(){ cbStop(); botReply(q); }, 650);
+  }
+  function did(label, view){ setTimeout(function(){ go(view); }, 480); return '<div class="kocb-did">✦ Opened '+label+'</div>'; }
+  function botReply(q){
+    var s=q.toLowerCase();
+    if(/(gdpr|data deletion|right to be forgotten|erasure)/.test(s)){ cbPush('ai','When a verified deletion request comes in, Revenue Ops logs it and Engineering purges the record within <b>30 days</b> across primary and backup stores. Opening the full cited answer.'+did('the answer','ask')); cbChips(['Where is this sourced?','Save this answer','Show coverage gaps']); return; }
+    if(/(refund|credit|money back)/.test(s)){ cbPush('ai','Enterprise refunds are issued as <b>account credits within 5 business days</b>, per the 2024 enterprise agreement update. Opening the answer with its sources.'+did('the answer','ask')); cbChips(['Open the source','Is this still current?','Save this answer']); return; }
+    if(/(residency|region|where.*hosted|data location)/.test(s)){ cbPush('ai','<b>EU, UK and US</b> data residency are fully supported; <b>APAC is partial</b>, routed via Singapore - which is also one of your rising coverage gaps. Opening Insights.'+did('Insights','insights')); cbChips(['Open the answer','Add a source','Show all gaps']); return; }
+    if(/(gap|unanswered|missing|coverage|no source|can.?t answer)/.test(s)){ cbPush('ai','You have <b>41 unanswered topics</b>. The biggest are <b>PTO carry-over</b> and <b>parental-leave top-up</b> - both asked repeatedly with no source. Opening Insights.'+did('Insights','insights')); cbChips(['Add a source','Which are asked most?','Open Overview']); return; }
+    if(/(health|score|how healthy)/.test(s)){ cbPush('ai','<b>Knowledge health is 82%</b>, down 3 points this week - dragged by the stale 2024 Enterprise Agreement and a growing data-residency gap. Opening Insights.'+did('Insights','insights')); cbChips(['What\'s stale?','Re-sync a source','Open Overview']); return; }
+    if(/(stale|out of date|outdated|re-?sync|re-?index|freshness)/.test(s)){ cbPush('ai','Two sources need attention - the <b>2024 Enterprise Agreement</b> is 8 months stale and cited in 14 answers. Opening Sources.'+did('Sources','sources')); cbChips(['Add a new source','Open Insights','What cites it?']); return; }
+    if(/(add|upload|connect|import|new).*(source|doc|file|drive|notion)/.test(s)||/add a source/.test(s)){ cbPush('ai','Let\'s add a source - I\'ll index it and make it answerable in about two minutes. Opening Add source.'+did('Add source','add-source')); cbChips(['Connect Google Drive','Paste a URL','Back to Sources']); return; }
+    if(/(saved|my answer|bookmark)/.test(s)){ cbPush('ai','Here are the answers you\'ve saved to the Acme workspace - re-open any to see its sources.'+did('Saved answers','saved')); cbChips(['Ask something new','Show coverage gaps']); return; }
+    if(/(provenance|citation|cite|where.*from|source for|trace|proof)/.test(s)){ cbPush('ai','Every answer traces back to a document - nothing invented. Here\'s the provenance for the refund answer, down to the exact passage.'+did('Provenance','provenance')); cbChips(['Open the answer','Is the source fresh?']); return; }
+    if(/(overview|home|today|summary|status|state of|dashboard)/.test(s)){ cbPush('ai','Here\'s the state of Acme\'s knowledge: <b>health 82%</b> (down 3), <b>1,284 questions answered</b> this week, and 3 things worth your attention. Opening your overview.'+did('Overview','overview')); cbChips(['What needs attention?','Show coverage gaps']); return; }
+    if(/(ask|question|answer)/.test(s)&&s.length<26){ cbPush('ai','Ask me anything about Acme\'s knowledge and I\'ll answer from your sources with citations. Opening Ask.'+did('Ask','ask')); cbChips(['What\'s our refund SLA?','How do we handle GDPR deletion?']); return; }
+    if(/^(hi|hey|hello|yo)\b/.test(s)&&s.length<14){ cbPush('ai','Hi Sam 👋 I can answer from Acme\'s sources, surface coverage gaps, or jump you anywhere. Try <b>"what\'s our refund SLA?"</b>, <b>"show coverage gaps"</b>, or <b>"what\'s stale?"</b>'); cbChips(['What\'s our refund SLA?','Show coverage gaps','What\'s stale?']); return; }
+    cbPush('ai','I can answer from your sources, show what\'s missing, check freshness, or navigate for you. Want to start with one of these?');
+    cbChips(['What\'s our refund SLA?','Show coverage gaps','Add a source','Open Insights']);
+  }
+
+  /* ---------------- one delegated click handler (data-* then catch-all) ---------------- */
+  function nearestInteractive(node, root){
+    while(node && node!==root){
+      if(node.tagName==='BUTTON'||node.tagName==='A') return node;
+      if(node.getAttribute && node.getAttribute('role')==='button') return node;
+      try{ if(getComputedStyle(node).cursor==='pointer') return node; }catch(e){}
+      node=node.parentElement;
+    }
+    return null;
+  }
+  function bootHandlers(){
+    var app=$('koapp');
+    app.addEventListener('click', function(e){
+      var t=e.target.closest('[data-nav],[data-action],[data-toast]');
+      if(t){
+        var nv=t.getAttribute('data-nav'), ac=t.getAttribute('data-action'), tm=t.getAttribute('data-toast');
+        if(nv!==null){ go(nv); return; }
+        if(tm!==null){ toast(tm); return; }
+        if(ac!==null){ handleAction(ac); return; }
+      }
+      // catch-all: any interactive element with no explicit handler still shows what it does
+      var el=nearestInteractive(e.target, app);
+      if(el){
+        var label=(el.getAttribute('aria-label')||txt(el)||'').trim();
+        label = label.length>42 ? label.slice(0,42)+'…' : label;
+        toast(label ? label+' - (demo)' : 'Action (demo)');
+      }
+    });
+    // copilot launcher + drawer
+    $('kocbBtn').addEventListener('click', openCopilot);
+    $('kocbClose').addEventListener('click', closeCopilot);
+    $('kocbSend').addEventListener('click', cbSend);
+    $('kocbIn').addEventListener('keydown', function(e){ if(e.key==='Enter') cbSend(); });
+    $('kocbChips').addEventListener('click', function(e){ var c=e.target.closest('.kocb-chip'); if(c){ $('kocbIn').value=c.getAttribute('data-chip'); cbSend(); } });
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeCopilot(); });
+    window.addEventListener('resize', fit);
+  }
+  function handleAction(a){
+    switch(a){
+      case 'add-source-submit': toast('Source queued - indexing now (demo)'); setTimeout(function(){go('sources');},650); break;
+      case 'open-copilot': openCopilot(); break;
+      default: toast('Action (demo)');
+    }
+  }
+
+  /* ---------------- boot ---------------- */
+  function boot(){
+    // pull templates out of the DOM
+    $all('script[type="text/html"][data-view]').forEach(function(sc){ tpl[sc.getAttribute('data-view')]=sc.textContent; });
+    bootHandlers();
+    fit();
+    var h=(location.hash||'').replace('#','');
+    go(VIEWS.indexOf(h)>=0 ? h : 'overview');
+    // greet in copilot
+    cbPush('ai','Hi Sam 👋 Ask me anything about Acme\'s knowledge - I answer from your sources with citations, and I can jump you anywhere.');
+    cbChips(['What\'s our refund SLA?','Show coverage gaps','What\'s stale?']);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', boot); else boot();
+})();
+
+</script>
+</body>
+</html>

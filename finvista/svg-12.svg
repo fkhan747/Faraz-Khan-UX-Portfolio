@@ -1,0 +1,40 @@
+<svg style="width:100%;background:#f8f8f6;border-radius:12px;" viewBox="0 0 1080 380" xmlns="http://www.w3.org/2000/svg">
+<style>text{font-family:Inter,sans-serif}.nd{rx:10}.t{font-size:11px;fill:#fff;font-weight:600;text-anchor:middle}.ts{font-size:8px;fill:rgba(255,255,255,0.7);text-anchor:middle}.ar{stroke:#999;stroke-width:1.2;fill:none;marker-end:url(#af)}</style>
+<defs><marker id="af" markerheight="6" markerwidth="6" orient="auto" refx="8" refy="5" viewBox="0 0 10 10"><path d="M2 1L8 5L2 9" fill="none" stroke="#999" stroke-linecap="round" stroke-width="1.5"></path></marker></defs>
+<rect class="nd" fill="#432CA5" height="50" width="100" x="20" y="30"></rect><text class="t" x="70" y="52">Welcome</text><text class="ts" x="70" y="66">Login / Register</text>
+<line class="ar" x1="120" x2="155" y1="55" y2="55"></line>
+<rect class="nd" fill="#432CA5" height="50" width="100" x="160" y="30"></rect><text class="t" x="210" y="52">Dashboard</text><text class="ts" x="210" y="66">App overview</text>
+<line class="ar" x1="260" x2="295" y1="55" y2="55"></line>
+<rect class="nd" fill="#432CA5" height="50" width="100" x="300" y="30"></rect><text class="t" x="350" y="52">New App</text><text class="ts" x="350" y="66">Select product</text>
+<line class="ar" x1="400" x2="435" y1="55" y2="55"></line>
+<rect class="nd" fill="#6B5BD2" height="50" width="110" x="440" y="30"></rect><text class="t" x="495" y="52">Personal</text><text class="ts" x="495" y="66">Step 1 of 11</text>
+<line class="ar" x1="550" x2="585" y1="55" y2="55"></line>
+<rect class="nd" fill="#6B5BD2" height="50" width="100" x="590" y="30"></rect><text class="t" x="640" y="52">PAN</text><text class="ts" x="640" y="66">Step 2 of 11</text>
+<line class="ar" x1="690" x2="725" y1="55" y2="55"></line>
+<rect class="nd" fill="#6B5BD2" height="50" width="100" x="730" y="30"></rect><text class="t" x="780" y="52">Address</text><text class="ts" x="780" y="66">Step 3 of 11</text>
+<line class="ar" x1="830" x2="865" y1="55" y2="55"></line>
+<rect class="nd" fill="#6B5BD2" height="50" width="110" x="870" y="30"></rect><text class="t" x="925" y="52">Employment</text><text class="ts" x="925" y="66">Step 4 of 11</text>
+<line class="ar" x1="925" x2="925" y1="80" y2="130"></line>
+<rect class="nd" fill="#6B5BD2" height="50" width="110" x="870" y="135"></rect><text class="t" x="925" y="157">Income</text><text class="ts" x="925" y="171">Step 5 of 11</text>
+<line class="ar" x1="870" x2="835" y1="160" y2="160"></line>
+<rect class="nd" fill="#6B5BD2" height="50" width="100" x="730" y="135"></rect><text class="t" x="780" y="157">Product</text><text class="ts" x="780" y="171">Step 6 of 11</text>
+<line class="ar" x1="730" x2="695" y1="160" y2="160"></line>
+<rect class="nd" fill="#6B5BD2" height="50" width="100" x="590" y="135"></rect><text class="t" x="640" y="157">Schemes</text><text class="ts" x="640" y="171">Step 7 of 11</text>
+<line class="ar" x1="590" x2="555" y1="160" y2="160"></line>
+<rect class="nd" fill="#6B5BD2" height="50" width="110" x="440" y="135"></rect><text class="t" x="495" y="157">Bank A/C</text><text class="ts" x="495" y="171">Step 8 of 11</text>
+<line class="ar" x1="440" x2="405" y1="160" y2="160"></line>
+<rect class="nd" fill="#6B5BD2" height="50" width="100" x="300" y="135"></rect><text class="t" x="350" y="157">Documents</text><text class="ts" x="350" y="171">Step 9 of 11</text>
+<line class="ar" x1="300" x2="265" y1="160" y2="160"></line>
+<rect class="nd" fill="#6B5BD2" height="50" width="100" x="160" y="135"></rect><text class="t" x="210" y="157">Consent</text><text class="ts" x="210" y="171">Step 10 of 11</text>
+<line class="ar" x1="210" x2="210" y1="185" y2="240"></line>
+<rect class="nd" fill="#432CA5" height="50" width="120" x="160" y="245"></rect><text class="t" x="220" y="267">Summary</text><text class="ts" x="220" y="281">Step 11 — Review</text>
+<line class="ar" x1="280" x2="335" y1="270" y2="270"></line>
+<rect fill="#2D8B55" height="50" rx="25" width="120" x="340" y="245"></rect><text class="t" x="400" y="267">Submitted</text><text class="ts" x="400" y="281">Sent for review</text>
+<line class="ar" x1="460" x2="515" y1="270" y2="270"></line>
+<rect fill="#120C2C" height="50" rx="25" width="120" x="520" y="245"></rect><text class="t" x="580" y="267">Processing</text><text class="ts" x="580" y="281">Credit check</text>
+<line class="ar" x1="640" x2="695" y1="270" y2="270"></line>
+<rect fill="#2D8B55" height="50" rx="25" width="130" x="700" y="245"></rect><text class="t" x="765" y="267">Disbursement</text><text class="ts" x="765" y="281">Loan approved</text>
+<rect fill="#432CA5" height="12" rx="3" width="12" x="20" y="330"></rect><text style="font-size:10px;fill:#555" x="38" y="340">Pre-application</text>
+<rect fill="#6B5BD2" height="12" rx="3" width="12" x="150" y="330"></rect><text style="font-size:10px;fill:#555" x="168" y="340">11-step loan journey</text>
+<rect fill="#2D8B55" height="12" rx="6" width="12" x="310" y="330"></rect><text style="font-size:10px;fill:#555" x="328" y="340">Post-submission</text>
+</svg>

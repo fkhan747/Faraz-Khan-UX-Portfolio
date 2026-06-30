@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Meridian Institute Analytics, Application Totals</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ds-real.css" />
+</head>
+<body>
+
+<!-- Fluent System Icons sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-overview" viewBox="0 0 24 24"><path d="M8.75 13C9.99264 13 11 14.0074 11 15.25V18.75C11 19.9926 9.99264 21 8.75 21H5.25C4.00736 21 3 19.9926 3 18.75V15.25C3 14.0074 4.00736 13 5.25 13H8.75ZM18.75 13C19.9926 13 21 14.0074 21 15.25V18.75C21 19.9926 19.9926 21 18.75 21H15.25C14.0074 21 13 19.9926 13 18.75V15.25C13 14.0074 14.0074 13 15.25 13H18.75ZM8.75 14.5H5.25C4.83579 14.5 4.5 14.8358 4.5 15.25V18.75C4.5 19.1642 4.83579 19.5 5.25 19.5H8.75C9.16421 19.5 9.5 19.1642 9.5 18.75V15.25C9.5 14.8358 9.16421 14.5 8.75 14.5ZM18.75 14.5H15.25C14.8358 14.5 14.5 14.8358 14.5 15.25V18.75C14.5 19.1642 14.8358 19.5 15.25 19.5H18.75C19.1642 19.5 19.5 19.1642 19.5 18.75V15.25C19.5 14.8358 19.1642 14.5 18.75 14.5ZM8.75 3C9.99264 3 11 4.00736 11 5.25V8.75C11 9.99264 9.99264 11 8.75 11H5.25C4.00736 11 3 9.99264 3 8.75V5.25C3 4.00736 4.00736 3 5.25 3H8.75ZM18.75 3C19.9926 3 21 4.00736 21 5.25V8.75C21 9.99264 19.9926 11 18.75 11H15.25C14.0074 11 13 9.99264 13 8.75V5.25C13 4.00736 14.0074 3 15.25 3H18.75ZM8.75 4.5H5.25C4.83579 4.5 4.5 4.83579 4.5 5.25V8.75C4.5 9.16421 4.83579 9.5 5.25 9.5H8.75C9.16421 9.5 9.5 9.16421 9.5 8.75V5.25C9.5 4.83579 9.16421 4.5 8.75 4.5ZM18.75 4.5H15.25C14.8358 4.5 14.5 4.83579 14.5 5.25V8.75C14.5 9.16421 14.8358 9.5 15.25 9.5H18.75C19.1642 9.5 19.5 9.16421 19.5 8.75V5.25C19.5 4.83579 19.1642 4.5 18.75 4.5Z"/></symbol>
+<symbol id="i-undergraduate" viewBox="0 0 24 24"><path d="M9.90878 3.70062C11.1832 2.88365 12.8168 2.88365 14.0912 3.70062L22.1548 8.86959C22.3689 9.00687 22.4989 9.24336 22.5 9.49775C22.5011 9.75213 22.3732 9.98974 22.1602 10.1289L19 12.1935V17.7509C19 17.9132 18.9474 18.0711 18.85 18.2009L18.8489 18.2024L18.8477 18.204L18.8446 18.208L18.8364 18.2187C18.8321 18.2242 18.8269 18.2308 18.8209 18.2383C18.8179 18.2421 18.8146 18.2462 18.8111 18.2505C18.7904 18.2761 18.7619 18.3105 18.7253 18.3522C18.6522 18.4358 18.5469 18.5493 18.4081 18.6826C18.1305 18.9491 17.7176 19.2958 17.1587 19.6397C16.0359 20.3306 14.3387 21.0009 12 21.0009C9.66127 21.0009 7.96408 20.3306 6.8413 19.6397C6.2824 19.2958 5.86951 18.9491 5.59193 18.6826C5.45308 18.5493 5.34778 18.4358 5.27468 18.3522C5.23204 18.3035 5.1901 18.2541 5.15107 18.2024C5.14956 18.2004 5.15 18.2009 5.15 18.2009C5.05263 18.0711 5 17.9132 5 17.7509V12.1935L3 10.8869V16.2509C3 16.6652 2.66421 17.0009 2.25 17.0009C1.83579 17.0009 1.5 16.6652 1.5 16.2509V9.50095C1.5 9.23047 1.64318 8.99343 1.85788 8.8615L9.90878 3.70062ZM14.1194 15.3822C12.8317 16.2235 11.1683 16.2234 9.88058 15.3822L6.5 13.1735V17.4697C6.5368 17.5082 6.58034 17.5522 6.63073 17.6005C6.84143 17.8028 7.17072 18.0811 7.62745 18.3622C8.53592 18.9213 9.96373 19.5009 12 19.5009C14.0363 19.5009 15.4641 18.9213 16.3726 18.3622C16.8293 18.0811 17.1586 17.8028 17.3693 17.6005C17.4197 17.5522 17.4632 17.5082 17.5 17.4697V13.1735L14.1194 15.3822ZM13.2817 4.96343C12.5006 4.46271 11.4994 4.46271 10.7183 4.96343L3.63041 9.50698L10.701 14.1264C11.4902 14.642 12.5098 14.642 13.299 14.1264L20.3696 9.50698L13.2817 4.96343Z"/></symbol>
+<symbol id="i-graduate" viewBox="0 0 24 24"><path d="M7 6C7 5.44772 7.44772 5 8 5H16C16.5523 5 17 5.44772 17 6V8C17 8.55228 16.5523 9 16 9H8C7.44772 9 7 8.55228 7 8V6ZM8.5 7.5H15.5V6.5H8.5V7.5ZM4 4.5C4 3.11929 5.11929 2 6.5 2H18C19.3807 2 20.5 3.11929 20.5 4.5V18.75C20.5 19.1642 20.1642 19.5 19.75 19.5H5.5C5.5 20.0523 5.94772 20.5 6.5 20.5H19.75C20.1642 20.5 20.5 20.8358 20.5 21.25C20.5 21.6642 20.1642 22 19.75 22H6.5C5.11929 22 4 20.8807 4 19.5V4.5ZM5.5 18H19V4.5C19 3.94772 18.5523 3.5 18 3.5H6.5C5.94772 3.5 5.5 3.94772 5.5 4.5V18Z"/></symbol>
+<symbol id="i-hr" viewBox="0 0 24 24"><path d="M5.5 8C5.5 6.61929 6.61929 5.5 8 5.5C9.38071 5.5 10.5 6.61929 10.5 8C10.5 9.38071 9.38071 10.5 8 10.5C6.61929 10.5 5.5 9.38071 5.5 8ZM8 4C5.79086 4 4 5.79086 4 8C4 10.2091 5.79086 12 8 12C10.2091 12 12 10.2091 12 8C12 5.79086 10.2091 4 8 4ZM15.5 9C15.5 8.17157 16.1716 7.5 17 7.5C17.8284 7.5 18.5 8.17157 18.5 9C18.5 9.82843 17.8284 10.5 17 10.5C16.1716 10.5 15.5 9.82843 15.5 9ZM17 6C15.3431 6 14 7.34315 14 9C14 10.6569 15.3431 12 17 12C18.6569 12 20 10.6569 20 9C20 7.34315 18.6569 6 17 6ZM14.2484 19.0377C14.9507 19.3232 15.8517 19.5 17.001 19.5C19.2833 19.5 20.5867 18.8027 21.2979 17.9421C21.643 17.5244 21.8186 17.1027 21.9077 16.7795C21.9521 16.6181 21.9754 16.48 21.9875 16.377C21.9936 16.3254 21.997 16.2821 21.9988 16.2487C21.9997 16.232 22.0003 16.2177 22.0006 16.2059L22.0009 16.1903L22.001 16.1839L22.001 16.1811L22.001 16.1786C22.001 14.9754 21.0256 14 19.8224 14H14.1796C14.1521 14 14.1248 14.0005 14.0977 14.0015C14.4916 14.4126 14.7787 14.927 14.914 15.5H19.8224C20.194 15.5 20.4958 15.7986 20.5009 16.1689C20.5006 16.1746 20.4997 16.1855 20.4979 16.2011C20.4934 16.2387 20.4835 16.3015 20.4615 16.3812C20.4177 16.5402 20.3277 16.7613 20.1416 16.9865C19.7903 17.4116 18.9687 18 17.001 18C16.0209 18 15.3252 17.854 14.8302 17.655C14.7231 18.0551 14.5452 18.5378 14.2484 19.0377ZM4.25 14C3.00736 14 2 15.0074 2 16.25V16.5011L2 16.5022L2.00001 16.5048L2.00007 16.5111L2.00035 16.5277C2.00064 16.5406 2.00117 16.5571 2.0021 16.5771C2.00396 16.6169 2.00745 16.6705 2.01398 16.7358C2.02701 16.8661 2.05233 17.045 2.10165 17.2564C2.19995 17.6776 2.39654 18.2404 2.79183 18.8051C3.61066 19.9749 5.17178 21 8 21C10.8282 21 12.3893 19.9749 13.2082 18.8051C13.6035 18.2404 13.8001 17.6776 13.8983 17.2564C13.9477 17.045 13.973 16.8661 13.986 16.7358C13.9926 16.6705 13.996 16.6169 13.9979 16.5771C13.9988 16.5571 13.9994 16.5406 13.9996 16.5277L13.9999 16.5111L14 16.5048L14 16.5022L14 16.25C14 15.0074 12.9926 14 11.75 14H4.25ZM3.50047 16.5072L3.5 16.4947V16.25C3.5 15.8358 3.83579 15.5 4.25 15.5H11.75C12.1642 15.5 12.5 15.8358 12.5 16.25V16.4946L12.4995 16.5072C12.4988 16.5222 12.4972 16.5493 12.4935 16.5865C12.486 16.6612 12.4703 16.7753 12.4376 16.9155C12.3718 17.1974 12.2403 17.5721 11.9793 17.9449C11.4857 18.6501 10.4218 19.5 8 19.5C5.57822 19.5 4.51434 18.6501 4.02067 17.9449C3.75971 17.5721 3.62818 17.1974 3.56241 16.9155C3.5297 16.7753 3.514 16.6612 3.50653 16.5865C3.50281 16.5493 3.50117 16.5222 3.50047 16.5072Z"/></symbol>
+<symbol id="i-research" viewBox="0 0 24 24"><path d="M8 4.5H8.99998V10.7382C8.99998 11.1132 8.90628 11.4822 8.72739 11.8117L5.14269 18.415C4.50968 19.5811 5.35388 20.9999 6.68068 20.9999H17.3193C18.6461 20.9999 19.4903 19.5811 18.8573 18.415L15.2726 11.8117C15.0937 11.4822 15 11.1132 15 10.7382V4.5H16C16.4142 4.5 16.75 4.16421 16.75 3.75C16.75 3.33579 16.4142 3 16 3H8C7.58579 3 7.25 3.33579 7.25 3.75C7.25 4.16421 7.58579 4.5 8 4.5ZM10.5 10.7382V4.5H13.5V10.7382C13.5 11.3631 13.6561 11.9781 13.9543 12.5273L14.7537 14H9.24621L10.0457 12.5273C10.3438 11.9781 10.5 11.3631 10.5 10.7382ZM8.43192 15.5H15.568L17.539 19.1307C17.6294 19.2973 17.5088 19.4999 17.3193 19.4999H6.68068C6.49114 19.4999 6.37054 19.2973 6.46097 19.1307L8.43192 15.5Z"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><path d="M16.1017 17.1624C14.717 18.3101 12.9391 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11C19 12.9391 18.3101 14.717 17.1624 16.1018L21.7803 20.7197C22.0732 21.0126 22.0732 21.4874 21.7803 21.7803C21.4874 22.0732 21.0125 22.0732 20.7196 21.7803L16.1017 17.1624ZM17.5 11C17.5 7.41015 14.5899 4.5 11 4.5C7.41015 4.5 4.5 7.41015 4.5 11C4.5 14.5899 7.41015 17.5 11 17.5C14.5899 17.5 17.5 14.5899 17.5 11Z"/></symbol>
+<symbol id="i-refresh" viewBox="0 0 24 24"><path d="M12 4.5C7.85786 4.5 4.5 7.85786 4.5 12C4.5 16.1421 7.85786 19.5 12 19.5C16.1421 19.5 19.5 16.1421 19.5 12C19.5 11.6236 19.4723 11.2538 19.4188 10.8923C19.3515 10.4382 19.6839 10 20.1429 10C20.5138 10 20.839 10.2562 20.8953 10.6228C20.9642 11.0718 21 11.5317 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C14.3051 3 16.4077 3.86656 18 5.29168V4.25C18 3.83579 18.3358 3.5 18.75 3.5C19.1642 3.5 19.5 3.83579 19.5 4.25V7.25C19.5 7.66421 19.1642 8 18.75 8H15.75C15.3358 8 15 7.66421 15 7.25C15 6.83579 15.3358 6.5 15.75 6.5H17.0991C15.7609 5.25883 13.9691 4.5 12 4.5Z"/></symbol>
+<symbol id="i-download" viewBox="0 0 24 24"><path d="M18.2498 20.5009C18.664 20.5008 19 20.8365 19 21.2507C19 21.6649 18.6644 22.0008 18.2502 22.0009L5.25022 22.0047C4.836 22.0048 4.5 21.6691 4.5 21.2549C4.5 20.8407 4.83557 20.5048 5.24978 20.5047L18.2498 20.5009ZM11.6482 2.01271L11.75 2.00586C12.1297 2.00586 12.4435 2.28801 12.4932 2.65409L12.5 2.75586L12.499 16.4409L16.2208 12.7205C16.4871 12.4543 16.9038 12.4301 17.1974 12.648L17.2815 12.7206C17.5477 12.9869 17.5719 13.4036 17.354 13.6972L17.2814 13.7813L12.2837 18.7779C12.0176 19.044 11.6012 19.0683 11.3076 18.8507L11.2235 18.7782L6.22003 13.7816C5.92694 13.4889 5.92661 13.014 6.21931 12.7209C6.48539 12.4545 6.90204 12.43 7.1958 12.6477L7.27997 12.7202L10.999 16.4339L11 2.75586C11 2.37616 11.2822 2.06237 11.6482 2.01271Z"/></symbol>
+<symbol id="i-table" viewBox="0 0 24 24"><path d="M3 6.25C3 4.45507 4.45507 3 6.25 3H17.75C19.5449 3 21 4.45507 21 6.25V17.75C21 19.5449 19.5449 21 17.75 21H6.25C4.45507 21 3 19.5449 3 17.75V6.25ZM6.25 4.5C5.2835 4.5 4.5 5.2835 4.5 6.25V8.5H8.5V4.5H6.25ZM4.5 10V14H8.5L8.5 10H4.5ZM10 10L10 14H14L14 10H10ZM15.5 10L15.5 14H19.5V10H15.5ZM14 15.5H10V19.5H14V15.5ZM15.5 19.5H17.75C18.7165 19.5 19.5 18.7165 19.5 17.75V15.5H15.5V19.5ZM15.5 8.5H19.5V6.25C19.5 5.2835 18.7165 4.5 17.75 4.5H15.5V8.5ZM14 4.5H10V8.5H14V4.5ZM4.5 15.5V17.75C4.5 18.7165 5.2835 19.5 6.25 19.5H8.5V15.5H4.5Z"/></symbol>
+<symbol id="i-chart" viewBox="0 0 24 24"><path d="M13.25 3C14.4926 3 15.5 4.00736 15.5 5.25V7H18.75C19.9926 7 21 8.00736 21 9.25V20.25C21 20.6642 20.6642 21 20.25 21H3.75C3.33579 21 3 20.6642 3 20.25V12.25C3 11.0074 4.00736 10 5.25 10H8.5V5.25C8.5 4.00736 9.50736 3 10.75 3H13.25ZM5.25 11.5C4.83579 11.5 4.5 11.8358 4.5 12.25V19.5H8.5V11.5H5.25ZM10.75 4.5C10.3358 4.5 10 4.83579 10 5.25V19.5H14V5.25C14 4.83579 13.6642 4.5 13.25 4.5H10.75ZM15.5 19.5H19.5V9.25C19.5 8.83579 19.1642 8.5 18.75 8.5H15.5V19.5Z"/></symbol>
+<symbol id="i-fullscreen" viewBox="0 0 24 24"><path d="M4.5 5.75C4.5 5.05964 5.05964 4.5 5.75 4.5H7.75C8.16421 4.5 8.5 4.16421 8.5 3.75C8.5 3.33579 8.16421 3 7.75 3H5.75C4.23122 3 3 4.23122 3 5.75V7.75C3 8.16421 3.33579 8.5 3.75 8.5C4.16421 8.5 4.5 8.16421 4.5 7.75V5.75ZM4.5 18.25C4.5 18.9404 5.05964 19.5 5.75 19.5H7.75C8.16421 19.5 8.5 19.8358 8.5 20.25C8.5 20.6642 8.16421 21 7.75 21H5.75C4.23122 21 3 19.7688 3 18.25V16.25C3 15.8358 3.33579 15.5 3.75 15.5C4.16421 15.5 4.5 15.8358 4.5 16.25V18.25ZM18.25 4.5C18.9404 4.5 19.5 5.05964 19.5 5.75V7.75C19.5 8.16421 19.8358 8.5 20.25 8.5C20.6642 8.5 21 8.16421 21 7.75V5.75C21 4.23122 19.7688 3 18.25 3H16.25C15.8358 3 15.5 3.33579 15.5 3.75C15.5 4.16421 15.8358 4.5 16.25 4.5H18.25ZM19.5 18.25C19.5 18.9404 18.9404 19.5 18.25 19.5H16.25C15.8358 19.5 15.5 19.8358 15.5 20.25C15.5 20.6642 15.8358 21 16.25 21H18.25C19.7688 21 21 19.7688 21 18.25V16.25C21 15.8358 20.6642 15.5 20.25 15.5C19.8358 15.5 19.5 15.8358 19.5 16.25V18.25Z"/></symbol>
+<symbol id="i-ai" viewBox="0 0 24 24"><path d="M8.66535 15.7345C8.90969 15.9075 9.20192 15.9999 9.50129 15.9989V15.9949C9.78358 15.9955 10.0598 15.9132 10.2957 15.7582C10.5316 15.6031 10.7168 15.3822 10.8283 15.1229L11.4413 13.2589C11.5829 12.8366 11.8207 12.4531 12.1361 12.1386C12.4514 11.8241 12.8356 11.5873 13.2583 11.4469L15.0363 10.8689C15.3227 10.7683 15.5701 10.5799 15.7432 10.3305C15.9164 10.0812 16.0065 9.7836 16.0007 9.48009C15.9949 9.17659 15.8936 8.88262 15.7111 8.64003C15.5286 8.39744 15.2743 8.21858 14.9843 8.12889L13.2293 7.55889C12.8048 7.41763 12.419 7.1793 12.1027 6.86283C11.7864 6.54637 11.5483 6.1605 11.4073 5.73589L10.8293 3.95889C10.7285 3.67586 10.542 3.43127 10.2958 3.25908C10.0496 3.0869 9.7559 2.99567 9.45547 2.99809C9.15504 3.00051 8.86282 3.09645 8.61942 3.27258C8.37602 3.44871 8.19353 3.69628 8.09729 3.98089L7.51429 5.77289C7.37371 6.18515 7.14135 6.56012 6.83474 6.8695C6.52813 7.17888 6.15528 7.4146 5.74429 7.55889L3.96729 8.12989C3.75592 8.20382 3.56463 8.32589 3.40855 8.48647C3.25247 8.64704 3.13587 8.84172 3.06798 9.05511C3.00008 9.2685 2.98274 9.49475 3.01733 9.716C3.05193 9.93724 3.1375 10.1474 3.26729 10.3299C3.44418 10.5789 3.69508 10.7657 3.98429 10.8639L5.73829 11.4329C6.16392 11.5753 6.55049 11.815 6.86729 12.1329C7.18409 12.4508 7.42378 12.8374 7.56629 13.2629L8.14429 15.0379C8.24276 15.3206 8.42102 15.5615 8.66535 15.7345ZM17.001 20.9989C17.2375 20.9991 17.468 20.9249 17.66 20.7869C17.8586 20.6469 18.0075 20.4472 18.085 20.2169L18.407 19.2279C18.4705 19.0366 18.5777 18.8627 18.72 18.7199C18.8622 18.5781 19.0349 18.4707 19.225 18.4059L20.239 18.0769C20.4649 17.9972 20.6601 17.8484 20.7967 17.6516C20.9333 17.4547 21.0045 17.2199 21.0002 16.9803C20.9959 16.7408 20.9163 16.5086 20.7727 16.3169C20.629 16.1251 20.4287 15.9834 20.2 15.9119L19.208 15.5889C19.0176 15.5254 18.8445 15.4187 18.7022 15.2771C18.5599 15.1356 18.4524 14.963 18.388 14.7729L18.059 13.7589C17.9784 13.5362 17.8306 13.344 17.6361 13.2089C17.4416 13.0738 17.2099 13.0025 16.973 13.0048C16.7362 13.0071 16.5059 13.0829 16.3141 13.2218C16.1222 13.3606 15.9782 13.5557 15.902 13.7799L15.578 14.7719C15.516 14.9604 15.4117 15.1322 15.273 15.2742C15.1343 15.4162 14.965 15.5245 14.778 15.5909L13.772 15.9169C13.5466 15.9934 13.3512 16.1394 13.214 16.3339C13.0757 16.5274 13.0013 16.7591 13.001 16.9969C13.0002 17.2331 13.0737 17.4636 13.211 17.6559C13.3516 17.8541 13.5516 18.0026 13.782 18.0799L14.773 18.4029C14.9645 18.4664 15.1385 18.574 15.281 18.7169C15.4231 18.8602 15.5302 19.0344 15.594 19.2259L15.922 20.2329C15.9981 20.4541 16.1415 20.6461 16.332 20.7819C16.5265 20.9229 16.7607 20.9989 17.001 20.9989Z"/></symbol>
+<symbol id="i-chevron" viewBox="0 0 24 24"><path d="M4.21967 8.46967C4.51256 8.17678 4.98744 8.17678 5.28033 8.46967L12 15.1893L18.7197 8.46967C19.0126 8.17678 19.4874 8.17678 19.7803 8.46967C20.0732 8.76256 20.0732 9.23744 19.7803 9.53033L12.5303 16.7803C12.2374 17.0732 11.7626 17.0732 11.4697 16.7803L4.21967 9.53033C3.92678 9.23744 3.92678 8.76256 4.21967 8.46967Z"/></symbol>
+<symbol id="i-send" viewBox="0 0 24 24"><path d="M5.69362 11.9997L2.29933 3.2715C2.0631 2.66403 2.65544 2.08309 3.2414 2.28959L3.33375 2.32885L21.3337 11.3288C21.852 11.588 21.8844 12.2975 21.4309 12.6129L21.3337 12.6705L3.33375 21.6705C2.75077 21.962 2.11746 21.426 2.2688 20.8234L2.29933 20.7278L5.69362 11.9997L2.29933 3.2715L5.69362 11.9997ZM7.01109 12.7491L4.4021 19.4593L19.3213 11.9997L4.4021 4.54007L7.01109 11.2491L13.6387 11.2497C14.0184 11.2497 14.3322 11.5318 14.3818 11.8979L14.3887 11.9997C14.3887 12.3794 14.1065 12.6932 13.7404 12.7428L13.6387 12.7497L7.01109 12.7491Z"/></symbol>
+<symbol id="i-close" viewBox="0 0 24 24"><path d="M4.39705 4.55379L4.46967 4.46967C4.73594 4.2034 5.1526 4.1792 5.44621 4.39705L5.53033 4.46967L12 10.939L18.4697 4.46967C18.7626 4.17678 19.2374 4.17678 19.5303 4.46967C19.8232 4.76256 19.8232 5.23744 19.5303 5.53033L13.061 12L19.5303 18.4697C19.7966 18.7359 19.8208 19.1526 19.6029 19.4462L19.5303 19.5303C19.2641 19.7966 18.8474 19.8208 18.5538 19.6029L18.4697 19.5303L12 13.061L5.53033 19.5303C5.23744 19.8232 4.76256 19.8232 4.46967 19.5303C4.17678 19.2374 4.17678 18.7626 4.46967 18.4697L10.939 12L4.46967 5.53033C4.2034 5.26406 4.1792 4.8474 4.39705 4.55379Z"/></symbol>
+</defs></svg>
+
+<div class="shell">
+
+  <!-- floating maroon rail -->
+  <aside class="rail">
+    <div class="side-brand">
+      <div class="side-mark">M</div>
+      <div><div class="bn">Meridian</div><div class="bs">Analytics</div></div>
+    </div>
+
+    <div class="side-label">Dashboards</div>
+    <nav class="side-nav">
+      <a class="nav-item" href="overview.html"><svg class="icon"><use href="#i-overview"/></svg> Overview</a>
+      <button class="nav-item nav-toggle is-active open" type="button"><svg class="icon"><use href="#i-undergraduate"/></svg> Undergraduate <svg class="chev"><use href="#i-chevron"/></svg></button>
+      <div class="side-sub">
+        <a href="ug-summary.html">Summary</a>
+        <a href="ug-yoy.html">Year to Year</a>
+        <a href="#">School / Program</a>
+        <a href="ug-totals.html" class="is-active">Application Totals</a>
+        <a href="#">LINK Only</a>
+      </div>
+      <button class="nav-item nav-toggle" type="button"><svg class="icon"><use href="#i-graduate"/></svg> Graduate <svg class="chev"><use href="#i-chevron"/></svg></button>
+      <div class="side-sub">
+        <a href="grad-summary.html">Summary</a>
+        <a href="#">Year to Year</a>
+        <a href="#">School / Program</a>
+        <a href="#">Application Totals</a>
+        <a href="#">LINK Only</a>
+      </div>
+      <button class="nav-item nav-toggle" type="button"><svg class="icon"><use href="#i-hr"/></svg> HR <svg class="chev"><use href="#i-chevron"/></svg></button>
+      <div class="side-sub">
+        <a href="hr-summary.html">Summary</a>
+        <a href="hr-headcount.html">Trends Headcount</a>
+        <a href="#">Trends Turnover</a>
+        <a href="#">Workforce Composition</a>
+      </div>
+      <button class="nav-item nav-toggle" type="button"><svg class="icon"><use href="#i-research"/></svg> Research <svg class="chev"><use href="#i-chevron"/></svg></button>
+      <div class="side-sub">
+        <a href="research-summary.html">Summary</a>
+        <a href="research-expenditures.html">Expenditures</a>
+        <a href="#">Year Over Year</a>
+        <a href="research-hindex.html">H-Index</a>
+      </div>
+    </nav>
+
+    <div class="rail-foot">
+      <div class="rail-user">
+        <span class="avatar">JE</span>
+        <div><div class="name">Jordan Ellis</div><div class="role">Institutional Research</div></div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- canvas -->
+  <main class="main">
+
+    <div class="pagehead">
+      <div>
+        <div class="eyebrow">Undergraduate</div>
+        <h1 class="pagetitle">Application Totals</h1>
+        <p class="pagesub">Fall 2024 first-year analysis.</p>
+      </div>
+      <div class="refresh">
+        <div class="updated">Last refreshed<b>Today, 8:00 AM</b></div>
+        <button class="control ctl-icon" title="Refresh data"><svg class="ic" style="width:18px;height:18px;color:var(--ink-soft)"><use href="#i-refresh"/></svg></button>
+      </div>
+    </div>
+
+    <!-- sub-tab bar -->
+<!-- filters -->
+    <div class="filterbar">
+      <span class="control">Academic Year <b style="margin-left:2px;color:var(--ink)">2024</b> <svg class="ic" style="width:14px;height:14px;color:var(--ink-faint)"><use href="#i-chevron"/></svg></span>
+      <span class="control">Decision Plan <svg class="ic" style="width:14px;height:14px;color:var(--ink-faint)"><use href="#i-chevron"/></svg></span>
+    </div>
+
+    <!-- KPI band: 4 up, with year-over-year deltas -->
+    <div class="kpis" style="grid-template-columns:repeat(4,1fr)">
+      <div class="kpi"><div class="kpi__label">Fall 2024 Applications</div><div class="kpi__value num">10,670</div><div class="kpi__foot"><span class="delta down"><span class="arr">&#x25BC;</span> 24.7%</span><span class="kpi-sub">vs Fall 2023</span></div></div>
+      <div class="kpi"><div class="kpi__label">Final Fall 2023</div><div class="kpi__value num">14,170</div><div class="kpi__foot"><span class="delta up"><span class="arr">&#x25B2;</span> 13.4%</span><span class="kpi-sub">vs Fall 2022</span></div></div>
+      <div class="kpi"><div class="kpi__label">Final Fall 2022</div><div class="kpi__value num">12,500</div><div class="kpi__foot"><span class="delta up"><span class="arr">&#x25B2;</span> 5.9%</span><span class="kpi-sub">vs Fall 2021</span></div></div>
+      <div class="kpi"><div class="kpi__label">Retained vs prior cycles</div><div class="kpi__value num">75.3%</div><div class="kpi__foot"><span class="kpi-sub">of 2023, and 85.4% of 2022</span></div></div>
+    </div>
+
+    <div class="grid-2" style="margin-bottom:16px">
+    <!-- headline: applications trend -->
+    <div class="card chart-card" data-chart="ug-applications-trend">
+      <div class="card-hd"><div><div class="card-title">Applications, last four cycles</div><div class="card-sub">First-year applications by fall term</div></div>
+        <div class="card-tools"><div class="seg-toggle"><button class="js-chart on" title="Chart view"><svg class="ic"><use href="#i-chart"/></svg></button><button class="js-table" title="Table view"><svg class="ic"><use href="#i-table"/></svg></button></div><button class="tool-btn js-fs" title="Full screen"><svg class="ic"><use href="#i-fullscreen"/></svg></button></div>
+      </div>
+      <div class="card-bd">
+        <div class="view-chart">
+          <div class="colchart" style="height:160px">
+            <div class="colgroup"><div class="colcell"><span class="colv">11,800</span><div class="col" style="height:83%;background:#004380"></div></div></div>
+            <div class="colgroup"><div class="colcell"><span class="colv">12,500</span><div class="col" style="height:88%;background:#004380"></div></div></div>
+            <div class="colgroup"><div class="colcell"><span class="colv">14,170</span><div class="col" style="height:100%;background:#004380"></div></div></div>
+            <div class="colgroup"><div class="colcell"><span class="colv">10,670</span><div class="col" style="height:75%;background:#004380"></div></div></div>
+          </div>
+          <div class="colx"><span>Fall 2021</span><span>Fall 2022</span><span>Fall 2023</span><span>Fall 2024</span></div>
+        </div>
+        <div class="view-table"><table class="tbl"><thead><tr><th>Fall term</th><th colspan="2">Applications</th></tr><tr><th></th><th>Total</th><th>Diff %</th></tr></thead><tbody>
+          <tr><td>Fall 2021</td><td class="num">11,800</td><td class="num">N/A</td></tr>
+          <tr><td>Fall 2022</td><td class="num">12,500</td><td class="num">+5.9%</td></tr>
+          <tr><td>Fall 2023</td><td class="num">14,170</td><td class="num">+13.4%</td></tr>
+          <tr><td>Fall 2024</td><td class="num">10,670</td><td class="num">-24.7%</td></tr>
+        </tbody></table><div class="tbl-foot"><button class="btn-download js-dl"><svg class="ic"><use href="#i-download"/></svg> Download CSV</button></div></div>
+      </div>
+    </div>
+
+    <!-- international by country (moved up into the headline row) -->
+    <div class="card chart-card" data-chart="ug-totals-international">
+      <div class="card-hd"><div><div class="card-title">International applications by country</div><div class="card-sub">Fall 2024 first-year, top source countries</div></div>
+        <div class="card-tools"><div class="seg-toggle"><button class="js-chart on" title="Chart view"><svg class="ic"><use href="#i-chart"/></svg></button><button class="js-table" title="Table view"><svg class="ic"><use href="#i-table"/></svg></button></div><button class="tool-btn js-fs" title="Full screen"><svg class="ic"><use href="#i-fullscreen"/></svg></button></div>
+      </div>
+      <div class="card-bd">
+        <div class="view-chart"><div class="bars">
+          <div class="bar-row"><span class="bar-lab">India</span><div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--c-navy)"></div></div><span class="bar-val num">312</span></div>
+          <div class="bar-row"><span class="bar-lab">China</span><div class="bar-track"><div class="bar-fill" style="width:72%;background:var(--c-navy)"></div></div><span class="bar-val num">224</span></div>
+          <div class="bar-row"><span class="bar-lab">Nigeria</span><div class="bar-track"><div class="bar-fill" style="width:35%;background:var(--c-navy)"></div></div><span class="bar-val num">110</span></div>
+          <div class="bar-row"><span class="bar-lab">South Korea</span><div class="bar-track"><div class="bar-fill" style="width:31%;background:var(--c-navy)"></div></div><span class="bar-val num">96</span></div>
+          <div class="bar-row"><span class="bar-lab">Canada</span><div class="bar-track"><div class="bar-fill" style="width:28%;background:var(--c-navy)"></div></div><span class="bar-val num">88</span></div>
+          <div class="bar-row"><span class="bar-lab">Pakistan</span><div class="bar-track"><div class="bar-fill" style="width:27%;background:var(--c-navy)"></div></div><span class="bar-val num">84</span></div>
+        </div></div>
+        <div class="view-table"><table class="tbl"><thead><tr><th rowspan="2">Country</th><th colspan="3">Applications</th></tr><tr><th>Fall 2024</th><th>Fall 2023</th><th>Diff %</th></tr></thead><tbody>
+          <tr><td>India</td><td class="num">312</td><td class="num">385</td><td class="num">-19%</td></tr>
+          <tr><td>China</td><td class="num">224</td><td class="num">290</td><td class="num">-23%</td></tr>
+          <tr><td>Nigeria</td><td class="num">110</td><td class="num">130</td><td class="num">-15%</td></tr>
+          <tr><td>South Korea</td><td class="num">96</td><td class="num">118</td><td class="num">-19%</td></tr>
+          <tr><td>Canada</td><td class="num">88</td><td class="num">105</td><td class="num">-16%</td></tr>
+          <tr><td>Pakistan</td><td class="num">84</td><td class="num">96</td><td class="num">-13%</td></tr>
+          <tr><td>All other countries</td><td class="num">366</td><td class="num">426</td><td class="num">-14%</td></tr>
+          <tr class="grp"><td>Total</td><td class="num">1,280</td><td class="num">1,550</td><td class="num">-17%</td></tr>
+        </tbody></table><div class="tbl-foot"><button class="btn-download js-dl"><svg class="ic"><use href="#i-download"/></svg> Download CSV</button></div></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="grid-2" style="margin-bottom:16px">
+      <!-- by decision plan -->
+      <div class="card chart-card" data-chart="ug-totals-decision-plan">
+        <div class="card-hd"><div><div class="card-title">By decision plan</div><div class="card-sub">Fall 2024 first-year</div></div>
+          <div class="card-tools"><div class="seg-toggle"><button class="js-chart on" title="Chart view"><svg class="ic"><use href="#i-chart"/></svg></button><button class="js-table" title="Table view"><svg class="ic"><use href="#i-table"/></svg></button></div><button class="tool-btn js-fs" title="Full screen"><svg class="ic"><use href="#i-fullscreen"/></svg></button></div>
+        </div>
+        <div class="card-bd">
+          <div class="view-chart"><div class="bars">
+            <div class="bar-row"><span class="bar-lab">Early Dec I</span><div class="bar-track"><div class="bar-fill" style="width:4%;background:var(--c-purple)"></div></div><span class="bar-val num">214</span></div>
+            <div class="bar-row"><span class="bar-lab">Early Dec II</span><div class="bar-track"><div class="bar-fill" style="width:2%;background:var(--c-teal)"></div></div><span class="bar-val num">95</span></div>
+            <div class="bar-row"><span class="bar-lab">Early Action</span><div class="bar-track"><div class="bar-fill" style="width:86%;background:var(--c-orange)"></div></div><span class="bar-val num">4,790</span></div>
+            <div class="bar-row"><span class="bar-lab">Regular</span><div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--c-magenta)"></div></div><span class="bar-val num">5,571</span></div>
+          </div></div>
+          <div class="view-table"><table class="tbl"><thead><tr><th rowspan="2">Decision plan</th><th colspan="3">Applications</th></tr><tr><th>Fall 2024</th><th>Fall 2023</th><th>Diff %</th></tr></thead><tbody>
+            <tr><td>Early Decision I</td><td class="num">214</td><td class="num">440</td><td class="num">-51%</td></tr>
+            <tr><td>Early Decision II</td><td class="num">95</td><td class="num">345</td><td class="num">-72%</td></tr>
+            <tr><td>Early Action</td><td class="num">4,790</td><td class="num">4,200</td><td class="num">+14%</td></tr>
+            <tr><td>Regular Decision</td><td class="num">5,571</td><td class="num">9,185</td><td class="num">-39%</td></tr>
+            <tr class="grp"><td>Total</td><td class="num">10,670</td><td class="num">14,170</td><td class="num">-25%</td></tr>
+          </tbody></table><div class="tbl-foot"><button class="btn-download js-dl"><svg class="ic"><use href="#i-download"/></svg> Download CSV</button></div></div>
+        </div>
+      </div>
+
+      <!-- by program -->
+      <div class="card chart-card" data-chart="ug-totals-program">
+        <div class="card-hd"><div><div class="card-title">By program</div><div class="card-sub">Fall 2024 first-year</div></div>
+          <div class="card-tools"><div class="seg-toggle"><button class="js-chart on" title="Chart view"><svg class="ic"><use href="#i-chart"/></svg></button><button class="js-table" title="Table view"><svg class="ic"><use href="#i-table"/></svg></button></div><button class="tool-btn js-fs" title="Full screen"><svg class="ic"><use href="#i-fullscreen"/></svg></button></div>
+        </div>
+        <div class="card-bd">
+          <div class="view-chart"><div class="bars">
+            <div class="bar-row"><span class="bar-lab">Business</span><div class="bar-track"><div class="bar-fill" style="width:18%;background:var(--c-purple)"></div></div><span class="bar-val num">1,541</span></div>
+            <div class="bar-row"><span class="bar-lab">Humanities</span><div class="bar-track"><div class="bar-fill" style="width:5%;background:var(--c-teal)"></div></div><span class="bar-val num">386</span></div>
+            <div class="bar-row"><span class="bar-lab">Eng &amp; Sci</span><div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--c-orange)"></div></div><span class="bar-val num">8,428</span></div>
+            <div class="bar-row"><span class="bar-lab">Systems</span><div class="bar-track"><div class="bar-fill" style="width:4%;background:var(--c-magenta)"></div></div><span class="bar-val num">315</span></div>
+          </div></div>
+          <div class="view-table"><table class="tbl"><thead><tr><th rowspan="2">Program</th><th colspan="3">Applications</th></tr><tr><th>Fall 2024</th><th>Fall 2023</th><th>Diff %</th></tr></thead><tbody>
+            <tr><td>Business</td><td class="num">1,541</td><td class="num">1,983</td><td class="num">-22%</td></tr>
+            <tr><td>Humanities &amp; Social Sciences</td><td class="num">386</td><td class="num">625</td><td class="num">-38%</td></tr>
+            <tr><td>Engineering &amp; Science</td><td class="num">8,428</td><td class="num">11,150</td><td class="num">-24%</td></tr>
+            <tr><td>Systems &amp; Enterprises</td><td class="num">315</td><td class="num">412</td><td class="num">-24%</td></tr>
+          </tbody></table><div class="tbl-foot"><button class="btn-download js-dl"><svg class="ic"><use href="#i-download"/></svg> Download CSV</button></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-2" style="margin-bottom:16px">
+      <!-- by gender -->
+      <div class="card chart-card" data-chart="ug-totals-gender">
+        <div class="card-hd"><div><div class="card-title">By gender</div><div class="card-sub">Fall 2024 first-year</div></div>
+          <div class="card-tools"><div class="seg-toggle"><button class="js-chart on" title="Chart view"><svg class="ic"><use href="#i-chart"/></svg></button><button class="js-table" title="Table view"><svg class="ic"><use href="#i-table"/></svg></button></div><button class="tool-btn js-fs" title="Full screen"><svg class="ic"><use href="#i-fullscreen"/></svg></button></div>
+        </div>
+        <div class="card-bd">
+          <div class="view-chart"><div class="donut-wrap">
+            <div class="donut"><svg viewBox="0 0 40 40" width="120" height="120"><circle class="ring" cx="20" cy="20" r="15.915"/><circle class="seg" cx="20" cy="20" r="15.915" stroke="#6D54C9" stroke-dasharray="66.4 33.6" stroke-dashoffset="0"/><circle class="seg" cx="20" cy="20" r="15.915" stroke="#21B5A8" stroke-dasharray="33.6 66.4" stroke-dashoffset="-66.4"/></svg><div class="donut-center"><div class="dc-val num">10,670</div><div class="dc-lab">apps</div></div></div>
+            <div class="legend"><div class="legend-i"><span class="dot" style="background:#6D54C9"></span>Male <b>66%</b></div><div class="legend-i"><span class="dot" style="background:#21B5A8"></span>Female <b>34%</b></div><div class="legend-i"><span class="dot" style="background:#C9C4CA"></span>Undeclared <b>0%</b></div></div>
+          </div></div>
+          <div class="view-table"><table class="tbl"><thead><tr><th rowspan="2">Gender</th><th colspan="3">Applications</th></tr><tr><th>Fall 2024</th><th>Fall 2023</th><th>Diff %</th></tr></thead><tbody>
+            <tr><td>Male</td><td class="num">7,082</td><td class="num">9,180</td><td class="num">-23%</td></tr>
+            <tr><td>Female</td><td class="num">3,586</td><td class="num">4,820</td><td class="num">-26%</td></tr>
+            <tr><td>Undeclared</td><td class="num">2</td><td class="num">170</td><td class="num">-99%</td></tr>
+          </tbody></table><div class="tbl-foot"><button class="btn-download js-dl"><svg class="ic"><use href="#i-download"/></svg> Download CSV</button></div></div>
+        </div>
+      </div>
+
+      <!-- by geography -->
+      <div class="card chart-card" data-chart="ug-totals-geography">
+        <div class="card-hd"><div><div class="card-title">By geography</div><div class="card-sub">Fall 2024 first-year</div></div>
+          <div class="card-tools"><div class="seg-toggle"><button class="js-chart on" title="Chart view"><svg class="ic"><use href="#i-chart"/></svg></button><button class="js-table" title="Table view"><svg class="ic"><use href="#i-table"/></svg></button></div><button class="tool-btn js-fs" title="Full screen"><svg class="ic"><use href="#i-fullscreen"/></svg></button></div>
+        </div>
+        <div class="card-bd">
+          <div class="view-chart"><div class="bars">
+            <div class="bar-row"><span class="bar-lab">In-state</span><div class="bar-track"><div class="bar-fill" style="width:78%;background:var(--c-purple)"></div></div><span class="bar-val num">4,108</span></div>
+            <div class="bar-row"><span class="bar-lab">Out-of-state</span><div class="bar-track"><div class="bar-fill" style="width:100%;background:var(--c-teal)"></div></div><span class="bar-val num">5,282</span></div>
+            <div class="bar-row"><span class="bar-lab">International</span><div class="bar-track"><div class="bar-fill" style="width:24%;background:var(--c-orange)"></div></div><span class="bar-val num">1,280</span></div>
+          </div></div>
+          <div class="view-table"><table class="tbl"><thead><tr><th rowspan="2">Origin</th><th colspan="3">Applications</th></tr><tr><th>Fall 2024</th><th>Fall 2023</th><th>Diff %</th></tr></thead><tbody>
+            <tr><td>In-state</td><td class="num">4,108</td><td class="num">5,290</td><td class="num">-22%</td></tr>
+            <tr><td>Out-of-state</td><td class="num">5,282</td><td class="num">7,330</td><td class="num">-28%</td></tr>
+            <tr><td>International</td><td class="num">1,280</td><td class="num">1,550</td><td class="num">-17%</td></tr>
+          </tbody></table><div class="tbl-foot"><button class="btn-download js-dl"><svg class="ic"><use href="#i-download"/></svg> Download CSV</button></div></div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="foot">
+      <span>Data as of Tuesday, 20 February. Final 24 figures reflect the closed Fall 2024 first-year cycle.</span>
+      <span>Meridian Institute Analytics</span>
+    </div>
+
+  </main>
+</div>
+
+<button class="ai-fab" id="aiOpen"><svg class="ic"><use href="#i-ai"/></svg> Ask AI</button>
+
+<!-- Ask AI modal (overlays the canvas, leaves the rail visible) -->
+<div class="ai-overlay">
+  <div class="ai-dim" data-aiclose></div>
+  <div class="ai-modal">
+    <div class="ai-modal-hd">
+      <div class="t"><span class="badge"><svg class="ic"><use href="#i-ai"/></svg></span><div><h2>Meridian AI</h2><div class="sub">Grounded in your dashboards</div></div></div>
+      <button class="tool-btn" data-aiclose title="Close"><svg class="ic"><use href="#i-close"/></svg></button>
+    </div>
+    <div class="ai-modal-body">
+      <div class="ai-stage">
+        <div class="ai-hello">
+          <h2>Good morning, Jordan.</h2>
+          <p>Here are a few places to start, or ask your own question below.</p>
+          <div class="prompt-chips">
+            <span class="chip"><svg class="ic"><use href="#i-ai"/></svg> Why did undergraduate applications fall?</span>
+            <span class="chip"><svg class="ic"><use href="#i-ai"/></svg> Which program lost the most volume?</span>
+            <span class="chip"><svg class="ic"><use href="#i-ai"/></svg> Summarize international applications</span>
+          </div>
+        </div>
+        <div class="msg user">
+          <span class="ava">JE</span>
+          <div class="body">How does the Fall 2024 application total compare to the prior two cycles?</div>
+        </div>
+        <div class="msg ai">
+          <span class="ava"><svg class="ic"><use href="#i-ai"/></svg></span>
+          <div class="body">
+            <div class="ai-answer">
+              <p>Fall 2024 first-year applications closed at <b>10,670</b>, down from 14,170 in Final Fall 2023 and 12,500 in Final Fall 2022.</p>
+              <div class="ai-callout">
+                <div><div class="k">2024 vs 2023</div><div class="big num">75.3%</div></div>
+                <div><div class="k">2024 vs 2022</div><div class="big num">85.4%</div></div>
+              </div>
+              <p>Against last year you are retaining <b>about three quarters</b> of the volume, a drop of 3,500 applications. The two year comparison is gentler at 85.4%, since 2022 was already a lower base than the 2023 peak.</p>
+              <p>By program, <b>SES carried the largest absolute decline</b>, down 2,722 applications year over year, while Business and HASS each shed a few hundred. International volume softened more modestly, from 1,548 to 1,280.</p>
+              <div class="ai-sources">
+                <span class="src">Common Data Set 2024</span>
+                <span class="src">Application Totals tab</span>
+                <span class="src">Decision plan ledger</span>
+              </div>
+            </div>
+            <div class="prompt-chips" style="justify-content:flex-start;margin-top:14px">
+              <span class="chip">Break this down by decision plan</span>
+              <span class="chip">Show the gender split</span>
+              <span class="chip">Where did international fall most?</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ai-modal-foot">
+      <div class="composer-in">
+        <svg class="ic" style="width:19px;height:19px;color:var(--maroon-500);margin-left:4px"><use href="#i-ai"/></svg>
+        <input type="text" placeholder="Ask about any metric, cohort, or trend..." />
+        <button class="composer-send"><svg class="ic"><use href="#i-send"/></svg></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.querySelectorAll('[data-chart]').forEach(function(card){
+  var bC = card.querySelector('.js-chart'), bT = card.querySelector('.js-table');
+  if (bC && bT) {
+    bC.addEventListener('click', function(){ card.classList.remove('show-table'); bC.classList.add('on'); bT.classList.remove('on'); });
+    bT.addEventListener('click', function(){ card.classList.add('show-table'); bT.classList.add('on'); bC.classList.remove('on'); });
+  }
+  var fs = card.querySelector('.js-fs');
+  if (fs) fs.addEventListener('click', function(){ if (document.fullscreenElement) { document.exitFullscreen(); } else if (card.requestFullscreen) { card.requestFullscreen().catch(function(){}); } });
+  var dl = card.querySelector('.js-dl');
+  if (dl) dl.addEventListener('click', function(){
+    var t = card.querySelector('.view-table table'); if (!t) return;
+    var csv = [].slice.call(t.querySelectorAll('tr')).map(function(r){ return [].slice.call(r.children).map(function(c){ return '"'+c.textContent.trim().replace(/"/g,'""')+'"'; }).join(','); }).join('\n');
+    var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv'})); a.download = (card.getAttribute('data-chart')||'data')+'.csv'; document.body.appendChild(a); a.click(); a.remove();
+  });
+});
+var aiOpen = document.getElementById('aiOpen');
+if (aiOpen) aiOpen.addEventListener('click', function(){ document.body.classList.add('ai-open'); });
+document.querySelectorAll('[data-aiclose]').forEach(function(el){ el.addEventListener('click', function(){ document.body.classList.remove('ai-open'); }); });
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape') document.body.classList.remove('ai-open'); });
+
+document.querySelectorAll('.nav-toggle').forEach(function(b){ b.addEventListener('click', function(){ b.classList.toggle('open'); }); });
+</script>
+<script src="_heatmap.js"></script>
+</body>
+</html>

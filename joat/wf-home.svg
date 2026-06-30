@@ -1,0 +1,125 @@
+<svg style="width:100%;background:#f1f0ec;border-radius:12px" viewBox="0 0 1080 580" xmlns="http://www.w3.org/2000/svg">
+<defs>
+ <filter id="sk" x="-3%" y="-3%" width="106%" height="106%">
+  <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed="7" result="n"/>
+  <feDisplacementMap in="SourceGraphic" in2="n" scale="3.2" xChannelSelector="R" yChannelSelector="G"/>
+ </filter>
+</defs>
+<style>
+ text{font-family:Inter,system-ui,-apple-system,sans-serif}
+ .frame{fill:#fcfcfb;stroke:#b1b1a9;stroke-width:2}
+ .chrome{fill:#d3d3cd}
+ .bar{fill:#e4e4df}
+ .bar2{fill:#d5d5cf}
+ .fld{fill:#ffffff;stroke:#bdbdb6;stroke-width:1.4;stroke-dasharray:5 3}
+ .btn{fill:#b9b9b2}
+ .opt{font-size:13px;font-weight:700;fill:#6a6a64}
+ .ann{font-size:10.5px;fill:#8f8f88}
+ .lbl{font-family:'Roboto Mono',monospace;font-size:11px;letter-spacing:.1em;fill:#9a9a93}
+ .chosen{fill:#5c5c56}
+ .chev{fill:#a8a8a2}
+</style>
+<g filter="url(#sk)">
+ <rect class="frame" x="40" y="80" width="300" height="430" rx="4"/>
+ <rect class="chrome" x="40" y="80" width="300" height="24" rx="4"/>
+ <circle cx="56" cy="92" r="4" fill="#c2c2bb"/>
+ <circle cx="70" cy="92" r="4" fill="#c2c2bb"/>
+ <circle cx="84" cy="92" r="4" fill="#c2c2bb"/>
+ <rect class="fld" x="110" y="86" width="210" height="12" rx="6"/>
+ <rect class="bar" x="56" y="116" width="60" height="10" rx="5"/>
+ <rect class="bar" x="232" y="116" width="40" height="10" rx="5"/>
+ <rect class="bar" x="280" y="116" width="44" height="10" rx="5"/>
+ <rect class="bar2" x="56" y="138" width="268" height="78" rx="4"/>
+ <rect class="bar" x="74" y="158" width="160" height="14" rx="7"/>
+ <rect class="bar" x="74" y="180" width="110" height="9" rx="4"/>
+ <rect class="btn" x="74" y="196" width="74" height="14" rx="7"/>
+ <rect class="bar" x="56" y="230" width="80" height="9" rx="4"/>
+ <rect class="bar2" x="56" y="248" width="80" height="58" rx="4"/>
+ <circle cx="72" cy="264" r="7" fill="#c2c2bb"/>
+ <rect class="bar" x="64" y="282" width="64" height="6" rx="3"/>
+ <rect class="bar" x="64" y="292" width="48" height="6" rx="3"/>
+ <rect class="bar2" x="148" y="248" width="80" height="58" rx="4"/>
+ <circle cx="164" cy="264" r="7" fill="#c2c2bb"/>
+ <rect class="bar" x="156" y="282" width="64" height="6" rx="3"/>
+ <rect class="bar" x="156" y="292" width="48" height="6" rx="3"/>
+ <rect class="bar2" x="240" y="248" width="84" height="58" rx="4"/>
+ <circle cx="256" cy="264" r="7" fill="#c2c2bb"/>
+ <rect class="bar" x="248" y="282" width="64" height="6" rx="3"/>
+ <rect class="bar" x="248" y="292" width="48" height="6" rx="3"/>
+ <rect class="bar" x="56" y="322" width="96" height="9" rx="4"/>
+ <rect class="bar2" x="56" y="340" width="80" height="72" rx="4"/>
+ <rect class="bar" x="64" y="396" width="50" height="7" rx="3"/>
+ <rect class="bar2" x="148" y="340" width="80" height="72" rx="4"/>
+ <rect class="bar" x="156" y="396" width="50" height="7" rx="3"/>
+ <rect class="bar2" x="240" y="340" width="84" height="72" rx="4"/>
+ <rect class="bar" x="248" y="396" width="50" height="7" rx="3"/>
+ <rect class="bar2" x="56" y="424" width="80" height="72" rx="4"/>
+ <rect class="bar" x="64" y="480" width="50" height="7" rx="3"/>
+ <rect class="bar2" x="148" y="424" width="80" height="72" rx="4"/>
+ <rect class="bar" x="156" y="480" width="50" height="7" rx="3"/>
+ <rect class="bar2" x="240" y="424" width="84" height="72" rx="4"/>
+ <rect class="bar" x="248" y="480" width="50" height="7" rx="3"/>
+ <rect class="frame" x="380" y="80" width="300" height="430" rx="4"/>
+ <rect class="chrome" x="380" y="80" width="300" height="24" rx="4"/>
+ <circle cx="396" cy="92" r="4" fill="#c2c2bb"/>
+ <circle cx="410" cy="92" r="4" fill="#c2c2bb"/>
+ <circle cx="424" cy="92" r="4" fill="#c2c2bb"/>
+ <rect class="fld" x="450" y="86" width="210" height="12" rx="6"/>
+ <rect class="bar" x="396" y="116" width="60" height="10" rx="5"/>
+ <rect class="fld" x="540" y="114" width="124" height="14" rx="7"/>
+ <rect class="bar" x="396" y="140" width="48" height="12" rx="6"/>
+ <rect class="bar" x="452" y="140" width="48" height="12" rx="6"/>
+ <rect class="bar" x="508" y="140" width="48" height="12" rx="6"/>
+ <rect class="bar" x="616" y="140" width="48" height="12" rx="6"/>
+ <rect class="bar2" x="396" y="164" width="80" height="78" rx="4"/>
+ <rect class="bar" x="404" y="226" width="50" height="7" rx="3"/>
+ <rect class="bar2" x="488" y="164" width="80" height="78" rx="4"/>
+ <rect class="bar" x="496" y="226" width="50" height="7" rx="3"/>
+ <rect class="bar2" x="580" y="164" width="84" height="78" rx="4"/>
+ <rect class="bar" x="588" y="226" width="50" height="7" rx="3"/>
+ <rect class="bar2" x="396" y="254" width="80" height="78" rx="4"/>
+ <rect class="bar" x="404" y="316" width="50" height="7" rx="3"/>
+ <rect class="bar2" x="488" y="254" width="80" height="78" rx="4"/>
+ <rect class="bar" x="496" y="316" width="50" height="7" rx="3"/>
+ <rect class="bar2" x="580" y="254" width="84" height="78" rx="4"/>
+ <rect class="bar" x="588" y="316" width="50" height="7" rx="3"/>
+ <rect class="bar2" x="396" y="344" width="80" height="78" rx="4"/>
+ <rect class="bar" x="404" y="406" width="50" height="7" rx="3"/>
+ <rect class="bar2" x="488" y="344" width="80" height="78" rx="4"/>
+ <rect class="bar" x="496" y="406" width="50" height="7" rx="3"/>
+ <rect class="bar2" x="580" y="344" width="84" height="78" rx="4"/>
+ <rect class="bar" x="588" y="406" width="50" height="7" rx="3"/>
+ <rect class="bar" x="396" y="438" width="80" height="9" rx="4"/>
+ <rect class="bar2" x="396" y="454" width="268" height="48" rx="4"/>
+ <rect class="bar" x="412" y="468" width="120" height="7" rx="3"/>
+ <rect class="bar" x="412" y="482" width="200" height="7" rx="3"/>
+ <rect class="frame" x="720" y="80" width="300" height="430" rx="4"/>
+ <rect class="chrome" x="720" y="80" width="300" height="24" rx="4"/>
+ <circle cx="736" cy="92" r="4" fill="#c2c2bb"/>
+ <circle cx="750" cy="92" r="4" fill="#c2c2bb"/>
+ <circle cx="764" cy="92" r="4" fill="#c2c2bb"/>
+ <rect class="fld" x="790" y="86" width="210" height="12" rx="6"/>
+ <rect class="bar" x="736" y="116" width="60" height="10" rx="5"/>
+ <rect class="bar" x="912" y="116" width="44" height="10" rx="5"/>
+ <rect class="bar" x="964" y="116" width="40" height="10" rx="5"/>
+ <rect class="bar2" x="736" y="146" width="268" height="290" rx="4"/>
+ <rect class="bar" x="800" y="232" width="140" height="20" rx="10"/>
+ <rect class="bar" x="816" y="262" width="108" height="20" rx="10"/>
+ <rect class="bar" x="824" y="300" width="92" height="11" rx="5"/>
+ <rect class="btn" x="812" y="328" width="116" height="22" rx="11"/>
+ <line x1="736" y1="448" x2="1004" y2="448" stroke="#cfcfc8" stroke-width="1.4" stroke-dasharray="6 5"/>
+ <rect class="bar" x="828" y="468" width="84" height="8" rx="4"/>
+ <path class="chev" d="M866 488 l8 9 l8 -9 z"/>
+</g>
+<text class="lbl" x="40" y="32">HOMEPAGE · LAYOUT EXPLORATION</text>
+<text class="opt" x="40" y="66">Option A</text>
+<text class="opt" x="380" y="66">Option B</text>
+<text class="opt" x="720" y="66">Option C</text>
+<g transform="translate(248,53)"><rect class="chosen" width="92" height="18" rx="9"/><text x="46" y="13" text-anchor="middle" style="font-size:9px;fill:#fff;font-weight:600">&#10003; chosen</text></g>
+<text class="ann" x="40" y="540">Hero, then a 3-step &quot;how it works,&quot; then a trending grid.</text>
+<text class="ann" x="40" y="556">First-timers got the model first. Shipped.</text>
+<text class="ann" x="380" y="540">Browse-first grid of campaigns up front, explanation below.</text>
+<text class="ann" x="380" y="556">Lost visitors who didn&apos;t know the model.</text>
+<text class="ann" x="720" y="540">A single big hero with one CTA, nothing else above the fold.</text>
+<text class="ann" x="720" y="556">Too thin to build trust.</text>
+</svg>

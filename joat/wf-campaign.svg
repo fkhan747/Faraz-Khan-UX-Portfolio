@@ -1,0 +1,115 @@
+<svg style="width:100%;background:#f1f0ec;border-radius:12px" viewBox="0 0 1080 580" xmlns="http://www.w3.org/2000/svg">
+<defs>
+ <filter id="sk" x="-3%" y="-3%" width="106%" height="106%">
+  <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="2" seed="7" result="n"/>
+  <feDisplacementMap in="SourceGraphic" in2="n" scale="3.2" xChannelSelector="R" yChannelSelector="G"/>
+ </filter>
+</defs>
+<style>
+ text{font-family:Inter,system-ui,-apple-system,sans-serif}
+ .frame{fill:#fcfcfb;stroke:#b1b1a9;stroke-width:2}
+ .chrome{fill:#d3d3cd}
+ .bar{fill:#e4e4df}
+ .bar2{fill:#d5d5cf}
+ .fld{fill:#ffffff;stroke:#bdbdb6;stroke-width:1.4;stroke-dasharray:5 3}
+ .btn{fill:#b9b9b2}
+ .opt{font-size:13px;font-weight:700;fill:#6a6a64}
+ .ann{font-size:10.5px;fill:#8f8f88}
+ .lbl{font-family:'Roboto Mono',monospace;font-size:11px;letter-spacing:.1em;fill:#9a9a93}
+ .chosen{fill:#5c5c56}
+ .chev{fill:#a8a8a2}
+</style>
+<g filter="url(#sk)">
+ <!-- ===== OPTION A : plain stacked form ===== -->
+ <rect class="frame" x="40" y="80" width="300" height="430" rx="6"/>
+ <rect class="chrome" x="40" y="80" width="300" height="24" rx="6"/>
+ <circle cx="56" cy="92" r="3.5" fill="#fcfcfb"/>
+ <circle cx="68" cy="92" r="3.5" fill="#fcfcfb"/>
+ <circle cx="80" cy="92" r="3.5" fill="#fcfcfb"/>
+ <!-- step title -->
+ <rect class="bar2" x="64" y="124" width="140" height="14" rx="3"/>
+ <!-- goal field -->
+ <rect class="bar" x="64" y="160" width="56" height="9" rx="2"/>
+ <rect class="fld" x="64" y="174" width="252" height="26" rx="4"/>
+ <rect class="bar2" x="64" y="208" width="252" height="8" rx="4"/>
+ <circle class="chev" cx="118" cy="212" r="6"/>
+ <!-- date field -->
+ <rect class="bar" x="64" y="236" width="48" height="9" rx="2"/>
+ <rect class="fld" x="64" y="250" width="252" height="26" rx="4"/>
+ <!-- price field -->
+ <rect class="bar" x="64" y="296" width="62" height="9" rx="2"/>
+ <rect class="fld" x="64" y="310" width="252" height="26" rx="4"/>
+ <!-- profit number buried at bottom -->
+ <line x1="64" y1="362" x2="316" y2="362" stroke="#cfcfc8" stroke-width="1.4"/>
+ <rect class="bar" x="64" y="378" width="80" height="9" rx="2"/>
+ <rect class="bar2" x="64" y="394" width="120" height="22" rx="4"/>
+ <rect class="btn" x="64" y="448" width="120" height="30" rx="15"/>
+
+ <!-- ===== OPTION B : form + live profit panel beside tee (CHOSEN) ===== -->
+ <rect class="frame" x="380" y="80" width="300" height="430" rx="6"/>
+ <rect class="chrome" x="380" y="80" width="300" height="24" rx="6"/>
+ <circle cx="396" cy="92" r="3.5" fill="#fcfcfb"/>
+ <circle cx="408" cy="92" r="3.5" fill="#fcfcfb"/>
+ <circle cx="420" cy="92" r="3.5" fill="#fcfcfb"/>
+ <!-- left column: form -->
+ <rect class="bar2" x="400" y="124" width="120" height="13" rx="3"/>
+ <rect class="bar" x="400" y="158" width="50" height="8" rx="2"/>
+ <rect class="fld" x="400" y="170" width="148" height="22" rx="4"/>
+ <rect class="bar2" x="400" y="200" width="148" height="8" rx="4"/>
+ <circle class="chev" cx="450" cy="204" r="5"/>
+ <rect class="bar" x="400" y="226" width="44" height="8" rx="2"/>
+ <rect class="fld" x="400" y="238" width="148" height="22" rx="4"/>
+ <rect class="bar" x="400" y="278" width="56" height="8" rx="2"/>
+ <rect class="fld" x="400" y="290" width="148" height="22" rx="4"/>
+ <rect class="btn" x="400" y="448" width="110" height="30" rx="15"/>
+ <!-- right column: tee + live profit panel pinned beside -->
+ <rect class="bar2" x="572" y="124" width="92" height="96" rx="6"/>
+ <!-- tee silhouette suggestion -->
+ <path class="chev" d="M588 136 l12 -8 l4 6 l4 -6 l12 8 l-6 12 l-6 -4 v34 h-16 v-34 l-6 4 z"/>
+ <!-- live profit panel -->
+ <rect class="bar" x="572" y="238" width="92" height="100" rx="6"/>
+ <rect class="bar2" x="582" y="250" width="48" height="8" rx="2"/>
+ <rect class="chosen" x="582" y="266" width="72" height="26" rx="4"/>
+ <rect class="bar2" x="582" y="302" width="56" height="7" rx="3"/>
+ <rect class="bar2" x="582" y="316" width="40" height="7" rx="3"/>
+
+ <!-- ===== OPTION C : step-by-step wizard ===== -->
+ <rect class="frame" x="720" y="80" width="300" height="430" rx="6"/>
+ <rect class="chrome" x="720" y="80" width="300" height="24" rx="6"/>
+ <circle cx="736" cy="92" r="3.5" fill="#fcfcfb"/>
+ <circle cx="748" cy="92" r="3.5" fill="#fcfcfb"/>
+ <circle cx="760" cy="92" r="3.5" fill="#fcfcfb"/>
+ <!-- step dots -->
+ <circle class="chosen" cx="800" cy="132" r="7"/>
+ <circle class="chev" cx="828" cy="132" r="7"/>
+ <circle class="chev" cx="856" cy="132" r="7"/>
+ <line x1="807" y1="132" x2="821" y2="132" stroke="#cfcfc8" stroke-width="2"/>
+ <line x1="835" y1="132" x2="849" y2="132" stroke="#cfcfc8" stroke-width="2"/>
+ <!-- single big number this screen -->
+ <rect class="bar2" x="770" y="200" width="150" height="13" rx="3"/>
+ <rect class="fld" x="770" y="232" width="200" height="48" rx="6"/>
+ <rect class="bar" x="770" y="300" width="120" height="9" rx="2"/>
+ <!-- next / back -->
+ <rect class="btn" x="770" y="448" width="70" height="30" rx="15"/>
+ <rect class="bar2" x="852" y="448" width="118" height="30" rx="15"/>
+ <path class="chev" d="M928 458 l10 5 l-10 5 z"/>
+</g>
+
+<!-- crisp text layer (outside filter) -->
+<text class="lbl" x="40" y="32">SET PRICE &amp; GOAL · LAYOUT EXPLORATION</text>
+
+<text class="opt" x="40" y="68">Option A</text>
+<text class="opt" x="380" y="68">Option B</text>
+<text class="opt" x="720" y="68">Option C</text>
+
+<g transform="translate(588,53)"><rect class="chosen" width="92" height="18" rx="9"/><text x="46" y="13" text-anchor="middle" style="font-size:9px;fill:#fff;font-weight:600">&#10003; chosen</text></g>
+
+<text class="ann" x="40" y="540">Plain form, profit at the end.</text>
+<text class="ann" x="40" y="556">Economics buried below the fold.</text>
+
+<text class="ann" x="380" y="540">Live profit panel beside the tee.</text>
+<text class="ann" x="380" y="556">Money obvious before launch. Shipped.</text>
+
+<text class="ann" x="720" y="540">One number per step.</text>
+<text class="ann" x="720" y="556">Too many clicks for a quick decision.</text>
+</svg>
