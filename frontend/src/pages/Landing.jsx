@@ -1,3 +1,4 @@
+import { useRef, useState, useLayoutEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Mail, Calendar, Linkedin, Briefcase, User, Star, Quote } from "lucide-react";
 import { PROFILE, projects, testimonials } from "../data/content";
@@ -7,15 +8,41 @@ import AgenticFeature from "../components/AgenticFeature";
 import BookCallButton from "../components/BookCallButton";
 import Seo from "../components/Seo";
 
-// The highlighted hero words are bold upright (the rest of the headline is
-// italic). The thick magenta marker underline sits on just the first two
-// letters of each word (and on "47" for "47 Tabs Deep"), touching the text.
-const HERO_UL = "underline decoration-[#F5379B] decoration-[6px] underline-offset-[1px] [text-decoration-skip-ink:none]";
-function Accent({ lead, rest = "" }) {
+// Highlighted hero word: bold upright magenta (the rest of the headline is italic).
+function Accent({ children }) {
+  return <span className="not-italic font-black text-[#F5379B]">{children}</span>;
+}
+
+// Scales one line of text to exactly fill the parent's width (the poster
+// "flush both edges" look). Measures the line at a 100px reference, then sets
+// font-size = 100 * (containerWidth / naturalWidth). Re-fits on resize + once
+// webfonts load. Nested size differences must be in `em` so they scale together.
+function FitLine({ children, className = "" }) {
+  const box = useRef(null);
+  const meas = useRef(null);
+  const [fs, setFs] = useState(null);
+  useLayoutEffect(() => {
+    const b = box.current, m = meas.current;
+    if (!b || !m) return;
+    const fit = () => {
+      const cw = b.clientWidth;
+      const nat = m.getBoundingClientRect().width;
+      // 0.992 safety factor: fonts don't scale perfectly linearly (hinting), so
+      // target just under the container to guarantee no overflow. Gap is invisible.
+      if (cw > 0 && nat > 0) setFs((100 * cw * 0.992) / nat);
+    };
+    fit();
+    const ro = new ResizeObserver(fit);
+    ro.observe(b);
+    let dead = false;
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { if (!dead) fit(); });
+    return () => { dead = true; ro.disconnect(); };
+  }, [children]);
   return (
-    <span className="not-italic font-black">
-      <span className={HERO_UL}>{lead}</span>{rest}
-    </span>
+    <div ref={box} className={`relative w-full ${className}`}>
+      <span ref={meas} aria-hidden="true" className="absolute invisible whitespace-nowrap left-0 top-0" style={{ fontSize: 100, lineHeight: 0.9 }}>{children}</span>
+      <span className="inline-block whitespace-nowrap" style={{ fontSize: fs ?? 48, lineHeight: 0.92 }}>{children}</span>
+    </div>
   );
 }
 
@@ -28,26 +55,25 @@ export default function Landing() {
     <div data-testid="landing-page">
       <Seo description="Faraz Khan, Senior UX Lead with 12+ years bridging design, data, and development. Enterprise platforms, design systems, and AI-native product concepts." />
       {/* HERO */}
-      <section className="pt-7 pb-14 md:pb-20 relative" data-testid="hero">
+      <section className="pt-[52px] pb-14 md:pb-20 relative" data-testid="hero">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
             {/* Copy */}
             <div className="lg:col-span-8">
-              <p className="font-mono text-xs md:text-sm uppercase tracking-[0.25em] text-[#F5379B] font-medium mb-5 rise rise-1" data-testid="hero-designation">
-                Senior UX Lead · design · data · development
-              </p>
               <h1
-                className="font-display case-keep italic font-light leading-[1.08] text-[2.5rem] sm:text-5xl lg:text-[3.2rem] xl:text-[3.6rem] rise rise-2"
+                className="font-display case-keep italic font-light rise rise-2 max-w-[620px]"
                 data-testid="hero-headline"
-                style={{ letterSpacing: "0.02em" }}
+                style={{ letterSpacing: "0.01em" }}
               >
-                I&apos;m <Accent lead="Fa" rest="raz" />.<br className="hidden xl:block" />{" "}
-                I Make Complex <Accent lead="Pr" rest="oducts" /><br className="hidden xl:block" />{" "}
-                Feel Obvious. <Accent lead="Fo" rest="otballer" /><br className="hidden xl:block" />{" "}
-                on Weekends, <Accent lead="Ga" rest="mer" /><br className="hidden xl:block" />{" "}
-                After Dark &amp; Forever.<br className="hidden xl:block" />{" "}
-                <Accent lead="47" rest=" Tabs Deep" />,<br className="hidden xl:block" />{" "}
-                Dreaming in Internet Waves.
+                <FitLine>
+                  I&apos;m <Accent><span className="uppercase">Faraz</span></Accent>.
+                </FitLine>
+                <FitLine>I Make Complex <Accent>Products</Accent></FitLine>
+                <FitLine>Feel Obvious. <Accent>Footballer</Accent></FitLine>
+                <FitLine>on Weekends, <Accent>Gamer</Accent></FitLine>
+                <FitLine>After Dark &amp; Forever.</FitLine>
+                <FitLine><Accent>47 Tabs Deep</Accent>, Dreamin&apos;</FitLine>
+                <FitLine>in the Internet Waves.</FitLine>
               </h1>
               <p className="mt-6 max-w-xl text-base md:text-lg text-[#A29CB4] leading-relaxed rise rise-3" data-testid="hero-sub">
                 12+ years across Graphic/Brand design, UX, data &amp; development. Big believer in clarity over decoration, <span className="text-[#F4F3FA] underline decoration-[#075EFD] decoration-2 underline-offset-4">facts over feelings</span>, and design that gets out of your way. Turns out treating people well is also great for business. Who knew.

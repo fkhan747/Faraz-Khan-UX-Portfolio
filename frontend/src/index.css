@@ -43,6 +43,17 @@ html, body {
   /* Use even-height lining figures so any numbers sit on the baseline. */
   font-variant-numeric: lining-nums tabular-nums;
 }
+
+/* No single-word last line (orphan/widow) in any text, site-wide. Headings get
+   text-wrap:balance (even line lengths); body text gets text-wrap:pretty (the
+   browser avoids leaving one lonely word on the final line). Pure line-breaking,
+   no layout or color change. */
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+p, li, blockquote, figcaption, dd, dt, summary {
+  text-wrap: pretty;
+}
 /* Title Case is for HEADINGS only. Body paragraphs that use .font-display
    (TL;DR card, white-callout body, etc.) stay in the case they are authored
    in. The grep target before this rule was applying capitalize to every

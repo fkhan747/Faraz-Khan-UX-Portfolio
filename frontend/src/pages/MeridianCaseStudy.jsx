@@ -140,16 +140,16 @@ function artifactFor(headline = "", data = {}) {
 /* "What I owned" responsibility chips, shown in the hero. */
 function Responsibilities({ items = [] }) {
   return (
-    <div className="mt-7 max-w-4xl">
+    <Reveal className="mt-7 max-w-4xl rounded-2xl p-5 bg-[#100210]/55 backdrop-blur-md border border-white/12">
       <p className="text-[10px] font-mono uppercase tracking-widest text-[#F5379B] mb-3">What I owned</p>
       <div className="flex flex-wrap gap-2.5">
-        {items.map((x, i) => (
-          <Reveal key={x} as="span" delay={0.4 + i * 0.04} className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-[#100210]/55 backdrop-blur-md px-4 py-2 text-sm font-semibold text-[#F4F3FA]">
+        {items.map((x) => (
+          <span key={x} className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-[#F4F3FA]">
             <span className="h-1.5 w-1.5 rounded-full" style={{ background: ACCENT }} />{x}
-          </Reveal>
+          </span>
         ))}
       </div>
-    </div>
+    </Reveal>
   );
 }
 
