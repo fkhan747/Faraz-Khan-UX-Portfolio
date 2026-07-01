@@ -58,10 +58,11 @@ export default function Landing() {
       <section className="pt-[52px] pb-14 md:pb-20 relative" data-testid="hero">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
-            {/* Copy */}
-            <div className="lg:col-span-8">
+            {/* Copy — 7 cols; the FitLine block fills the full column so there is
+                no dead zone between the headline and the (wider, 5-col) photo. */}
+            <div className="lg:col-span-7">
               <h1
-                className="font-display case-keep italic font-light rise rise-2 max-w-[620px]"
+                className="font-display case-keep italic font-light rise rise-2"
                 data-testid="hero-headline"
                 style={{ letterSpacing: "0.01em" }}
               >
@@ -99,7 +100,7 @@ export default function Landing() {
             </div>
 
             {/* Photo - dark "sand" portrait that fades into the page (aligns with the copy column) */}
-            <div className="lg:col-span-4 relative rise rise-3 min-h-[300px] lg:min-h-0" data-testid="hero-photo-wrap">
+            <div className="lg:col-span-5 relative rise rise-3 min-h-[300px] lg:min-h-0" data-testid="hero-photo-wrap">
               <div className="relative h-full w-full min-h-[300px] overflow-hidden rounded-2xl lg:rounded-tl-none lg:rounded-br-none lg:rounded-bl-none lg:rounded-tr-[3.5rem]">
                 <img
                   src="/images/faraz.jpg"
