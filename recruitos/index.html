@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RecruitOS - Interactive Prototype</title>
+<title>Slate - Interactive Prototype</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -459,12 +459,12 @@
 </style>
 </head>
 <body>
-<div class="frame-label"><span>RecruitOS · Interactive Prototype - click anything · open "Ask" for the copilot</span><span>Desktop · 1440 × 864</span></div>
+<div class="frame-label"><span>Slate · Interactive Prototype - click anything · open "Ask" for the copilot</span><span>Desktop · 1440 × 864</span></div>
 
 <div class="app" id="app">
   <!-- TOP BAR -->
   <div class="topbar">
-    <div class="tb-left" id="tbLeft"><div class="mark" data-nav="overview"><div class="m grad grain"><b>R</b></div><div class="wm">RecruitOS</div></div></div>
+    <div class="tb-left" id="tbLeft"><div class="mark" data-nav="overview"><div class="m grad grain"><b>S</b></div><div class="wm">Slate</div></div></div>
     <div class="tb-center">
       <div class="hdr-search">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
@@ -605,7 +605,7 @@ function setActiveNav(sec){document.querySelectorAll('.ni').forEach(function(n){
 
 var VIEWS={};
 function go(view,opts){opts=opts||{};if(opts.projId)STATE.projId=opts.projId;if(opts.candId)STATE.candId=opts.candId;STATE.view=view;
-  var v=VIEWS[view]?VIEWS[view]():{main:'<div class="brew"><div class="orb grad grain">✦</div><h1>Coming together</h1><p>This part of RecruitOS is still brewing.</p></div>',aside:asideDefault()};
+  var v=VIEWS[view]?VIEWS[view]():{main:'<div class="brew"><div class="orb grad grain">✦</div><h1>Coming together</h1><p>This part of Slate is still brewing.</p></div>',aside:asideDefault()};
   $('main').innerHTML=v.main;$('aside').innerHTML=v.aside;$('aside').className='aside-ai'+(v.plainAside?' plain':'');
   setActiveNav(SECTION_OF[view]||view);$('main').scrollTop=0;
   if(v.after)v.after();
