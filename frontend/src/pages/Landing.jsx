@@ -1,5 +1,5 @@
-import { useRef, useState, useLayoutEffect } from "react";
-import { Link } from "react-router-dom";
+import { useRef, useState, useLayoutEffect, lazy, Suspense } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import { ArrowRight, Mail, Calendar, Linkedin, Briefcase, User } from "lucide-react";
 import { PROFILE, projects } from "../data/content";
 import { Container } from "../components/Grid";
@@ -46,15 +46,79 @@ function FitLine({ children, className = "" }) {
   );
 }
 
+// Hero exploration: two alternative hero directions, viewable via ?hero=a and
+// ?hero=b while the current hero stays the default. Lazy so the default page
+// loads no extra code. Remove the losers once one is chosen.
+const HeroDepth = lazy(() => import("../components/hero/HeroDepth"));
+const HeroParticles = lazy(() => import("../components/hero/HeroParticles"));
+const HeroFusion = lazy(() => import("../components/hero/HeroFusion"));
+
+function HeroSwitcher({ active }) {
+  const opts = [
+    { key: "old", label: "Old", href: "/?hero=old" },
+    { key: "a", label: "A · Depth", href: "/?hero=a" },
+    { key: "b", label: "B · Signal", href: "/?hero=b" },
+    { key: "c", label: "C · Fusion", href: "/?hero=c" },
+    { key: "c-solo", label: "C · Solo", href: "/?hero=c&solo=1" },
+  ];
+  return (
+    <div className="fixed bottom-5 left-1/2 -translate-x-1/2 z-[90] flex items-center gap-1 rounded-full border border-[#2C2542] bg-[#181126]/90 backdrop-blur px-1.5 py-1.5 shadow-2xl" data-testid="hero-switcher">
+      {opts.map((o) => (
+        <a
+          key={o.key}
+          href={o.href}
+          className={`px-4 py-1.5 rounded-full text-xs font-mono uppercase tracking-wider transition-colors ${
+            active === o.key ? "bg-[#F5379B] text-white" : "text-[#A29CB4] hover:text-white"
+          }`}
+        >
+          {o.label}
+        </a>
+      ))}
+    </div>
+  );
+}
+
 export default function Landing() {
   // The two fully-built case studies (FinVista, Aurora) are featured on the home
   // page, side by side. The full list lives on the "My Work" page.
   const featured = projects.filter((p) => p.detail).slice(0, 2);
+  const [params] = useSearchParams();
+  // The SHIPPED landing is the solo fusion hero (no query param needed).
+  // The old FitLine hero and the A/B/C explorations stay reachable behind
+  // ?hero=old / a / b / c for reference while we iterate.
+  const heroParam = params.get("hero"); // null = shipped solo landing
+  const variant =
+    heroParam === "a" ? "a"
+    : heroParam === "b" ? "b"
+    : heroParam === "c" ? "c"
+    : heroParam === "old" ? "old"
+    : "";
+  // Solo: the hero IS the whole landing page (no sections below, no footer).
+  const solo = variant === "" || (variant === "c" && params.get("solo") === "1");
 
   return (
     <div data-testid="landing-page">
       <Seo description="Faraz Khan, Senior UX Lead with 12+ years bridging design, data, and development. Enterprise platforms, design systems, and AI-native product concepts." />
       {/* HERO */}
+      {variant === "a" && (
+        <Suspense fallback={<div style={{ minHeight: "90vh" }} />}>
+          <HeroDepth />
+        </Suspense>
+      )}
+      {variant === "b" && (
+        <Suspense fallback={<div style={{ minHeight: "90vh" }} />}>
+          <HeroParticles />
+        </Suspense>
+      )}
+      {(variant === "c" || variant === "") && (
+        <Suspense fallback={<div style={{ minHeight: "90vh" }} />}>
+          <HeroFusion solo={solo} />
+        </Suspense>
+      )}
+      {/* Solo = the hero is the entire page: no footer, no scroll. */}
+      {solo && <style>{`footer{display:none !important}`}</style>}
+      {heroParam !== null && <HeroSwitcher active={variant === "c" && solo ? "c-solo" : variant} />}
+      {variant === "old" && (
       <section className="pt-[52px] pb-14 md:pb-20 relative" data-testid="hero">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
@@ -119,7 +183,11 @@ export default function Landing() {
           </div>
         </Container>
       </section>
+      )}
 
+      {/* Everything below the hero is hidden in solo mode: the hero IS the page. */}
+      {!solo && (
+      <>
       {/* FEATURED CASE STUDIES - the two fully-built case studies, side by side */}
       <section className="pb-12" data-testid="featured-project">
         <Container>
@@ -180,6 +248,8 @@ export default function Landing() {
         </div>
         </Container>
       </section>
+      </>
+      )}
 
     </div>
   );
