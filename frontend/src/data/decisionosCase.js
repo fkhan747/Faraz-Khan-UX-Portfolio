@@ -29,7 +29,7 @@ export const decisionos = {
     badge: "Concept · self-initiated · not client work",
     facts: [
       { label: "Type", value: "AI-native product concept" },
-      { label: "Role", value: "Sr. UX Lead (end-to-end)" },
+      { label: "Role", value: "Senior UX Lead (end-to-end)" },
       { label: "Basis", value: "Secondary research + teardown" },
       { label: "Platform", value: "Responsive web, desktop-first" },
       { label: "Tools", value: "Figma, decision modelling, desk research" },

@@ -6,7 +6,7 @@ export const aurora = {
   slug: "aurora",
   title: "Aurora",
   subtitle:
-    "Transforming the experience of a marketing campaign platform. I redesigned the Recurring Batch Journey configurator and embedded an in-canvas AI composer (Helio AI) during a parallel AngularJS-to-Angular migration. The work cut clicks for campaign setup 3:1 and brought the product in line with Helio's unified brand language.",
+    "Transforming the experience of a marketing campaign platform. I redesigned the Recurring Batch Journey configurator and embedded an in-canvas AI composer (Helio AI) while the platform was being rebuilt on modern foundations. The work cut clicks for campaign setup 3:1 and brought the product in line with Helio's unified brand language.",
   hero: {
     facts: [
       { label: "Role", value: "Lead Product Designer" },
@@ -25,13 +25,13 @@ export const aurora = {
     headline: "Project Overview",
     tldrTitle: "TL;DR: Executive Summary",
     tldr:
-      "I cut campaign setup from three clicks to one. I put an AI composer right inside the email canvas, so writers stopped pasting copy back and forth from ChatGPT. Aurora is a B2B marketing-tech product in Europe, acquired by its parent company Helio. I used its AngularJS-to-Angular migration as the window to fix a legacy, engineer-led UI. I redesigned the Recurring Batch Journey configurator, embedded the Helio AI composer, and built a Figma design system that brought Aurora in line with Helio's brand. Every asset shipped dev-ready, linked to a user story.",
+      "I cut campaign setup from three clicks to one. I put an AI composer right inside the email canvas, so writers stopped pasting copy back and forth from ChatGPT. Aurora is a B2B marketing-tech product in Europe, acquired by its parent company Helio. I used a once-in-a-decade platform rebuild as the window to fix a legacy, engineer-led UI. I redesigned the Recurring Batch Journey configurator, embedded the Helio AI composer, and built a Figma design system that brought Aurora in line with Helio's brand. Every screen shipped ready to build, traceable to the exact requirement it served.",
     facts: [
       { label: "Role", value: "Lead Product Designer" },
       { label: "Duration", value: "~5 Months" },
       { label: "Team", value: "2 PMs, 5 Devs, 1 QA, 2 Designers" },
       { label: "Platform", value: "Web (B2B SaaS · Europe)" },
-      { label: "Tools", value: "Figma, FigJam, Azure DevOps" },
+      { label: "Tools", value: "Figma, FigJam" },
     ],
     process: [
       { step: "01", title: "Discovery", duration: "3 weeks" },
@@ -41,12 +41,12 @@ export const aurora = {
       { step: "05", title: "Handoff", duration: "2 weeks" },
     ],
     intro:
-      "Aurora is a B2B marketing-tech platform for large European enterprises. Helio acquired it to build out a suite of marketing products. That gave us an opening. We could align Aurora with Helio's UX vision while we finished a long-planned move from AngularJS to modern Angular.",
+      "Aurora is a B2B marketing-tech platform for large European enterprises. Helio acquired it to build out a suite of marketing products. That gave us an opening. We could align Aurora with Helio's UX vision while the team finished a long-planned rebuild of the product's foundations. Aurora and Helio are stand-in names; the real client is kept confidential under NDA.",
     intro2:
       "The legacy product was engineer-led. It worked, but it was dense, inconsistent, and visually fragmented. Marketers fought cluttered config panels to ship a recurring campaign. Copywriters had no AI in the composer, so they wrote in ChatGPT and pasted back.",
     contextTitle: "Project Context",
     contextBody:
-      "The product was migrating from AngularJS to Angular; the platform team treated that engineering work as a once-in-a-decade window to also reduce cognitive load, simplify the flows, and create a consistent brand experience aligned with Helio's design language.",
+      "The product was being rebuilt from the ground up; the team treated that once-in-a-decade window as the chance to also reduce cognitive load, simplify the flows, and create a consistent brand experience aligned with Helio's design language.",
     metadata: [
       { k: "Industry", v: "Marketing Technology" },
       { k: "Sector", v: "Digital Marketing & Relationship Management" },
@@ -84,7 +84,7 @@ export const aurora = {
       "AI controls: shorten, rewrite, change tone, generate variations",
       "Subject-line AI generation & 5-option variations",
       "Reusable Figma design system aligned with Helio's brand",
-      "Dev-ready assets linked to Azure DevOps user stories",
+      "Build-ready design files, each traceable to its requirement",
     ],
     outOfScope: [
       "Push notification & SMS composer redesigns",
@@ -110,7 +110,7 @@ export const aurora = {
       "Marketers prefer guided multi-step flows over single dense forms for complex configurations",
       "Most recurring journeys use Daily or Weekly cadence (validated: 78% of historical sends)",
       "AI suggestions are an aid, not a replacement. Final copy must stay author-controlled",
-      "The new Angular component library can absorb design tokens without breaking semantic versioning",
+      "The new component library could adopt the design tokens without disrupting work already in flight",
     ],
     risks: [
       "Helio AI latency could disrupt flow if generations exceed 3 seconds",
@@ -127,7 +127,7 @@ export const aurora = {
     headline: "Research",
     auditTitle: "UX Audit",
     auditIntro:
-      "I audited the existing Recurring Batch Journey and the message composer end to end. The same three failures kept showing up: setup, scheduling comprehension, and content authoring. The rigid AngularJS codebase made each one harder to fix.",
+      "I audited the existing Recurring Batch Journey and the message composer end to end. The same three failures kept showing up: setup, scheduling comprehension, and content authoring. The rigid legacy platform made each one harder to fix.",
     auditFindings: [
       { t: "Cluttered Journey Form", d: "14 fields on first load, no progressive disclosure, no help, no validation until you hit submit, and 33% of new users bailed at the audience step." },
       { t: "Hidden Schedule Logic", d: "\"Custom\" cadence was the default but never explained, and weekdays could be set from two controls that disagreed on timezone." },
@@ -143,8 +143,8 @@ export const aurora = {
       { t: "Recognition Rather than Recall", d: "Cadence terminology shown without examples; users can't recall what \"Custom time frame\" produces", s: "5/10" },
     ],
     stakeholders: [
-      { role: "Head of Product", quote: "The Angular migration is once-in-a-decade leverage. We use it to fix what engineering-led design left broken, not just port it forward.", priority: "Reduce cognitive load" },
-      { role: "Engineering Lead", quote: "I'm open to AI integration but we cannot block journey creation on model latency. Streaming output with graceful fallbacks is non-negotiable.", priority: "Performance resilience" },
+      { role: "Head of Product", quote: "The platform rebuild is once-in-a-decade leverage. We use it to fix what engineering-led design left broken, not just carry it forward.", priority: "Reduce cognitive load" },
+      { role: "Engineering Lead", quote: "I'm open to AI, but building a campaign can never wait on it. If a suggestion is slow, the writer keeps working and nothing stalls.", priority: "Keep the work flowing" },
       { role: "Helio Design Director", quote: "Aurora needs to feel like part of the Helio family. A reusable design system aligned with our brand language is non-negotiable for this release.", priority: "Brand alignment" },
     ],
     competitiveTable: {
@@ -181,7 +181,7 @@ export const aurora = {
       { t: "Demystify Cadence", d: "Always show a plain-English summary, such as \"The content will be sent weekly on Wednesday at 09:00 AM in Europe/Paris,\" so users never have to interpret raw settings." },
       { t: "Bring AI to the Canvas", d: "Surface Helio AI from the text block, subject line, and preheader. Never make it a separate page or detour. Quick actions and 5-option variation pickers." },
       { t: "Preserve Author Control", d: "AI generates options; the writer always selects, never auto-replaces. Every suggestion is reversible and previewable with explicit \"Insert to text block.\"" },
-      { t: "Build Reusable System", d: "Ship a Figma design system aligned with Helio's brand language. Components, variables, and styles linked to Azure DevOps user stories for engineering pickup." },
+      { t: "Build Reusable System", d: "Ship a Figma design system aligned with Helio's brand language. Components, variables, and styles linked to the exact requirements engineers were building from." },
       { t: "Design for Trust", d: "Surface contact counts, timezone resolution, dashboard warnings and alerts inline so users can verify what will happen before they ship." },
     ],
     keyInsight:
@@ -206,7 +206,7 @@ export const aurora = {
       { src: A("wf_06_subject_variations.svg"), tag: "Lo-fi · 04", title: "Composer · Subject-Line Variations", desc: "Five-option variation picker stacked vertically. Locked the radio-style selection pattern and the regeneration button before color and type pass." },
     ],
     finalIntro:
-      "Hi-fidelity screens shipped to engineering via Figma, with each frame linked to its Azure DevOps user story. Aurora brand teal (#2B8679) and the Aurora Engage component library applied uniformly. 11 screens across the Recurring Batch Journey configurator and the Helio AI composer.",
+      "Hi-fidelity screens shipped to engineering via Figma, with each frame linked to the requirement it fulfils. Aurora brand teal (#2B8679) and the Aurora Engage component library applied uniformly. 11 screens across the Recurring Batch Journey configurator and the Helio AI composer.",
     finalScreens: [
       { src: A("01_RBJ_Type_Tab_Basic_Fields.jpg"), tag: "Hi-fi · RBJ · 01", title: "RBJ · Type Tab: Basic Fields", desc: "The flow opens on just name, folder path, and asset, with everything advanced tucked behind the \"All Fields\" toggle." },
       { src: A("02_RBJ_Type_Tab_All_Fields.jpg"), tag: "Hi-fi · RBJ · 02", title: "RBJ · Type Tab: All Fields", desc: "\"All Fields\" adds API Name, Labels, Description, Asset, and the Campaign / Message analytics tags for power users, without bloating the default view." },
@@ -226,7 +226,7 @@ export const aurora = {
   designSystem: {
     headline: "Design System",
     intro:
-      "In parallel with the Recurring Batch Journey and Helio AI work, I built the Aurora Engage UI Kit in Figma. It's a reusable design system that aligned Aurora with Helio's parent brand language. Tokens, components, and patterns were linked directly to Azure DevOps user stories so engineering could pick them up without ambiguity. The kit is the source of truth for every screen shown in section 05.",
+      "In parallel with the Recurring Batch Journey and Helio AI work, I built the Aurora Engage UI Kit in Figma. It's a reusable design system that aligned Aurora with Helio's parent brand language. Tokens, components, and patterns were linked directly to the team's build plan so engineers could pick them up without ambiguity. The kit is the source of truth for every screen shown in section 05.",
     colors: [
       { name: "Aurora / 500", hex: "#2B8679" },
       { name: "Aurora / 300", hex: "#5FA59A" },
@@ -280,8 +280,8 @@ export const aurora = {
       { n: 1, t: "Concept sketches", d: "Sketched the tabbed configurator and the docked AI composer by hand to agree on the basic shape with product before committing to pixels." },
       { n: 2, t: "Graybox wireframes", d: "Locked information hierarchy and density (the cadence pills, the per-day time table, the AI quick-action grid) in grayscale and reviewed them with PMs and stakeholders, so no one debated color yet." },
       { n: 3, t: "Hi-fi on the design system", d: "Applied the Aurora Engage UI kit and pressure-tested every component and state, surfacing gaps that fed straight back into the system tokens." },
-      { n: 4, t: "Migration-aligned refinement", d: "Worked alongside engineering through the AngularJS to Angular migration to keep the design implementable, refining edge cases like the Custom cadence that proved more complex than expected." },
-      { n: 5, t: "Stakeholder sign-off & handoff", d: "Walked the final Figma prototype through product and engineering for sign-off, with each frame linked to its user story before dev handoff." },
+      { n: 4, t: "Rebuild-aligned refinement", d: "Worked alongside engineering through the platform rebuild to keep the design buildable, refining edge cases like the Custom cadence that proved more complex than expected." },
+      { n: 5, t: "Stakeholder sign-off & handoff", d: "Walked the final Figma prototype through product and engineering for sign-off, with each frame linked to the requirement it serves before handoff to engineering." },
     ],
     outcome:
       "The flow evolved from a cluttered, multi-action configurator into a focused tabbed journey with an in-canvas AI composer, signed off by product and engineering before handoff. The honest gap: without a formal usability study, the next step is validating the flow with real campaign managers.",
@@ -292,7 +292,7 @@ export const aurora = {
     headline: "Key learnings & reflection",
     wentWell: [
       "The three-tab structure passed product and engineering review in week 1, so implementation could start early.",
-      "Helio AI integration stayed on schedule thanks to a streaming-first contract negotiated with backend in week 3.",
+      "Helio AI stayed on schedule because we agreed early on one rule: a suggestion appears right away, and the writer never waits on it to keep working.",
       "The plain-language cadence summary (\"This will send every Wednesday at 9am\") was the change product and stakeholders pointed to most as making the schedule unambiguous.",
       "The Aurora Engage UI kit back-filled three other product surfaces with no extra design work across the Helio portfolio.",
     ],

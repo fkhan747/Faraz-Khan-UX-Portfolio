@@ -34,7 +34,7 @@ export default function AgenticFeature({ className = "", compact = false }) {
             <div className={`relative grid lg:grid-cols-2 ${innerGap} items-center`}>
               {/* copy */}
               <div>
-                <h3 className={`font-display ${headSize} font-black leading-[0.98] tracking-tight text-[#F7F5FF]`}>
+                <h3 className={`font-display ${headSize} font-black leading-[0.98] tracking-tight text-[#F7F5FF] case-keep`}>
                   Point a swarm of AI agents at any website.
                 </h3>
                 <p className={`${subMt} max-w-lg text-base md:text-lg text-[#A29CB4] leading-relaxed`}>

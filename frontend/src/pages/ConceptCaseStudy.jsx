@@ -466,7 +466,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
         <div className="grid md:grid-cols-2 gap-5">
           {r.hypothesis.principles.map((p, idx) => (
             <Reveal key={p.t} delay={(idx % 2) * 0.06} className={`rounded-3xl p-7 ${idx % 2 === 0 ? "dark-card" : "bg-white border-2 border-[#F5379B]"}`}>
-              <div className="font-mono text-sm uppercase tracking-widest text-white">principle 0{idx + 1}</div>
+              <div className={`font-mono text-sm uppercase tracking-widest ${idx % 2 === 0 ? "text-white" : "text-[#C71E73]"}`}>principle 0{idx + 1}</div>
               <h3 className={`mt-2 font-display text-xl font-black ${idx % 2 === 0 ? "" : "text-[#F5379B]"}`}>{p.t}</h3>
               <p className={`mt-2 text-base leading-relaxed ${idx % 2 === 0 ? "" : "text-black"}`}>{p.d}</p>
               <p className={`mt-4 text-xs font-mono uppercase tracking-widest ${idx % 2 === 0 ? "text-[#F5379B]" : "text-[#C71E73]"}`}>{p.from}</p>
@@ -559,7 +559,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
                  className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full dark-card text-white font-semibold text-sm hover:bg-[#241B33] transition-[background-color,color,transform] duration-200 active:scale-[0.97] ${FOCUS}`}>
                 View Prototype In Browser <Maximize2 size={14} />
               </a>
-              <span className="text-xs font-mono uppercase tracking-widest text-white">click anything. it answers from your sources, cites every claim, and flags what's stale</span>
+              <span className="text-xs font-mono uppercase tracking-widest text-white">{r.design.prototypeHint || "click anything. it's the real prototype, not a mock-up."}</span>
             </div>
             <div className="rounded-3xl overflow-hidden border border-[#2C2542] bg-[#DDE3EC] shadow-[0_30px_70px_rgba(20,30,60,0.18)]">
               <iframe

@@ -77,7 +77,7 @@ export default function FinvistaCaseStudy() {
             ux case study · featured
           </Reveal>
           <Reveal as="h1" delay={0.08} className="font-display text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9] case-keep text-[#F7F5FF]">
-            Finv<span className="dot-o">i</span>sta
+            FinV<span className="dot-o">i</span>sta
           </Reveal>
           <Reveal as="p" delay={0.16} className="mt-8 max-w-3xl text-xl md:text-2xl text-[#F4F3FA] leading-snug font-light italic">
             {fv.subtitle}

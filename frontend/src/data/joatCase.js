@@ -137,7 +137,7 @@ export const joat = {
     intro:
       "Design is step one of three: Design your tee, Set your price, Add a description. The pricing step is where most platforms hide the economics; I pulled them into the open. A goal slider, an end date and a per-tee price update a live minimum-profit figure. The reassurance that matters most, pay nothing even if the campaign fails, sits right beside the CTA.",
     screens: [
-      { src: J("03-set-price.jpg"), w: 1400, h: 870, title: "Set Your Price", desc: "Goal slider, campaign end date and selling price drive a live minimum-profit calc; the no-risk promise sits beside the CTA." },
+      { src: J("03-set-price.jpg"), w: 1400, h: 870, title: "Set Your Price", desc: "Goal slider, campaign end date and selling price update a live minimum-profit figure; the no-risk promise sits beside the CTA." },
       { src: J("04-add-description.jpg"), w: 1400, h: 870, title: "Add a Description", desc: "The final step before launch, the story and details that make a campaign shareable." },
       { src: J("05-campaign.jpg"), w: 1400, h: 870, title: "Campaign Page", desc: "The public campaign page a raiser shares into Facebook ads and social to convert cold traffic into buyers." },
     ],

@@ -254,10 +254,10 @@ export default function About() {
               </div>
               <div className="mt-6 space-y-4 text-base md:text-lg leading-relaxed text-white/95">
                 <p>
-                  Hey there! I&apos;m a UX Lead with <strong>12+ years</strong> of hands-on design experience across India&apos;s buzzing tech hubs: Pune, Nagpur, and Bengaluru. Whether I&apos;m building enterprise dashboards or crafting story-driven visuals, I aim to pair creative flair with smart functionality.
+                  Hey there. I&apos;m a UX Lead with <strong>12+ years</strong> in the messy end of product design: enterprise dashboards, lending flows, analytics tools, the systems most people find intimidating. I like taking something dense and complicated and making it feel obvious. I sit right between design, data, and engineering, which is usually where the interesting problems hide.
                 </p>
                 <p>
-                  I&apos;ve worked with both startups and global giants, leading UX/UI projects that put users first while staying aligned with business goals. I&apos;m now looking to bring my passion for human-centered design to opportunities in India, the Middle East, or anywhere remote.
+                  I&apos;ve done this for first-time founders and for some of the bigger names in banking and enterprise software. I stay in the file doing the actual pixels, not just the slides, and I care as much about whether a thing ships as whether it looks good. Right now I&apos;m after a senior product or UX role, in India, the Middle East, or fully remote.
                 </p>
               </div>
             </div>

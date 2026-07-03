@@ -1,8 +1,8 @@
 export default function MeridianIA() {
   const sources = [
-    { name: "Slate CRM", sub: "ug + graduate admissions" },
-    { name: "Student Information System", sub: "enrolled-student records" },
-    { name: "Power BI semantic layer", sub: "shared metric definitions" },
+    { name: "Slate", sub: "undergrad + graduate admissions" },
+    { name: "Student records system", sub: "enrolled-student records" },
+    { name: "Shared metric definitions", sub: "one meaning per number" },
   ];
 
   const modules = [

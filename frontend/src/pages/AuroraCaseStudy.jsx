@@ -387,7 +387,7 @@ export default function AuroraCaseStudy() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {au.insights.designGoals.map((g, i) => (
             <Reveal key={g.t} delay={(i % 2) * 0.06} className={`rounded-3xl p-6 ${i % 2 === 0 ? "dark-card" : "bg-white border-2 border-[#F5379B]"}`}>
-              <div className="font-mono text-sm uppercase tracking-widest text-white">0{i + 1}</div>
+              <div className={`font-mono text-sm uppercase tracking-widest ${i % 2 === 0 ? "text-white" : "text-[#C71E73]"}`}>0{i + 1}</div>
               <h3 className={`mt-2 font-display text-lg font-black ${i % 2 === 0 ? "" : "text-[#F5379B]"}`}>{g.t}</h3>
               <p className={`mt-2 text-sm leading-relaxed ${i % 2 === 0 ? "" : "text-black"}`}>{g.d}</p>
             </Reveal>

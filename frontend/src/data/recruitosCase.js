@@ -17,7 +17,7 @@ export const recruitos = {
   hero: {
     // Concept work -> research-backed figures, framed honestly as such in copy.
     facts: [
-      { label: "Role", value: "Sr. UX Lead (end-to-end)" },
+      { label: "Role", value: "Senior UX Lead (end-to-end)" },
       { label: "Domain", value: "Staffing & recruitment" },
       { label: "Platform", value: "Responsive web (concept)" },
     ],
@@ -37,7 +37,7 @@ export const recruitos = {
     badge: "Concept · self-initiated · not client work",
     facts: [
       { label: "Type", value: "AI-native product concept" },
-      { label: "Role", value: "Sr. UX Lead (end-to-end)" },
+      { label: "Role", value: "Senior UX Lead (end-to-end)" },
       { label: "Basis", value: "Secondary research + teardown" },
       { label: "Platform", value: "Responsive web · desktop-first" },
       { label: "Status", value: "Concept + working prototype" },
@@ -182,9 +182,9 @@ export const recruitos = {
     headline: "I tore down the tools recruiters already pay for, and found the same hole in each.",
     ecoTitle: "The tool sprawl",
     ecoIntro:
-      "I mapped every tool a recruiter touches in a typical week. The picture is the problem: a recruiter is the only integration layer connecting an ATS, a CRM, job boards, LinkedIn, email, a comms app, spreadsheets, and a reporting deck. Manually, all day.",
+      "I mapped every tool a recruiter touches in a typical week. The picture is the problem: the recruiter is the only thing holding an ATS, a CRM, job boards, LinkedIn, email, a chat app, spreadsheets, and a reporting deck together. By hand, all day.",
     ecosystem: [
-      { name: "ATS", role: "System of record (that nobody trusts)" },
+      { name: "ATS", role: "The official file (that nobody trusts)" },
       { name: "CRM", role: "Client relationships, kept separately" },
       { name: "LinkedIn Recruiter", role: "Sourcing + outreach" },
       { name: "Email", role: "The actual source of truth" },
@@ -217,14 +217,14 @@ export const recruitos = {
         ["Confidence + provenance", "Yes", "No", "No", "No", "No", "No"],
         ["AI outreach (human-gated)", "Yes", "Partial", "Partial", "Yes", "No", "Yes"],
         ["One-click client report", "Yes", "No", "Partial", "No", "Partial", "No"],
-        ["NL search across desk", "Yes", "No", "No", "Partial", "No", "Partial"],
+        ["Plain-English search across the desk", "Yes", "No", "No", "Partial", "No", "Partial"],
         ["Organisational memory", "Yes", "Partial", "Partial", "No", "No", "Partial"],
         ["Built for the recruiter", "Yes", "No", "Partial", "Partial", "No", "Partial"],
       ],
     },
     gapTitle: "The gap statement",
     gap:
-      "I couldn't find a single tool that combined a project-centric workflow with end-to-end AI recruiters actually trust. Incumbents are systems of record with AI bolted on; point tools own a feature, not the workflow. I designed Slate for the space between them.",
+      "I couldn't find a single tool that combined a project-centric workflow with end-to-end AI recruiters actually trust. Incumbents are filing cabinets with AI bolted on; point tools own a feature, not the workflow. I designed Slate for the space between them.",
   },
 
   // --- 04 THE HYPOTHESIS (Positioning + mental model + principles) ---
@@ -272,7 +272,7 @@ export const recruitos = {
       "Before any IA, I broke the recruitment lifecycle into discrete tasks with their dependencies, so the structure would be organised around the actual sequence of work, not around database tables.",
     lifecycle: [
       { t: "Take the brief", d: "Client opens a role → becomes a project." },
-      { t: "Source", d: "Add candidates via resume / profile → structured records." },
+      { t: "Source", d: "Add candidates from a resume or profile; each becomes a clean, complete candidate card." },
       { t: "Analyse & rank", d: "AI summarises, scores fit, and flags risks, with provenance." },
       { t: "Shortlist", d: "Recruiter curates; compares candidates side by side." },
       { t: "Outreach", d: "AI drafts; recruiter edits and sends." },
@@ -317,6 +317,8 @@ export const recruitos = {
     ],
     finalIntro:
       "From grayscale to a working, clickable product. The screens below are captured from the live Slate prototype: Google / Material-3 design language, a Gemini-style gradient reserved exclusively for AI surfaces, and the ✦ sparkle marking every AI action. It's the real prototype, not a screen mock-up: you can open it and click through. It shows the intent without claiming results.",
+    prototypeHint:
+      "click anything. the copilot sources, ranks and drafts. nothing sends without you.",
     finalScreens: [
       { src: S("01-overview.png"), tag: "Prototype · 01", title: "Overview", desc: "The agency at a glance: active projects, pipeline health, and what the copilot thinks needs attention today. The global layer above the project workspace." },
       { src: S("02-projects.png"), tag: "Prototype · 02", title: "Projects", desc: "Every engagement as a project, the home base of the whole product. Status, client, and candidate counts in one scannable list." },

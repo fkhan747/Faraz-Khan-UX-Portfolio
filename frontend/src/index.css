@@ -139,6 +139,19 @@ h5.font-display, h6.font-display {
 }
 .marquee-track { animation: scrollX 30s linear infinite; }
 
+/* Respect reduced-motion: stop the infinite marquee, drop entrance offsets, and
+   never leave .rise content invisible if its animation is suppressed. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .marquee-track { animation: none !important; }
+  .rise { opacity: 1 !important; animation: none !important; }
+}
+
 /* Hide scrollbar in sidebar */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

@@ -9,7 +9,7 @@ export const finvista = {
     "Re-imagining a digital lending platform for quick, hassle-free finance, serving millions across urban and rural India.",
   hero: {
     facts: [
-      { label: "Role", value: "Sr. UX Lead" },
+      { label: "Role", value: "Senior UX Lead" },
       { label: "Domain", value: "Fintech · digital lending" },
       { label: "Platform", value: "Native Android app" },
     ],
@@ -25,12 +25,12 @@ export const finvista = {
     headline:
       "Designing a scalable lending experience for India's next billion borrowers",
     intro:
-      "FinVista is a consumer-facing digital lending platform operated by a leading Indian NBFC, a subsidiary of one of India's largest automotive conglomerates. The platform serves customers across 500+ cities, offering loans for two-wheelers, consumer durables, personal needs, used vehicles, tractors, and more.",
+      "FinVista is a consumer-facing digital lending platform operated by a leading Indian NBFC, a subsidiary of one of India's largest automotive conglomerates. The platform serves customers across 500+ cities, offering loans for two-wheelers, consumer durables, personal needs, used vehicles, tractors, and more. FinVista is a stand-in name; the client's identity is kept confidential under NDA.",
     tldrTitle: "TL;DR: Executive Summary",
     tldr:
       "I led the UX design of a native Android Loan Origination System for a leading Indian NBFC, covering 6 loan product journeys with a focus on the Two-Wheeler flow. Through competitive analysis, persona development, and 5 rounds of iterative prototyping, I created a scalable design system with 100+ components and turned a complex, paper-heavy loan application into an 11-step digital journey. The result was faster processing, less reliance on agents, and higher completion rates.",
     facts: [
-      { label: "Role", value: "Sr. UX Lead" },
+      { label: "Role", value: "Senior UX Lead" },
       { label: "Duration", value: "5 Months" },
       { label: "Team", value: "2 Designers, 1 PM, 8 Devs" },
       { label: "Platform", value: "Native Android App" },
@@ -130,7 +130,7 @@ export const finvista = {
       "Admin panel and back-office tools",
       "Marketing website and landing pages",
       "Post-disbursal loan management",
-      "Third-party API integration logic",
+      "Connections to outside services, behind the scenes",
     ],
   },
 
@@ -313,7 +313,7 @@ export const finvista = {
     intro:
       "I built a 100+ component system in Figma, one shared visual language across all six products. I built it on auto-layout, variants, and tokens, so handoff to engineering stayed clean.",
     panelsIntro:
-      "I organized the 100+ components into tokens, form controls, navigation, and content containers. I built them on auto-layout and variants, so engineering could pull each one straight into the build.",
+      "I organized the 100+ components into tokens, form controls, navigation, and content containers. I built them on auto-layout and variants, so every component could be recreated exactly as designed, with nothing lost in handoff.",
     panels: [
       { src: F("022-foundation-color-palette-typography-scale-and-spacing-system.png"), caption: "Foundation: Color palette, typography scale, and spacing system" },
       { src: F("023-icons-illustrations-functional-icons-multi-color-variants-an.png"), caption: "Icons & Illustrations: Functional icons, multi-color variants, and contextual graphics" },

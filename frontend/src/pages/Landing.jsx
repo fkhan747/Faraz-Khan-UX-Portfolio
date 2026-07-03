@@ -1,8 +1,8 @@
 import { useRef, useState, useLayoutEffect } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Mail, Calendar, Linkedin, Briefcase, User, Star, Quote } from "lucide-react";
-import { PROFILE, projects, testimonials } from "../data/content";
-import { Container, Grid } from "../components/Grid";
+import { ArrowRight, Mail, Calendar, Linkedin, Briefcase, User } from "lucide-react";
+import { PROFILE, projects } from "../data/content";
+import { Container } from "../components/Grid";
 import CaseCover from "../components/CaseCover";
 import AgenticFeature from "../components/AgenticFeature";
 import BookCallButton from "../components/BookCallButton";
@@ -76,8 +76,11 @@ export default function Landing() {
                 <FitLine><Accent>47 Tabs Deep</Accent>, Dreamin&apos;</FitLine>
                 <FitLine>in the Internet Waves.</FitLine>
               </h1>
-              <p className="mt-6 max-w-xl text-base md:text-lg text-[#A29CB4] leading-relaxed rise rise-3" data-testid="hero-sub">
-                12+ years across Graphic/Brand design, UX, data &amp; development. Big believer in clarity over decoration, <span className="text-[#F4F3FA] underline decoration-[#075EFD] decoration-2 underline-offset-4">facts over feelings</span>, and design that gets out of your way. Turns out treating people well is also great for business. Who knew.
+              <p className="mt-5 text-[11px] md:text-xs font-mono uppercase tracking-[0.25em] text-[#F5379B] rise rise-3" data-testid="hero-eyebrow">
+                Senior UX Lead · Enterprise, Fintech &amp; Analytics
+              </p>
+              <p className="mt-4 max-w-xl text-base md:text-lg text-[#A29CB4] leading-relaxed rise rise-3" data-testid="hero-sub">
+                12+ years across UX, product and data, with roots in brand and code. Big believer in clarity over decoration, <span className="text-[#F4F3FA] underline decoration-[#075EFD] decoration-2 underline-offset-4">facts over feelings</span>, and design that gets out of your way. Turns out treating people well is also great for business. Who knew.
               </p>
               <div className="mt-9 flex items-center gap-4 flex-wrap rise rise-3">
                 <Link
@@ -86,7 +89,7 @@ export default function Landing() {
                   className="inline-flex items-center gap-2 px-9 py-4 rounded-full bg-[#075EFD] text-white text-lg font-semibold capitalize shadow-[0_10px_36px_-8px_rgba(7,94,253,0.7)] hover:bg-[#2E78FF] transition-colors"
                 >
                   <Briefcase size={20} />
-                  see what i do
+                  view my work
                 </Link>
                 <Link
                   to="/about"
@@ -94,7 +97,7 @@ export default function Landing() {
                   className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-white text-base font-semibold capitalize hover:bg-white hover:text-[#100210] transition-colors"
                 >
                   <User size={18} />
-                  know me
+                  about me
                 </Link>
               </div>
             </div>
@@ -152,42 +155,6 @@ export default function Landing() {
           ))}
         </div>
       </section>
-
-      {/* TESTIMONIALS hidden until real ones are ready; flip false to true to revive. */}
-      {false && (
-      <section className="py-20 md:py-28 border-t border-white/10" data-testid="testimonials">
-        <Container>
-        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">what clients say</p>
-        <h2 className="font-display text-4xl md:text-5xl font-black mb-12 leading-tight max-w-3xl">the results <span className="italic font-light">speak</span> for themselves.</h2>
-
-        <Grid>
-          {testimonials.map((t, i) => (
-            <figure key={i} data-testid={`testimonial-${i}`} className={`col-span-12 md:col-span-4 relative rounded-3xl p-7 ${i === 1 ? "bg-[#075EFD] text-white" : "dark-card text-[#F4F3FA]"}`}>
-              <Quote className={`absolute -top-3 -left-2 ${i === 1 ? "text-white" : "text-[#075EFD]"}`} size={36} fill="currentColor" />
-              <blockquote className="text-base leading-relaxed mb-6 relative z-10">"{t.quote}"</blockquote>
-              <figcaption className="flex items-center gap-3">
-                <img src={t.photo} alt={t.name} className="w-10 h-10 rounded-full object-cover" />
-                <div>
-                  <div className="text-sm font-semibold capitalize">{t.name}</div>
-                  <div className={`text-xs ${i === 1 ? "text-white/80" : "text-[#A29CB4]"}`}>{t.role}</div>
-                </div>
-              </figcaption>
-            </figure>
-          ))}
-        </Grid>
-
-        <div className="mt-12 flex items-center gap-6 flex-wrap">
-          <div className="flex items-center gap-1">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Star key={i} size={20} fill="#F5379B" className="text-white" />
-            ))}
-          </div>
-          <span className="font-display text-xl font-bold">4.9 / 5</span>
-          <span className="text-sm text-[#A29CB4]">across 30+ engagements since 2015</span>
-        </div>
-        </Container>
-      </section>
-      )}
 
       {/* FINAL CTA */}
       <section className="py-16 md:py-20" data-testid="final-cta">

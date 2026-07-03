@@ -22,6 +22,7 @@ import RecruitosConcept from "./pages/RecruitosConcept";
 import KnowledgeosConcept from "./pages/KnowledgeosConcept";
 import DecisionosConcept from "./pages/DecisionosConcept";
 import AgenticWorkflow from "./pages/AgenticWorkflow";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -46,7 +47,7 @@ function App() {
             <Route path="/case/meridian" element={<MeridianCaseStudy />} />
             <Route path="/agentic-workflow" element={<AgenticWorkflow />} />
             <Route path="/case/:slug" element={<CaseStudy />} />
-            <Route path="*" element={<Landing />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>
         </LightboxProvider>

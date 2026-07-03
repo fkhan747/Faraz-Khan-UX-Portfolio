@@ -31,21 +31,21 @@ export const meridian = {
     "AI interaction patterns",
   ],
   principles: [
-    { t: "Segment by level, always", d: "Grad is ~48% international, undergrad ~4%. A blended number describes a student who doesn't exist, so there's no Institute-wide total anywhere." },
+    { t: "Segment by level, always", d: "Grad is ~48% international, undergrad ~4%. A blended rate describes a student who doesn't exist, so rates never blend across levels. The Overview may total counts; percentages and yield only ever live per level." },
     { t: "Lead with the answer", d: "End the 90-second orienting. Headline first, drill second. Every screen names its takeaway before it shows the detail." },
-    { t: "Design to what Power BI renders", d: "Agree with the engine before drawing anything pretty. Native drill-through, not a custom framework the team can't actually ship." },
+    { t: "Design to what Power BI can show", d: "Agree with the tool's limits before drawing anything pretty. Native drill-through, nothing custom the build team couldn't actually deliver." },
     { t: "Trends by default, deltas everywhere", d: "One year tells you nothing. Every view defaults to a multi-year trend, and every KPI carries a year-over-year delta." },
     { t: "AI is a guide, never the decider", d: "Human in the loop, inputs visible, sensitive attributes kept out of any scoring. Ask Meridian AI summarizes; it never ranks or predicts." },
   ],
   constraints: [
-    { t: "Power BI rendering limits", d: "I designed to native behavior, drill-through and standard visuals, not a bespoke framework, so engineering could actually build it." },
-    { t: "The existing data model", d: "Slate (the enrollment CRM) and the SIS were the source of truth. I designed to the live data contract, not an idealized one." },
+    { t: "Power BI's native limits", d: "I designed to native behavior, drill-through and standard visuals, nothing custom-built, so the team could actually ship it." },
+    { t: "The existing data model", d: "Slate (the admissions system) and the student-records system already owned every number. I designed to the data the university actually has, not an idealized one." },
     { t: "Post-SFFA data sensitivity", d: "After the 2023 ruling, disaggregated demographic data is restricted. Those views suppress small counts and degrade gracefully when a category is withheld." },
     { t: "Scope honesty", d: "The Overview is hi-fi; the other tabs carried through IA, greybox, and hi-fi. Designed and demonstrated, not shipped and measured." },
   ],
   validation: [
     { t: "Heuristic audit", d: "I scored all four legacy dashboards against Nielsen's heuristics on a 0 to 4 severity scale, and tied every finding to a real person and a real task." },
-    { t: "Analyst sign-off", d: "The IR analysts who own and defend the data confirmed the surface matched their data contract. That sign-off was the real acceptance test." },
+    { t: "Analyst sign-off", d: "The IR analysts who own and defend the data confirmed every number on screen means exactly what their records say. That sign-off was the real acceptance test." },
     { t: "Honest scope", d: "Expert review and stakeholder sign-off, not a formal usability study. Validating task-times with real provosts and deans is the next step." },
   ],
   expectedOutcomes: [
@@ -106,7 +106,7 @@ Before I drew a single box, I went and learned the sector. Every finding here tu
 
 ### Where a dashboard actually sits
 
-The dashboard is the last mile of a CRM and SIS pipeline. Slate runs about half the enrollment-CRM market and holds both funnels, so that is the source of truth. I designed to what Power BI can actually render, and collapsed four legacy dashboards into one.
+A dashboard like this sits at the very end of the university's admissions and student-records systems. Slate is where about half of universities run admissions, and it holds both funnels, so that is the source of truth. I designed to what Power BI can actually show, and collapsed four legacy dashboards into one.
 
 ### It's a trajectory, not a snapshot
 
@@ -150,13 +150,13 @@ The brief was not "prettier charts." It was: make these numbers fast to read and
 
 ### What success looked like
 
-I made success behavioral, not decorative. A first-time user names any screen's headline in about five seconds. A returning user answers a routine question with one filter change at most. One definition per metric. A forecast always reads as a forecast. And the analysts sign off that the surface matches their data contract. That sign-off was the real acceptance test.
+I made success behavioral, not decorative. A first-time user names any screen's headline in about five seconds. A returning user answers a routine question with one filter change at most. One definition per metric. A forecast always reads as a forecast. And the analysts sign off that every number on screen means what their records say. That sign-off was the real acceptance test.
 
 ### How I worked
 
-Six passes, looping back often. The discipline I held myself to: agree with what Power BI can render before drawing anything pretty.
+Six passes, looping back often. The discipline I held myself to: agree with what Power BI can show before drawing anything pretty.
 
-I audited the four legacy dashboards, mapped every idea to native behavior (drill-through, not some custom framework), then collapsed them into one spine, grayscale first.
+I audited the four legacy dashboards, mapped every idea to native behavior (drill-through, no custom workarounds), then collapsed them into one spine, grayscale first.
 
 AI came last, on purpose. Ask Meridian AI is optional, audited for bias, human in the loop. A guide, not the decision-maker.
 
@@ -239,8 +239,6 @@ The demographic panels are where I designed most carefully:
 Both are longitudinal stories the legacy dashboards flattened into single-year pies. Both have a headline number that misleads on its own and only helps once you split it. Admissions taught me to lead with the funnel; these taught me to lead with the multi-year arc, and to know when not to compute at all.
 
 ## Funnel, yield, and melt
-
-A lean intro, then the spine of each point.
 
 The funnel is the whole job for enrollment leaders, so it sits right up top.
 
