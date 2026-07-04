@@ -66,7 +66,7 @@
     "build": "craco build",
     "postinstall": "patch-package",
     "postbuild": "react-snap || true",
-    "deploy": "npm run build && netlify deploy --prod --dir=build",
+    "deploy": "npm run build && npx --yes gh-pages@6 -d build --dotfiles",
     "test": "craco test"
   },
   "browserslist": {

@@ -1,28 +1,22 @@
-# READ ME FIRST — how to put this online
+# READ ME FIRST: how this site goes live
 
-Your portfolio is finished and **already built**. You do NOT need Emergent anymore.
+Your portfolio is a plain React app (in `frontend/`). It is **already live** at **https://www.khanfaraz.in**, hosted on **GitHub Pages**. You do NOT need Emergent, and you do NOT need Netlify.
 
-## The fastest way to get it live (no commands)
+## Deploy (the one and only method: GitHub Pages)
 
-1. Unzip this file. You get a folder.
-2. Inside it, go to: `frontend` → `build`. That `build` folder IS your finished website.
-3. In your browser, open **https://app.netlify.com/drop**
-4. Drag the **`build`** folder onto that page.
-5. Wait a few seconds — Netlify gives you a live link (like `something.netlify.app`). That's your portfolio, live. Open it on your phone, send it to anyone.
-
-That's it. Aurora, FinVista, and the new RecruitOS prototype are all in there.
-
-## Want to use your own domain (like work.yourname.com)?
-After the site is live on Netlify: in Netlify go to **Domain management → add a domain**, then add the **CNAME** record it shows you at your domain provider. (This part needs your accounts, so you do it — tell me if you want me to walk you through each click.)
-
-## If you're working in Claude Code
-Open the whole folder there and ask me to build or change things. I'll read `CLAUDE.md` (next to this file) for full context. To rebuild after edits:
+From Claude Code, just ask me to deploy. Or run it yourself:
 ```
 cd frontend
-npm install
-npm run build
+CI=false npm run build     # builds frontend/build/
+npm run deploy             # publishes build/ to the gh-pages branch
 ```
-Then re-drag the new `frontend/build` folder to Netlify (or set up auto-deploy later).
+`npm run deploy` builds the site and pushes the `build/` folder to the repo's `gh-pages` branch. GitHub Pages serves it at www.khanfaraz.in a minute or two later. Also commit your source changes to `main` (the source lives on `main`, the built site lives on `gh-pages`).
+
+## Your custom domain
+Already set up: **www.khanfaraz.in** points at GitHub Pages, and `frontend/public/CNAME` keeps it attached on every deploy. Nothing to do.
+
+## If you're working in Claude Code
+Open the whole folder and ask me to build, change, or deploy things. I read `CLAUDE.md` (next to this file) for full context.
 
 ## Note
-This is now a normal React site you fully own — no Emergent, no subscription. Everything can be done in Claude + Netlify from here on.
+This is a normal React site you fully own: no Emergent, no Netlify, no subscription. Everything is done in Claude Code + GitHub from here on.

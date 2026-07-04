@@ -1,6 +1,6 @@
 # CLAUDE.md — Faraz's UX Portfolio (Emergent-free)
 
-Read this first. This is Faraz Khan's personal portfolio site. **It no longer depends on Emergent** — it's a plain React (CRA + CRACO) app that builds with npm and hosts as static files on Netlify. Faraz works entirely in Claude / Claude Code now and hosts on Netlify. Do not reintroduce any Emergent dependency or tooling.
+Read this first. This is Faraz Khan's personal portfolio site. **It no longer depends on Emergent.** It's a plain React (CRA + CRACO) app that builds with npm and deploys as static files to **GitHub Pages** at the custom domain **www.khanfaraz.in**. Faraz works entirely in Claude / Claude Code now. Do not reintroduce any Emergent dependency or tooling, and **do not reintroduce Netlify: GitHub Pages is the one and only deploy method** (see Deploy below).
 
 ## The site lives in `frontend/`
 Everything that matters for the website is in `frontend/`. (`backend/` is a leftover FastAPI app and is NOT used by the portfolio — the site is fully static.)
@@ -15,12 +15,22 @@ npx serve -s build
 ```
 A prebuilt `frontend/build/` is already included in this zip, so it can be deployed without building first.
 
+## Deploy (GitHub Pages only, never Netlify)
+The live site is **GitHub Pages** on the custom domain **www.khanfaraz.in** (`curl -sI` shows `server: GitHub.com`). Netlify is NOT in the loop: `netlify.toml` was removed; any leftover `.netlify` / `_redirects` bits are inert on Pages.
+
+```bash
+cd frontend
+CI=false npm run build     # outputs frontend/build/ (postbuild react-snap prerenders each route)
+npm run deploy             # = build + `npx gh-pages -d build --dotfiles` → pushes build/ to origin/gh-pages
+```
+Also commit source to `main`. `build/` is gitignored: **source lives on `main`, built output on the `gh-pages` branch.** `frontend/public/CNAME` (www.khanfaraz.in) and `frontend/public/.nojekyll` ride into every build. keep them, or the domain / asset serving breaks. Get Faraz's go-ahead before a live deploy, then verify the new `main.<hash>.js` returns 200 on the live domain (GitHub Pages can lag ~10 min or throttle).
+
 ## What changed to remove Emergent (keep it this way)
 - Deleted `@emergentbase/visual-edits` from `frontend/package.json`.
 - Removed the `withVisualEdits` block from `frontend/craco.config.js`.
 - Added `frontend/.npmrc` (`legacy-peer-deps=true`) so installs are clean.
 - Pinned `ajv@8` in dependencies (fixes a react-scripts 5 / ajv-keywords build error).
-- Added `frontend/public/_redirects` for Netlify SPA routing (deep links like `/case/recruitos` survive refresh; real files like `/recruitos/` are served first).
+- Added `frontend/public/_redirects` (Netlify-era SPA routing). On **GitHub Pages this file is inert**: deep links survive refresh because `react-snap` (postbuild) prerenders every route to its own `index.html`. Safe to leave or delete.
 
 ## Architecture
 - React + react-router-dom, Tailwind + shadcn/ui, framer-motion, embla-carousel.
@@ -37,7 +47,7 @@ A prebuilt `frontend/build/` is already included in this zip, so it can be deplo
 Single-file SPA at `frontend/public/recruitos/index.html`. Google AI / Material-3 design language (LOCKED): bg `#F7F9FC`, ink `#1F1F1F`, Google Blue `#1A73E8`, AI = Gemini gradient `linear-gradient(120deg,#4285F4,#9168F0 55%,#E8519B)` via `.grad`/`.grain`, sparkle ✦. Fonts: Plus Jakarta Sans + Inter + Roboto Mono. Client-side router (`VIEWS`/`go()`), global "Ask AI" chatbot, canon data (8 candidates / 6 projects, Acme Corp is the active project). The comment/annotation tool was removed. **Still open: an alignment pass — render + screenshot and fix.**
 
 ## Next steps queue
-1. Host on Netlify (drag `frontend/build` to app.netlify.com/drop), then a custom domain.
+1. DONE: hosted on GitHub Pages at www.khanfaraz.in (custom domain live). See Deploy above.
 2. RecruitOS alignment polish (screenshot-driven).
 3. Build KnowledgeOS, then DecisionOS, and merge each into the `concepts` array + a page, same as RecruitOS.
 4. Optional: a written narrative case-study wrapper for RecruitOS.

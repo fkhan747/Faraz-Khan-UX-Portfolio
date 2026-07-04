@@ -38,7 +38,8 @@ export default function Seo({ title, description = DEFAULT_DESC, image = OG_IMAG
     document.title = full;
     // Per-page canonical URL. pathname is correct during react-snap prerender;
     // pairing it with the fixed production origin avoids baking in localhost.
-    // Normalised to a trailing slash to match Netlify's served URLs.
+    // Normalised to a trailing slash to match the GitHub Pages served URLs
+    // (react-snap prerenders each route to /route/index.html).
     const path = typeof window !== "undefined" ? window.location.pathname : "/";
     const url = SITE + (path.endsWith("/") ? path : `${path}/`);
     upsert('meta[name="description"]', "name", "description", description);
