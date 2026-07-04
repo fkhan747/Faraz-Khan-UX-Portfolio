@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Logo Lab v2 · Latin letters, Arabic soul</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400..700&family=Rakkas&family=Lalezar&family=Katibeh&family=Jomhuria&family=Marhey:wght@300..700&family=Reem+Kufi:wght@400..700&family=Aref+Ruqaa:wght@400;700&family=JetBrains+Mono:wght@600&family=Outfit:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#100210; --card:#181126; --line:#2C2542;
+    --ink:#F4F3FA; --muted:#A29CB4;
+    --blue:#075EFD; --mag:#F0186C; --yellow:#F2D50F;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--bg); color:var(--ink); font-family:Outfit,sans-serif; padding:40px;}
+  h1{font-family:'JetBrains Mono',monospace; font-size:13px; letter-spacing:.25em; text-transform:uppercase; color:var(--mag); margin-bottom:6px;}
+  .sub{color:var(--muted); font-size:14px; margin-bottom:24px; max-width:760px;}
+  h2{font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); margin:34px 0 14px;}
+  .grid{display:grid; grid-template-columns:repeat(5,1fr); gap:16px;}
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:16px;
+    padding:18px 14px 14px; display:flex; flex-direction:column; align-items:center; gap:10px;
+    min-height:310px;
+  }
+  .stage{flex:1; display:flex; align-items:center; justify-content:center; width:100%;}
+  .tag{font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.12em; color:var(--yellow); text-transform:uppercase;}
+  .note{font-size:11.5px; color:var(--muted); text-align:center; line-height:1.5;}
+
+  .ref{display:flex; align-items:center; gap:18px; background:var(--card); border:1px solid var(--line); border-radius:16px; padding:16px 20px; width:max-content; margin-bottom:4px;}
+  .ref img{height:74px; filter:invert(31%) sepia(94%) saturate(4184%) hue-rotate(217deg) brightness(97%);}
+  .ref span{color:var(--muted); font-size:13px; max-width:360px;}
+
+  /* ---- KF monograms: Latin letters, Arabic gesture ---- */
+  .kf1{position:relative; display:flex; flex-direction:column; align-items:center;}
+  .kf1 .m{font-family:'Rakkas'; font-size:104px; line-height:.9; letter-spacing:-0.04em;}
+  .kf1 svg{width:130px; height:22px; margin-top:-6px;}
+  .kf2{font-family:'El Messiri'; font-weight:700; font-size:100px; line-height:1; letter-spacing:-0.06em; display:flex; align-items:flex-start;}
+  .kf2 .dot{width:14px; height:14px; border-radius:50%; background:var(--blue); margin:14px 2px 0;}
+  .kf3{font-family:'Lalezar'; font-size:82px; line-height:.78; display:flex; flex-direction:column; align-items:center;}
+  .kf3 span:last-child{color:var(--mag);}
+  .kf4{width:150px; height:150px; border-radius:50%; border:3px solid var(--ink); position:relative;
+       display:flex; align-items:center; justify-content:center;
+       font-family:'Jomhuria'; font-size:120px; line-height:.62; padding-top:26px;}
+  .kf4::after{content:''; position:absolute; inset:7px; border-radius:50%; border:1px solid var(--line);}
+
+  /* ---- Khan Faraz wordmarks ---- */
+  .nm1{display:flex; flex-direction:column; align-items:center; gap:2px;}
+  .nm1 .m{font-family:'El Messiri'; font-weight:600; font-size:52px; line-height:1;}
+  .nm1 .rule{width:150px; height:2px; background:var(--mag); margin-top:8px;}
+  .nm2{font-family:'Katibeh'; font-size:72px; line-height:.8;}
+  .nm2 b{color:var(--blue); font-weight:400;}
+  .nm3{font-family:'Rakkas'; font-size:56px; line-height:.95; text-align:center;}
+  .nm4{font-family:'Jomhuria'; font-size:84px; line-height:.6; text-align:center; display:flex; flex-direction:column; align-items:center;}
+  .nm4 span:last-child{color:var(--yellow);}
+  .nm5{font-family:'Reem Kufi'; font-weight:600; font-size:44px; letter-spacing:.04em; text-align:center; line-height:1.15;}
+  .nm5 b{color:var(--blue); font-weight:600;}
+</style>
+</head>
+<body>
+  <h1>Logo Lab v2 · Latin letters, Arabic soul</h1>
+  <p class="sub">Every mark below is ENGLISH text, set in faces whose Latin letterforms are drawn with Arabic calligraphic DNA (these families were designed Arabic-first, their Latin harmonized to match), like the current mark. KF·5 is a custom-drawn fused monogram sketch.</p>
+
+  <div class="ref">
+    <img src="/logo.svg" alt="current logo">
+    <span>Current mark (reference): Latin initials drawn as one Arabic calligraphic gesture.</span>
+  </div>
+
+  <h2>A · KF monograms</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="stage"><div class="kf1">
+        <span class="m">KF</span>
+        <svg viewBox="0 0 130 22"><path d="M4 6 C 30 20, 96 20, 126 4" fill="none" stroke="#075EFD" stroke-width="5" stroke-linecap="round"/></svg>
+      </div></div>
+      <div class="tag">KF·1 Rakkas + kasheeda</div>
+      <p class="note">Latin KF in Rakkas (Ruqaa-DNA display face), riding a blue kasheeda sweep, like a signature underline.</p>
+    </div>
+    <div class="card">
+      <div class="stage"><div class="kf2">K<span class="dot"></span>F</div></div>
+      <div class="tag">KF·2 El Messiri</div>
+      <p class="note">Elegant Arabic-harmonized Latin, tall and courtly. The blue dot sits between the letters as a diacritic.</p>
+    </div>
+    <div class="card">
+      <div class="stage"><div class="kf3"><span>K</span><span>F</span></div></div>
+      <div class="tag">KF·3 Tughra stack</div>
+      <p class="note">K over magenta F in Lalezar, tall and column-like, the same vertical energy as the current mark.</p>
+    </div>
+    <div class="card">
+      <div class="stage"><div class="kf4">KF</div></div>
+      <div class="tag">KF·4 Coin seal</div>
+      <p class="note">Jomhuria display in a double-ring roundel. A stamp/avatar; the letters keep their reed-pen contrast.</p>
+    </div>
+    <div class="card">
+      <div class="stage">
+        <svg viewBox="0 0 140 170" width="130">
+          <g fill="none" stroke="#F4F3FA" stroke-linecap="round">
+            <path d="M34 18 C 28 62, 28 104, 36 148" stroke-width="13"/>
+            <path d="M36 92 C 58 78, 74 54, 88 22" stroke-width="12"/>
+            <path d="M36 92 C 58 104, 80 118, 132 124" stroke-width="12"/>
+            <path d="M88 22 C 92 56, 94 90, 92 124" stroke-width="11"/>
+            <path d="M90 52 L 122 48" stroke-width="10"/>
+            <path d="M90 84 L 116 81" stroke-width="9"/>
+          </g>
+          <circle cx="104" cy="16" r="7" fill="#075EFD"/>
+        </svg>
+      </div>
+      <div class="tag">KF·5 Custom fusion sketch</div>
+      <p class="note">Hand-drawn: the K's arm becomes the F's stem, one connected gesture with a kasheeda leg and a blue diacritic. Direction sketch for a bespoke mark.</p>
+    </div>
+  </div>
+
+  <h2>B · Khan Faraz wordmarks</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="stage"><div class="nm1"><span class="m">Khan Faraz</span><span class="rule"></span></div></div>
+      <div class="tag">NAME·1 El Messiri</div>
+      <p class="note">The most refined: Arabic-harmonized Latin with calligraphic joins, over a magenta rule.</p>
+    </div>
+    <div class="card">
+      <div class="stage"><div class="nm2">Khan Faraz<b>.</b></div></div>
+      <div class="tag">NAME·2 Katibeh flow</div>
+      <p class="note">Katibeh's Latin flows like Naskh: soft bowls, low waists, reed-pen ends. Blue period signature.</p>
+    </div>
+    <div class="card">
+      <div class="stage"><div class="nm3">Khan<br>Faraz</div></div>
+      <div class="tag">NAME·3 Rakkas block</div>
+      <p class="note">Heavy Ruqaa-DNA display, stacked. Confident poster weight that matches the hero.</p>
+    </div>
+    <div class="card">
+      <div class="stage"><div class="nm4"><span>KHAN</span><span>FARAZ</span></div></div>
+      <div class="tag">NAME·4 Jomhuria stack</div>
+      <p class="note">Compressed reed-pen caps, FARAZ in the art yellow. Loud, editorial, unmistakable.</p>
+    </div>
+    <div class="card">
+      <div class="stage"><div class="nm5">KHAN<br><b>FARAZ</b></div></div>
+      <div class="tag">NAME·5 Kufi geometry</div>
+      <p class="note">Reem Kufi's Latin: square-cut geometric letters from Kufic tradition. The systems-designer option.</p>
+    </div>
+  </div>
+</body>
+</html>
