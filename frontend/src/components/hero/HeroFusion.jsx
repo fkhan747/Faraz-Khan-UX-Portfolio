@@ -107,6 +107,7 @@ function Magnetic({ enabled, children }) {
 export default function HeroFusion({ solo = false }) {
   const sectionRef = useRef(null);
   const wrapRef = useRef(null);
+  const sensesRef = useRef(null);
   const canvasRef = useRef(null);
   const reduced = useReducedMotion();
   const [interactive, setInteractive] = useState(false);
@@ -302,9 +303,9 @@ export default function HeroFusion({ solo = false }) {
         const cctx = comp.getContext("2d");
         if (!cctx) throw new Error("no composite context");
         const rim = Math.round(RIM_OFFSET * dpr);
-        silhouette("#F5379B");
+        silhouette("#F0186C");
         cctx.drawImage(scratch, -rim, 0);
-        silhouette("#075EFD");
+        silhouette("#F2D50F");
         cctx.drawImage(scratch, rim, 0);
         if ("filter" in cctx) cctx.filter = "saturate(1.08)";
         cctx.drawImage(img, 0, 0, cw, ch);
@@ -346,8 +347,8 @@ export default function HeroFusion({ solo = false }) {
         cctx.globalCompositeOperation = "source-over";
 
         /* Channel-split copies and the neon flash variant */
-        const mag = tinted(comp, "#F5379B");
-        const blue = tinted(comp, "#075EFD");
+        const mag = tinted(comp, "#F0186C");
+        const blue = tinted(comp, "#F2D50F"); /* art yellow, keeps the old name */
         const neon = document.createElement("canvas");
         neon.width = cw;
         neon.height = ch;
@@ -355,8 +356,8 @@ export default function HeroFusion({ solo = false }) {
         if (!nctx) throw new Error("no neon context");
         nctx.drawImage(comp, 0, 0);
         const ng = nctx.createLinearGradient(0, 0, cw, ch);
-        ng.addColorStop(0, "#F5379B");
-        ng.addColorStop(1, "#075EFD");
+        ng.addColorStop(0, "#F0186C");
+        ng.addColorStop(1, "#F2D50F");
         nctx.globalCompositeOperation = "source-atop";
         nctx.globalAlpha = 0.7;
         nctx.fillStyle = ng;
@@ -380,11 +381,22 @@ export default function HeroFusion({ solo = false }) {
       }
     };
 
+    /* Sync the DOM spider-sense squiggles with the canvas glitch: crackle
+       exactly while a burst or tic paints, still the moment it goes clean. */
+    const setSensing = (on) => {
+      const el = sensesRef.current;
+      if (el && el.dataset.sensing !== String(on)) {
+        el.dataset.sensing = String(on);
+        el.classList.toggle("hxc-sensing", on);
+      }
+    };
+
     const drawClean = () => {
       const { ctx, comp, w, h } = eff;
       if (!ctx || !comp) return;
       ctx.clearRect(0, 0, w, h);
       ctx.drawImage(comp, 0, 0, w, h);
+      setSensing(false);
     };
 
     /* Seeded ambient schedule: quiet gap, then a burst; sometimes one
@@ -408,6 +420,7 @@ export default function HeroFusion({ solo = false }) {
       const cw = comp.width;
       const ch = comp.height;
       const stepIdx = Math.floor(age / BURST_STEP_MS);
+      setSensing(true);
       ctx.clearRect(0, 0, w, h);
 
       /* Whole-head jitter */
@@ -487,6 +500,7 @@ export default function HeroFusion({ solo = false }) {
     /* Rare single-slice micro-tic between bursts */
     const drawTic = (bi) => {
       const { ctx, w, h, dpr, comp } = eff;
+      setSensing(true);
       ctx.clearRect(0, 0, w, h);
       ctx.drawImage(comp, 0, 0, w, h);
       const sd = bi * 977 + 29;
@@ -720,10 +734,6 @@ export default function HeroFusion({ solo = false }) {
         transition: { duration: 0.9, ease: "easeOut" },
       };
 
-  const coarsePointer =
-    typeof window !== "undefined" &&
-    window.matchMedia("(pointer: coarse)").matches;
-
   const displaySlot = reduced ? WORDS[0] : wordState.cur;
 
   return (
@@ -828,22 +838,38 @@ export default function HeroFusion({ solo = false }) {
           will-change:transform;
         }
 
-        /* Spider-sense tingles: chunky comic squiggles wiggling around the
-           head, magenta and blue, each on its own beat. */
+        /* Spider-sense squiggles: dormant and dim between glitches, then
+           crackling like electric sparks (hard stepped jumps + flicker)
+           exactly while the canvas burst runs (.hxc-sensing, engine-driven). */
         .hxc-senses{ position:absolute; inset:0; pointer-events:none; will-change:transform; }
-        .hxc-sq{ position:absolute; overflow:visible; }
+        .hxc-sq{ position:absolute; overflow:visible; opacity:0.3; }
         .hxc-sq path{ stroke-linejoin:round; }
-        .hxc-sq-1{ width:13%; top:2%;  left:-14%; transform:rotate(-38deg); animation:hxc-tingle 1.7s ease-in-out infinite alternate; }
-        .hxc-sq-2{ width:16%; top:-7%; left:22%;  transform:rotate(-8deg);  animation:hxc-tingle 2.1s ease-in-out 0.3s infinite alternate; }
-        .hxc-sq-3{ width:13%; top:-3%; right:-4%; transform:rotate(26deg);  animation:hxc-tingle 1.5s ease-in-out 0.6s infinite alternate; }
-        .hxc-sq-4{ width:15%; top:26%; right:-17%;transform:rotate(64deg);  animation:hxc-tingle 2.4s ease-in-out 0.15s infinite alternate; }
-        .hxc-sq-5{ width:12%; top:34%; left:-16%; transform:rotate(-72deg); animation:hxc-tingle 1.9s ease-in-out 0.45s infinite alternate; }
-        @keyframes hxc-tingle{
-          0%{   translate:0 0;    scale:1; }
-          100%{ translate:0 -6px; scale:1.08; }
+        .hxc-sq-1{ width:13%; top:2%;  left:-14%; transform:rotate(-38deg); }
+        .hxc-sq-2{ width:16%; top:-7%; left:22%;  transform:rotate(-8deg); }
+        .hxc-sq-3{ width:13%; top:-3%; right:-4%; transform:rotate(26deg); }
+        .hxc-sq-4{ width:15%; top:26%; right:-17%;transform:rotate(64deg); }
+        .hxc-sq-5{ width:12%; top:34%; left:-16%; transform:rotate(-72deg); }
+        .hxc-sensing .hxc-sq-1{ animation:hxc-spark-a 0.18s steps(1, end) infinite; }
+        .hxc-sensing .hxc-sq-2{ animation:hxc-spark-b 0.22s steps(1, end) 0.03s infinite; }
+        .hxc-sensing .hxc-sq-3{ animation:hxc-spark-a 0.16s steps(1, end) 0.06s infinite; }
+        .hxc-sensing .hxc-sq-4{ animation:hxc-spark-b 0.2s steps(1, end) 0.09s infinite; }
+        .hxc-sensing .hxc-sq-5{ animation:hxc-spark-a 0.24s steps(1, end) 0.05s infinite; }
+        @keyframes hxc-spark-a{
+          0%{   opacity:1;    translate:0 0;      scale:1; }
+          25%{  opacity:0.35; translate:3px -4px; scale:1.18; }
+          50%{  opacity:1;    translate:-3px 2px; scale:0.88; }
+          75%{  opacity:0.5;  translate:2px 3px;  scale:1.1; }
+          100%{ opacity:1;    translate:0 0;      scale:1; }
+        }
+        @keyframes hxc-spark-b{
+          0%{   opacity:0.9;  translate:0 0;      scale:1; }
+          25%{  opacity:1;    translate:-4px 2px; scale:1.12; }
+          50%{  opacity:0.3;  translate:2px -3px; scale:0.92; }
+          75%{  opacity:1;    translate:-2px -2px;scale:1.06; }
+          100%{ opacity:0.9;  translate:0 0;      scale:1; }
         }
         @media (prefers-reduced-motion: reduce){
-          .hxc-sq-1,.hxc-sq-2,.hxc-sq-3,.hxc-sq-4,.hxc-sq-5{ animation:none !important; }
+          .hxc-sq{ opacity:0.3 !important; animation:none !important; }
         }
         .hxc-float{ animation:hxc-floaty 7s ease-in-out infinite; will-change:transform; }
         .hxc-portrait{ position:relative; width:var(--hxc-head-w); pointer-events:auto; }
@@ -914,15 +940,6 @@ export default function HeroFusion({ solo = false }) {
           animation:hxc-juggle 0.6s ease-in-out -0.3s infinite;
         }
 
-        .hxc-caption{
-          position:absolute; top:100%; left:0; right:0; margin-top:12px;
-          text-align:center; pointer-events:none;
-          font-family:'JetBrains Mono', ui-monospace, monospace; font-weight:600;
-          font-size:10px; letter-spacing:0.08em;
-          color:rgba(162,156,180,0.75);
-          transition:opacity 0.22s ease-out;
-        }
-
         /* Fallback portrait, CSS rims, only if the canvas pipeline fails */
         .hxc-rim{
           position:absolute; inset:0;
@@ -931,8 +948,8 @@ export default function HeroFusion({ solo = false }) {
           -webkit-mask-size:100% 100%; mask-size:100% 100%;
           -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
         }
-        .hxc-rim-magenta{ background:#F5379B; transform:translateX(-8px); z-index:1; }
-        .hxc-rim-blue{ background:#075EFD; transform:translateX(8px); z-index:2; }
+        .hxc-rim-magenta{ background:#F0186C; transform:translateX(-8px); z-index:1; }
+        .hxc-rim-blue{ background:#F2D50F; transform:translateX(8px); z-index:2; }
         .hxc-cutout{
           position:relative; z-index:3; display:block; width:100%; height:auto;
           filter:saturate(1.08);
@@ -964,7 +981,7 @@ export default function HeroFusion({ solo = false }) {
         }
         .hxc-dot{ width:6px; height:6px; border-radius:9999px; flex:none; }
         .hxc-dot-m{ background:#F5379B; box-shadow:0 0 10px rgba(245,55,155,0.8); }
-        .hxc-dot-b{ background:#075EFD; box-shadow:0 0 10px rgba(7,94,253,0.8); }
+        .hxc-dot-b{ background:#F2D50F; box-shadow:0 0 10px rgba(242,213,15,0.8); }
 
         /* Foreground copy: left column, never touching the figure. Flex
            centering (not transform) because framer owns this transform. */
@@ -1038,22 +1055,22 @@ export default function HeroFusion({ solo = false }) {
         .hxc-btn:focus-visible{ outline:2px solid #2E78FF; outline-offset:3px; }
         .hxc-btn-primary{
           --hxc-rot: -1deg;
-          background:#075EFD; color:#F4F3FA;
-          box-shadow:5px 5px 0 #F5379B;
+          background:#F0186C; color:#F4F3FA;
+          box-shadow:5px 5px 0 #F2D50F;
         }
         .hxc-btn-ghost{
           --hxc-rot: 1deg;
           background:transparent; color:#F4F3FA;
-          box-shadow:5px 5px 0 #075EFD;
+          box-shadow:5px 5px 0 #F0186C;
         }
         .hxc-btn-primary:active{
           transform:translate(3px, 3px) rotate(var(--hxc-rot)) scale(0.97);
-          box-shadow:2px 2px 0 #F5379B;
+          box-shadow:2px 2px 0 #F2D50F;
           animation:none;
         }
         .hxc-btn-ghost:active{
           transform:translate(3px, 3px) rotate(var(--hxc-rot)) scale(0.97);
-          box-shadow:2px 2px 0 #075EFD;
+          box-shadow:2px 2px 0 #F0186C;
           animation:none;
         }
         @media (hover: hover) and (pointer: fine){
@@ -1061,17 +1078,21 @@ export default function HeroFusion({ solo = false }) {
         }
 
         .hxc-featured{
-          display:flex; flex-wrap:wrap; align-items:center; gap:14px;
-          margin-top:16px;
+          display:flex; flex-wrap:wrap; align-items:center; gap:16px;
+          margin-top:18px;
           font-family:'JetBrains Mono', ui-monospace, monospace; font-weight:600;
-          font-size:11px; letter-spacing:0.08em; color:#A29CB4;
+          font-size:12.5px; letter-spacing:0.08em; color:#A29CB4;
         }
-        .hxc-featured-link{ color:#A29CB4; text-decoration:none; }
+        .hxc-featured-link{
+          color:#F4F3FA; text-decoration:underline;
+          text-decoration-color:#F0186C; text-decoration-thickness:2px;
+          text-underline-offset:4px;
+        }
         .hxc-featured-link:focus-visible{
           outline:2px solid #2E78FF; outline-offset:3px; border-radius:2px;
         }
         @media (hover: hover) and (pointer: fine){
-          .hxc-featured-link:hover{ color:#F4F3FA; }
+          .hxc-featured-link:hover{ color:#F2D50F; text-decoration-color:#F2D50F; }
         }
 
         @keyframes hxc-floaty{
@@ -1124,17 +1145,17 @@ export default function HeroFusion({ solo = false }) {
           5%{
             clip-path:inset(8% -8px 55% -8px);
             transform:translate(-2px, 1px) rotate(var(--hxc-rot));
-            text-shadow:-2px 0 #F5379B, 2px 0 #075EFD;
+            text-shadow:-2px 0 #F0186C, 2px 0 #F2D50F;
           }
           10%{
             clip-path:inset(58% -8px 6% -8px);
             transform:translate(2px, -2px) rotate(var(--hxc-rot));
-            text-shadow:-2px 0 #F5379B, 2px 0 #075EFD;
+            text-shadow:-2px 0 #F0186C, 2px 0 #F2D50F;
           }
           16%{
             clip-path:inset(30% -8px 30% -8px);
             transform:translate(-1px, 2px) rotate(var(--hxc-rot));
-            text-shadow:-2px 0 #F5379B, 2px 0 #075EFD;
+            text-shadow:-2px 0 #F0186C, 2px 0 #F2D50F;
           }
           22%{
             clip-path:inset(-8px);
@@ -1180,19 +1201,22 @@ export default function HeroFusion({ solo = false }) {
 
             {/* The figure cluster: head behind, name in front, walker, chips */}
             <div className="hxc-figure">
-              {/* Spider-sense tingle squiggles around the head */}
+              {/* Spider-sense squiggles: electric sparks that crackle in
+                  perfect sync with the canvas glitch (hxc-sensing class,
+                  toggled by the engine) */}
               <motion.div
+                ref={sensesRef}
                 className="hxc-senses"
                 style={{ x: chipX, y: chipY, z: -30 }}
                 aria-hidden="true"
               >
                 <motion.div {...fadeOnly(0.7, 0.8)}>
                   {[
-                    { cls: "hxc-sq-1", color: "#F5379B" },
-                    { cls: "hxc-sq-2", color: "#075EFD" },
-                    { cls: "hxc-sq-3", color: "#F5379B" },
-                    { cls: "hxc-sq-4", color: "#075EFD" },
-                    { cls: "hxc-sq-5", color: "#F5379B" },
+                    { cls: "hxc-sq-1", color: "#F0186C" },
+                    { cls: "hxc-sq-2", color: "#F2D50F" },
+                    { cls: "hxc-sq-3", color: "#F0186C" },
+                    { cls: "hxc-sq-4", color: "#F2D50F" },
+                    { cls: "hxc-sq-5", color: "#F0186C" },
                   ].map((s) => (
                     <svg
                       key={s.cls}
@@ -1283,17 +1307,6 @@ export default function HeroFusion({ solo = false }) {
                 </motion.div>
               </motion.div>
 
-              {/* Caption under the name */}
-              {!failed && (
-                <div
-                  className="hxc-caption"
-                  style={{ opacity: ready ? 1 : 0 }}
-                  aria-hidden="true"
-                >
-                  {"> a glitching portrait · "}
-                  {coarsePointer ? "tap to glitch it" : "hover to glitch it"}
-                </div>
-              )}
             </div>
 
             {/* Foreground copy */}
@@ -1325,9 +1338,30 @@ export default function HeroFusion({ solo = false }) {
                               alt=""
                               draggable="false"
                             />
-                            <svg className="hxc-ball2" viewBox="0 0 12 12" focusable="false" aria-hidden="true">
-                              <circle cx="6" cy="6" r="5" fill="#FFFFFF" />
-                              <circle cx="6" cy="6" r="1.8" fill="#111111" />
+                            <svg className="hxc-ball2" viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                              <defs>
+                                <clipPath id="hxcBallClip">
+                                  <circle cx="12" cy="12" r="10.6" />
+                                </clipPath>
+                              </defs>
+                              <circle cx="12" cy="12" r="10.6" fill="#FFFFFF" stroke="#111111" strokeWidth="1.6" />
+                              <g clipPath="url(#hxcBallClip)">
+                                <polygon points="12,8 15.8,10.76 14.35,15.24 9.65,15.24 8.2,10.76" fill="#111111" />
+                                <g stroke="#111111" strokeWidth="1.3">
+                                  <line x1="12" y1="8" x2="12" y2="2" />
+                                  <line x1="15.8" y1="10.76" x2="21.5" y2="8.9" />
+                                  <line x1="14.35" y1="15.24" x2="17.9" y2="20.1" />
+                                  <line x1="9.65" y1="15.24" x2="6.1" y2="20.1" />
+                                  <line x1="8.2" y1="10.76" x2="2.5" y2="8.9" />
+                                </g>
+                                <g fill="#111111">
+                                  <circle cx="12" cy="1.4" r="2.6" />
+                                  <circle cx="22.2" cy="8.6" r="2.6" />
+                                  <circle cx="18.4" cy="20.9" r="2.6" />
+                                  <circle cx="5.6" cy="20.9" r="2.6" />
+                                  <circle cx="1.8" cy="8.6" r="2.6" />
+                                </g>
+                              </g>
                             </svg>
                           </div>
                         </div>
@@ -1387,7 +1421,7 @@ export default function HeroFusion({ solo = false }) {
 
               {solo && (
                 <motion.p className="hxc-featured" {...entrance(0.6, 8, 0.45)}>
-                  <span>featured:</span>
+                  <span>Featured case studies</span>
                   <Link className="hxc-featured-link" to="/case/finvista">
                     FinVista
                   </Link>
