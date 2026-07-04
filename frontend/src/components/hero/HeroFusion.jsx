@@ -112,7 +112,7 @@ export default function HeroFusion({ solo = false }) {
   const [interactive, setInteractive] = useState(false);
   const [failed, setFailed] = useState(false);
   const [ready, setReady] = useState(false);
-  const [aspect, setAspect] = useState("610 / 780");
+  const [aspect, setAspect] = useState("894 / 1233");
 
   /* Rotating statement slot */
   const [wordState, setWordState] = useState({
@@ -744,7 +744,7 @@ export default function HeroFusion({ solo = false }) {
           overflow:hidden;
           --hxc-name-size: clamp(52px, 18vw, 84px);
           --hxc-head-w: min(58vw, 300px);
-          --hxc-walker-w: 35px;
+          --hxc-walker-w: 42px;
           --hxc-walker-h: 64px;
         }
         @media (min-width: 768px){
@@ -752,7 +752,7 @@ export default function HeroFusion({ solo = false }) {
             --hxc-name-size: clamp(88px, 9vw, 148px);
             --hxc-head-w: min(36vw, 600px);
             --hxc-walker-h: clamp(56px, 9.2svh, 88px);
-            --hxc-walker-w: calc(var(--hxc-walker-h) * 0.55);
+            --hxc-walker-w: calc(var(--hxc-walker-h) * 0.66);
           }
         }
         @media (min-width: 768px) and (max-height: 700px){
@@ -827,6 +827,24 @@ export default function HeroFusion({ solo = false }) {
           display:flex; justify-content:center;
           will-change:transform;
         }
+
+        /* Spider-sense tingles: chunky comic squiggles wiggling around the
+           head, magenta and blue, each on its own beat. */
+        .hxc-senses{ position:absolute; inset:0; pointer-events:none; will-change:transform; }
+        .hxc-sq{ position:absolute; overflow:visible; }
+        .hxc-sq path{ stroke-linejoin:round; }
+        .hxc-sq-1{ width:13%; top:2%;  left:-14%; transform:rotate(-38deg); animation:hxc-tingle 1.7s ease-in-out infinite alternate; }
+        .hxc-sq-2{ width:16%; top:-7%; left:22%;  transform:rotate(-8deg);  animation:hxc-tingle 2.1s ease-in-out 0.3s infinite alternate; }
+        .hxc-sq-3{ width:13%; top:-3%; right:-4%; transform:rotate(26deg);  animation:hxc-tingle 1.5s ease-in-out 0.6s infinite alternate; }
+        .hxc-sq-4{ width:15%; top:26%; right:-17%;transform:rotate(64deg);  animation:hxc-tingle 2.4s ease-in-out 0.15s infinite alternate; }
+        .hxc-sq-5{ width:12%; top:34%; left:-16%; transform:rotate(-72deg); animation:hxc-tingle 1.9s ease-in-out 0.45s infinite alternate; }
+        @keyframes hxc-tingle{
+          0%{   translate:0 0;    scale:1; }
+          100%{ translate:0 -6px; scale:1.08; }
+        }
+        @media (prefers-reduced-motion: reduce){
+          .hxc-sq-1,.hxc-sq-2,.hxc-sq-3,.hxc-sq-4,.hxc-sq-5{ animation:none !important; }
+        }
         .hxc-float{ animation:hxc-floaty 7s ease-in-out infinite; will-change:transform; }
         .hxc-portrait{ position:relative; width:var(--hxc-head-w); pointer-events:auto; }
         .hxc-canvas{
@@ -880,12 +898,21 @@ export default function HeroFusion({ solo = false }) {
           width:var(--hxc-walker-w); height:var(--hxc-walker-h);
           animation:hxc-flip 60s linear infinite;
         }
-        .hxc-walker{ display:block; width:100%; height:100%; }
-        .hxc-bhead, .hxc-leg-a, .hxc-leg-b, .hxc-ball{ transform-box:view-box; }
-        .hxc-bhead{ transform-origin:22.8px 39px; animation:hxc-bobble 0.6s ease-in-out infinite; }
-        .hxc-leg-a{ transform-origin:18.9px 63.5px; animation:hxc-kick 0.6s ease-in-out infinite; }
-        .hxc-leg-b{ transform-origin:24.9px 63.5px; animation:hxc-kick 0.6s ease-in-out -0.3s infinite; }
-        .hxc-ball{ animation:hxc-juggle 0.3s ease-in-out -0.18s infinite; }
+        /* Faraz's supplied Messi caricature: the whole figure bobbles as he
+           strolls, a ball bounces at his boots. */
+        .hxc-messi-wrap{ position:relative; width:100%; height:100%; }
+        .hxc-messi{
+          display:block; height:100%; width:auto;
+          transform-origin:50% 96%;
+          animation:hxc-bobble 0.6s ease-in-out infinite;
+          filter:drop-shadow(0 2px 6px rgba(16,2,16,0.6));
+        }
+        .hxc-ball2{
+          position:absolute;
+          width:22%; height:auto; aspect-ratio:1;
+          left:64%; bottom:-2%;
+          animation:hxc-juggle 0.6s ease-in-out -0.3s infinite;
+        }
 
         .hxc-caption{
           position:absolute; top:100%; left:0; right:0; margin-top:12px;
@@ -1072,15 +1099,9 @@ export default function HeroFusion({ solo = false }) {
           0%, 50%{ transform:scaleX(1); }
           50.01%, 100%{ transform:scaleX(-1); }
         }
-        @keyframes hxc-kick{
-          0%{ transform:rotate(0deg); }
-          20%{ transform:rotate(-30deg); }
-          45%{ transform:rotate(0deg); }
-          100%{ transform:rotate(0deg); }
-        }
         @keyframes hxc-juggle{
           0%, 100%{ transform:translateY(0); }
-          50%{ transform:translateY(-14px); }
+          50%{ transform:translateY(-160%); }
         }
         @keyframes hxc-bobble{
           0%, 100%{ transform:rotate(3deg); }
@@ -1134,10 +1155,8 @@ export default function HeroFusion({ solo = false }) {
           .hxc-orb-magenta,
           .hxc-stroll,
           .hxc-flip,
-          .hxc-bhead,
-          .hxc-leg-a,
-          .hxc-leg-b,
-          .hxc-ball,
+          .hxc-messi,
+          .hxc-ball2,
           .hxc-word,
           .hxc-btn{ animation:none !important; }
           .hxc-cursor{ display:none; }
@@ -1161,6 +1180,38 @@ export default function HeroFusion({ solo = false }) {
 
             {/* The figure cluster: head behind, name in front, walker, chips */}
             <div className="hxc-figure">
+              {/* Spider-sense tingle squiggles around the head */}
+              <motion.div
+                className="hxc-senses"
+                style={{ x: chipX, y: chipY, z: -30 }}
+                aria-hidden="true"
+              >
+                <motion.div {...fadeOnly(0.7, 0.8)}>
+                  {[
+                    { cls: "hxc-sq-1", color: "#F5379B" },
+                    { cls: "hxc-sq-2", color: "#075EFD" },
+                    { cls: "hxc-sq-3", color: "#F5379B" },
+                    { cls: "hxc-sq-4", color: "#075EFD" },
+                    { cls: "hxc-sq-5", color: "#F5379B" },
+                  ].map((s) => (
+                    <svg
+                      key={s.cls}
+                      className={`hxc-sq ${s.cls}`}
+                      viewBox="0 0 72 18"
+                      focusable="false"
+                    >
+                      <path
+                        d="M3 12 Q10 3 17 10 T31 10 T45 10 T59 10 L69 6"
+                        fill="none"
+                        stroke={s.color}
+                        strokeWidth="5"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                  ))}
+                </motion.div>
+              </motion.div>
+
               {/* Head plane, behind the letters */}
               <motion.div
                 className="hxc-head-layer"
@@ -1192,8 +1243,8 @@ export default function HeroFusion({ solo = false }) {
                             className="hxc-cutout"
                             src={CARTOON}
                             alt="Cartoon portrait of Faraz Khan"
-                            width="610"
-                            height="780"
+                            width="894"
+                            height="1233"
                             draggable="false"
                           />
                           <div className="hxc-fade" aria-hidden="true" />
@@ -1267,78 +1318,18 @@ export default function HeroFusion({ solo = false }) {
                     <div className="hxc-walkline">
                       <div className="hxc-stroll">
                         <div className="hxc-flip">
-                          <svg
-                            className="hxc-walker"
-                            viewBox="0 0 44 80"
-                            xmlns="http://www.w3.org/2000/svg"
-                            focusable="false"
-                            aria-hidden="true"
-                          >
-                            {/* back leg */}
-                            <g className="hxc-leg-b">
-                              <rect x="23.2" y="63" width="3.4" height="7.4" rx="1.6" fill="#C68B59" />
-                              <rect x="23.4" y="69.8" width="3" height="7.4" rx="1.4" fill="#FFFFFF" />
-                              <rect x="22.8" y="76.8" width="6.4" height="3.2" rx="1.5" fill="#111111" />
-                            </g>
-                            {/* front leg */}
-                            <g className="hxc-leg-a">
-                              <rect x="17.2" y="63" width="3.4" height="7.4" rx="1.6" fill="#C68B59" />
-                              <rect x="17.4" y="69.8" width="3" height="7.4" rx="1.4" fill="#FFFFFF" />
-                              <rect x="16.8" y="76.8" width="6.4" height="3.2" rx="1.5" fill="#111111" />
-                            </g>
-                            {/* shorts */}
-                            <rect x="15" y="56.5" width="14" height="7" rx="2" fill="#111111" />
-                            {/* arms, small, out for balance */}
-                            <rect x="11" y="42" width="2.8" height="8.5" rx="1.4" fill="#C68B59" transform="rotate(18 12.4 42.6)" />
-                            <rect x="30.2" y="42" width="2.8" height="8.5" rx="1.4" fill="#C68B59" transform="rotate(-18 31.6 42.6)" />
-                            {/* Argentina shirt: white base, three sky stripes */}
-                            <rect x="14" y="40.5" width="16" height="17" rx="3" fill="#FFFFFF" />
-                            <rect x="15.5" y="40.9" width="3" height="16.2" fill="#6CACE4" />
-                            <rect x="20.5" y="40.9" width="3" height="16.2" fill="#6CACE4" />
-                            <rect x="25.5" y="40.9" width="3" height="16.2" fill="#6CACE4" />
-                            <text
-                              x="22"
-                              y="50.5"
-                              textAnchor="middle"
-                              fontFamily="'JetBrains Mono', monospace"
-                              fontSize="5.5"
-                              fontWeight="700"
-                              fill="#111111"
-                            >
-                              10
-                            </text>
-                            {/* the bobble head: short dark hair cap swept
-                                back, sideburns, full jaw beard, calm eyes,
-                                strong nose */}
-                            <g className="hxc-bhead">
-                              <circle cx="23" cy="22.5" r="16.6" fill="#C68B59" />
-                              {/* hair: thick cap across the top */}
-                              <path d="M6.4 21.5 A16.6 16.6 0 0 1 39.6 21.5 L34.2 22.6 A11.4 11.4 0 0 0 11.6 24.2 Z" fill="#111111" />
-                              {/* sideburns joining hair to beard */}
-                              <rect x="6.7" y="20" width="3.2" height="8.5" rx="1.4" fill="#111111" />
-                              <rect x="36.1" y="20" width="3.2" height="8.5" rx="1.4" fill="#111111" />
-                              {/* full jaw beard, ear to ear, past the chin */}
-                              <path d="M6.9 26 a16.2 16.2 0 0 0 32.2 0 l-5.4 0 a10.8 10.8 0 0 1 -21.4 0 z" fill="#111111" />
-                              {/* brows, eyes, nose */}
-                              <rect x="14.6" y="16.8" width="4.6" height="1.3" rx="0.65" fill="#111111" />
-                              <rect x="25.2" y="16.8" width="4.6" height="1.3" rx="0.65" fill="#111111" />
-                              <circle cx="17.2" cy="21.3" r="1.4" fill="#111111" />
-                              <circle cx="27.6" cy="21.3" r="1.4" fill="#111111" />
-                              <path
-                                d="M22.6 20.5 l1.7 5.8 l-2.7 0.5"
-                                stroke="#111111"
-                                strokeWidth="1.1"
-                                strokeLinecap="round"
-                                fill="none"
-                                opacity="0.5"
-                              />
-                            </g>
-                            {/* the ball */}
-                            <g className="hxc-ball">
-                              <circle cx="36.5" cy="75.5" r="4" fill="#FFFFFF" />
-                              <circle cx="36.5" cy="75.5" r="1.4" fill="#111111" />
-                            </g>
-                          </svg>
+                          <div className="hxc-messi-wrap">
+                            <img
+                              className="hxc-messi"
+                              src="/images/messi-cartoon.webp"
+                              alt=""
+                              draggable="false"
+                            />
+                            <svg className="hxc-ball2" viewBox="0 0 12 12" focusable="false" aria-hidden="true">
+                              <circle cx="6" cy="6" r="5" fill="#FFFFFF" />
+                              <circle cx="6" cy="6" r="1.8" fill="#111111" />
+                            </svg>
+                          </div>
                         </div>
                       </div>
                     </div>
