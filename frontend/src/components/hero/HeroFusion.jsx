@@ -108,6 +108,8 @@ export default function HeroFusion({ solo = false }) {
   const sectionRef = useRef(null);
   const wrapRef = useRef(null);
   const sensesRef = useRef(null);
+  const nameRef = useRef(null);
+  const stLineRef = useRef(null);
   const canvasRef = useRef(null);
   const reduced = useReducedMotion();
   const [interactive, setInteractive] = useState(false);
@@ -135,6 +137,37 @@ export default function HeroFusion({ solo = false }) {
     }, 2000);
     return () => clearInterval(timer);
   }, [reduced]);
+
+  /* Fit the name to the statement line: "faraz." ends exactly at the s of
+     "products". The CSS ratio gets it close; this measures and locks it
+     (font hinting is not perfectly linear across sizes). */
+  useEffect(() => {
+    const name = nameRef.current;
+    const line = stLineRef.current;
+    if (!name || !line) return undefined;
+    const fit = () => {
+      name.style.fontSize = "";
+      const nw = name.getBoundingClientRect().width;
+      const lw = line.getBoundingClientRect().width;
+      if (nw > 0 && lw > 0) {
+        const cur = parseFloat(getComputedStyle(name).fontSize);
+        name.style.fontSize = `${((cur * lw) / nw).toFixed(2)}px`;
+      }
+    };
+    fit();
+    const ro = new ResizeObserver(fit);
+    ro.observe(line);
+    let dead = false;
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => {
+        if (!dead) fit();
+      });
+    }
+    return () => {
+      dead = true;
+      ro.disconnect();
+    };
+  }, []);
 
   /* Tilt only for fine pointers on desktop-ish widths, never under
      reduced motion. */
@@ -759,7 +792,10 @@ export default function HeroFusion({ solo = false }) {
         }
         @media (min-width: 768px){
           .hxc-hero{
-            --hxc-name-size: clamp(88px, 9vw, 148px);
+            /* The name ends exactly at the s of "products": 4.729 x the
+               statement font size (both Playfair, measured ratio). */
+            --hxc-st-size: clamp(30px, 3.6vw, 50px);
+            --hxc-name-size: calc(var(--hxc-st-size) * 4.729);
             --hxc-head-w: min(36vw, 600px);
             --hxc-walker-h: clamp(56px, 9.2svh, 88px);
             --hxc-walker-w: calc(var(--hxc-walker-h) * 0.66);
@@ -767,7 +803,7 @@ export default function HeroFusion({ solo = false }) {
         }
         @media (min-width: 768px) and (max-height: 700px){
           .hxc-hero{
-            --hxc-name-size: clamp(80px, 8.2vw, 118px);
+            --hxc-st-size: clamp(24px, 2.8vw, 38px);
             --hxc-head-w: min(33vw, 470px);
           }
         }
@@ -892,14 +928,11 @@ export default function HeroFusion({ solo = false }) {
           font-family:'Playfair Display', Georgia, serif;
           font-weight:900;
           font-size:var(--hxc-name-size);
-          line-height:0.92;
-          letter-spacing:0.04em;
-          text-transform:uppercase;
+          line-height:0.95;
+          letter-spacing:-0.05em;
+          text-transform:capitalize;
           white-space:nowrap;
-          color:transparent;
-          background:linear-gradient(180deg, #F4F3FA 46%, rgba(244,243,250,0.34) 100%);
-          -webkit-background-clip:text;
-          background-clip:text;
+          color:#F4F3FA;
           will-change:transform;
         }
 
@@ -999,7 +1032,7 @@ export default function HeroFusion({ solo = false }) {
         }
         .hxc-statement{
           font-family:'Playfair Display', Georgia, serif; font-weight:800;
-          font-size:clamp(30px, 3.6vw, 50px); line-height:1.12;
+          font-size:var(--hxc-st-size, clamp(30px, 3.6vw, 50px)); line-height:1.12;
           color:#F4F3FA; margin-bottom:20px;
         }
         .hxc-st-line{ display:block; white-space:nowrap; }
@@ -1315,8 +1348,8 @@ export default function HeroFusion({ solo = false }) {
               {/* The white FARAZ masthead, walker strolling its top edge */}
               <div className="hxc-nameplate" aria-hidden="true">
                 <div className="hxc-clip">
-                  <motion.div className="hxc-name" {...rise(0.3)}>
-                    Faraz
+                  <motion.div ref={nameRef} className="hxc-name" {...rise(0.3)}>
+                    f<span className="dot-o">a</span>raz.
                   </motion.div>
                 </div>
                 <div className="hxc-walk-layer">
@@ -1370,7 +1403,7 @@ export default function HeroFusion({ solo = false }) {
                 aria-label="Faraz. I make complex products feel obvious."
               >
                 <span aria-hidden="true">
-                  <span className="hxc-st-line">I make complex products</span>
+                  <span ref={stLineRef} className="hxc-st-line">I make complex products</span>
                   <span className="hxc-slot-line">
                     <span className="hxc-slot">
                       <span className="hxc-slot-sizer">{LONGEST_WORD}</span>
