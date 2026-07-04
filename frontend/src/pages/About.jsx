@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import HeroFusion from "../components/hero/HeroFusion";
 import {
   Mail,
   Linkedin,
@@ -21,6 +22,14 @@ import { PROFILE } from "../data/content";
 import { Container, Grid } from "../components/Grid";
 import BookCallButton from "../components/BookCallButton";
 import Seo from "../components/Seo";
+import { NEON_CSS as AB_CSS, Squiggle as AbSquiggle } from "../components/neonStyle";
+
+/* The last word of the About headline rotates, like the landing's slot line. */
+const KINETIC_WORDS = ["systems.", "dashboards.", "decisions.", "interfaces."];
+
+/* Icon accent cycle: the four-pillar palette (UX magenta, Data Viz cyan,
+   Visual Design yellow, AI purple) rotated across the competency grid. */
+const ICON_COLORS = ["#F0186C", "#17C3E8", "#F2D50F", "#7B2FBE"];
 
 const COMPETENCIES = [
   { icon: Lightbulb, t: "User Experience Strategy & Leadership", d: "Setting UX vision, OKRs, and design culture across multi-product orgs." },
@@ -167,56 +176,70 @@ const AWARDS = [
 // Text-only tool pill. Brand logos were dropped for consistency: several tools
 // (e.g. Adobe products) have no reliable logo source, so it was all-or-nothing.
 function ToolPill({ name }) {
-  return (
-    <span className="px-4 py-2 rounded-full dark-card text-[#F4F3FA] text-sm font-medium border border-white/10">
-      {name}
-    </span>
-  );
+  return <span className="ab-chip">{name}</span>;
 }
 
 export default function About() {
   const [showAllExp, setShowAllExp] = useState(false);
+  const [word, setWord] = useState({ cur: KINETIC_WORDS[0], prev: null, n: 0 });
+  useEffect(() => {
+    const mq = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (mq && mq.matches) return undefined;
+    let i = 0;
+    const t = setInterval(() => {
+      i += 1;
+      setWord({ cur: KINETIC_WORDS[i % KINETIC_WORDS.length], prev: KINETIC_WORDS[(i - 1) % KINETIC_WORDS.length], n: i });
+    }, 3200);
+    return () => clearInterval(t);
+  }, []);
+
   return (
     <div data-testid="about-page">
+      <style>{AB_CSS}</style>
       <Seo title="This is Me" description="Faraz Khan, Senior UX Lead. 12+ years across BFSI, enterprise software, data and AI, and consumer tech. Design systems, dashboards, and AI-native product concepts." />
-      {/* HERO */}
-      <section className="pt-12 pb-12" data-testid="about-hero">
+      {/* HERO - kinetic headline + the glitching portrait */}
+      <section className="pt-10 pb-14 relative overflow-hidden" data-testid="about-hero">
+        <AbSquiggle className="ab-sq-1" color="#F0186C" rot={-34} />
+        <span className="hidden md:block absolute right-[38%] top-24 z-0"><AbSquiggle className="ab-sq-2" color="#9B4DE0" rot={22} /></span>
         <Container>
-        <div className="flex items-center gap-2 mb-6">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#F5379B] animate-pulse" />
-          <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F4F3FA]/80">
-            {PROFILE.status}
-          </span>
-        </div>
-        <h1 className="font-display font-black leading-[0.92] text-[12vw] md:text-[8vw] lg:text-[7rem] tracking-tighter">
-          designing&nbsp;clarity<br />
-          int<span className="dot-o">o</span>&nbsp;<span className="italic font-light">complex</span>&nbsp;systems.
-        </h1>
-        <p className="mt-8 max-w-5xl text-lg md:text-xl leading-relaxed text-[#F4F3FA]">
-          User Experience Lead with <strong>12+ years</strong> across BFSI, enterprise software, and consumer tech. I turn research into interfaces that ship and scale.
-        </p>
-        <div className="mt-8 flex gap-4 flex-wrap">
-          <a
-            href={`mailto:${PROFILE.email}`}
-            data-testid="about-cta-email"
-            className="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-[#075EFD] text-white font-semibold text-sm capitalize hover:bg-[#2E78FF] transition-colors"
-          >
-            <Mail size={16} /> get in touch
-          </a>
-          <a
-            href={RESUME_PATH}
-            download="Faraz_Khan_Resume.pdf"
-            data-testid="about-download-resume"
-            className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-[#F4F3FA] font-semibold text-sm capitalize hover:bg-[#261E3A] transition-colors"
-          >
-            <Download size={16} /> download résumé
-          </a>
-          <Link
-            to="/projects"
-            className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-[#F4F3FA] font-semibold text-sm capitalize hover:bg-[#261E3A] transition-colors"
-          >
-            see my work
-          </Link>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-center">
+          <div className="lg:col-span-7 relative z-10">
+            <div className="flex items-center gap-2 mb-6">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#F0186C] animate-pulse" />
+              <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F4F3FA]/80">
+                {PROFILE.status}
+              </span>
+            </div>
+            <h1 className="font-display font-black leading-[0.92] text-[8.8vw] md:text-[7.2vw] lg:text-[6.4rem] tracking-tighter">
+              designing&nbsp;clarity<br />
+              int<span className="ab-dot-o">o</span>&nbsp;<span className="italic font-light">complex</span>&nbsp;
+              <span className="ab-slot" aria-label={word.cur}>
+                <span className="ab-slot-sizer" aria-hidden="true">dashboards.</span>
+                {word.prev && (
+                  <span key={`o-${word.n}`} className="ab-word ab-word-out text-[#F0186C]" aria-hidden="true">{word.prev}</span>
+                )}
+                <span key={`i-${word.n}`} className="ab-word ab-word-in text-[#F0186C]">{word.cur}</span>
+              </span>
+            </h1>
+            <p className="mt-8 max-w-2xl text-lg md:text-xl leading-relaxed text-[#F4F3FA]">
+              User Experience Lead with <strong>12+ years</strong> across BFSI, enterprise software, and consumer tech. I turn research into interfaces that ship and scale.
+            </p>
+            <div className="mt-8 flex gap-4 flex-wrap items-center">
+              <a href={`mailto:${PROFILE.email}`} data-testid="about-cta-email" className="ab-btn">
+                <Mail size={16} /> get in touch
+              </a>
+              <a href={RESUME_PATH} download="Faraz_Khan_Resume.pdf" data-testid="about-download-resume" className="ab-btn ab-btn-ghost">
+                <Download size={16} /> résumé
+              </a>
+              <Link to="/projects" className="ab-btn ab-btn-ghost">
+                see my work
+              </Link>
+            </div>
+          </div>
+          {/* The glitching portrait, reused from the landing at a smaller size */}
+          <div className="lg:col-span-5 relative z-10 flex justify-center lg:justify-end" data-testid="about-hero-portrait">
+            <HeroFusion portraitOnly portraitW="min(72vw, 360px)" />
+          </div>
         </div>
         </Container>
       </section>
@@ -225,13 +248,13 @@ export default function About() {
       <section className="pb-16" data-testid="about-profile">
         <Container>
         {/* Profile card - photo (home-hero treatment) + identity + bio, all in one container */}
-        <div className="dark-card rounded-3xl overflow-hidden flex flex-col sm:flex-row" data-testid="about-profile-card">
+        <div className="ab-card ab-flat ab-c2 overflow-hidden flex flex-col sm:flex-row" data-testid="about-profile-card">
           {/* Photo strip - fades into the card: downward on mobile, rightward on desktop */}
           <div className="relative w-full h-56 sm:h-auto sm:w-52 md:w-64 flex-shrink-0 overflow-hidden">
             <img
               src="/images/faraz.jpg"
               alt="Faraz Khan"
-              className="photo-blue absolute inset-0 w-full h-full object-cover object-top"
+              className="absolute inset-0 w-full h-full object-cover object-top" style={{ filter: "grayscale(0.15) contrast(1.05) saturate(1.05)" }}
             />
             <div className="absolute inset-0 grain-overlay pointer-events-none" aria-hidden="true" />
             <div className="absolute inset-0 pointer-events-none sm:hidden" aria-hidden="true" style={{ background: "linear-gradient(to bottom, rgba(24,17,38,0) 45%, #181126 100%)" }} />
@@ -239,7 +262,7 @@ export default function About() {
           </div>
           {/* Identity + bio */}
           <div className="flex-1 p-7 md:p-10 relative overflow-hidden">
-            <div className="absolute -top-10 -right-10 w-72 h-72 rounded-full bg-[#075EFD] blur-3xl opacity-20 pointer-events-none" aria-hidden="true" />
+            <div className="absolute -top-10 -right-10 w-72 h-72 rounded-full bg-[#7B2FBE] blur-3xl opacity-20 pointer-events-none" aria-hidden="true" />
             <div className="relative">
               <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
                 <div>
@@ -265,16 +288,14 @@ export default function About() {
         </div>
 
         {/* Industry verticals */}
-        <div className="mt-6 rounded-3xl dark-card p-6 md:p-7" data-testid="about-industries">
+        <div className="mt-6 ab-card ab-flat ab-c3 p-6 md:p-7" data-testid="about-industries">
           <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
             <p className="text-sm font-mono uppercase tracking-widest text-white">industry verticals</p>
             <p className="text-sm font-mono uppercase tracking-widest text-white">{INDUSTRIES.length} sectors</p>
           </div>
           <div className="flex flex-wrap gap-2">
             {INDUSTRIES.map((i) => (
-              <span key={i} className="px-4 py-2 rounded-full dark-card text-[#F4F3FA] text-sm font-medium border border-white/10">
-                {i}
-              </span>
+              <span key={i} className="ab-chip">{i}</span>
             ))}
           </div>
         </div>
@@ -284,12 +305,12 @@ export default function About() {
       {/* 01 - CORE COMPETENCIES */}
       <section className="py-20 border-t border-white/10" data-testid="about-competencies">
         <Container>
-        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">01 / what i do</p>
+        <p data-text="01 / what i do" className="ab-glitch inline-block text-[11px] font-mono uppercase tracking-[0.25em] text-[#F0186C] mb-4">01 / what i do</p>
         <h2 className="font-display text-4xl md:text-5xl font-black mb-10 max-w-5xl">core <span className="italic font-light">competencies.</span></h2>
         <Grid>
           {COMPETENCIES.map((c, i) => (
-            <div key={c.t} data-testid={`competency-${i}`} className="col-span-12 sm:col-span-6 lg:col-span-3 dark-card rounded-3xl p-6 hover:bg-[#332B4D] transition-colors group">
-              <c.icon size={24} className="text-[#075EFD] mb-5 group-hover:scale-110 transition-transform" />
+            <div key={c.t} data-testid={`competency-${i}`} className="col-span-12 sm:col-span-6 lg:col-span-3 ab-card p-6 group">
+              <c.icon size={24} style={{ color: ICON_COLORS[i % ICON_COLORS.length] }} className="mb-5 group-hover:scale-110 transition-transform" />
               <h3 className="font-display text-base md:text-lg font-black leading-snug mb-3">{c.t}</h3>
               <p className="text-sm leading-relaxed text-[#F4F3FA]/85">{c.d}</p>
             </div>
@@ -301,18 +322,18 @@ export default function About() {
       {/* 02 - TOOLKIT */}
       <section className="py-20 border-t border-white/10" data-testid="about-tools">
         <Container>
-        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">02 / toolkit</p>
+        <p data-text="02 / toolkit" className="ab-glitch inline-block text-[11px] font-mono uppercase tracking-[0.25em] text-[#F0186C] mb-4">02 / toolkit</p>
         <h2 className="font-display text-4xl md:text-5xl font-black mb-10 max-w-5xl">tools & <span className="italic font-light">skills.</span></h2>
 
         <Grid>
-          <div className="col-span-12 md:col-span-4 dark-card rounded-3xl p-7">
+          <div className="col-span-12 md:col-span-4 ab-card p-7">
             <p className="text-sm font-mono uppercase tracking-widest text-white mb-4">design tools</p>
             <div className="flex flex-wrap gap-2">
               {TOOLS.design.map((t) => <ToolPill key={t.name} {...t} />)}
             </div>
           </div>
 
-          <div className="col-span-12 md:col-span-4 dark-card rounded-3xl p-7">
+          <div className="col-span-12 md:col-span-4 ab-card p-7">
             <p className="text-sm font-mono uppercase tracking-widest text-white mb-2">development</p>
             <p className="text-xs italic text-[#A29CB4] mb-4">Basic understanding & familiarity with front-end technologies</p>
             <div className="flex flex-wrap gap-2">
@@ -320,7 +341,7 @@ export default function About() {
             </div>
           </div>
 
-          <div className="col-span-12 md:col-span-4 dark-card rounded-3xl p-7">
+          <div className="col-span-12 md:col-span-4 ab-card p-7">
             <p className="text-sm font-mono uppercase tracking-widest text-white mb-4">collaboration</p>
             <div className="flex flex-wrap gap-2">
               {TOOLS.collaboration.map((t) => <ToolPill key={t.name} {...t} />)}
@@ -329,9 +350,9 @@ export default function About() {
         </Grid>
 
         {/* AI Tools - thin full-width card with the closing-CTA glow treatment */}
-        <div className="mt-6 rounded-3xl dark-card relative overflow-hidden p-7 md:p-8" data-testid="about-ai-tools">
-          <div className="absolute -top-16 -right-10 w-72 h-72 rounded-full bg-[#075EFD] blur-3xl opacity-30 pointer-events-none" aria-hidden="true" />
-          <div className="absolute -bottom-20 -left-10 w-72 h-72 rounded-full bg-[#F5379B] blur-3xl opacity-25 pointer-events-none" aria-hidden="true" />
+        <div className="mt-6 ab-card ab-flat ab-c4 relative overflow-hidden p-7 md:p-8" data-testid="about-ai-tools">
+          <div className="absolute -top-16 -right-10 w-72 h-72 rounded-full bg-[#7B2FBE] blur-3xl opacity-30 pointer-events-none" aria-hidden="true" />
+          <div className="absolute -bottom-20 -left-10 w-72 h-72 rounded-full bg-[#F0186C] blur-3xl opacity-25 pointer-events-none" aria-hidden="true" />
           <div className="relative flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
             <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-white md:w-28 flex-shrink-0">ai tools</p>
             <div className="flex flex-wrap gap-2">
@@ -340,14 +361,14 @@ export default function About() {
           </div>
         </div>
 
-        <div className="mt-6 rounded-3xl dark-card p-7" data-testid="about-core-skills">
+        <div className="mt-6 ab-card ab-flat ab-c1 p-7" data-testid="about-core-skills">
           <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
             <p className="text-sm font-mono uppercase tracking-widest text-white">core skills</p>
             <p className="text-sm font-mono uppercase tracking-widest text-white">{CORE_SKILLS.length} disciplines</p>
           </div>
           <div className="flex flex-wrap gap-2">
             {CORE_SKILLS.map((s) => (
-              <span key={s} className="px-4 py-2 rounded-full dark-card text-[#F4F3FA] text-sm font-medium border border-white/10 hover:bg-[#332B4D] transition-colors cursor-default">{s}</span>
+              <span key={s} className="ab-chip cursor-default">{s}</span>
             ))}
           </div>
         </div>
@@ -357,21 +378,20 @@ export default function About() {
       {/* 03 - EXPERIENCE (merged from résumé) */}
       <section className="py-20 border-t border-white/10" data-testid="about-experience">
         <Container>
-        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">03 / experience</p>
+        <p data-text="03 / experience" className="ab-glitch inline-block text-[11px] font-mono uppercase tracking-[0.25em] text-[#F0186C] mb-4">03 / experience</p>
         <h2 className="font-display text-4xl md:text-5xl font-black mb-10 max-w-5xl">where i&apos;ve <span className="italic font-light">worked.</span></h2>
         <ol className="relative border-l border-white/10 pl-7 space-y-9 max-w-4xl">
           {(showAllExp ? EXPERIENCE : EXPERIENCE.slice(0, 3)).map((e) => (
             <li key={e.org} className="relative" data-testid={`experience-${e.org}`}>
-              <span className="absolute -left-[2.1rem] top-1.5 h-3 w-3 rounded-full bg-[#F5379B] ring-4 ring-[#100210]" aria-hidden="true" />
+              <span className="absolute -left-[2.1rem] top-1.5 h-3 w-3 rounded-full bg-[#F0186C] ring-4 ring-[#100210]" aria-hidden="true" />
               <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                 <h3 className="font-display text-xl md:text-2xl font-black">{e.role}</h3>
                 <span className="text-sm font-mono uppercase tracking-widest text-white">{e.time}</span>
               </div>
-              <p className="text-sm font-semibold text-[#F5379B] mt-0.5">{e.org} <span className="text-[#A29CB4] font-normal">· {e.place}</span></p>
+              <p className="text-sm font-semibold text-[#F0186C] mt-0.5">{e.org} <span className="text-[#A29CB4] font-normal">· {e.place}</span></p>
               <ul className="mt-3 space-y-2">
                 {e.points.map((p, i) => (
-                  <li key={i} className="flex gap-3 text-sm md:text-[15px] leading-relaxed text-[#F4F3FA]/90">
-                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[#F5379B] flex-shrink-0" aria-hidden="true" />
+                  <li key={i} className="text-sm md:text-[15px] leading-relaxed text-[#F4F3FA]/90">
                     {p}
                   </li>
                 ))}
@@ -384,7 +404,7 @@ export default function About() {
             type="button"
             onClick={() => setShowAllExp((v) => !v)}
             data-testid="experience-toggle"
-            className="mt-10 ml-7 inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white text-white text-sm font-semibold hover:bg-white hover:text-[#100210] transition-colors"
+            className="ab-btn ab-btn-ghost mt-10 ml-7"
           >
             {showAllExp ? "Show less" : `Show all ${EXPERIENCE.length} roles`}
           </button>
@@ -395,27 +415,24 @@ export default function About() {
       {/* 04 - CREDENTIALS (merged from résumé) */}
       <section className="py-20 border-t border-white/10" data-testid="about-credentials">
         <Container>
-        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">04 / credentials</p>
+        <p data-text="04 / credentials" className="ab-glitch inline-block text-[11px] font-mono uppercase tracking-[0.25em] text-[#F0186C] mb-4">04 / credentials</p>
         <h2 className="font-display text-4xl md:text-5xl font-black mb-10 max-w-5xl">certs, awards &amp; <span className="italic font-light">education.</span></h2>
         <Grid>
           {/* Certifications */}
-          <div className="col-span-12 md:col-span-4 dark-card rounded-3xl p-7">
-            <p className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-5"><Sparkles size={14} /> certifications</p>
+          <div className="col-span-12 md:col-span-4 ab-card p-7">
+            <p className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.25em] text-[#F0186C] mb-5"><Sparkles size={14} /> certifications</p>
             <ul className="space-y-4">
               {CERTS.map((c) => (
-                <li key={c.t} className="flex gap-3">
-                  <span className="mt-1.5 h-2 w-2 rounded-full flex-shrink-0 bg-[#F5379B]" aria-hidden="true" />
-                  <div>
-                    <p className="text-sm font-semibold leading-snug">{c.t}</p>
-                    <p className="text-xs text-[#A29CB4] mt-0.5">{c.s}</p>
-                  </div>
+                <li key={c.t}>
+                  <p className="text-sm font-semibold leading-snug">{c.t}</p>
+                  <p className="text-xs text-[#A29CB4] mt-0.5">{c.s}</p>
                 </li>
               ))}
             </ul>
           </div>
           {/* Recognition */}
-          <div className="col-span-12 md:col-span-4 dark-card rounded-3xl p-7">
-            <p className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-5"><Award size={14} /> recognition</p>
+          <div className="col-span-12 md:col-span-4 ab-card p-7">
+            <p className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.25em] text-[#F0186C] mb-5"><Award size={14} /> recognition</p>
             <ul className="space-y-4">
               {AWARDS.map((a) => (
                 <li key={a.t}>
@@ -426,8 +443,8 @@ export default function About() {
             </ul>
           </div>
           {/* Education */}
-          <div className="col-span-12 md:col-span-4 dark-card rounded-3xl p-7">
-            <p className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-5"><GraduationCap size={14} /> education</p>
+          <div className="col-span-12 md:col-span-4 ab-card p-7">
+            <p className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.25em] text-[#F0186C] mb-5"><GraduationCap size={14} /> education</p>
             <p className="text-sm font-semibold">B.Sc. Multimedia</p>
             <p className="text-xs text-[#A29CB4] mt-0.5">Vishwakarma Creative-i College, Pune · 2008 - 2011</p>
           </div>
@@ -439,20 +456,20 @@ export default function About() {
       <section className="py-16 md:py-20" data-testid="final-cta">
         <Container>
         <div className="rounded-3xl dark-card text-white p-8 md:p-12 relative overflow-hidden">
-          <div className="absolute -top-10 -right-10 w-72 h-72 rounded-full bg-[#075EFD] blur-3xl opacity-40" />
-          <div className="absolute -bottom-12 -left-10 w-72 h-72 rounded-full bg-[#F5379B] blur-3xl opacity-30" />
+          <div className="absolute -top-10 -right-10 w-72 h-72 rounded-full bg-[#7B2FBE] blur-3xl opacity-40" />
+          <div className="absolute -bottom-12 -left-10 w-72 h-72 rounded-full bg-[#F0186C] blur-3xl opacity-30" />
           <p className="relative text-[11px] font-mono uppercase tracking-[0.25em] text-white mb-4">let's build</p>
           <h2 className="relative font-display text-4xl md:text-6xl font-black leading-[1.0] md:whitespace-nowrap">
             have an idea <span className="italic font-light text-white">worth</span> shipping?
           </h2>
           <div className="relative mt-8 flex gap-4 flex-wrap">
-            <Link to="/contact" data-testid="cta-contact" className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-white font-semibold text-sm hover:bg-white/10 transition-colors">
+            <Link to="/contact" data-testid="cta-contact" className="ab-btn">
               <Mail size={16} /> Get in Touch
             </Link>
-            <BookCallButton data-testid="cta-book-call" className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-white font-semibold text-sm hover:bg-white/10 transition-colors">
+            <BookCallButton data-testid="cta-book-call" className="ab-btn ab-btn-ghost">
               <Calendar size={16} /> Book a Call
             </BookCallButton>
-            <a href={PROFILE.social.linkedin} target="_blank" rel="noopener noreferrer" data-testid="cta-linkedin" className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-white font-semibold text-sm hover:bg-white/10 transition-colors">
+            <a href={PROFILE.social.linkedin} target="_blank" rel="noopener noreferrer" data-testid="cta-linkedin" className="ab-btn ab-btn-ghost">
               <Linkedin size={16} /> LinkedIn
             </a>
           </div>

@@ -31,11 +31,423 @@ import {
 
 const EASE = [0.23, 1, 0.32, 1];
 const CARTOON = "/images/faraz-neon.webp";
+
+/* Hero + portrait styles, shared by the full hero and portraitOnly mode. */
+const HXC_CSS = `
+        .hxc-hero{
+          position:relative;
+          background:#100210;
+          overflow:hidden;
+          --hxc-name-size: clamp(52px, 18vw, 84px);
+          --hxc-head-w: min(58vw, 300px);
+        }
+        @media (min-width: 768px){
+          .hxc-hero{
+            /* The name ends exactly at the s of "products": 4.729 x the
+               statement font size (both Playfair, measured ratio). */
+            --hxc-st-size: clamp(30px, 3.6vw, 50px);
+            --hxc-name-size: calc(var(--hxc-st-size) * 4.729);
+            --hxc-head-w: min(38vw, calc((100svh - 200px) * 0.667));
+          }
+        }
+        /* Shorter viewports (laptops ~768 tall): shrink the masthead and
+           tighten the vertical rhythm so nothing clips or scrolls. */
+        @media (min-width: 768px) and (max-height: 840px){
+          .hxc-hero{
+            --hxc-st-size: clamp(26px, 3vw, 42px);
+            --hxc-head-w: min(34vw, calc((100svh - 170px) * 0.667));
+          }
+          .hxc-solo{ --hxc-top-gap: clamp(6px, 1.5vh, 16px); }
+          .hxc-chips{ margin-bottom:9px; }
+          .hxc-nameplate{ margin-bottom:6px; }
+          .hxc-statement{ margin-bottom:12px; }
+          .hxc-sub{ margin-bottom:16px; }
+        }
+        @media (min-width: 768px) and (max-height: 680px){
+          .hxc-hero{ --hxc-st-size: clamp(22px, 2.6vw, 34px); }
+          .hxc-sub{ font-size:14px; margin-bottom:12px; }
+        }
+
+        /* Solo: full-viewport standalone landing. The site main pads 90px,
+           so the section owns the rest and never scrolls on desktop. */
+        .hxc-solo{
+          min-height:calc(100vh - 90px);
+          min-height:calc(100svh - 90px);
+          padding-top:24px; padding-bottom:40px;
+        }
+        @media (min-width: 768px){
+          .hxc-solo{
+            height:calc(100vh - 90px);
+            height:calc(100svh - 90px);
+            max-height:calc(100svh - 90px);
+            min-height:0;
+            overflow:hidden;
+            display:flex; align-items:stretch;
+            padding-top:0; padding-bottom:0;
+            /* Shared gap below the navbar: the copy AND the picture both
+               start here, so their tops align with equal padding. */
+            --hxc-top-gap: clamp(10px, 3vh, 34px);
+          }
+          .hxc-solo .hxc-inner{ width:100%; }
+          /* Explicit height (not %: the perspective wrapper is auto-height)
+             so the absolutely-centered copy + picture have a box to center in. */
+          .hxc-solo .hxc-stage{ height:calc(100vh - 90px); height:calc(100svh - 90px); }
+        }
+
+        .hxc-persp{ perspective:none; }
+        @media (min-width: 768px){ .hxc-persp{ perspective:1200px; } }
+
+        .hxc-stage{ position:relative; transform-style:preserve-3d; }
+        @media (min-width: 768px){
+          .hxc-stage{ height:clamp(640px, calc(100vh - 200px), 780px); }
+        }
+
+        /* Layer 1 · ambient glow orbs */
+        .hxc-layer-orbs{ position:absolute; inset:-4%; pointer-events:none; will-change:transform; }
+        .hxc-orb{ position:absolute; border-radius:9999px; filter:blur(110px); }
+        .hxc-orb-blue{
+          width:min(46vw, 560px); height:min(46vw, 560px);
+          top:-14%; right:-8%; opacity:0.32;
+          background:radial-gradient(circle at 50% 50%, rgba(7,94,253,0.55) 0%, rgba(7,94,253,0) 68%);
+          animation:hxc-drift-a 19s ease-in-out infinite;
+        }
+        .hxc-orb-magenta{
+          width:min(52vw, 620px); height:min(52vw, 620px);
+          bottom:-18%; left:-12%; opacity:0.28;
+          background:radial-gradient(circle at 50% 50%, rgba(245,55,155,0.5) 0%, rgba(245,55,155,0) 68%);
+          animation:hxc-drift-b 24s ease-in-out infinite;
+        }
+
+        /* The figure cluster: the big cartoon head + chips + caption,
+           confined to the right on desktop so the copy never overlaps. */
+        .hxc-figure{
+          position:relative;
+          margin:0 auto;
+          width:var(--hxc-head-w);
+          height:calc(var(--hxc-head-w) * 1.5);
+          display:flex; flex-direction:column; justify-content:flex-end;
+          pointer-events:none;
+          transform-style:preserve-3d;
+        }
+        @media (min-width: 768px){
+          .hxc-figure{
+            position:absolute; right:0; margin:0;
+            top:50%; bottom:auto; transform:translateY(-50%);
+          }
+        }
+
+        .hxc-head-layer{
+          position:absolute; left:0; right:0; bottom:0;
+          display:flex; justify-content:center;
+          will-change:transform;
+        }
+
+        /* Spider-sense squiggles: dormant and dim between glitches, then
+           crackling like electric sparks (hard stepped jumps + flicker)
+           exactly while the canvas burst runs (.hxc-sensing, engine-driven). */
+        .hxc-senses{ position:absolute; inset:0; pointer-events:none; will-change:transform; }
+        .hxc-sq{ position:absolute; overflow:visible; opacity:0.3; }
+        .hxc-sq path{ stroke-linejoin:round; }
+        .hxc-sq-1{ width:13%; top:2%;  left:-14%; transform:rotate(-38deg); }
+        .hxc-sq-2{ width:16%; top:-7%; left:22%;  transform:rotate(-8deg); }
+        .hxc-sq-3{ width:13%; top:-3%; right:-4%; transform:rotate(26deg); }
+        .hxc-sq-4{ width:15%; top:26%; right:-17%;transform:rotate(64deg); }
+        .hxc-sq-5{ width:12%; top:34%; left:-16%; transform:rotate(-72deg); }
+        .hxc-sensing .hxc-sq-1{ animation:hxc-spark-a 0.18s steps(1, end) infinite; }
+        .hxc-sensing .hxc-sq-2{ animation:hxc-spark-b 0.22s steps(1, end) 0.03s infinite; }
+        .hxc-sensing .hxc-sq-3{ animation:hxc-spark-a 0.16s steps(1, end) 0.06s infinite; }
+        .hxc-sensing .hxc-sq-4{ animation:hxc-spark-b 0.2s steps(1, end) 0.09s infinite; }
+        .hxc-sensing .hxc-sq-5{ animation:hxc-spark-a 0.24s steps(1, end) 0.05s infinite; }
+        @keyframes hxc-spark-a{
+          0%{   opacity:1;    translate:0 0;      scale:1; }
+          25%{  opacity:0.35; translate:3px -4px; scale:1.18; }
+          50%{  opacity:1;    translate:-3px 2px; scale:0.88; }
+          75%{  opacity:0.5;  translate:2px 3px;  scale:1.1; }
+          100%{ opacity:1;    translate:0 0;      scale:1; }
+        }
+        @keyframes hxc-spark-b{
+          0%{   opacity:0.9;  translate:0 0;      scale:1; }
+          25%{  opacity:1;    translate:-4px 2px; scale:1.12; }
+          50%{  opacity:0.3;  translate:2px -3px; scale:0.92; }
+          75%{  opacity:1;    translate:-2px -2px;scale:1.06; }
+          100%{ opacity:0.9;  translate:0 0;      scale:1; }
+        }
+        @media (prefers-reduced-motion: reduce){
+          .hxc-sq{ opacity:0.3 !important; animation:none !important; }
+        }
+        .hxc-float{ animation:hxc-floaty 7s ease-in-out infinite; will-change:transform; }
+        .hxc-portrait{ position:relative; width:var(--hxc-head-w); pointer-events:auto; }
+        .hxc-canvas{
+          position:absolute; inset:0; width:100%; height:100%;
+          display:block; touch-action:pan-y;
+        }
+
+        /* The nameplate: white FARAZ masthead in the copy column. */
+        .hxc-nameplate{
+          position:relative;
+          width:max-content; max-width:100%;
+          margin-bottom:14px;
+        }
+        .hxc-clip{ overflow:hidden; padding-top:0.06em; font-size:var(--hxc-name-size); }
+        .hxc-name{
+          font-family:'Playfair Display', Georgia, serif;
+          font-weight:900;
+          font-size:var(--hxc-name-size);
+          line-height:0.95;
+          letter-spacing:-0.05em;
+          text-transform:capitalize;
+          white-space:nowrap;
+          color:#F4F3FA;
+          will-change:transform;
+        }
+
+        /* Fallback portrait, plain img, only if the canvas pipeline fails */
+        .hxc-cutout{
+          position:relative; z-index:3; display:block; width:100%; height:auto;
+        }
+        .hxc-fade{
+          position:absolute; left:-3%; right:-3%; bottom:-2px; height:20%; z-index:5; pointer-events:none;
+          background:linear-gradient(180deg, rgba(16,2,16,0) 0%, rgba(16,2,16,0.35) 60%, rgba(16,2,16,0.85) 100%);
+        }
+
+        /* Chips: one glass row at the top of the copy column */
+        .hxc-chips{ margin-bottom:14px; }
+        .hxc-chips-row{
+          display:flex; flex-wrap:wrap; gap:10px;
+        }
+        .hxc-chip-card{
+          display:inline-flex; align-items:center; gap:8px;
+          padding:8px 14px; border-radius:9999px;
+          background:rgba(24,17,38,0.7);
+          border:1px solid #2C2542;
+          backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+          font-family:'JetBrains Mono', ui-monospace, monospace; font-weight:600;
+          font-size:11px; letter-spacing:0.08em; color:#F4F3FA; white-space:nowrap;
+          box-shadow:0 10px 30px rgba(16,2,16,0.55);
+        }
+        .hxc-dot{ width:6px; height:6px; border-radius:9999px; flex:none; }
+        .hxc-dot-m{ background:#F5379B; box-shadow:0 0 10px rgba(245,55,155,0.8); }
+        .hxc-dot-b{ background:#9B4DE0; box-shadow:0 0 10px rgba(155,77,224,0.8); }
+
+        /* Foreground copy: left column, never touching the figure. Flex
+           centering (not transform) because framer owns this transform. */
+        .hxc-copy{ position:relative; margin-top:40px; will-change:transform; }
+        @media (min-width: 768px){
+          .hxc-copy{
+            position:absolute; left:0; top:0; bottom:0;
+            width:min(50%, 620px); margin-top:0;
+            display:flex; flex-direction:column; justify-content:center;
+          }
+          /* Roomier vertical rhythm on taller displays so the block fills
+             the height and never reads as cramped-at-top. */
+          @media (min-height: 860px){
+            .hxc-chips{ margin-bottom:20px; }
+            .hxc-nameplate{ margin-bottom:20px; }
+            .hxc-statement{ margin-bottom:30px; }
+            .hxc-sub{ margin-bottom:34px; }
+            .hxc-cta-row{ margin-bottom:6px; }
+            .hxc-featured{ margin-top:26px; }
+          }
+        }
+        .hxc-eyebrow{
+          font-family:'JetBrains Mono', ui-monospace, monospace; font-weight:600;
+          font-size:12.5px; letter-spacing:0.22em; color:#F5379B;
+          margin-bottom:6px;
+        }
+        .hxc-cursor{
+          display:inline-block; margin-left:0.4em; color:#F5379B;
+          animation:hxc-blink 1.1s steps(2, end) infinite;
+        }
+        .hxc-statement{
+          font-family:'Playfair Display', Georgia, serif; font-weight:800;
+          font-size:var(--hxc-st-size, clamp(30px, 3.6vw, 50px)); line-height:1.12;
+          color:#F4F3FA; margin-bottom:20px;
+        }
+        .hxc-st-line{ display:block; white-space:nowrap; }
+        @media (max-width: 419px){ .hxc-st-line{ white-space:normal; } }
+        .hxc-slot-line{
+          display:block; margin-top:8px;
+          font-family:'Playfair Display', Georgia, serif;
+          font-style:italic; font-weight:400;
+          font-size:clamp(18px, calc(1.3vw + 9px), 27px);
+          line-height:1.4; letter-spacing:-0.01em;
+          color:#F5379B; white-space:nowrap;
+        }
+        .hxc-slot{ position:relative; display:inline-block; }
+        .hxc-slot-sizer{ visibility:hidden; }
+        .hxc-word{
+          position:absolute; left:0; top:0; white-space:nowrap;
+          will-change:transform, opacity;
+        }
+        .hxc-word-in{ animation:hxc-word-in 250ms cubic-bezier(0.23, 1, 0.32, 1) both; }
+        .hxc-word-out{ animation:hxc-word-out 250ms cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+
+        .hxc-sub{
+          color:rgba(244,243,250,0.92); font-size:clamp(16px, 1.25vw, 19px);
+          line-height:1.65;
+          max-width:52ch; margin-bottom:26px;
+        }
+
+        /* Spider-Verse comic CTAs: hard offset shadows, tiny opposing
+           rotations, an RGB-split glitch tic on hover */
+        .hxc-cta-row{
+          display:flex; flex-wrap:wrap; align-items:center;
+          margin-left:-10px;
+        }
+        .hxc-mag{ display:inline-block; padding:10px; }
+        .hxc-btn{
+          --hxc-rot: 0deg;
+          position:relative;
+          display:inline-flex; align-items:center; justify-content:center;
+          border-radius:12px;
+          border:2px solid #F2D50F;
+          padding:13px 26px;
+          font-family:'Outfit', sans-serif; font-weight:700; font-size:15px;
+          letter-spacing:0.02em; text-decoration:none; cursor:pointer;
+          transform:rotate(var(--hxc-rot));
+          transition:transform 0.14s ease-out, box-shadow 0.14s ease-out;
+          will-change:transform;
+        }
+        .hxc-btn:focus-visible{ outline:2px solid #2E78FF; outline-offset:3px; }
+        .hxc-btn-primary{
+          --hxc-rot: -1deg;
+          background:#7B2FBE; color:#F4F3FA;
+          box-shadow:5px 5px 0 #F0186C;
+        }
+        .hxc-btn-ghost{
+          --hxc-rot: 1deg;
+          background:transparent; color:#F4F3FA;
+          box-shadow:5px 5px 0 #7B2FBE;
+        }
+        .hxc-btn-primary:active{
+          transform:translate(3px, 3px) rotate(var(--hxc-rot)) scale(0.97);
+          box-shadow:2px 2px 0 #F0186C;
+          animation:none;
+        }
+        .hxc-btn-ghost:active{
+          transform:translate(3px, 3px) rotate(var(--hxc-rot)) scale(0.97);
+          box-shadow:2px 2px 0 #7B2FBE;
+          animation:none;
+        }
+        @media (hover: hover) and (pointer: fine){
+          .hxc-btn:hover{ animation:hxc-btn-glitch 0.9s linear infinite; }
+        }
+
+        .hxc-featured{
+          display:flex; flex-wrap:wrap; align-items:center; gap:16px;
+          margin-top:18px;
+          font-family:'JetBrains Mono', ui-monospace, monospace; font-weight:600;
+          font-size:12.5px; letter-spacing:0.08em; color:#A29CB4;
+        }
+        .hxc-featured-link{
+          color:#F4F3FA; text-decoration:underline;
+          text-decoration-color:#9B4DE0; text-decoration-thickness:2px;
+          text-underline-offset:4px;
+        }
+        .hxc-featured-link:focus-visible{
+          outline:2px solid #2E78FF; outline-offset:3px; border-radius:2px;
+        }
+        @media (hover: hover) and (pointer: fine){
+          .hxc-featured-link:hover{ color:#F0186C; text-decoration-color:#F0186C; }
+        }
+
+        @keyframes hxc-floaty{
+          0%, 100%{ transform:translate3d(0, 0, 0); }
+          50%{ transform:translate3d(0, -8px, 0); }
+        }
+        @keyframes hxc-drift-a{
+          0%, 100%{ transform:translate3d(0, 0, 0) scale(1); }
+          50%{ transform:translate3d(-4%, 7%, 0) scale(1.06); }
+        }
+        @keyframes hxc-drift-b{
+          0%, 100%{ transform:translate3d(0, 0, 0) scale(1); }
+          50%{ transform:translate3d(6%, -6%, 0) scale(1.08); }
+        }
+        @keyframes hxc-blink{
+          0%, 100%{ opacity:1; }
+          50%{ opacity:0; }
+        }
+        @keyframes hxc-word-in{
+          from{ opacity:0; transform:translateY(0.55em); filter:blur(6px); }
+          to{ opacity:1; transform:translateY(0); filter:blur(0); }
+        }
+        @keyframes hxc-word-out{
+          from{ opacity:1; transform:translateY(0); filter:blur(0); }
+          to{ opacity:0; transform:translateY(-0.55em); filter:blur(6px); }
+        }
+        @keyframes hxc-btn-glitch{
+          0%{
+            clip-path:inset(-8px);
+            transform:translate(0, 0) rotate(var(--hxc-rot));
+            text-shadow:none;
+          }
+          5%{
+            clip-path:inset(8% -8px 55% -8px);
+            transform:translate(-2px, 1px) rotate(var(--hxc-rot));
+            text-shadow:-2px 0 #F0186C, 2px 0 #7B2FBE;
+          }
+          10%{
+            clip-path:inset(58% -8px 6% -8px);
+            transform:translate(2px, -2px) rotate(var(--hxc-rot));
+            text-shadow:-2px 0 #F0186C, 2px 0 #7B2FBE;
+          }
+          16%{
+            clip-path:inset(30% -8px 30% -8px);
+            transform:translate(-1px, 2px) rotate(var(--hxc-rot));
+            text-shadow:-2px 0 #F0186C, 2px 0 #7B2FBE;
+          }
+          22%{
+            clip-path:inset(-8px);
+            transform:translate(1px, -1px) rotate(var(--hxc-rot));
+            text-shadow:none;
+          }
+          31%, 100%{
+            clip-path:inset(-8px);
+            transform:translate(0, 0) rotate(var(--hxc-rot));
+            text-shadow:none;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce){
+          .hxc-float,
+          .hxc-chips-row,
+          .hxc-orb-blue,
+          .hxc-orb-magenta,
+          .hxc-word,
+          .hxc-btn{ animation:none !important; }
+          .hxc-cursor{ display:none; }
+          .hxc-word-out{ display:none; }
+        }
+
+        /* Portrait-only mode: the glitch head at a chosen size, no hero
+           layout. Sets --hxc-head-w from --hxc-po-w so the shared portrait
+           CSS just works at the smaller size. */
+        .hxc-po-root{
+          position:relative;
+          --hxc-head-w: var(--hxc-po-w, min(80vw, 340px));
+        }
+        .hxc-po-persp{ perspective:1000px; }
+        .hxc-po-stage{
+          position:relative; transform-style:preserve-3d;
+          display:flex; justify-content:center;
+        }
+        .hxc-po-figure{
+          position:relative;
+          width:var(--hxc-head-w);
+          height:calc(var(--hxc-head-w) * 1.5);
+          margin:0 auto;
+          transform-style:preserve-3d;
+          pointer-events:none;
+        }
+`;
 /* Alternate expressions, swapped in during glitches */
 const ALT_CARTOONS = [
   "/images/faraz-neon-smile.webp",
   "/images/faraz-neon-grin.webp",
   "/images/faraz-neon-brow.webp",
+  "/images/faraz-neon-laugh.webp",
+  "/images/faraz-neon-confident.webp",
+  "/images/faraz-neon-cocky.webp",
 ];
 
 /* Statement slot phrases. The first is the resting line. */
@@ -106,7 +518,7 @@ function Magnetic({ enabled, children }) {
   );
 }
 
-export default function HeroFusion({ solo = false }) {
+export default function HeroFusion({ solo = false, portraitOnly = false, portraitW }) {
   const sectionRef = useRef(null);
   const wrapRef = useRef(null);
   const sensesRef = useRef(null);
@@ -817,6 +1229,76 @@ export default function HeroFusion({ solo = false }) {
 
   const displaySlot = reduced ? WORDS[0] : wordState.cur;
 
+  const squiggles = (
+    <motion.div
+      ref={sensesRef}
+      className="hxc-senses"
+      style={{ x: chipX, y: chipY, z: -30 }}
+      aria-hidden="true"
+    >
+      <motion.div {...fadeOnly(0.7, 0.8)}>
+        {[
+          { cls: "hxc-sq-1", color: "#F0186C" },
+          { cls: "hxc-sq-2", color: "#9B4DE0" },
+          { cls: "hxc-sq-3", color: "#F0186C" },
+          { cls: "hxc-sq-4", color: "#9B4DE0" },
+          { cls: "hxc-sq-5", color: "#F0186C" },
+        ].map((s) => (
+          <svg key={s.cls} className={`hxc-sq ${s.cls}`} viewBox="0 0 72 18" focusable="false">
+            <path d="M3 12 Q10 3 17 10 T31 10 T45 10 T59 10 L69 6" fill="none" stroke={s.color} strokeWidth="5" strokeLinecap="round" />
+          </svg>
+        ))}
+      </motion.div>
+    </motion.div>
+  );
+
+  const portrait = (
+    <motion.div className="hxc-head-layer" style={{ x: headX, y: headY, z: -60 }}>
+      <motion.div
+        initial={reduced ? false : { opacity: 0, scale: 0.96 }}
+        animate={ready || failed || reduced ? { opacity: 1, scale: 1 } : undefined}
+        transition={{ duration: ENTRANCE_FADE_MS / 1000, ease: "easeOut" }}
+      >
+        <div className="hxc-float">
+          <div className="hxc-portrait" ref={failed ? null : wrapRef} style={{ aspectRatio: aspect }}>
+            {failed ? (
+              <>
+                <img className="hxc-cutout" src={CARTOON} alt="Portrait of Faraz Khan" width="880" height="1320" draggable="false" />
+                <div className="hxc-fade" aria-hidden="true" />
+              </>
+            ) : (
+              <canvas ref={canvasRef} className="hxc-canvas" role="img" aria-label="Portrait of Faraz Khan that glitches like a comic-book dimension rift" />
+            )}
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+
+  /* Portrait-only mode: just the glitching head at a smaller size, for reuse
+     on other pages (e.g. About). Same engine, no copy column. */
+  if (portraitOnly) {
+    return (
+      <div
+        ref={sectionRef}
+        onPointerMove={onPointerMove}
+        onPointerLeave={onPointerLeave}
+        className="hxc-po-root"
+        style={portraitW ? { "--hxc-po-w": portraitW } : undefined}
+      >
+        <style>{HXC_CSS}</style>
+        <div className="hxc-persp hxc-po-persp">
+          <motion.div className="hxc-stage hxc-po-stage" style={{ rotateX, rotateY }}>
+            <div className="hxc-figure hxc-po-figure">
+              {squiggles}
+              {portrait}
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <section
       data-testid="hero"
@@ -828,392 +1310,7 @@ export default function HeroFusion({ solo = false }) {
       }
       aria-label="Faraz Khan, senior UX lead"
     >
-      <style>{`
-        .hxc-hero{
-          position:relative;
-          background:#100210;
-          overflow:hidden;
-          --hxc-name-size: clamp(52px, 18vw, 84px);
-          --hxc-head-w: min(58vw, 300px);
-        }
-        @media (min-width: 768px){
-          .hxc-hero{
-            /* The name ends exactly at the s of "products": 4.729 x the
-               statement font size (both Playfair, measured ratio). */
-            --hxc-st-size: clamp(30px, 3.6vw, 50px);
-            --hxc-name-size: calc(var(--hxc-st-size) * 4.729);
-            --hxc-head-w: min(38vw, calc((100svh - 200px) * 0.667));
-          }
-        }
-        /* Shorter viewports (laptops ~768 tall): shrink the masthead and
-           tighten the vertical rhythm so nothing clips or scrolls. */
-        @media (min-width: 768px) and (max-height: 840px){
-          .hxc-hero{
-            --hxc-st-size: clamp(26px, 3vw, 42px);
-            --hxc-head-w: min(34vw, calc((100svh - 170px) * 0.667));
-          }
-          .hxc-solo{ --hxc-top-gap: clamp(6px, 1.5vh, 16px); }
-          .hxc-chips{ margin-bottom:9px; }
-          .hxc-nameplate{ margin-bottom:6px; }
-          .hxc-statement{ margin-bottom:12px; }
-          .hxc-sub{ margin-bottom:16px; }
-        }
-        @media (min-width: 768px) and (max-height: 680px){
-          .hxc-hero{ --hxc-st-size: clamp(22px, 2.6vw, 34px); }
-          .hxc-sub{ font-size:14px; margin-bottom:12px; }
-        }
-
-        /* Solo: full-viewport standalone landing. The site main pads 90px,
-           so the section owns the rest and never scrolls on desktop. */
-        .hxc-solo{
-          min-height:calc(100vh - 90px);
-          min-height:calc(100svh - 90px);
-          padding-top:24px; padding-bottom:40px;
-        }
-        @media (min-width: 768px){
-          .hxc-solo{
-            height:calc(100vh - 90px);
-            height:calc(100svh - 90px);
-            max-height:calc(100svh - 90px);
-            min-height:0;
-            overflow:hidden;
-            display:flex; align-items:stretch;
-            padding-top:0; padding-bottom:0;
-            /* Shared gap below the navbar: the copy AND the picture both
-               start here, so their tops align with equal padding. */
-            --hxc-top-gap: clamp(10px, 3vh, 34px);
-          }
-          .hxc-solo .hxc-inner{ width:100%; }
-          /* Explicit height (not %: the perspective wrapper is auto-height)
-             so the absolutely-centered copy + picture have a box to center in. */
-          .hxc-solo .hxc-stage{ height:calc(100vh - 90px); height:calc(100svh - 90px); }
-        }
-
-        .hxc-persp{ perspective:none; }
-        @media (min-width: 768px){ .hxc-persp{ perspective:1200px; } }
-
-        .hxc-stage{ position:relative; transform-style:preserve-3d; }
-        @media (min-width: 768px){
-          .hxc-stage{ height:clamp(640px, calc(100vh - 200px), 780px); }
-        }
-
-        /* Layer 1 · ambient glow orbs */
-        .hxc-layer-orbs{ position:absolute; inset:-4%; pointer-events:none; will-change:transform; }
-        .hxc-orb{ position:absolute; border-radius:9999px; filter:blur(110px); }
-        .hxc-orb-blue{
-          width:min(46vw, 560px); height:min(46vw, 560px);
-          top:-14%; right:-8%; opacity:0.32;
-          background:radial-gradient(circle at 50% 50%, rgba(7,94,253,0.55) 0%, rgba(7,94,253,0) 68%);
-          animation:hxc-drift-a 19s ease-in-out infinite;
-        }
-        .hxc-orb-magenta{
-          width:min(52vw, 620px); height:min(52vw, 620px);
-          bottom:-18%; left:-12%; opacity:0.28;
-          background:radial-gradient(circle at 50% 50%, rgba(245,55,155,0.5) 0%, rgba(245,55,155,0) 68%);
-          animation:hxc-drift-b 24s ease-in-out infinite;
-        }
-
-        /* The figure cluster: the big cartoon head + chips + caption,
-           confined to the right on desktop so the copy never overlaps. */
-        .hxc-figure{
-          position:relative;
-          margin:0 auto;
-          width:var(--hxc-head-w);
-          height:calc(var(--hxc-head-w) * 1.5);
-          display:flex; flex-direction:column; justify-content:flex-end;
-          pointer-events:none;
-          transform-style:preserve-3d;
-        }
-        @media (min-width: 768px){
-          .hxc-figure{
-            position:absolute; right:0; margin:0;
-            top:50%; bottom:auto; transform:translateY(-50%);
-          }
-        }
-
-        .hxc-head-layer{
-          position:absolute; left:0; right:0; bottom:0;
-          display:flex; justify-content:center;
-          will-change:transform;
-        }
-
-        /* Spider-sense squiggles: dormant and dim between glitches, then
-           crackling like electric sparks (hard stepped jumps + flicker)
-           exactly while the canvas burst runs (.hxc-sensing, engine-driven). */
-        .hxc-senses{ position:absolute; inset:0; pointer-events:none; will-change:transform; }
-        .hxc-sq{ position:absolute; overflow:visible; opacity:0.3; }
-        .hxc-sq path{ stroke-linejoin:round; }
-        .hxc-sq-1{ width:13%; top:2%;  left:-14%; transform:rotate(-38deg); }
-        .hxc-sq-2{ width:16%; top:-7%; left:22%;  transform:rotate(-8deg); }
-        .hxc-sq-3{ width:13%; top:-3%; right:-4%; transform:rotate(26deg); }
-        .hxc-sq-4{ width:15%; top:26%; right:-17%;transform:rotate(64deg); }
-        .hxc-sq-5{ width:12%; top:34%; left:-16%; transform:rotate(-72deg); }
-        .hxc-sensing .hxc-sq-1{ animation:hxc-spark-a 0.18s steps(1, end) infinite; }
-        .hxc-sensing .hxc-sq-2{ animation:hxc-spark-b 0.22s steps(1, end) 0.03s infinite; }
-        .hxc-sensing .hxc-sq-3{ animation:hxc-spark-a 0.16s steps(1, end) 0.06s infinite; }
-        .hxc-sensing .hxc-sq-4{ animation:hxc-spark-b 0.2s steps(1, end) 0.09s infinite; }
-        .hxc-sensing .hxc-sq-5{ animation:hxc-spark-a 0.24s steps(1, end) 0.05s infinite; }
-        @keyframes hxc-spark-a{
-          0%{   opacity:1;    translate:0 0;      scale:1; }
-          25%{  opacity:0.35; translate:3px -4px; scale:1.18; }
-          50%{  opacity:1;    translate:-3px 2px; scale:0.88; }
-          75%{  opacity:0.5;  translate:2px 3px;  scale:1.1; }
-          100%{ opacity:1;    translate:0 0;      scale:1; }
-        }
-        @keyframes hxc-spark-b{
-          0%{   opacity:0.9;  translate:0 0;      scale:1; }
-          25%{  opacity:1;    translate:-4px 2px; scale:1.12; }
-          50%{  opacity:0.3;  translate:2px -3px; scale:0.92; }
-          75%{  opacity:1;    translate:-2px -2px;scale:1.06; }
-          100%{ opacity:0.9;  translate:0 0;      scale:1; }
-        }
-        @media (prefers-reduced-motion: reduce){
-          .hxc-sq{ opacity:0.3 !important; animation:none !important; }
-        }
-        .hxc-float{ animation:hxc-floaty 7s ease-in-out infinite; will-change:transform; }
-        .hxc-portrait{ position:relative; width:var(--hxc-head-w); pointer-events:auto; }
-        .hxc-canvas{
-          position:absolute; inset:0; width:100%; height:100%;
-          display:block; touch-action:pan-y;
-        }
-
-        /* The nameplate: white FARAZ masthead in the copy column. */
-        .hxc-nameplate{
-          position:relative;
-          width:max-content; max-width:100%;
-          margin-bottom:14px;
-        }
-        .hxc-clip{ overflow:hidden; padding-top:0.06em; font-size:var(--hxc-name-size); }
-        .hxc-name{
-          font-family:'Playfair Display', Georgia, serif;
-          font-weight:900;
-          font-size:var(--hxc-name-size);
-          line-height:0.95;
-          letter-spacing:-0.05em;
-          text-transform:capitalize;
-          white-space:nowrap;
-          color:#F4F3FA;
-          will-change:transform;
-        }
-
-        /* Fallback portrait, plain img, only if the canvas pipeline fails */
-        .hxc-cutout{
-          position:relative; z-index:3; display:block; width:100%; height:auto;
-        }
-        .hxc-fade{
-          position:absolute; left:-3%; right:-3%; bottom:-2px; height:20%; z-index:5; pointer-events:none;
-          background:linear-gradient(180deg, rgba(16,2,16,0) 0%, rgba(16,2,16,0.35) 60%, rgba(16,2,16,0.85) 100%);
-        }
-
-        /* Chips: one glass row at the top of the copy column */
-        .hxc-chips{ margin-bottom:14px; }
-        .hxc-chips-row{
-          display:flex; flex-wrap:wrap; gap:10px;
-        }
-        .hxc-chip-card{
-          display:inline-flex; align-items:center; gap:8px;
-          padding:8px 14px; border-radius:9999px;
-          background:rgba(24,17,38,0.7);
-          border:1px solid #2C2542;
-          backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
-          font-family:'JetBrains Mono', ui-monospace, monospace; font-weight:600;
-          font-size:11px; letter-spacing:0.08em; color:#F4F3FA; white-space:nowrap;
-          box-shadow:0 10px 30px rgba(16,2,16,0.55);
-        }
-        .hxc-dot{ width:6px; height:6px; border-radius:9999px; flex:none; }
-        .hxc-dot-m{ background:#F5379B; box-shadow:0 0 10px rgba(245,55,155,0.8); }
-        .hxc-dot-b{ background:#9B4DE0; box-shadow:0 0 10px rgba(155,77,224,0.8); }
-
-        /* Foreground copy: left column, never touching the figure. Flex
-           centering (not transform) because framer owns this transform. */
-        .hxc-copy{ position:relative; margin-top:40px; will-change:transform; }
-        @media (min-width: 768px){
-          .hxc-copy{
-            position:absolute; left:0; top:0; bottom:0;
-            width:min(50%, 620px); margin-top:0;
-            display:flex; flex-direction:column; justify-content:center;
-          }
-          /* Roomier vertical rhythm on taller displays so the block fills
-             the height and never reads as cramped-at-top. */
-          @media (min-height: 860px){
-            .hxc-chips{ margin-bottom:20px; }
-            .hxc-nameplate{ margin-bottom:20px; }
-            .hxc-statement{ margin-bottom:30px; }
-            .hxc-sub{ margin-bottom:34px; }
-            .hxc-cta-row{ margin-bottom:6px; }
-            .hxc-featured{ margin-top:26px; }
-          }
-        }
-        .hxc-eyebrow{
-          font-family:'JetBrains Mono', ui-monospace, monospace; font-weight:600;
-          font-size:12.5px; letter-spacing:0.22em; color:#F5379B;
-          margin-bottom:6px;
-        }
-        .hxc-cursor{
-          display:inline-block; margin-left:0.4em; color:#F5379B;
-          animation:hxc-blink 1.1s steps(2, end) infinite;
-        }
-        .hxc-statement{
-          font-family:'Playfair Display', Georgia, serif; font-weight:800;
-          font-size:var(--hxc-st-size, clamp(30px, 3.6vw, 50px)); line-height:1.12;
-          color:#F4F3FA; margin-bottom:20px;
-        }
-        .hxc-st-line{ display:block; white-space:nowrap; }
-        @media (max-width: 419px){ .hxc-st-line{ white-space:normal; } }
-        .hxc-slot-line{
-          display:block; margin-top:8px;
-          font-family:'Playfair Display', Georgia, serif;
-          font-style:italic; font-weight:400;
-          font-size:clamp(18px, calc(1.3vw + 9px), 27px);
-          line-height:1.4; letter-spacing:-0.01em;
-          color:#F5379B; white-space:nowrap;
-        }
-        .hxc-slot{ position:relative; display:inline-block; }
-        .hxc-slot-sizer{ visibility:hidden; }
-        .hxc-word{
-          position:absolute; left:0; top:0; white-space:nowrap;
-          will-change:transform, opacity;
-        }
-        .hxc-word-in{ animation:hxc-word-in 250ms cubic-bezier(0.23, 1, 0.32, 1) both; }
-        .hxc-word-out{ animation:hxc-word-out 250ms cubic-bezier(0.23, 1, 0.32, 1) forwards; }
-
-        .hxc-sub{
-          color:rgba(244,243,250,0.92); font-size:clamp(16px, 1.25vw, 19px);
-          line-height:1.65;
-          max-width:52ch; margin-bottom:26px;
-        }
-
-        /* Spider-Verse comic CTAs: hard offset shadows, tiny opposing
-           rotations, an RGB-split glitch tic on hover */
-        .hxc-cta-row{
-          display:flex; flex-wrap:wrap; align-items:center;
-          margin-left:-10px;
-        }
-        .hxc-mag{ display:inline-block; padding:10px; }
-        .hxc-btn{
-          --hxc-rot: 0deg;
-          position:relative;
-          display:inline-flex; align-items:center; justify-content:center;
-          border-radius:12px;
-          border:2px solid #F2D50F;
-          padding:13px 26px;
-          font-family:'Outfit', sans-serif; font-weight:700; font-size:15px;
-          letter-spacing:0.02em; text-decoration:none; cursor:pointer;
-          transform:rotate(var(--hxc-rot));
-          transition:transform 0.14s ease-out, box-shadow 0.14s ease-out;
-          will-change:transform;
-        }
-        .hxc-btn:focus-visible{ outline:2px solid #2E78FF; outline-offset:3px; }
-        .hxc-btn-primary{
-          --hxc-rot: -1deg;
-          background:#7B2FBE; color:#F4F3FA;
-          box-shadow:5px 5px 0 #F0186C;
-        }
-        .hxc-btn-ghost{
-          --hxc-rot: 1deg;
-          background:transparent; color:#F4F3FA;
-          box-shadow:5px 5px 0 #7B2FBE;
-        }
-        .hxc-btn-primary:active{
-          transform:translate(3px, 3px) rotate(var(--hxc-rot)) scale(0.97);
-          box-shadow:2px 2px 0 #F0186C;
-          animation:none;
-        }
-        .hxc-btn-ghost:active{
-          transform:translate(3px, 3px) rotate(var(--hxc-rot)) scale(0.97);
-          box-shadow:2px 2px 0 #7B2FBE;
-          animation:none;
-        }
-        @media (hover: hover) and (pointer: fine){
-          .hxc-btn:hover{ animation:hxc-btn-glitch 0.9s linear infinite; }
-        }
-
-        .hxc-featured{
-          display:flex; flex-wrap:wrap; align-items:center; gap:16px;
-          margin-top:18px;
-          font-family:'JetBrains Mono', ui-monospace, monospace; font-weight:600;
-          font-size:12.5px; letter-spacing:0.08em; color:#A29CB4;
-        }
-        .hxc-featured-link{
-          color:#F4F3FA; text-decoration:underline;
-          text-decoration-color:#9B4DE0; text-decoration-thickness:2px;
-          text-underline-offset:4px;
-        }
-        .hxc-featured-link:focus-visible{
-          outline:2px solid #2E78FF; outline-offset:3px; border-radius:2px;
-        }
-        @media (hover: hover) and (pointer: fine){
-          .hxc-featured-link:hover{ color:#F0186C; text-decoration-color:#F0186C; }
-        }
-
-        @keyframes hxc-floaty{
-          0%, 100%{ transform:translate3d(0, 0, 0); }
-          50%{ transform:translate3d(0, -8px, 0); }
-        }
-        @keyframes hxc-drift-a{
-          0%, 100%{ transform:translate3d(0, 0, 0) scale(1); }
-          50%{ transform:translate3d(-4%, 7%, 0) scale(1.06); }
-        }
-        @keyframes hxc-drift-b{
-          0%, 100%{ transform:translate3d(0, 0, 0) scale(1); }
-          50%{ transform:translate3d(6%, -6%, 0) scale(1.08); }
-        }
-        @keyframes hxc-blink{
-          0%, 100%{ opacity:1; }
-          50%{ opacity:0; }
-        }
-        @keyframes hxc-word-in{
-          from{ opacity:0; transform:translateY(0.55em); filter:blur(6px); }
-          to{ opacity:1; transform:translateY(0); filter:blur(0); }
-        }
-        @keyframes hxc-word-out{
-          from{ opacity:1; transform:translateY(0); filter:blur(0); }
-          to{ opacity:0; transform:translateY(-0.55em); filter:blur(6px); }
-        }
-        @keyframes hxc-btn-glitch{
-          0%{
-            clip-path:inset(-8px);
-            transform:translate(0, 0) rotate(var(--hxc-rot));
-            text-shadow:none;
-          }
-          5%{
-            clip-path:inset(8% -8px 55% -8px);
-            transform:translate(-2px, 1px) rotate(var(--hxc-rot));
-            text-shadow:-2px 0 #F0186C, 2px 0 #7B2FBE;
-          }
-          10%{
-            clip-path:inset(58% -8px 6% -8px);
-            transform:translate(2px, -2px) rotate(var(--hxc-rot));
-            text-shadow:-2px 0 #F0186C, 2px 0 #7B2FBE;
-          }
-          16%{
-            clip-path:inset(30% -8px 30% -8px);
-            transform:translate(-1px, 2px) rotate(var(--hxc-rot));
-            text-shadow:-2px 0 #F0186C, 2px 0 #7B2FBE;
-          }
-          22%{
-            clip-path:inset(-8px);
-            transform:translate(1px, -1px) rotate(var(--hxc-rot));
-            text-shadow:none;
-          }
-          31%, 100%{
-            clip-path:inset(-8px);
-            transform:translate(0, 0) rotate(var(--hxc-rot));
-            text-shadow:none;
-          }
-        }
-
-        @media (prefers-reduced-motion: reduce){
-          .hxc-float,
-          .hxc-chips-row,
-          .hxc-orb-blue,
-          .hxc-orb-magenta,
-          .hxc-word,
-          .hxc-btn{ animation:none !important; }
-          .hxc-cursor{ display:none; }
-          .hxc-word-out{ display:none; }
-        }
-      `}</style>
+      <style>{HXC_CSS}</style>
 
       <div className="hxc-inner relative mx-auto w-full max-w-screen-2xl px-6 md:px-10 lg:px-16">
         <div className="hxc-persp">
@@ -1231,90 +1328,8 @@ export default function HeroFusion({ solo = false }) {
 
             {/* The figure cluster: the glitching portrait */}
             <div className="hxc-figure">
-              {/* Spider-sense squiggles: electric sparks that crackle in
-                  perfect sync with the canvas glitch (hxc-sensing class,
-                  toggled by the engine) */}
-              <motion.div
-                ref={sensesRef}
-                className="hxc-senses"
-                style={{ x: chipX, y: chipY, z: -30 }}
-                aria-hidden="true"
-              >
-                <motion.div {...fadeOnly(0.7, 0.8)}>
-                  {[
-                    { cls: "hxc-sq-1", color: "#F0186C" },
-                    { cls: "hxc-sq-2", color: "#9B4DE0" },
-                    { cls: "hxc-sq-3", color: "#F0186C" },
-                    { cls: "hxc-sq-4", color: "#9B4DE0" },
-                    { cls: "hxc-sq-5", color: "#F0186C" },
-                  ].map((s) => (
-                    <svg
-                      key={s.cls}
-                      className={`hxc-sq ${s.cls}`}
-                      viewBox="0 0 72 18"
-                      focusable="false"
-                    >
-                      <path
-                        d="M3 12 Q10 3 17 10 T31 10 T45 10 T59 10 L69 6"
-                        fill="none"
-                        stroke={s.color}
-                        strokeWidth="5"
-                        strokeLinecap="round"
-                      />
-                    </svg>
-                  ))}
-                </motion.div>
-              </motion.div>
-
-              {/* Head plane, behind the letters */}
-              <motion.div
-                className="hxc-head-layer"
-                style={{ x: headX, y: headY, z: -60 }}
-              >
-                <motion.div
-                  initial={reduced ? false : { opacity: 0, scale: 0.96 }}
-                  animate={
-                    ready || failed || reduced
-                      ? { opacity: 1, scale: 1 }
-                      : undefined
-                  }
-                  transition={{
-                    duration: ENTRANCE_FADE_MS / 1000,
-                    ease: "easeOut",
-                  }}
-                >
-                  <div className="hxc-float">
-                    <div
-                      className="hxc-portrait"
-                      ref={failed ? null : wrapRef}
-                      style={{ aspectRatio: aspect }}
-                    >
-                      {failed ? (
-                        <>
-                          <img
-                            className="hxc-cutout"
-                            src={CARTOON}
-                            alt="Cartoon portrait of Faraz Khan"
-                            width="880"
-                            height="1320"
-                            draggable="false"
-                          />
-                          <div className="hxc-fade" aria-hidden="true" />
-                        </>
-                      ) : (
-                        <canvas
-                          ref={canvasRef}
-                          className="hxc-canvas"
-                          role="img"
-                          aria-label="Cartoon portrait of Faraz Khan that glitches like a comic-book dimension rift when you touch it"
-                        />
-                      )}
-                    </div>
-                  </div>
-                </motion.div>
-              </motion.div>
-
-
+              {squiggles}
+              {portrait}
             </div>
 
             {/* Foreground copy. No translateZ: pushing it forward in the
@@ -1336,7 +1351,7 @@ export default function HeroFusion({ solo = false }) {
                   </span>
                   <span className="hxc-chip-card">
                     <span className="hxc-dot hxc-dot-b" />
-                    UX · data · code
+                    UX › Data Viz › Visual Design › AI
                   </span>
                 </div>
               </motion.div>

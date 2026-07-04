@@ -25,8 +25,8 @@ const encode = (data) =>
     .join("&");
 
 const fieldClass = (hasError) =>
-  `w-full rounded-xl bg-[#100210]/55 border px-4 py-3 text-[15px] text-[#F4F3FA] placeholder:text-[#6F6885] outline-none transition-colors focus:ring-2 focus:ring-[#075EFD]/30 ${
-    hasError ? "border-[#F5379B] focus:border-[#F5379B]" : "border-white/50 focus:border-[#075EFD]"
+  `w-full rounded-xl bg-[#100210]/55 border px-4 py-3 text-[15px] text-[#F4F3FA] placeholder:text-[#6F6885] outline-none transition-colors focus:ring-2 focus:ring-[#7B2FBE]/40 ${
+    hasError ? "border-[#F0186C] focus:border-[#F0186C]" : "border-white/50 focus:border-[#7B2FBE]"
   }`;
 
 export default function ContactForm() {
@@ -79,9 +79,9 @@ export default function ContactForm() {
         tabIndex={-1}
         role="status"
         data-testid="contact-form-success"
-        className="dark-card rounded-3xl border border-white/10 p-8 md:p-10 outline-none flex flex-col items-center text-center justify-center min-h-[420px]"
+        className="ab-card ab-flat ab-c1 p-8 md:p-10 outline-none flex flex-col items-center text-center justify-center min-h-[420px]"
       >
-        <span className="h-14 w-14 rounded-2xl bg-[#F5379B] grid place-items-center text-white mb-5">
+        <span className="h-14 w-14 rounded-2xl bg-[#7B2FBE] grid place-items-center text-white mb-5">
           <CheckCircle2 size={26} />
         </span>
         <h3 className="font-display text-2xl md:text-3xl font-black mb-2">Message sent.</h3>
@@ -91,7 +91,7 @@ export default function ContactForm() {
         <button
           type="button"
           onClick={() => setStatus("idle")}
-          className="mt-6 text-sm font-semibold text-[#5B9BFF] hover:text-[#2E78FF] transition-colors"
+          className="mt-6 text-sm font-semibold text-[#F0186C] hover:text-[#17C3E8] transition-colors"
         >
           Send another →
         </button>
@@ -108,7 +108,7 @@ export default function ContactForm() {
       onSubmit={handleSubmit}
       noValidate
       data-testid="contact-form"
-      className="dark-card rounded-3xl border border-white/10 p-6 md:p-8"
+      className="ab-card ab-flat ab-c2 p-6 md:p-8"
     >
       {/* Netlify needs these in the POST body */}
       <input type="hidden" name="form-name" value="contact" />
@@ -120,7 +120,7 @@ export default function ContactForm() {
       </p>
 
       <div className="mb-6">
-        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-3">send a message</p>
+        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F0186C] mb-3">send a message</p>
         <h2 className="font-display text-2xl md:text-3xl font-black leading-tight">
           Tell me what you’re <span className="italic font-light">working on.</span>
         </h2>
@@ -130,7 +130,7 @@ export default function ContactForm() {
         {/* Name */}
         <div>
           <label htmlFor="cf-name" className="block text-sm font-mono uppercase tracking-widest text-white mb-1.5">
-            Your name <span className="text-[#F5379B]">*</span>
+            Your name <span className="text-[#F0186C]">*</span>
           </label>
           <input
             id="cf-name"
@@ -146,13 +146,13 @@ export default function ContactForm() {
             aria-describedby={errors.full_name ? "cf-name-err" : undefined}
             className={fieldClass(errors.full_name)}
           />
-          {errors.full_name && <p id="cf-name-err" className="mt-1.5 text-xs text-[#F5379B]">{errors.full_name}</p>}
+          {errors.full_name && <p id="cf-name-err" className="mt-1.5 text-xs text-[#F0186C]">{errors.full_name}</p>}
         </div>
 
         {/* Email */}
         <div>
           <label htmlFor="cf-email" className="block text-sm font-mono uppercase tracking-widest text-white mb-1.5">
-            Email <span className="text-[#F5379B]">*</span>
+            Email <span className="text-[#F0186C]">*</span>
           </label>
           <input
             id="cf-email"
@@ -169,13 +169,13 @@ export default function ContactForm() {
             aria-describedby={errors.email ? "cf-email-err" : undefined}
             className={fieldClass(errors.email)}
           />
-          {errors.email && <p id="cf-email-err" className="mt-1.5 text-xs text-[#F5379B]">{errors.email}</p>}
+          {errors.email && <p id="cf-email-err" className="mt-1.5 text-xs text-[#F0186C]">{errors.email}</p>}
         </div>
 
         {/* Inquiry type */}
         <div>
           <label htmlFor="cf-inquiry" className="block text-sm font-mono uppercase tracking-widest text-white mb-1.5">
-            What’s this about? <span className="text-[#F5379B]">*</span>
+            What’s this about? <span className="text-[#F0186C]">*</span>
           </label>
           <div className="relative">
             <select
@@ -200,13 +200,13 @@ export default function ContactForm() {
             </select>
             <ChevronDown size={18} className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-[#A29CB4]" />
           </div>
-          {errors.inquiry_type && <p id="cf-inquiry-err" className="mt-1.5 text-xs text-[#F5379B]">{errors.inquiry_type}</p>}
+          {errors.inquiry_type && <p id="cf-inquiry-err" className="mt-1.5 text-xs text-[#F0186C]">{errors.inquiry_type}</p>}
         </div>
 
         {/* Company (required) */}
         <div>
           <label htmlFor="cf-company" className="block text-sm font-mono uppercase tracking-widest text-white mb-1.5">
-            Company or team <span className="text-[#F5379B]">*</span>
+            Company or team <span className="text-[#F0186C]">*</span>
           </label>
           <input
             id="cf-company"
@@ -222,7 +222,7 @@ export default function ContactForm() {
             aria-describedby={errors.company ? "cf-company-err" : undefined}
             className={fieldClass(errors.company)}
           />
-          {errors.company && <p id="cf-company-err" className="mt-1.5 text-xs text-[#F5379B]">{errors.company}</p>}
+          {errors.company && <p id="cf-company-err" className="mt-1.5 text-xs text-[#F0186C]">{errors.company}</p>}
         </div>
       </div>
 
@@ -243,7 +243,7 @@ export default function ContactForm() {
       </div>
 
       {status === "error" && (
-        <p role="alert" className="mt-5 text-sm text-[#F5379B]">
+        <p role="alert" className="mt-5 text-sm text-[#F0186C]">
           Something went wrong sending that. Please email me directly at Abdulfarazkhan@outlook.com.
         </p>
       )}
@@ -253,7 +253,7 @@ export default function ContactForm() {
           type="submit"
           disabled={status === "submitting"}
           data-testid="contact-form-submit"
-          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-10 py-4 rounded-full bg-white text-[#C71E73] font-semibold text-sm hover:bg-[#C71E73] hover:text-white transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+          className="ab-btn w-full sm:w-auto justify-center px-10 py-4 disabled:opacity-60 disabled:cursor-not-allowed"
         >
           {status === "submitting" ? "Sending…" : "Send message"}
           {status !== "submitting" && <Send size={16} />}
