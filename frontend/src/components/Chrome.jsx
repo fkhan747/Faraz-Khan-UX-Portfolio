@@ -61,7 +61,7 @@ export default function Chrome() {
             {/* Right: desktop CTA, or hamburger on phones */}
             <BookCallButton
               data-testid="sidebar-book-call"
-              className="hidden sm:inline-flex ml-2 items-center px-3.5 md:px-4 py-2.5 rounded-full bg-transparent border border-[#C71E73] text-[#C71E73] text-[13px] md:text-sm font-semibold capitalize hover:bg-[#C71E73] hover:text-white transition-colors whitespace-nowrap flex-shrink-0"
+              className="btn-comic hidden sm:inline-flex ml-2 items-center px-4 md:px-5 py-2.5 text-[13px] md:text-sm font-semibold capitalize whitespace-nowrap flex-shrink-0"
             >
               Book a call →
             </BookCallButton>
@@ -98,7 +98,7 @@ export default function Chrome() {
                 </NavLink>
               ))}
               <BookCallButton
-                className="w-full mt-1 inline-flex items-center justify-center px-4 py-3 rounded-2xl bg-[#C71E73] text-white text-sm font-semibold capitalize"
+                className="btn-comic w-full mt-1 inline-flex items-center justify-center px-4 py-3 text-sm font-semibold capitalize"
               >
                 Book a call →
               </BookCallButton>

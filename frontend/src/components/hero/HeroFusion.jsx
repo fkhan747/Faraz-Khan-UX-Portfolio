@@ -1327,7 +1327,7 @@ export default function HeroFusion({ solo = false }) {
                           <div className="hxc-messi-wrap">
                             <img
                               className="hxc-messi"
-                              src="/images/messi-cartoon.webp"
+                              src="/images/messi-cartoon-2.webp"
                               alt=""
                               draggable="false"
                             />
