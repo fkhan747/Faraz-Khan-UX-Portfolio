@@ -254,8 +254,11 @@ export default function HeroFusion({ solo = false }) {
       w: 0,
       h: 0,
       dpr: 1,
-      alts: [], /* smile composites, revealed mid-glitch */
-      altIdx: 0,
+      alts: [], /* smile composites (built from the extra artworks) */
+      bases: [], /* all pictures: [neutral, ...smiles], one shown at a time */
+      neons: [], /* one saturated flash variant per base */
+      baseIdx: 0, /* the picture currently resting on screen */
+      nextBaseIdx: 0, /* the picture the in-progress glitch resolves to */
       burstIdx: 0,
       burstAt: 0,
       burstDur: 0,
@@ -365,40 +368,49 @@ export default function HeroFusion({ solo = false }) {
           return c;
         };
 
+        /* A saturated flash variant of any composite */
+        const makeNeon = (compCanvas) => {
+          const nc = document.createElement("canvas");
+          nc.width = cw;
+          nc.height = ch;
+          const nctx = nc.getContext("2d");
+          if (!nctx) throw new Error("no neon context");
+          if ("filter" in nctx) {
+            nctx.filter = "saturate(1.7) brightness(1.25)";
+            nctx.drawImage(compCanvas, 0, 0);
+            nctx.filter = "none";
+          } else {
+            nctx.drawImage(compCanvas, 0, 0);
+            nctx.globalCompositeOperation = "screen";
+            nctx.globalAlpha = 0.3;
+            nctx.drawImage(compCanvas, 0, 0);
+            nctx.globalCompositeOperation = "destination-in";
+            nctx.globalAlpha = 1;
+            nctx.drawImage(compCanvas, 0, 0);
+            nctx.globalCompositeOperation = "source-over";
+          }
+          return nc;
+        };
+
         const comp = makeComp(img);
         eff.alts = altImgs
           .filter((a) => a.complete && a.naturalWidth > 0)
           .map((a) => makeComp(a));
 
-        /* Channel-split copies (magenta / cyan, both from the artwork) and
-           the neon flash variant (saturation surge) */
-        const mag = tinted(comp, "#F0186C");
-        const blue = tinted(comp, "#17C3E8"); /* art cyan, keeps the old name */
-        const neon = document.createElement("canvas");
-        neon.width = cw;
-        neon.height = ch;
-        const nctx = neon.getContext("2d");
-        if (!nctx) throw new Error("no neon context");
-        if ("filter" in nctx) {
-          nctx.filter = "saturate(1.7) brightness(1.25)";
-          nctx.drawImage(comp, 0, 0);
-          nctx.filter = "none";
-        } else {
-          nctx.drawImage(comp, 0, 0);
-          nctx.globalCompositeOperation = "screen";
-          nctx.globalAlpha = 0.3;
-          nctx.drawImage(comp, 0, 0);
-          nctx.globalCompositeOperation = "destination-in";
-          nctx.globalAlpha = 1;
-          nctx.drawImage(comp, 0, 0);
-          nctx.globalCompositeOperation = "source-over";
-        }
+        /* Every picture (neutral + smiles) is a swappable base with its own
+           neon flash. Each glitch commits a full swap to the next one. */
+        const bases = [comp, ...eff.alts];
+        eff.bases = bases;
+        eff.neons = bases.map(makeNeon);
+        if (eff.baseIdx >= bases.length) eff.baseIdx = 0;
 
+        /* Channel-split copies (magenta / cyan) for the RGB fringe. A subtle
+           colored ghost, so base-0 is fine for every swap. */
         eff.ctx = ctx;
         eff.comp = comp;
-        eff.mag = mag;
-        eff.blue = blue;
-        eff.neon = neon;
+        eff.mag = tinted(comp, "#F0186C");
+        eff.blue = tinted(comp, "#17C3E8"); /* art cyan, keeps the old name */
+        eff.neon = eff.neons[0];
         eff.w = w;
         eff.h = h;
         eff.dpr = dpr;
@@ -421,10 +433,11 @@ export default function HeroFusion({ solo = false }) {
     };
 
     const drawClean = () => {
-      const { ctx, comp, w, h } = eff;
-      if (!ctx || !comp) return;
+      const { ctx, w, h } = eff;
+      const base = eff.bases[eff.baseIdx] || eff.comp;
+      if (!ctx || !base) return;
       ctx.clearRect(0, 0, w, h);
-      ctx.drawImage(comp, 0, 0, w, h);
+      ctx.drawImage(base, 0, 0, w, h);
       setSensing(false);
     };
 
@@ -435,29 +448,29 @@ export default function HeroFusion({ solo = false }) {
       const gap = BURST_MIN_GAP + seeded(bi, 51) * BURST_GAP_VAR;
       eff.burstAt = now + gap;
       eff.burstDur = BURST_MIN_MS + seeded(bi, 52) * BURST_VAR_MS;
-      /* Every glitch is two sparks: a short warning tic, a dark beat, then
-         the main burst (which reveals one of the smiles). */
+      /* Every glitch is two sparks: a short warning tic on the current
+         picture, a dark beat, then the main burst that swaps the WHOLE
+         picture to the next one in the cycle. */
       eff.warnDur = 90 + seeded(bi, 91) * 60;
       eff.warnAt = eff.burstAt - (150 + seeded(bi, 92) * 120) - eff.warnDur;
-      eff.altIdx = seeded(bi, 90) < 0.5 ? 0 : 1;
+      eff.nextBaseIdx = eff.bases.length
+        ? (eff.baseIdx + 1) % eff.bases.length
+        : 0;
       eff.ticAt =
         seeded(bi, 59) < 0.35
           ? now + gap * (0.35 + 0.4 * seeded(bi, 58))
           : Infinity;
     };
 
-    /* The smile composite for a given seed, if the alt images loaded */
-    const altFor = (i) =>
-      eff.alts.length
-        ? eff.alts[Math.floor(seeded(i, 93) * eff.alts.length) % eff.alts.length]
-        : null;
-
     /* One burst frame: jittered base, 8-14 horizontal tears (full and
        partial width), 1-2 vertical slices, hard RGB split, neon flashes.
        Layout re-seeds every BURST_STEP_MS so the burst crackles. */
-    const drawBurst = (age, bi, dur, altBase) => {
-      const { ctx, w, h, dpr, comp, mag, blue, neon } = eff;
-      const base = altBase || comp;
+    const drawBurst = (age, bi, dur, baseArg) => {
+      const { ctx, w, h, dpr, comp, mag, blue } = eff;
+      const bIdx =
+        typeof baseArg === "number" && eff.bases[baseArg] ? baseArg : 0;
+      const base = eff.bases[bIdx] || comp;
+      const neon = eff.neons[bIdx] || eff.neon;
       const cw = comp.width;
       const ch = comp.height;
       const stepIdx = Math.floor(age / BURST_STEP_MS);
@@ -481,8 +494,7 @@ export default function HeroFusion({ solo = false }) {
         const sxx = partial ? seeded(sd, 65) * (w - sw) : 0;
         const dx =
           (seeded(sd, 57) < 0.5 ? -1 : 1) * (12 + seeded(sd, 56) * 48);
-        const src =
-          seeded(sd, 60) < 0.3 ? neon : seeded(sd, 72) < 0.5 ? comp : base;
+        const src = seeded(sd, 60) < 0.3 ? neon : base;
         ctx.drawImage(
           src,
           Math.floor(sxx * dpr),
@@ -505,7 +517,7 @@ export default function HeroFusion({ solo = false }) {
         const dy =
           (seeded(cd, 82) < 0.5 ? -1 : 1) * (10 + seeded(cd, 83) * 20);
         ctx.drawImage(
-          comp,
+          base,
           Math.floor(colX * dpr),
           0,
           Math.max(1, Math.floor(colW * dpr)),
@@ -541,20 +553,21 @@ export default function HeroFusion({ solo = false }) {
 
     /* Rare single-slice micro-tic between bursts */
     const drawTic = (bi) => {
-      const { ctx, w, h, dpr, comp } = eff;
+      const { ctx, w, h, dpr } = eff;
+      const base = eff.bases[eff.baseIdx] || eff.comp;
       setSensing(true);
       ctx.clearRect(0, 0, w, h);
-      ctx.drawImage(comp, 0, 0, w, h);
+      ctx.drawImage(base, 0, 0, w, h);
       const sd = bi * 977 + 29;
       const sy = seeded(sd, 54) * h * 0.9;
       let sliceH = 5 + seeded(sd, 55) * 14;
       if (sy + sliceH > h) sliceH = h - sy;
       const dx = (seeded(sd, 57) < 0.5 ? -1 : 1) * (4 + seeded(sd, 56) * 8);
       ctx.drawImage(
-        comp,
+        base,
         0,
         Math.floor(sy * dpr),
-        comp.width,
+        base.width,
         Math.max(1, Math.floor(sliceH * dpr)),
         dx,
         sy,
@@ -592,9 +605,12 @@ export default function HeroFusion({ solo = false }) {
           }
           return;
         }
+        const n = eff.bases.length || 1;
         if (local >= SEQ_TOTAL_MS) {
           seq.active = false;
           seq.cooldownUntil = now + SEQ_COOLDOWN_MS;
+          /* Land on the last picture the triple cycled to */
+          eff.baseIdx = (eff.baseIdx + 3) % n;
           schedule(now);
           drawClean();
           eff.dirty = false;
@@ -603,11 +619,18 @@ export default function HeroFusion({ solo = false }) {
         const segLen = SEQ_BURST_MS + SEQ_GAP_MS;
         const seg = Math.floor(local / segLen);
         const inSeg = local - seg * segLen;
+        /* Each of the three bursts swaps to the next picture in turn */
+        const segBase = (eff.baseIdx + seg + 1) % n;
         if (inSeg < SEQ_BURST_MS) {
-          drawBurst(inSeg, seq.baseIdx + seg * 7, SEQ_BURST_MS, altFor(seq.baseIdx + seg));
+          drawBurst(inSeg, seq.baseIdx + seg * 7, SEQ_BURST_MS, segBase);
           eff.dirty = true;
-        } else if (eff.dirty) {
+        } else {
+          /* Between bursts, rest on the picture just swapped in */
+          const restBase = (eff.baseIdx + seg + 1) % n;
+          const prev = eff.baseIdx;
+          eff.baseIdx = restBase;
           drawClean();
+          eff.baseIdx = prev;
           eff.dirty = false;
         }
         return;
@@ -617,15 +640,17 @@ export default function HeroFusion({ solo = false }) {
 
       const end = eff.burstAt + eff.burstDur;
       if (now >= end) {
+        /* Commit the swap: the new picture is now the resting one */
+        eff.baseIdx = eff.nextBaseIdx;
         schedule(now);
       } else if (now >= eff.burstAt) {
-        /* Main burst: one of the smiles shows through the tears */
-        drawBurst(now - eff.burstAt, eff.burstIdx, eff.burstDur, eff.alts[eff.altIdx] || null);
+        /* Main burst: the whole picture glitch-swaps to the next one */
+        drawBurst(now - eff.burstAt, eff.burstIdx, eff.burstDur, eff.nextBaseIdx);
         eff.dirty = true;
         return;
       } else if (now >= eff.warnAt && now < eff.warnAt + eff.warnDur) {
-        /* Warning spark: short, neutral face */
-        drawBurst(now - eff.warnAt, eff.burstIdx * 13 + 5, eff.warnDur);
+        /* Warning spark: a short flicker on the current picture */
+        drawBurst(now - eff.warnAt, eff.burstIdx * 13 + 5, eff.warnDur, eff.baseIdx);
         eff.dirty = true;
         return;
       }
