@@ -31,6 +31,11 @@ import {
 
 const EASE = [0.23, 1, 0.32, 1];
 const CARTOON = "/images/faraz-neon.webp";
+/* Alternate expressions, revealed at random during glitches */
+const ALT_CARTOONS = [
+  "/images/faraz-neon-smile.webp",
+  "/images/faraz-neon-grin.webp",
+];
 
 /* Statement slot phrases. The first is the resting line. */
 const WORDS = [
@@ -249,9 +254,13 @@ export default function HeroFusion({ solo = false }) {
       w: 0,
       h: 0,
       dpr: 1,
+      alts: [], /* smile composites, revealed mid-glitch */
+      altIdx: 0,
       burstIdx: 0,
       burstAt: 0,
       burstDur: 0,
+      warnAt: Infinity, /* the short warning spark before the main burst */
+      warnDur: 0,
       ticAt: Infinity,
       seqCount: 0,
       lastNow: 0,
@@ -275,6 +284,17 @@ export default function HeroFusion({ solo = false }) {
     const img = new Image();
     let loadRetries = 0;
     let retryTimer = null;
+
+    /* The smile variants are optional extras: build() folds in whichever
+       have loaded; a failed load just means neutral-faced glitches. */
+    const altImgs = ALT_CARTOONS.map((srcUrl) => {
+      const a = new Image();
+      a.onload = () => {
+        if (!disposed && eff.built) build();
+      };
+      a.src = srcUrl;
+      return a;
+    });
 
     /* Flat tint copy of a canvas, alpha preserved */
     /* Detail-preserving tint: multiply the artwork with a color (keeps the
@@ -318,26 +338,37 @@ export default function HeroFusion({ solo = false }) {
            not a cutout), so no rims and no halftone: draw it whole, then
            melt every edge into the page with alpha fades so no rectangle
            border ever shows. */
-        const comp = document.createElement("canvas");
-        comp.width = cw;
-        comp.height = ch;
-        const cctx = comp.getContext("2d");
-        if (!cctx) throw new Error("no composite context");
-        cctx.drawImage(img, 0, 0, cw, ch);
+        /* One faded composite per artwork: full-bleed draw, then melt all
+           four edges so no rectangle border ever shows. */
+        const makeComp = (source) => {
+          const c = document.createElement("canvas");
+          c.width = cw;
+          c.height = ch;
+          const cctx = c.getContext("2d");
+          if (!cctx) throw new Error("no composite context");
+          cctx.drawImage(source, 0, 0, cw, ch);
+          cctx.globalCompositeOperation = "destination-out";
+          const fx = Math.round(cw * 0.13);
+          const fy = Math.round(ch * 0.1);
+          const fade = (x0, y0, x1, y1, rx, ry, rw, rh) => {
+            const g = cctx.createLinearGradient(x0, y0, x1, y1);
+            g.addColorStop(0, "rgba(0,0,0,0.95)");
+            g.addColorStop(1, "rgba(0,0,0,0)");
+            cctx.fillStyle = g;
+            cctx.fillRect(rx, ry, rw, rh);
+          };
+          fade(0, 0, fx, 0, 0, 0, fx, ch);
+          fade(cw, 0, cw - fx, 0, cw - fx, 0, fx, ch);
+          fade(0, 0, 0, fy, 0, 0, cw, fy);
+          fade(0, ch, 0, ch - fy * 1.6, 0, ch - fy * 1.6, cw, fy * 1.6);
+          cctx.globalCompositeOperation = "source-over";
+          return c;
+        };
 
-        cctx.globalCompositeOperation = "destination-out";
-        const fx = Math.round(cw * 0.13);
-        const fy = Math.round(ch * 0.1);
-        /* left, right, top, bottom */
-        cctx.fillStyle = (() => { const g = cctx.createLinearGradient(0, 0, fx, 0); g.addColorStop(0, "rgba(0,0,0,0.95)"); g.addColorStop(1, "rgba(0,0,0,0)"); return g; })();
-        cctx.fillRect(0, 0, fx, ch);
-        cctx.fillStyle = (() => { const g = cctx.createLinearGradient(cw, 0, cw - fx, 0); g.addColorStop(0, "rgba(0,0,0,0.95)"); g.addColorStop(1, "rgba(0,0,0,0)"); return g; })();
-        cctx.fillRect(cw - fx, 0, fx, ch);
-        cctx.fillStyle = (() => { const g = cctx.createLinearGradient(0, 0, 0, fy); g.addColorStop(0, "rgba(0,0,0,0.95)"); g.addColorStop(1, "rgba(0,0,0,0)"); return g; })();
-        cctx.fillRect(0, 0, cw, fy);
-        cctx.fillStyle = (() => { const g = cctx.createLinearGradient(0, ch, 0, ch - fy * 1.6); g.addColorStop(0, "rgba(0,0,0,0.95)"); g.addColorStop(1, "rgba(0,0,0,0)"); return g; })();
-        cctx.fillRect(0, ch - fy * 1.6, cw, fy * 1.6);
-        cctx.globalCompositeOperation = "source-over";
+        const comp = makeComp(img);
+        eff.alts = altImgs
+          .filter((a) => a.complete && a.naturalWidth > 0)
+          .map((a) => makeComp(a));
 
         /* Channel-split copies (magenta / cyan, both from the artwork) and
            the neon flash variant (saturation surge) */
@@ -404,17 +435,29 @@ export default function HeroFusion({ solo = false }) {
       const gap = BURST_MIN_GAP + seeded(bi, 51) * BURST_GAP_VAR;
       eff.burstAt = now + gap;
       eff.burstDur = BURST_MIN_MS + seeded(bi, 52) * BURST_VAR_MS;
+      /* Every glitch is two sparks: a short warning tic, a dark beat, then
+         the main burst (which reveals one of the smiles). */
+      eff.warnDur = 90 + seeded(bi, 91) * 60;
+      eff.warnAt = eff.burstAt - (150 + seeded(bi, 92) * 120) - eff.warnDur;
+      eff.altIdx = seeded(bi, 90) < 0.5 ? 0 : 1;
       eff.ticAt =
         seeded(bi, 59) < 0.35
           ? now + gap * (0.35 + 0.4 * seeded(bi, 58))
           : Infinity;
     };
 
+    /* The smile composite for a given seed, if the alt images loaded */
+    const altFor = (i) =>
+      eff.alts.length
+        ? eff.alts[Math.floor(seeded(i, 93) * eff.alts.length) % eff.alts.length]
+        : null;
+
     /* One burst frame: jittered base, 8-14 horizontal tears (full and
        partial width), 1-2 vertical slices, hard RGB split, neon flashes.
        Layout re-seeds every BURST_STEP_MS so the burst crackles. */
-    const drawBurst = (age, bi, dur) => {
+    const drawBurst = (age, bi, dur, altBase) => {
       const { ctx, w, h, dpr, comp, mag, blue, neon } = eff;
+      const base = altBase || comp;
       const cw = comp.width;
       const ch = comp.height;
       const stepIdx = Math.floor(age / BURST_STEP_MS);
@@ -424,7 +467,7 @@ export default function HeroFusion({ solo = false }) {
       /* Whole-head jitter */
       const hjx = (seeded(bi * 5 + stepIdx, 70) * 2 - 1) * 4;
       const hjy = (seeded(bi * 3 + stepIdx, 78) * 2 - 1) * 4;
-      ctx.drawImage(comp, hjx, hjy, w, h);
+      ctx.drawImage(base, hjx, hjy, w, h);
 
       /* Horizontal tears */
       const nSlices = 8 + Math.floor(seeded(bi, 53) * 6.99);
@@ -438,7 +481,8 @@ export default function HeroFusion({ solo = false }) {
         const sxx = partial ? seeded(sd, 65) * (w - sw) : 0;
         const dx =
           (seeded(sd, 57) < 0.5 ? -1 : 1) * (12 + seeded(sd, 56) * 48);
-        const src = seeded(sd, 60) < 0.3 ? neon : comp;
+        const src =
+          seeded(sd, 60) < 0.3 ? neon : seeded(sd, 72) < 0.5 ? comp : base;
         ctx.drawImage(
           src,
           Math.floor(sxx * dpr),
@@ -560,7 +604,7 @@ export default function HeroFusion({ solo = false }) {
         const seg = Math.floor(local / segLen);
         const inSeg = local - seg * segLen;
         if (inSeg < SEQ_BURST_MS) {
-          drawBurst(inSeg, seq.baseIdx + seg * 7, SEQ_BURST_MS);
+          drawBurst(inSeg, seq.baseIdx + seg * 7, SEQ_BURST_MS, altFor(seq.baseIdx + seg));
           eff.dirty = true;
         } else if (eff.dirty) {
           drawClean();
@@ -575,7 +619,13 @@ export default function HeroFusion({ solo = false }) {
       if (now >= end) {
         schedule(now);
       } else if (now >= eff.burstAt) {
-        drawBurst(now - eff.burstAt, eff.burstIdx, eff.burstDur);
+        /* Main burst: one of the smiles shows through the tears */
+        drawBurst(now - eff.burstAt, eff.burstIdx, eff.burstDur, eff.alts[eff.altIdx] || null);
+        eff.dirty = true;
+        return;
+      } else if (now >= eff.warnAt && now < eff.warnAt + eff.warnDur) {
+        /* Warning spark: short, neutral face */
+        drawBurst(now - eff.warnAt, eff.burstIdx * 13 + 5, eff.warnDur);
         eff.dirty = true;
         return;
       }
@@ -693,6 +743,9 @@ export default function HeroFusion({ solo = false }) {
       ro.disconnect();
       img.onload = null;
       img.onerror = null;
+      altImgs.forEach((a) => {
+        a.onload = null;
+      });
       wrap.removeEventListener("pointerenter", onEnter);
       wrap.removeEventListener("pointerdown", onDown);
       document.removeEventListener("visibilitychange", onVisibility);
