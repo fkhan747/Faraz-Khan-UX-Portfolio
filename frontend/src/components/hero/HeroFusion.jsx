@@ -883,7 +883,9 @@ export default function HeroFusion({ solo = false }) {
             --hxc-top-gap: clamp(10px, 3vh, 34px);
           }
           .hxc-solo .hxc-inner{ width:100%; }
-          .hxc-solo .hxc-stage{ height:100%; }
+          /* Explicit height (not %: the perspective wrapper is auto-height)
+             so the absolutely-centered copy + picture have a box to center in. */
+          .hxc-solo .hxc-stage{ height:calc(100vh - 90px); height:calc(100svh - 90px); }
         }
 
         .hxc-persp{ perspective:none; }
@@ -924,7 +926,7 @@ export default function HeroFusion({ solo = false }) {
         @media (min-width: 768px){
           .hxc-figure{
             position:absolute; right:0; margin:0;
-            top:var(--hxc-top-gap); bottom:auto;
+            top:50%; bottom:auto; transform:translateY(-50%);
           }
         }
 
@@ -1026,9 +1028,19 @@ export default function HeroFusion({ solo = false }) {
         .hxc-copy{ position:relative; margin-top:40px; will-change:transform; }
         @media (min-width: 768px){
           .hxc-copy{
-            position:absolute; left:0; top:var(--hxc-top-gap); bottom:auto;
-            width:min(50%, 640px); margin-top:0;
-            display:flex; flex-direction:column; justify-content:flex-start;
+            position:absolute; left:0; top:0; bottom:0;
+            width:min(50%, 620px); margin-top:0;
+            display:flex; flex-direction:column; justify-content:center;
+          }
+          /* Roomier vertical rhythm on taller displays so the block fills
+             the height and never reads as cramped-at-top. */
+          @media (min-height: 860px){
+            .hxc-chips{ margin-bottom:20px; }
+            .hxc-nameplate{ margin-bottom:20px; }
+            .hxc-statement{ margin-bottom:30px; }
+            .hxc-sub{ margin-bottom:34px; }
+            .hxc-cta-row{ margin-bottom:6px; }
+            .hxc-featured{ margin-top:26px; }
           }
         }
         .hxc-eyebrow{
@@ -1202,7 +1214,7 @@ export default function HeroFusion({ solo = false }) {
         }
       `}</style>
 
-      <div className="hxc-inner relative mx-auto w-full max-w-[1280px] px-6">
+      <div className="hxc-inner relative mx-auto w-full max-w-screen-2xl px-6 md:px-10 lg:px-16">
         <div className="hxc-persp">
           <motion.div className="hxc-stage" style={{ rotateX, rotateY }}>
             {/* Layer 1 · ambient glow */}
