@@ -4,23 +4,23 @@ import { projects, concepts } from "../data/content";
 import { Container, Grid } from "../components/Grid";
 import CaseCover from "../components/CaseCover";
 import Seo from "../components/Seo";
+import { NEON_CSS as AB_CSS, Squiggle as AbSquiggle } from "../components/neonStyle";
 
 const AGENTS = ["Accessibility", "Content & voice", "Visual hierarchy", "IA & nav", "Performance", "Mobile"];
 
 /* Compact agentic-feature card, sized to sit alongside a concept card in a
-   2-column grid. Same visual language as the larger banner that used to live
-   above the case studies (dark card + glow blobs + audit panel). */
+   2-column grid. Comic-panel treatment matching the About/Contact language. */
 function AgenticCard() {
   return (
     <Link
       to="/agentic-workflow"
       data-testid="agentic-feature-link"
-      className="group block relative overflow-hidden rounded-3xl dark-card p-7 md:p-8 lift h-full"
+      className="group ab-card ab-flat ab-c2 block relative overflow-hidden p-7 md:p-8 h-full"
     >
-      <div className="absolute -top-16 -right-10 w-64 h-64 rounded-full bg-[#075EFD] blur-3xl opacity-30 pointer-events-none" aria-hidden="true" />
-      <div className="absolute -bottom-20 left-1/4 w-56 h-56 rounded-full bg-[#F5379B] blur-3xl opacity-20 pointer-events-none" aria-hidden="true" />
+      <div className="absolute -top-16 -right-10 w-64 h-64 rounded-full bg-[#7B2FBE] blur-3xl opacity-30 pointer-events-none" aria-hidden="true" />
+      <div className="absolute -bottom-20 left-1/4 w-56 h-56 rounded-full bg-[#F0186C] blur-3xl opacity-20 pointer-events-none" aria-hidden="true" />
       <div className="relative flex flex-col h-full">
-        <span className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-5">
+        <span className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.25em] text-[#F0186C] mb-5">
           <Sparkles size={13} /> featured · interactive demo
         </span>
         <h3 className="font-display text-2xl md:text-3xl font-black leading-[1.05] tracking-tight text-[#F7F5FF] case-keep">
@@ -45,12 +45,12 @@ function AgenticCard() {
             ))}
           </div>
           <div className="mt-3 flex items-center gap-2 text-[10px] font-mono text-[#A29CB4]">
-            <ShieldCheck size={12} className="text-[#075EFD]" /> verified, 1 prioritized report
+            <ShieldCheck size={12} className="text-[#17C3E8]" /> verified, 1 prioritized report
           </div>
         </div>
 
         <div className="mt-auto pt-6">
-          <span className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-white text-[#C71E73] text-sm font-semibold group-hover:bg-[#F5379B] group-hover:text-white transition-colors">
+          <span className="ab-btn w-full justify-center">
             Try the live demo <ArrowRight size={16} />
           </span>
         </div>
@@ -62,29 +62,38 @@ function AgenticCard() {
 export default function Projects() {
   return (
     <div data-testid="projects-page">
+      <style>{AB_CSS}</style>
       <Seo title="My Work" description="Selected UX case studies by Faraz Khan: FinVista, Aurora, Meridian, Jack of All Threads, and the Slate AI-native product concept." />
-      <section className="pt-12 pb-10">
+      <section className="pt-12 pb-10 relative overflow-hidden">
+        <AbSquiggle className="ab-sq-1" color="#F0186C" rot={-32} />
+        <span className="hidden md:block absolute right-[26%] top-16 z-0"><AbSquiggle className="ab-sq-2" color="#9B4DE0" rot={20} /></span>
+        <span className="hidden md:block absolute right-[7%] top-40 z-0"><AbSquiggle className="ab-sq-3" color="#17C3E8" rot={-14} /></span>
         <Container>
-        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-6">selected work</p>
+        <div className="relative z-10">
+        <div className="flex items-center gap-2 mb-6">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#F0186C] animate-pulse" />
+          <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F4F3FA]/80">selected work</span>
+        </div>
         <h1 className="font-display font-black leading-[0.95] text-[14vw] md:text-[8vw] lg:text-[7rem] tracking-tighter ">
-          c<span className="dot-o">a</span>se studies.
+          c<span className="ab-dot-o">a</span>se studies.
         </h1>
         <p className="mt-6 max-w-2xl text-lg md:text-xl text-[#F4F3FA]">
           Client work plus a self-initiated track of AI-native product concepts. Some are full case studies; a few are still being prepared, and I'm happy to walk you through those early on request.
         </p>
+        </div>
         </Container>
       </section>
 
-      {/* Client work - equal 2-column grid */}
+      {/* Client work - equal 2-column grid of comic panels */}
       <section className="pb-24" data-testid="client-work-section">
         <Container>
-        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-6">client work</p>
+        <p data-text="client work" className="ab-glitch inline-block text-[11px] font-mono uppercase tracking-[0.25em] text-[#F0186C] mb-6">client work</p>
         <Grid>
-          {projects.map((p, i) => (
+          {projects.map((p) => (
             <Link
               key={p.slug}
               to={`/case/${p.slug}`}
-              className={`col-span-12 md:col-span-6 group block rounded-3xl overflow-hidden lift rise rise-${(i % 6) + 1}`}
+              className="col-span-12 md:col-span-6 group block ab-card overflow-hidden"
               data-testid={`projects-card-${p.slug}`}
             >
               <CaseCover img={p.coverImg} title={p.title} subtitle={p.subtitle} year={p.year} comingSoon={p.comingSoon} titleAs="h2" />
@@ -97,7 +106,7 @@ export default function Projects() {
       {/* Self-initiated AI work: Slate (concept) + the AI agent live demo, side by side */}
       <section className="pb-24" data-testid="concepts-section">
         <Container>
-        <p className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-6">
+        <p className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.25em] text-[#F0186C] mb-6">
           <Sparkles size={13} /> self-initiated · ai-native
         </p>
         <h2 className="font-display font-black leading-[0.95] text-4xl md:text-6xl tracking-tighter mb-4">
@@ -110,15 +119,15 @@ export default function Projects() {
 
         <Grid>
           {/* Slate concept card - full height image card with a sleek blurb */}
-          {concepts.filter((c) => c.live !== false).map((c, i) => (
+          {concepts.filter((c) => c.live !== false).map((c) => (
             <div
               key={c.slug}
               data-testid={`concept-card-${c.slug}`}
-              className={`relative col-span-12 md:col-span-6 h-full rise rise-${(i % 6) + 1}`}
+              className="relative col-span-12 md:col-span-6 h-full"
             >
               <Link
                 to={c.href}
-                className="group relative flex flex-col h-full min-h-[420px] rounded-3xl overflow-hidden lift bg-[#15101F]"
+                className="group ab-card ab-flat ab-c1 relative flex flex-col h-full min-h-[420px] overflow-hidden bg-[#15101F]"
               >
                 <img
                   src={c.coverImg}
@@ -148,7 +157,7 @@ export default function Projects() {
                   target="_blank"
                   rel="noopener noreferrer"
                   data-testid={`concept-prototype-${c.slug}`}
-                  className="absolute top-4 left-4 z-10 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white text-[#C71E73] text-[10px] font-mono font-bold uppercase tracking-widest shadow-[0_6px_20px_-6px_rgba(245,55,155,0.55)] hover:bg-white/90 transition-colors"
+                  className="absolute top-4 left-4 z-10 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#F2D50F] text-[#100210] text-[10px] font-mono font-bold uppercase tracking-widest shadow-[3px_3px_0_#F0186C] hover:-translate-y-0.5 transition-transform"
                 >
                   {c.status} <ArrowUpRight size={13} />
                 </a>
@@ -157,7 +166,7 @@ export default function Projects() {
           ))}
 
           {/* Agentic-audit live demo card */}
-          <div className="col-span-12 md:col-span-6 rise rise-2">
+          <div className="col-span-12 md:col-span-6">
             <AgenticCard />
           </div>
         </Grid>

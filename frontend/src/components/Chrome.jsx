@@ -19,8 +19,7 @@ const NAV = [
 ];
 
 const navItem = ({ isActive }) =>
-  `px-3 md:px-4 py-2.5 rounded-full text-[13px] md:text-sm font-semibold whitespace-nowrap transition-colors
-   ${isActive ? "bg-[#075EFD] text-white" : "text-[#1A1326]/70 hover:text-[#100210] hover:bg-[#1A1326]/10"}`;
+  `nav-comic ${isActive ? "nav-comic-current" : ""} inline-flex items-center px-3.5 md:px-4 py-2 text-[13px] md:text-sm font-semibold whitespace-nowrap`;
 
 export default function Chrome() {
   const [open, setOpen] = useState(false);
@@ -37,7 +36,7 @@ export default function Chrome() {
       {/* Sticky top bar, aligned to body-content width, nudged down from the top */}
       <header className="fixed top-0 inset-x-0 z-50 pt-7 pointer-events-none" data-testid="global-header">
         <Container>
-          <div className="pointer-events-auto flex items-center justify-between gap-3 rounded-full bg-white/95 backdrop-blur-md border border-[#075EFD]/15 pl-4 md:pl-5 pr-3 md:pr-7 py-2.5 shadow-[0_0_44px_-4px_rgba(7,94,253,0.5)]">
+          <div className="nav-shell pointer-events-auto flex items-center justify-between gap-3 rounded-2xl pl-4 md:pl-5 pr-3 md:pr-7 py-2.5">
             {/* Left: logo + nav links (links hidden on phones) */}
             <div className="flex items-center gap-0.5 md:gap-1 min-w-0">
               <Link
@@ -49,7 +48,7 @@ export default function Chrome() {
               >
                 <Logo className="h-12 w-auto" />
               </Link>
-              <div className="hidden sm:flex items-center gap-0.5 md:gap-1">
+              <div className="hidden sm:flex items-center gap-2 md:gap-2.5">
                 {NAV.map((item) => (
                   <NavLink key={item.to} to={item.to} data-testid={`nav-${item.label.toLowerCase()}`} className={navItem}>
                     {item.label}
@@ -61,7 +60,7 @@ export default function Chrome() {
             {/* Right: desktop CTA, or hamburger on phones */}
             <BookCallButton
               data-testid="sidebar-book-call"
-              className="btn-comic hidden sm:inline-flex ml-2 items-center px-4 md:px-5 py-2.5 text-[13px] md:text-sm font-semibold capitalize whitespace-nowrap flex-shrink-0"
+              className="btn-comic btn-comic-yellow hidden sm:inline-flex ml-2 items-center px-4 md:px-5 py-2.5 text-[13px] md:text-sm font-semibold capitalize whitespace-nowrap flex-shrink-0"
             >
               Book a call →
             </BookCallButton>
@@ -71,7 +70,7 @@ export default function Chrome() {
               aria-label={open ? "Close menu" : "Open menu"}
               aria-expanded={open}
               data-testid="nav-menu-toggle"
-              className="sm:hidden flex-shrink-0 h-10 w-10 grid place-items-center rounded-full border border-[#075EFD]/25 text-[#100210] hover:bg-[#1A1326]/10 transition-colors"
+              className="sm:hidden flex-shrink-0 h-10 w-10 grid place-items-center rounded-full border border-[#7B2FBE]/30 text-[#100210] hover:bg-[#1A1326]/10 transition-colors"
             >
               {open ? <X size={20} /> : <Menu size={20} />}
             </button>
@@ -80,7 +79,7 @@ export default function Chrome() {
           {/* Mobile sheet */}
           {open && (
             <div
-              className="sm:hidden pointer-events-auto mt-2 rounded-3xl bg-white/97 backdrop-blur-md border border-[#075EFD]/15 shadow-[0_0_44px_-4px_rgba(7,94,253,0.5)] p-2"
+              className="nav-shell sm:hidden pointer-events-auto mt-2 rounded-3xl p-2"
               data-testid="nav-mobile-sheet"
             >
               {NAV.map((item) => (
@@ -89,16 +88,14 @@ export default function Chrome() {
                   to={item.to}
                   onClick={() => setOpen(false)}
                   className={({ isActive }) =>
-                    `block px-4 py-3 rounded-2xl text-sm font-semibold transition-colors ${
-                      isActive ? "bg-[#075EFD] text-white" : "text-[#1A1326]/80 hover:bg-[#1A1326]/10"
-                    }`
+                    `nav-comic ${isActive ? "nav-comic-current" : ""} flex w-full items-center px-4 py-3 mb-2 text-sm font-semibold`
                   }
                 >
                   {item.label}
                 </NavLink>
               ))}
               <BookCallButton
-                className="btn-comic w-full mt-1 inline-flex items-center justify-center px-4 py-3 text-sm font-semibold capitalize"
+                className="btn-comic btn-comic-yellow w-full mt-1 inline-flex items-center justify-center px-4 py-3 text-sm font-semibold capitalize"
               >
                 Book a call →
               </BookCallButton>
