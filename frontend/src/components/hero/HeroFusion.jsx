@@ -959,15 +959,10 @@ export default function HeroFusion({ solo = false }) {
           background:linear-gradient(180deg, rgba(16,2,16,0) 0%, rgba(16,2,16,0.35) 60%, rgba(16,2,16,0.85) 100%);
         }
 
-        /* Chips: one glass row near the head */
-        .hxc-chips{
-          position:absolute; right:2%;
-          bottom:calc(var(--hxc-head-w) * 0.08);
-          will-change:transform;
-        }
+        /* Chips: one glass row at the top of the copy column */
+        .hxc-chips{ margin-bottom:14px; }
         .hxc-chips-row{
-          display:flex; gap:10px;
-          animation:hxc-floaty 6s ease-in-out 0.7s infinite;
+          display:flex; flex-wrap:wrap; gap:10px;
         }
         .hxc-chip-card{
           display:inline-flex; align-items:center; gap:8px;
@@ -1287,26 +1282,6 @@ export default function HeroFusion({ solo = false }) {
               </motion.div>
 
 
-              {/* Chips: one glass row, below-right of the head */}
-              <motion.div
-                className="hxc-chips"
-                style={{ x: chipX, y: chipY, z: 120 }}
-                aria-hidden="true"
-              >
-                <motion.div {...entrance(0.5, 10, 0.5)}>
-                  <div className="hxc-chips-row">
-                    <span className="hxc-chip-card">
-                      <span className="hxc-dot hxc-dot-m" />
-                      12+ yrs
-                    </span>
-                    <span className="hxc-chip-card">
-                      <span className="hxc-dot hxc-dot-b" />
-                      UX · data · code
-                    </span>
-                  </div>
-                </motion.div>
-              </motion.div>
-
             </div>
 
             {/* Foreground copy */}
@@ -1314,6 +1289,24 @@ export default function HeroFusion({ solo = false }) {
               className="hxc-copy"
               style={{ x: copyX, y: copyY, z: 50 }}
             >
+              {/* Glass chips, above the eyebrow */}
+              <motion.div
+                className="hxc-chips"
+                aria-hidden="true"
+                {...entrance(0.2, 10, 0.5)}
+              >
+                <div className="hxc-chips-row">
+                  <span className="hxc-chip-card">
+                    <span className="hxc-dot hxc-dot-m" />
+                    12+ yrs
+                  </span>
+                  <span className="hxc-chip-card">
+                    <span className="hxc-dot hxc-dot-b" />
+                    UX · data · code
+                  </span>
+                </div>
+              </motion.div>
+
               <motion.p className="hxc-eyebrow" {...entrance(0.26, 14)}>
                 SENIOR UX LEAD · ENTERPRISE, FINTECH &amp; ANALYTICS
                 <span className="hxc-cursor" aria-hidden="true">▍</span>
