@@ -752,7 +752,7 @@ export default function HeroFusion({ solo = false }) {
           overflow:hidden;
           --hxc-name-size: clamp(52px, 18vw, 84px);
           --hxc-head-w: min(58vw, 300px);
-          --hxc-walker-w: 42px;
+          --hxc-walker-w: 27px;
           --hxc-walker-h: 64px;
         }
         @media (min-width: 768px){
@@ -762,8 +762,8 @@ export default function HeroFusion({ solo = false }) {
             --hxc-st-size: clamp(30px, 3.6vw, 50px);
             --hxc-name-size: calc(var(--hxc-st-size) * 4.729);
             --hxc-head-w: min(38vw, calc((100svh - 200px) * 0.667));
-            --hxc-walker-h: clamp(56px, 9.2svh, 88px);
-            --hxc-walker-w: calc(var(--hxc-walker-h) * 0.66);
+            --hxc-walker-h: clamp(64px, 10.5svh, 100px);
+            --hxc-walker-w: calc(var(--hxc-walker-h) * 0.42);
           }
         }
         @media (min-width: 768px) and (max-height: 700px){
@@ -931,12 +931,6 @@ export default function HeroFusion({ solo = false }) {
           animation:hxc-bobble 0.6s ease-in-out infinite;
           filter:drop-shadow(0 2px 6px rgba(16,2,16,0.6));
         }
-        .hxc-ball2{
-          position:absolute;
-          width:22%; height:auto; aspect-ratio:1;
-          left:64%; bottom:-2%;
-          animation:hxc-juggle 0.6s ease-in-out -0.3s infinite;
-        }
 
         /* Fallback portrait, plain img, only if the canvas pipeline fails */
         .hxc-cutout{
@@ -1103,10 +1097,6 @@ export default function HeroFusion({ solo = false }) {
           0%, 50%{ transform:scaleX(1); }
           50.01%, 100%{ transform:scaleX(-1); }
         }
-        @keyframes hxc-juggle{
-          0%, 100%{ transform:translateY(0); }
-          50%{ transform:translateY(-160%); }
-        }
         @keyframes hxc-bobble{
           0%, 100%{ transform:rotate(3deg); }
           50%{ transform:rotate(-3deg); }
@@ -1160,7 +1150,6 @@ export default function HeroFusion({ solo = false }) {
           .hxc-stroll,
           .hxc-flip,
           .hxc-messi,
-          .hxc-ball2,
           .hxc-word,
           .hxc-btn{ animation:none !important; }
           .hxc-cursor{ display:none; }
@@ -1313,35 +1302,10 @@ export default function HeroFusion({ solo = false }) {
                           <div className="hxc-messi-wrap">
                             <img
                               className="hxc-messi"
-                              src="/images/messi-cartoon-2.webp"
+                              src="/images/messi-barca.webp"
                               alt=""
                               draggable="false"
                             />
-                            <svg className="hxc-ball2" viewBox="0 0 24 24" focusable="false" aria-hidden="true">
-                              <defs>
-                                <clipPath id="hxcBallClip">
-                                  <circle cx="12" cy="12" r="10.6" />
-                                </clipPath>
-                              </defs>
-                              <circle cx="12" cy="12" r="10.6" fill="#FFFFFF" stroke="#111111" strokeWidth="1.6" />
-                              <g clipPath="url(#hxcBallClip)">
-                                <polygon points="12,8 15.8,10.76 14.35,15.24 9.65,15.24 8.2,10.76" fill="#111111" />
-                                <g stroke="#111111" strokeWidth="1.3">
-                                  <line x1="12" y1="8" x2="12" y2="2" />
-                                  <line x1="15.8" y1="10.76" x2="21.5" y2="8.9" />
-                                  <line x1="14.35" y1="15.24" x2="17.9" y2="20.1" />
-                                  <line x1="9.65" y1="15.24" x2="6.1" y2="20.1" />
-                                  <line x1="8.2" y1="10.76" x2="2.5" y2="8.9" />
-                                </g>
-                                <g fill="#111111">
-                                  <circle cx="12" cy="1.4" r="2.6" />
-                                  <circle cx="22.2" cy="8.6" r="2.6" />
-                                  <circle cx="18.4" cy="20.9" r="2.6" />
-                                  <circle cx="5.6" cy="20.9" r="2.6" />
-                                  <circle cx="1.8" cy="8.6" r="2.6" />
-                                </g>
-                              </g>
-                            </svg>
                           </div>
                         </div>
                       </div>
