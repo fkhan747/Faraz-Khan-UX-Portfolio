@@ -135,7 +135,7 @@ export default function HeroFusion({ solo = false }) {
         cur: WORDS[idx % WORDS.length],
         n: idx,
       });
-    }, 2000);
+    }, 3500);
     return () => clearInterval(timer);
   }, [reduced]);
 
@@ -152,7 +152,11 @@ export default function HeroFusion({ solo = false }) {
       const lw = line.getBoundingClientRect().width;
       if (nw > 0 && lw > 0) {
         const cur = parseFloat(getComputedStyle(name).fontSize);
-        name.style.fontSize = `${((cur * lw) / nw).toFixed(2)}px`;
+        const target = (cur * lw) / nw;
+        /* Cap by viewport height so the masthead never forces a scroll on
+           short laptops (it just ends a touch before the "s" there). */
+        const cap = window.innerHeight * 0.27;
+        name.style.fontSize = `${Math.min(target, cap).toFixed(2)}px`;
       }
     };
     fit();
@@ -830,8 +834,6 @@ export default function HeroFusion({ solo = false }) {
           overflow:hidden;
           --hxc-name-size: clamp(52px, 18vw, 84px);
           --hxc-head-w: min(58vw, 300px);
-          --hxc-walker-w: 27px;
-          --hxc-walker-h: 64px;
         }
         @media (min-width: 768px){
           .hxc-hero{
@@ -840,15 +842,24 @@ export default function HeroFusion({ solo = false }) {
             --hxc-st-size: clamp(30px, 3.6vw, 50px);
             --hxc-name-size: calc(var(--hxc-st-size) * 4.729);
             --hxc-head-w: min(38vw, calc((100svh - 200px) * 0.667));
-            --hxc-walker-h: clamp(64px, 10.5svh, 100px);
-            --hxc-walker-w: calc(var(--hxc-walker-h) * 0.42);
           }
         }
-        @media (min-width: 768px) and (max-height: 700px){
+        /* Shorter viewports (laptops ~768 tall): shrink the masthead and
+           tighten the vertical rhythm so nothing clips or scrolls. */
+        @media (min-width: 768px) and (max-height: 840px){
           .hxc-hero{
-            --hxc-st-size: clamp(24px, 2.8vw, 38px);
-            --hxc-head-w: min(34vw, calc((100svh - 180px) * 0.667));
+            --hxc-st-size: clamp(26px, 3vw, 42px);
+            --hxc-head-w: min(34vw, calc((100svh - 170px) * 0.667));
           }
+          .hxc-solo{ --hxc-top-gap: clamp(6px, 1.5vh, 16px); }
+          .hxc-chips{ margin-bottom:9px; }
+          .hxc-nameplate{ margin-bottom:6px; }
+          .hxc-statement{ margin-bottom:12px; }
+          .hxc-sub{ margin-bottom:16px; }
+        }
+        @media (min-width: 768px) and (max-height: 680px){
+          .hxc-hero{ --hxc-st-size: clamp(22px, 2.6vw, 34px); }
+          .hxc-sub{ font-size:14px; margin-bottom:12px; }
         }
 
         /* Solo: full-viewport standalone landing. The site main pads 90px,
@@ -865,11 +876,14 @@ export default function HeroFusion({ solo = false }) {
             max-height:calc(100svh - 90px);
             min-height:0;
             overflow:hidden;
-            display:flex; align-items:center;
+            display:flex; align-items:stretch;
             padding-top:0; padding-bottom:0;
+            /* Shared gap below the navbar: the copy AND the picture both
+               start here, so their tops align with equal padding. */
+            --hxc-top-gap: clamp(10px, 3vh, 34px);
           }
           .hxc-solo .hxc-inner{ width:100%; }
-          .hxc-solo .hxc-stage{ height:clamp(520px, calc(100svh - 150px), 900px); }
+          .hxc-solo .hxc-stage{ height:100%; }
         }
 
         .hxc-persp{ perspective:none; }
@@ -908,7 +922,10 @@ export default function HeroFusion({ solo = false }) {
           transform-style:preserve-3d;
         }
         @media (min-width: 768px){
-          .hxc-figure{ position:absolute; right:0; bottom:0; margin:0; }
+          .hxc-figure{
+            position:absolute; right:0; margin:0;
+            top:var(--hxc-top-gap); bottom:auto;
+          }
         }
 
         .hxc-head-layer{
@@ -957,13 +974,10 @@ export default function HeroFusion({ solo = false }) {
           display:block; touch-action:pan-y;
         }
 
-        /* The nameplate: white FARAZ masthead in the copy column. The top
-           padding reserves the airspace the footballer walks through. */
+        /* The nameplate: white FARAZ masthead in the copy column. */
         .hxc-nameplate{
-          --hxc-np-pad: calc(var(--hxc-walker-h) * 0.92);
           position:relative;
           width:max-content; max-width:100%;
-          padding-top:var(--hxc-np-pad);
           margin-bottom:14px;
         }
         .hxc-clip{ overflow:hidden; padding-top:0.06em; font-size:var(--hxc-name-size); }
@@ -977,37 +991,6 @@ export default function HeroFusion({ solo = false }) {
           white-space:nowrap;
           color:#F4F3FA;
           will-change:transform;
-        }
-
-        /* The walker rail: a faint line on the name's top edge */
-        .hxc-walk-layer{
-          position:absolute; left:0; right:0; top:0;
-          pointer-events:none; will-change:transform;
-        }
-        .hxc-walkline{
-          position:absolute; left:0; right:0;
-          top:calc(var(--hxc-np-pad) + var(--hxc-name-size) * 0.16);
-          height:0;
-          border-top:1.5px solid rgba(244,243,250,0.12);
-        }
-        .hxc-stroll{
-          position:absolute; left:0; right:var(--hxc-walker-w); top:0; height:0;
-          animation:hxc-stroll 60s linear infinite;
-          will-change:transform;
-        }
-        .hxc-flip{
-          position:absolute; left:0; bottom:0;
-          width:var(--hxc-walker-w); height:var(--hxc-walker-h);
-          animation:hxc-flip 60s linear infinite;
-        }
-        /* Faraz's supplied Messi caricature: the whole figure bobbles as he
-           strolls, a ball bounces at his boots. */
-        .hxc-messi-wrap{ position:relative; width:100%; height:100%; }
-        .hxc-messi{
-          display:block; height:100%; width:auto;
-          transform-origin:50% 96%;
-          animation:hxc-bobble 0.6s ease-in-out infinite;
-          filter:drop-shadow(0 2px 6px rgba(16,2,16,0.6));
         }
 
         /* Fallback portrait, plain img, only if the canvas pipeline fails */
@@ -1043,9 +1026,9 @@ export default function HeroFusion({ solo = false }) {
         .hxc-copy{ position:relative; margin-top:40px; will-change:transform; }
         @media (min-width: 768px){
           .hxc-copy{
-            position:absolute; left:0; top:0; bottom:0;
+            position:absolute; left:0; top:var(--hxc-top-gap); bottom:auto;
             width:min(50%, 640px); margin-top:0;
-            display:flex; flex-direction:column; justify-content:center;
+            display:flex; flex-direction:column; justify-content:flex-start;
           }
         }
         .hxc-eyebrow{
@@ -1099,7 +1082,7 @@ export default function HeroFusion({ solo = false }) {
           position:relative;
           display:inline-flex; align-items:center; justify-content:center;
           border-radius:12px;
-          border:2px solid #F4F3FA;
+          border:2px solid #F2D50F;
           padding:13px 26px;
           font-family:'Outfit', sans-serif; font-weight:700; font-size:15px;
           letter-spacing:0.02em; text-decoration:none; cursor:pointer;
@@ -1166,19 +1149,6 @@ export default function HeroFusion({ solo = false }) {
           0%, 100%{ opacity:1; }
           50%{ opacity:0; }
         }
-        @keyframes hxc-stroll{
-          0%{ transform:translateX(0); }
-          50%{ transform:translateX(100%); }
-          100%{ transform:translateX(0); }
-        }
-        @keyframes hxc-flip{
-          0%, 50%{ transform:scaleX(1); }
-          50.01%, 100%{ transform:scaleX(-1); }
-        }
-        @keyframes hxc-bobble{
-          0%, 100%{ transform:rotate(3deg); }
-          50%{ transform:rotate(-3deg); }
-        }
         @keyframes hxc-word-in{
           from{ opacity:0; transform:translateY(0.55em); filter:blur(6px); }
           to{ opacity:1; transform:translateY(0); filter:blur(0); }
@@ -1225,9 +1195,6 @@ export default function HeroFusion({ solo = false }) {
           .hxc-chips-row,
           .hxc-orb-blue,
           .hxc-orb-magenta,
-          .hxc-stroll,
-          .hxc-flip,
-          .hxc-messi,
           .hxc-word,
           .hxc-btn{ animation:none !important; }
           .hxc-cursor{ display:none; }
@@ -1249,7 +1216,7 @@ export default function HeroFusion({ solo = false }) {
               <div className="hxc-orb hxc-orb-magenta" />
             </motion.div>
 
-            {/* The figure cluster: head behind, name in front, walker, chips */}
+            {/* The figure cluster: the glitching portrait */}
             <div className="hxc-figure">
               {/* Spider-sense squiggles: electric sparks that crackle in
                   perfect sync with the canvas glitch (hxc-sensing class,
@@ -1337,10 +1304,11 @@ export default function HeroFusion({ solo = false }) {
 
             </div>
 
-            {/* Foreground copy */}
+            {/* Foreground copy. No translateZ: pushing it forward in the
+                perspective upscaled and blurred all the text. */}
             <motion.div
               className="hxc-copy"
-              style={{ x: copyX, y: copyY, z: 50 }}
+              style={{ x: copyX, y: copyY }}
             >
               {/* Glass chips, above the eyebrow */}
               <motion.div
@@ -1365,29 +1333,11 @@ export default function HeroFusion({ solo = false }) {
                 <span className="hxc-cursor" aria-hidden="true">▍</span>
               </motion.p>
 
-              {/* The white FARAZ masthead, walker strolling its top edge */}
+              {/* The white FARAZ masthead */}
               <div className="hxc-nameplate" aria-hidden="true">
                 <div className="hxc-clip">
                   <motion.div ref={nameRef} className="hxc-name" {...rise(0.3)}>
                     faraz.
-                  </motion.div>
-                </div>
-                <div className="hxc-walk-layer">
-                  <motion.div {...fadeOnly(0.5, 0.6)}>
-                    <div className="hxc-walkline">
-                      <div className="hxc-stroll">
-                        <div className="hxc-flip">
-                          <div className="hxc-messi-wrap">
-                            <img
-                              className="hxc-messi"
-                              src="/images/messi-barca.webp"
-                              alt=""
-                              draggable="false"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
                   </motion.div>
                 </div>
               </div>
