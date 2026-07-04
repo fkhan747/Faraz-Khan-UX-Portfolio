@@ -31,10 +31,11 @@ import {
 
 const EASE = [0.23, 1, 0.32, 1];
 const CARTOON = "/images/faraz-neon.webp";
-/* Alternate expressions, revealed at random during glitches */
+/* Alternate expressions, swapped in during glitches */
 const ALT_CARTOONS = [
   "/images/faraz-neon-smile.webp",
   "/images/faraz-neon-grin.webp",
+  "/images/faraz-neon-brow.webp",
 ];
 
 /* Statement slot phrases. The first is the resting line. */
