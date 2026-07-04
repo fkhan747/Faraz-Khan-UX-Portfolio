@@ -247,17 +247,17 @@ h5.font-display, h6.font-display {
    button that appears on every page. Magenta fill, electric-yellow hard
    shadow, presses INTO the page, glitch tic on hover. */
 .btn-comic {
-  background: #F0186C;
+  background: #7B2FBE;
   color: #fff;
   border: 2px solid #100210;
   border-radius: 12px;
-  box-shadow: 4px 4px 0 #F2D50F;
+  box-shadow: 4px 4px 0 #F0186C;
   transition: transform 0.14s ease-out, box-shadow 0.14s ease-out;
 }
 .btn-comic:active {
   animation: none;
   transform: translate(3px, 3px) scale(0.98);
-  box-shadow: 1px 1px 0 #F2D50F;
+  box-shadow: 1px 1px 0 #F0186C;
 }
 .btn-comic:focus-visible {
   outline: 2px solid #075EFD;
@@ -270,8 +270,8 @@ h5.font-display, h6.font-display {
 }
 @keyframes btn-comic-glitch {
   0%, 24%, 100% { text-shadow: none; transform: translate(0, 0); }
-  8%  { text-shadow: -2px 0 #F2D50F, 2px 0 #100210; transform: translate(-1px, 1px); }
-  16% { text-shadow: 2px 0 #F2D50F, -2px 0 #100210; transform: translate(1px, -1px); }
+  8%  { text-shadow: -2px 0 #F0186C, 2px 0 #100210; transform: translate(-1px, 1px); }
+  16% { text-shadow: 2px 0 #F0186C, -2px 0 #100210; transform: translate(1px, -1px); }
 }
 @media (prefers-reduced-motion: reduce) {
   .btn-comic:hover { animation: none; }

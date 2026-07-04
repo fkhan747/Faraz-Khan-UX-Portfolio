@@ -30,7 +30,7 @@ import {
      1366x768, 1440x900 and 1920x1080 (section = 100svh - 90px main pad) */
 
 const EASE = [0.23, 1, 0.32, 1];
-const CARTOON = "/images/faraz-cartoon.webp";
+const CARTOON = "/images/faraz-neon.webp";
 
 /* Statement slot phrases. The first is the resting line. */
 const WORDS = [
@@ -41,13 +41,9 @@ const WORDS = [
 ];
 const LONGEST_WORD = WORDS[3];
 
-/* Composite treatment */
-const RIM_OFFSET = 8; /* stereo rim offset, px */
-const HALFTONE_ALPHA = 0.07; /* comic print dots over the head */
-
 /* Ambient glitch rhythm */
-const BURST_MIN_GAP = 2200; /* quiet time between bursts, ms */
-const BURST_GAP_VAR = 1000; /* seeded extra gap, ms */
+const BURST_MIN_GAP = 5000; /* quiet time between bursts, ms (owner: one glitch every ~5s) */
+const BURST_GAP_VAR = 400; /* seeded extra gap, ms */
 const BURST_MIN_MS = 240; /* burst length floor, ms */
 const BURST_VAR_MS = 180; /* seeded extra burst length, ms */
 const BURST_STEP_MS = 60; /* slice re-seed cadence inside a burst, ms */
@@ -115,7 +111,7 @@ export default function HeroFusion({ solo = false }) {
   const [interactive, setInteractive] = useState(false);
   const [failed, setFailed] = useState(false);
   const [ready, setReady] = useState(false);
-  const [aspect, setAspect] = useState("894 / 1233");
+  const [aspect, setAspect] = useState("880 / 1320");
 
   /* Rotating statement slot */
   const [wordState, setWordState] = useState({
@@ -281,15 +277,20 @@ export default function HeroFusion({ solo = false }) {
     let retryTimer = null;
 
     /* Flat tint copy of a canvas, alpha preserved */
+    /* Detail-preserving tint: multiply the artwork with a color (keeps the
+       drawing visible inside the tint), then restore the original alpha. */
     const tinted = (src, paint) => {
       const c = document.createElement("canvas");
       c.width = src.width;
       c.height = src.height;
       const t = c.getContext("2d");
       t.drawImage(src, 0, 0);
-      t.globalCompositeOperation = "source-in";
+      t.globalCompositeOperation = "multiply";
       t.fillStyle = paint;
       t.fillRect(0, 0, c.width, c.height);
+      t.globalCompositeOperation = "destination-in";
+      t.drawImage(src, 0, 0);
+      t.globalCompositeOperation = "source-over";
       return c;
     };
 
@@ -313,90 +314,54 @@ export default function HeroFusion({ solo = false }) {
         const cw = canvas.width;
         const ch = canvas.height;
 
-        /* Scratch silhouette of the head, refillable */
-        const scratch = document.createElement("canvas");
-        scratch.width = cw;
-        scratch.height = ch;
-        const sctx = scratch.getContext("2d");
-        if (!sctx) throw new Error("no scratch context");
-        const silhouette = (paint) => {
-          sctx.globalCompositeOperation = "source-over";
-          sctx.clearRect(0, 0, cw, ch);
-          sctx.drawImage(img, 0, 0, cw, ch);
-          sctx.globalCompositeOperation = "source-in";
-          sctx.fillStyle = paint;
-          sctx.fillRect(0, 0, cw, ch);
-        };
-
-        /* Composite: rims behind, cartoon over (slight saturation boost
-           where canvas filters are supported), halftone, soft melt */
+        /* Composite: the neon artwork is FULL-BLEED on near-black (it is
+           not a cutout), so no rims and no halftone: draw it whole, then
+           melt every edge into the page with alpha fades so no rectangle
+           border ever shows. */
         const comp = document.createElement("canvas");
         comp.width = cw;
         comp.height = ch;
         const cctx = comp.getContext("2d");
         if (!cctx) throw new Error("no composite context");
-        const rim = Math.round(RIM_OFFSET * dpr);
-        silhouette("#F0186C");
-        cctx.drawImage(scratch, -rim, 0);
-        silhouette("#F2D50F");
-        cctx.drawImage(scratch, rim, 0);
-        if ("filter" in cctx) cctx.filter = "saturate(1.08)";
         cctx.drawImage(img, 0, 0, cw, ch);
-        if ("filter" in cctx) cctx.filter = "none";
 
-        /* Faint halftone dots, masked to the artwork (comic print) */
-        const tile = document.createElement("canvas");
-        tile.width = 10;
-        tile.height = 10;
-        const tctx = tile.getContext("2d");
-        if (tctx) {
-          tctx.fillStyle = "#100210";
-          tctx.beginPath();
-          tctx.arc(2.5, 2.5, 1.7, 0, Math.PI * 2);
-          tctx.moveTo(9.2, 7.5);
-          tctx.arc(7.5, 7.5, 1.7, 0, Math.PI * 2);
-          tctx.fill();
-          const pat = cctx.createPattern(tile, "repeat");
-          if (pat) {
-            cctx.globalCompositeOperation = "source-atop";
-            cctx.globalAlpha = HALFTONE_ALPHA;
-            cctx.fillStyle = pat;
-            cctx.fillRect(0, 0, cw, ch);
-            cctx.globalAlpha = 1;
-            cctx.globalCompositeOperation = "source-over";
-          }
-        }
-
-        /* Soft bottom melt as an alpha fade (the asset already fades at the
-           neck, this just settles it into the page) */
-        const fadeTop = Math.round(ch * 0.82);
-        const fg = cctx.createLinearGradient(0, fadeTop, 0, ch);
-        fg.addColorStop(0, "rgba(0,0,0,0)");
-        fg.addColorStop(0.6, "rgba(0,0,0,0.35)");
-        fg.addColorStop(1, "rgba(0,0,0,0.85)");
         cctx.globalCompositeOperation = "destination-out";
-        cctx.fillStyle = fg;
-        cctx.fillRect(0, fadeTop, cw, ch - fadeTop + 2);
+        const fx = Math.round(cw * 0.13);
+        const fy = Math.round(ch * 0.1);
+        /* left, right, top, bottom */
+        cctx.fillStyle = (() => { const g = cctx.createLinearGradient(0, 0, fx, 0); g.addColorStop(0, "rgba(0,0,0,0.95)"); g.addColorStop(1, "rgba(0,0,0,0)"); return g; })();
+        cctx.fillRect(0, 0, fx, ch);
+        cctx.fillStyle = (() => { const g = cctx.createLinearGradient(cw, 0, cw - fx, 0); g.addColorStop(0, "rgba(0,0,0,0.95)"); g.addColorStop(1, "rgba(0,0,0,0)"); return g; })();
+        cctx.fillRect(cw - fx, 0, fx, ch);
+        cctx.fillStyle = (() => { const g = cctx.createLinearGradient(0, 0, 0, fy); g.addColorStop(0, "rgba(0,0,0,0.95)"); g.addColorStop(1, "rgba(0,0,0,0)"); return g; })();
+        cctx.fillRect(0, 0, cw, fy);
+        cctx.fillStyle = (() => { const g = cctx.createLinearGradient(0, ch, 0, ch - fy * 1.6); g.addColorStop(0, "rgba(0,0,0,0.95)"); g.addColorStop(1, "rgba(0,0,0,0)"); return g; })();
+        cctx.fillRect(0, ch - fy * 1.6, cw, fy * 1.6);
         cctx.globalCompositeOperation = "source-over";
 
-        /* Channel-split copies and the neon flash variant */
+        /* Channel-split copies (magenta / cyan, both from the artwork) and
+           the neon flash variant (saturation surge) */
         const mag = tinted(comp, "#F0186C");
-        const blue = tinted(comp, "#F2D50F"); /* art yellow, keeps the old name */
+        const blue = tinted(comp, "#17C3E8"); /* art cyan, keeps the old name */
         const neon = document.createElement("canvas");
         neon.width = cw;
         neon.height = ch;
         const nctx = neon.getContext("2d");
         if (!nctx) throw new Error("no neon context");
-        nctx.drawImage(comp, 0, 0);
-        const ng = nctx.createLinearGradient(0, 0, cw, ch);
-        ng.addColorStop(0, "#F0186C");
-        ng.addColorStop(1, "#F2D50F");
-        nctx.globalCompositeOperation = "source-atop";
-        nctx.globalAlpha = 0.7;
-        nctx.fillStyle = ng;
-        nctx.fillRect(0, 0, cw, ch);
-        nctx.globalCompositeOperation = "source-over";
-        nctx.globalAlpha = 1;
+        if ("filter" in nctx) {
+          nctx.filter = "saturate(1.7) brightness(1.25)";
+          nctx.drawImage(comp, 0, 0);
+          nctx.filter = "none";
+        } else {
+          nctx.drawImage(comp, 0, 0);
+          nctx.globalCompositeOperation = "screen";
+          nctx.globalAlpha = 0.3;
+          nctx.drawImage(comp, 0, 0);
+          nctx.globalCompositeOperation = "destination-in";
+          nctx.globalAlpha = 1;
+          nctx.drawImage(comp, 0, 0);
+          nctx.globalCompositeOperation = "source-over";
+        }
 
         eff.ctx = ctx;
         eff.comp = comp;
@@ -796,7 +761,7 @@ export default function HeroFusion({ solo = false }) {
                statement font size (both Playfair, measured ratio). */
             --hxc-st-size: clamp(30px, 3.6vw, 50px);
             --hxc-name-size: calc(var(--hxc-st-size) * 4.729);
-            --hxc-head-w: min(36vw, 600px);
+            --hxc-head-w: min(38vw, calc((100svh - 200px) * 0.667));
             --hxc-walker-h: clamp(56px, 9.2svh, 88px);
             --hxc-walker-w: calc(var(--hxc-walker-h) * 0.66);
           }
@@ -804,7 +769,7 @@ export default function HeroFusion({ solo = false }) {
         @media (min-width: 768px) and (max-height: 700px){
           .hxc-hero{
             --hxc-st-size: clamp(24px, 2.8vw, 38px);
-            --hxc-head-w: min(33vw, 470px);
+            --hxc-head-w: min(34vw, calc((100svh - 180px) * 0.667));
           }
         }
 
@@ -859,13 +824,13 @@ export default function HeroFusion({ solo = false }) {
           position:relative;
           margin:0 auto;
           width:var(--hxc-head-w);
-          height:calc(var(--hxc-head-w) * 1.28);
+          height:calc(var(--hxc-head-w) * 1.5);
           display:flex; flex-direction:column; justify-content:flex-end;
           pointer-events:none;
           transform-style:preserve-3d;
         }
         @media (min-width: 768px){
-          .hxc-figure{ position:absolute; right:0; bottom:4%; margin:0; }
+          .hxc-figure{ position:absolute; right:0; bottom:0; margin:0; }
         }
 
         .hxc-head-layer{
@@ -973,19 +938,9 @@ export default function HeroFusion({ solo = false }) {
           animation:hxc-juggle 0.6s ease-in-out -0.3s infinite;
         }
 
-        /* Fallback portrait, CSS rims, only if the canvas pipeline fails */
-        .hxc-rim{
-          position:absolute; inset:0;
-          -webkit-mask-image:url('${CARTOON}');
-          mask-image:url('${CARTOON}');
-          -webkit-mask-size:100% 100%; mask-size:100% 100%;
-          -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
-        }
-        .hxc-rim-magenta{ background:#F0186C; transform:translateX(-8px); z-index:1; }
-        .hxc-rim-blue{ background:#F2D50F; transform:translateX(8px); z-index:2; }
+        /* Fallback portrait, plain img, only if the canvas pipeline fails */
         .hxc-cutout{
           position:relative; z-index:3; display:block; width:100%; height:auto;
-          filter:saturate(1.08);
         }
         .hxc-fade{
           position:absolute; left:-3%; right:-3%; bottom:-2px; height:20%; z-index:5; pointer-events:none;
@@ -1009,7 +964,7 @@ export default function HeroFusion({ solo = false }) {
         }
         .hxc-dot{ width:6px; height:6px; border-radius:9999px; flex:none; }
         .hxc-dot-m{ background:#F5379B; box-shadow:0 0 10px rgba(245,55,155,0.8); }
-        .hxc-dot-b{ background:#F2D50F; box-shadow:0 0 10px rgba(242,213,15,0.8); }
+        .hxc-dot-b{ background:#9B4DE0; box-shadow:0 0 10px rgba(155,77,224,0.8); }
 
         /* Foreground copy: left column, never touching the figure. Flex
            centering (not transform) because framer owns this transform. */
@@ -1083,22 +1038,22 @@ export default function HeroFusion({ solo = false }) {
         .hxc-btn:focus-visible{ outline:2px solid #2E78FF; outline-offset:3px; }
         .hxc-btn-primary{
           --hxc-rot: -1deg;
-          background:#F0186C; color:#F4F3FA;
-          box-shadow:5px 5px 0 #F2D50F;
+          background:#7B2FBE; color:#F4F3FA;
+          box-shadow:5px 5px 0 #F0186C;
         }
         .hxc-btn-ghost{
           --hxc-rot: 1deg;
           background:transparent; color:#F4F3FA;
-          box-shadow:5px 5px 0 #F0186C;
+          box-shadow:5px 5px 0 #7B2FBE;
         }
         .hxc-btn-primary:active{
           transform:translate(3px, 3px) rotate(var(--hxc-rot)) scale(0.97);
-          box-shadow:2px 2px 0 #F2D50F;
+          box-shadow:2px 2px 0 #F0186C;
           animation:none;
         }
         .hxc-btn-ghost:active{
           transform:translate(3px, 3px) rotate(var(--hxc-rot)) scale(0.97);
-          box-shadow:2px 2px 0 #F0186C;
+          box-shadow:2px 2px 0 #7B2FBE;
           animation:none;
         }
         @media (hover: hover) and (pointer: fine){
@@ -1113,14 +1068,14 @@ export default function HeroFusion({ solo = false }) {
         }
         .hxc-featured-link{
           color:#F4F3FA; text-decoration:underline;
-          text-decoration-color:#F0186C; text-decoration-thickness:2px;
+          text-decoration-color:#9B4DE0; text-decoration-thickness:2px;
           text-underline-offset:4px;
         }
         .hxc-featured-link:focus-visible{
           outline:2px solid #2E78FF; outline-offset:3px; border-radius:2px;
         }
         @media (hover: hover) and (pointer: fine){
-          .hxc-featured-link:hover{ color:#F2D50F; text-decoration-color:#F2D50F; }
+          .hxc-featured-link:hover{ color:#F0186C; text-decoration-color:#F0186C; }
         }
 
         @keyframes hxc-floaty{
@@ -1173,17 +1128,17 @@ export default function HeroFusion({ solo = false }) {
           5%{
             clip-path:inset(8% -8px 55% -8px);
             transform:translate(-2px, 1px) rotate(var(--hxc-rot));
-            text-shadow:-2px 0 #F0186C, 2px 0 #F2D50F;
+            text-shadow:-2px 0 #F0186C, 2px 0 #7B2FBE;
           }
           10%{
             clip-path:inset(58% -8px 6% -8px);
             transform:translate(2px, -2px) rotate(var(--hxc-rot));
-            text-shadow:-2px 0 #F0186C, 2px 0 #F2D50F;
+            text-shadow:-2px 0 #F0186C, 2px 0 #7B2FBE;
           }
           16%{
             clip-path:inset(30% -8px 30% -8px);
             transform:translate(-1px, 2px) rotate(var(--hxc-rot));
-            text-shadow:-2px 0 #F0186C, 2px 0 #F2D50F;
+            text-shadow:-2px 0 #F0186C, 2px 0 #7B2FBE;
           }
           22%{
             clip-path:inset(-8px);
@@ -1241,9 +1196,9 @@ export default function HeroFusion({ solo = false }) {
                 <motion.div {...fadeOnly(0.7, 0.8)}>
                   {[
                     { cls: "hxc-sq-1", color: "#F0186C" },
-                    { cls: "hxc-sq-2", color: "#F2D50F" },
+                    { cls: "hxc-sq-2", color: "#9B4DE0" },
                     { cls: "hxc-sq-3", color: "#F0186C" },
-                    { cls: "hxc-sq-4", color: "#F2D50F" },
+                    { cls: "hxc-sq-4", color: "#9B4DE0" },
                     { cls: "hxc-sq-5", color: "#F0186C" },
                   ].map((s) => (
                     <svg
@@ -1289,14 +1244,12 @@ export default function HeroFusion({ solo = false }) {
                     >
                       {failed ? (
                         <>
-                          <div className="hxc-rim hxc-rim-magenta" aria-hidden="true" />
-                          <div className="hxc-rim hxc-rim-blue" aria-hidden="true" />
                           <img
                             className="hxc-cutout"
                             src={CARTOON}
                             alt="Cartoon portrait of Faraz Khan"
-                            width="894"
-                            height="1233"
+                            width="880"
+                            height="1320"
                             draggable="false"
                           />
                           <div className="hxc-fade" aria-hidden="true" />
@@ -1349,7 +1302,7 @@ export default function HeroFusion({ solo = false }) {
               <div className="hxc-nameplate" aria-hidden="true">
                 <div className="hxc-clip">
                   <motion.div ref={nameRef} className="hxc-name" {...rise(0.3)}>
-                    f<span className="dot-o">a</span>raz.
+                    faraz.
                   </motion.div>
                 </div>
                 <div className="hxc-walk-layer">
