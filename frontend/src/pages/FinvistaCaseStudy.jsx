@@ -70,7 +70,7 @@ export default function FinvistaCaseStudy() {
               data-testid="back-link"
               className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-white/70 hover:text-[#F5379B] transition-colors"
             >
-              <ArrowLeft size={14} /> all projects
+              <ArrowLeft size={14} /> All Projects
             </Link>
           </div>
           <Reveal as="p" delay={0} className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-5">
@@ -630,7 +630,7 @@ export default function FinvistaCaseStudy() {
           data-testid="toggle-gallery"
           className="mt-10 inline-flex items-center gap-2 px-6 py-3 rounded-full dark-card text-white font-semibold text-sm hover:bg-[#241B33] transition-colors"
         >
-          {showAll ? "show fewer screens" : `view all 46 screens →`}
+          {showAll ? "Show Fewer Screens" : `View All 46 Screens →`}
         </button>
       </SectionWrap>
 
@@ -647,13 +647,13 @@ export default function FinvistaCaseStudy() {
             data-testid="case-cta-email"
             className={`inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-[#C71E73] font-semibold text-sm hover:bg-[#C71E73] hover:text-white transition-[background-color,color,transform] duration-200 active:scale-[0.97] ${FOCUS}`}
           >
-            <Mail size={16} /> email me
+            <Mail size={16} /> Email Me
           </a>
           <Link
             to="/projects"
             className={`inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-[#F4F3FA] font-semibold text-sm hover:bg-[#261E3A] transition-[background-color,color,transform] duration-200 active:scale-[0.97] ${FOCUS}`}
           >
-            view all projects
+            View All Projects
           </Link>
           <ProjectNav slug="finvista" variant="footer" which="next" />
         </div>

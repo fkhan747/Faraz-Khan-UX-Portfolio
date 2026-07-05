@@ -231,7 +231,7 @@ export default function AgenticWorkflow() {
         <div className="absolute inset-0" aria-hidden="true" style={{ background: "radial-gradient(120% 90% at 80% -10%, rgba(7,94,253,0.30) 0%, rgba(16,2,16,0) 55%), radial-gradient(90% 80% at 0% 110%, rgba(245,55,155,0.18) 0%, rgba(16,2,16,0) 50%), #100210" }} />
         <Container className="relative z-10 pt-12 pb-12">
           <Link to="/projects" className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-white/70 hover:text-[#F5379B] transition-colors mb-9">
-            <ArrowLeft size={14} /> all projects
+            <ArrowLeft size={14} /> All Projects
           </Link>
           <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-5" style={{ color: PINK }}>✦ Agentic Workflow · Live Demo</p>
           <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[0.96] text-[#F7F5FF] max-w-4xl case-keep">Point a swarm of AI agents at any website.</h1>
@@ -268,7 +268,7 @@ export default function AgenticWorkflow() {
               <button type="button" onClick={runCustom} disabled={running}
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-colors flex-shrink-0"
                 style={{ background: running ? "rgba(255,255,255,0.06)" : PINK, color: running ? "#A29CB4" : "#fff" }}>
-                {running ? "Running…" : <><Play size={16} /> Run audit</>}
+                {running ? "Running…" : <><Play size={16} /> Run Audit</>}
               </button>
             </div>
             <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
@@ -281,7 +281,7 @@ export default function AgenticWorkflow() {
               </div>
               <button type="button" onClick={runSample} disabled={running}
                 className="ml-auto inline-flex items-center gap-1.5 text-[12px] font-mono uppercase tracking-wider text-white/70 hover:text-[#F5379B] transition-colors">
-                <Play size={12} /> watch a sample run
+                <Play size={12} /> Watch a Sample Run
               </button>
             </div>
           </div>
@@ -524,7 +524,7 @@ export default function AgenticWorkflow() {
         <Container>
           <h2 className="font-display text-3xl md:text-5xl font-black mb-6 case-keep">Want one pointed at your product?</h2>
           <Link to="/contact" className="inline-flex items-center gap-2 px-7 py-4 rounded-full text-white font-semibold text-sm transition-transform hover:scale-[1.03]" style={{ background: PINK }}>
-            Get in touch
+            Get in Touch
           </Link>
         </Container>
       </section>

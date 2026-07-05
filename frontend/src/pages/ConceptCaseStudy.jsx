@@ -128,7 +128,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
             data-testid="back-link"
             className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-white hover:text-[#F5379B] transition-colors"
           >
-            <ArrowLeft size={14} /> all projects
+            <ArrowLeft size={14} /> All Projects
           </Link>
         </div>
 
@@ -557,7 +557,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
             <div className="mb-4 flex flex-wrap items-center gap-3">
               <a href={r.prototypeUrl} target="_blank" rel="noreferrer" data-testid="open-fullscreen"
                  className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full dark-card text-white font-semibold text-sm hover:bg-[#241B33] transition-[background-color,color,transform] duration-200 active:scale-[0.97] ${FOCUS}`}>
-                View Prototype In Browser <Maximize2 size={14} />
+                View Prototype in Browser <Maximize2 size={14} />
               </a>
               <span className="text-xs font-mono uppercase tracking-widest text-white">{r.design.prototypeHint || "click anything. it's the real prototype, not a mock-up."}</span>
             </div>
@@ -904,8 +904,8 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
         <Reveal as="p" delay={0.08} className="text-lg text-[#A29CB4] mb-8">{r.title} is a self-initiated concept. If you&apos;d like to talk through the process, or where it goes next, I&apos;d love to connect.</Reveal>
         <div className="flex gap-4 justify-center flex-wrap items-center">
           <ProjectNav slug={r.slug} variant="footer" which="prev" />
-          <a href={`mailto:${PROFILE.email}`} data-testid="case-cta-email" className={`inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-[#C71E73] font-semibold text-sm hover:bg-[#C71E73] hover:text-white transition-[background-color,color,transform] duration-200 active:scale-[0.97] ${FOCUS}`}><Mail size={16} /> email me</a>
-          <Link to="/projects" className={`inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-[#F4F3FA] font-semibold text-sm hover:bg-[#261E3A] transition-[background-color,color,transform] duration-200 active:scale-[0.97] ${FOCUS}`}>view all projects</Link>
+          <a href={`mailto:${PROFILE.email}`} data-testid="case-cta-email" className={`inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-[#C71E73] font-semibold text-sm hover:bg-[#C71E73] hover:text-white transition-[background-color,color,transform] duration-200 active:scale-[0.97] ${FOCUS}`}><Mail size={16} /> Email Me</a>
+          <Link to="/projects" className={`inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-[#F4F3FA] font-semibold text-sm hover:bg-[#261E3A] transition-[background-color,color,transform] duration-200 active:scale-[0.97] ${FOCUS}`}>View All Projects</Link>
           <ProjectNav slug={r.slug} variant="footer" which="next" />
         </div>
       </SectionWrap>

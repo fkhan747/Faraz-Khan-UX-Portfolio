@@ -23,19 +23,19 @@ export default function NotFound() {
               to="/projects"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-[#075EFD] text-white text-base font-semibold shadow-[0_10px_36px_-8px_rgba(7,94,253,0.7)] hover:bg-[#2E78FF] transition-colors"
             >
-              <Briefcase size={18} /> View my work
+              <Briefcase size={18} /> View My Work
             </Link>
             <Link
               to="/contact"
               className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-white text-base font-semibold hover:bg-white hover:text-[#100210] transition-colors"
             >
-              <Mail size={16} /> Get in touch
+              <Mail size={16} /> Get in Touch
             </Link>
             <Link
               to="/"
               className="inline-flex items-center gap-2 px-2 py-4 text-sm font-semibold text-[#A29CB4] hover:text-white transition-colors"
             >
-              <ArrowLeft size={16} /> Back home
+              <ArrowLeft size={16} /> Back Home
             </Link>
           </div>
         </Container>

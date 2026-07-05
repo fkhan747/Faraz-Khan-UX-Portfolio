@@ -27,7 +27,7 @@ export default function Contact() {
           <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F4F3FA]/80">get in touch</span>
         </div>
         <h1 className="font-display font-black leading-[0.95] text-[14vw] md:text-[8vw] lg:text-[7rem] tracking-tighter">
-          c<span className="ab-dot-o">o</span>ntact.
+          contact.
         </h1>
         <p className="mt-6 text-lg md:text-xl text-[#F4F3FA]">
           The fastest way to reach me is email or a call. I reply within 24 hours on weekdays.
@@ -49,7 +49,7 @@ export default function Contact() {
           <p className="relative text-lg md:text-xl font-bold leading-tight text-[#F4F3FA]">Open to full-time &amp; remote opportunities.</p>
           <div className="relative flex flex-wrap gap-4 md:flex-shrink-0">
             <BookCallButton data-testid="schedule-call" className="ab-btn">
-              <Calendar size={16} /> Schedule a call
+              <Calendar size={16} /> Schedule a Call
             </BookCallButton>
             <a
               href={RESUME_PATH}
@@ -57,7 +57,7 @@ export default function Contact() {
               data-testid="download-resume"
               className="ab-btn ab-btn-ghost"
             >
-              Download resume <Download size={16} />
+              Download Resume <Download size={16} />
             </a>
           </div>
         </div>

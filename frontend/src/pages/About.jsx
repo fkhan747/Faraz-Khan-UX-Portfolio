@@ -212,7 +212,7 @@ export default function About() {
             </div>
             <h1 className="font-display font-black leading-[0.92] text-[8.8vw] md:text-[7.2vw] lg:text-[6.4rem] tracking-tighter">
               designing&nbsp;clarity<br />
-              int<span className="ab-dot-o">o</span>&nbsp;<span className="italic font-light">complex</span>&nbsp;
+              into&nbsp;<span className="italic font-light">complex</span>&nbsp;
               <span className="ab-slot" aria-label={word.cur}>
                 <span className="ab-slot-sizer" aria-hidden="true">dashboards.</span>
                 {word.prev && (
@@ -226,13 +226,13 @@ export default function About() {
             </p>
             <div className="mt-8 flex gap-4 flex-wrap items-center">
               <a href={`mailto:${PROFILE.email}`} data-testid="about-cta-email" className="ab-btn">
-                <Mail size={16} /> get in touch
+                <Mail size={16} /> Get in Touch
               </a>
               <a href={RESUME_PATH} download="Faraz_Khan_Resume.pdf" data-testid="about-download-resume" className="ab-btn ab-btn-ghost">
-                <Download size={16} /> résumé
+                <Download size={16} /> Résumé
               </a>
               <Link to="/projects" className="ab-btn ab-btn-ghost">
-                see my work
+                See My Work
               </Link>
             </div>
           </div>
@@ -375,7 +375,7 @@ export default function About() {
         </Container>
       </section>
 
-      {/* 03 - EXPERIENCE (merged from résumé) */}
+      {/* 03 - EXPERIENCE (merged from Résumé) */}
       <section className="py-20 border-t border-white/10" data-testid="about-experience">
         <Container>
         <p data-text="03 / experience" className="ab-glitch inline-block text-[11px] font-mono uppercase tracking-[0.25em] text-[#F0186C] mb-4">03 / experience</p>
@@ -406,13 +406,13 @@ export default function About() {
             data-testid="experience-toggle"
             className="ab-btn ab-btn-ghost mt-10 ml-7"
           >
-            {showAllExp ? "Show less" : `Show all ${EXPERIENCE.length} roles`}
+            {showAllExp ? "Show Less" : `Show All ${EXPERIENCE.length} Roles`}
           </button>
         )}
         </Container>
       </section>
 
-      {/* 04 - CREDENTIALS (merged from résumé) */}
+      {/* 04 - CREDENTIALS (merged from Résumé) */}
       <section className="py-20 border-t border-white/10" data-testid="about-credentials">
         <Container>
         <p data-text="04 / credentials" className="ab-glitch inline-block text-[11px] font-mono uppercase tracking-[0.25em] text-[#F0186C] mb-4">04 / credentials</p>

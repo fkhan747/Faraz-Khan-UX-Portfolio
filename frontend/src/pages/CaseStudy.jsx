@@ -16,7 +16,7 @@ export default function ComingSoonCase() {
             data-testid="back-link"
             className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-white hover:text-[#F5379B] transition-colors"
           >
-            <ArrowLeft size={14} /> all projects
+            <ArrowLeft size={14} /> All Projects
           </Link>
         </div>
         <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-6">case study · drafting</p>
@@ -47,7 +47,7 @@ export default function ComingSoonCase() {
             data-testid="early-walkthrough-cta"
             className="mt-10 inline-flex items-center gap-2 px-7 py-4 rounded-full dark-card text-white font-semibold text-sm hover:bg-[#241B33] transition-colors"
           >
-            <Mail size={16} /> request early walkthrough
+            <Mail size={16} /> Request Early Walkthrough
           </a>
         </div>
       </section>

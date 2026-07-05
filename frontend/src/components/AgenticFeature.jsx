@@ -41,7 +41,7 @@ export default function AgenticFeature({ className = "", compact = false }) {
                   A live demo of an agentic audit workflow I designed. Specialist agents fan out in parallel, adversarially verify every finding, then synthesize one prioritized report.
                 </p>
                 <span className={`${ctaMt} inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#F5379B] text-white text-sm font-semibold group-hover:scale-[1.03] transition-transform`}>
-                  Try the live demo <ArrowRight size={16} />
+                  Try the Live Demo <ArrowRight size={16} />
                 </span>
               </div>
 

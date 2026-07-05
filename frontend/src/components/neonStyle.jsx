@@ -43,17 +43,6 @@ export const NEON_CSS = `
   }
   .ab-chip-dot{ width:6px; height:6px; border-radius:9999px; flex:none; background:#F0186C; box-shadow:0 0 10px rgba(240,24,108,0.8); }
 
-  /* Headline "o" with a comic-yellow dot. Self-contained (not the global
-     .dot-o, whose --accent-yellow var is a stale alias for magenta), so the
-     dot lands true yellow and nothing leaks into the case studies. */
-  .ab-dot-o{ position:relative; display:inline-block; text-transform:lowercase; }
-  .ab-dot-o::after{
-    content:""; position:absolute; left:50%; top:50%;
-    transform:translate(-50%,-45%);
-    width:0.32em; height:0.32em; border-radius:50%;
-    background:#F2D50F; box-shadow:0 0 0 2px #100210;
-  }
-
   /* Rotating headline word */
   .ab-slot{ position:relative; display:inline-block; }
   .ab-slot-sizer{ visibility:hidden; }

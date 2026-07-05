@@ -70,7 +70,7 @@ export default function JoatCaseStudy() {
               data-testid="back-link"
               className={`inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-white/70 hover:text-[#F5379B] rounded transition-[color,transform] duration-200 active:scale-[0.97] ${FOCUS}`}
             >
-              <ArrowLeft size={14} /> all projects
+              <ArrowLeft size={14} /> All Projects
             </Link>
           </div>
 
@@ -366,9 +366,9 @@ export default function JoatCaseStudy() {
         <Reveal as="p" delay={0.08} className="text-lg text-[#A29CB4] mb-8">If you&apos;d like to talk through this project or how I approach end-to-end product design, I&apos;d love to connect.</Reveal>
         <div className="flex gap-4 justify-center flex-wrap items-center">
           <ProjectNav slug={j.slug} variant="footer" which="prev" />
-          <a href={`mailto:${PROFILE.email}`} data-testid="case-cta-email" className={`inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-[#C71E73] font-semibold text-sm hover:bg-[#C71E73] hover:text-white transition-[background-color,color,transform] duration-200 active:scale-[0.97] ${FOCUS}`}><Mail size={16} /> email me</a>
-          <Link to="/case/aurora" className={`inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-[#F4F3FA] font-semibold text-sm hover:bg-[#261E3A] transition-[background-color,transform] duration-200 active:scale-[0.97] ${FOCUS}`}>read aurora case study</Link>
-          <Link to="/projects" className={`inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-[#F4F3FA] font-semibold text-sm hover:bg-[#261E3A] transition-[background-color,transform] duration-200 active:scale-[0.97] ${FOCUS}`}>view all projects</Link>
+          <a href={`mailto:${PROFILE.email}`} data-testid="case-cta-email" className={`inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-[#C71E73] font-semibold text-sm hover:bg-[#C71E73] hover:text-white transition-[background-color,color,transform] duration-200 active:scale-[0.97] ${FOCUS}`}><Mail size={16} /> Email Me</a>
+          <Link to="/case/aurora" className={`inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-[#F4F3FA] font-semibold text-sm hover:bg-[#261E3A] transition-[background-color,transform] duration-200 active:scale-[0.97] ${FOCUS}`}>Read Aurora Case Study</Link>
+          <Link to="/projects" className={`inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-[#F4F3FA] font-semibold text-sm hover:bg-[#261E3A] transition-[background-color,transform] duration-200 active:scale-[0.97] ${FOCUS}`}>View All Projects</Link>
           <ProjectNav slug={j.slug} variant="footer" which="next" />
         </div>
       </SectionWrap>

@@ -51,7 +51,7 @@ function AgenticCard() {
 
         <div className="mt-auto pt-6">
           <span className="ab-btn w-full justify-center">
-            Try the live demo <ArrowRight size={16} />
+            Try the Live Demo <ArrowRight size={16} />
           </span>
         </div>
       </div>
@@ -75,7 +75,7 @@ export default function Projects() {
           <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F4F3FA]/80">selected work</span>
         </div>
         <h1 className="font-display font-black leading-[0.95] text-[14vw] md:text-[8vw] lg:text-[7rem] tracking-tighter ">
-          c<span className="ab-dot-o">a</span>se studies.
+          case studies.
         </h1>
         <p className="mt-6 max-w-2xl text-lg md:text-xl text-[#F4F3FA]">
           Client work plus a self-initiated track of AI-native product concepts. Some are full case studies; a few are still being prepared, and I'm happy to walk you through those early on request.

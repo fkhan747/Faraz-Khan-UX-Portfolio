@@ -153,7 +153,7 @@ export default function Landing() {
                   className="inline-flex items-center gap-2 px-9 py-4 rounded-full bg-[#075EFD] text-white text-lg font-semibold capitalize shadow-[0_10px_36px_-8px_rgba(7,94,253,0.7)] hover:bg-[#2E78FF] transition-colors"
                 >
                   <Briefcase size={20} />
-                  view my work
+                  View My Work
                 </Link>
                 <Link
                   to="/about"
@@ -161,7 +161,7 @@ export default function Landing() {
                   className="inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-white text-base font-semibold capitalize hover:bg-white hover:text-[#100210] transition-colors"
                 >
                   <User size={18} />
-                  about me
+                  About Me
                 </Link>
               </div>
             </div>
@@ -194,7 +194,7 @@ export default function Landing() {
         <div className="flex items-baseline justify-between mb-6">
           <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B]">featured case studies</span>
           <Link to="/projects" data-testid="all-projects-link" className="hidden md:inline-flex items-center gap-2 text-sm font-semibold underline underline-offset-4 decoration-[#075EFD]">
-            View all case studies <ArrowRight size={16} />
+            View All Case Studies <ArrowRight size={16} />
           </Link>
         </div>
 

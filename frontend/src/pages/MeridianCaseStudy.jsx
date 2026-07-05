@@ -365,7 +365,7 @@ export default function MeridianCaseStudy({ data = meridian }) {
         <Container className="relative z-10 pt-12 pb-14">
           <div className="flex flex-wrap items-center justify-between gap-3 mb-10">
             <Link to="/projects" data-testid="back-link" className={`inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-white/70 hover:text-[#F5379B] rounded transition-[color,transform] duration-200 active:scale-[0.97] ${FOCUS}`}>
-              <ArrowLeft size={14} /> all projects
+              <ArrowLeft size={14} /> All Projects
             </Link>
           </div>
           <Reveal as="p" delay={0} className="text-[11px] font-mono uppercase tracking-[0.25em] mb-5" style={{ color: ACCENT }}>{m.hero.eyebrow}</Reveal>
@@ -495,10 +495,10 @@ export default function MeridianCaseStudy({ data = meridian }) {
             <div className="flex gap-4 justify-center flex-wrap items-center">
               <ProjectNav slug={m.slug} variant="footer" which="prev" />
               <a href={`mailto:${PROFILE.email}`} data-testid="case-cta-email" className={`inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-[#C71E73] font-semibold text-sm hover:bg-[#C71E73] hover:text-white transition-[background-color,color,transform] duration-200 active:scale-[0.97] ${FOCUS}`}>
-                <Mail size={16} /> email me
+                <Mail size={16} /> Email Me
               </a>
               <Link to="/projects" className={`inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-[#F4F3FA] font-semibold text-sm hover:bg-[#261E3A] transition-[background-color,color,transform] duration-200 active:scale-[0.97] ${FOCUS}`}>
-                view all projects
+                View All Projects
               </Link>
               <ProjectNav slug={m.slug} variant="footer" which="next" />
             </div>

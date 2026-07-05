@@ -176,7 +176,7 @@ const ComponentKitCard = () => {
       </div>
       <button type="button" onClick={() => setAll((v) => !v)}
         className="mt-5 inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#F4F3FA] rounded-full px-5 py-2.5 border border-white/15 hover:bg-white/5 transition-colors">
-        {all ? "show fewer" : <>see all components <span className="inline-flex items-center gap-0.5 text-[#5B9BFF]"><Plus size={12} />{KIT.length - 6}</span></>}
+        {all ? "Show Fewer" : <>See All Components <span className="inline-flex items-center gap-0.5 text-[#5B9BFF]"><Plus size={12} />{KIT.length - 6}</span></>}
       </button>
     </div>
   );
