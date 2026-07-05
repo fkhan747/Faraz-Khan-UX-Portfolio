@@ -285,6 +285,16 @@ h5.font-display, h6.font-display {
   box-shadow: 4px 4px 0 #7B2FBE;
 }
 .btn-comic-yellow:active { box-shadow: 1px 1px 0 #7B2FBE; }
+/* Ghost tints so the footer's secondary actions read apart (cyan / magenta).
+   Fill with their own colour on hover. */
+.btn-comic-cyan { color: #17C3E8; border-color: #17C3E8; box-shadow: 4px 4px 0 #17C3E8; }
+.btn-comic-magenta { color: #F0186C; border-color: #F0186C; box-shadow: 4px 4px 0 #F0186C; }
+.btn-comic-cyan:active { box-shadow: 1px 1px 0 #17C3E8; }
+.btn-comic-magenta:active { box-shadow: 1px 1px 0 #F0186C; }
+@media (hover: hover) and (pointer: fine) {
+  .btn-comic-cyan:hover { background: #17C3E8; color: #100210; }
+  .btn-comic-magenta:hover { background: #F0186C; color: #fff; }
+}
 @media (hover: hover) and (pointer: fine) {
   .btn-comic:hover { animation: btn-comic-glitch 0.9s steps(2, end) infinite; }
   .btn-comic-ghost:hover { background: #7B2FBE; color: #fff; animation: btn-comic-glitch 0.9s steps(2, end) infinite; }

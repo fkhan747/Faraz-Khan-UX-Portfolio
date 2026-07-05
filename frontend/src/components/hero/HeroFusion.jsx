@@ -251,7 +251,7 @@ const HXC_CSS = `
         }
         .hxc-eyebrow{
           font-family:'JetBrains Mono', ui-monospace, monospace; font-weight:600;
-          font-size:12.5px; letter-spacing:0.22em; color:#F5379B;
+          font-size:14.5px; letter-spacing:0.22em; color:#F5379B;
           margin-bottom:6px;
         }
         .hxc-cursor{
@@ -269,7 +269,7 @@ const HXC_CSS = `
           display:block; margin-top:8px;
           font-family:'Playfair Display', Georgia, serif;
           font-style:italic; font-weight:400;
-          font-size:clamp(18px, calc(1.3vw + 9px), 27px);
+          font-size:clamp(20px, calc(1.3vw + 11px), 29px);
           line-height:1.4; letter-spacing:-0.01em;
           color:#F5379B; white-space:nowrap;
         }

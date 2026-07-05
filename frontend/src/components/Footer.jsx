@@ -68,9 +68,9 @@ export default function Footer() {
 
           {/* Actions */}
           <div className="flex items-center gap-3 flex-wrap">
-            <a href={PROFILE.social.linkedin} target="_blank" rel="noopener noreferrer" className="btn-comic-ghost inline-flex items-center px-5 py-2.5 text-sm font-semibold">LinkedIn</a>
-            <a href={`mailto:${PROFILE.email}`} className="btn-comic-ghost inline-flex items-center px-5 py-2.5 text-sm font-semibold">Email</a>
-            <a href={RESUME_PATH} download="Faraz_Khan_Resume.pdf" className="btn-comic inline-flex items-center px-5 py-2.5 text-sm font-semibold">Résumé</a>
+            <a href={PROFILE.social.linkedin} target="_blank" rel="noopener noreferrer" className="btn-comic-ghost btn-comic-cyan inline-flex items-center px-5 py-2.5 text-sm font-semibold">LinkedIn</a>
+            <a href={`mailto:${PROFILE.email}`} className="btn-comic-ghost btn-comic-magenta inline-flex items-center px-5 py-2.5 text-sm font-semibold">Email</a>
+            <a href={RESUME_PATH} download="Faraz_Khan_Resume.pdf" className="btn-comic btn-comic-yellow inline-flex items-center px-5 py-2.5 text-sm font-semibold">Résumé</a>
           </div>
         </div>
 

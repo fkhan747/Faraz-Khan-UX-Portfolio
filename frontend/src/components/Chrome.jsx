@@ -60,9 +60,9 @@ export default function Chrome() {
             {/* Right: desktop CTA, or hamburger on phones */}
             <BookCallButton
               data-testid="sidebar-book-call"
-              className="btn-comic btn-comic-yellow hidden sm:inline-flex ml-2 items-center px-4 md:px-5 py-2.5 text-[13px] md:text-sm font-semibold capitalize whitespace-nowrap flex-shrink-0"
+              className="btn-comic btn-comic-yellow hidden sm:inline-flex ml-2 items-center px-4 md:px-5 py-2.5 text-[13px] md:text-sm font-semibold normal-case whitespace-nowrap flex-shrink-0"
             >
-              Book a call →
+              Book a Call →
             </BookCallButton>
             <button
               type="button"
@@ -95,9 +95,9 @@ export default function Chrome() {
                 </NavLink>
               ))}
               <BookCallButton
-                className="btn-comic btn-comic-yellow w-full mt-1 inline-flex items-center justify-center px-4 py-3 text-sm font-semibold capitalize"
+                className="btn-comic btn-comic-yellow w-full mt-1 inline-flex items-center justify-center px-4 py-3 text-sm font-semibold normal-case"
               >
-                Book a call →
+                Book a Call →
               </BookCallButton>
             </div>
           )}
