@@ -9,6 +9,7 @@ import Zoomable from "../components/Zoomable";
 import CaseStudyNav from "../components/CaseStudyNav";
 import ProjectNav from "../components/ProjectNav";
 import Reveal from "../components/Reveal";
+import OwnedCard from "../components/OwnedCard";
 
 const FOCUS = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F5379B] focus-visible:ring-offset-2 focus-visible:ring-offset-[#100210]";
 
@@ -34,8 +35,12 @@ const SectionLabel = ({ num, name }) => (
 );
 
 const SectionWrap = ({ children, className = "", ...rest }) => (
-  <section className={`px-6 md:px-10 lg:px-16 py-20 md:py-24 border-t border-white/10 ${className}`} {...rest}>
-    {children}
+  <section className={`py-20 md:py-24 border-t border-white/10 ${className}`} {...rest}>
+    {/* Centered like the other case studies' <Container> so the fixed
+        left section-nav has margin to sit in and never overlaps content. */}
+    <div className="mx-auto w-full max-w-screen-2xl px-6 md:px-10 lg:px-16">
+      {children}
+    </div>
   </section>
 );
 
@@ -121,7 +126,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
       <Seo title={r.title} description={r.subtitle} />
       <CaseStudyNav />
       {/* ============ TITLE BLOCK ============ */}
-      <header className="px-6 md:px-10 lg:px-16 pt-12 pb-10">
+      <header className="mx-auto w-full max-w-screen-2xl px-6 md:px-10 lg:px-16 pt-12 pb-10">
         <div className="flex flex-wrap items-center justify-between gap-3 mb-10">
           <Link
             to="/projects"
@@ -163,6 +168,8 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
             </Reveal>
           ))}
         </div>
+
+        <OwnedCard items={["Product concept", "Information architecture", "UI design", "Design system", "AI interaction patterns", "Prototyping"]} />
       </header>
 
       {/* ============ 00 OVERVIEW ============ */}

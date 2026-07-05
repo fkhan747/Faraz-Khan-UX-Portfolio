@@ -11,6 +11,7 @@ import CaseStudyNav from "../components/CaseStudyNav";
 import ProjectNav from "../components/ProjectNav";
 import { Container } from "../components/Grid";
 import Reveal from "../components/Reveal";
+import OwnedCard from "../components/OwnedCard";
 
 const FOCUS = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F5379B] focus-visible:ring-offset-2 focus-visible:ring-offset-[#100210]";
 
@@ -104,6 +105,8 @@ export default function FinvistaCaseStudy() {
               </Reveal>
             ))}
           </div>
+
+          <OwnedCard items={["Research", "Information architecture", "UI design", "Design system", "Prototyping", "Usability testing"]} />
         </Container>
       </header>
 

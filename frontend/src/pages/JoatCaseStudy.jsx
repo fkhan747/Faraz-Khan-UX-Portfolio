@@ -5,6 +5,7 @@ import { joat as j } from "../data/joatCase";
 import { PROFILE } from "../data/content";
 import Seo from "../components/Seo";
 import Reveal from "../components/Reveal";
+import OwnedCard from "../components/OwnedCard";
 import Zoomable from "../components/Zoomable";
 import PhoneFrame from "../components/PhoneFrame";
 import CaseStudyNav from "../components/CaseStudyNav";
@@ -103,6 +104,8 @@ export default function JoatCaseStudy() {
               </Reveal>
             ))}
           </div>
+
+          <OwnedCard items={["UI design", "Information architecture", "Interaction design", "Visual & brand", "Prototyping"]} />
         </Container>
       </header>
 

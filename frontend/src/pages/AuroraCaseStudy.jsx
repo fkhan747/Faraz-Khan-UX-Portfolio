@@ -4,6 +4,7 @@ import { aurora as au } from "../data/auroraCase";
 import { PROFILE } from "../data/content";
 import Seo from "../components/Seo";
 import Reveal from "../components/Reveal";
+import OwnedCard from "../components/OwnedCard";
 import Zoomable from "../components/Zoomable";
 import AuroraDesignSystem from "../components/AuroraDesignSystem";
 import CaseStudyNav from "../components/CaseStudyNav";
@@ -90,6 +91,8 @@ export default function AuroraCaseStudy() {
               </Reveal>
             ))}
           </div>
+
+          <OwnedCard items={["Research", "Information architecture", "UI design", "Design system", "AI interaction patterns", "Prototyping"]} />
         </Container>
       </header>
 
