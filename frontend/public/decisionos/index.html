@@ -4,18 +4,27 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Crux · Control Room</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%230E1116'/><circle cx='50' cy='50' r='22' fill='none' stroke='%23E8519B' stroke-width='9'/><circle cx='50' cy='50' r='5' fill='%23E6EDF3'/></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%234A154B'/><circle cx='50' cy='50' r='22' fill='none' stroke='%232EB67D' stroke-width='9'/><circle cx='50' cy='50' r='5' fill='%23FFFFFF'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400,0,0&display=swap" rel="stylesheet">
 <style>
 /* ================= Crux Control Room, design tokens (LOCKED, see CONTROL-ROOM.md 3e) ================= */
 :root{
-  --bg:#0E1116; --panel:#161B22; --panel-2:#1B222B; --line:#2A313C;
-  --ink:#E6EDF3; --muted:#8B949E; --dim:#6E7681;
-  --brand:#E8519B;
-  --ok:#3FB950; --watch:#D29922; --act:#F85149; --info:#58A6FF;
-  --sans:'IBM Plex Sans',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+  /* Slack Design System (light). Surfaces */
+  --bg:#F8F8F8; --panel:#FFFFFF; --panel-2:#F4F4F4; --line:#E8E8E8;
+  --sidebar:#4A123E;               /* $core_primary, Slack sidebar aubergine */
+  /* Text ink */
+  --ink:#1D1C1D; --muted:#616061; --dim:#868686;
+  /* Brand accent: Slack aubergine */
+  --brand:#4A154B;                 /* $core_primary_brand */
+  /* Status (logo hues; use as dots/fills. Darker text variants live in the theme block) */
+  --ok:#2EB67D; --watch:#ECB22E; --act:#E01E5A; --info:#1264A3;
+  /* Type: two-font system, Figtree body + Playfair Display titles */
+  --sans:'Figtree',system-ui,-apple-system,sans-serif;
+  --mono:'Figtree',system-ui,-apple-system,sans-serif;
+  --display:'Playfair Display',Georgia,serif;
   --r:6px; --ease:cubic-bezier(0.2,0.7,0.2,1);
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -27,7 +36,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 ::selection{background:rgba(232,81,155,0.35)}
 
 /* ---- App shell: fixed sidebar + topbar + main ---- */
-.shell{display:grid;grid-template-columns:232px 1fr;grid-template-rows:52px 1fr;height:100vh}
+.shell{display:grid;grid-template-columns:360px 1fr;grid-template-rows:52px 1fr;height:100vh}
 .brand{grid-column:1;grid-row:1;display:flex;align-items:center;gap:10px;padding:0 16px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
 .brand-mark{width:20px;height:20px;border-radius:50%;border:5px solid var(--brand);flex:none}
 .brand b{font-weight:700;letter-spacing:-0.01em}
@@ -243,6 +252,149 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 @media (prefers-reduced-motion: reduce){
   *{animation:none !important;transition:none !important}
 }
+
+/* ============================================================
+   SLACK THEME (light) - palette from the Slack Design System.
+   Aubergine sidebar, white content, Playfair titles + Figtree body.
+   This block overrides the base rules above via source order.
+   ============================================================ */
+::selection{background:rgba(74,21,75,0.16)}
+
+/* Playfair Display on titles only; data/numbers stay Figtree tabular-nums */
+#screen-title,.review-head h2,.esc-title,.empty h3,.brand b{
+  font-family:var(--display);font-weight:700;letter-spacing:-0.005em;line-height:1.18;
+}
+.kpi .v,.conf-val,.conf-mini,.rp-t,.lane-n,.num,.mono{font-family:var(--sans);font-variant-numeric:tabular-nums}
+
+/* Status TEXT darkened for AA on white (dots/fills keep the bright logo hues) */
+.s-ok{color:#1A7F52}
+.s-watch{color:#8A6D00}
+.s-act{color:#C31C4E}
+.s-info{color:#1264A3}
+.below{color:#8A6D00}
+.li-tag.held{color:#8A6D00}
+.chip.rev{color:#1A7F52;border-color:rgba(46,182,125,0.5)}
+.chip.hard{color:#8A6D00;border-color:rgba(236,178,46,0.6)}
+.btn.warn{border-color:rgba(236,178,46,0.65);color:#8A6D00}
+.btn.warn:hover{background:rgba(236,178,46,0.12)}
+.dial-rec{color:#1264A3}
+.diff-tag.before{background:rgba(224,30,90,0.10);color:#C31C4E}
+.diff-tag.after{background:rgba(46,182,125,0.14);color:#1A7F52}
+.b-ok{box-shadow:inset 0 0 0 1px rgba(26,127,82,0.55)}
+.b-watch{box-shadow:inset 0 0 0 1px rgba(138,109,0,0.6)}
+
+/* Light-theme elevation + surfaces */
+.avatar{background:linear-gradient(135deg,#EFE3EF,#E6E9F0);color:var(--ink);border-color:var(--line)}
+.toast{box-shadow:0 8px 24px rgba(15,20,25,0.14)}
+.rp-step.cur .rp-dot{box-shadow:0 0 0 4px rgba(74,21,75,0.16)}
+.conf-bar{background:#E8E8E8}
+.topbar{background:#FFFFFF}
+.main{background:var(--bg)}
+
+/* ---- Aubergine sidebar: the iconic Slack element ---- */
+.brand,.side{background:var(--sidebar)}
+.brand{border-right-color:rgba(255,255,255,0.14);border-bottom-color:rgba(255,255,255,0.14)}
+.brand b{color:#FFFFFF}
+.brand .mono{color:rgba(255,255,255,0.6)}
+.brand-mark{border-color:#ECB22E}
+.side{border-right-color:rgba(255,255,255,0.14)}
+.side-label{color:rgba(255,255,255,0.5)}
+.nav-item{color:rgba(255,255,255,0.8)}
+.nav-item:hover{background:rgba(255,255,255,0.08);color:#FFFFFF}
+.nav-item.active{background:#1264A3;color:#FFFFFF}
+.nav-item .glyph{color:rgba(255,255,255,0.55)}
+.nav-item.active .glyph{color:#FFFFFF}
+.nav-badge{border-color:rgba(255,255,255,0.28);color:rgba(255,255,255,0.78)}
+.nav-badge.hot{background:#E01E5A;border-color:#E01E5A;color:#FFFFFF}
+
+/* ---- Material Symbols (Rounded) icons ---- */
+.msr{font-family:'Material Symbols Rounded';font-weight:400;font-style:normal;font-size:18px;line-height:1;
+  letter-spacing:normal;text-transform:none;white-space:nowrap;direction:ltr;
+  -webkit-font-feature-settings:'liga';font-feature-settings:'liga';-webkit-font-smoothing:antialiased;
+  font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 20}
+/* nav icons (override the old .glyph mono treatment) */
+.nav-item .glyph{font-family:'Material Symbols Rounded';font-size:20px;width:22px;line-height:1;
+  font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 20;
+  -webkit-font-feature-settings:'liga';font-feature-settings:'liga'}
+.nav-item.active .glyph{font-variation-settings:'FILL' 1,'wght' 500,'GRAD' 0,'opsz' 20}
+/* agent fleet role icons, tinted by health */
+.agent-ico{font-size:18px;flex:none;width:20px;text-align:center}
+.agent-ico.ag-ok{color:#1A7F52}
+.agent-ico.ag-watch{color:#8A6D00}
+.agent-ico.ag-act{color:#C31C4E}
+.side .agent-ico.ag-ok{color:#2EB67D}
+.side .agent-ico.ag-watch{color:#ECB22E}
+.side .agent-ico.ag-act{color:#FF6392}
+
+/* =====================================================================
+   POLISH PASS (design punch-list + consistency)
+   ===================================================================== */
+/* soft, hue-tinted elevation on cards (no pure-black shadows) */
+.panel{box-shadow:0 1px 2px rgba(29,28,29,0.05)}
+
+/* 1. KPI cards: three gradients, white readouts, larger numbers */
+.kpi{border:none;border-radius:12px;padding:18px 20px;gap:6px}
+.kpi.k1{background:linear-gradient(135deg,#1E328F,#1264A3)}
+.kpi.k2{background:linear-gradient(135deg,#4A154B,#7C2852)}
+.kpi.k3{background:linear-gradient(135deg,#B01247,#E01E5A)}
+.kpi .v{color:#fff;font-size:34px;font-weight:700}
+.kpi .l{color:rgba(255,255,255,0.88);font-size:12px}
+
+/* 2. Section/panel headers: Playfair, larger than body, aubergine */
+.panel-h{padding:13px 18px}
+.panel-h h2{font-family:var(--display);font-size:17px;font-weight:700;color:#4A154B;letter-spacing:-0.005em;margin-right:4px}
+.review-head h2,.esc-title{color:#4A154B}
+.review-head h2{font-size:20px}
+
+/* 3. Brand wordmark, clearly large */
+.brand{gap:11px;padding:0 18px}
+.brand b{font-size:23px;line-height:1}
+.brand .mono{font-size:9px;letter-spacing:0.16em}
+
+/* 4. Sidebar nav: more legible, roomier */
+.side{padding:14px 12px}
+.side-label{color:rgba(255,255,255,0.55);padding:14px 10px 6px}
+.nav-item{font-size:14px;padding:9px 12px;color:rgba(255,255,255,0.86)}
+.nav-item:hover{color:#fff}
+
+/* 5. Autonomy pills: colour-coded, not bland */
+.pill.au-suggest{background:#EAF1FB;color:#1264A3;border-color:#CBDFF4}
+.pill.au-approve{background:#F5EAF3;color:#7C2852;border-color:#E6D0E1}
+.pill.au-auto{background:#E7F6EF;color:#1A7F52;border-color:#C6E8D6}
+.nav-badge.au-suggest{color:#8FC7F5;border-color:rgba(143,199,245,0.42)}
+.nav-badge.au-approve{color:#E9A9CE;border-color:rgba(233,169,206,0.42)}
+.nav-badge.au-auto{color:#7FD9AC;border-color:rgba(127,217,172,0.42)}
+
+/* 6. Primary Approve button = Slack green (distinct from aubergine chrome) */
+.btn.primary{background:#007A5A;border-color:#007A5A;color:#fff}
+.btn.primary:hover{background:#148567;border-color:#148567;filter:none}
+
+/* 7. Audit filter chips: aligned, visible counts */
+.fbar{gap:8px;align-items:center;margin-bottom:4px}
+.fchip{align-items:center;gap:8px;padding:6px 8px 6px 13px;border-radius:999px}
+.fchip-n{font-size:11px;font-weight:600;color:#616061;background:#ECECEC;border-radius:999px;padding:1px 8px;min-width:20px;text-align:center}
+.fchip.on{border-color:#4A154B;color:#4A154B}
+.fchip.on .fchip-n{background:#4A154B;color:#fff}
+
+/* 8. Intent cards: content left-aligned, agent tag + actions on the right */
+.ip{gap:9px;padding:16px 18px}
+.ip-head{display:flex;align-items:flex-start;gap:14px}
+.ip-action{flex:1;min-width:0;font-weight:600;font-size:15px;line-height:1.35;color:var(--ink)}
+.ip-agent-tag{flex:none;display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;color:var(--muted);background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:4px 12px 4px 8px}
+.ip-agent-tag .agent-ico{font-size:15px;width:auto}
+.ip-detail,.ip-meta,.ip-read,.conf{margin-top:0}
+.conf-lbl{font-size:11px;color:var(--dim);font-weight:500;flex:none}
+.ip-actions{justify-content:flex-end}
+
+/* 9. Audit rows: typographic hierarchy (action leads, agent is a label) */
+.arow-main{gap:14px;padding:11px 16px}
+.ar-agent{display:inline-flex;align-items:center;gap:8px;width:118px;flex:none}
+.arow-main .who{width:auto;font-size:12px;color:var(--muted)}
+.arow-main .what{flex:1;min-width:0;font-size:14px;font-weight:500;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.arow-caret{font-size:20px;color:var(--dim);width:auto}
+/* 10. expanded diff aligns from the left (no dead left space) */
+.arow-detail{padding:2px 16px 14px 16px}
+.diff{max-width:640px}
 </style>
 </head>
 <body>
@@ -278,11 +430,11 @@ const STORE = {
   bank: "Cobalt Mutual",
   team: "Ops Analytics",
   agents: [
-    { id:"recon",    name:"Recon",    job:"Reconciles daily transaction ledgers, flags breaks",          autonomy:"approve", rec:"auto",    status:"ok",    dot:"b-ok"    },
-    { id:"sentinel", name:"Sentinel", job:"Watches transactions for fraud patterns",                     autonomy:"approve", status:"act",   dot:"b-act"   },
-    { id:"reporter", name:"Reporter", job:"Drafts the daily ops brief and regulator-ready summaries",    autonomy:"suggest", status:"ok",    dot:"b-ok"    },
-    { id:"quality",  name:"Quality",  job:"Monitors data pipelines, proposes schema fixes",              autonomy:"approve", status:"watch", dot:"b-watch" },
-    { id:"forecast", name:"Forecast", job:"Projects liquidity and volume, flags anomalies vs forecast",  autonomy:"suggest", status:"ok",    dot:"b-ok"    },
+    { id:"recon",    name:"Recon",    icon:"balance",       job:"Reconciles daily transaction ledgers, flags breaks",          autonomy:"approve", rec:"auto",    status:"ok",    dot:"b-ok"    },
+    { id:"sentinel", name:"Sentinel", icon:"shield",        job:"Watches transactions for fraud patterns",                     autonomy:"approve", status:"act",   dot:"b-act"   },
+    { id:"reporter", name:"Reporter", icon:"description",   job:"Drafts the daily ops brief and regulator-ready summaries",    autonomy:"suggest", status:"ok",    dot:"b-ok"    },
+    { id:"quality",  name:"Quality",  icon:"account_tree",  job:"Monitors data pipelines, proposes schema fixes",              autonomy:"approve", status:"watch", dot:"b-watch" },
+    { id:"forecast", name:"Forecast", icon:"trending_up",   job:"Projects liquidity and volume, flags anomalies vs forecast",  autonomy:"suggest", status:"ok",    dot:"b-ok"    },
   ],
   // Items waiting on a human. queueCount is derived from this length everywhere.
   confThreshold: 70,       // below this, the UI forces escalation (Confidence Signal)
@@ -368,10 +520,10 @@ const AUTONOMY_LABEL = { suggest:"Suggest only", approve:"Approve each", auto:"A
 
 /* ---------- Router ---------- */
 const ROUTES = [
-  { hash:"#/overview",   nav:"Overview",   glyph:"◉", title:"Overview" },
-  { hash:"#/review",     nav:"Review",     glyph:"☑", title:"Review Queue",  badge:() => STORE.queueCount },
-  { hash:"#/audit",      nav:"Audit",      glyph:"≣", title:"Action Audit" },
-  { hash:"#/escalation", nav:"Escalation", glyph:"▲", title:"Escalation",    badge:() => STORE.activeEscalations.length, hot:true },
+  { hash:"#/overview",   nav:"Overview",   glyph:"space_dashboard", title:"Overview" },
+  { hash:"#/review",     nav:"Review",     glyph:"checklist",       title:"Review Queue",  badge:() => STORE.queueCount },
+  { hash:"#/audit",      nav:"Audit",      glyph:"receipt_long",    title:"Action Audit" },
+  { hash:"#/escalation", nav:"Escalation", glyph:"warning",         title:"Escalation",    badge:() => STORE.activeEscalations.length, hot:true },
 ];
 function currentRoute(){
   const h = location.hash || "#/overview";
@@ -396,8 +548,8 @@ function renderNav(){
   }).join("");
   const agents = STORE.agents.map(a => `
     <a class="nav-item ${r.agentId===a.id ? "active":""}" href="#/agent/${a.id}">
-      <span class="agent-dot ${a.dot}" aria-hidden="true"></span>${a.name}
-      <span class="nav-badge">${AUTONOMY_LABEL[a.autonomy].split(" ")[0]}</span>
+      <span class="agent-ico msr ag-${a.status}" aria-hidden="true">${a.icon}</span>${a.name}
+      <span class="nav-badge au-${a.autonomy}">${AUTONOMY_LABEL[a.autonomy].split(" ")[0]}</span>
     </a>`).join("");
   $("#sidenav").innerHTML = `${items}<div class="side-label">Agent Fleet</div>${agents}`;
 }
@@ -405,10 +557,10 @@ function renderNav(){
 function screenOverview(){
   const fleet = STORE.agents.map(a => `
     <a class="row" href="#/agent/${a.id}" style="text-decoration:none">
-      <span class="agent-dot ${a.dot}"></span>
+      <span class="agent-ico msr ag-${a.status}">${a.icon}</span>
       <span class="who">${a.name}</span>
       <span class="what">${esc(a.job)}</span>
-      <span class="pill">${AUTONOMY_LABEL[a.autonomy]}</span>
+      <span class="pill au-${a.autonomy}">${AUTONOMY_LABEL[a.autonomy]}</span>
     </a>`).join("");
   const feed = STORE.feed.map(f => `
     <div class="row">
@@ -418,9 +570,9 @@ function screenOverview(){
     </div>`).join("");
   return `
     <div class="grid cols-3">
-      <div class="panel kpi"><span class="v">${STORE.agents.length}</span><span class="l">Agents on the floor</span></div>
-      <div class="panel kpi"><span class="v">${STORE.queueCount}</span><span class="l">Waiting on you</span></div>
-      <div class="panel kpi"><span class="v s-act">${STORE.activeEscalations.length}</span><span class="l">Active escalation${STORE.activeEscalations.length===1?"":"s"} · ${STORE.escalations.thisWeek} this week</span></div>
+      <div class="panel kpi k1"><span class="v">${STORE.agents.length}</span><span class="l">Agents on the floor</span></div>
+      <div class="panel kpi k2"><span class="v">${STORE.queueCount}</span><span class="l">Waiting on you</span></div>
+      <div class="panel kpi k3"><span class="v">${STORE.activeEscalations.length}</span><span class="l">Active escalation${STORE.activeEscalations.length===1?"":"s"} &middot; ${STORE.escalations.thisWeek} this week</span></div>
     </div>
     <div class="panel">
       <div class="panel-h"><h2>Agent Fleet</h2><span class="mono">autonomy is per agent, per action class</span></div>
@@ -473,7 +625,7 @@ function screenAgent(id){
   return `
     <div class="panel">
       <div class="panel-h">
-        <span class="agent-dot ${a.dot}"></span><h2>${a.name}</h2>
+        <span class="agent-ico msr ag-${a.status}" style="font-size:22px">${a.icon}</span><h2>${a.name}</h2>
         <span class="pill s-${a.status==="ok"?"ok":a.status}"><span class="dot ${a.dot}"></span>${a.status==="act"?"needs you":a.status==="watch"?"watch":"healthy"}</span>
       </div>
       <div class="panel-b" style="color:var(--muted)">${esc(a.job)}.</div>
@@ -509,16 +661,17 @@ function screenAgent(id){
 let auditFilter = "all";
 let replayIdx = 0;
 function auditRow(c){
-  const who = agentById(c.agent).name;
+  const ag = agentById(c.agent);
+  const ico = ag.icon ? `<span class="agent-ico msr ag-${ag.status||"ok"}" style="font-size:16px">${ag.icon}</span>` : "";
   const hasDetail = !!(c.diff || c.reason);
   return `
   <div class="arow" id="ar-${c.id}">
     <button class="arow-main" ${hasDetail ? `onclick="toggleAudit('${c.id}')"` : `style="cursor:default"`}>
-      <span class="who">${who}</span>
+      <span class="ar-agent">${ico}<span class="who">${ag.name}</span></span>
       <span class="what">${esc(c.action)}</span>
       ${decisionBadge(c.decision)}
       <span class="when">${c.when}</span>
-      <span class="arow-caret">${hasDetail ? "&rsaquo;" : ""}</span>
+      <span class="arow-caret msr">${hasDetail ? "chevron_right" : ""}</span>
     </button>
     ${hasDetail ? `<div class="arow-detail">
       ${c.diff ? `<div class="diff">
@@ -679,27 +832,25 @@ function intentCard(it){
     : `<button class="btn primary" onclick="approveItem('${it.id}')">Approve</button>`;
   return `
   <div class="ip" data-id="${it.id}">
-    <div class="ip-top">
-      <div class="ip-agent"><span class="agent-dot ${a.dot}"></span>${a.name}</div>
-      <div class="ip-main">
-        <div class="ip-action">${esc(it.action)}</div>
-        <div class="ip-detail">${esc(it.detail)}</div>
-        <div class="ip-meta">
-          ${it.systems.map(s => `<span class="chip sys">${esc(s)}</span>`).join("")}
-          <span class="chip ${it.reversible ? "rev":"hard"}">${it.reversible ? "Reversible" : "Hard to reverse"}</span>
-        </div>
-        <div class="ip-read"><b>Read to decide:</b> ${esc(it.read)}</div>
-        <div class="conf">
-          <div class="conf-row">
-            <span class="mono" style="font-size:11px;color:var(--dim)">Confidence</span>
-            <div class="conf-bar"><div class="conf-fill" style="width:${it.conf}%;background:var(--info)"></div></div>
-            <span class="conf-val">${it.conf}%</span>
-            <button class="conf-toggle" onclick="toggleWhy('${it.id}')">why</button>
-          </div>
-          <ul class="conf-why" id="why-${it.id}">${it.why.map(w => `<li>${esc(w)}</li>`).join("")}</ul>
-          ${below ? `<div class="below"><span>&#9650;</span> Below your ${STORE.confThreshold}% escalation threshold. It cannot be auto-approved; a human has to make this call.</div>` : ""}
-        </div>
+    <div class="ip-head">
+      <div class="ip-action">${esc(it.action)}</div>
+      <div class="ip-agent-tag"><span class="agent-ico msr ag-${a.status||"ok"}">${a.icon||"smart_toy"}</span>${a.name}</div>
+    </div>
+    <div class="ip-detail">${esc(it.detail)}</div>
+    <div class="ip-meta">
+      ${it.systems.map(s => `<span class="chip sys">${esc(s)}</span>`).join("")}
+      <span class="chip ${it.reversible ? "rev":"hard"}">${it.reversible ? "Reversible" : "Hard to reverse"}</span>
+    </div>
+    <div class="ip-read"><b>Read to decide:</b> ${esc(it.read)}</div>
+    <div class="conf">
+      <div class="conf-row">
+        <span class="conf-lbl">Confidence</span>
+        <div class="conf-bar"><div class="conf-fill" style="width:${it.conf}%;background:var(--info)"></div></div>
+        <span class="conf-val">${it.conf}%</span>
+        <button class="conf-toggle" onclick="toggleWhy('${it.id}')">why</button>
       </div>
+      <ul class="conf-why" id="why-${it.id}">${it.why.map(w => `<li>${esc(w)}</li>`).join("")}</ul>
+      ${below ? `<div class="below"><span class="msr" style="font-size:17px">warning</span> Below your ${STORE.confThreshold}% escalation threshold. It cannot be auto-approved; a human has to make this call.</div>` : ""}
     </div>
     <div class="ip-actions">
       ${primary}
