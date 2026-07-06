@@ -15,9 +15,9 @@ Faraz approved this direction on 2026-07-06.
 | Research (5-angle web sweep) | DONE, digest in section 2 |
 | Direction approved by Faraz | DONE ("Do it but keep all of this separate") |
 | This plan file | DONE |
-| Phase 1: prototype shell + design tokens | NOT STARTED |
-| Phase 2: canon data + agent fleet screens | NOT STARTED |
-| Phase 3: the five trust patterns as working UI | NOT STARTED |
+| Phase 1: prototype shell + design tokens | DONE + VERIFIED (public/decisionos/index.html; overview + agent screens, hash router, canon store; console clean, overflowX 0, KPIs 5/12/1) |
+| Phase 2: canon data + agent fleet screens | Overview + Agent DONE; queue items data + Agent autonomy detail = IN PROGRESS |
+| Phase 3: the five trust patterns as working UI | NOT STARTED (start with Review queue + Intent Preview) |
 | Phase 4: polish pass (motion, edge states, copy) | NOT STARTED |
 | Phase 5: case-study integration content | NOT STARTED |
 | Piece 2: Commentary Mode component | NOT STARTED |

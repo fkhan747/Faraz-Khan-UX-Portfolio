@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crux · Control Room</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%230E1116'/><circle cx='50' cy='50' r='22' fill='none' stroke='%23E8519B' stroke-width='9'/><circle cx='50' cy='50' r='5' fill='%23E6EDF3'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ================= Crux Control Room, design tokens (LOCKED, see CONTROL-ROOM.md 3e) ================= */
+:root{
+  --bg:#0E1116; --panel:#161B22; --panel-2:#1B222B; --line:#2A313C;
+  --ink:#E6EDF3; --muted:#8B949E; --dim:#6E7681;
+  --brand:#E8519B;
+  --ok:#3FB950; --watch:#D29922; --act:#F85149; --info:#58A6FF;
+  --sans:'IBM Plex Sans',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+  --r:6px; --ease:cubic-bezier(0.2,0.7,0.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.num,.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+::selection{background:rgba(232,81,155,0.35)}
+
+/* ---- App shell: fixed sidebar + topbar + main ---- */
+.shell{display:grid;grid-template-columns:232px 1fr;grid-template-rows:52px 1fr;height:100vh}
+.brand{grid-column:1;grid-row:1;display:flex;align-items:center;gap:10px;padding:0 16px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.brand-mark{width:20px;height:20px;border-radius:50%;border:5px solid var(--brand);flex:none}
+.brand b{font-weight:700;letter-spacing:-0.01em}
+.brand .mono{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.14em;margin-left:auto}
+.topbar{grid-column:2;grid-row:1;display:flex;align-items:center;gap:16px;padding:0 20px;border-bottom:1px solid var(--line)}
+.topbar h1{font-size:14px;font-weight:600}
+.topbar .crumb{color:var(--muted);font-size:12px}
+.top-right{margin-left:auto;display:flex;align-items:center;gap:14px}
+.env-chip{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:3px 10px}
+.avatar{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#3d2b3f,#22303f);border:1px solid var(--line);display:grid;place-items:center;font-family:var(--mono);font-size:10px;color:var(--ink)}
+
+.side{grid-column:1;grid-row:2;border-right:1px solid var(--line);padding:14px 10px;display:flex;flex-direction:column;gap:2px;overflow-y:auto}
+.side-label{font-family:var(--mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--dim);padding:10px 8px 6px}
+.nav-item{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:7px 10px;border-radius:var(--r);color:var(--muted);font-weight:500;font-size:13px;text-decoration:none;transition:background 140ms var(--ease),color 140ms var(--ease)}
+.nav-item:hover{background:var(--panel);color:var(--ink)}
+.nav-item.active{background:var(--panel-2);color:var(--ink)}
+.nav-item .glyph{width:16px;text-align:center;font-family:var(--mono);font-size:12px;color:var(--dim)}
+.nav-item.active .glyph{color:var(--brand)}
+.nav-badge{margin-left:auto;font-family:var(--mono);font-size:10px;padding:1px 7px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.nav-badge.hot{border-color:rgba(248,81,73,0.5);color:var(--act)}
+.agent-dot{width:7px;height:7px;border-radius:50%;flex:none}
+
+.main{grid-column:2;grid-row:2;overflow-y:auto;padding:20px;scroll-behavior:smooth}
+.screen{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:16px;animation:screen-in 200ms var(--ease)}
+@keyframes screen-in{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* ---- Primitives ---- */
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--r)}
+.panel-h{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line)}
+.panel-h h2{font-size:12px;font-weight:600;letter-spacing:0.02em}
+.panel-h .mono{font-size:10px;color:var(--dim)}
+.panel-b{padding:14px}
+.grid{display:grid;gap:16px}
+.cols-3{grid-template-columns:repeat(3,1fr)}
+.cols-2{grid-template-columns:repeat(2,1fr)}
+.pill{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;padding:2px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.pill .dot{width:6px;height:6px;border-radius:50%}
+.s-ok{color:var(--ok)} .s-watch{color:var(--watch)} .s-act{color:var(--act)} .s-info{color:var(--info)}
+.b-ok{background:var(--ok)} .b-watch{background:var(--watch)} .b-act{background:var(--act)} .b-info{background:var(--info)}
+.kpi{display:flex;flex-direction:column;gap:2px;padding:14px}
+.kpi .v{font-family:var(--mono);font-size:26px;font-weight:600;line-height:1.1}
+.kpi .l{font-size:11px;color:var(--muted)}
+.stub{padding:36px 20px;text-align:center;color:var(--dim);font-size:13px}
+.stub .mono{display:block;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:8px;color:var(--brand)}
+.foot-note{max-width:1180px;margin:26px auto 8px;padding-top:12px;border-top:1px solid var(--line);color:var(--dim);font-size:11px;display:flex;gap:8px;flex-wrap:wrap}
+.foot-note b{color:var(--muted);font-weight:600}
+
+/* ---- Rows (queue/feed lists) ---- */
+.row{display:flex;align-items:center;gap:12px;padding:9px 14px;border-bottom:1px solid var(--line);font-size:13px}
+.row:last-child{border-bottom:none}
+.row .who{font-family:var(--mono);font-size:11px;color:var(--muted);width:76px;flex:none}
+.row .what{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .when{font-family:var(--mono);font-size:11px;color:var(--dim);flex:none}
+
+/* ---- Small screens: the console is desktop-first but must not break ---- */
+.mobile-note{display:none}
+@media (max-width: 860px){
+  .shell{grid-template-columns:1fr;grid-template-rows:52px auto 1fr}
+  .brand{border-right:none}
+  .side{grid-column:1;grid-row:2;flex-direction:row;overflow-x:auto;border-right:none;border-bottom:1px solid var(--line);padding:8px 10px}
+  .side-label{display:none}
+  .nav-item{flex:none}
+  .topbar{display:none}
+  .main{grid-column:1;grid-row:3}
+  .cols-3,.cols-2{grid-template-columns:1fr}
+  .mobile-note{display:block;font-size:11px;color:var(--dim);padding:8px 2px}
+}
+@media (prefers-reduced-motion: reduce){
+  *{animation:none !important;transition:none !important}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <b>Crux</b>
+    <span class="mono">Control Room</span>
+  </div>
+  <div class="topbar">
+    <h1 id="screen-title">Overview</h1>
+    <span class="crumb" id="screen-crumb">Cobalt Mutual · Ops Analytics</span>
+    <div class="top-right">
+      <span class="env-chip">Concept Prototype</span>
+      <span class="avatar" title="You, the human in charge">FK</span>
+    </div>
+  </div>
+  <nav class="side" id="sidenav" aria-label="Console navigation"></nav>
+  <main class="main" id="main"></main>
+</div>
+
+<script>
+"use strict";
+/* =====================================================================
+   Crux Control Room, single-file concept prototype.
+   Phase 1: shell, tokens, router, canon store, five navigable screens.
+   Spec: CONTROL-ROOM.md at repo root. Keep canon counts consistent:
+   5 agents, 12 queue items, 1 active incident, 3 escalations this week.
+   ===================================================================== */
+
+/* ---------- Canon store (single source of truth) ---------- */
+const STORE = {
+  bank: "Cobalt Mutual",
+  team: "Ops Analytics",
+  agents: [
+    { id:"recon",    name:"Recon",    job:"Reconciles daily transaction ledgers, flags breaks",          autonomy:"auto",    status:"ok",    dot:"b-ok"    },
+    { id:"sentinel", name:"Sentinel", job:"Watches transactions for fraud patterns",                     autonomy:"approve", status:"act",   dot:"b-act"   },
+    { id:"reporter", name:"Reporter", job:"Drafts the daily ops brief and regulator-ready summaries",    autonomy:"suggest", status:"ok",    dot:"b-ok"    },
+    { id:"quality",  name:"Quality",  job:"Monitors data pipelines, proposes schema fixes",              autonomy:"approve", status:"watch", dot:"b-watch" },
+    { id:"forecast", name:"Forecast", job:"Projects liquidity and volume, flags anomalies vs forecast",  autonomy:"suggest", status:"ok",    dot:"b-ok"    },
+  ],
+  queueCount: 12,          // items waiting on a human (Phase 2 fills the items)
+  escalations: { activeNow: 1, thisWeek: 3 },
+  feed: [                  // most recent first; relative times only, never dates
+    { who:"Recon",    what:"Cleared 1,204 matched entries; 2 breaks parked for review", when:"2m ago"  },
+    { who:"Sentinel", what:"ESCALATED: card-present cluster, 7 txns, needs a human call", when:"9m ago" },
+    { who:"Quality",  what:"Proposed a schema fix for the settlements pipeline",          when:"14m ago" },
+    { who:"Reporter", what:"Drafted the 09:00 ops brief, waiting on your review",         when:"31m ago" },
+    { who:"Forecast", what:"Liquidity projection updated; within expected band",          when:"48m ago" },
+  ],
+};
+const AUTONOMY_LABEL = { suggest:"Suggest only", approve:"Approve each", auto:"Auto with audit" };
+
+/* ---------- Router ---------- */
+const ROUTES = [
+  { hash:"#/overview",   nav:"Overview",   glyph:"◉", title:"Overview" },
+  { hash:"#/review",     nav:"Review",     glyph:"☑", title:"Review Queue",  badge:() => STORE.queueCount },
+  { hash:"#/audit",      nav:"Audit",      glyph:"≣", title:"Action Audit" },
+  { hash:"#/escalation", nav:"Escalation", glyph:"▲", title:"Escalation",    badge:() => STORE.escalations.activeNow, hot:true },
+];
+function currentRoute(){
+  const h = location.hash || "#/overview";
+  if (h.startsWith("#/agent/")) return { hash:h, title:"Agent", agentId:h.split("/")[2] };
+  return ROUTES.find(r => r.hash === h) || ROUTES[0];
+}
+
+/* ---------- Renderers ---------- */
+const $ = (sel) => document.querySelector(sel);
+const esc = (s) => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+function renderNav(){
+  const r = currentRoute();
+  const items = ROUTES.map(x => `
+    <a class="nav-item ${x.hash===r.hash ? "active":""}" href="${x.hash}">
+      <span class="glyph" aria-hidden="true">${x.glyph}</span>${x.nav}
+      ${x.badge ? `<span class="nav-badge ${x.hot?"hot":""}">${x.badge()}</span>` : ""}
+    </a>`).join("");
+  const agents = STORE.agents.map(a => `
+    <a class="nav-item ${r.agentId===a.id ? "active":""}" href="#/agent/${a.id}">
+      <span class="agent-dot ${a.dot}" aria-hidden="true"></span>${a.name}
+      <span class="nav-badge">${AUTONOMY_LABEL[a.autonomy].split(" ")[0]}</span>
+    </a>`).join("");
+  $("#sidenav").innerHTML = `${items}<div class="side-label">Agent Fleet</div>${agents}`;
+}
+
+function screenOverview(){
+  const fleet = STORE.agents.map(a => `
+    <a class="row" href="#/agent/${a.id}" style="text-decoration:none">
+      <span class="agent-dot ${a.dot}"></span>
+      <span class="who">${a.name}</span>
+      <span class="what">${esc(a.job)}</span>
+      <span class="pill">${AUTONOMY_LABEL[a.autonomy]}</span>
+    </a>`).join("");
+  const feed = STORE.feed.map(f => `
+    <div class="row">
+      <span class="who">${f.who}</span>
+      <span class="what ${f.what.startsWith("ESCALATED") ? "s-act":""}">${esc(f.what)}</span>
+      <span class="when">${f.when}</span>
+    </div>`).join("");
+  return `
+    <div class="grid cols-3">
+      <div class="panel kpi"><span class="v">${STORE.agents.length}</span><span class="l">Agents on the floor</span></div>
+      <div class="panel kpi"><span class="v">${STORE.queueCount}</span><span class="l">Waiting on you</span></div>
+      <div class="panel kpi"><span class="v s-act">${STORE.escalations.activeNow}</span><span class="l">Active escalation · ${STORE.escalations.thisWeek} this week</span></div>
+    </div>
+    <div class="panel">
+      <div class="panel-h"><h2>Agent Fleet</h2><span class="mono">autonomy is per agent, per action class</span></div>
+      ${fleet}
+    </div>
+    <div class="panel">
+      <div class="panel-h"><h2>Activity</h2><span class="mono">live feed</span></div>
+      ${feed}
+    </div>`;
+}
+
+function screenAgent(id){
+  const a = STORE.agents.find(x => x.id === id);
+  if (!a) return `<div class="panel stub">Unknown agent.</div>`;
+  return `
+    <div class="panel">
+      <div class="panel-h"><h2>${a.name}</h2><span class="pill"><span class="dot ${a.dot}"></span>${AUTONOMY_LABEL[a.autonomy]}</span></div>
+      <div class="panel-b" style="color:var(--muted)">${esc(a.job)}.</div>
+    </div>
+    <div class="panel stub"><span class="mono">Phase 3</span>Autonomy Dial, action classes, and this agent's decision history render here.</div>`;
+}
+
+const STUBS = {
+  "#/review":     ["Phase 3", "Intent Preview cards for the 12 queued items render here: plan, blast radius, sources, reversibility, approve / edit scope / decline."],
+  "#/audit":      ["Phase 3", "The immutable action log renders here: filters, before/after diffs, incident replay."],
+  "#/escalation": ["Phase 3", "Sentinel's context package renders here: what it tried, what it knows, what it recommends, and your one-click paths."],
+};
+
+function render(){
+  const r = currentRoute();
+  renderNav();
+  let html;
+  if (r.agentId) html = screenAgent(r.agentId);
+  else if (r.hash === "#/overview") html = screenOverview();
+  else { const s = STUBS[r.hash]; html = `<div class="panel stub"><span class="mono">${s[0]}</span>${s[1]}</div>`; }
+  const agent = r.agentId ? STORE.agents.find(x=>x.id===r.agentId) : null;
+  $("#screen-title").textContent = agent ? agent.name : r.title;
+  $("#screen-crumb").textContent = `${STORE.bank} · ${STORE.team}`;
+  $("#main").innerHTML = `
+    <div class="screen">
+      <p class="mobile-note">Best experienced on desktop; this console is data-dense by design.</p>
+      ${html}
+      <div class="foot-note">
+        <b>Why this exists:</b> a working study of the five agent-trust patterns (intent preview, autonomy dial,
+        confidence, audit, escalation) for Crux, an AI decision-intelligence concept. Reconstructed from secondary
+        research; no primary research conducted. All data is fictional.
+      </div>
+    </div>`;
+}
+
+window.addEventListener("hashchange", render);
+render();
+</script>
+</body>
+</html>
