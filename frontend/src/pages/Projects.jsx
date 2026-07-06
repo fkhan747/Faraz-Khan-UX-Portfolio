@@ -8,30 +8,38 @@ import { NEON_CSS as AB_CSS, Squiggle as AbSquiggle } from "../components/neonSt
 
 const AGENTS = ["Accessibility", "Content & voice", "Visual hierarchy", "IA & nav", "Performance", "Mobile"];
 
-/* Compact agentic-feature card, sized to sit alongside a concept card in a
-   2-column grid. Comic-panel treatment matching the About/Contact language. */
+/* Full-width agentic-feature band: copy on the left, a mini audit panel on the
+   right. Comic-panel treatment matching the About/Contact language. */
 function AgenticCard() {
   return (
     <Link
       to="/agentic-workflow"
       data-testid="agentic-feature-link"
-      className="group ab-card ab-flat ab-c2 block relative overflow-hidden p-7 md:p-8 h-full"
+      className="group ab-card ab-flat ab-c2 block relative overflow-hidden p-7 md:p-9 lg:p-10"
     >
       <div className="absolute -top-16 -right-10 w-64 h-64 rounded-full bg-[#7B2FBE] blur-3xl opacity-30 pointer-events-none" aria-hidden="true" />
       <div className="absolute -bottom-20 left-1/4 w-56 h-56 rounded-full bg-[#F0186C] blur-3xl opacity-20 pointer-events-none" aria-hidden="true" />
-      <div className="relative flex flex-col h-full">
-        <span className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.25em] text-[#F0186C] mb-5">
-          <Sparkles size={13} /> featured · interactive demo
-        </span>
-        <h3 className="font-display text-2xl md:text-3xl font-black leading-[1.05] tracking-tight text-[#F7F5FF] case-keep">
-          Point a swarm of AI agents at any website.
-        </h3>
-        <p className="mt-4 text-sm md:text-base text-[#A29CB4] leading-relaxed">
-          A live demo of an agentic audit workflow I designed. Specialist agents fan out in parallel, adversarially verify every finding, then synthesize one prioritized report.
-        </p>
+      <div className="relative grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        {/* copy */}
+        <div>
+          <span className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.25em] text-[#F0186C] mb-5">
+            <Sparkles size={13} /> featured · interactive demo
+          </span>
+          <h3 className="font-display text-2xl md:text-3xl lg:text-4xl font-black leading-[1.03] tracking-tight text-[#F7F5FF] case-keep">
+            Point a swarm of AI agents at any website.
+          </h3>
+          <p className="mt-4 max-w-xl text-sm md:text-base text-[#A29CB4] leading-relaxed">
+            A live demo of an agentic audit workflow I designed. Specialist agents fan out in parallel, adversarially verify every finding, then synthesize one prioritized report.
+          </p>
+          <div className="mt-7">
+            <span className="ab-btn">
+              Try the Live Demo <ArrowRight size={16} />
+            </span>
+          </div>
+        </div>
 
         {/* mini audit panel */}
-        <div className="mt-6 rounded-2xl p-4" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.1)" }}>
+        <div className="rounded-2xl p-4 md:p-5" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.1)" }}>
           <div className="flex items-center justify-between mb-3">
             <span className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4]">audit · acme.com</span>
             <span className="text-[10px] font-mono text-[#21BA45]">12 confirmed</span>
@@ -47,12 +55,6 @@ function AgenticCard() {
           <div className="mt-3 flex items-center gap-2 text-[10px] font-mono text-[#A29CB4]">
             <ShieldCheck size={12} className="text-[#17C3E8]" /> verified, 1 prioritized report
           </div>
-        </div>
-
-        <div className="mt-auto pt-6">
-          <span className="ab-btn w-full justify-center">
-            Try the Live Demo <ArrowRight size={16} />
-          </span>
         </div>
       </div>
     </Link>
@@ -165,8 +167,8 @@ export default function Projects() {
             </div>
           ))}
 
-          {/* Agentic-audit live demo card */}
-          <div className="col-span-12 md:col-span-6">
+          {/* Agentic-audit live demo — full-width band */}
+          <div className="col-span-12">
             <AgenticCard />
           </div>
         </Grid>
