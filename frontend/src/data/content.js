@@ -125,18 +125,18 @@ export const concepts = [
   {
     slug: "decisionos",
     title: "Crux",
-    subtitle: "AI Executive Decision Intelligence",
+    subtitle: "AI-agent supervision console",
     kind: "AI-native concept",
     role: "Senior UX Lead · self-initiated",
     year: "2026",
     accent: "#E8519B",
-    coverImg: "https://images.unsplash.com/photo-1543286386-2e659306cd6c?w=1200&q=80&auto=format&fit=crop",
+    coverImg: "/decisionos-shots/cr-01-overview.png",
     status: "live prototype",
     prototypeUrl: "/decisionos/",
     summary:
-      "Turning scattered signals into a clear, defensible call for the people who have to make it.",
+      "Five AI agents run a bank's operations while a human keeps every call. The five agent-trust patterns, built as a working prototype.",
     href: "/case/decisionos",
-    live: false,                          // dormant, may revive later
+    live: true,                           // Control Room prototype merged 2026-07-06
   },
 ];
 
