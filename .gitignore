@@ -30,6 +30,10 @@ next-env.d.ts
 dist/
 dist
 
+# Interview deck: keep the PLAINTEXT local copy out of the public repo.
+# (The encrypted hosted copy at frontend/public/deck/ is committed on purpose.)
+/presentation/
+
 # Environment files (comprehensive coverage)
 
 *token.json*
