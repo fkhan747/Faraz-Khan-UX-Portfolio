@@ -1,0 +1,89 @@
+{
+  "$schema": "https://www.khanfaraz.in/portfolio.schema.json",
+  "generated": "on build",
+  "designer": {
+    "name": "Faraz Khan",
+    "role": "Senior UX Lead",
+    "focus": "Enterprise data UX and AI-native product design",
+    "location": "Pune, Maharashtra, India",
+    "workingSince": 2013,
+    "site": "https://www.khanfaraz.in",
+    "linkedin": "https://www.linkedin.com/in/thekhanfaraz",
+    "booking": "https://cal.com/khanfaraz/30min",
+    "email": "abdulfarazkhan@outlook.com"
+  },
+  "note": "This structured index exists so AI readers can parse the portfolio directly. Self-initiated concepts are reconstructed from secondary research with no primary research, metrics, or usability tests claimed.",
+  "caseStudies": [
+    {
+      "title": "FinVista",
+      "slug": "finvista",
+      "url": "https://www.khanfaraz.in/case/finvista",
+      "type": "client work",
+      "role": "Senior UX Lead",
+      "year": 2024,
+      "domain": "Digital lending / NBFC fintech, India",
+      "summary": "Native Android loan origination system across 6 loan products, with a 100+ component design system and a streamlined 11-step two-wheeler loan journey.",
+      "artifacts": ["research", "user flows", "wireframes", "design system", "high-fidelity UI"]
+    },
+    {
+      "title": "Aurora",
+      "slug": "aurora",
+      "url": "https://www.khanfaraz.in/case/aurora",
+      "type": "client work",
+      "role": "Lead Product Designer",
+      "year": 2024,
+      "domain": "Marketing campaign platform with embedded AI",
+      "summary": "Redesigned the Recurring Batch Journey configurator and embedded the Helio AI composer; cut campaign-setup clicks 3:1 and shipped a 52-component design system.",
+      "artifacts": ["product design", "design system", "research", "AI composer UX"]
+    },
+    {
+      "title": "Meridian Institute Analytics",
+      "slug": "meridian",
+      "url": "https://www.khanfaraz.in/case/meridian",
+      "type": "client work",
+      "role": "Lead UX Designer",
+      "year": 2024,
+      "domain": "Higher-education analytics / data visualization",
+      "summary": "Unified four siloed Power BI dashboards (undergraduate and graduate admissions, research, HR) into one platform with an overview-and-drill-down model and an optional AI layer. Client anonymized.",
+      "artifacts": ["information architecture", "data visualization", "design system", "AI layer"]
+    },
+    {
+      "title": "Jack of All Threads",
+      "slug": "somethings-cooking",
+      "url": "https://www.khanfaraz.in/case/somethings-cooking",
+      "type": "client work",
+      "role": "Product / UX Designer",
+      "year": 2015,
+      "domain": "Custom-apparel crowdfunding, India",
+      "summary": "End-to-end product for India's first t-shirt crowdfunding platform: an in-browser design studio, the campaign-creation flow, and the buyer and raiser journeys across desktop and mobile.",
+      "artifacts": ["product design", "design studio tool", "end-to-end journeys", "visual design"]
+    }
+  ],
+  "concepts": [
+    {
+      "title": "Slate",
+      "slug": "recruitos",
+      "url": "https://www.khanfaraz.in/case/recruitos",
+      "prototype": "https://www.khanfaraz.in/recruitos/",
+      "type": "self-initiated AI-native concept",
+      "role": "Senior UX Lead",
+      "year": 2026,
+      "domain": "AI recruiting workspace for staffing agencies",
+      "posture": "Reconstructed from secondary research; no primary research or metrics claimed.",
+      "summary": "The AI sources candidates, ranks them, and drafts outreach while the recruiter stays the decision-maker. Designed end to end and built as a working interactive prototype."
+    },
+    {
+      "title": "Crux — the Control Room",
+      "slug": "decisionos",
+      "url": "https://www.khanfaraz.in/case/decisionos",
+      "prototype": "https://www.khanfaraz.in/decisionos/",
+      "type": "self-initiated AI-native concept",
+      "role": "Senior UX Lead",
+      "year": 2026,
+      "domain": "AI-agent supervision console for enterprise analytics (BFSI)",
+      "posture": "Reconstructed from secondary research; no primary research, users, or metrics claimed. States what could not be validated and how it would be.",
+      "summary": "A working prototype of an AI-agent supervision console that renders the five Agent Experience trust patterns as real interface: intent preview, autonomy dial with live work re-routing, calibrated confidence that forces escalation below threshold, an action audit with before/after diffs and incident replay, and an escalation pathway with a full context package.",
+      "trustPatterns": ["Intent Preview", "Autonomy Dial", "Confidence Signal", "Action Audit", "Escalation Pathway"]
+    }
+  ]
+}
