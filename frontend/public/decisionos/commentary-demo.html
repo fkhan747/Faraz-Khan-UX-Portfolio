@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Commentary Mode · demo</title>
+<!--
+  Standalone, separate demo of Commentary Mode (Piece 2). This mirrors the
+  behavior of src/components/CommentaryMode.jsx against a mock case-study page,
+  so the interaction can be seen and verified before merge. It is NOT the
+  shipped artifact; the React component is. Lives under /decisionos/ so it is
+  stripped from the build on deploy, same as the rest of the separate work.
+-->
+<style>
+  :root{--bg:#0E1116;--panel:#161B22;--line:#2A313C;--ink:#E6EDF3;--muted:#8B949E;--brand:#E8519B}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:system-ui,sans-serif;line-height:1.6}
+  .wrap{max-width:760px;margin:0 auto;padding:56px 24px 160px}
+  .eyebrow{font:600 11px/1 ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--brand)}
+  h1{font-size:34px;font-weight:700;margin:10px 0 6px;letter-spacing:-.01em}
+  .sub{color:var(--muted);font-size:16px;margin-bottom:8px}
+  .demo-note{margin:18px 0 34px;padding:12px 14px;border:1px dashed var(--line);border-radius:8px;color:var(--muted);font-size:13px}
+  section{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:22px 24px;margin:16px 0;position:relative}
+  section h2{font-size:19px;margin-bottom:8px}
+  section p{color:#C9D1D9;font-size:14px}
+  .mock-img{height:150px;border-radius:8px;margin-top:14px;background:
+    repeating-linear-gradient(135deg,#1B222B 0 14px,#161B22 14px 28px);border:1px solid var(--line);
+    display:grid;place-items:center;color:var(--muted);font:600 12px/1 ui-monospace,monospace;letter-spacing:.08em}
+
+  /* ---- Commentary Mode styles (mirror of CommentaryMode.jsx) ---- */
+  .cmt-toggle{position:fixed;left:20px;bottom:20px;z-index:60;display:inline-flex;align-items:center;gap:8px;
+    font:600 13px/1 system-ui,sans-serif;color:#E6EDF3;background:#161B22;border:1px solid #2A313C;border-radius:999px;
+    padding:10px 15px;cursor:pointer;box-shadow:0 6px 24px rgba(0,0,0,.35);transition:border-color .15s,background .15s}
+  .cmt-toggle:hover{border-color:#3d4552;background:#1B222B}
+  .cmt-toggle.on{border-color:#E8519B;color:#fff}
+  .cmt-toggle .cmt-swatch{width:9px;height:9px;border-radius:50%;background:#E8519B;flex:none}
+  .cmt-count{font:600 10px/1 ui-monospace,monospace;color:#8B949E;border:1px solid #2A313C;border-radius:999px;padding:2px 6px}
+  .cmt-pin{position:fixed;transform:translate(-50%,-50%);z-index:59;width:26px;height:26px;border-radius:50%;
+    display:grid;place-items:center;font:700 12px/1 ui-monospace,monospace;color:#fff;background:#E8519B;
+    border:2px solid #0E1116;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.4);transition:transform .12s}
+  .cmt-pin:hover,.cmt-pin.active{transform:translate(-50%,-50%) scale(1.15)}
+  .cmt-pin::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:2px solid rgba(232,81,155,.35);
+    animation:cmt-ping 2s ease-out infinite}
+  .cmt-card{position:fixed;z-index:61;width:320px;max-width:calc(100vw - 32px);background:#161B22;color:#E6EDF3;
+    border:1px solid #2A313C;border-radius:10px;box-shadow:0 16px 50px rgba(0,0,0,.55);padding:16px;animation:cmt-in .16s ease}
+  .cmt-card h4{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#8B949E;margin:0 0 5px;font-weight:600}
+  .cmt-block+.cmt-block{margin-top:12px}
+  .cmt-card p{margin:0;font-size:13px;line-height:1.5;color:#C9D1D9}
+  .cmt-decision{font-size:15px;font-weight:600;line-height:1.35;color:#fff}
+  .cmt-conf{display:inline-flex;align-items:center;gap:6px;font:600 10px/1 ui-monospace,monospace;letter-spacing:.06em;
+    text-transform:uppercase;border:1px solid currentColor;border-radius:999px;padding:3px 8px}
+  .cmt-conf.high{color:#3FB950}.cmt-conf.medium{color:#D29922}.cmt-conf.low{color:#F85149}
+  .cmt-close{position:absolute;top:10px;right:10px;width:24px;height:24px;border-radius:6px;border:1px solid #2A313C;
+    background:none;color:#8B949E;cursor:pointer;font-size:14px;line-height:1}
+  .cmt-close:hover{color:#E6EDF3;border-color:#3d4552}
+  .cmt-num{font:700 10px/1 ui-monospace,monospace;color:#E8519B}
+  @keyframes cmt-ping{0%{transform:scale(.9);opacity:.8}70%,100%{transform:scale(1.5);opacity:0}}
+  @keyframes cmt-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion: reduce){.cmt-pin::after{animation:none}.cmt-card{animation:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Commentary Mode · demo</div>
+  <h1>Meridian Institute Analytics</h1>
+  <p class="sub">One cockpit for admissions, research, and HR.</p>
+  <div class="demo-note">This is a mock of a case-study page. Click <b>Design notes</b> (bottom-left) to reveal the rationale pins, then click a pin. On the real site this is one React component over the actual case study.</div>
+
+  <section data-commentary="ia-model">
+    <h2>Information architecture</h2>
+    <p>Four siloed Power BI dashboards became one overview that drills into four modules.</p>
+    <div class="mock-img">IA DIAGRAM</div>
+  </section>
+  <section data-commentary="ai-layer">
+    <h2>The AI layer</h2>
+    <p>An optional assistant sits beside the numbers, never in front of them.</p>
+    <div class="mock-img">AI PANEL</div>
+  </section>
+  <section data-commentary="drilldown">
+    <h2>Overview and drill-down</h2>
+    <p>Every KPI on the overview opens its own module for the people who need the detail.</p>
+    <div class="mock-img">DRILL-DOWN</div>
+  </section>
+  <section data-commentary="anonymization">
+    <h2>Anonymization</h2>
+    <p>The client ships as Meridian Institute of Technology.</p>
+  </section>
+  <section data-commentary="validation">
+    <h2>What I could not validate</h2>
+    <p>No usability testing was run. Here is how I would test it with real access.</p>
+  </section>
+</div>
+
+<script>
+"use strict";
+// Pin content mirrors src/data/commentary/meridian.js
+const PINS = [
+  { anchor:"ia-model", x:50, y:40, decision:"One cockpit: a single overview that drills into four modules.",
+    why:"The team was tab-hopping across four separate Power BI dashboards, so no one could see admissions, research, and HR in one glance.",
+    rejected:"Four polished-but-separate dashboards. Cleaner to build, but it keeps the silos that were the actual problem.", confidence:"high" },
+  { anchor:"ai-layer", x:50, y:35, decision:"AI sits as an optional layer, not the default surface.",
+    why:"Leaders are accountable for these numbers. A black box on top of governance data erodes trust instead of building it.",
+    rejected:"An AI-first landing that answers in prose. It hides the figures people have to defend in a room.", confidence:"medium" },
+  { anchor:"drilldown", x:50, y:50, decision:"Every KPI on the overview drills straight into its own module.",
+    why:"Executives scan, analysts dig. One overview-and-drill-down model serves both without a second navigation.",
+    rejected:"Separate 'summary' and 'detail' apps. That doubles the wayfinding and reintroduces the hop.", confidence:"medium" },
+  { anchor:"anonymization", x:50, y:50, decision:"The client ships anonymized as Meridian Institute of Technology.",
+    why:"Real institutional data plus a real brand cannot go in a public portfolio without breaking the client relationship.",
+    rejected:"Showing the real name and logo for credibility. Not worth the trust cost.", confidence:"high" },
+  { anchor:"validation", x:50, y:45, decision:"The case study carries a written 'what I could not validate' section.",
+    why:"No usability testing was run here. Saying so, and how I would test it, is a judgment signal; hiding it reads as fabrication.",
+    rejected:"Implying it tested well with round, invented metrics. False, and a known portfolio tell hiring managers screen for.", confidence:"high" },
+];
+
+let on = false, active = null;
+const layer = [];   // pin button elements
+let card = null;
+
+function measure(){
+  PINS.forEach((p,i)=>{
+    const btn = layer[i]; if(!btn) return;
+    const el = document.querySelector('[data-commentary="'+p.anchor+'"]');
+    if(!el){ btn.style.display='none'; return; }
+    const r = el.getBoundingClientRect();
+    btn.style.display='grid';
+    btn.style.left = (r.left + (p.x/100)*r.width) + 'px';
+    btn.style.top  = (r.top  + (p.y/100)*r.height) + 'px';
+  });
+  if(card && active!=null) positionCard();
+}
+function positionCard(){
+  const btn = layer[active]; if(!btn) return;
+  const W=320,M=16, bl=parseFloat(btn.style.left), bt=parseFloat(btn.style.top);
+  let left=Math.max(M, Math.min(bl+20, window.innerWidth-W-M));
+  let top =Math.max(M, Math.min(bt+16, window.innerHeight-220));
+  card.style.left=left+'px'; card.style.top=top+'px';
+}
+function openCard(i){
+  active = (active===i? null : i);
+  render();
+}
+function render(){
+  layer.forEach((btn,i)=> btn.classList.toggle('active', active===i));
+  if(card){ card.remove(); card=null; }
+  if(active!=null){
+    const p = PINS[active];
+    card = document.createElement('div');
+    card.className='cmt-card'; card.setAttribute('role','dialog');
+    card.innerHTML =
+      '<button class="cmt-close" aria-label="Close">×</button>'+
+      '<span class="cmt-num">Note '+(active+1)+' of '+PINS.length+'</span>'+
+      '<div class="cmt-block" style="margin-top:6px"><h4>Decision</h4><p class="cmt-decision"></p></div>'+
+      '<div class="cmt-block"><h4>Why</h4><p class="cmt-why"></p></div>'+
+      '<div class="cmt-block"><h4>Rejected</h4><p class="cmt-rej"></p></div>'+
+      '<div class="cmt-block"><span class="cmt-conf '+p.confidence+'">'+p.confidence+' confidence</span></div>';
+    card.querySelector('.cmt-decision').textContent = p.decision;
+    card.querySelector('.cmt-why').textContent = p.why;
+    card.querySelector('.cmt-rej').textContent = p.rejected;
+    card.querySelector('.cmt-close').onclick = ()=>{ active=null; render(); };
+    document.body.appendChild(card);
+    positionCard();
+  }
+}
+function toggle(){
+  on = !on;
+  document.getElementById('cmt-toggle').classList.toggle('on', on);
+  layer.forEach(btn => btn.style.visibility = on ? 'visible':'hidden');
+  if(!on){ active=null; render(); }
+  else measure();
+}
+
+// build toggle + pins
+const tgl = document.createElement('button');
+tgl.id='cmt-toggle'; tgl.className='cmt-toggle'; tgl.setAttribute('aria-pressed','false');
+tgl.innerHTML = '<span class="cmt-swatch"></span>Design notes <span class="cmt-count">'+PINS.length+'</span>';
+tgl.onclick = ()=>{ toggle(); tgl.setAttribute('aria-pressed', String(on)); };
+document.body.appendChild(tgl);
+
+PINS.forEach((p,i)=>{
+  const b = document.createElement('button');
+  b.className='cmt-pin'; b.style.visibility='hidden'; b.textContent=(i+1);
+  b.setAttribute('aria-label','Design note '+(i+1)+': '+p.decision);
+  b.onclick = ()=>openCard(i);
+  document.body.appendChild(b); layer.push(b);
+});
+
+window.addEventListener('scroll', measure, {passive:true});
+window.addEventListener('resize', measure);
+window.addEventListener('keydown', e=>{ if(e.key==='Escape' && active!=null){ active=null; render(); }});
+measure();
+</script>
+</body>
+</html>

@@ -19,9 +19,9 @@ Faraz approved this direction on 2026-07-06.
 | Phase 2: canon data + agent fleet screens | DONE + VERIFIED. Overview + full Agent detail screen + 12-item canon queue. |
 | Phase 3: the five trust patterns as working UI | DONE + VERIFIED, all five live and interactive. (1) Intent Preview: 12 review cards with blast radius, sources, reversibility. (2) Autonomy Dial: 3-position per-agent control on the agent screen; turning to Auto re-routes that agent's confident items from "waiting on you" to "flowing through" and below-threshold items stay HELD (proven: Recon->Auto flows q6/92%, holds q5/64%, drops queue 12->11 across KPI+badge+chip; fully reversible). (3) Confidence Signal: why-decompose + sub-70% forces Escalate (q5/q8). (4) Action Audit: filterable log (all/approved/declined/escalated), expandable before/after diffs, decline reasons, + incident replay stepper (Sentinel timeline, prev/next/restart). (5) Escalation Pathway: Sentinel context package (tried / knows / recommends+confidence) with 3 one-click paths (approve rec / take over / send back with guidance); escalating from Review also lands here; resolving updates activeNow everywhere. Whole console: console-clean, overflowX 0 on all 5 screens desktop + mobile (lanes/esc-cols stack). Committed. Note: "Edit scope" intentionally omitted to avoid a dead button. |
 | Phase 4: polish pass (motion, edge states, copy) | Partly folded into Phase 3 (lane-in motion, reduced-motion, keyboard-enter on reason inputs, empty states, hot-badge only when >0). Deferred by Faraz: full visual design pass ("we will do visual design later"). |
-| Phase 5: case-study integration content | NOT STARTED |
-| Piece 2: Commentary Mode component | NOT STARTED |
-| Garnish: llms.txt + machine-readable layer | NOT STARTED |
+| Phase 5: case-study integration content | NOT STARTED. Next up: draft `decisionosCase.controlroom-draft.js` (needs Faraz's voice pass + merge-day prototype screenshots). |
+| Piece 2: Commentary Mode component | DONE + VERIFIED. `src/components/CommentaryMode.jsx` (unimported, compiles clean under project babel) + draft pins `src/data/commentary/meridian.js` + standalone verified demo `public/decisionos/commentary-demo.html` (toggle on, 5 pins anchored, card shows Decision/Why/Rejected/Confidence, overflowX 0, console clean). Pin WORDING still needs Faraz's approval before merge. |
+| Garnish: llms.txt + machine-readable layer | DONE. `public/decisionos/llms.txt` + `public/decisionos/portfolio.json` (valid JSON, 4 case studies + 2 concepts). STAGED inside decisionos/ so they are stripped on deploy; merge step moves them to `public/` root. |
 | Merge into main site | BLOCKED, only on Faraz's explicit word |
 
 ---
@@ -304,11 +304,19 @@ at merge time since the prototype needs no build.
 3. Swap in the updated `decisionosCase.js` (from the Phase 5 draft).
 4. Add prototype screenshots to `public/decisionos-shots/` (the `S()` helper
    in decisionosCase.js already points there).
-5. Integrate Commentary Mode imports on approved case studies.
-6. Remove the `rm -rf frontend/build/decisionos` line from the deploy ritual.
-7. Full ritual: serial build, crawl 11/11, deploy, curl-verify bundle 200,
+5. Integrate Commentary Mode on approved case studies: `import CommentaryMode
+   from "../components/CommentaryMode"` + one `<CommentaryMode pins={...} />`
+   line per page, and tag that page's anchors with `data-commentary="..."`
+   matching the pins. Approve every pin's wording first. See
+   `public/decisionos/commentary-demo.html` for the working reference.
+6. Move the garnish to the site root: `git mv frontend/public/decisionos/llms.txt
+   frontend/public/llms.txt` and same for `portfolio.json` (they were staged
+   under decisionos/ only so the deploy strip kept them off the live site).
+   Delete `public/decisionos/commentary-demo.html` (demo only, not shipped).
+7. Remove the `rm -rf frontend/build/decisionos` line from the deploy ritual.
+8. Full ritual: serial build, crawl 11/11, deploy, curl-verify bundle 200,
    leakage checks, live spot-checks. Get explicit go-ahead first, as always.
-8. Consider the positioning line change on Landing/About after Faraz decides:
+9. Consider the positioning line change on Landing/About after Faraz decides:
    "enterprise data UX lead who ships AI-native prototypes."
 
 ---
