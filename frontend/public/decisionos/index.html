@@ -75,6 +75,59 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 .foot-note{max-width:1180px;margin:26px auto 8px;padding-top:12px;border-top:1px solid var(--line);color:var(--dim);font-size:11px;display:flex;gap:8px;flex-wrap:wrap}
 .foot-note b{color:var(--muted);font-weight:600}
 
+/* ---- Intent Preview cards (trust pattern 1) ---- */
+.review-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.review-head h2{font-size:15px;font-weight:600}
+.review-head .mono{font-size:11px;color:var(--muted)}
+.ip{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;display:grid;grid-template-columns:1fr;gap:12px;transition:border-color 140ms var(--ease),opacity 200ms var(--ease),transform 200ms var(--ease)}
+.ip.leaving{opacity:0;transform:translateX(10px)}
+.ip-top{display:flex;align-items:flex-start;gap:12px}
+.ip-agent{display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;color:var(--muted);flex:none;width:88px;padding-top:1px}
+.ip-main{flex:1;min-width:0}
+.ip-action{font-weight:600;font-size:14px;line-height:1.35}
+.ip-detail{color:var(--muted);font-size:13px;margin-top:3px}
+.ip-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px;align-items:center}
+.chip{font-family:var(--mono);font-size:10px;letter-spacing:0.04em;padding:2px 8px;border-radius:4px;border:1px solid var(--line);color:var(--muted)}
+.chip.sys{background:var(--panel-2)}
+.chip.rev{color:var(--ok);border-color:rgba(63,185,80,0.35)}
+.chip.hard{color:var(--watch);border-color:rgba(210,153,34,0.4)}
+.ip-read{font-size:11px;color:var(--dim);margin-top:8px}
+.ip-read b{color:var(--muted);font-weight:500}
+/* confidence */
+.conf{margin-top:10px}
+.conf-row{display:flex;align-items:center;gap:10px}
+.conf-bar{flex:1;height:6px;border-radius:999px;background:var(--panel-2);overflow:hidden;border:1px solid var(--line)}
+.conf-fill{height:100%;border-radius:999px;transition:width 300ms var(--ease)}
+.conf-val{font-family:var(--mono);font-size:12px;width:38px;text-align:right}
+.conf-toggle{font-family:var(--mono);font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:var(--dim);border:1px solid var(--line);border-radius:999px;padding:2px 8px}
+.conf-toggle:hover{color:var(--ink)}
+.conf-why{margin-top:8px;padding:8px 10px;background:var(--panel-2);border:1px solid var(--line);border-radius:var(--r);display:none}
+.conf-why.open{display:block}
+.conf-why li{list-style:none;font-size:12px;color:var(--muted);padding:2px 0 2px 14px;position:relative}
+.conf-why li::before{content:"";position:absolute;left:2px;top:8px;width:5px;height:5px;border-radius:50%;background:var(--dim)}
+.below{font-size:11px;color:var(--watch);margin-top:8px;display:flex;align-items:center;gap:6px}
+/* actions */
+.ip-actions{display:flex;gap:8px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:12px}
+.btn{font-family:var(--sans);font-size:12px;font-weight:600;padding:7px 14px;border-radius:var(--r);border:1px solid var(--line);color:var(--ink);transition:background 120ms var(--ease),border-color 120ms var(--ease)}
+.btn:hover{background:var(--panel-2)}
+.btn.primary{background:var(--brand);border-color:var(--brand);color:#fff}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn.warn{border-color:rgba(210,153,34,0.5);color:var(--watch)}
+.btn.warn:hover{background:rgba(210,153,34,0.08)}
+.btn.ghost{color:var(--muted)}
+.decline-box{display:none;gap:8px;align-items:center;flex-wrap:wrap;width:100%;margin-top:4px}
+.decline-box.open{display:flex}
+.decline-box input{flex:1;min-width:180px;background:var(--bg);border:1px solid var(--line);border-radius:var(--r);color:var(--ink);font:inherit;font-size:13px;padding:7px 10px;outline:none}
+.decline-box input:focus{border-color:var(--brand)}
+/* empty + toast */
+.empty{padding:44px 20px;text-align:center}
+.empty .ring{width:40px;height:40px;border-radius:50%;border:3px solid var(--ok);margin:0 auto 14px;display:grid;place-items:center;color:var(--ok)}
+.empty h3{font-size:15px;font-weight:600;margin-bottom:4px}
+.empty p{color:var(--muted);font-size:13px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(8px);background:var(--panel-2);border:1px solid var(--line);border-radius:var(--r);padding:10px 16px;font-size:13px;color:var(--ink);box-shadow:0 8px 30px rgba(0,0,0,0.5);opacity:0;pointer-events:none;transition:opacity 180ms var(--ease),transform 180ms var(--ease);z-index:50;max-width:80vw}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast .mono{color:var(--muted);font-size:11px}
+
 /* ---- Rows (queue/feed lists) ---- */
 .row{display:flex;align-items:center;gap:12px;padding:9px 14px;border-bottom:1px solid var(--line);font-size:13px}
 .row:last-child{border-bottom:none}
@@ -139,7 +192,24 @@ const STORE = {
     { id:"quality",  name:"Quality",  job:"Monitors data pipelines, proposes schema fixes",              autonomy:"approve", status:"watch", dot:"b-watch" },
     { id:"forecast", name:"Forecast", job:"Projects liquidity and volume, flags anomalies vs forecast",  autonomy:"suggest", status:"ok",    dot:"b-ok"    },
   ],
-  queueCount: 12,          // items waiting on a human (Phase 2 fills the items)
+  // Items waiting on a human. queueCount is derived from this length everywhere.
+  confThreshold: 70,       // below this, the UI forces escalation (Confidence Signal)
+  queue: [
+    { id:"q1",  agent:"sentinel", action:"Freeze card ending 4471 for 24 hours",        detail:"Velocity rule v4 and geo-jump both tripped on 3 transactions in 6 minutes.", systems:["Cards","Ledger"],            reversible:true,  conf:88, why:["Velocity + geo-jump both fired","Cardholder in known-good travel corridor: no"], read:"3 txns · card history · velocity rule v4" },
+    { id:"q2",  agent:"sentinel", action:"Flag merchant MID-90233 for manual review",    detail:"Chargeback rate crossed 1.2% over the trailing 7 days.",                    systems:["Fraud Ops"],                 reversible:true,  conf:76, why:["7-day chargeback rate 1.2% (limit 0.9%)","Volume steady, not a spike"], read:"merchant 7-day history · chargeback ledger" },
+    { id:"q3",  agent:"quality",  action:"Apply schema fix to the settlements pipeline",  detail:"Adds a nullable settlement_ref column the new rail requires.",                systems:["Data Pipeline","Warehouse"], reversible:false, conf:71, why:["Matches the documented rail spec","No downstream consumer reads the column yet"], read:"rail spec v2 · pipeline DAG · 4 consumers" },
+    { id:"q4",  agent:"quality",  action:"Backfill 3 null-rate columns in txn_daily",     detail:"Recompute derived rates for the last 14 partitions.",                        systems:["Warehouse"],                 reversible:true,  conf:83, why:["Source rows are complete","Recompute is idempotent"], read:"txn_daily · 14 partitions · rate defs" },
+    { id:"q5",  agent:"recon",    action:"Write off 2 ledger breaks under 500 rupees",     detail:"Sub-threshold breaks that aged past 5 days with no counterparty match.",     systems:["Ledger","GL"],               reversible:false, conf:64, why:["Both under the auto-writeoff limit","No counterparty match found in 5 days"], read:"2 breaks · GL policy · aging report" },
+    { id:"q6",  agent:"recon",    action:"Re-run reconciliation for branch 118",          detail:"Overnight batch missed a file; a clean re-run should close it.",              systems:["Ledger"],                    reversible:true,  conf:92, why:["Missing file has now landed","Re-run is a read-then-match, no writes till matched"], read:"branch 118 batch log · file manifest" },
+    { id:"q7",  agent:"reporter", action:"Send the 09:00 ops brief to Ops leads",         detail:"Standard daily brief, 6 recipients on the ops distribution list.",           systems:["Email","Reporting"],         reversible:true,  conf:90, why:["All source panels rendered","Distribution list unchanged"], read:"brief draft · distribution list" },
+    { id:"q8",  agent:"reporter", action:"Publish regulator summary draft for sign-off",   detail:"Quarterly ops summary; goes to the compliance queue, not to the regulator.", systems:["Reporting","Compliance"],    reversible:false, conf:68, why:["Numbers reconcile to the ledger","One narrative section is thin on context"], read:"quarterly figures · last filing · template" },
+    { id:"q9",  agent:"forecast", action:"Raise a liquidity alert for Friday settlement",  detail:"Projected outflow sits near the comfort band for the Friday window.",         systems:["Treasury"],                  reversible:true,  conf:79, why:["Projection within 3% of the band edge","Two large known outflows land Friday"], read:"liquidity model · Friday calendar" },
+    { id:"q10", agent:"forecast", action:"Adjust volume forecast +4% for festival week",   detail:"Seasonal uplift the base model underweights.",                               systems:["Forecast Model"],            reversible:true,  conf:74, why:["Last two festival weeks ran +4 to +6%","Base model has no festival feature"], read:"3-year seasonal series · model config" },
+    { id:"q11", agent:"quality",  action:"Pause the KYC-docs ingestion job",               detail:"Upstream source is returning malformed records; pause protects the table.",   systems:["Data Pipeline"],             reversible:true,  conf:81, why:["12% of last batch malformed","Table is downstream-critical"], read:"batch error log · schema check" },
+    { id:"q12", agent:"sentinel", action:"Add device fingerprint to the watchlist",        detail:"A single device tied to 4 accounts opened in one hour.",                     systems:["Fraud Ops"],                 reversible:true,  conf:85, why:["4 accounts, 1 device, 1 hour","No shared-family signal"], read:"device graph · account open log" },
+  ],
+  get queueCount(){ return this.queue.length; },
+  cleared: [],             // approved/declined items move here (feeds Audit in a later phase)
   escalations: { activeNow: 1, thisWeek: 3 },
   feed: [                  // most recent first; relative times only, never dates
     { who:"Recon",    what:"Cleared 1,204 matched entries; 2 breaks parked for review", when:"2m ago"  },
@@ -225,10 +295,123 @@ function screenAgent(id){
 }
 
 const STUBS = {
-  "#/review":     ["Phase 3", "Intent Preview cards for the 12 queued items render here: plan, blast radius, sources, reversibility, approve / edit scope / decline."],
   "#/audit":      ["Phase 3", "The immutable action log renders here: filters, before/after diffs, incident replay."],
   "#/escalation": ["Phase 3", "Sentinel's context package renders here: what it tried, what it knows, what it recommends, and your one-click paths."],
 };
+
+const agentById = (id) => STORE.agents.find(a => a.id === id) || { name:id, dot:"b-info" };
+
+/* ---------- Trust pattern 1: Intent Preview / Review Queue ---------- */
+function intentCard(it){
+  const a = agentById(it.agent);
+  const below = it.conf < STORE.confThreshold;
+  const primary = below
+    ? `<button class="btn warn" onclick="escalateItem('${it.id}')">Escalate to review</button>`
+    : `<button class="btn primary" onclick="approveItem('${it.id}')">Approve</button>`;
+  return `
+  <div class="ip" data-id="${it.id}">
+    <div class="ip-top">
+      <div class="ip-agent"><span class="agent-dot ${a.dot}"></span>${a.name}</div>
+      <div class="ip-main">
+        <div class="ip-action">${esc(it.action)}</div>
+        <div class="ip-detail">${esc(it.detail)}</div>
+        <div class="ip-meta">
+          ${it.systems.map(s => `<span class="chip sys">${esc(s)}</span>`).join("")}
+          <span class="chip ${it.reversible ? "rev":"hard"}">${it.reversible ? "Reversible" : "Hard to reverse"}</span>
+        </div>
+        <div class="ip-read"><b>Read to decide:</b> ${esc(it.read)}</div>
+        <div class="conf">
+          <div class="conf-row">
+            <span class="mono" style="font-size:11px;color:var(--dim)">Confidence</span>
+            <div class="conf-bar"><div class="conf-fill" style="width:${it.conf}%;background:var(--info)"></div></div>
+            <span class="conf-val">${it.conf}%</span>
+            <button class="conf-toggle" onclick="toggleWhy('${it.id}')">why</button>
+          </div>
+          <ul class="conf-why" id="why-${it.id}">${it.why.map(w => `<li>${esc(w)}</li>`).join("")}</ul>
+          ${below ? `<div class="below"><span>&#9650;</span> Below your ${STORE.confThreshold}% escalation threshold. It cannot be auto-approved; a human has to make this call.</div>` : ""}
+        </div>
+      </div>
+    </div>
+    <div class="ip-actions">
+      ${primary}
+      <button class="btn ghost" onclick="openDecline('${it.id}')">Decline</button>
+      <div class="decline-box" id="dec-${it.id}">
+        <input type="text" id="reason-${it.id}" placeholder="Reason (the agent factors this into future proposals)" onkeydown="if(event.key==='Enter')confirmDecline('${it.id}')">
+        <button class="btn warn" onclick="confirmDecline('${it.id}')">Decline with reason</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function screenReview(){
+  if (!STORE.queue.length){
+    return `<div class="panel empty">
+      <div class="ring">&#10003;</div>
+      <h3>Queue clear.</h3>
+      <p>Every pending action has a human decision on it. New proposals will land here.</p>
+    </div>`;
+  }
+  return `
+    <div class="review-head">
+      <h2>Review Queue</h2>
+      <span class="mono">${STORE.queue.length} items &middot; each card is what an agent intends to do, before it acts</span>
+    </div>
+    ${STORE.queue.map(intentCard).join("")}`;
+}
+
+/* interactions (single source of truth: mutate STORE.queue, then re-render) */
+window.toggleWhy = (id) => {
+  const el = document.getElementById("why-" + id);
+  if (el) el.classList.toggle("open");
+};
+function resolveItem(id, decision, reason){
+  const i = STORE.queue.findIndex(x => x.id === id);
+  if (i < 0) return null;
+  const [item] = STORE.queue.splice(i, 1);
+  STORE.cleared.unshift({ ...item, decision, reason: reason || null, when: "just now" });
+  if (decision === "escalated") STORE.escalations.activeNow += 1;
+  return item;
+}
+function animateOutThenRender(id, after){
+  const card = document.querySelector(`.ip[data-id="${id}"]`);
+  const go = () => { after(); render(); };
+  if (!card || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return go();
+  card.classList.add("leaving");
+  setTimeout(go, 200);
+};
+window.approveItem = (id) => {
+  const it = STORE.queue.find(x => x.id === id); if (!it) return;
+  const a = agentById(it.agent);
+  animateOutThenRender(id, () => resolveItem(id, "approved"));
+  toast(`Approved. ${a.name} will act now.`, "Logged to the action audit.");
+};
+window.escalateItem = (id) => {
+  animateOutThenRender(id, () => resolveItem(id, "escalated"));
+  toast("Escalated. It is now on the Escalation screen.", "Low confidence needs a human call.");
+};
+window.openDecline = (id) => {
+  const box = document.getElementById("dec-" + id);
+  if (box){ box.classList.add("open"); const inp = document.getElementById("reason-" + id); if (inp) inp.focus(); }
+};
+window.confirmDecline = (id) => {
+  const inp = document.getElementById("reason-" + id);
+  const reason = (inp && inp.value.trim()) || "";
+  if (!reason){ if (inp){ inp.focus(); inp.style.borderColor = "var(--act)"; } return; }
+  const it = STORE.queue.find(x => x.id === id); const a = it ? agentById(it.agent) : { name:"The agent" };
+  animateOutThenRender(id, () => resolveItem(id, "declined", reason));
+  toast(`Declined. ${a.name} will factor that into future proposals.`, `"${reason}"`);
+};
+
+/* toast */
+let toastTimer;
+function toast(msg, sub){
+  let t = document.getElementById("toast");
+  if (!t){ t = document.createElement("div"); t.id = "toast"; t.className = "toast"; document.body.appendChild(t); }
+  t.innerHTML = `${esc(msg)}${sub ? ` <span class="mono">${esc(sub)}</span>` : ""}`;
+  requestAnimationFrame(() => t.classList.add("show"));
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove("show"), 2800);
+}
 
 function render(){
   const r = currentRoute();
@@ -236,6 +419,7 @@ function render(){
   let html;
   if (r.agentId) html = screenAgent(r.agentId);
   else if (r.hash === "#/overview") html = screenOverview();
+  else if (r.hash === "#/review") html = screenReview();
   else { const s = STUBS[r.hash]; html = `<div class="panel stub"><span class="mono">${s[0]}</span>${s[1]}</div>`; }
   const agent = r.agentId ? STORE.agents.find(x=>x.id===r.agentId) : null;
   $("#screen-title").textContent = agent ? agent.name : r.title;

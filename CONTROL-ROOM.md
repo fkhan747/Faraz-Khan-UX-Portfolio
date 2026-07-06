@@ -16,8 +16,8 @@ Faraz approved this direction on 2026-07-06.
 | Direction approved by Faraz | DONE ("Do it but keep all of this separate") |
 | This plan file | DONE |
 | Phase 1: prototype shell + design tokens | DONE + VERIFIED (public/decisionos/index.html; overview + agent screens, hash router, canon store; console clean, overflowX 0, KPIs 5/12/1) |
-| Phase 2: canon data + agent fleet screens | Overview + Agent DONE; queue items data + Agent autonomy detail = IN PROGRESS |
-| Phase 3: the five trust patterns as working UI | NOT STARTED (start with Review queue + Intent Preview) |
+| Phase 2: canon data + agent fleet screens | Overview + Agent screen + 12-item canon queue DONE + VERIFIED; Agent autonomy DETAIL still stubbed |
+| Phase 3: the five trust patterns as working UI | 1 Intent Preview DONE+VERIFIED (12 cards, blast radius, sources, reversibility). 3 Confidence Signal DONE+VERIFIED (why-decompose + sub-70% forces Escalate, 2 items). Approve/Decline-with-reason/Escalate loop DONE+VERIFIED (single source of truth: 12->11 updated queue+KPI+nav badge+cleared log+toast). REMAINING: 2 Autonomy Dial (+ queue re-route animation), 4 Action Audit (cleared[] already feeds it), 5 Escalation Pathway (Sentinel incident). Note: "Edit scope" intentionally omitted to avoid a dead button; add in Phase 4 only if made real. |
 | Phase 4: polish pass (motion, edge states, copy) | NOT STARTED |
 | Phase 5: case-study integration content | NOT STARTED |
 | Piece 2: Commentary Mode component | NOT STARTED |
