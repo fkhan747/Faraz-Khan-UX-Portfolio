@@ -140,6 +140,11 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
             </Reveal>
           ))}
         </div>
+        {r.hero.statsNote && (
+          <Reveal as="p" delay={0.46} className="mt-3 max-w-5xl text-[11px] font-mono uppercase tracking-widest text-white/50">
+            {r.hero.statsNote}
+          </Reveal>
+        )}
 
         <OwnedCard items={["Product concept", "Information architecture", "UI design", "Design system", "AI interaction patterns", "Prototyping"]} />
       </header>

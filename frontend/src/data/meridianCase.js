@@ -18,7 +18,7 @@ export const meridian = {
     stats: [
       { value: "4", label: "Departments unified" },
       { value: "~40", label: "Legacy views replaced" },
-      { value: "14,170", label: "Applications tracked" },
+      { value: "14,722", label: "Applications in one view" },
       { value: "10+ yrs", label: "Of history in one view" },
     ],
   },
@@ -31,15 +31,15 @@ export const meridian = {
     "AI interaction patterns",
   ],
   principles: [
-    { t: "Segment by level, always", d: "Grad is ~48% international, undergrad ~4%. A blended rate describes a student who doesn't exist, so rates never blend across levels. The Overview may total counts; percentages and yield only ever live per level." },
+    { t: "Segment by level, always", d: "Grad is ~48% international, undergrad ~4%. A blended mix describes a student who doesn't exist, so population mixes never blend across levels. The Overview may roll the funnel up; any mix or comparison only ever lives per level." },
     { t: "Lead with the answer", d: "End the 90-second orienting. Headline first, drill second. Every screen names its takeaway before it shows the detail." },
     { t: "Design to what Power BI can show", d: "Agree with the tool's limits before drawing anything pretty. Native drill-through, nothing custom the build team couldn't actually deliver." },
     { t: "Trends by default, deltas everywhere", d: "One year tells you nothing. Every view defaults to a multi-year trend, and every KPI carries a year-over-year delta." },
-    { t: "AI is a guide, never the decider", d: "Human in the loop, inputs visible, sensitive attributes kept out of any scoring. Ask Meridian AI summarizes; it never ranks or predicts." },
+    { t: "AI is a guide, never the decider", d: "Human in the loop, inputs visible, sensitive attributes kept out of any scoring. Ask Meridian AI summarizes and explains what is on screen; it never scores a student, and people make the calls." },
   ],
   constraints: [
     { t: "Power BI's native limits", d: "I designed to native behavior, drill-through and standard visuals, nothing custom-built, so the team could actually ship it." },
-    { t: "The existing data model", d: "Slate (the admissions system) and the student-records system already owned every number. I designed to the data the university actually has, not an idealized one." },
+    { t: "The data the university already has", d: "The admissions system and the student-records system already owned every number. I designed to the data the university actually has, not an idealized one." },
     { t: "Post-SFFA data sensitivity", d: "After the 2023 ruling, disaggregated demographic data is restricted. Those views suppress small counts and degrade gracefully when a category is withheld." },
     { t: "Scope honesty", d: "The Overview is hi-fi; the other tabs carried through IA, greybox, and hi-fi. Designed and demonstrated, not shipped and measured." },
   ],
@@ -70,7 +70,7 @@ Meridian is small, research-heavy, and split almost evenly between undergrad and
 
 Leadership thinks across domains. The tools didn't. A provost asks "is enrollment softening, is research strong enough to carry us, is headcount outrunning revenue?" in a single breath, and the old setup needed three separate sittings to answer it.
 
-Every dashboard spoke its own dialect, too. Grad is about 48% international, undergrad about 4%. Blend them and the number means nothing. So I split by level, by default, everywhere.
+Every dashboard spoke its own dialect, too. The graduate school is international-heavy while undergrad is overwhelmingly domestic. Blend them and the number means nothing. So I split by level, by default, everywhere.
 
 ### Two ways of reading, one product
 
@@ -106,7 +106,7 @@ Before I drew a single box, I went and learned the sector. Every finding here tu
 
 ### Where a dashboard actually sits
 
-A dashboard like this sits at the very end of the university's admissions and student-records systems. Slate is where about half of universities run admissions, and it holds both funnels, so that is the source of truth. I designed to what Power BI can actually show, and collapsed four legacy dashboards into one.
+A dashboard like this sits at the very end of the university's admissions and student-records systems. The admissions CRM runs the funnels for about half of all universities, so every number starts there. I designed to what Power BI can actually show, and collapsed four legacy dashboards into one.
 
 ### It's a trajectory, not a snapshot
 
@@ -118,7 +118,7 @@ The college-age population is shrinking in the Northeast, Midwest, and West, and
 
 ### International share lies until you split it
 
-Grad is about 48% international, undergrad about 4%. A blended number averages two unrelated populations. So I segment by level everywhere. There is no global "students" view, on purpose.
+The two levels are nothing alike, and a blended number averages two unrelated populations. So I segment by level everywhere. There is no global "students" view, on purpose.
 
 ### Test-optional is reversing
 
@@ -166,9 +166,9 @@ Enterprise work, so the box was real before I drew anything. These shaped every 
 
 ## Information architecture and navigation model
 
-One product, one navigation model, one set of filters that behave the same everywhere. Shallow on purpose: an Overview cockpit up top, then five owner-aligned areas, each opening on a summary before you drill into named sub-views. Filters carry over, so the drill-down continues the question you were already asking.
+One product, one navigation model, one set of filters that behave the same everywhere. Shallow on purpose: an Overview cockpit up top, then four owner-aligned areas, each opening on a summary before you drill into named sub-views. Filters carry over, so the drill-down continues the question you were already asking.
 
-Two calls shaped it. Undergrad and Grad stay split (not one "Admissions" toggle) because the funnels are genuinely different: roughly 48% international versus 4%, volumes 2x apart. One layout would always look wrong for one of them.
+Two calls shaped it. Undergrad and Grad stay split (not one "Admissions" toggle) because the funnels are genuinely different: international mixes worlds apart, volumes 2x apart. One layout would always look wrong for one of them.
 
 And one rule runs through the whole thing: segment by level, always. No lone "total enrollment," no blended "percent international." Both would describe a student who does not exist.
 
@@ -200,7 +200,7 @@ Graduate runs on a different engine: smaller pool, dramatic international skew, 
 
 The funnel makes the real problem legible: more than two thirds of admitted applicants decline. That gap, not the application count, is where the yield work lives.
 
-At about 48% international with source markets concentrated (India by far the largest), that concentration is a risk as much as a strength. When one country supplies a big share of a class, a visa-policy change becomes an enrollment event.
+With source markets concentrated (India by far the largest), that concentration is a risk as much as a strength. When one country supplies a big share of a class, a visa-policy change becomes an enrollment event.
 
 ### Why I let the two diverge
 
@@ -262,7 +262,7 @@ At 4% international, the domestic story is the story. I lead with a US map, beca
 
 ### Graduate Geo
 
-At about 48% international, the source-market world map leads. The pipeline is concentrated, and that is the risk: one visa shift can move a whole class.
+International-heavy as it is, the source-market world map leads. The pipeline is concentrated, and that is the risk: one visa shift can move a whole class.
 
 ## Before and after
 
@@ -272,7 +272,7 @@ The fastest proof: the old pain on the left, the new answer on the right.
 
 **Undergraduate Admissions.** Applications fell 14,170 to 10,670, admit rate climbed 43% to 51%. A Northeast school feels the demographic decline harder, so geography earned its own screen.
 
-**Graduate Admissions.** The worst of the pie problem. International share now splits by level: about 48% of grad students, only about 4% of undergrads.
+**Graduate Admissions.** The worst of the pie problem. International share now splits by level instead of pretending one number covers both.
 
 **Research.** A dense grid of fiscal-year tables became a proposals-to-awards pipeline with flagged trends.
 
@@ -288,5 +288,5 @@ No formal usability lab on this one, and I won't pretend otherwise. Here is what
 
 ## Outcome, reflection, and forward outlook
 
-What shipped, what I would redo, and where Meridian goes next.`,
+What came of it, what I would redo, and where Meridian goes next.`,
 };

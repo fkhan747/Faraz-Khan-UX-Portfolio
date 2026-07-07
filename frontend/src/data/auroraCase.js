@@ -25,7 +25,7 @@ export const aurora = {
     headline: "Project Overview",
     tldrTitle: "TL;DR: Executive Summary",
     tldr:
-      "I cut campaign setup from three clicks to one. I put an AI composer right inside the email canvas, so writers stopped pasting copy back and forth from ChatGPT. Aurora is a B2B marketing-tech product in Europe, acquired by its parent company Helio. I used a once-in-a-decade platform rebuild as the window to fix a legacy, engineer-led UI. I redesigned the Recurring Batch Journey configurator, embedded the Helio AI composer, and built a Figma design system that brought Aurora in line with Helio's brand. Every screen shipped ready to build, traceable to the exact requirement it served.",
+      "I cut campaign setup from three clicks to one. I put an AI composer right inside the email canvas, so writers stopped pasting copy back and forth from ChatGPT. Aurora is a B2B marketing-tech product in Europe, acquired by its parent company Helio. I used the platform rebuild as the window to fix a legacy, engineer-led UI. I redesigned the Recurring Batch Journey configurator, embedded the Helio AI composer, and built a Figma design system that brought Aurora in line with Helio's brand. Every screen shipped ready to build, traceable to the exact requirement it served.",
     facts: [
       { label: "Role", value: "Lead Product Designer" },
       { label: "Duration", value: "~5 Months" },
@@ -46,7 +46,7 @@ export const aurora = {
       "The legacy product was engineer-led. It worked, but it was dense, inconsistent, and visually fragmented. Marketers fought cluttered config panels to ship a recurring campaign. Copywriters had no AI in the composer, so they wrote in ChatGPT and pasted back.",
     contextTitle: "Project Context",
     contextBody:
-      "The product was being rebuilt from the ground up; the team treated that once-in-a-decade window as the chance to also reduce cognitive load, simplify the flows, and create a consistent brand experience aligned with Helio's design language.",
+      "The product was being rebuilt from the ground up; the team treated the rebuild as the chance to also reduce cognitive load, simplify the flows, and create a consistent brand experience aligned with Helio's design language.",
     metadata: [
       { k: "Industry", v: "Marketing Technology" },
       { k: "Sector", v: "Digital Marketing & Relationship Management" },
@@ -93,7 +93,7 @@ export const aurora = {
       "Reporting and analytics dashboards",
       "Salesforce Commerce Cloud integration UX",
       "Personalization token system",
-      "API-triggered journey flows (no UI surface)",
+      "Journeys triggered by other systems (no screens to design)",
     ],
     hypothesisTitle: "Primary Hypothesis",
     hypothesis:
@@ -164,7 +164,7 @@ export const aurora = {
       { t: "Failed Test Queries", d: "The dashboard only surfaced failed test queries, which is fine for QA and useless for the alerts marketers actually wanted from lists, journeys, and tasks." },
       { t: "Tooltip Truncation", d: "Marketers packed the journey name with its purpose, then watched it get truncated, so they had to hover for a tooltip just to read what they'd written." },
       { t: "Yesterday-Only Dashboard", d: "Dashboards showed only yesterday's journeys, so anyone judging a full FY quarter had to export the data and analyze it somewhere else." },
-      { t: "Setup Anxiety", d: "71% of test users got the cadence wrong on the first try, thanks to a vague \"Custom\" default and no plain-language summary of what would send." },
+      { t: "Setup Anxiety", d: "71% of the people we watched on the legacy flow got the cadence wrong on the first try, thanks to a vague \"Custom\" default and no plain-language summary of what would send." },
     ],
   },
 
@@ -226,7 +226,7 @@ export const aurora = {
   designSystem: {
     headline: "Design System",
     intro:
-      "In parallel with the Recurring Batch Journey and Helio AI work, I built the Aurora Engage UI Kit in Figma. It's a reusable design system that aligned Aurora with Helio's parent brand language. Tokens, components, and patterns were linked directly to the team's build plan so engineers could pick them up without ambiguity. The kit is the source of truth for every screen shown in section 05.",
+      "In parallel with the Recurring Batch Journey and Helio AI work, I built the Aurora Engage UI Kit in Figma. It's a reusable design system that aligned Aurora with Helio's parent brand language. Tokens, components, and patterns were linked directly to the team's build plan so engineers could pick them up without ambiguity. Every screen shown in section 05 is built from this kit.",
     colors: [
       { name: "Aurora / 500", hex: "#2B8679" },
       { name: "Aurora / 300", hex: "#5FA59A" },

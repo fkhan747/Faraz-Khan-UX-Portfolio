@@ -11,7 +11,7 @@ export const decisionos = {
   title: "Crux",
   kind: "AI-native concept · self-initiated",
   subtitle:
-    "An AI-agent supervision console. Five AI agents run a bank's daily operations while a human keeps every consequential call. I took the five agent-trust patterns that so far only exist as essays (intent preview, an autonomy dial, calibrated confidence, an action audit, and an escalation pathway) and built them as real, working UI. I designed and built it end-to-end as a prototype you can open and drive.",
+    "An AI-agent supervision console. Five AI agents run a bank's daily operations while a human keeps every consequential call. I took the five agent-trust patterns that so far mostly live in essays and frameworks (intent preview, an autonomy dial, calibrated confidence, an action audit, and an escalation pathway) and built them as real, working UI. I designed and built it end-to-end as a prototype you can open and drive.",
 
   hero: {
     stats: [
@@ -26,14 +26,14 @@ export const decisionos = {
     headline: "A supervision console for the moment AI agents do the work and humans own the judgment.",
     tldrTitle: "TL;DR · Concept Summary",
     tldr:
-      "AI agents are starting to take real actions inside companies. The open design problem is how one human safely supervises a whole fleet of them without turning into a rubber stamp. Crux is my answer: a working, fully client-side prototype of a supervision console for a fictional bank's operations team, where five AI agents propose and run daily work and a human approves, steers, or takes over. I built the five agent-trust patterns as real, operable interface rather than slides. Reconstructed from secondary research; no users or metrics claimed.",
+      "AI agents are starting to take real actions inside companies. The open design problem is how one human safely supervises a whole fleet of them without turning into a rubber stamp. Crux is my answer: a working prototype of a supervision console for a fictional bank's operations team, where five AI agents propose and run daily work and a human approves, steers, or takes over. I built the five agent-trust patterns as real, operable interface rather than slides. Reconstructed from secondary research; no users or metrics claimed.",
     badge: "Concept · self-initiated · not client work",
     facts: [
       { label: "Type", value: "AI-native product concept" },
       { label: "Role", value: "Senior UX Lead (end-to-end)" },
       { label: "Basis", value: "Secondary research + teardown" },
       { label: "Platform", value: "Responsive web, desktop-first" },
-      { label: "Build", value: "Single-file working prototype, vanilla JS" },
+      { label: "Build", value: "Working prototype, runs in any browser" },
     ],
     process: [
       { step: "01", title: "Probe", duration: "Find the white space" },
@@ -280,7 +280,7 @@ export const decisionos = {
     ],
     iaDecisionsTitle: "Three IA decisions",
     iaDecisions: [
-      { t: "One source of truth", chose: "Every count on every screen is derived live from a single data store, so the queue, the badges, and the lanes can never disagree.", alt: "Considered per-screen state (rejected, because a supervision console that lies about its own numbers is the exact failure it should prevent)." },
+      { t: "One set of numbers", chose: "Every count on every screen is read live from one shared record, so the queue, the badges, and the lanes can never disagree.", alt: "Considered letting each screen keep its own numbers (rejected, because a supervision console that lies about its own numbers is the exact failure it should prevent)." },
       { t: "The dial re-routes work live", chose: "Turning an agent to Auto visibly moves its confident items from 'waiting on you' into 'flowing through', in the same interaction, so autonomy is something you see, not a setting you trust blindly.", alt: "Considered a plain settings toggle (rejected, because the value is in watching the queue re-route)." },
       { t: "Confidence overrides autonomy", chose: "Even an agent on full auto holds any action below the threshold and routes it to a human, tagged and visible.", alt: "Considered letting Auto mean always-act (rejected, because a bank cannot have an agent auto-approving its least-certain calls)." },
     ],
@@ -306,12 +306,13 @@ export const decisionos = {
       { t: "Escalation → resolve", d: "An agent hits its limit → hands over a context package (tried, knows, recommends) → the human approves, takes over, or sends it back. AI touchpoint: the recommendation. Human gate: the human makes the call." },
     ],
     finalIntro:
-      "From exploration to a working console. The Control Room below is live and fully client-side: five agents, one honest data store, and the five trust patterns as real UI. It is not a mock-up. Open it, turn an agent to Auto, decline something with a reason, and watch every count re-route in the same instant.",
+      "The Control Room below is live: five agents, one honest set of numbers, and the five trust patterns as real UI. It is not a mock-up. Open it, turn an agent to Auto, decline something with a reason, and watch every count re-route in the same instant.",
     prototypeHint: "click anything. turn an agent to Auto and watch its work re-route. it's the real prototype.",
     finalScreens: [
-      { src: S("cr-01-overview.png"), tag: "Pattern · Overview", title: "The floor", desc: "Fleet health, the queue waiting on you, and the one active escalation. Every number is derived live from a single data store, so nothing can drift out of sync." },
+      { src: S("cr-01-overview.png"), tag: "Pattern · Overview", title: "The floor", desc: "Fleet health, the queue waiting on you, and the one active escalation. Every number on screen comes from the same record, so nothing can drift out of sync." },
       { src: S("cr-02-review.png"), tag: "Pattern 01 · Intent Preview", title: "See it before it acts", desc: "Each proposed action is a card: what the agent will do, which systems it touches (blast radius), what it read to decide, whether it is reversible, and a confidence bar that opens into its reasons. Approve, decline with a reason, or escalate." },
       { src: S("cr-03-autonomy.png"), tag: "Pattern 02 · Autonomy Dial", title: "Set the leash, watch it re-route", desc: "Per agent, a three-way dial. Turn Recon to Auto and its 92% reconciliation flows through on its own, while its 64% write-off stays held for a human. The queue count drops everywhere in the same instant." },
+      { src: S("cr-06-confidence.png"), tag: "Pattern 03 · Confidence Signal", title: "A number that shows its reasons", desc: "Click WHY on any card and the confidence opens into what drove it, like the two signals behind this 88% card. Below 70%, the Approve button disappears entirely: low-confidence work cannot be waved through." },
       { src: S("cr-04-audit.png"), tag: "Pattern 04 · Action Audit", title: "Everything on the record", desc: "A filterable log of every decision, who made it, and a before-and-after diff of what changed. Plus an incident replay that steps through a fraud cluster moment by moment. The screen governance exhales at." },
       { src: S("cr-05-escalation.png"), tag: "Pattern 05 · Escalation Pathway", title: "The hard call, with its homework done", desc: "When Sentinel cannot clear a case alone, it hands over a context package: what it tried, what it knows, what it recommends and how sure it is, with one-click paths to approve, take over, or send back with guidance." },
     ],
@@ -331,7 +332,7 @@ export const decisionos = {
     ],
     decisionsTitle: "AI design decisions",
     decisions: [
-      { t: "One honest source of truth", d: "Every count on every screen is derived from a single data store. Approve one item and the queue, the KPI, the sidebar badge, and the audit all move together. A supervision console that can disagree with itself is worthless." },
+      { t: "One honest set of numbers", d: "Every count on every screen is read from the same record. Approve one item and the queue, the KPI, the sidebar badge, and the audit all move together. A supervision console that can disagree with itself is worthless." },
       { t: "Confidence overrides autonomy", d: "The confidence threshold is deliberately allowed to override the dial. Even an agent on Auto holds anything below 70% for a human, tagged amber. Safety beats the cleaner story." },
       { t: "The audit is the forensic record", d: "The design's contribution to security is that abuse cannot happen invisibly. Every action leaves an attributable trace with a before-and-after, so misuse is detectable after the fact." },
     ],
@@ -396,7 +397,7 @@ export const decisionos = {
       "Honest about what is proven and what is not. Nothing here is claimed as measured. The prototype proves the design holds together as a real, operable experience. Whether it helps real analysts is a separate question, and one I would test rather than assert.",
     doneTitle: "What's done",
     done: [
-      "A working, fully client-side Control Room prototype: the five agent-trust patterns as real, operable UI, driven by one honest data store where every count stays consistent when you act.",
+      "A working Control Room prototype you can open in any browser: the five agent-trust patterns as real, operable UI, where every count stays consistent when you act.",
       "A defined problem reconstructed from secondary research: where supervising acting agents breaks down, and why visibility, graduated control, and an audit trail are the real gaps.",
       "A competitive teardown across five tool types, exposing the empty middle between BI (surfaces data), copilots (over-automate), and frameworks (no human surface).",
       "The earlier decision-brief exploration that seeded the thesis, kept honestly as the first direction rather than hidden.",

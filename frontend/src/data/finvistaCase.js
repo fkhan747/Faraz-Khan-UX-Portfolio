@@ -139,7 +139,7 @@ export const finvista = {
     headline:
       "Understanding the lending landscape through competitive analysis and stakeholder discovery",
     intro:
-      "I conducted a comprehensive competitive analysis of leading digital lending apps in India, combined with stakeholder interviews and a heuristic evaluation, to identify patterns, gaps, and opportunities for differentiation.",
+      "I pulled apart the leading lending apps in India, sat with stakeholders, and ran a heuristic evaluation to find the gaps worth going after.",
     competitive: [
       {
         name: "Navi",
@@ -201,7 +201,7 @@ export const finvista = {
           { t: "Efficient Assistance", d: "Provide prompt and effective assistance to existing customers applying for a loan, ensuring a positive experience." },
           { t: "Clear Communication", d: "Explain complex terms and procedures in a simple, understandable manner." },
           { t: "Personalized Service", d: "Tailor loan options and recommendations to each customer's unique financial needs and circumstances." },
-          { t: "Phone-to-App Continuity", d: "Phone-to-app continuity, with customer information and live application status in one place." },
+          { t: "Phone-to-App Continuity", d: "Customer information and live application status in one place, so a call can pick up exactly where the app left off." },
         ],
       },
       {
@@ -217,7 +217,7 @@ export const finvista = {
         goals: [
           { t: "Convenient Access", d: "Hassle-free loan access without visiting a physical branch. Values convenience and efficiency in financial transactions." },
           { t: "Transparency", d: "Clear information about interest rates, repayment terms, and any associated fees throughout the process." },
-          { t: "Quick Approval", d: "Quick approval and disbursement of loans for urgent, unexpected expenses." },
+          { t: "Quick Approval", d: "A loan that lands fast when an urgent, unexpected expense cannot wait." },
           { t: "User-Friendly Interface", d: "Intuitive interface with easy navigation to complete the application process without confusion." },
         ],
       },
@@ -313,7 +313,7 @@ export const finvista = {
     intro:
       "I built a 100+ component system in Figma, one shared visual language across all six products. I built it on auto-layout, variants, and tokens, so handoff to engineering stayed clean.",
     panelsIntro:
-      "I organized the 100+ components into tokens, form controls, navigation, and content containers. I built them on auto-layout and variants, so every component could be recreated exactly as designed, with nothing lost in handoff.",
+      "I organized the 100+ components into four families: tokens, form controls, navigation, and content containers.",
     panels: [
       { src: F("022-foundation-color-palette-typography-scale-and-spacing-system.png"), caption: "Foundation: Color palette, typography scale, and spacing system" },
       { src: F("023-icons-illustrations-functional-icons-multi-color-variants-an.png"), caption: "Icons & Illustrations: Functional icons, multi-color variants, and contextual graphics" },

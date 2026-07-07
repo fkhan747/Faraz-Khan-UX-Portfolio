@@ -42,7 +42,7 @@ const SectionWrap = ({ children, className = "", ...rest }) => (
 export default function JoatCaseStudy() {
   return (
     <article data-testid="joat-case-study" className="pb-24">
-      <Seo title={`${j.title} · Faraz Khan`} description={j.subtitle} />
+      <Seo title={j.title} description={j.subtitle} />
       <CaseStudyNav />
 
       {/* TITLE BLOCK over a darkened cover image */}

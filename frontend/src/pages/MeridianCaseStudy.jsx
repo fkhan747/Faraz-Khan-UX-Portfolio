@@ -113,7 +113,7 @@ function artifactFor(headline = "", data = {}) {
       <IframeBlock src={B + "funnel.html"} h={660} />
       <IframeBlock src={B + "school.html"} h={640} />
       <div className="mt-10">
-        <MeridianShot name="ug-summary" maxW={1040} label="The Undergraduate tab, with the international-applications map leaders loved" />
+        <MeridianShot name="ug-summary" maxW={1040} label="The Undergraduate tab, led by the international-applications map" />
       </div>
       <div className="mt-8">
         <MeridianShot name="grad-summary" maxW={1040} label="The Graduate tab, where stage conversion and source-country mix come first" />
@@ -354,7 +354,7 @@ export default function MeridianCaseStudy({ data = meridian }) {
   const sections = getSections(m.body);
   return (
     <article data-testid="meridian-case-study" className="pb-24">
-      <Seo title={`${m.title} · Faraz Khan`} description={m.subtitle} />
+      <Seo title={m.title} description={m.subtitle} />
       <CaseStudyNav />
 
       {/* HERO */}

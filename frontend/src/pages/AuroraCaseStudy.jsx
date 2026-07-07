@@ -555,7 +555,7 @@ export default function AuroraCaseStudy() {
       <SectionWrap className="text-center">
         <Reveal>
           <h2 className="font-display text-3xl md:text-5xl font-black mb-6">thank you for reading.</h2>
-          <p className="text-lg text-[#A29CB4] mb-8">If you&apos;d like to discuss this project in more detail or explore collaboration opportunities, I&apos;d love to connect.</p>
+          <p className="text-lg text-[#A29CB4] mb-8">Want the story behind any decision here? I&apos;m happy to walk you through it.</p>
           <div className="flex gap-4 justify-center flex-wrap items-center">
             <ProjectNav slug="aurora" variant="footer" which="prev" />
             <a href={`mailto:${PROFILE.email}`} data-testid="case-cta-email" className={`inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-[#C71E73] font-semibold text-sm hover:bg-[#C71E73] hover:text-white transition-[background-color,color,transform] duration-200 active:scale-[0.97] ${FOCUS}`}><Mail size={16} /> Email Me</a>

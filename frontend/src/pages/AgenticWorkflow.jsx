@@ -224,7 +224,7 @@ export default function AgenticWorkflow() {
 
   return (
     <article data-testid="agentic-workflow" className="pb-24">
-      <Seo title="Agentic Audit · Faraz Khan" description="Point a swarm of AI agents at any URL: parallel UX audit, adversarial verification, and synthesis into one prioritized report." />
+      <Seo title="Agentic Audit" description="Point a swarm of AI agents at any URL: parallel UX audit, adversarial verification, and synthesis into one prioritized report." />
 
       {/* HERO */}
       <header className="relative overflow-hidden border-b border-white/10">

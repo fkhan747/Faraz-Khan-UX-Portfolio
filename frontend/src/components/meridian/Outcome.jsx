@@ -11,17 +11,17 @@ const SHIFTS = [
 const CHANGED = [
   { t: "Reads, not decodes", d: "Pie-heavy, tiny-font layouts gave way to clear hierarchy and charts matched to the question." },
   { t: "Segmented by level", d: "No blended numbers. Percent international is meaningless when grad is ~48% and undergrad ~4%, so every panel splits by default." },
-  { t: "One source of truth", d: "Every metric traces to the Common Data Set and IPEDS, the common spine four ad-hoc dashboards never had." },
+  { t: "One common spine", d: "Every metric traces to the Common Data Set and IPEDS, the shared backbone four ad-hoc dashboards never had." },
   { t: "Trusted by IR", d: "The funnel and segmentation logic matched how the analysts already think, so they never had to re-translate it." },
 ];
 const DIFFERENTLY = [
   { t: "Design inside Power BI's box", d: "Every layout had to be buildable in Power BI. Next time I would pull a Power BI engineer into wireframe reviews earlier." },
   { t: "The AI is a promise, not a proof", d: "Built human-in-the-loop with visible inputs, but none of it is bias-audited yet. That is the first work item." },
   { t: "Demographics on shrinking ground", d: "Post-SFFA, far fewer institutions release disaggregated data, so those panels degrade gracefully when it is missing." },
-  { t: "Scope honesty", d: "The overview is hi-fi; the other seven carried through IA, greybox, and hi-fi. Designed and demonstrated, not shipped and measured." },
+  { t: "Scope honesty", d: "The overview is hi-fi; the other seven screens carried through IA, greybox, and hi-fi. Designed and demonstrated, not shipped and measured." },
 ];
 const OUTLOOK = [
-  { t: "AI becomes how you query", d: "Not a bolt-on. You ask in plain language and the right panel assembles itself, governed by an honest data model." },
+  { t: "AI becomes how you ask", d: "Not a bolt-on. You ask in plain language and the right panel assembles itself, grounded in numbers that mean what they say." },
   { t: "Admissions data keeps getting closer to live", d: "The data keeps moving closer to real time, so summer melt is something you watch as it happens, not something you find out about later." },
   { t: "Segmentation is the whole game", d: "With the enrollment cliff coming, multi-year trends plus geo and policy segmentation is how you see it early." },
   { t: "UX maturity in the sector", d: "Built for the provost and dean, not just data teams. Treat 'understood in five seconds' as a requirement." },

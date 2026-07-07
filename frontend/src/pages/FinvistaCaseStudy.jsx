@@ -177,7 +177,7 @@ export default function FinvistaCaseStudy() {
           ))}
         </div>
 
-        <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">Primary Users</Reveal>
+        <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">primary users</Reveal>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {fv.primaryUsers.map((u, i) => (
             <Reveal key={u.label} delay={(i % 2) * 0.06} className="dark-card rounded-2xl p-5 border-l-4 border-[#075EFD]">

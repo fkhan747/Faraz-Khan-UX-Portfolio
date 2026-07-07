@@ -73,7 +73,7 @@ export const projects = [
     title: "Jack of All Threads",
     subtitle: "India's First Crowdfunding Platform for Custom Apparel",
     client: "Jack of All Threads (Bangalore)",
-    role: "Product / UX Designer",
+    role: "Senior UX / UI Designer",
     services: "Product Design, UX, Visual Design",
     year: "2015",
     cover: "/joat/cover.jpg",

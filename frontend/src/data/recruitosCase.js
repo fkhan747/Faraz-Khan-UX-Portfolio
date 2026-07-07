@@ -12,7 +12,7 @@ export const recruitos = {
   title: "Slate",
   kind: "AI-native concept · self-initiated",
   subtitle:
-    "An AI recruiting workspace for staffing agencies. The system sources, ranks, and drafts the outreach, and the recruiter stays the decision-maker. I designed it end-to-end from desk research to a working, clickable prototype, with AI trust at the centre: confidence scores and clickable provenance.",
+    "An AI recruiting workspace for staffing agencies. The system sources, ranks, and drafts the outreach, and the recruiter stays the decision-maker. I designed it end-to-end from desk research to a working, clickable prototype, with AI trust at the centre: every score shows its confidence and where it came from.",
 
   hero: {
     // Concept work -> research-backed figures, framed honestly as such in copy.
@@ -26,6 +26,7 @@ export const recruitos = {
       { value: "40%+", label: "Time lost to admin" },
       { value: "~17 hrs", label: "Reclaimable / week" },
     ],
+    statsNote: "The problem, in published industry numbers. Sources in Where It Stands.",
   },
 
   // --- 00 OVERVIEW ---
@@ -259,7 +260,7 @@ export const recruitos = {
     principles: [
       { t: "AI proposes, recruiter disposes", d: "I gated every consequential action behind a person: sending outreach, advancing a candidate, sharing a shortlist. The AI works up to the moment of consequence, then I hand the decision back.", from: "Trust is the #1 barrier to AI adoption in hiring." },
       { t: "Project-centric over record-centric", d: "I organised by engagement, not by candidate or job, so the architecture matches how recruiters already think and nothing has to be relearned.", from: "The unit of work is the engagement, not the candidate." },
-      { t: "Show your work, always", d: "I let no AI output ship without a confidence level and clickable provenance, because a score you can't check is a score you ignore.", from: "A sceptical professional won't act on a score they can't check." },
+      { t: "Show your work, always", d: "I let no AI output ship without a confidence level and its source in plain sight, because a score you can't check is a score you ignore.", from: "A sceptical professional won't act on a score they can't check." },
       { t: "Do the admin, free up the judgement", d: "I automated re-entry, summarisation, and reporting so the saved attention goes to the candidates that matter. Fast and human, not heavy and clever.", from: "40%+ of the desk's time is lost to non-recruiting work." },
     ],
   },
@@ -316,14 +317,14 @@ export const recruitos = {
       { t: "Project → Client update", d: "Project state → AI generates status report → recruiter reviews → shared with client. AI touchpoint: generation. Human gate: review before share." },
     ],
     finalIntro:
-      "From grayscale to a working, clickable product. The screens below are captured from the live Slate prototype: Google / Material-3 design language, a Gemini-style gradient reserved exclusively for AI surfaces, and the ✦ sparkle marking every AI action. It's the real prototype, not a screen mock-up: you can open it and click through. It shows the intent without claiming results.",
+      "Slate exists as a working, clickable product. The screens below are captured from the live prototype: Google / Material-3 design language, a Gemini-style gradient reserved exclusively for AI surfaces, and the ✦ sparkle marking every AI action. It's the real prototype, not a screen mock-up: you can open it and click through. It shows the intent without claiming results.",
     prototypeHint:
       "click anything. the copilot sources, ranks and drafts. nothing sends without you.",
     finalScreens: [
       { src: S("01-overview.png"), tag: "Prototype · 01", title: "Overview", desc: "The agency at a glance: active projects, pipeline health, and what the copilot thinks needs attention today. The global layer above the project workspace." },
       { src: S("02-projects.png"), tag: "Prototype · 02", title: "Projects", desc: "Every engagement as a project, the home base of the whole product. Status, client, and candidate counts in one scannable list." },
       { src: S("03-workspace.png"), tag: "Prototype · 03", title: "Project workspace", desc: "The signature view. Ranked candidate table on the left, AI copilot docked in the right rail. Assistance one glance away, never a separate mode." },
-      { src: S("04-analysis.png"), tag: "Prototype · 04", title: "AI candidate analysis", desc: "The trust centrepiece. Fit score, skills, and red flags, each carrying a confidence level and clickable provenance, so you can see exactly why the AI said what it said." },
+      { src: S("04-analysis.png"), tag: "Prototype · 04", title: "AI candidate analysis", desc: "The trust centrepiece. Fit score, skills, and red flags, each carrying a confidence level and the source behind it, so you can see exactly why the AI said what it said." },
       { src: S("05-candidate.png"), tag: "Prototype · 05", title: "Candidate detail", desc: "The full structured profile built from a resume or a pasted profile. AI summary up top, evidence underneath, every claim traceable to a source." },
       { src: S("06-shortlist.png"), tag: "Prototype · 06", title: "Shortlist & compare", desc: "Curate the AI ranking into a shortlist and compare candidates side by side. It's the side-by-side view recruiters do in their heads, made real." },
       { src: S("07-outreach.png"), tag: "Prototype · 07", title: "AI outreach composer", desc: "AI drafts a personalised message; the recruiter edits and sends. The human gate is explicit, so nothing goes out without a person behind it." },
