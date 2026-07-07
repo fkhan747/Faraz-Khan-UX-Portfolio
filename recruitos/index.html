@@ -933,10 +933,10 @@ VIEWS.candidates=function(){
 /* ============== BREWING VIEWS ============== */
 function brew(title,desc,chips){return {main:'<div class="crumb"><span class="b" data-nav="overview">Overview</span><span class="sep">/</span><span>'+title+'</span></div><div class="brew"><div class="orb grad grain">✦</div><h1>'+title+'</h1><p>'+desc+'</p><div class="bchips">'+chips.map(function(c){return '<div class="bchip" '+(c[1]||'data-action="open-chat"')+'>'+c[0]+'</div>';}).join('')+'</div></div>',aside:asideDefault()};}
 VIEWS.outreach_hub=function(){return brew('Outreach','All your sequences and drafts live here.',[]);};
-VIEWS.reports=function(){return brew('Reports','Placement metrics, time-to-fill, and client-ready reports - generated on demand.',[['✦ Generate this month\'s report'],['View BluePeak close-out','data-nav="share-client"']]);};
-VIEWS.knowledge=function(){return brew('Knowledge','Your agency\'s playbooks, client preferences, and past placements - the memory your copilot draws on.',[['✦ What does Acme dislike in candidates?'],['Ask anything']]);};
+VIEWS.reports=function(){return brew('Reports','Placement metrics, time-to-fill, and client-ready reports - generated on demand.',[['✦ Generate this month\'s report','data-action="ask" data-ask="Generate this month\'s client report"'],['View BluePeak close-out','data-nav="share-client"']]);};
+VIEWS.knowledge=function(){return brew('Knowledge','Your agency\'s playbooks, client preferences, and past placements - the memory your copilot draws on.',[['✦ What does Acme dislike in candidates?','data-action="ask" data-ask="What does Acme dislike in candidates?"'],['Ask anything']]);};
 VIEWS.settings=function(){return brew('Settings','Workspace, seats, and AI preferences.',[['Manage seats','data-toast="Seats (demo)"'],['AI behaviour','data-action="open-chat"']]);};
-VIEWS.help=function(){return brew('Help','Stuck? The copilot knows the whole product - just ask it.',[['✦ How do I lock a shortlist?'],['✦ How does AI fit scoring work?']]);};
+VIEWS.help=function(){return brew('Help','Stuck? The copilot knows the whole product - just ask it.',[['✦ How do I lock a shortlist?','data-action="ask" data-ask="How do I lock a shortlist?"'],['✦ How does AI fit scoring work?','data-action="ask" data-ask="How does AI fit scoring work?"']]);};
 
 /* ============== INTERACTIVITY GLUE ============== */
 var app=$('app');
@@ -963,9 +963,12 @@ function handleFilt(filt,t){
 
 function nextStatus(s){var o=['sourced','screened','interview','offer','accepted'];var i=o.indexOf(s);return i>=0&&i<o.length-1?o[i+1]:s;}
 
+function askCopilot(q){openChat();cbPush('user',q.replace(/</g,'&lt;'));cbTyping();setTimeout(function(){cbStopTyping();botReply(q);},700);}
+
 function handleAction(a,t,opts,e){
   switch(a){
-    case 'open-chat': openChat(); break;
+    case 'open-chat': var q=t&&t.getAttribute&&t.getAttribute('data-ask'); if(q){askCopilot(q);}else{openChat();} break;
+    case 'ask': askCopilot(t.getAttribute('data-ask')||t.textContent.replace(/^✦\s*/,'').trim()); break;
     case 'close-chat': $('cbDrawer').classList.remove('open'); break;
     case 'cb-send': cbSend(); break;
     case 'search': openChat(); break;
@@ -1081,6 +1084,8 @@ function botReply(q){
   if(/(project|role)s?\b/.test(s)&&/(show|list|all|my|open)/.test(s)){cbPush('ai','You have <b>9 open roles</b>. Opening the full list - 2 need attention today.'+did('projects','projects'));cbChips(['Who\'s breaching SLA?','Create a new project']);return;}
   if(/(overview|home|today|morning|summary|dashboard)/.test(s)){cbPush('ai','Here\'s your day: <b>4 things need you</b> - 2 SLA risks, 3 new Acme matches, and Marcus\'s acceptance to confirm. Opening your overview.'+did('overview','overview'));cbChips(['Who\'s breaching SLA?','Top candidates for Acme']);return;}
   if(/(fit|score|how).*(work|calculat|comput|mean)/.test(s)||/how.*fit/.test(s)){cbPush('ai','<b>Fit score</b> weighs three things: skills match against the brief (50%), relevant experience &amp; seniority (30%), and logistics like notice period &amp; comp (20%). Every score traces back to source documents - nothing invented.');cbChips(['Show top candidates','Open Anaya\'s profile']);return;}
+  if(/report/.test(s)&&/(month|generate|placement|client)/.test(s)){cbPush('ai','The month so far: <b>4 placed</b>, <b>3 offers out</b> (1 accepted), 9 roles active across 64 tracked candidates. Building the client-ready version now - internal notes and AI jargon stripped before anything is shared.'+did('client report','share-client'));cbChips(['Copy share link','Who\'s breaching SLA?','Back to overview']);return;}
+  if(/(dislike|prefer|playbook|red flag|past placement)/.test(s)){cbPush('ai','From the Acme file: they pass on <b>agency-hoppers</b> (3+ agencies in 2 years), prefer <b>hands-on leads who still code</b>, and Sarah reads only the first two lines of a submission, so keep them tight. I check every candidate against these notes before you submit.');cbChips(['Top candidates for Acme','Open the Acme pipeline','Draft outreach to Anaya']);return;}
   if(/(hi|hello|hey|yo)\b/.test(s)&&s.length<12){cbPush('ai','Hey Meera 👋 I can run pretty much anything here - try <b>"who\'s breaching SLA?"</b>, <b>"draft outreach to Anaya"</b>, or <b>"create a new project"</b>.');cbChips(['Top candidates for Acme','Who\'s breaching SLA?','Create a new project']);return;}
   // fallback
   cbPush('ai','I can do that kind of thing right from here - navigation, summaries, drafting, sourcing. Want me to start with one of these?');
