@@ -28,7 +28,7 @@ export const projects = [
     role: "Senior UX Lead",
     services: "UX, Design Systems, Research",
     year: "2024",
-    cover: F("003-final-mobile-screens-welcome-applications-personal-details.png"),
+    cover: F("outcome-montage.png"),
     coverImg: "/finvista/cover.jpg",
     color: "#FFE3B3",
     tag: "case study",
