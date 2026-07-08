@@ -107,7 +107,7 @@ export default function Resume() {
                 Senior UX Lead Bridging Design, Data &amp; Development
               </p>
               <p className="mt-5 max-w-2xl text-base md:text-lg text-[#A29CB4] leading-relaxed">
-                12+ years across enterprise software, data &amp; AI and consumer tech. I lead UX from research
+                11+ years across enterprise software, data &amp; AI and consumer tech. I lead UX from research
                 to shipped product, pairing creative craft with data-driven thinking. Now building AI-native
                 experiences. Open to full-time and remote roles.
               </p>

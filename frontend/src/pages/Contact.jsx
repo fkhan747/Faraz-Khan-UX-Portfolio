@@ -123,7 +123,7 @@ export default function Contact() {
           {[
             { q: "What roles are you looking for?", a: "Full-time roles as a UX Lead or Senior Product Designer. I'm based in India and happy to work remotely, relocate anywhere, or look at the Middle East." },
             { q: "What do you do best?", a: "I take messy, complicated products and make them feel simple. I sit right between design, data, and engineering, so the thing actually ships, not just looks good in a slide." },
-            { q: "Which industries have you worked in?", a: "Banking and finance, big enterprise software, data and analytics, consumer apps, and education. A little over twelve years, based in India and working with clients across several countries." },
+            { q: "Which industries have you worked in?", a: "Banking and finance, big enterprise software, data and analytics, consumer apps, and education. A little over eleven years, based in India and working with clients across several countries." },
             { q: "Are you hands-on, or mostly strategy?", a: "Both. I set the direction and I'm still in the file doing the actual pixels. I won't hand over work I couldn't build a prototype of myself." },
             { q: "Do you build design systems?", a: "Yes, it's one of my favorite parts of the job. I built a hundred-plus component system for FinVista and another for Aurora, and both teams still lean on them as their source of truth." },
             { q: "How do you work with engineers and product managers?", a: "Shoulder to shoulder, inside the sprint. I keep design, product, and engineering on the same page so nothing gets lost between the mockup and the build." },

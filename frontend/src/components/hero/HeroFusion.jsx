@@ -1347,7 +1347,7 @@ export default function HeroFusion({ solo = false, portraitOnly = false, portrai
                 <div className="hxc-chips-row">
                   <span className="hxc-chip-card">
                     <span className="hxc-dot hxc-dot-m" />
-                    12+ yrs
+                    11+ yrs
                   </span>
                   <span className="hxc-chip-card">
                     <span className="hxc-dot hxc-dot-b" />
@@ -1400,7 +1400,7 @@ export default function HeroFusion({ solo = false, portraitOnly = false, portrai
               </motion.h1>
 
               <motion.p className="hxc-sub" {...entrance(0.44, 16)}>
-                12+ years across UX, product and data, with roots in brand and
+                11+ years across UX, product and data, with roots in brand and
                 code. Big believer in clarity over decoration, facts over
                 feelings, and design that gets out of your way.
               </motion.p>

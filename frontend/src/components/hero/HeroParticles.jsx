@@ -663,7 +663,7 @@ export default function HeroParticles() {
             variants={itemVariants}
             className="hxb-sub mt-7 max-w-[34rem] text-lg leading-relaxed"
           >
-            12+ years across UX, product and data, with roots in brand and code.
+            11+ years across UX, product and data, with roots in brand and code.
             Big believer in clarity over decoration, facts over feelings, and
             design that gets out of your way.
           </motion.p>

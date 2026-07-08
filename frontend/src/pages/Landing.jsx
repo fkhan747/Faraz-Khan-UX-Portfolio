@@ -98,7 +98,7 @@ export default function Landing() {
 
   return (
     <div data-testid="landing-page">
-      <Seo description="Faraz Khan, Senior UX Lead with 12+ years bridging design, data, and development. Enterprise platforms, design systems, and AI-native product concepts." />
+      <Seo description="Faraz Khan, Senior UX Lead with 11+ years bridging design, data, and development. Enterprise platforms, design systems, and AI-native product concepts." />
       {/* HERO */}
       {variant === "a" && (
         <Suspense fallback={<div style={{ minHeight: "90vh" }} />}>
@@ -144,7 +144,7 @@ export default function Landing() {
                 Senior UX Lead · Enterprise, Fintech &amp; Analytics
               </p>
               <p className="mt-4 max-w-xl text-base md:text-lg text-[#A29CB4] leading-relaxed rise rise-3" data-testid="hero-sub">
-                12+ years across UX, product and data, with roots in brand and code. Big believer in clarity over decoration, <span className="text-[#F4F3FA] underline decoration-[#075EFD] decoration-2 underline-offset-4">facts over feelings</span>, and design that gets out of your way. Turns out treating people well is also great for business. Who knew.
+                11+ years across UX, product and data, with roots in brand and code. Big believer in clarity over decoration, <span className="text-[#F4F3FA] underline decoration-[#075EFD] decoration-2 underline-offset-4">facts over feelings</span>, and design that gets out of your way. Turns out treating people well is also great for business. Who knew.
               </p>
               <div className="mt-9 flex items-center gap-4 flex-wrap rise rise-3">
                 <Link

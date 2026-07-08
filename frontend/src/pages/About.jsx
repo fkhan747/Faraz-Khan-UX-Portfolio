@@ -38,7 +38,7 @@ const COMPETENCIES = [
   { icon: Palette, t: "Advanced UI/UX & Visual Design", d: "Systems thinking down to pixel-level craft in Figma, across web and mobile." },
   { icon: LineChart, t: "Data-Driven Dashboard Design", d: "Translating BI data (Power BI, Tableau, MicroStrategy) into clear, actionable UIs." },
   { icon: GitBranch, t: "Agile Collaboration & DesignOps", d: "Tight loops with PMs, engineers and QA. Jira-native, sprint-ready handoffs." },
-  { icon: Globe, t: "Global & Multicultural UX Expertise", d: "12+ years across BFSI, edtech, enterprise and consumer tech, multiple geographies." },
+  { icon: Globe, t: "Global & Multicultural UX Expertise", d: "11+ years across BFSI, edtech, enterprise and consumer tech, multiple geographies." },
   { icon: Repeat, t: "Continuous Improvement & UX Optimization", d: "Post-launch loops: heuristic audits, A/B testing, accessibility, and visual QA." },
 ];
 
@@ -196,7 +196,7 @@ export default function About() {
   return (
     <div data-testid="about-page">
       <style>{AB_CSS}</style>
-      <Seo title="This is Me" description="Faraz Khan, Senior UX Lead. 12+ years across BFSI, enterprise software, data and AI, and consumer tech. Design systems, dashboards, and AI-native product concepts." />
+      <Seo title="This is Me" description="Faraz Khan, Senior UX Lead. 11+ years across BFSI, enterprise software, data and AI, and consumer tech. Design systems, dashboards, and AI-native product concepts." />
       {/* HERO - kinetic headline + the glitching portrait */}
       <section className="pt-10 pb-14 relative overflow-hidden" data-testid="about-hero">
         <AbSquiggle className="ab-sq-1" color="#F0186C" rot={-34} />
@@ -222,7 +222,7 @@ export default function About() {
               </span>
             </h1>
             <p className="mt-8 max-w-2xl text-lg md:text-xl leading-relaxed text-[#F4F3FA]">
-              User Experience Lead with <strong>12+ years</strong> across BFSI, enterprise software, and consumer tech. I turn research into interfaces that ship and scale.
+              User Experience Lead with <strong>11+ years</strong> across BFSI, enterprise software, and consumer tech. I turn research into interfaces that ship and scale.
             </p>
             <div className="mt-8 flex gap-4 flex-wrap items-center">
               <a href={`mailto:${PROFILE.email}`} data-testid="about-cta-email" className="ab-btn">
@@ -277,7 +277,7 @@ export default function About() {
               </div>
               <div className="mt-6 space-y-4 text-base md:text-lg leading-relaxed text-white/95">
                 <p>
-                  Hey there. I&apos;m a UX Lead with <strong>12+ years</strong> in the messy end of product design: enterprise dashboards, lending flows, analytics tools, the systems most people find intimidating. I like taking something dense and complicated and making it feel obvious. I sit right between design, data, and engineering, which is usually where the interesting problems hide.
+                  Hey there. I&apos;m a UX Lead with <strong>11+ years</strong> in the messy end of product design: enterprise dashboards, lending flows, analytics tools, the systems most people find intimidating. I like taking something dense and complicated and making it feel obvious. I sit right between design, data, and engineering, which is usually where the interesting problems hide.
                 </p>
                 <p>
                   I&apos;ve done this for first-time founders and for some of the bigger names in banking and enterprise software. I stay in the file doing the actual pixels, not just the slides, and I care as much about whether a thing ships as whether it looks good. Right now I&apos;m after a senior product or UX role, in India, the Middle East, or fully remote.

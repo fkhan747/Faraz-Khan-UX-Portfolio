@@ -467,7 +467,7 @@ export default function HeroDepth() {
                 <motion.div {...entrance(0.5, 10, 0.5)}>
                   <span className="hxa-chip-card hxa-chip-f1">
                     <span className="hxa-dot hxa-dot-m" />
-                    12+ yrs
+                    11+ yrs
                   </span>
                 </motion.div>
               </motion.div>
@@ -504,7 +504,7 @@ export default function HeroDepth() {
               </motion.h1>
 
               <motion.p className="hxa-sub" {...entrance(0.4, 16)}>
-                12+ years across UX, product and data, with roots in brand and
+                11+ years across UX, product and data, with roots in brand and
                 code. Big believer in clarity over decoration, facts over
                 feelings, and design that gets out of your way.
               </motion.p>
