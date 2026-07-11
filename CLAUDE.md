@@ -1,53 +1,81 @@
-# CLAUDE.md — Faraz's UX Portfolio (Emergent-free)
+# CLAUDE.md — Faraz Khan's UX Portfolio
 
-Read this first. This is Faraz Khan's personal portfolio site. **It no longer depends on Emergent.** It's a plain React (CRA + CRACO) app that builds with npm and deploys as static files to **GitHub Pages** at the custom domain **www.khanfaraz.in**. Faraz works entirely in Claude / Claude Code now. Do not reintroduce any Emergent dependency or tooling, and **do not reintroduce Netlify: GitHub Pages is the one and only deploy method** (see Deploy below).
+Read this first. Faraz's personal portfolio: a plain React (CRA + CRACO) app in
+`frontend/`, fully static, deployed to **GitHub Pages** at **www.khanfaraz.in**
+from a **private repo** (GitHub Pro). There is no backend, no Netlify, no
+Emergent — do not reintroduce any of them.
 
-## The site lives in `frontend/`
-Everything that matters for the website is in `frontend/`. (`backend/` is a leftover FastAPI app and is NOT used by the portfolio — the site is fully static.)
+## Design language (current)
+Dark near-black site (`#100210`) with a comic/neon accent language (magenta
+`#F0186C`, purple `#7B2FBE`, cyan `#17C3E8`, yellow `#F2D50F`), Title Case
+headings, bottom-nav chrome. Shared comic CSS lives in
+`src/components/neonStyle.jsx`. Never use em-dashes in copy; write human.
 
-## Build & run (no Emergent, no flags)
+## Case studies — names, routes, access
+One true name everywhere (no legacy dual names):
+
+| Study | Slug/route | Access |
+|---|---|---|
+| Meridian Institute Analytics | `/case/meridian` | open, leads the order |
+| FinVista | `/case/finvista` | **locked (vault)** |
+| Aurora | `/case/aurora` | **locked (vault)** |
+| Jack of All Threads | `/case/joat` | **locked (vault)** |
+| Slate (concept) | `/case/slate`, prototype `/slate/` | open |
+| Almanac (concept, dormant `live:false`) | `/case/almanac`, prototype `/almanac/` | open |
+| Crux (concept) | `/case/crux`, prototype `/crux/` | open |
+
+Old URLs (`recruitos`, `knowledgeos`, `decisionos`, `somethings-cooking`)
+redirect via `<Navigate>` routes in `App.js` + static stubs in
+`public/<old>/index.html` and `public/case/<old>/index.html`. Keep those stubs.
+
+Data files: `src/data/<name>Case.js` exporting the matching name (`meridian`,
+`finvista`, `aurora`, `joat`, `slate`, `almanac`, `crux`). Cards/order come from
+`src/data/content.js` (`projects` + `concepts`).
+
+## The vault (confidential case studies)
+FinVista, Aurora and JOAT are **AES-256-GCM encrypted on the deployed site**:
+- Written content ships as `public/locked/<slug>.enc` (generated, gitignored);
+  the app never imports their data modules — `CaseStudyGate` decrypts on unlock
+  and provides data via `useCaseData()`.
+- All screenshots in `build/{finvista,aurora,joat}/` are encrypted by the
+  postbuild step (`cover.jpg` stays plain — public card teaser). Pages render
+  them through `VaultImage`/`PhoneFrame`/`Lightbox`, which decrypt to object
+  URLs at view time.
+- Format: `CSE1` magic + 12-byte IV + ciphertext; PBKDF2 (fixed public salt in
+  `src/lib/vault.js`, 150k iters). **No password or hash exists in source** —
+  unlock succeeds only if AES-GCM auth succeeds. Unlock is EPHEMERAL: leaving a
+  case study re-locks it (Faraz's explicit requirement — never persist it).
+- The password lives ONLY in `frontend/.env.local` (`CS_PW=...`, gitignored) —
+  ask Faraz if missing; never commit it or write it into tracked files.
+- Build pipeline: `prestart`/`prebuild` → `scripts/encrypt-case-data.mjs`;
+  `postbuild` → react-snap, then `scripts/encrypt-build.mjs` (encrypts
+  screenshots + fails the build if confidential text appears in built JS/HTML).
+
+## Build & deploy
 ```bash
 cd frontend
-npm install        # .npmrc sets legacy-peer-deps=true, so this just works
-npm run build      # outputs frontend/build/  ← the deployable static site
-# preview locally:
-npx serve -s build
+npm install            # .npmrc sets legacy-peer-deps
+CI=false npm run build # prebuild encrypt → craco → react-snap → postbuild encrypt+leak-check
+npx gh-pages -d build --dotfiles   # or ../deploy.sh
 ```
-A prebuilt `frontend/build/` is already included in this zip, so it can be deployed without building first.
+Source lives on `main`, built output on `gh-pages`. `public/CNAME` +
+`public/.nojekyll` must ride every build. Get Faraz's go-ahead before live
+deploys; verify live with curl after (Pages can lag). No private-file stripping
+is needed anymore — nothing private sits in `public/`.
 
-## Deploy (GitHub Pages only, never Netlify)
-The live site is **GitHub Pages** on the custom domain **www.khanfaraz.in** (`curl -sI` shows `server: GitHub.com`). Netlify is NOT in the loop: `netlify.toml` was removed; any leftover `.netlify` / `_redirects` bits are inert on Pages.
+Gotchas: use nvm node 20.20.2 (`/usr/local/bin/node` is broken on this Mac);
+react-snap port 45678 zombie → `lsof -ti :45678 | xargs kill -9`; never pipe
+builds (masks exit codes).
 
-```bash
-cd frontend
-CI=false npm run build     # outputs frontend/build/ (postbuild react-snap prerenders each route)
-npm run deploy             # = build + `npx gh-pages -d build --dotfiles` → pushes build/ to origin/gh-pages
-```
-Also commit source to `main`. `build/` is gitignored: **source lives on `main`, built output on the `gh-pages` branch.** `frontend/public/CNAME` (www.khanfaraz.in) and `frontend/public/.nojekyll` ride into every build. keep them, or the domain / asset serving breaks. Get Faraz's go-ahead before a live deploy, then verify the new `main.<hash>.js` returns 200 on the live domain (GitHub Pages can lag ~10 min or throttle).
+## Hidden interview deck
+`/deck/` = encrypted 35-slide deck (same password, its own AES payload),
+reached via the TreasureSpark easter egg in `Layout.jsx`. Confidential images
+are inlined as data URIs inside its encrypted payload, so encrypting the site
+images does not affect it. Plaintext working copy: `presentation/` (gitignored,
+local only). The hosted payload sits in `public/deck/index.html` under
+`<script id="deck-data">`.
 
-## What changed to remove Emergent (keep it this way)
-- Deleted `@emergentbase/visual-edits` from `frontend/package.json`.
-- Removed the `withVisualEdits` block from `frontend/craco.config.js`.
-- Added `frontend/.npmrc` (`legacy-peer-deps=true`) so installs are clean.
-- Pinned `ajv@8` in dependencies (fixes a react-scripts 5 / ajv-keywords build error).
-- Added `frontend/public/_redirects` (Netlify-era SPA routing). On **GitHub Pages this file is inert**: deep links survive refresh because `react-snap` (postbuild) prerenders every route to its own `index.html`. Safe to leave or delete.
-
-## Architecture
-- React + react-router-dom, Tailwind + shadcn/ui, framer-motion, embla-carousel.
-- Routing in `frontend/src/App.js`. Pages in `frontend/src/pages/`. Project/content data in `frontend/src/data/` (`content.js`, `auroraCase.js`, `finvistaCase.js`).
-- Brand: bold **lowercase** display type, cream `#F7F1DA` cards, vermilion accent `#E94B1F`, yellow `#FFD93D` for "coming soon", mono uppercase eyebrows.
-
-## Case studies currently in the site
-- **FinVista** — full React case study (`/case/finvista`). Baseline, untouched.
-- **Aurora** — full React case study (`/case/aurora`). Untouched.
-- **RecruitOS** — merged: the interactive prototype is hosted at `frontend/public/recruitos/index.html` (served at `/recruitos/`), and `frontend/src/pages/RecruitosConcept.jsx` (`/case/recruitos`) embeds it in an iframe with a back link + "open full screen".
-- A separate **AI-native concepts** section was added to `frontend/src/pages/Projects.jsx` (dark, AI-accented band) listing RecruitOS (live), KnowledgeOS + DecisionOS (in progress) — driven by the `concepts` array in `content.js`. This keeps the AI concepts visually distinct from the Aurora/FinVista client work.
-
-## RecruitOS prototype internals (for editing it)
-Single-file SPA at `frontend/public/recruitos/index.html`. Google AI / Material-3 design language (LOCKED): bg `#F7F9FC`, ink `#1F1F1F`, Google Blue `#1A73E8`, AI = Gemini gradient `linear-gradient(120deg,#4285F4,#9168F0 55%,#E8519B)` via `.grad`/`.grain`, sparkle ✦. Fonts: Plus Jakarta Sans + Inter + Roboto Mono. Client-side router (`VIEWS`/`go()`), global "Ask AI" chatbot, canon data (8 candidates / 6 projects, Acme Corp is the active project). The comment/annotation tool was removed. **Still open: an alignment pass — render + screenshot and fix.**
-
-## Next steps queue
-1. DONE: hosted on GitHub Pages at www.khanfaraz.in (custom domain live). See Deploy above.
-2. RecruitOS alignment polish (screenshot-driven).
-3. Build KnowledgeOS, then DecisionOS, and merge each into the `concepts` array + a page, same as RecruitOS.
-4. Optional: a written narrative case-study wrapper for RecruitOS.
+## Analytics
+GA4 (`G-H7ZD6PZMK1`) + Microsoft Clarity (`xktpj6mube`) + Cloudflare Web
+Analytics + PostHog (Faraz's own project `phc_yy4d...`) — one guarded loader in
+`public/index.html`, skipped for react-snap and localhost.

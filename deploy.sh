@@ -2,6 +2,11 @@
 # One-command deploy to GitHub Pages.
 # Builds the site locally and pushes the static output to the gh-pages branch.
 # No CI build minutes, no credit limits, run this only when you want to ship.
+#
+# Requires the vault password for the confidential case studies: CS_PW in the
+# environment or in frontend/.env.local (gitignored). The build pipeline
+# (prebuild/postbuild) encrypts the locked case-study data + screenshots
+# automatically and fails loudly if plaintext would leak.
 set -e
 ROOT="$(cd "$(dirname "$0")" && pwd)"
 FRONTEND="$ROOT/frontend"
