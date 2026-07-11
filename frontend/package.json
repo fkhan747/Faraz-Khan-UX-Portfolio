@@ -62,10 +62,12 @@
     "zod": "3.24.4"
   },
   "scripts": {
+    "prestart": "node scripts/encrypt-case-data.mjs",
     "start": "craco start",
+    "prebuild": "node scripts/encrypt-case-data.mjs",
     "build": "craco build",
     "postinstall": "patch-package",
-    "postbuild": "react-snap || true",
+    "postbuild": "(react-snap || true) && node scripts/encrypt-build.mjs",
     "deploy": "npm run build && npx --yes gh-pages@6 -d build --dotfiles",
     "test": "craco test"
   },
@@ -90,11 +92,11 @@
       "/contact",
       "/case/finvista",
       "/case/aurora",
-      "/case/recruitos",
-      "/case/knowledgeos",
-      "/case/decisionos",
-      "/case/somethings-cooking",
-      "/case/meridian"
+      "/case/joat",
+      "/case/meridian",
+      "/case/slate",
+      "/case/almanac",
+      "/case/crux"
     ],
     "crawl": false,
     "inlineCss": false,

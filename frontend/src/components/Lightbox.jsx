@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect, useCallback } from "react";
 import { X } from "lucide-react";
+import { useVaultSrc } from "./VaultImage";
 
 /**
  * App-wide image lightbox. A single overlay shared by every case study via
@@ -14,6 +15,8 @@ export function LightboxProvider({ children }) {
   const [item, setItem] = useState(null);
   const open = useCallback((it) => setItem(it), []);
   const close = useCallback(() => setItem(null), []);
+  // Encrypted case-study images resolve through the vault; plain paths pass through.
+  const resolvedSrc = useVaultSrc(item?.src);
 
   useEffect(() => {
     if (!item) return;
@@ -48,7 +51,7 @@ export function LightboxProvider({ children }) {
             <X size={20} />
           </button>
           <img
-            src={item.src}
+            src={resolvedSrc || item.src}
             alt={item.alt || ""}
             onClick={(e) => e.stopPropagation()}
             className="max-w-[95vw] max-h-[85vh] w-auto h-auto object-contain rounded-lg shadow-[0_40px_80px_-24px_rgba(7,94,253,0.45)] bg-white"

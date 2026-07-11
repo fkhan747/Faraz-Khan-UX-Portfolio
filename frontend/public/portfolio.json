@@ -49,8 +49,8 @@
     },
     {
       "title": "Jack of All Threads",
-      "slug": "somethings-cooking",
-      "url": "https://www.khanfaraz.in/case/somethings-cooking",
+      "slug": "joat",
+      "url": "https://www.khanfaraz.in/case/joat",
       "type": "client work",
       "role": "Product / UX Designer",
       "year": 2015,
@@ -62,9 +62,9 @@
   "concepts": [
     {
       "title": "Slate",
-      "slug": "recruitos",
-      "url": "https://www.khanfaraz.in/case/recruitos",
-      "prototype": "https://www.khanfaraz.in/recruitos/",
+      "slug": "slate",
+      "url": "https://www.khanfaraz.in/case/slate",
+      "prototype": "https://www.khanfaraz.in/slate/",
       "type": "self-initiated AI-native concept",
       "role": "Senior UX Lead",
       "year": 2026,
@@ -74,9 +74,9 @@
     },
     {
       "title": "Crux — the Control Room",
-      "slug": "decisionos",
-      "url": "https://www.khanfaraz.in/case/decisionos",
-      "prototype": "https://www.khanfaraz.in/decisionos/",
+      "slug": "crux",
+      "url": "https://www.khanfaraz.in/case/crux",
+      "prototype": "https://www.khanfaraz.in/crux/",
       "type": "self-initiated AI-native concept",
       "role": "Senior UX Lead",
       "year": 2026,

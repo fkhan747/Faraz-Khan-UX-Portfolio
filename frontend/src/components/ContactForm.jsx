@@ -13,6 +13,7 @@ const INQUIRY_OPTIONS = [
   "Full-time role",
   "Contract or freelance project",
   "Remote opportunity",
+  "Case Study Access Request",
   "Speaking or advisory",
   "Just saying hi",
 ];
@@ -29,8 +30,13 @@ const fieldClass = (hasError) =>
     hasError ? "border-[#F0186C] focus:border-[#F0186C]" : "border-white/50 focus:border-[#7B2FBE]"
   }`;
 
-export default function ContactForm() {
-  const [form, setForm] = useState(BLANK);
+export default function ContactForm({
+  eyebrow = "send a message",
+  title,
+  defaultInquiry = "",
+  messagePlaceholder = "A few lines about the role or project. Links and timeline help too.",
+}) {
+  const [form, setForm] = useState({ ...BLANK, inquiry_type: defaultInquiry });
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle"); // idle | submitting | success | error
   const successRef = useRef(null);
@@ -65,7 +71,7 @@ export default function ContactForm() {
         body: encode({ "form-name": "contact", ...form }),
       });
       setStatus("success");
-      setForm(BLANK);
+      setForm({ ...BLANK, inquiry_type: defaultInquiry });
       setTimeout(() => successRef.current?.focus(), 0);
     } catch {
       setStatus("error");
@@ -120,9 +126,13 @@ export default function ContactForm() {
       </p>
 
       <div className="mb-6">
-        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F0186C] mb-3">send a message</p>
+        <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F0186C] mb-3">{eyebrow}</p>
         <h2 className="font-display text-2xl md:text-3xl font-black leading-tight">
-          Tell me what you’re <span className="italic font-light">working on.</span>
+          {title || (
+            <>
+              Tell me what you’re <span className="italic font-light">working on.</span>
+            </>
+          )}
         </h2>
       </div>
 
@@ -237,7 +247,7 @@ export default function ContactForm() {
           rows={5}
           value={form.message}
           onChange={update}
-          placeholder="A few lines about the role or project. Links and timeline help too."
+          placeholder={messagePlaceholder}
           className={`${fieldClass(false)} resize-y min-h-[120px]`}
         />
       </div>

@@ -1,9 +1,11 @@
 import { Mail, Phone, MapPin, Linkedin, ArrowUpRight, Download, Calendar } from "lucide-react";
+import { useSearchParams } from "react-router-dom";
 import { PROFILE } from "../data/content";
 import { Container } from "../components/Grid";
 import CopyButton from "../components/CopyButton";
 import BookCallButton from "../components/BookCallButton";
 import ContactForm from "../components/ContactForm";
+import DirectContactStrip from "../components/DirectContactStrip";
 import Seo from "../components/Seo";
 import { NEON_CSS as AB_CSS, Squiggle as AbSquiggle } from "../components/neonStyle";
 
@@ -11,6 +13,45 @@ const RESUME_PATH = "/files/Faraz_Khan_Resume.pdf";
 const telHref = "tel:" + PROFILE.phone.replace(/[^+\d]/g, "");
 
 export default function Contact() {
+  const [params] = useSearchParams();
+  const accessReq = params.get("intent") === "access";
+
+  // Routed here from a locked case study: show just the request form + a direct
+  // line to reach me. No hero, no cards, no FAQ — either they request or they don't.
+  if (accessReq) {
+    return (
+      <div data-testid="contact-page">
+        <style>{AB_CSS}</style>
+        <Seo
+          title="Request Case Study Access"
+          description="Request access to Faraz Khan's confidential client case studies."
+          noindex
+        />
+        <section className="pt-14 pb-24 relative overflow-hidden min-h-[72vh]">
+          <AbSquiggle className="ab-sq-1" color="#F0186C" rot={-32} />
+          <span className="hidden md:block absolute right-[10%] top-24 z-0">
+            <AbSquiggle className="ab-sq-3" color="#17C3E8" rot={-14} />
+          </span>
+          <Container>
+            <div className="max-w-3xl mx-auto relative z-10" data-testid="access-request-view">
+              <ContactForm
+                eyebrow="request access"
+                title={
+                  <>
+                    Request access to the <span className="italic font-light">work.</span>
+                  </>
+                }
+                defaultInquiry="Case Study Access Request"
+                messagePlaceholder="Tell me which case study you'd like to see, and a line about you. Optional."
+              />
+              <DirectContactStrip className="mt-9 pt-6 border-t border-white/10" />
+            </div>
+          </Container>
+        </section>
+      </div>
+    );
+  }
+
   return (
     <div data-testid="contact-page">
       <style>{AB_CSS}</style>

@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, Mail, Check, Star } from "lucide-react";
-import { joat as j } from "../data/joatCase";
+import { useCaseData } from "../components/CaseStudyGate";
+import VaultImage from "../components/VaultImage";
 import { PROFILE } from "../data/content";
 import Seo from "../components/Seo";
 import Reveal from "../components/Reveal";
@@ -40,6 +41,8 @@ const SectionWrap = ({ children, className = "", ...rest }) => (
 );
 
 export default function JoatCaseStudy() {
+  // Decrypted case data provided by CaseStudyGate after unlock.
+  const j = useCaseData();
   return (
     <article data-testid="joat-case-study" className="pb-24">
       <Seo title={j.title} description={j.subtitle} />
@@ -47,7 +50,7 @@ export default function JoatCaseStudy() {
 
       {/* TITLE BLOCK over a darkened cover image */}
       <header className="relative overflow-hidden">
-        <img
+        <VaultImage
           src={j.hero.cover}
           alt=""
           aria-hidden="true"
@@ -201,7 +204,7 @@ export default function JoatCaseStudy() {
 
         <Reveal as="figure" delay={0.08} className="mt-12 rounded-3xl dark-card overflow-hidden">
           <Zoomable src={j.howItWorks.image.src} alt={j.howItWorks.image.caption} caption={j.howItWorks.image.caption} className="bg-white">
-            <img src={j.howItWorks.image.src} alt={j.howItWorks.image.caption} width={j.howItWorks.image.w} height={j.howItWorks.image.h} loading="lazy" className="block w-full h-auto" />
+            <VaultImage src={j.howItWorks.image.src} alt={j.howItWorks.image.caption} width={j.howItWorks.image.w} height={j.howItWorks.image.h} loading="lazy" className="block w-full h-auto" />
           </Zoomable>
           <figcaption className="p-5 text-xs font-mono uppercase tracking-widest text-white text-center">{j.howItWorks.image.caption}</figcaption>
         </Reveal>
@@ -214,7 +217,7 @@ export default function JoatCaseStudy() {
         <Reveal as="p" delay={0.08} className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{j.ia.intro}</Reveal>
         <Reveal as="figure" delay={0.08} className="mt-12 rounded-3xl dark-card p-5 md:p-8">
           <Zoomable src={j.ia.diagram} alt={j.ia.caption} caption={j.ia.caption} className="block">
-            <img src={j.ia.diagram} alt={j.ia.caption} width={j.ia.diagramW} height={j.ia.diagramH} loading="lazy" className="block w-full h-auto" />
+            <VaultImage src={j.ia.diagram} alt={j.ia.caption} width={j.ia.diagramW} height={j.ia.diagramH} loading="lazy" className="block w-full h-auto" />
           </Zoomable>
           <figcaption className="mt-5 text-xs font-mono uppercase tracking-widest text-white text-center">{j.ia.caption}</figcaption>
         </Reveal>
@@ -227,7 +230,7 @@ export default function JoatCaseStudy() {
         <Reveal as="p" delay={0.08} className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{j.userFlow.intro}</Reveal>
         <Reveal as="figure" delay={0.08} className="mt-12 rounded-3xl dark-card p-5 md:p-8">
           <Zoomable src={j.userFlow.diagram} alt={j.userFlow.caption} caption={j.userFlow.caption} className="block">
-            <img src={j.userFlow.diagram} alt={j.userFlow.caption} width={j.userFlow.diagramW} height={j.userFlow.diagramH} loading="lazy" className="block w-full h-auto" />
+            <VaultImage src={j.userFlow.diagram} alt={j.userFlow.caption} width={j.userFlow.diagramW} height={j.userFlow.diagramH} loading="lazy" className="block w-full h-auto" />
           </Zoomable>
           <figcaption className="mt-5 text-xs font-mono uppercase tracking-widest text-white text-center">{j.userFlow.caption}</figcaption>
         </Reveal>
@@ -242,7 +245,7 @@ export default function JoatCaseStudy() {
           {j.wireframes.batches.map((b, i) => (
             <Reveal as="figure" key={i} delay={(i % 2) * 0.06} className="rounded-3xl dark-card p-5 md:p-8">
               <Zoomable src={b.src} alt={b.caption} caption={b.caption} className="block">
-                <img src={b.src} alt={b.caption} width={b.w} height={b.h} loading="lazy" className="block w-full h-auto" />
+                <VaultImage src={b.src} alt={b.caption} width={b.w} height={b.h} loading="lazy" className="block w-full h-auto" />
               </Zoomable>
               <figcaption className="mt-5 text-xs font-mono uppercase tracking-widest text-white text-center">{b.caption}</figcaption>
             </Reveal>
@@ -258,7 +261,7 @@ export default function JoatCaseStudy() {
 
         <Reveal as="figure" delay={0.08} className="mt-12 rounded-3xl dark-card overflow-hidden">
           <Zoomable src={j.studio.image.src} alt={j.studio.image.caption} caption={j.studio.image.caption} className="bg-white">
-            <img src={j.studio.image.src} alt={j.studio.image.caption} width={j.studio.image.w} height={j.studio.image.h} loading="lazy" className="block w-full h-auto" />
+            <VaultImage src={j.studio.image.src} alt={j.studio.image.caption} width={j.studio.image.w} height={j.studio.image.h} loading="lazy" className="block w-full h-auto" />
           </Zoomable>
           <figcaption className="p-5 text-xs font-mono uppercase tracking-widest text-white text-center">{j.studio.image.caption}</figcaption>
         </Reveal>
@@ -283,7 +286,7 @@ export default function JoatCaseStudy() {
           {j.campaign.screens.map((s, i) => (
             <Reveal as="figure" key={s.title} delay={(i % 2) * 0.06} className="rounded-3xl dark-card overflow-hidden">
               <Zoomable src={s.src} alt={s.title} caption={`${s.title}: ${s.desc}`} className="bg-white">
-                <img src={s.src} alt={s.title} width={s.w} height={s.h} loading="lazy" className="block w-full h-auto" />
+                <VaultImage src={s.src} alt={s.title} width={s.w} height={s.h} loading="lazy" className="block w-full h-auto" />
               </Zoomable>
               <figcaption className="p-6">
                 <h3 className="font-display text-lg font-black">{s.title}</h3>
@@ -304,7 +307,7 @@ export default function JoatCaseStudy() {
           {j.dashboard.screens.map((s, i) => (
             <Reveal as="figure" key={s.title} delay={(i % 2) * 0.06} className="rounded-3xl dark-card overflow-hidden">
               <Zoomable src={s.src} alt={s.title} caption={`${s.title}: ${s.desc}`} className="bg-white">
-                <img src={s.src} alt={s.title} width={s.w} height={s.h} loading="lazy" className="block w-full h-auto" />
+                <VaultImage src={s.src} alt={s.title} width={s.w} height={s.h} loading="lazy" className="block w-full h-auto" />
               </Zoomable>
               <figcaption className="p-5">
                 <h3 className="font-display text-base font-black">{s.title}</h3>

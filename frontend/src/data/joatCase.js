@@ -8,7 +8,7 @@
 const J = (f) => `/joat/${f}`;
 
 export const joat = {
-  slug: "somethings-cooking",
+  slug: "joat",
   title: "Jack of All Threads",
   subtitle:
     "A UX and visual redesign of India's first crowdfunding platform for custom apparel: design a tee, set a goal, and sell it before a single shirt is printed.",

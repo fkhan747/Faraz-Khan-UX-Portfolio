@@ -4,6 +4,7 @@ import { ArrowRight, Mail, Calendar, Linkedin, Briefcase, User } from "lucide-re
 import { PROFILE, projects } from "../data/content";
 import { Container } from "../components/Grid";
 import CaseCover from "../components/CaseCover";
+import RequestAccessPill from "../components/RequestAccessPill";
 import AgenticFeature from "../components/AgenticFeature";
 import BookCallButton from "../components/BookCallButton";
 import Seo from "../components/Seo";
@@ -199,11 +200,20 @@ export default function Landing() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {featured.map((p) => (
-            <Link key={p.slug} to={`/case/${p.slug}`} data-testid={`featured-link-${p.slug}`} className="block group rounded-3xl overflow-hidden lift">
-              <CaseCover img={p.coverImg} title={p.title} subtitle={p.subtitle} year={p.year} titleAs="h2" />
-            </Link>
-          ))}
+          {featured.map((p) =>
+            p.locked ? (
+              <div key={p.slug} className="relative">
+                <Link to={`/case/${p.slug}`} data-testid={`featured-link-${p.slug}`} className="block group rounded-3xl overflow-hidden lift">
+                  <CaseCover img={p.coverImg} title={p.title} subtitle={p.subtitle} year={p.year} locked titleAs="h2" />
+                </Link>
+                <RequestAccessPill slug={p.slug} />
+              </div>
+            ) : (
+              <Link key={p.slug} to={`/case/${p.slug}`} data-testid={`featured-link-${p.slug}`} className="block group rounded-3xl overflow-hidden lift">
+                <CaseCover img={p.coverImg} title={p.title} subtitle={p.subtitle} year={p.year} titleAs="h2" />
+              </Link>
+            )
+          )}
         </div>
         </Container>
       </section>

@@ -19,7 +19,7 @@ const FOCUS = "focus-visible:outline-none focus-visible:ring-2 focus-visible:rin
  * concept still in progress, and not over-claim.
  *
  * Props:
- *   data   - the case object (recruitos / decisionos / ...), same shape family
+ *   data   - the case object (slate / crux / ...), same shape family
  *   accent - the product's AI gradient (CSS string), e.g. "linear-gradient(...)"
  *   wordmark - JSX for the title
  */

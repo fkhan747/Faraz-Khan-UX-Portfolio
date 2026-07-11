@@ -11,6 +11,9 @@
 # production
 /build
 
+# generated vault ciphertext (encrypt-case-data.mjs); source of truth = src/data/*Case.js
+/public/locked
+
 # misc
 .DS_Store
 .env.local

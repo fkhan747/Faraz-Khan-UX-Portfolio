@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Mail, Check, X, Star } from "lucide-react";
-import { finvista as fv } from "../data/finvistaCase";
+import { useCaseData } from "../components/CaseStudyGate";
+import VaultImage from "../components/VaultImage";
 import { PROFILE } from "../data/content";
 import Seo from "../components/Seo";
 import Zoomable from "../components/Zoomable";
@@ -39,6 +40,8 @@ const FactCell = ({ label, value }) => (
 );
 
 export default function FinvistaCaseStudy() {
+  // Decrypted case data provided by CaseStudyGate after unlock.
+  const fv = useCaseData();
   const [showAll, setShowAll] = useState(false);
 
   return (
@@ -47,7 +50,7 @@ export default function FinvistaCaseStudy() {
       <CaseStudyNav />
       {/* TITLE BLOCK over a darkened cover image */}
       <header className="relative overflow-hidden">
-        <img
+        <VaultImage
           src="/finvista/cover.jpg"
           alt=""
           aria-hidden="true"
@@ -269,7 +272,7 @@ export default function FinvistaCaseStudy() {
           {fv.research.competitive.map((c, i) => (
             <Reveal key={c.name} delay={i * 0.05} className="dark-card rounded-3xl overflow-hidden">
               <Zoomable src={c.image} alt={`${c.name} app teardown`} caption={`${c.name}: screen-by-screen teardown`} className="bg-white overflow-hidden">
-                <img src={c.image} alt={`${c.name} app teardown`} loading="lazy" className="block w-full h-auto" />
+                <VaultImage src={c.image} alt={`${c.name} app teardown`} loading="lazy" className="block w-full h-auto" />
               </Zoomable>
               <div className="p-6">
                 <h3 className="font-display text-xl font-black mb-2">{c.name}</h3>
@@ -405,7 +408,7 @@ export default function FinvistaCaseStudy() {
         {/* Flow SVG */}
         <Reveal delay={0.06}>
           <Zoomable src={fv.flow.diagramSvg} alt={fv.flow.diagramCaption} caption={fv.flow.diagramCaption} className="mt-10 rounded-3xl dark-card p-6 md:p-10 overflow-x-auto">
-            <img src={fv.flow.diagramSvg} alt={fv.flow.diagramCaption} loading="lazy" className="w-full h-auto" />
+            <VaultImage src={fv.flow.diagramSvg} alt={fv.flow.diagramCaption} loading="lazy" className="w-full h-auto" />
           </Zoomable>
           <p className="mt-3 text-xs font-mono uppercase tracking-widest text-white text-center">
             {fv.flow.diagramCaption}
@@ -445,7 +448,7 @@ export default function FinvistaCaseStudy() {
           {fv.design.wireframes.batches.map((b, i) => (
             <Reveal key={i} as="figure" delay={i * 0.05} className="rounded-3xl dark-card p-6 md:p-8">
               <Zoomable src={b.src} alt={b.caption} caption={b.caption} className="block">
-                <img src={b.src} alt={b.caption} loading="lazy" className="w-full h-auto" />
+                <VaultImage src={b.src} alt={b.caption} loading="lazy" className="w-full h-auto" />
               </Zoomable>
               <figcaption className="mt-4 text-xs font-mono uppercase tracking-widest text-white text-center">
                 {b.caption}
@@ -461,7 +464,7 @@ export default function FinvistaCaseStudy() {
           {fv.design.explorations.images.map((img, i) => (
             <Reveal key={i} as="figure" delay={i * 0.05} className="rounded-3xl dark-card p-6 md:p-8">
               <Zoomable src={img.src} alt={img.caption} caption={img.caption} className="block">
-                <img src={img.src} alt={img.caption} loading="lazy" className="w-full h-auto" />
+                <VaultImage src={img.src} alt={img.caption} loading="lazy" className="w-full h-auto" />
               </Zoomable>
               <figcaption className="mt-4 text-xs font-mono uppercase tracking-widest text-white text-center">
                 {img.caption}
@@ -607,7 +610,7 @@ export default function FinvistaCaseStudy() {
           {fv.gallery.representative.map((s, i) => (
             <Reveal key={s.title} as="figure" delay={(i % 2) * 0.06} className="rounded-2xl dark-card overflow-hidden">
               <Zoomable src={s.src} alt={s.title} caption={s.title} className="aspect-[9/16] bg-white p-2 flex items-center justify-center">
-                <img src={s.src} alt={s.title} loading="lazy" className="max-w-full max-h-full object-contain" />
+                <VaultImage src={s.src} alt={s.title} loading="lazy" className="max-w-full max-h-full object-contain" />
               </Zoomable>
               <figcaption className="px-3 py-3 text-[11px] font-mono uppercase tracking-wider text-[#F4F3FA]">
                 {s.title}
@@ -618,7 +621,7 @@ export default function FinvistaCaseStudy() {
             fv.gallery.all.map((s) => (
               <figure key={s.title} className="rounded-2xl dark-card overflow-hidden">
                 <Zoomable src={s.src} alt={s.title} caption={s.title} className="aspect-[9/16] bg-white p-2 flex items-center justify-center">
-                  <img src={s.src} alt={s.title} loading="lazy" className="max-w-full max-h-full object-contain" />
+                  <VaultImage src={s.src} alt={s.title} loading="lazy" className="max-w-full max-h-full object-contain" />
                 </Zoomable>
                 <figcaption className="px-3 py-3 text-[11px] font-mono uppercase tracking-wider text-[#F4F3FA]">
                   {s.title}

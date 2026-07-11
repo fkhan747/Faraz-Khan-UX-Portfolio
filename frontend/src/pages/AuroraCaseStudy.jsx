@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft, Mail, Check, X, Star, AlertTriangle } from "lucide-react";
-import { aurora as au } from "../data/auroraCase";
+import { useCaseData } from "../components/CaseStudyGate";
+import VaultImage from "../components/VaultImage";
 import { PROFILE } from "../data/content";
 import Seo from "../components/Seo";
 import Reveal from "../components/Reveal";
@@ -29,13 +30,15 @@ const SectionWrap = ({ children, className = "", ...rest }) => (
 );
 
 export default function AuroraCaseStudy() {
+  // Decrypted case data provided by CaseStudyGate after unlock.
+  const au = useCaseData();
   return (
     <article data-testid="aurora-case-study" className="pb-24">
       <Seo title={au.title} description={au.subtitle} />
       <CaseStudyNav />
       {/* TITLE BLOCK over a darkened cover image */}
       <header className="relative overflow-hidden">
-        <img
+        <VaultImage
           src="/aurora/cover.jpg"
           alt=""
           aria-hidden="true"
@@ -420,7 +423,7 @@ export default function AuroraCaseStudy() {
           {au.design.sketches.map((s, i) => (
             <Reveal key={s.title} delay={(i % 2) * 0.06} as="figure" className="rounded-3xl dark-card overflow-hidden">
               <Zoomable src={s.src} alt={s.title} caption={s.desc} className="bg-[#FAF5E8] p-4 md:p-6">
-                <img src={s.src} alt={s.title} loading="lazy" className="w-full h-auto" />
+                <VaultImage src={s.src} alt={s.title} loading="lazy" className="w-full h-auto" />
               </Zoomable>
               <figcaption className="p-6">
                 <span className="text-[10px] font-mono uppercase tracking-widest text-[#F5379B]">{s.tag}</span>
@@ -441,7 +444,7 @@ export default function AuroraCaseStudy() {
           {au.design.wireframes.map((w, i) => (
             <Reveal key={w.title} delay={(i % 2) * 0.06} as="figure" className="rounded-3xl dark-card overflow-hidden">
               <Zoomable src={w.src} alt={w.title} caption={w.desc} className="bg-white p-4 md:p-6 border-b border-white/5">
-                <img src={w.src} alt={w.title} loading="lazy" className="w-full h-auto" />
+                <VaultImage src={w.src} alt={w.title} loading="lazy" className="w-full h-auto" />
               </Zoomable>
               <figcaption className="p-6">
                 <span className="text-[10px] font-mono uppercase tracking-widest text-[#F5379B]">{w.tag}</span>
@@ -462,7 +465,7 @@ export default function AuroraCaseStudy() {
           {au.design.finalScreens.map((s, i) => (
             <Reveal key={s.title} delay={(i % 2) * 0.06} as="figure" className="mb-5 break-inside-avoid rounded-3xl dark-card overflow-hidden">
               <Zoomable src={s.src} alt={s.title} caption={s.desc} className="bg-white p-3 border-b border-white/5">
-                <img src={s.src} alt={s.title} loading="lazy" className="w-full h-auto rounded-lg" />
+                <VaultImage src={s.src} alt={s.title} loading="lazy" className="w-full h-auto rounded-lg" />
               </Zoomable>
               <figcaption className="p-5">
                 <span className="text-[10px] font-mono uppercase tracking-widest text-[#F5379B]">{s.tag}</span>

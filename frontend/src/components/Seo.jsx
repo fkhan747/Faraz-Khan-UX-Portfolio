@@ -32,10 +32,13 @@ function upsertLink(rel, href) {
   el.setAttribute("href", href);
 }
 
-export default function Seo({ title, description = DEFAULT_DESC, image = OG_IMAGE }) {
+export default function Seo({ title, description = DEFAULT_DESC, image = OG_IMAGE, noindex = false }) {
   useEffect(() => {
     const full = title ? `${title} · ${NAME}` : `${NAME} · Senior UX Lead`;
     document.title = full;
+    // Confidential (gated) routes ask crawlers to stay out; every other route
+    // resets the tag to index so SPA navigation off a locked page re-indexes.
+    upsert('meta[name="robots"]', "name", "robots", noindex ? "noindex, nofollow" : "index, follow");
     // Per-page canonical URL. pathname is correct during react-snap prerender;
     // pairing it with the fixed production origin avoids baking in localhost.
     // Normalised to a trailing slash to match the GitHub Pages served URLs
@@ -52,6 +55,6 @@ export default function Seo({ title, description = DEFAULT_DESC, image = OG_IMAG
     upsert('meta[name="twitter:card"]', "name", "twitter:card", "summary_large_image");
     upsert('meta[name="twitter:title"]', "name", "twitter:title", full);
     upsert('meta[name="twitter:description"]', "name", "twitter:description", description);
-  }, [title, description, image]);
+  }, [title, description, image, noindex]);
   return null;
 }

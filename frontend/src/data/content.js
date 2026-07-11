@@ -17,41 +17,11 @@ export const PROFILE = {
 
 const F = (n) => `/finvista/${n}`;
 
-// Projects: 4 total, shown as equal case studies (no featured treatment).
-// FinVista & Aurora are full case studies; the other 2 are being prepared.
+// Projects: 4 client case studies. Meridian leads and is open to explore.
+// FinVista, Aurora and Jack of All Threads are confidential client work, gated
+// behind a password (see src/lib/caseLock.js) — `locked: true` drives the lock
+// treatment on the cards and the route-level CaseStudyGate.
 export const projects = [
-  {
-    slug: "finvista",
-    title: "FinVista",
-    subtitle: "Re-imagining a Digital Lending Platform for India's Next Billion Borrowers",
-    client: "FinVista (Leading Indian NBFC)",
-    role: "Senior UX Lead",
-    services: "UX, Design Systems, Research",
-    year: "2024",
-    cover: F("outcome-montage.png"),
-    coverImg: "/finvista/cover.jpg",
-    color: "#FFE3B3",
-    tag: "case study",
-    summary:
-      "Led the UX of a native Android Loan Origination System covering 6 loan products, with a 100+ component design system and a streamlined 11-step Two-Wheeler journey.",
-    detail: true,
-  },
-  {
-    slug: "aurora",
-    title: "Aurora",
-    subtitle: "Redesigning a Marketing Campaign Platform & Embedding AI in the Canvas",
-    client: "Aurora (by Helio)",
-    role: "Lead Product Designer",
-    services: "Product Design, Design System, Research",
-    year: "2024",
-    cover: "/aurora/04_RBJ_Properties_Weekly.jpg",
-    coverImg: "/aurora/cover.jpg",
-    color: "#E8F2F0",
-    tag: "case study",
-    summary:
-      "Led the redesign of the Recurring Batch Journey configurator and embedded the Helio AI composer. Cut clicks for campaign setup 3:1 and shipped a 52-component design system.",
-    detail: true,
-  },
   {
     slug: "meridian",
     title: "Meridian Institute Analytics",
@@ -69,7 +39,41 @@ export const projects = [
     detail: true,
   },
   {
-    slug: "somethings-cooking",
+    slug: "finvista",
+    title: "FinVista",
+    subtitle: "Re-imagining a Digital Lending Platform for India's Next Billion Borrowers",
+    client: "FinVista (Leading Indian NBFC)",
+    role: "Senior UX Lead",
+    services: "UX, Design Systems, Research",
+    year: "2024",
+    cover: F("outcome-montage.png"),
+    coverImg: "/finvista/cover.jpg",
+    color: "#FFE3B3",
+    tag: "case study",
+    summary:
+      "Led the UX of a native Android Loan Origination System covering 6 loan products, with a 100+ component design system and a streamlined 11-step Two-Wheeler journey.",
+    detail: true,
+    locked: true,
+  },
+  {
+    slug: "aurora",
+    title: "Aurora",
+    subtitle: "Redesigning a Marketing Campaign Platform & Embedding AI in the Canvas",
+    client: "Aurora (by Helio)",
+    role: "Lead Product Designer",
+    services: "Product Design, Design System, Research",
+    year: "2024",
+    cover: "/aurora/04_RBJ_Properties_Weekly.jpg",
+    coverImg: "/aurora/cover.jpg",
+    color: "#E8F2F0",
+    tag: "case study",
+    summary:
+      "Led the redesign of the Recurring Batch Journey configurator and embedded the Helio AI composer. Cut clicks for campaign setup 3:1 and shipped a 52-component design system.",
+    detail: true,
+    locked: true,
+  },
+  {
+    slug: "joat",
     title: "Jack of All Threads",
     subtitle: "India's First Crowdfunding Platform for Custom Apparel",
     client: "Jack of All Threads (Bangalore)",
@@ -83,13 +87,14 @@ export const projects = [
     summary:
       "Designed the end-to-end product for India's first t-shirt crowdfunding platform: an in-browser design studio, the campaign-creation flow, and the buyer + raiser journeys across desktop and mobile.",
     detail: true,
+    locked: true,
   },
 ];
 
 // AI-native concepts - self-initiated, separate from client work.
 export const concepts = [
   {
-    slug: "recruitos",
+    slug: "slate",
     title: "Slate",
     subtitle: "AI recruiting workspace for staffing agencies",
     kind: "AI-native concept",
@@ -98,16 +103,16 @@ export const concepts = [
     accent: "#4285F4",
     coverImg: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1200&q=80&auto=format&fit=crop",
     status: "live prototype",
-    prototypeUrl: "/recruitos/",
+    prototypeUrl: "/slate/",
     summary:
       "A recruitment workspace where the AI sources, ranks, and drafts outreach while the recruiter stays the decision-maker. Designed end-to-end and built as an interactive prototype.",
     blurb:
       "The AI sources candidates, ranks them, and drafts the outreach. The recruiter stays the one who decides. Designed end to end and built as a working prototype.",
-    href: "/case/recruitos",
+    href: "/case/slate",
     live: true,
   },
   {
-    slug: "knowledgeos",
+    slug: "almanac",
     title: "Almanac",
     subtitle: "Enterprise AI your team can actually ask",
     kind: "AI-native concept",
@@ -116,26 +121,26 @@ export const concepts = [
     accent: "#0E9CA6",
     coverImg: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&q=80&auto=format&fit=crop",
     status: "live prototype",
-    prototypeUrl: "/knowledgeos/",
+    prototypeUrl: "/almanac/",
     summary:
       "Turning institutional memory into something teams can actually ask, not just search through.",
-    href: "/case/knowledgeos",
+    href: "/case/almanac",
     live: false,                          // dormant, may revive later
   },
   {
-    slug: "decisionos",
+    slug: "crux",
     title: "Crux",
     subtitle: "AI-agent supervision console",
     kind: "AI-native concept",
     role: "Senior UX Lead · self-initiated",
     year: "2026",
     accent: "#E8519B",
-    coverImg: "/decisionos-shots/cr-01-overview.png",
+    coverImg: "/crux-shots/cr-01-overview.png",
     status: "live prototype",
-    prototypeUrl: "/decisionos/",
+    prototypeUrl: "/crux/",
     summary:
       "Five AI agents run a bank's operations while a human keeps every call. The five agent-trust patterns, built as a working prototype.",
-    href: "/case/decisionos",
+    href: "/case/crux",
     live: true,                           // Control Room prototype merged 2026-07-06
   },
 ];

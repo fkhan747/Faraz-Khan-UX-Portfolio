@@ -3,6 +3,7 @@ import { Sparkles, ArrowUpRight, ArrowRight, Check, ShieldCheck } from "lucide-r
 import { projects, concepts } from "../data/content";
 import { Container, Grid } from "../components/Grid";
 import CaseCover from "../components/CaseCover";
+import RequestAccessPill from "../components/RequestAccessPill";
 import Seo from "../components/Seo";
 import { NEON_CSS as AB_CSS, Squiggle as AbSquiggle } from "../components/neonStyle";
 
@@ -91,16 +92,29 @@ export default function Projects() {
         <Container>
         <p data-text="client work" className="ab-glitch inline-block text-[11px] font-mono uppercase tracking-[0.25em] text-[#F0186C] mb-6">client work</p>
         <Grid>
-          {projects.map((p) => (
-            <Link
-              key={p.slug}
-              to={`/case/${p.slug}`}
-              className="col-span-12 md:col-span-6 group block ab-card overflow-hidden"
-              data-testid={`projects-card-${p.slug}`}
-            >
-              <CaseCover img={p.coverImg} title={p.title} subtitle={p.subtitle} year={p.year} comingSoon={p.comingSoon} titleAs="h2" />
-            </Link>
-          ))}
+          {projects.map((p) =>
+            p.locked ? (
+              <div
+                key={p.slug}
+                className="relative col-span-12 md:col-span-6"
+                data-testid={`projects-card-${p.slug}`}
+              >
+                <Link to={`/case/${p.slug}`} className="group block ab-card overflow-hidden">
+                  <CaseCover img={p.coverImg} title={p.title} subtitle={p.subtitle} year={p.year} locked titleAs="h2" />
+                </Link>
+                <RequestAccessPill slug={p.slug} />
+              </div>
+            ) : (
+              <Link
+                key={p.slug}
+                to={`/case/${p.slug}`}
+                className="col-span-12 md:col-span-6 group block ab-card overflow-hidden"
+                data-testid={`projects-card-${p.slug}`}
+              >
+                <CaseCover img={p.coverImg} title={p.title} subtitle={p.subtitle} year={p.year} comingSoon={p.comingSoon} titleAs="h2" />
+              </Link>
+            )
+          )}
         </Grid>
         </Container>
       </section>
