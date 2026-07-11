@@ -33,7 +33,7 @@ export default function Contact() {
             <AbSquiggle className="ab-sq-3" color="#17C3E8" rot={-14} />
           </span>
           <Container>
-            <div className="max-w-3xl mx-auto relative z-10" data-testid="access-request-view">
+            <div className="relative z-10" data-testid="access-request-view">
               <ContactForm
                 eyebrow="request access"
                 title={
