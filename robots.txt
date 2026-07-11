@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
 
+# Confidential client case studies — gated, kept out of search.
+Disallow: /case/finvista
+Disallow: /case/aurora
+Disallow: /case/joat
+
 Sitemap: https://www.khanfaraz.in/sitemap.xml

@@ -4,9 +4,7 @@
   <url><loc>https://www.khanfaraz.in/projects</loc><priority>0.9</priority></url>
   <url><loc>https://www.khanfaraz.in/about</loc><priority>0.8</priority></url>
   <url><loc>https://www.khanfaraz.in/contact</loc><priority>0.7</priority></url>
-  <url><loc>https://www.khanfaraz.in/case/finvista</loc><priority>0.8</priority></url>
-  <url><loc>https://www.khanfaraz.in/case/aurora</loc><priority>0.8</priority></url>
-  <url><loc>https://www.khanfaraz.in/case/recruitos</loc><priority>0.8</priority></url>
-  <url><loc>https://www.khanfaraz.in/case/knowledgeos</loc><priority>0.8</priority></url>
-  <url><loc>https://www.khanfaraz.in/case/decisionos</loc><priority>0.8</priority></url>
+  <url><loc>https://www.khanfaraz.in/case/meridian</loc><priority>0.9</priority></url>
+  <url><loc>https://www.khanfaraz.in/case/slate</loc><priority>0.8</priority></url>
+  <url><loc>https://www.khanfaraz.in/case/crux</loc><priority>0.8</priority></url>
 </urlset>
