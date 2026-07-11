@@ -175,17 +175,14 @@
                     }),
                     (e.__SV = 1));
             })(document, window.posthog || []);
-            // Skip analytics during react-snap prerendering: PostHog's session
-            // recording keeps a connection open, which prevents puppeteer's
-            // networkidle0 from settling and times out the image-heavy pages.
-            if (navigator.userAgent !== "ReactSnap") {
-                posthog.init("phc_xAvL2Iq4tFmANRE7kzbKwaSqp1HJjN7x48s3vr0CMjs", {
+            // Skip during react-snap prerender (PostHog session recording holds a
+            // connection open, stalling puppeteer's networkidle0 and timing out
+            // image-heavy pages) and on localhost so builds/dev don't log fake visits.
+            if (navigator.userAgent !== "ReactSnap" && location.hostname !== "localhost" && location.hostname !== "127.0.0.1") {
+                posthog.init("phc_yy4dNYK3iaCxwb4JqGJp9meXUGbqENsbCofjSnExkzNi", {
                     api_host: "https://us.i.posthog.com",
-                    person_profiles: "identified_only", // or 'always' to create profiles for anonymous users as well,
-                    session_recording: {
-                        recordCrossOriginIframes: true,
-                        capturePerformance: false,
-                    },
+                    defaults: "2026-05-30",
+                    person_profiles: "identified_only", // or 'always' to create profiles for anonymous users as well
                 });
             }
         </script>
