@@ -99,7 +99,9 @@ function artifactFor(headline = "", data = {}) {
   if (h.includes("context and primary users")) return <MeridianPersonas />;
   if (h.includes("before and after")) return <MeridianFiveProblems />;
   if (h.includes("problem")) return <LegacyMontage />;
-  if (h.includes("goals, success")) return <MeridianWireframes />;
+  if (h.includes("goals, success") || h.includes("what the sector")) return <MeridianWireframes />;
+  // TL;DR leads with the finished product: reviewers scroll to the outcome first.
+  if (h.includes("tl;dr")) return <MeridianShot name="overview" maxW={1040} label="The Overview cockpit: the whole institution in one read" />;
   if (h.includes("information architecture")) return (
     <>
       <MeridianIA />

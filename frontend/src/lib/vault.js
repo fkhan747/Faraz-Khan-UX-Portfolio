@@ -26,6 +26,11 @@ const LOCKED = new Set(["finvista", "aurora", "joat"]);
 const LOCKED_PREFIX = /^\/(finvista|aurora|joat)\//;
 const DEV = process.env.NODE_ENV === "development";
 
+// Dormant mode: vault code stays, but no gate, no encryption, no key.
+// Flip REACT_APP_VAULT_DORMANT to 0 (or delete it) in frontend/.env.local and
+// re-run the build to reactivate the lock. The scripts read the same flag.
+export const DORMANT = process.env.REACT_APP_VAULT_DORMANT === "1";
+
 const MIME = {
   png: "image/png",
   jpg: "image/jpeg",
@@ -39,6 +44,7 @@ let vaultKey = null; // CryptoKey while a locked study is open
 let urlCache = new Map(); // src -> Promise<objectURL|src>
 
 export function isLocked(slug) {
+  if (DORMANT) return false;
   return LOCKED.has(slug);
 }
 
@@ -80,6 +86,7 @@ async function decryptPayload(key, buf) {
  * module memory so images can decrypt on demand.
  */
 export async function unlockCase(slug, password) {
+  if (DORMANT) return loadDormantCase(slug);
   try {
     const res = await fetch(`/locked/${slug}.enc`, { cache: "no-store" });
     if (!res.ok) return null;
@@ -89,6 +96,18 @@ export async function unlockCase(slug, password) {
     const data = JSON.parse(new TextDecoder().decode(plain));
     vaultKey = key;
     return data;
+  } catch {
+    return null;
+  }
+}
+
+// Dormant loader: plaintext JSON that encrypt-case-data.mjs emits when the
+// flag is on. No key involved.
+async function loadDormantCase(slug) {
+  try {
+    const res = await fetch(`/locked/${slug}.json`, { cache: "no-store" });
+    if (!res.ok) return null;
+    return await res.json();
   } catch {
     return null;
   }
@@ -111,7 +130,7 @@ export function isVaultPath(src) {
 }
 
 function needsVault(src) {
-  if (DEV) return false;
+  if (DEV || DORMANT) return false;
   if (typeof src !== "string" || !LOCKED_PREFIX.test(src)) return false;
   if (src.endsWith("cover.jpg")) return false; // public card teaser stays plain
   return true;

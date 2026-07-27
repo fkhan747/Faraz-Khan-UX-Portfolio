@@ -219,15 +219,15 @@ const HXC_CSS = `
           display:inline-flex; align-items:center; gap:8px;
           padding:8px 14px; border-radius:9999px;
           background:rgba(24,17,38,0.7);
-          border:1px solid #2C2542;
+          border:1px solid rgba(244,243,250,0.18);
           backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
           font-family:'JetBrains Mono', ui-monospace, monospace; font-weight:600;
           font-size:11px; letter-spacing:0.08em; color:#F4F3FA; white-space:nowrap;
-          box-shadow:0 10px 30px rgba(16,2,16,0.55);
+
         }
         .hxc-dot{ width:6px; height:6px; border-radius:9999px; flex:none; }
-        .hxc-dot-m{ background:#F5379B; box-shadow:0 0 10px rgba(245,55,155,0.8); }
-        .hxc-dot-b{ background:#9B4DE0; box-shadow:0 0 10px rgba(155,77,224,0.8); }
+        .hxc-dot-m{ background:#F5379B; }
+        .hxc-dot-b{ background:#F5379B; }
 
         /* Foreground copy: left column, never touching the figure. Flex
            centering (not transform) because framer owns this transform. */
@@ -300,7 +300,7 @@ const HXC_CSS = `
           position:relative;
           display:inline-flex; align-items:center; justify-content:center;
           border-radius:12px;
-          border:2px solid #F2D50F;
+          border:1px solid rgba(244,243,250,0.28);
           padding:13px 26px;
           font-family:'Outfit', sans-serif; font-weight:700; font-size:15px;
           letter-spacing:0.02em; text-decoration:none; cursor:pointer;
@@ -310,27 +310,24 @@ const HXC_CSS = `
         }
         .hxc-btn:focus-visible{ outline:2px solid #2E78FF; outline-offset:3px; }
         .hxc-btn-primary{
-          --hxc-rot: -1deg;
-          background:#7B2FBE; color:#F4F3FA;
-          box-shadow:5px 5px 0 #F0186C;
+          --hxc-rot: 0deg;
+          background:#F5379B; color:#FFFFFF; border-color:#F5379B;
         }
         .hxc-btn-ghost{
-          --hxc-rot: 1deg;
+          --hxc-rot: 0deg;
           background:transparent; color:#F4F3FA;
-          box-shadow:5px 5px 0 #7B2FBE;
         }
         .hxc-btn-primary:active{
-          transform:translate(3px, 3px) rotate(var(--hxc-rot)) scale(0.97);
-          box-shadow:2px 2px 0 #F0186C;
+          transform:translateY(1px);
           animation:none;
         }
         .hxc-btn-ghost:active{
-          transform:translate(3px, 3px) rotate(var(--hxc-rot)) scale(0.97);
-          box-shadow:2px 2px 0 #7B2FBE;
+          transform:translateY(1px);
           animation:none;
         }
         @media (hover: hover) and (pointer: fine){
-          .hxc-btn:hover{ animation:hxc-btn-glitch 0.9s linear infinite; }
+          .hxc-btn-primary:hover{ background:#D81F7E; border-color:#D81F7E; }
+          .hxc-btn-ghost:hover{ border-color:rgba(244,243,250,0.6); }
         }
 
         .hxc-featured{

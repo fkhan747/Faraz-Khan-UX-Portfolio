@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { isLocked, clearVault } from "../lib/vault";
+import { isLocked, clearVault, unlockCase, DORMANT } from "../lib/vault";
 import LockedCaseStudy from "./LockedCaseStudy";
 
 /**
@@ -22,8 +22,19 @@ export default function CaseStudyGate({ slug, children }) {
 
   useEffect(() => clearVault, []); // wipe key + object URLs on exit
 
+  // Dormant mode: auto-load plaintext case data on mount; skip the gate UI.
+  useEffect(() => {
+    if (!DORMANT) return;
+    let cancelled = false;
+    unlockCase(slug).then((d) => { if (!cancelled) setData(d); });
+    return () => { cancelled = true; };
+  }, [slug]);
+
   if (isLocked(slug) && !data) {
     return <LockedCaseStudy slug={slug} onUnlock={setData} />;
   }
+  // Dormant mode: children read useCaseData() directly, so hold render until
+  // the plaintext JSON arrives (otherwise they crash on au.title).
+  if (DORMANT && !data) return null;
   return <CaseDataContext.Provider value={data}>{children}</CaseDataContext.Provider>;
 }

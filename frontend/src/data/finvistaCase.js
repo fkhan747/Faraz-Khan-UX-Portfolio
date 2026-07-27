@@ -1,41 +1,43 @@
-// FinVista case study data - verbatim sections, copy & image references from
-// the original case study HTML provided by Faraz. Visual styling is portfolio-driven.
+// FinVista case study. Confidential client (NDA) — kept anonymized.
+// Structured data consumed by FinVistaCaseStudy.jsx. Every top-level key
+// below is referenced by the page — do not remove keys, only shorten values.
+// Voice: first-person, conversational, plain. No em-dashes.
 const F = (n) => `/finvista/${n}`;
 
 export const finvista = {
   slug: "finvista",
   title: "FinVista",
   subtitle:
-    "Re-imagining a digital lending platform for quick, hassle-free finance, serving millions across urban and rural India.",
+    "A native lending app that turned a paper-heavy loan into an eleven-step journey a first-time borrower can finish on their own phone.",
   hero: {
     facts: [
       { label: "Role", value: "Senior UX Lead" },
       { label: "Domain", value: "Fintech · digital lending" },
       { label: "Platform", value: "Native Android app" },
     ],
+    // Outcome numbers as the hero counter, so the impact reads before the story.
     stats: [
-      { value: "6", label: "Loan Products Designed" },
-      { value: "11", label: "Step Loan Journey" },
-      { value: "100+", label: "Components Built" },
+      { value: "60%", label: "Faster processing" },
+      { value: "6", label: "Products, one system" },
+      { value: "100+", label: "Components" },
     ],
   },
 
   // --- 01 PROJECT OVERVIEW ---
   overview: {
-    headline:
-      "Designing a scalable lending experience for India's next billion borrowers",
+    headline: "One lending app for six products, urban and rural, agent and DIY",
     intro:
-      "FinVista is a consumer-facing digital lending platform operated by a leading Indian NBFC, a subsidiary of one of India's largest automotive conglomerates. The platform serves customers across 500+ cities, offering loans for two-wheelers, consumer durables, personal needs, used vehicles, tractors, and more. FinVista is a stand-in name; the client's identity is kept confidential under NDA.",
-    tldrTitle: "TL;DR: Executive Summary",
+      "FinVista is a consumer lending app for a large Indian NBFC (client anonymized under NDA), serving borrowers across 500+ cities. I led UX across six products, with the two-wheeler flow as the proving ground.",
+    tldrTitle: "TL;DR",
     tldr:
-      "I led the UX design of a native Android Loan Origination System for a leading Indian NBFC, covering 6 loan product journeys with a focus on the Two-Wheeler flow. Through competitive analysis, persona development, and 5 rounds of iterative prototyping, I created a scalable design system with 100+ components and turned a complex, paper-heavy loan application into an 11-step digital journey. The result was faster processing, less reliance on agents, and higher completion rates.",
+      "Paper-heavy, agent-only loan → 11-step native Android journey. Six products on one 100+ component system. Processing runs ~60% faster, agent training dropped ~40%.",
     facts: [
       { label: "Role", value: "Senior UX Lead" },
-      { label: "Duration", value: "5 Months" },
-      { label: "Team", value: "2 Designers, 1 PM, 8 Devs" },
-      { label: "Platform", value: "Native Android App" },
+      { label: "Duration", value: "5 months" },
+      { label: "Team", value: "2 designers, 1 PM, 8 devs" },
+      { label: "Platform", value: "Native Android app" },
       { label: "Tools", value: "Figma, FigJam, JIRA" },
-      { label: "Scope", value: "End-to-End LOS" },
+      { label: "Scope", value: "End-to-end LOS" },
     ],
     process: [
       { step: "01", title: "Discovery", duration: "3 weeks" },
@@ -45,32 +47,16 @@ export const finvista = {
     ],
     productLandscape: {
       intro:
-        "The platform supports six distinct loan products, each with its own journey flow. I designed all six, but this case study focuses on the Two-Wheeler (TW) Loan, the highest-volume product.",
+        "Six products, one system. I used the highest-volume one as the proving ground.",
       products: [
         {
           name: "Two-Wheeler Loan",
-          badge: "PRIMARY FOCUS",
-          desc: "New and used bikes, scooters, electric, and mopeds. Runs in both agent-assisted and customer DIY modes. Our highest-volume product, so I made it the proving ground.",
+          badge: "PROVING GROUND",
+          desc: "New and used bikes, scooters, electric, mopeds. This case study is about this flow.",
         },
         {
-          name: "Consumer Durable Loan",
-          desc: "Mobiles, fridges, washing machines. Agents close it in-store, or customers schedule it themselves.",
-        },
-        {
-          name: "Cross-Sell Personal Loan",
-          desc: "Pre-approved personal loans for existing customers who already qualify. Agent-assisted or self-service.",
-        },
-        {
-          name: "Used Car Loan",
-          desc: "Used four-wheelers, for agents and customers alike. Onboards new and existing borrowers.",
-        },
-        {
-          name: "Tractor Loan",
-          desc: "Brand-new tractors, up to 90% funded, with the paperwork trimmed down.",
-        },
-        {
-          name: "Three-Wheeler Loan",
-          desc: "New three-wheelers, through dealership agents or customer self-service.",
+          name: "Consumer Durable · Personal · Used Car · Tractor · Three-Wheeler",
+          desc: "Five more loan products on the same 100+ component system.",
         },
       ],
     },
@@ -79,40 +65,27 @@ export const finvista = {
   // --- 02 PROBLEM ---
   primaryUsers: [
     { label: "Sales Centre Executives", desc: "They process loans over phone and app, juggle a dozen applications at once, and own the compliance. Speed is their whole job." },
-    { label: "Loan Customers", desc: "First-time and repeat borrowers across urban and rural India, applying for a two-wheeler loan on their own phone. Often their first time doing this digitally." },
+    { label: "Loan Customers", desc: "First-time and repeat borrowers, applying for a two-wheeler loan on their own phone. Often the first time they've done anything financial digitally." },
   ],
 
   problem: {
-    headline:
-      "A lending platform that needed to work for everyone, from tech-savvy urbanites to first-time borrowers in rural India",
+    headline: "One app, two personas, six products, and a device gap from flagship to entry-level 2G",
     intro:
-      "The NBFC's existing loan process was paper-heavy, agent-dependent, and fragmented. The challenge: design a native Android app that served multiple user personas and loan products, scaled across urban and rural markets, and stayed compliant with regulation throughout.",
+      "The old flow was paper, agents, and fragments. I had to design one app that worked on the borrower's own phone, on the executive's too, held up on 2G, and stayed RBI-compliant end to end.",
     coreChallenge:
-      "Design a native Android application with a scalable structure, dynamic reusable components, and a future-proof solution that enhances accessibility and user experience across all types of smartphones and devices.",
+      "One scalable Android app, reusable components, holding up across every device and network in India, staying compliant.",
     dimensions: [
       {
         title: "Multi-Persona Complexity",
-        desc: "Two personas pulling opposite ways: customers applying solo, and executives processing loans for them, with dealership agents riding inside the executive flow as a sub-mode. Different goals, different literacy, same screens.",
+        desc: "Customers apply solo, executives process for them. Different goals, different literacy, same screens.",
       },
       {
         title: "Information Overload",
-        desc: "One application is 40+ fields: personal, KYC, employment, income, vehicle, bank. All of it on a small phone. Fit that without drowning anyone and the IA does the heavy lifting.",
+        desc: "One application is 40+ fields. Fit them on a phone without drowning anyone. The IA does the heavy lifting.",
       },
       {
-        title: "Device & Network Diversity",
-        desc: "One user is on a flagship and 5G. The next is on an entry-level Android and 2G in a village. The app has to hold up across that whole gap.",
-      },
-      {
-        title: "Trust & Security",
-        desc: "First-time borrowers hesitate before handing over financial data on a phone. So the interface has to earn trust at every step, and stay RBI-compliant doing it.",
-      },
-      {
-        title: "Product Scalability",
-        desc: "Six products, each with its own fields and eligibility rules. They all needed one shared foundation that still bent to fit each journey.",
-      },
-      {
-        title: "Accessibility Gaps",
-        desc: "Mobile-first cuts both ways for something this heavy. Discoverability suffers, preferences vary, performance bites, and the hardware sets hard limits.",
+        title: "Device and Network Diversity",
+        desc: "Flagship on 5G to entry-level Android on village 2G. The app has to hold up across the whole gap.",
       },
     ],
     inScope: [
@@ -122,36 +95,33 @@ export const finvista = {
       "Agent and customer (DIY) pathways",
       "KYC, identity verification, consent flows",
       "Scalable component library (100+ components)",
-      "Dashboard and application management",
     ],
     outOfScope: [
-      "Backend credit scoring algorithms",
-      "Payment gateway integration UI",
-      "Admin panel and back-office tools",
-      "Marketing website and landing pages",
+      "Backend credit scoring",
+      "Payment gateway UI",
+      "Admin panel and back-office",
+      "Marketing site",
       "Post-disbursal loan management",
-      "Connections to outside services, behind the scenes",
     ],
   },
 
   // --- 03 RESEARCH ---
   research: {
-    headline:
-      "Understanding the lending landscape through competitive analysis and stakeholder discovery",
+    headline: "What the best Indian lending apps already do, and what they miss",
     intro:
-      "I pulled apart the leading lending apps in India, sat with stakeholders, and ran a heuristic evaluation to find the gaps worth going after.",
+      "I pulled apart the leading Indian lending apps, sat with stakeholders, ran a heuristic sweep. The pattern was clear.",
     competitive: [
       {
         name: "Navi",
         image: F("Navi.jpg"),
         notes:
-          "Clean UI, contextual navigation, one-step-at-a-time approach, intuitive micro-interactions and animations.",
+          "Clean UI, one-step-at-a-time flow, intuitive micro-interactions.",
       },
       {
         name: "KreditBee",
         image: F("KreditBee.jpg"),
         notes:
-          "Step-by-step onboarding, progress tracking, categorized information, help always available mid-journey.",
+          "Stepped onboarding, progress tracking, help always in reach.",
       },
     ],
     findingsTable: {
@@ -162,81 +132,59 @@ export const finvista = {
         ["Micro-assistive text", "✓", "✓", "-", "✓", "-"],
         ["Progress tracking", "-", "✓", "✓", "-", "✓"],
         ["Help always available", "✓", "✓", "✓", "✓", "-"],
-        ["Future process indication", "-", "✓", "-", "-", "-"],
-        ["Micro-interactions", "✓", "-", "✓", "-", "-"],
         ["Multi-product support", "-", "-", "✓", "-", "-"],
       ],
     },
     keyInsight:
-      "Competitors excelled at single-product lending flows, but none had solved the multi-product, multi-persona challenge at scale. That became our main opportunity: one flexible system serving 6 products and 2 primary personas, customers and executives, instead of 6 separate apps.",
+      "Every competitor nails a single-product flow. None solve multi-product, multi-persona. That gap is the opportunity: one flexible system for 6 products and 2 personas.",
     approach: [
-      { title: "Material Design Foundation", desc: "I built on Material and card layouts. It's what Android users already know, so adoption comes for free." },
-      { title: "Clean & Minimalistic", desc: "I kept the surface uncluttered. That matters most for the borrower with little digital literacy." },
-      { title: "Contextual Graphics", desc: "I leaned on illustrations and icons to carry context, so the screens lean less on walls of text." },
-      { title: "Visual Hierarchy", desc: "One consistent hierarchy for primary actions, titles, and supporting info, everywhere." },
-      { title: "Progress Visibility", desc: "I show progress upfront, so users always know where they are and what's next." },
-      { title: "Intuitive Multi-color Icons", desc: "Multi-color icons read faster and make the journey feel less clinical." },
+      { title: "Material Foundation", desc: "Built on Material and card layouts. Android users already know it." },
+      { title: "Clean and Minimal", desc: "One hierarchy, uncluttered surface. Matters most for the borrower with the least digital literacy." },
+      { title: "Progress Always Visible", desc: "Users always know where they are and what is next." },
     ],
   },
 
   // --- 04 INSIGHTS ---
   insights: {
-    headline:
-      "Two personas, one journey: bridging agent efficiency and customer empowerment",
+    headline: "Two personas, one journey",
     intro:
-      "Research handed me two archetypes, and they shaped every call I made. The trick was serving both without forcing either into the other's workflow.",
+      "Two archetypes, both served without forcing either into the other's workflow.",
     personas: [
       {
         name: "Rahul Sharma",
         role: "Sales Centre Executive",
-        quote:
-          "I am focused on giving existing customers a smooth loan application, using both phone support and the app to help them through it.",
+        quote: "Move fast, keep the customer calm, never miss a compliance step.",
         challenges: [
-          { t: "Technical Issues", d: "May encounter glitches with the mobile app while assisting customers remotely. Needs reliable tech support and troubleshooting resources." },
-          { t: "Time Constraints", d: "Often handles multiple customer inquiries simultaneously as a sales centre executive." },
-          { t: "Compliance & Security", d: "Must ensure compliance with regulatory requirements and data security standards while assisting with loan applications." },
-          { t: "Training & Support", d: "Requires ongoing training to stay updated on latest features, functionalities, and changes to loan policies." },
+          { t: "Time", d: "Many customers at once. Every extra tap costs him." },
         ],
         goals: [
-          { t: "Efficient Assistance", d: "Provide prompt and effective assistance to existing customers applying for a loan, ensuring a positive experience." },
-          { t: "Clear Communication", d: "Explain complex terms and procedures in a simple, understandable manner." },
-          { t: "Personalized Service", d: "Tailor loan options and recommendations to each customer's unique financial needs and circumstances." },
-          { t: "Phone-to-App Continuity", d: "Customer information and live application status in one place, so a call can pick up exactly where the app left off." },
+          { t: "Phone-to-App Continuity", d: "A call picks up exactly where the app left off." },
         ],
       },
       {
         name: "Ankita Agarwal",
-        role: "Customer (First-time Borrower)",
-        quote:
-          "I am looking for financial help via a transparent service that makes the loan application process convenient and efficient for my busy lifestyle.",
+        role: "First-time Borrower",
+        quote: "Give me a loan I understand, from my phone, with no hidden charges.",
         challenges: [
-          { t: "Security Concerns", d: "Cautious about sharing personal and financial information online. Wants clear, visible safeguards before she hands over her data." },
-          { t: "Understanding Loan Terms", d: "As a first-time applicant, not familiar with financial jargon. Needs clear explanations of terms and conditions to make informed decisions." },
-          { t: "Customer Support", d: "Expects prompt and helpful support through the mobile app for any questions or issues during the application process." },
+          { t: "Trust", d: "Cautious about sharing financial data. Needs visible safeguards first." },
         ],
         goals: [
-          { t: "Convenient Access", d: "Hassle-free loan access without visiting a physical branch. Values convenience and efficiency in financial transactions." },
-          { t: "Transparency", d: "Clear information about interest rates, repayment terms, and any associated fees throughout the process." },
-          { t: "Quick Approval", d: "A loan that lands fast when an urgent, unexpected expense cannot wait." },
-          { t: "User-Friendly Interface", d: "Intuitive interface with easy navigation to complete the application process without confusion." },
+          { t: "Transparency", d: "Clear rate, EMI, fees, total. No fine print surprises." },
         ],
       },
     ],
     principles: [
-      { t: "Progressive Disclosure", d: "I broke the data entry into focused, single-purpose screens. One category at a time, so the load never spikes." },
-      { t: "Information Chunking", d: "I grouped related fields into digestible chunks. KYC, employment, income each get their own step." },
-      { t: "Assistive Context", d: "Micro-copy and plain explanations sit on every step. A first-time borrower should never feel lost." },
-      { t: "Trust at Every Step", d: "Security badges, transparent consent, and a plain reason for every field I ask them to fill." },
-      { t: "Dual-Mode Flexibility", d: "Agents need speed, customers need guidance. Same system, the UX just adapts to who's holding the phone." },
-      { t: "Scalable Patterns", d: "Every component has to clear all 6 products. I designed for the hardest one (TW) and simplified down." },
+      { t: "Progressive Disclosure", d: "One category of fields at a time. The load never spikes." },
+      { t: "Trust at Every Step", d: "Visible security cues, transparent consent, a plain reason for every field." },
+      { t: "Dual-Mode Flexibility", d: "Agents need speed, customers need guidance. Same system, adaptive UX." },
     ],
   },
 
   // --- 05 USER FLOW & TASKS ---
   flow: {
-    headline: "Mapping the Two-Wheeler loan journey from entry to disbursement",
+    headline: "The Two-Wheeler loan journey in 11 steps",
     intro:
-      "I shaped the TW application as 11 steps, with onboarding on one end and processing on the other. Every step is a single screen with a single job, and progress always on view.",
+      "One screen, one job, progress always visible. Onboarding on one end, disbursement on the other.",
     diagramSvg: F("svg-12.svg"),
     diagramCaption:
       "Two-Wheeler loan journey: 11-step application flow from welcome to disbursement",
@@ -257,121 +205,114 @@ export const finvista = {
 
   // --- 06 DESIGN ---
   design: {
-    headline: "From wireframes to production: the Two-Wheeler journey",
+    headline: "From wireframes to production",
     intro:
-      "I moved through three phases. Low-fi wireframes to lock the IA, mid-fi to test the visual direction, then high-fi screens I sharpened against stakeholder feedback.",
+      "Low-fi to lock IA, mid-fi for visual direction, high-fi sharpened against real feedback.",
     wireframes: {
       intro:
-        "Before any visual polish, I explored the hardest screens in grayscale, weighing a few layout directions for each. Putting the options side by side is how the final structure earned its shape.",
+        "I explored the hardest screens in grayscale, options side by side.",
       batches: [
-        { src: F("svg-13.svg"), caption: "Loan application form: one long form vs a grouped accordion vs a stepped wizard. The stepped wizard became the 11-step journey." },
-        { src: F("svg-14.svg"), caption: "Applications dashboard: a plain list vs status cards vs grouping by stage. Status cards won for daily scanning." },
-        { src: F("svg-15.svg"), caption: "Application progress: a top bar vs a vertical stepper vs a progress ring. The vertical stepper kept every stage visible." },
+        { src: F("svg-13.svg"), caption: "Loan application: long form vs accordion vs stepped wizard. The wizard won." },
+        { src: F("svg-14.svg"), caption: "Applications dashboard: plain list vs status cards vs grouping by stage. Status cards won." },
+        { src: F("svg-15.svg"), caption: "Progress: top bar vs vertical stepper vs progress ring. The stepper kept every stage visible." },
       ],
     },
     explorations: {
       intro:
-        "After wireframes, I explored several visual approaches, testing flat vs. 3D icons, input field styles, and layout density. I reviewed each variant with stakeholders and iterated on their feedback.",
+        "Flat vs 3D icons, input styles, layout density. Tested with stakeholders, iterated.",
       images: [
-        { src: F("002-design-explorations-comparing-flat-and-3d-approaches.png"), caption: "Exploring flat vs. 3D icon styles, comparing approaches for tenure, loan amount, and add-on screens" },
+        { src: F("002-design-explorations-comparing-flat-and-3d-approaches.png"), caption: "Flat vs 3D icons across tenure, loan amount, and add-on screens" },
       ],
     },
     finalDesign: {
       intro:
-        "The finalized UI across 16 key screens, from login to disbursement. Each screen follows the no-scroll, single-action pattern with information chunking and dual progress indicators.",
+        "16 screens from login to disbursement. Every screen holds a single action.",
       screens: [
-        { src: F("005-login-authentication.png"), title: "Login & Authentication", desc: "Mobile number entry with OTP verification. Employee login fallback for sales executives." },
-        { src: F("006-applications-dashboard.png"), title: "Applications Dashboard", desc: "Search, sort, filter. Status badges (Lead, DDE, Escalated) with quick access to applications." },
-        { src: F("007-dealer-portfolio.png"), title: "Dealer & Portfolio", desc: "Sales executive flow. Dealer and portfolio selection before starting the customer journey." },
-        { src: F("008-personal-details.png"), title: "Personal Details", desc: "Pre-verified KYC data with edit affordances. Live photo capture inline. Dual progress system." },
-        { src: F("009-address-details.png"), title: "Address Details", desc: "Current address with pin code auto-fill, residence type chips, and landmark assistance." },
-        { src: F("010-employment-info.png"), title: "Employment Info", desc: "Employment type chips, company details, and income capture with currency formatting." },
-        { src: F("011-vehicle-selection.png"), title: "Vehicle Selection", desc: "Visual chip selection for ICE vs Electric. Icon-led interface for recognition." },
-        { src: F("012-product-config.png"), title: "Product Config", desc: "Bottom sheet for Make/Model/Variant with asset cost and financed amount." },
-        { src: F("013-scheme-selection.png"), title: "Scheme Selection", desc: "Recommended scheme upfront. ROI, PF, charges breakdown with customization options." },
-        { src: F("014-add-on-products.png"), title: "Add-On Products", desc: "Accessories like helmets and gear. Bundled financing simplifies the purchase decision." },
-        { src: F("015-co-applicant.png"), title: "Co-Applicant", desc: "Choose existing relationships or add new. Strengthens eligibility for first-time borrowers." },
-        { src: F("016-loan-summary.png"), title: "Loan Summary", desc: "Complete breakdown of amount, EMI, tenure, and IRR. Transparent for trust-building." },
-        { src: F("017-asset-validation.png"), title: "Asset Validation", desc: "Engine and chassis number with barcode scan. Locks the physical asset to the loan." },
-        { src: F("018-kfs-e-agreement.png"), title: "KFS & E-Agreement", desc: "Digital signature with OTP. Real-time document tracking status." },
-        { src: F("019-document-upload.png"), title: "Document Upload", desc: "Down payment, insurance, passbook upload with re-upload and format guidance." },
-        { src: F("021-disbursement.png"), title: "Disbursement", desc: "Final success state with application number and support contact." },
+        { src: F("005-login-authentication.png"), title: "Login & Authentication", desc: "Mobile number + OTP, with an employee login fallback." },
+        { src: F("006-applications-dashboard.png"), title: "Applications Dashboard", desc: "Search, sort, filter with status badges." },
+        { src: F("007-dealer-portfolio.png"), title: "Dealer & Portfolio", desc: "Executive-only step, before the customer journey begins." },
+        { src: F("008-personal-details.png"), title: "Personal Details", desc: "Pre-verified KYC, live photo, dual progress." },
+        { src: F("009-address-details.png"), title: "Address Details", desc: "Pin-code auto-fill and landmark assistance." },
+        { src: F("010-employment-info.png"), title: "Employment Info", desc: "Type chips + income with currency formatting." },
+        { src: F("011-vehicle-selection.png"), title: "Vehicle Selection", desc: "Chip selection, ICE vs Electric, icon-led." },
+        { src: F("012-product-config.png"), title: "Product Config", desc: "Bottom sheet for Make / Model / Variant." },
+        { src: F("013-scheme-selection.png"), title: "Scheme Selection", desc: "Recommended scheme with a full breakdown." },
+        { src: F("014-add-on-products.png"), title: "Add-On Products", desc: "Helmets and gear, bundled into financing." },
+        { src: F("015-co-applicant.png"), title: "Co-Applicant", desc: "Existing relationships or a new addition." },
+        { src: F("016-loan-summary.png"), title: "Loan Summary", desc: "Amount, EMI, tenure, IRR, all on one screen." },
+        { src: F("017-asset-validation.png"), title: "Asset Validation", desc: "Engine and chassis number with barcode scan." },
+        { src: F("018-kfs-e-agreement.png"), title: "KFS & E-Agreement", desc: "OTP signature and real-time tracking." },
+        { src: F("019-document-upload.png"), title: "Document Upload", desc: "Downpayment, insurance, passbook, with format hints." },
+        { src: F("021-disbursement.png"), title: "Disbursement", desc: "Success state with application number." },
       ],
     },
     keyDecisions: [
-      { t: "No-Scroll Screen Design", d: "Adopted a no-scroll approach presenting precise, relevant information on a single screen. This reduced cognitive overload and created a focused interaction model, which mattered for agents processing 15-20 applications daily." },
-      { t: "Dual Progress System", d: "A two-tier progress indicator: top-level percentage bar (\"45% Complete\") plus step-level indicator (\"Step 5 of 11\"). Keeps users oriented without overwhelming them with the full scope upfront." },
-      { t: "Assistive Onboarding", d: "Each step opens with supportive messaging: \"Hello! Let's begin by reviewing the basic information.\" Conversational tone reduces anxiety for first-time borrowers navigating a bureaucratic process." },
-      { t: "Pre-verified Data Display", d: "For existing customers, pre-populated fields display with verification checkmarks and edit icons. One-tap confirmation (\"Yes, that's right\") or update option reduces friction for repeat borrowers." },
+      { t: "No-Scroll Screen", d: "One screen, one job. It mattered most for agents processing 15-20 applications a day." },
+      { t: "Dual Progress", d: "Top-level percentage and step-level indicator. Orientation without overwhelm." },
+      { t: "Assistive Onboarding", d: "Every step opens with plain-language help. Reduces anxiety for first-time borrowers." },
+      { t: "Pre-verified Data", d: "For existing customers: pre-populated fields with checkmarks and one-tap confirm." },
     ],
   },
 
   // --- 07 DESIGN SYSTEM ---
   designSystem: {
-    headline:
-      "A component library built for scale, powering 6 products with consistent patterns",
+    headline: "A 100+ component library, one visual language across six products",
     intro:
-      "I built a 100+ component system in Figma, one shared visual language across all six products. I built it on auto-layout, variants, and tokens, so handoff to engineering stayed clean.",
+      "Built in Figma on auto-layout, variants, and tokens, so engineering handoff stayed clean.",
     panelsIntro:
-      "I organized the 100+ components into four families: tokens, form controls, navigation, and content containers.",
+      "Four families: tokens, form controls, navigation, and content containers.",
     panels: [
-      { src: F("022-foundation-color-palette-typography-scale-and-spacing-system.png"), caption: "Foundation: Color palette, typography scale, and spacing system" },
-      { src: F("023-icons-illustrations-functional-icons-multi-color-variants-an.png"), caption: "Icons & Illustrations: Functional icons, multi-color variants, and contextual graphics" },
-      { src: F("024-button-system-primary-secondary-and-tertiary-button-states-w.png"), caption: "Button System: Primary, secondary, and tertiary button states with variants" },
-      { src: F("025-form-controls-input-states-checkboxes-progress-bars-toasts-a.png"), caption: "Form Controls: Input states, checkboxes, progress bars, toasts, and file upload" },
-      { src: F("026-cards-sheets-lead-cards-vas-cards-popup-dialogs-and-bottom-s.png"), caption: "Cards & Sheets: Lead cards, VAS cards, popup dialogs, and bottom sheet patterns" },
+      { src: F("022-foundation-color-palette-typography-scale-and-spacing-system.png"), caption: "Foundation: color, type scale, spacing" },
+      { src: F("023-icons-illustrations-functional-icons-multi-color-variants-an.png"), caption: "Icons and illustrations: functional icons, multi-color variants" },
+      { src: F("024-button-system-primary-secondary-and-tertiary-button-states-w.png"), caption: "Button system: primary, secondary, tertiary with all states" },
+      { src: F("025-form-controls-input-states-checkboxes-progress-bars-toasts-a.png"), caption: "Form controls: inputs, checkboxes, progress, toasts, file upload" },
+      { src: F("026-cards-sheets-lead-cards-vas-cards-popup-dialogs-and-bottom-s.png"), caption: "Cards and sheets: lead cards, VAS cards, dialogs, bottom sheets" },
     ],
     systemImpact:
-      "The design system enabled consistent experiences across 6 loan products while reducing handoff time. New product journeys could be assembled from existing components in days rather than weeks.",
+      "New product journeys assembled from existing components in days, not weeks.",
   },
 
   // --- 08 VALIDATION ---
   validation: {
-    headline:
-      "Five rounds of iterative prototyping, tested with real users before engineering handoff",
+    headline: "Five rounds, twenty participants, one journey people could finish alone",
     intro:
-      "Rather than a formal usability study, I took an iterative approach. I shared Figma prototypes with real users (sales executives, dealership agents, and customers), watched how they interacted, captured feedback, and refined the work across 5 distinct rounds.",
+      "No formal lab. I shared Figma prototypes with real users across five rounds, watched, and refined.",
     rounds: [
-      { n: 1, t: "Round 1: Internal Stakeholders", d: "Shared initial wireframes with PM, business analysts, and engineering leads. This surfaced a core IA problem: scrollable multi-action screens were creating cognitive overload. Pivoted to a single-screen, no-scroll approach." },
-      { n: 2, t: "Round 2: Sales Executives", d: "6 sales centre executives tested the mid-fidelity prototype. Key finding: agents couldn't locate the \"back to edit\" path. Added persistent edit icons on pre-verified fields and visible step-back navigation." },
-      { n: 3, t: "Round 3: Visual Design Review", d: "Tested flat vs. 3D icon styles with stakeholders. 3D icons were engaging but added visual weight on data-heavy screens. Adopted flat icons with selective 3D for onboarding and empty states." },
-      { n: 4, t: "Round 4: Customer DIY Testing", d: "5 first-time borrowers tested the high-fidelity prototype. The progress tracker confused them, so I added dual progress (percentage + step count). Vehicle selection icons were universally praised." },
-      { n: 5, t: "Round 5: Final Polish", d: "End-to-end walkthrough with 3 existing customers. Refined \"No, I want to update\" button prominence, added benefit descriptions to add-on cards, improved error states for edge cases." },
+      { n: 1, t: "Internal stakeholders", d: "PM, analysts, engineering on wireframes. Surfaced the IA problem: scrollable multi-action screens overwhelmed everyone. I pivoted to one screen, one action." },
+      { n: 2, t: "Sales executives", d: "Six executives on mid-fi. Nobody could find the way back to edit a completed step. Added persistent edit icons + visible step-back." },
+      { n: 3, t: "Customer DIY", d: "Five first-time borrowers on high-fi. Progress tracker confused them. Added dual progress (percentage + step count). Vehicle icons were the most-praised piece." },
     ],
     outcome:
-      "Through 5 iterations with 20+ participants, the design evolved from a scrollable, multi-action layout to a focused, single-screen journey that both agents and customers could navigate confidently. The final Figma prototype was signed off by all stakeholders before engineering handoff.",
+      "The design moved from a scrollable, multi-action layout to a focused, single-screen journey both agents and first-time borrowers could finish alone.",
   },
 
   // --- 09 IMPACT ---
   impact: {
-    headline:
-      "From paper to digital: measurable outcomes across speed, adoption, and consistency",
+    headline: "From paper to digital",
     metrics: [
-      { v: "60%", l: "Faster Processing", s: "Vs. paper-based flow" },
-      { v: "6", l: "Products Unified", s: "Single design system" },
-      { v: "100+", l: "Components", s: "Reusable library" },
-      { v: "40%", l: "Less Training", s: "Intuitive agent UI" },
+      { v: "60%", l: "Faster processing", s: "vs. paper flow" },
+      { v: "6", l: "Products unified", s: "one design system" },
+      { v: "100+", l: "Components", s: "reusable library" },
+      { v: "40%", l: "Less training", s: "for agents" },
     ],
     wentWell: [
-      "No-scroll, single-screen approach eliminated form fatigue, and both agents and customers praised it",
-      "Progressive disclosure reduced perceived complexity, so the 11-step journey \"didn't feel long\"",
-      "Dual progress system kept users oriented without anxiety",
-      "Building the design system early enabled rapid assembly of subsequent product journeys",
-      "Close engineering collaboration during wireframing caught feasibility issues early",
+      "One screen, one action killed form fatigue for both agents and customers",
+      "Progressive disclosure made the 11-step journey \"not feel long\"",
+      "Dual progress kept everyone oriented without anxiety",
+      "The early design system let later product journeys assemble in days",
     ],
     differently: [
-      "Would involve sales executives earlier. Their deep insight only surfaced in Round 2 testing",
-      "Should have tested on low-end Android devices sooner, since performance gaps appeared late",
-      "Would design comprehensive error states from the start, because edge cases needed last-minute attention",
-      "More A/B testing on add-on card designs before settling on the final pattern",
+      "Bring sales executives in on round one. Their deepest insight only surfaced in round two",
+      "Test on low-end Android devices sooner. Performance gaps appeared late",
+      "Design error states from the start, not against edge cases at the end",
     ],
   },
 
   // --- 10 SCREEN GALLERY ---
   gallery: {
-    headline: "All screens at a glance",
+    headline: "Ten of the 46 screens",
     intro:
-      "Showing 10 of the 46 screens designed for the Two-Wheeler journey. Open the full set below.",
+      "A grab-bag from across the two-wheeler journey, from login to disbursement.",
     representative: [
       { src: F("005-login-authentication.png"), title: "Login" },
       { src: F("006-applications-dashboard.png"), title: "Applications Dashboard" },

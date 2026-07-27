@@ -9,12 +9,17 @@ import { readFileSync, writeFileSync, readdirSync, statSync, copyFileSync, rmSyn
 import { fileURLToPath } from "node:url";
 import { dirname, join, relative } from "node:path";
 import { tmpdir } from "node:os";
-import { loadPassword, deriveKey, encryptBytes, isEncrypted } from "./vaultCrypto.mjs";
+import { loadPassword, deriveKey, encryptBytes, isEncrypted, isDormant } from "./vaultCrypto.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const BUILD = join(ROOT, "build");
 const LOCKED_DIRS = ["finvista", "aurora", "joat"];
 const PLAIN_ALLOWLIST = new Set(["cover.jpg"]);
+
+if (isDormant()) {
+  console.log("VAULT DORMANT — skipping screenshot encryption + leak check.");
+  process.exit(0);
+}
 
 const key = await deriveKey(loadPassword());
 

@@ -13,6 +13,8 @@ import ProjectNav from "../components/ProjectNav";
 import { Container } from "../components/Grid";
 
 const FOCUS = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F5379B] focus-visible:ring-offset-2 focus-visible:ring-offset-[#100210]";
+// A shipped screen that anchors the Outcome section with a real visual.
+const A_HERO = "/aurora/04_RBJ_Properties_Weekly.jpg";
 
 const SectionLabel = ({ num, name }) => (
   <div className="flex items-center gap-4 mb-6">
@@ -235,34 +237,6 @@ export default function AuroraCaseStudy() {
           </ul>
         </Reveal>
 
-        <div className="mt-8 grid md:grid-cols-2 gap-5">
-          {au.problem.sideHypotheses.map((h, i) => (
-            <Reveal key={h.t} delay={(i % 2) * 0.06} className="dark-card rounded-3xl p-7">
-              <h3 className="font-display text-xl font-black mb-3">{h.t}</h3>
-              <p className="text-base leading-relaxed">{h.d}</p>
-            </Reveal>
-          ))}
-        </div>
-
-        <div className="mt-12 grid md:grid-cols-2 gap-5">
-          <Reveal className="dark-card rounded-3xl p-7">
-            <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">key assumptions</p>
-            <ul className="space-y-3">
-              {au.problem.assumptions.map((a) => (
-                <li key={a} className="flex items-start gap-3 text-sm"><Check className="flex-shrink-0 mt-1 text-[#F5379B]" size={14} />{a}</li>
-              ))}
-            </ul>
-          </Reveal>
-          <Reveal delay={0.06} className="dark-card rounded-3xl p-7">
-            <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">identified risks</p>
-            <ul className="space-y-3">
-              {au.problem.risks.map((r) => (
-                <li key={r} className="flex items-start gap-3 text-sm"><AlertTriangle className="flex-shrink-0 mt-1 text-[#075EFD]" size={14} />{r}</li>
-              ))}
-            </ul>
-          </Reveal>
-        </div>
-
         <Reveal delay={0.06} className="mt-10 rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
           <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3 text-[#C71E73]">★ key insight</p>
           <p className="font-display text-xl md:text-2xl font-bold leading-snug max-w-6xl text-black">{au.problem.keyInsight}</p>
@@ -305,7 +279,7 @@ export default function AuroraCaseStudy() {
         </Reveal>
 
         <Reveal>
-          <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">stakeholder interviews</h3>
+          <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">voices from the team</h3>
         </Reveal>
         <div className="grid md:grid-cols-3 gap-5">
           {au.research.stakeholders.map((s, i) => (
@@ -317,30 +291,6 @@ export default function AuroraCaseStudy() {
             </Reveal>
           ))}
         </div>
-
-        <Reveal>
-          <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">competitive analysis</h3>
-        </Reveal>
-        <Reveal delay={0.06} className="rounded-3xl dark-card overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-white/10">
-                {au.research.competitiveTable.headers.map((h, i) => (
-                  <th key={i} className={`p-4 font-mono uppercase text-[10px] tracking-widest ${i === 0 ? "text-left" : "text-center"}`}>{h}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {au.research.competitiveTable.rows.map((row, i) => (
-                <tr key={i} className="border-b border-white/5">
-                  {row.map((cell, j) => (
-                    <td key={j} className={`p-4 ${j === 0 ? "font-medium" : "text-center font-display font-bold"} ${cell === "Yes" ? "text-[#F5379B]" : cell === "No" ? "text-[#5B9BFF]" : cell === "Partial" ? "text-[#D97706]" : ""}`}>{cell}</td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </Reveal>
 
         <Reveal>
           <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">research findings</h3>
@@ -501,56 +451,57 @@ export default function AuroraCaseStudy() {
         </Reveal>
       </SectionWrap>
 
-      {/* 07 ITERATIVE TESTING */}
-      <SectionWrap data-testid="section-validation">
-        <SectionLabel num="07" name="Iterative Testing" />
+      {/* 07 OUTCOME — merges validation + reflection into one section */}
+      <SectionWrap data-testid="section-outcome">
+        <SectionLabel num="07" name="Outcome" />
         <Reveal>
-          <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">
-            {au.validation.headline}
-          </h2>
+          <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{au.impact.headline}</h2>
         </Reveal>
-        <Reveal delay={0.08}>
-          <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{au.validation.intro}</p>
+        <Reveal delay={0.06}>
+          <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{au.validation.intro}</p>
         </Reveal>
 
-        <ol className="mt-12 relative border-l-2 border-white/15 ml-2 space-y-8">
-          {au.validation.rounds.map((r, i) => (
-            <Reveal key={r.n} as="li" delay={i * 0.05} className="pl-8 relative">
-              <span className="absolute -left-[14px] top-1 w-7 h-7 rounded-full bg-[#075EFD] text-white flex items-center justify-center font-display font-black text-sm border-4 border-[#100210]">
-                {r.n}
-              </span>
-              <h3 className="font-display text-xl font-black ">{r.t}</h3>
-              <p className="mt-2 text-base leading-relaxed max-w-5xl">{r.d}</p>
-            </Reveal>
-          ))}
-        </ol>
-
-        <Reveal delay={0.06} className="mt-12 rounded-3xl dark-card text-white p-8 md:p-10">
-          <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-white mb-3">outcome</p>
+        {/* Headline outcome + a real screen tying it to visible product. */}
+        <Reveal delay={0.06} className="rounded-3xl dark-card text-white p-8 md:p-10 mb-10">
+          <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-white mb-3">what changed</p>
           <p className="font-display text-xl md:text-2xl leading-snug max-w-6xl">{au.validation.outcome}</p>
         </Reveal>
-      </SectionWrap>
 
-      {/* 08 REFLECTION */}
-      <SectionWrap data-testid="section-impact">
-        <SectionLabel num="08" name="Reflection" />
-        <Reveal>
-          <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-10">{au.impact.headline}</h2>
+        <Reveal delay={0.06} as="figure" className="mb-12 rounded-3xl dark-card overflow-hidden">
+          <Zoomable src={A_HERO} alt="Aurora recurring campaign, weekly view" caption="Recurring setup, weekly view: schedule, content, and rules on one page.">
+            <VaultImage src={A_HERO} alt="Aurora recurring campaign, weekly view" loading="lazy" className="w-full h-auto bg-white" />
+          </Zoomable>
         </Reveal>
 
-        <div className="grid md:grid-cols-2 gap-5">
-          <Reveal className="dark-card rounded-3xl p-7">
-            <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">what went well</p>
-            <ul className="space-y-3">
-              {au.impact.wentWell.map((x) => (<li key={x} className="flex items-start gap-3 text-base"><Check className="flex-shrink-0 mt-1 text-[#F5379B]" size={16} /><span>{x}</span></li>))}
-            </ul>
+        {/* Rounds + reflection side by side, tightened. */}
+        <div className="grid lg:grid-cols-2 gap-8">
+          <Reveal>
+            <h3 className="font-mono text-xs uppercase tracking-widest text-[#F5379B] mb-5">five rounds of testing</h3>
+            <ol className="relative border-l-2 border-white/15 ml-2 space-y-6">
+              {au.validation.rounds.map((r, i) => (
+                <li key={r.n} className="pl-6 relative">
+                  <span className="absolute -left-[14px] top-1 w-7 h-7 rounded-full bg-[#075EFD] text-white flex items-center justify-center font-display font-black text-sm border-4 border-[#100210]">{r.n}</span>
+                  <h4 className="font-display text-base font-black">{r.t}</h4>
+                  <p className="mt-1.5 text-sm leading-relaxed">{r.d}</p>
+                </li>
+              ))}
+            </ol>
           </Reveal>
-          <Reveal delay={0.06} className="dark-card rounded-3xl p-7">
-            <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">what I&apos;d do differently</p>
-            <ul className="space-y-3">
-              {au.impact.differently.map((x) => (<li key={x} className="flex items-start gap-3 text-base"><Star className="flex-shrink-0 mt-1 text-[#075EFD]" size={16} /><span>{x}</span></li>))}
-            </ul>
-          </Reveal>
+
+          <div className="space-y-5">
+            <Reveal className="dark-card rounded-3xl p-6">
+              <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-3">what went well</p>
+              <ul className="space-y-2.5">
+                {au.impact.wentWell.map((x) => (<li key={x} className="flex items-start gap-3 text-sm"><Check className="flex-shrink-0 mt-0.5 text-[#F5379B]" size={14} /><span>{x}</span></li>))}
+              </ul>
+            </Reveal>
+            <Reveal delay={0.06} className="dark-card rounded-3xl p-6">
+              <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-3">what I&apos;d do differently</p>
+              <ul className="space-y-2.5">
+                {au.impact.differently.map((x) => (<li key={x} className="flex items-start gap-3 text-sm"><Star className="flex-shrink-0 mt-0.5 text-[#075EFD]" size={14} /><span>{x}</span></li>))}
+              </ul>
+            </Reveal>
+          </div>
         </div>
       </SectionWrap>
 

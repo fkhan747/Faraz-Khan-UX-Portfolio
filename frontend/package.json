@@ -67,7 +67,7 @@
     "prebuild": "node scripts/encrypt-case-data.mjs",
     "build": "craco build",
     "postinstall": "patch-package",
-    "postbuild": "(react-snap || true) && node scripts/encrypt-build.mjs",
+    "postbuild": "(react-snap || true) && cp build/index.html build/404.html && node scripts/encrypt-build.mjs",
     "deploy": "npm run build && npx --yes gh-pages@6 -d build --dotfiles",
     "test": "craco test"
   },
@@ -96,7 +96,8 @@
       "/case/meridian",
       "/case/slate",
       "/case/almanac",
-      "/case/crux"
+      "/case/crux",
+      "/agentic-workflow"
     ],
     "crawl": false,
     "inlineCss": false,

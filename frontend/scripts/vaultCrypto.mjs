@@ -10,13 +10,24 @@ import { dirname, join } from "node:path";
 export const MAGIC = Buffer.from("CSE1");
 const SALT = "khanfaraz.in/case-vault/v1";
 
+function readEnvLocal(key) {
+  const envLocal = join(dirname(fileURLToPath(import.meta.url)), "..", ".env.local");
+  if (!existsSync(envLocal)) return null;
+  const m = readFileSync(envLocal, "utf8").match(new RegExp(`^${key}=(.+)$`, "m"));
+  return m ? m[1].trim() : null;
+}
+
+// Vault is dormant when REACT_APP_VAULT_DORMANT=1 (env or .env.local). Mirrors
+// the flag src/lib/vault.js reads on the client side.
+export function isDormant() {
+  const v = process.env.REACT_APP_VAULT_DORMANT ?? readEnvLocal("REACT_APP_VAULT_DORMANT");
+  return v === "1";
+}
+
 export function loadPassword() {
   if (process.env.CS_PW) return process.env.CS_PW.trim();
-  const envLocal = join(dirname(fileURLToPath(import.meta.url)), "..", ".env.local");
-  if (existsSync(envLocal)) {
-    const m = readFileSync(envLocal, "utf8").match(/^CS_PW=(.+)$/m);
-    if (m) return m[1].trim();
-  }
+  const v = readEnvLocal("CS_PW");
+  if (v) return v;
   throw new Error(
     "Vault password not found. Set CS_PW in the environment or in frontend/.env.local (CS_PW=...)."
   );

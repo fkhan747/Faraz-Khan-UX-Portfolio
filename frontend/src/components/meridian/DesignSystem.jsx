@@ -21,10 +21,10 @@ const TINTS = [
   { name: "Light gold", hex: "#FFFAE6" }, { name: "Light gray", hex: "#F2F2F2" },
 ];
 const TYPE_ROWS = [
-  { tag: "Display", node: <span style={{ ...PLEX, fontWeight: 700, fontSize: "28px", color: "#F4F3FA" }}>10,670</span> },
+  { tag: "Display", node: <span style={{ ...PLEX, fontWeight: 700, fontSize: "28px", color: "#F4F3FA" }}>6,290</span> },
   { tag: "Heading", node: <span style={{ ...PLEX, fontWeight: 600, fontSize: "17px", color: "#F4F3FA" }}>Applications by school</span> },
   { tag: "Body", node: <span style={{ ...PLEX, fontWeight: 400, fontSize: "14px", color: "#D7D4E2" }}>Segmented by level, every screen</span> },
-  { tag: "Numbers", node: <span style={{ ...PLEX, fontWeight: 700, fontSize: "15px", color: "#F4F3FA", fontVariantNumeric: "tabular-nums" }}>14,170 · 21% yield · $52M</span> },
+  { tag: "Numbers", node: <span style={{ ...PLEX, fontWeight: 700, fontSize: "15px", color: "#F4F3FA", fontVariantNumeric: "tabular-nums" }}>8,410 · 21% yield · $52M</span> },
 ];
 
 const FoundationsCard = () => (
@@ -90,7 +90,7 @@ const HBar = ({ w, c = "#4896CF", l, v }) => (
 
 const KIT = [
   { k: "KPI tile", node: (
-    <div><div className="text-[22px] font-bold leading-none" style={{ color: INK }}>14,170</div>
+    <div><div className="text-[22px] font-bold leading-none" style={{ color: INK }}>8,410</div>
       <div className="text-[10px] font-semibold mt-1" style={{ color: "#21BA45" }}>▲ 3.1% vs last cycle</div></div>
   )},
   { k: "Sorted bars", node: (
