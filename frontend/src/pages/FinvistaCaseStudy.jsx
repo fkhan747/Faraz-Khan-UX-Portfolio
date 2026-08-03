@@ -167,7 +167,7 @@ export default function FinvistaCaseStudy() {
             <Reveal
               key={p.name}
               delay={(i % 2) * 0.06}
-              className={`rounded-3xl p-6 ${i === 0 ? "bg-white border-2 border-[#F5379B]" : "dark-card text-[#F4F3FA]"}`}
+              className={`rounded-3xl p-6 ${i === 0 ? "bg-white" : "dark-card text-[#F4F3FA]"}`}
             >
               {p.badge && (
                 <span className="inline-block mb-3 text-[10px] font-mono uppercase tracking-widest bg-[#F5379B] text-black px-3 py-1 rounded-full">
@@ -201,7 +201,7 @@ export default function FinvistaCaseStudy() {
         </Reveal>
         <Reveal as="p" delay={0.08} className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA]">{fv.problem.intro}</Reveal>
 
-        <Reveal delay={0.06} className="mt-10 rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
+        <Reveal delay={0.06} className="mt-10 rounded-3xl bg-white p-8 md:p-10">
           <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3 text-[#F5379B]">core challenge</p>
           <p className="font-display text-xl md:text-2xl font-bold leading-snug max-w-6xl text-black">
             {fv.problem.coreChallenge}
@@ -494,7 +494,7 @@ export default function FinvistaCaseStudy() {
         <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-8">key design decisions</Reveal>
         <div className="grid md:grid-cols-2 gap-5">
           {fv.design.keyDecisions.map((k, i) => (
-            <Reveal key={k.t} delay={(i % 2) * 0.06} className={`rounded-3xl p-7 ${i % 2 === 0 ? "dark-card" : "bg-white border-2 border-[#F5379B]"}`}>
+            <Reveal key={k.t} delay={(i % 2) * 0.06} className={`rounded-3xl p-7 ${i % 2 === 0 ? "dark-card" : "bg-white"}`}>
               <h3 className={`font-display text-xl font-black mb-3 ${i % 2 === 0 ? "" : "text-[#F5379B]"}`}>{k.t}</h3>
               <p className={`text-base leading-relaxed ${i % 2 === 0 ? "" : "text-black"}`}>{k.d}</p>
             </Reveal>
@@ -516,7 +516,7 @@ export default function FinvistaCaseStudy() {
           <FinvistaDesignSystem />
         </Reveal>
 
-        <Reveal delay={0.06} className="mt-10 rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
+        <Reveal delay={0.06} className="mt-10 rounded-3xl bg-white p-8 md:p-10">
           <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-3">system impact</p>
           <p className="font-display text-xl md:text-2xl leading-snug max-w-6xl text-black">{fv.designSystem.systemImpact}</p>
         </Reveal>

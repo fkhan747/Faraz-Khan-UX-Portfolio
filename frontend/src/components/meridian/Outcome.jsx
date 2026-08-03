@@ -24,7 +24,7 @@ const OUTLOOK = [
   { t: "AI becomes how you ask", d: "Not a bolt-on. You ask in plain language and the right panel assembles itself, grounded in numbers that mean what they say." },
   { t: "Admissions data keeps getting closer to live", d: "The data keeps moving closer to real time, so summer melt is something you watch as it happens, not something you find out about later." },
   { t: "Segmentation is the whole game", d: "With the enrollment cliff coming, multi-year trends plus geo and policy segmentation is how you see it early." },
-  { t: "UX maturity in the sector", d: "Built for the provost and dean, not just data teams. Treat 'understood in five seconds' as a requirement." },
+  { t: "UX maturity in the sector", d: "Built for university leadership, not just data teams. Treat 'understood in five seconds' as a requirement." },
 ];
 
 const Group = ({ eyebrow, items, icon: Icon, iconColor }) => (
@@ -64,12 +64,12 @@ export default function MeridianOutcome() {
         </div>
       </div>
 
-      <Group eyebrow="What changed" items={CHANGED} icon={Check} iconColor="#F5379B" />
+      <Group eyebrow="What changed" items={CHANGED} icon={Check} iconColor="var(--acc, #F5379B)" />
       <Group eyebrow="What I would do differently" items={DIFFERENTLY} icon={Star} iconColor="#075EFD" />
       <Group eyebrow="Forward outlook, the next two to three years" items={OUTLOOK} icon={ArrowUpRight} iconColor="#075EFD" />
 
       {/* white accent callout, the honest close */}
-      <div className="rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
+      <div className="rounded-3xl bg-white p-8 md:p-10">
         <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#C71E73] mb-3">The honest claim</p>
         <p className="font-display text-xl md:text-2xl font-bold leading-snug text-black max-w-4xl">
           The redesign makes the data clearer, faster to read, properly segmented, and trusted by the people who own it. The AI and the harder behavioral outcomes are designed for, not yet proven. Both are true at once.

@@ -85,13 +85,10 @@ export default function Contact() {
           className="ab-card ab-flat ab-c4 relative overflow-hidden px-6 py-6 md:px-8 md:py-7 flex flex-col md:flex-row md:items-center md:justify-between gap-5"
           data-testid="available-card"
         >
-          <div className="absolute -top-16 -right-10 w-72 h-72 rounded-full bg-[#7B2FBE] blur-3xl opacity-30 pointer-events-none" aria-hidden="true" />
-          <div className="absolute -bottom-20 -left-10 w-72 h-72 rounded-full bg-[#F0186C] blur-3xl opacity-25 pointer-events-none" aria-hidden="true" />
+          <div className="absolute -top-16 -right-10 w-72 h-72 rounded-full bg-[#7B2FBE] blur-3xl opacity-[0.10] pointer-events-none" aria-hidden="true" />
+          <div className="absolute -bottom-20 -left-10 w-72 h-72 rounded-full bg-[#F0186C] blur-3xl opacity-[0.09] pointer-events-none" aria-hidden="true" />
           <p className="relative text-lg md:text-xl font-bold leading-tight text-[#F4F3FA]">Open to full-time &amp; remote opportunities.</p>
           <div className="relative flex flex-wrap gap-4 md:flex-shrink-0">
-            <BookCallButton data-testid="schedule-call" className="ab-btn">
-              <Calendar size={16} /> Schedule a Call
-            </BookCallButton>
             <a
               href={RESUME_PATH}
               download="Faraz_Khan_Resume.pdf"
@@ -100,6 +97,9 @@ export default function Contact() {
             >
               Download Resume <Download size={16} />
             </a>
+            <BookCallButton data-testid="schedule-call" className="ab-btn">
+              <Calendar size={16} /> Schedule a Call
+            </BookCallButton>
           </div>
         </div>
 
@@ -176,7 +176,15 @@ export default function Contact() {
             <details key={i} className="ab-card ab-flat p-6 group" data-testid={`faq-${i}`}>
               <summary className="font-display text-xl font-bold cursor-pointer flex items-center justify-between list-none">
                 <span>{f.q}</span>
-                <span className="text-[#F0186C] transition-transform group-open:rotate-45">+</span>
+                {/* A ring, not a bare glyph: the plus is the affordance that says this row
+                    opens, so it needs to read as a control. White for the same reason
+                    every other icon on a dark surface is white. */}
+                <span
+                  aria-hidden="true"
+                  className="flex-shrink-0 grid place-items-center h-8 w-8 rounded-full border border-white/30 text-white text-lg leading-none transition-transform duration-200 group-open:rotate-45"
+                >
+                  +
+                </span>
               </summary>
               <p className="mt-3 text-base leading-relaxed text-[#F4F3FA]">{f.a}</p>
             </details>

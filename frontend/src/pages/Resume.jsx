@@ -50,7 +50,7 @@ const EXPERIENCE = [
 ];
 
 const EARLIER =
-  "Earlier roles: Sr. UX/UI Designer at Jack of All Threads, and Graphic Designer at Jainawin Retails & Prime Advertising (2011-2016).";
+  "Earlier roles: Sr. UX/UI Designer at Threadfold, and Graphic Designer at Jainawin Retails & Prime Advertising (2011-2016).";
 
 const COMPETENCIES = [
   "UX Strategy & Leadership",

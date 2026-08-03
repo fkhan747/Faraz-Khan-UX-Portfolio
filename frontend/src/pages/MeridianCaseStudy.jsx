@@ -30,6 +30,74 @@ const EASE = [0.23, 1, 0.32, 1];
 const B = "/meridian-mocks/blocks/";
 const FOCUS = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F5379B] focus-visible:ring-offset-2 focus-visible:ring-offset-[#100210]";
 
+/* ── LIGHT THEME, SCOPED TO THIS PAGE ONLY ─────────────────────────────────
+   Pilot for the light-mode case-study treatment. Everything is namespaced
+   under .cs-light so no other page, and no global token, is affected. The
+   photographic hero stays dark on purpose: dark masthead into a light reading
+   body. Attribute-substring selectors are used to catch Tailwind's arbitrary
+   colour classes without having to escape them. */
+const LIGHT_PAPER = "#F5F5F7";
+const LIGHT_SURFACE = "#FFFFFF";
+const LIGHT_LINE = "#E3E1E8";
+const LIGHT_INK = "#16121C";
+const LIGHT_MUTED = "#5C5668";
+const CS_LIGHT_CSS = `
+  .cs-light{ background:${LIGHT_PAPER}; color:${LIGHT_INK}; }
+
+  /* Panels flip from the dark surface to white with a hairline. The grain and
+     top-sheen pseudo-elements are dark-surface effects, so they switch off. */
+  .cs-light .dark-card{ background-color:${LIGHT_SURFACE}; border:1px solid ${LIGHT_LINE}; }
+  .cs-light .dark-card::before, .cs-light .dark-card::after{ display:none; }
+
+  /* Body copy + headings. Deliberately no blanket "p { color: inherit }" here:
+     that outranks Tailwind's own colour classes and silently flattens accent
+     text (it turned the hero's magenta labels to ink). Target the classes. */
+  .cs-light [class*="text-[#F4F3FA]"]{ color:${LIGHT_INK}; }
+  .cs-light [class*="text-[#F7F5FF]"]{ color:${LIGHT_INK}; }
+  .cs-light [class*="text-[#EDEBF5]"]{ color:${LIGHT_INK}; }
+  .cs-light [class*="text-[#A29CB4]"]{ color:${LIGHT_MUTED}; }
+  .cs-light [class*="text-white"]{ color:${LIGHT_MUTED}; }
+  .cs-light h2, .cs-light h3, .cs-light h4{ color:${LIGHT_INK}; }
+
+  /* Anything sitting on its own painted fill (the Before / After pills, the
+     coloured nodes in the IA diagram) keeps white text: its contrast comes
+     from that fill, not from the page. Covers the element itself and anything
+     nested inside it. */
+  .cs-light [class*="text-white"][style*="background"],
+  .cs-light [style*="background"] [class*="text-white"]{ color:#FFFFFF; }
+  .cs-light [style*="background"] [class*="text-[#F4F3FA]"],
+  .cs-light [style*="background"] [class*="text-[#EDEBF5]"]{ color:#F4F3FA; }
+
+  /* Hairlines that were white-on-dark become ink-on-paper */
+  .cs-light [class*="border-white"]{ border-color:${LIGHT_LINE}; }
+  .cs-light [class*="divide-white"] > * + *{ border-color:${LIGHT_LINE}; }
+  .cs-light [class*="bg-white/5"]{ background-color:rgba(22,18,28,0.05); }
+
+  /* The white accent callout would vanish on paper, so it inverts to ink. */
+  .cs-light .rounded-3xl.bg-white{ background:${LIGHT_INK}; }
+  .cs-light .rounded-3xl.bg-white p{ color:#F4F3FA; }
+  .cs-light .rounded-3xl.bg-white [class*="text-black"]{ color:#FFFFFF; }
+  .cs-light .rounded-3xl.bg-white [class*="text-[#C71E73]"]{ color:#FF6FB0; }
+
+  /* Product screenshots sit on white already; give them a frame so they read
+     as artefacts rather than bleeding into the page. */
+  .cs-light figure img, .cs-light .shot img{ border-radius:8px; }
+
+  /* The hero stays a dark photographic masthead: dark head, light reading
+     body. Every light-mode rule above is re-reverted inside it, at higher
+     specificity, so no glass panel or chip loses its contrast. */
+  .cs-light > header{ background:#100210; }
+  .cs-light > header [class*="text-[#F4F3FA]"],
+  .cs-light > header [class*="text-[#F7F5FF]"]{ color:#F4F3FA; }
+  .cs-light > header [class*="text-[#A29CB4]"]{ color:#A29CB4; }
+  .cs-light > header [class*="text-white"]{ color:rgba(255,255,255,0.72); }
+  .cs-light > header h1, .cs-light > header h2,
+  .cs-light > header h3, .cs-light > header h4{ color:#F7F5FF; }
+  .cs-light > header [class*="border-white"]{ border-color:rgba(255,255,255,0.14); }
+  .cs-light > header [class*="bg-white/5"]{ background-color:rgba(255,255,255,0.05); }
+  .cs-light > header .dark-card{ background-color:rgba(16,2,16,0.55); border-color:rgba(255,255,255,0.14); }
+`;
+
 /* light product before/after exhibit (the real dashboards), framed on the dark page */
 function IframeBlock({ src, h }) {
   return (
@@ -43,9 +111,10 @@ function IframeBlock({ src, h }) {
 /* real legacy montage, a "before" screenshot framed in a dark card (FinVista pattern) */
 function LegacyMontage({ caption = "The four legacy dashboards, four offices, four visual languages, no shared layout" }) {
   const src = "/meridian/legacy/four-dashboards.png";
+  /* No "Before" pill: the caption already says these are the legacy
+     dashboards, and Faraz wants the badges gone across every case study. */
   return (
     <figure className="dark-card rounded-3xl overflow-hidden max-w-4xl relative">
-      <span className="absolute z-10 m-4 font-mono text-[10px] font-semibold uppercase tracking-[0.1em] px-3 py-1 rounded-full text-white" style={{ background: "#8C8C8C" }}>Before</span>
       <Zoomable src={src} alt="The four legacy dashboards" caption={caption} className="bg-white p-3 block">
         <img src={src} alt="The four legacy dashboards" width={580} height={328} loading="lazy" className="w-full h-auto block rounded-lg" />
       </Zoomable>
@@ -57,7 +126,9 @@ function LegacyMontage({ caption = "The four legacy dashboards, four offices, fo
 /* real redesigned screen, an "after" screenshot framed in a dark card (same FinVista pattern
    as LegacyMontage). These are the actual client-loved dashboards, so the light screenshot
    sits inside a bg-white panel, like every product shot on the site. */
-function RealScreen({ src, w, h, label, maxW = "100%", badge = "After" }) {
+/* `badge` defaults to none. It survives only for genuine labels like "AI";
+   the old Before / After pills are gone site-wide at Faraz's request. */
+function RealScreen({ src, w, h, label, maxW = "100%", badge = null }) {
   return (
     <figure className="dark-card rounded-3xl overflow-hidden relative" style={{ width: "100%", maxWidth: maxW }}>
       {badge && (
@@ -75,7 +146,7 @@ function RealScreen({ src, w, h, label, maxW = "100%", badge = "After" }) {
    dark-card frame. Replaces the old iframe approach so the image has its
    natural height and the floating Ask AI button does not bleed outside
    the frame. Width 1472 at 2x DPR; height auto. */
-function MeridianShot({ name, label, maxW = "100%", badge = "After" }) {
+function MeridianShot({ name, label, maxW = "100%", badge = null }) {
   const src = `/meridian-mocks/real/png/${name}.png`;
   return (
     <figure className="dark-card rounded-3xl overflow-hidden relative" style={{ width: "100%", maxWidth: maxW }}>
@@ -216,7 +287,7 @@ function Validation({ items = [], outcomes = [] }) {
 /* white accent callout, used for the one key statement per section (matches FinVista/Aurora) */
 function WhiteCallout({ label, children }) {
   return (
-    <div className="mb-9 rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
+    <div className="mb-9 rounded-3xl bg-white p-8 md:p-10">
       <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#C71E73] mb-3">{label}</p>
       <p className="font-display text-xl md:text-2xl font-bold leading-snug text-black">{children}</p>
     </div>
@@ -355,7 +426,8 @@ export default function MeridianCaseStudy({ data = meridian }) {
   const m = data;
   const sections = getSections(m.body);
   return (
-    <article data-testid="meridian-case-study" className="pb-24">
+    <article data-testid="meridian-case-study" className="pb-24 cs-light">
+      <style>{CS_LIGHT_CSS}</style>
       <Seo title={m.title} description={m.subtitle} />
       <CaseStudyNav />
 
@@ -444,7 +516,7 @@ export default function MeridianCaseStudy({ data = meridian }) {
                   </div>
                   {rg.synthesis && (
                     <Reveal delay={0.06} className="mt-8">
-                      <div className="rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
+                      <div className="rounded-3xl bg-white p-8 md:p-10">
                         <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#C71E73] mb-3">{rg.synthesis.title}</p>
                         {rg.synthesis.body.map((b, j) => <p key={j} className="font-display text-xl md:text-2xl font-bold leading-snug text-black case-keep">{inline(b.v)}</p>)}
                       </div>

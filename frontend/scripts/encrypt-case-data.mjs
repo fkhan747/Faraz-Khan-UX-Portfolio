@@ -13,7 +13,7 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SOURCES = {
   finvista: { file: "src/data/finvistaCase.js", exportName: "finvista" },
   aurora: { file: "src/data/auroraCase.js", exportName: "aurora" },
-  joat: { file: "src/data/joatCase.js", exportName: "joat" },
+  threadfold: { file: "src/data/threadfoldCase.js", exportName: "threadfold" },
 };
 
 const DORMANT = isDormant();

@@ -60,7 +60,7 @@ export default function Footer() {
               <p className="mt-2 text-sm text-[#A29CB4]">Senior UX Lead · {PROFILE.city}</p>
               <nav className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold">
                 <Link to="/projects" className="text-[#A29CB4] hover:text-[#F4F3FA] transition-colors">My Work</Link>
-                <Link to="/about" className="text-[#A29CB4] hover:text-[#F4F3FA] transition-colors">This Is Me</Link>
+                <Link to="/about" className="text-[#A29CB4] hover:text-[#F4F3FA] transition-colors">About Me</Link>
                 <Link to="/contact" className="text-[#A29CB4] hover:text-[#F4F3FA] transition-colors">Get in Touch</Link>
               </nav>
             </div>

@@ -13,7 +13,7 @@ const AFTER = path.join(STD, 'after');
 const LABELS = {
   landing: 'Landing', projects: 'Work / Projects', about: 'About', contact: 'Contact',
   'case-finvista': 'Case · FinVista', 'case-aurora': 'Case · Aurora',
-  'case-meridian': 'Case · Meridian', 'case-joat': 'Case · Jack of All Threads',
+  'case-meridian': 'Case · Meridian', 'case-threadfold': 'Case · Threadfold',
   'case-slate': 'Case · Slate', 'agentic-workflow': 'Agentic Audit demo',
 };
 const NOTES = {
@@ -24,11 +24,11 @@ const NOTES = {
   'case-finvista': 'Wordmark FinVista casing; NDA disclosure added; jargon softened (auto-layout handoff clause, out-of-scope list).',
   'case-aurora': 'Engineering jargon removed across the page (AngularJS migration, Azure DevOps, streaming/backend/codebase); NDA disclosure; goal-number contrast fixed.',
   'case-meridian': 'Leaked authoring note removed; jargon softened (data contract, CRM/SIS pipeline, semantic layer); principle 01 reconciled with the Overview KPI band.',
-  'case-joat': 'Minor jargon fix (profit "calc" to "figure").',
+  'case-threadfold': 'Minor jargon fix (profit "calc" to "figure").',
   'case-slate': 'Prototype rebranded RecruitOS to Slate; principle 02/04 eyebrows now legible; prototype hint corrected; jargon softened.',
   'agentic-workflow': 'No content change (reference).',
 };
-const ORDER = ['landing', 'projects', 'about', 'contact', 'case-finvista', 'case-aurora', 'case-meridian', 'case-joat', 'case-slate', 'agentic-workflow'];
+const ORDER = ['landing', 'projects', 'about', 'contact', 'case-finvista', 'case-aurora', 'case-meridian', 'case-threadfold', 'case-slate', 'agentic-workflow'];
 
 const uri = (p) => 'data:image/jpeg;base64,' + fs.readFileSync(p).toString('base64');
 const shots = (d) => (fs.existsSync(d) ? fs.readdirSync(d).filter((f) => /\.jpe?g$/i.test(f)).sort() : []);

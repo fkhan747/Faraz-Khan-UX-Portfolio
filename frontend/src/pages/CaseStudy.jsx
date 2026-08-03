@@ -31,7 +31,7 @@ export default function ComingSoonCase() {
       </section>
 
       <section className="px-6 md:px-10 lg:px-16">
-        <div className="rounded-3xl bg-white border-2 border-[#F5379B] p-10 md:p-16">
+        <div className="rounded-3xl bg-white p-10 md:p-16">
           <div className="flex items-center gap-3 mb-6 text-[#F5379B]">
             <Clock size={20} />
             <span className="font-mono text-xs uppercase tracking-[0.25em]">coming soon</span>

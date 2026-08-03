@@ -483,7 +483,7 @@ export default function AgenticWorkflow() {
               );
             })}
           </div>
-          <div className="mt-10 rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10 max-w-4xl">
+          <div className="mt-10 rounded-3xl bg-white p-8 md:p-10 max-w-4xl">
             <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#C71E73] mb-3">The point</p>
             <p className="font-display text-xl md:text-2xl font-bold leading-snug text-black">
               I don't just use AI tools. I design the systems that make a fleet of agents fast, honest, and accountable to a human, and then I ship the result.

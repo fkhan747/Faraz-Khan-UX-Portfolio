@@ -1,0 +1,668 @@
+<!doctype html><html><head><meta charset="utf-8"><title>FinVista M3 render source</title>
+<style>
+:root{
+  --pri:#16653C;--onpri:#FFFFFF;--prid:#0E4F2C;--pric:#A2F2C0;--onpric:#00210F;
+  --sec:#4E6355;--secc:#D1E8D5;--onsecc:#0C1F13;
+  --ter:#3B6470;--terc:#BEEAF8;--onterc:#001F28;
+  --sf:#F6FBF5;--sf1:#F1F7F0;--sf2:#EBF2EA;--sf3:#E5ECE4;
+  --on:#171D18;--onv:#414942;--out:#717971;--outv:#C1C9C0;
+  --errc:#FFDAD6;--onerrc:#410002;
+}
+
+/* ── SPACING SCALE ────────────────────────────────────────────────────
+   Material 3 is built on a 4dp grid. Every padding, margin and gap below
+   comes from this scale, so nothing is eyeballed. Section rhythm uses the
+   16 / 24 / 32 tiers. Borders, radii and stroke widths are NOT spacing and
+   sit outside the scale by design. */
+:root{
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px; --s6:24px;
+  --s8:32px; --s10:40px; --s12:48px;
+  --touch:48px;               /* Android minimum touch target */
+  --screen-pad:16px;          /* M3 mobile side margin */
+  --r-xs:4px; --r-s:8px; --r-m:12px; --r-l:16px; --r-xl:28px; --r-full:999px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#EFEDE7;font-family:Roboto,"Helvetica Neue",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased}
+
+.wrapx{max-width:1240px;margin:0 auto;padding:var(--s10) var(--s6) var(--s12)}
+.hd{padding:var(--s2) 0 var(--s8);border-bottom:1px solid #DCD7CC;margin-bottom:var(--s8)}
+.hd .eb{font:600 11.5px/1 ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:#6B665D}
+.hd h1{font:800 clamp(1.8rem,4vw,2.8rem)/1.05 system-ui,sans-serif;letter-spacing:-.03em;
+  margin:var(--s4) 0 var(--s3);color:#171512}
+.hd p{font:16px/1.6 system-ui,sans-serif;color:#4A4F49;max-width:62ch;margin:0}
+.hd .sw{display:flex;margin-top:var(--s5)}
+.hd .sw i{width:32px;height:32px;border-radius:var(--r-s);display:block;border:1px solid rgba(0,0,0,.12)}
+.grid{display:flex;flex-wrap:wrap;gap:var(--s8) var(--s6);align-items:flex-start}
+.cell{display:flex;flex-direction:column;align-items:center}
+.cell .cap{font:600 12px/1 ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:#6B665D}
+.cell .mode{font:11px/1 system-ui,sans-serif;color:#8A8F88}
+.frame{border-radius:var(--s6);padding:var(--s1);background:linear-gradient(#3A3E45,#22252A);
+  box-shadow:0 16px 32px rgba(0,0,0,.26)}
+.frame .screen{border-radius:20px}
+
+/* ── SCREEN SHELL ──────────────────────────────────────────────────── */
+.screen{width:360px;height:760px;background:var(--sf);color:var(--on);
+  display:flex;flex-direction:column;overflow:hidden;position:relative;
+  font-size:14px;line-height:1.45}
+.sb{height:var(--s6);display:flex;align-items:center;justify-content:space-between;
+  padding:0 var(--screen-pad);font-size:11px;font-weight:600;flex:0 0 auto}
+.body{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.pad{padding:0 var(--screen-pad)}
+.nav{height:var(--s6);display:grid;place-items:center;flex:0 0 auto}
+.nav i{width:96px;height:4px;border-radius:var(--r-full);background:currentColor;opacity:.32}
+.grow{flex:1}
+.ico{width:24px;height:24px;flex:0 0 auto;display:block;fill:currentColor}
+.ico-s{width:16px;height:16px}.ico-l{width:28px;height:28px}
+.tnum{font-variant-numeric:tabular-nums}
+
+/* ── COMPONENTS ────────────────────────────────────────────────────── */
+.appbar{padding:var(--s1) var(--s1) var(--s2);display:flex;align-items:center;
+  min-height:56px;background:var(--sf)}
+.appbar h1{font-size:20px;font-weight:400;flex:1;line-height:1.25;padding-left:var(--s1)}
+.appbar>h1:first-child{padding-left:var(--s3)}
+/* 48dp touch target, Android minimum. */
+.iconbtn{width:var(--touch);height:var(--touch);border-radius:var(--r-full);
+  display:grid;place-items:center;color:var(--onv);border:0;background:none;flex:0 0 auto}
+.chips{display:flex;padding:0 var(--screen-pad) var(--s3);overflow:hidden}
+/* M3 chips are a fixed 32dp tall. Vertical padding made them drift to 35dp on
+   screens with a taller label, so height is set outright and padding is
+   horizontal only. */
+.chip{border:1px solid var(--outv);border-radius:var(--r-s);padding:0 var(--s3);
+  font-size:12px;color:var(--onv);white-space:nowrap;display:flex;
+  align-items:center;height:32px;box-sizing:border-box}
+.chip.on{background:var(--secc);border-color:transparent;color:var(--onsecc);font-weight:500}
+.card{background:var(--sf1);border-radius:var(--r-m);padding:var(--s4);margin-bottom:var(--s3)}
+.card.hi{background:var(--sf2)}
+.av{width:var(--s10);height:var(--s10);border-radius:var(--r-full);background:var(--pric);
+  color:var(--onpric);display:grid;place-items:center;font-size:13px;font-weight:600;flex:0 0 auto}
+.btn{border:0;border-radius:var(--r-full);height:var(--touch);padding:0 var(--s6);
+  font-size:15px;font-weight:500;background:var(--pri);color:var(--onpri);
+  display:flex;align-items:center;justify-content:center;width:100%}
+.btn.tonal{background:var(--secc);color:var(--onsecc)}
+.btn.text{background:none;color:var(--pri)}
+.btn.out{background:none;color:var(--pri);border:1px solid var(--out)}
+.fab{position:absolute;right:var(--screen-pad);bottom:96px;height:56px;
+  border-radius:var(--r-l);background:var(--pric);color:var(--onpric);display:flex;
+  align-items:center;padding:0 var(--s5);font-size:15px;font-weight:500;
+  box-shadow:0 6px 12px rgba(0,0,0,.18)}
+.bnav{display:flex;background:var(--sf2);padding:var(--s2) 0 var(--s1);flex:0 0 auto}
+.bnav div{flex:1;display:flex;flex-direction:column;align-items:center;
+  font-size:11px;color:var(--onv);min-height:var(--touch);justify-content:center}
+.bnav div.on{color:var(--onsecc)}
+.bnav .pill{width:56px;height:32px;border-radius:var(--r-full);display:grid;place-items:center}
+.bnav div.on .pill{background:var(--secc)}
+.field{background:var(--sf2);border-radius:var(--r-xs) var(--r-xs) 0 0;
+  border-bottom:1px solid var(--out);padding:var(--s2) var(--s4);min-height:56px;
+  display:flex;flex-direction:column;justify-content:center}
+.field.foc{border-bottom:2px solid var(--pri);background:var(--sf3)}
+.field label{display:block;font-size:12px;color:var(--onv);margin-bottom:2px}
+.field.foc label{color:var(--pri)}
+.field .val{font-size:16px;color:var(--on)}
+/* M3 stacks filled text fields on a 16dp rhythm. */
+.fieldstack .field + .field{margin-top:var(--s4)}
+/* `* + *` cannot reach a bare text node, so an icon sitting directly beside
+   unwrapped label text needs its own margin. */
+.chip > .ico{margin-right:var(--s2)}
+.btn > .ico{margin-right:var(--s2)}
+.fab > .ico{margin-right:var(--s2)}
+.stepchip > .ico{margin-left:var(--s1)}
+.lp{height:4px;border-radius:var(--r-full);background:var(--sf3);overflow:hidden}
+.lp i{display:block;height:100%;background:var(--pri);border-radius:var(--r-full)}
+/* Dual progress: percentage AND step count, from the competitive analysis. */
+.dual{background:var(--sf1);border-radius:var(--r-m);padding:var(--s3) var(--s4) var(--s4)}
+.dual .top{display:flex;align-items:center;justify-content:space-between;}
+.dual .lbl{font-size:13px;font-weight:500;color:var(--pri)}
+.dual .pct{font-size:12px;color:var(--onv)}
+.dual .stepchip{display:inline-flex;align-items:center;background:var(--secc);
+  color:var(--onsecc);border-radius:var(--r-s);padding:var(--s1) var(--s2);
+  font-size:12px;font-weight:500;min-height:28px}
+.hero{background:var(--pric);color:var(--onpric)}
+.stat{background:var(--sf1);border-radius:var(--r-m);padding:var(--s4)}
+.tag{font-size:11px;font-weight:500;border-radius:var(--r-s);padding:var(--s1) var(--s2);
+  background:var(--errc);color:var(--onerrc)}
+.tag.ok{background:var(--terc);color:var(--onterc)}
+.note{background:var(--terc);color:var(--onterc);border-radius:var(--r-m);padding:var(--s3) var(--s4)}
+.otp{display:flex;}
+.otp b{flex:1;height:56px;border-radius:var(--r-s);background:var(--sf2);
+  border:1px solid var(--outv);display:grid;place-items:center;font-size:22px;font-weight:500}
+.otp b.foc{border:2px solid var(--pri);background:var(--sf3)}
+.pick{display:flex;flex-direction:column;}
+.pick a{display:flex;align-items:center;background:var(--sf1);
+  border-radius:var(--r-m);padding:var(--s4);text-decoration:none;color:var(--on);
+  min-height:var(--touch)}
+.pick a.on{background:var(--secc);color:var(--onsecc)}
+.pick .vico{width:var(--s12);height:var(--s12);border-radius:var(--r-full);
+  background:var(--pric);color:var(--onpric);display:grid;place-items:center;flex:0 0 auto}
+
+/* ── UTILITIES, all on the 4dp scale ───────────────────────────────── */
+.r{display:flex;align-items:center;gap:var(--s3)}.r.t{align-items:flex-start}
+.sp{justify-content:space-between}.col{display:flex;flex-direction:column}
+.g4{}.g8{}.g12{}.g16{}.g24{}
+.mt4{margin-top:var(--s1)}.mt8{margin-top:var(--s2)}.mt12{margin-top:var(--s3)}
+.mt16{margin-top:var(--s4)}.mt20{margin-top:var(--s5)}.mt24{margin-top:var(--s6)}
+.mt32{margin-top:var(--s8)}
+.f11{font-size:11px}.f12{font-size:12px}.f13{font-size:13px}.f15{font-size:16px}
+.f22{font-size:22px}.f26{font-size:26px}.f30{font-size:30px}
+.w5{font-weight:500}.dim{opacity:.7}
+
+/* ── DESIGN SYSTEM SHEET ───────────────────────────────────────────── */
+.dswrap{width:1080px;background:var(--sf);display:block}
+.dsx{width:1080px;background:var(--sf);color:var(--on);padding:var(--s8);
+  font-family:Roboto,system-ui,sans-serif;display:flex;flex-direction:column;}
+.dsrow{display:grid;grid-template-columns:168px 1fr;gap:var(--s8);align-items:start;
+  padding-bottom:var(--s6);border-bottom:1px solid var(--outv)}
+.dsrow:last-child{border-bottom:0;padding-bottom:0}
+.dstitle{font-size:14px;font-weight:500;color:var(--pri);padding-top:var(--s1)}
+.dssub{font-size:12px;color:var(--onv);margin-top:var(--s1);font-weight:400}
+.dsgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--s3)}
+.dschip{border-radius:var(--r-m);padding:var(--s4);min-height:80px;display:flex;
+  flex-direction:column;justify-content:flex-end;gap:var(--s1)}
+.dschip b{font-size:13px;font-weight:500}
+.dschip span{font-size:11px;opacity:.75;font-variant-numeric:tabular-nums}
+.dstype{display:flex;flex-direction:column;}
+.dsl{font-size:11px;color:var(--onv);letter-spacing:.08em;display:block;margin-bottom:var(--s1)}
+/* Wrapping flex rows cannot use `* + *` margins: the first item of a wrapped
+   row would take a left margin and sit indented, and there would be no row
+   spacing at all. Margin on every child plus a negative pull on the container
+   spaces both axes evenly and renders the same in any browser. */
+.dsflex{display:flex;flex-wrap:wrap;align-items:center;
+  margin:0 calc(var(--s3) * -1) calc(var(--s3) * -1) 0}
+.dsflex > *{margin:0 var(--s3) var(--s3) 0}
+.dscols{display:grid;grid-template-columns:1fr 1fr;gap:var(--s6)}
+.dsspace{display:flex;align-items:flex-end;}
+.dsspace div{text-align:center}
+.dsspace i{display:block;background:var(--pri);border-radius:2px;margin-bottom:var(--s1)}
+.dsspace span{font-size:11px;color:var(--onv);font-variant-numeric:tabular-nums}
+.dsshape{display:flex;align-items:flex-end}
+.dsshape div{text-align:center}
+.dsshape i{display:block;width:64px;height:64px;background:var(--secc);margin-bottom:var(--s1)}
+/* Grid, not wrapping flex: 16 symbols fall into two even rows of eight with a
+   real row gap, so the labels of the first row never crowd the icons below. */
+.dsicons{display:grid;grid-template-columns:repeat(8,1fr);gap:var(--s6) var(--s3);
+  color:var(--pri);justify-items:center}
+.dsicons div{display:flex;flex-direction:column;align-items:center}
+.dsicons span{font-size:10px;color:var(--onv)}
+.dstouch{display:flex;align-items:center}
+.dstouch i{display:grid;place-items:center;border:1px dashed var(--pri);color:var(--pri);
+  font-size:10px;font-style:normal}
+
+/* ── FLEX SPACING FALLBACK ────────────────────────────────────────────
+   The renderer that produces these PNGs is Chromium 78, which supports gap
+   on grid but NOT on flex (that shipped in Chrome 84). Every flex gap was
+   therefore being silently dropped, which is what made spacing look broken
+   on every screen no matter what the values said.
+
+   All flex spacing below is expressed as margins instead, so the source
+   renders identically in an old renderer and a current browser. Grid
+   containers keep gap. Do not reintroduce gap on a flex container here. */
+.hd .sw > * + *{margin-left:var(--s2)}
+.cell > * + *{margin-top:var(--s3)}
+.chips > * + *{margin-left:var(--s2)}
+.chip > * + *{margin-left:var(--s1)}
+.btn > * + *{margin-left:var(--s2)}
+.fab > * + *{margin-left:var(--s2)}
+.bnav div > * + *{margin-top:var(--s1)}
+.dual .top > * + *{margin-left:var(--s2)}
+.dual .stepchip > * + *{margin-left:var(--s1)}
+.otp > * + *{margin-left:var(--s2)}
+.pick > * + *{margin-top:var(--s3)}
+.pick a > * + *{margin-left:var(--s3)}
+.r > * + *{margin-left:var(--s3)}
+.col > * + *{margin-top:var(--s3)}
+.r.g4 > * + *{margin-left:var(--s1)} .col.g4 > * + *{margin-top:var(--s1)}
+.r.g8 > * + *{margin-left:var(--s2)} .col.g8 > * + *{margin-top:var(--s2)}
+.r.g12 > * + *{margin-left:var(--s3)} .col.g12 > * + *{margin-top:var(--s3)}
+.r.g16 > * + *{margin-left:var(--s4)} .col.g16 > * + *{margin-top:var(--s4)}
+.r.g24 > * + *{margin-left:var(--s6)} .col.g24 > * + *{margin-top:var(--s6)}
+.dsx > * + *{margin-top:var(--s8)}
+.dstype > * + *{margin-top:var(--s4)}
+.dsspace > * + *{margin-left:var(--s3)}
+.dsshape > * + *{margin-left:var(--s3)}
+.dsicons div > * + *{margin-top:var(--s2)}
+.dstouch > * + *{margin-left:var(--s4)}
+.fieldstack .field + .field{margin-top:var(--s4)}
+/* `* + *` cannot reach a bare text node, so an icon sitting directly beside
+   unwrapped label text needs its own margin. */
+.chip > .ico{margin-right:var(--s2)}
+.btn > .ico{margin-right:var(--s2)}
+.fab > .ico{margin-right:var(--s2)}
+.stepchip > .ico{margin-left:var(--s1)}
+</style></head><body>
+
+<svg width="0" height="0" style="position:absolute"><defs>
+<path id="m-search" d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19 15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+<path id="m-filter" d="M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z"/>
+<path id="m-plus" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+<path id="m-list" d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-8 14H7v-2h4v2zm0-4H7v-2h4v2zm0-4H7V7h4v2zm6 8h-4v-2h4v2zm0-4h-4v-2h4v2zm0-4h-4V7h4v2z"/>
+<path id="m-store" d="M20 4H4v2h16V4zm1 10v-2l-1-5H4l-1 5v2h1v6h10v-6h4v6h2v-6h1zm-9 4H6v-4h6v4z"/>
+<path id="m-user" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+<path id="m-cam" d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/>
+<path id="m-shield" d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+<path id="m-check" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+<path id="m-chev" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+<path id="m-back" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+<path id="m-lock" d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+<path id="m-info" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+<path id="m-doc" d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+<path id="m-clock" d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+<path id="m-edit" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+<path id="m-place" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/>
+<path id="m-bike" d="M5 14a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm14 0a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM14.5 5h-3l1.2 3H9.4L6 12h6.5l1.6-3.6L16 12h2l-2.4-5.4L17 5h-2.5z"/>
+<path id="m-bolt" d="M11 21h-1l1-7H6.5c-.88 0-.33-.75-.31-.78C7.48 10.94 9.4 7.57 12.16 3h1l-1 7h4.51c.4 0 .62.19.4.66C13.98 15.66 11 21 11 21z"/>
+</defs></svg>
+
+<div class="wrapx">
+<div class="hd">
+  <p class="eb">FinVista · Android · Material Design 3 · Forest</p>
+  <h1>Eleven screens</h1>
+  <p>The screens the case study uses. Work mode is paper white; the three handoff moments, where
+     the phone is turned around to the customer, fill with the primary container tone. Rendered from
+     this file by <code>scripts/render-finvista-m3.mjs</code>, which refuses to output anything that
+     fails a contrast check.</p>
+  <div class="sw"><i style="background:#16653C"></i><i style="background:#A2F2C0"></i>
+    <i style="background:#BEEAF8"></i><i style="background:#D1E8D5"></i><i style="background:#F6FBF5"></i>
+    <i style="background:#171D18"></i></div>
+</div>
+<div id="sheet" class="grid"></div></div>
+<script>
+const ic=(n,c)=>`<svg class="ico ${c||''}" viewBox="0 0 24 24"><use href="#m-${n}"/></svg>`;
+const sb=`<div class="sb"><span>9:41</span><span class="tnum">4G ▮</span></div>`;
+const sbHero=`<div class="sb hero"><span>9:41</span><span class="tnum">4G ▮</span></div>`;
+const gest=`<div class="nav"><i></i></div>`;
+const handBar=`<div class="r g8" style="padding:10px 16px;font-size:11px;opacity:.8">${ic('lock','ico-s')}Handed to customer · other applications hidden</div>`;
+
+const S={};
+
+/* 1 · Login */
+S.login=`${sb}<div class="body"><div class="pad" style="padding-top:40px">
+  <div style="width:52px;height:52px;border-radius:14px;background:var(--pri);color:var(--onpri);display:grid;place-items:center;font-size:22px;font-weight:700">F</div>
+  <div class="f26 mt24" style="line-height:1.2">Sign in to FinVista</div>
+  <div class="f13 mt8 dim">For sales, call centre and store staff.</div>
+  <div class="mt24"><div class="field foc"><label>Mobile number</label><div class="val tnum">+91 98200 41762</div></div></div>
+  <div class="f11 dim mt12">We will send a one time password to this number.</div>
+  <div class="mt20"><button class="btn">Send OTP</button></div>
+  <div class="r mt20" style="gap:12px"><span style="flex:1;height:1px;background:var(--outv)"></span>
+    <span class="f11 dim">or</span><span style="flex:1;height:1px;background:var(--outv)"></span></div>
+  <div class="mt20"><button class="btn out">Employee ID login</button></div>
+</div><div class="grow"></div>
+<div class="pad f11 dim" style="padding-bottom:16px;text-align:center">FinVista v4.2 · Sharma Motors, Pune</div>${gest}</div>`;
+
+/* 2 · Applications dashboard */
+S.dashboard=`${sb}<div class="body">
+<div class="appbar"><h1>Applications</h1>
+  <button class="iconbtn">${ic('search')}</button><button class="iconbtn">${ic('filter')}</button></div>
+<div class="chips"><span class="chip on">${ic('check','ico-s')}Active 12</span>
+  <span class="chip">Lead</span><span class="chip">DDE</span><span class="chip">Sanctioned</span></div>
+<div class="pad" style="overflow:hidden">
+  <div class="card hi"><div class="r sp"><div class="r g12"><div class="av">JK</div>
+    <div><div class="f13 w5">Jayesh Kulkarni</div><div class="f11 dim tnum">3000TW0000001</div></div></div>
+    <span class="tag ok">Lead</span></div><div class="lp mt12"><i style="width:24%"></i></div>
+    <div class="r sp mt8 f11 dim"><span>Step 2 of 6</span><span class="tnum">30 May</span></div></div>
+  <div class="card"><div class="r sp"><div class="r g12"><div class="av">AP</div>
+    <div><div class="f13 w5">Aadesh Pawar</div><div class="f11 dim tnum">3000TW0000002</div></div></div>
+    <span class="tag">Escalated</span></div><div class="lp mt12"><i style="width:66%"></i></div>
+    <div class="r sp mt8 f11 dim"><span>Step 4 of 6</span><span class="tnum">26 May</span></div></div>
+  <div class="card"><div class="r sp"><div class="r g12"><div class="av">SR</div>
+    <div><div class="f13 w5">Sneha Rane</div><div class="f11 dim tnum">3000TW0000003</div></div></div>
+    <span class="tag ok">DDE</span></div><div class="lp mt12"><i style="width:82%"></i></div>
+    <div class="r sp mt8 f11 dim"><span>Awaiting signature</span><span class="tnum">24 May</span></div></div>
+  <div class="card"><div class="r sp"><div class="r g12"><div class="av">MD</div>
+    <div><div class="f13 w5">Mahesh Deshmukh</div><div class="f11 dim tnum">3000TW0000004</div></div></div>
+    <span class="tag ok">Sanctioned</span></div><div class="lp mt12"><i style="width:100%"></i></div>
+    <div class="r sp mt8 f11 dim"><span>Ready to disburse</span><span class="tnum">23 May</span></div></div>
+</div><div class="grow"></div>
+<button class="fab">${ic('plus')}New</button>
+<div class="bnav"><div class="on"><span class="pill">${ic('list')}</span>Applications</div>
+  <div><span class="pill">${ic('store')}</span>Portfolio</div>
+  <div><span class="pill">${ic('user')}</span>Profile</div></div>${gest}</div>`;
+
+/* 3 · Dealer and portfolio, the store-manager view */
+S.portfolio=`${sb}<div class="body">
+<div class="appbar"><h1>Portfolio</h1><button class="iconbtn">${ic('filter')}</button></div>
+<div class="pad">
+  <div class="f11 dim">Sharma Motors, Pune · May 2024</div>
+  <div class="r g8 mt12">
+    <div class="stat" style="flex:1"><div class="f11 dim">Disbursed</div>
+      <div class="f22 tnum w5" style="color:var(--pri)">₹ 42.6L</div>
+      <div class="f11 dim tnum">38 loans</div></div>
+    <div class="stat" style="flex:1"><div class="f11 dim">In progress</div>
+      <div class="f22 tnum w5">12</div><div class="f11 dim">4 need attention</div></div>
+  </div>
+  <div class="f11 dim mt20">Team</div>
+  <div class="mt8">
+    <div class="card"><div class="r sp"><div class="r g12"><div class="av">RS</div>
+      <div><div class="f13 w5">Rahul Sharma</div><div class="f11 dim">Sales centre executive</div></div></div>
+      <div style="text-align:right"><div class="f13 w5 tnum">14</div><div class="f11 dim">this month</div></div></div></div>
+    <div class="card"><div class="r sp"><div class="r g12"><div class="av">PK</div>
+      <div><div class="f13 w5">Priya Kulkarni</div><div class="f11 dim">Call centre executive</div></div></div>
+      <div style="text-align:right"><div class="f13 w5 tnum">11</div><div class="f11 dim">this month</div></div></div></div>
+    <div class="card"><div class="r sp"><div class="r g12"><div class="av">AN</div>
+      <div><div class="f13 w5">Amit Naik</div><div class="f11 dim">Sales centre executive</div></div></div>
+      <div style="text-align:right"><div class="f13 w5 tnum">9</div><div class="f11 dim">this month</div></div></div></div>
+  </div>
+  <div class="r t g8 mt12 note f11">${ic('info','ico-s')}
+    <span>Four applications have been waiting on a customer signature for more than 48 hours.</span></div>
+</div><div class="grow"></div>
+<div class="bnav"><div><span class="pill">${ic('list')}</span>Applications</div>
+  <div class="on"><span class="pill">${ic('store')}</span>Portfolio</div>
+  <div><span class="pill">${ic('user')}</span>Profile</div></div>${gest}</div>`;
+
+/* 4 · Personal details with live photo — a handoff moment */
+S.personal=`${sbHero}<div class="body hero">${handBar}
+<div class="pad" style="padding-top:4px">
+  <div class="f26" style="line-height:1.2">Jayesh, we need a photo of you</div>
+  <div class="f13 mt12" style="opacity:.82">Your executive cannot take this for you. Look at the camera and hold still.</div>
+  <div class="mt20" style="background:var(--sf);border-radius:20px;padding:18px;display:grid;place-items:center">
+    <div style="width:150px;height:150px;border-radius:99px;background:var(--sf2);
+      border:3px dashed var(--pri);display:grid;place-items:center;color:var(--pri)">
+      <svg viewBox="0 0 24 24" style="width:52px;height:52px;fill:currentColor"><use href="#m-user"/></svg></div>
+    <div class="f12 mt16" style="color:var(--onv);text-align:center">Centre your face in the circle</div>
+  </div>
+  <div class="col g12 mt20 f12">
+    <div class="r t g8">${ic('shield','ico-s')}<span>The photo is matched against your ID. It is not shared with the dealer.</span></div>
+    <div class="r t g8">${ic('info','ico-s')}<span>You can retake it as many times as you like.</span></div>
+  </div>
+</div><div class="grow"></div>
+<div class="pad col g8" style="padding-bottom:16px">
+  <button class="btn">${ic('cam','ico-s')}Take photo</button>
+  <button class="btn" style="background:none;color:var(--onpric)">Not now</button></div>${gest}</div>`;
+
+/* 5 · Address details */
+S.address=`${sb}<div class="body">
+<div class="appbar"><button class="iconbtn">${ic('back')}</button><h1 style="font-size:18px">Jayesh Kulkarni</h1></div>
+<div class="pad">
+  <div class="dual"><div class="top"><span class="lbl">Good start</span>
+    <span class="stepchip">Step 2 of 6${ic('chev','ico-s')}</span></div>
+    <div class="lp mt12"><i style="width:32%"></i></div>
+    <div class="r sp mt8"><span class="pct tnum">32% complete</span><span class="pct tnum">4 steps left</span></div></div>
+  <div class="f22 mt20" style="line-height:1.2">Where does Jayesh live?</div>
+  <div class="f12 dim mt8">Enter the pin code and we will fill in the rest.</div>
+  <div class="fieldstack mt20">
+    <div class="field foc"><label>Pin code</label><div class="val tnum">411 038</div></div>
+    <div class="field"><label>City and state</label><div class="val">Pune, Maharashtra</div></div>
+    <div class="field"><label>Address line</label><div class="val">101, Lake Palace, Near Church</div></div>
+    <div class="field"><label>Landmark</label><div class="val">Opposite Kothrud depot</div></div>
+  </div>
+  <div class="r t g8 mt16 f11" style="color:var(--onv)">${ic('place','ico-s')}
+    <span>Residence type: owned. Living here 6 years.</span></div>
+</div><div class="grow"></div>
+<div class="pad" style="padding-bottom:14px"><button class="btn">Continue</button></div>${gest}</div>`;
+
+/* 6 · Employment */
+S.employment=`${sb}<div class="body">
+<div class="appbar"><button class="iconbtn">${ic('back')}</button><h1 style="font-size:18px">Jayesh Kulkarni</h1></div>
+<div class="pad">
+  <div class="dual"><div class="top"><span class="lbl">Halfway there</span>
+    <span class="stepchip">Step 3 of 6${ic('chev','ico-s')}</span></div>
+    <div class="lp mt12"><i style="width:48%"></i></div>
+    <div class="r sp mt8"><span class="pct tnum">48% complete</span><span class="pct tnum">3 steps left</span></div></div>
+  <div class="f22 mt20" style="line-height:1.2">Where does Jayesh work?</div>
+  <div class="f12 dim mt8">Used to check repayment capacity. Nothing here is shared with the employer.</div>
+  <div class="col g8 mt20"><div class="f11 dim">Employment type</div>
+    <div class="r g8"><span class="chip on" style="border-radius:8px;padding:6px 12px">Salaried</span>
+      <span class="chip" style="border-radius:8px;padding:6px 12px">Self-employed</span>
+      <span class="chip" style="border-radius:8px;padding:6px 12px">Other</span></div></div>
+  <div class="fieldstack mt16">
+    <div class="field foc"><label>Employer name</label><div class="val">Tata Consultancy Services</div></div>
+    <div class="field"><label>Monthly income</label><div class="val tnum">₹ 42,000</div></div>
+    <div class="field"><label>Total household income</label><div class="val tnum">₹ 68,000</div></div></div>
+</div><div class="grow"></div>
+<div class="pad" style="padding-bottom:14px"><button class="btn">Continue</button></div>${gest}</div>`;
+
+/* 7 · Vehicle selection, icon-led (the most praised piece in testing) */
+S.vehicle=`${sb}<div class="body">
+<div class="appbar"><button class="iconbtn">${ic('back')}</button><h1 style="font-size:18px">Jayesh Kulkarni</h1></div>
+<div class="pad">
+  <div class="dual"><div class="top"><span class="lbl">Nearly there</span>
+    <span class="stepchip">Step 4 of 6${ic('chev','ico-s')}</span></div>
+    <div class="lp mt12"><i style="width:64%"></i></div>
+    <div class="r sp mt8"><span class="pct tnum">64% complete</span><span class="pct tnum">2 steps left</span></div></div>
+  <div class="f22 mt20" style="line-height:1.2">Which kind of two-wheeler?</div>
+  <div class="f12 dim mt8">Pick one. You can change the model on the next screen.</div>
+  <div class="pick mt20">
+    <a class="on"><span class="vico">${ic('bike','ico-l')}</span>
+      <span style="flex:1"><span class="f15 w5" style="display:block">Petrol</span>
+        <span class="f11 dim">Bikes, scooters and mopeds</span></span>${ic('check','ico-s')}</a>
+    <a><span class="vico">${ic('bolt','ico-l')}</span>
+      <span style="flex:1"><span class="f15 w5" style="display:block">Electric</span>
+        <span class="f11 dim">Lower EMI, subsidy may apply</span></span>${ic('chev','ico-s')}</a>
+  </div>
+  <div class="r t g8 mt20 note f11">${ic('info','ico-s')}
+    <span>Electric two-wheelers qualify for a state subsidy in Maharashtra. We apply it automatically.</span></div>
+</div><div class="grow"></div>
+<div class="pad" style="padding-bottom:14px"><button class="btn">Continue</button></div>${gest}</div>`;
+
+/* 8 · Credit check consent — the handoff the case study is built on */
+S.consent=`${sbHero}<div class="body hero">${handBar}
+<div class="pad" style="padding-top:4px">
+  <svg viewBox="0 0 190 118" style="width:100%;max-width:176px;height:auto;display:block">
+    <ellipse cx="95" cy="104" rx="78" ry="10" fill="var(--onpric)" opacity=".08"/>
+    <rect x="10" y="12" width="118" height="80" rx="12" fill="#FFFFFF"/>
+    <rect x="10" y="12" width="118" height="22" rx="12" fill="var(--sec)"/>
+    <rect x="10" y="26" width="118" height="8" fill="var(--sec)"/>
+    <circle cx="42" cy="58" r="15" fill="var(--secc)"/><circle cx="42" cy="53" r="6" fill="var(--sec)"/>
+    <path d="M42 61c-7 0-12 4-12 8v3h24v-3c0-4-5-8-12-8z" fill="var(--sec)"/>
+    <rect x="66" y="47" width="48" height="7" rx="3.5" fill="var(--outv)"/>
+    <rect x="66" y="60" width="38" height="7" rx="3.5" fill="var(--outv)"/>
+    <rect x="66" y="73" width="26" height="7" rx="3.5" fill="var(--outv)"/>
+    <path d="M141 34l30 11v21c0 17-12.8 27.6-30 32-17.2-4.4-30-15-30-32V45z" fill="var(--pri)"/>
+    <path d="M126 68.5l10.5 10.5L157 58" fill="none" stroke="var(--pric)" stroke-width="8"
+      stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <div class="f26 mt16" style="line-height:1.16">Jayesh, may we check your credit history?</div>
+  <div class="f13 mt12" style="opacity:.82">Your executive cannot do this part for you.</div>
+  <div class="col g12 mt20 f12">
+    <div class="r t g8">${ic('shield','ico-s')}<span>We ask CIBIL for your repayment record. We see the score, not your bank balance.</span></div>
+    <div class="r t g8">${ic('check','ico-s')}<span>This is a soft check. It does not lower your score.</span></div>
+    <div class="r t g8">${ic('info','ico-s')}<span>Say no and the application stops here. Nothing is saved.</span></div>
+  </div>
+</div><div class="grow"></div>
+<div class="pad col g8" style="padding-bottom:16px">
+  <button class="btn">Yes, check my credit history</button>
+  <button class="btn" style="background:none;color:var(--onpric)">Not now</button></div>${gest}</div>`;
+
+/* 9 · Loan summary, the turn-around */
+S.summary=`${sb}<div class="body">
+<div class="appbar"><button class="iconbtn">${ic('back')}</button><h1 style="font-size:18px">Loan summary</h1></div>
+<div class="pad">
+  <div class="hero" style="border-radius:16px;padding:16px">
+    <div class="f11" style="opacity:.78">You will pay in total</div>
+    <div class="f30 tnum w5" style="line-height:1.1;margin-top:2px">₹ 66,000</div>
+    <div class="f12 mt8 tnum" style="opacity:.85">₹ 11,000 a month for 6 months</div></div>
+  <div class="stat mt16 col g8 f12">
+    <div class="r sp"><span class="dim">Vehicle price</span><span class="tnum">₹ 80,000</span></div>
+    <div class="r sp"><span class="dim">Down payment</span><span class="tnum">₹ 20,000</span></div>
+    <div class="r sp"><span class="dim">Loan amount</span><span class="tnum">₹ 60,000</span></div>
+    <div class="r sp"><span class="dim">Interest rate</span><span class="tnum">26.97%</span></div>
+    <div class="r sp"><span class="dim">Processing fee</span><span class="tnum">₹ 3,000</span></div>
+    <div style="height:1px;background:var(--outv)"></div>
+    <div class="r sp w5"><span>Total payable</span><span class="tnum">₹ 66,000</span></div></div>
+  <div class="r t g8 mt16 note f11">${ic('info','ico-s')}
+    <span>There is nothing else to pay. No charge appears after you sign.</span></div>
+</div><div class="grow"></div>
+<div class="pad" style="padding-bottom:14px"><button class="btn">Continue to signature</button></div>${gest}</div>`;
+
+/* 10 · Key facts statement and e-signature — a handoff moment */
+S.kfs=`${sbHero}<div class="body hero">${handBar}
+<div class="pad" style="padding-top:4px">
+  <div class="f26" style="line-height:1.2">Sign to accept the loan</div>
+  <div class="f13 mt12" style="opacity:.82">Read the key facts, then enter the code we sent to your phone.</div>
+  <div class="mt20" style="background:var(--sf);border-radius:16px;padding:14px">
+    <div class="f11" style="color:var(--onv)">KEY FACTS STATEMENT</div>
+    <div class="col g8 mt12 f12" style="color:var(--on)">
+      <div class="r sp"><span style="color:var(--onv)">You borrow</span><span class="tnum">₹ 60,000</span></div>
+      <div class="r sp"><span style="color:var(--onv)">You repay</span><span class="tnum">₹ 66,000</span></div>
+      <div class="r sp"><span style="color:var(--onv)">Interest rate</span><span class="tnum">26.97%</span></div>
+      <div class="r sp"><span style="color:var(--onv)">Monthly EMI</span><span class="tnum">₹ 11,000 × 6</span></div>
+      <div class="r sp"><span style="color:var(--onv)">If you repay early</span><span>No penalty</span></div>
+    </div>
+    <div class="r g8 mt12 f11" style="color:var(--pri)">${ic('doc','ico-s')}Read the full agreement</div>
+  </div>
+  <div class="f12 mt20" style="opacity:.85">Code sent to +91 98••• ••762</div>
+  <div class="otp mt12"><b class="foc">5</b><b>8</b><b>2</b><b></b><b></b><b></b></div>
+</div><div class="grow"></div>
+<div class="pad col g8" style="padding-bottom:16px">
+  <button class="btn">Sign with this code</button>
+  <button class="btn" style="background:none;color:var(--onpric)">Resend code</button></div>${gest}</div>`;
+
+/* 11 · Disbursed */
+S.disbursed=`${sb}<div class="body">
+<div class="pad" style="padding-top:26px">
+  <svg viewBox="0 0 208 128" style="width:100%;max-width:196px;height:auto;display:block">
+    <ellipse cx="104" cy="115" rx="88" ry="9" fill="var(--on)" opacity=".07"/>
+    <rect x="6" y="44" width="26" height="7" rx="3.5" fill="var(--outv)"/>
+    <rect x="0" y="60" width="18" height="7" rx="3.5" fill="var(--outv)" opacity=".6"/>
+    <path d="M60 98h58a30 30 0 0 0 28-42l-9-20h-18l9 21a14 14 0 0 1-13 20H60z" fill="var(--pri)"/>
+    <path d="M46 66h50l10 22H60a16 16 0 0 1-14-22z" fill="var(--pri)" opacity=".82"/>
+    <rect x="52" y="52" width="40" height="15" rx="7.5" fill="var(--prid)"/>
+    <path d="M126 34h10l4 10h-12z" fill="var(--prid)"/>
+    <rect x="118" y="28" width="30" height="8" rx="4" fill="var(--prid)"/>
+    <circle cx="60" cy="96" r="24" fill="var(--prid)"/><circle cx="60" cy="96" r="10" fill="var(--sf)"/>
+    <circle cx="152" cy="96" r="24" fill="var(--prid)"/><circle cx="152" cy="96" r="10" fill="var(--sf)"/>
+    <circle cx="176" cy="30" r="26" fill="var(--terc)"/>
+    <path d="M165 30.5l7.5 7.5L188 22" fill="none" stroke="var(--onterc)" stroke-width="6"
+      stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <div class="f30 mt20" style="line-height:1.16">Loan disbursed</div>
+  <div class="f13 mt8 dim tnum">₹ 60,000 sent to Sharma Motors · 3000TW0000001</div>
+  <div class="stat mt20 col g12 f12">
+    <div class="r g12"><span style="color:var(--pri)">${ic('check','ico-s')}</span><span>Jayesh gets an SMS with the schedule</span></div>
+    <div class="r g12"><span style="color:var(--pri)">${ic('clock','ico-s')}</span><span>First EMI on 11 July</span></div>
+    <div class="r g12"><span style="color:var(--pri)">${ic('doc','ico-s')}</span><span>Agreement copy mailed to both of you</span></div></div>
+</div><div class="grow"></div>
+<div class="pad col g8" style="padding-bottom:14px">
+  <button class="btn">Start a new application</button>
+  <button class="btn text">Back to applications</button></div>${gest}</div>`;
+
+
+
+/* 12 · Design system sheet. Comprehensive: the things another designer or an
+   engineer actually needs to rebuild this, not just a colour strip. */
+// Every swatch takes a hairline outline. Without it the near-white Surface tile
+// vanishes into the sheet and reads as a missing swatch rather than a colour.
+const SW=(n,bg,fg)=>`<div class="dschip" style="background:${bg};color:${fg};box-shadow:inset 0 0 0 1px rgba(23,29,24,.14)"><b>${n}</b><span>${bg}</span></div>`;
+S.system=`<div class="dsx">
+
+  <div class="dsrow"><div class="dstitle">Colour roles<div class="dssub">M3 tonal palette, seeded from the FinVista green</div></div>
+    <div class="dsgrid">
+      ${SW('Primary','#16653C','#fff')}${SW('On primary container','#A2F2C0','#00210F')}
+      ${SW('Secondary container','#D1E8D5','#0C1F13')}${SW('Tertiary container','#BEEAF8','#001F28')}
+      ${SW('Surface','#F6FBF5','#171D18')}${SW('Error container','#FFDAD6','#410002')}
+    </div></div>
+
+  <div class="dsrow"><div class="dstitle">Type scale<div class="dssub">Roboto, five M3 roles</div></div>
+    <div class="dstype">
+      <div><span class="dsl">DISPLAY 30 / 400</span><p style="font-size:30px;line-height:1.16">Loan disbursed</p></div>
+      <div><span class="dsl">HEADLINE 22 / 400</span><p style="font-size:22px;line-height:1.2">Where does Jayesh work?</p></div>
+      <div><span class="dsl">TITLE 16 / 500</span><p style="font-size:16px;font-weight:500">Applications</p></div>
+      <div><span class="dsl">BODY 14 / 400</span><p style="font-size:14px">Used to check repayment capacity.</p></div>
+      <div><span class="dsl">LABEL 12 / 500</span><p style="font-size:12px;font-weight:500;color:var(--onv)">STEP 3 OF 6</p></div>
+    </div></div>
+
+  <div class="dsrow"><div class="dstitle">Spacing<div class="dssub">4dp grid. Every gap in the product is one of these</div></div>
+    <div class="dsspace">
+      ${[4,8,12,16,20,24,32,40,48].map(v=>`<div><i style="width:${v}px;height:${v}px"></i><span>${v}</span></div>`).join('')}
+    </div></div>
+
+  <div class="dsrow"><div class="dstitle">Shape<div class="dssub">M3 corner scale</div></div>
+    <div class="dsshape">
+      ${[['XS',4],['S',8],['M',12],['L',16],['XL',28],['Full',999]].map(([n,r])=>
+        `<div><i style="border-radius:${r}px"></i><span class="dsl" style="margin:0">${n} ${r===999?'full':r}</span></div>`).join('')}
+    </div></div>
+
+  <div class="dsrow"><div class="dstitle">Buttons<div class="dssub">48dp height, full-round, one primary per screen</div></div>
+    <div class="dsflex">
+      <button class="btn" style="width:auto">Continue</button>
+      <button class="btn tonal" style="width:auto">Save draft</button>
+      <button class="btn out" style="width:auto">Employee login</button>
+      <button class="btn text" style="width:auto">Not now</button>
+      <button class="btn" data-a11y-exempt style="width:auto;opacity:.38">Disabled</button>
+    </div></div>
+
+  <div class="dsrow"><div class="dstitle">Text fields<div class="dssub">Filled, stacked on a 16dp rhythm</div></div>
+    <div class="dscols">
+      <div class="fieldstack">
+        <div class="field foc"><label>Employer name</label><div class="val">Tata Consultancy Services</div></div>
+        <div class="field"><label>Monthly income</label><div class="val tnum">₹ 42,000</div></div>
+        <div class="field" style="border-bottom-color:#BA1A1A"><label style="color:#BA1A1A">PAN</label><div class="val">ABCDE1234</div></div>
+      </div>
+      <div>
+        <div class="f12" style="color:#BA1A1A;margin-bottom:var(--s3)">A PAN is ten characters. Check the last digit.</div>
+        <div class="otp"><b class="foc">5</b><b>8</b><b>2</b><b></b><b></b><b></b></div>
+        <div class="f12 mt8" style="color:var(--onv)">OTP, six digits, used for the e-signature</div>
+      </div>
+    </div></div>
+
+  <div class="dsrow"><div class="dstitle">Progress<div class="dssub">Dual progress: percentage and step count</div></div>
+    <div class="dscols">
+      <div class="dual"><div class="top"><span class="lbl">Halfway there</span>
+        <span class="stepchip">Step 3 of 6</span></div>
+        <div class="lp mt12"><i style="width:48%"></i></div>
+        <div class="r sp mt8"><span class="pct tnum">48% complete</span><span class="pct tnum">3 steps left</span></div></div>
+      <div><div class="f12" style="color:var(--onv);margin-bottom:var(--s2)">Linear, on its own</div>
+        <div class="lp"><i style="width:24%"></i></div>
+        <div class="lp mt12"><i style="width:66%"></i></div>
+        <div class="lp mt12"><i style="width:100%"></i></div></div>
+    </div></div>
+
+  <div class="dsrow"><div class="dstitle">Selection<div class="dssub">Filled container plus a check. No outline</div></div>
+    <div class="dscols">
+      <div class="pick"><a class="on"><span class="vico">${ic('bike','ico-l')}</span>
+          <span style="flex:1"><span class="f15 w5" style="display:block">Petrol</span>
+            <span class="f12 dim">Bikes, scooters and mopeds</span></span>${ic('check','ico-s')}</a>
+        <a><span class="vico">${ic('bolt','ico-l')}</span>
+          <span style="flex:1"><span class="f15 w5" style="display:block">Electric</span>
+            <span class="f12 dim">Lower EMI, subsidy may apply</span></span>${ic('chev','ico-s')}</a></div>
+      <div class="dsflex" style="align-items:flex-start">
+        <span class="chip on">${ic('check','ico-s')}Salaried</span>
+        <span class="chip">Self-employed</span><span class="chip">Other</span></div>
+    </div></div>
+
+  <div class="dsrow"><div class="dstitle">Status<div class="dssub">Colour never carries meaning alone</div></div>
+    <div class="dsflex">
+      <span class="tag ok">Lead</span><span class="tag ok">DDE</span><span class="tag">Escalated</span>
+      <div class="note" style="flex:1;min-width:280px;font-size:13px">Nothing else to pay. No charge appears after you sign.</div>
+    </div></div>
+
+  <div class="dsrow"><div class="dstitle">Icons<div class="dssub">Material Symbols, filled, 24dp</div></div>
+    <div class="dsicons">
+      ${['search','filter','plus','list','store','user','cam','shield','check','lock','info','doc','clock','back','bike','bolt']
+        .map(n=>`<div>${ic(n)}<span>${n}</span></div>`).join('')}
+    </div></div>
+
+  <div class="dsrow"><div class="dstitle">Touch targets<div class="dssub">48dp minimum, 8dp apart</div></div>
+    <div class="dstouch">
+      <i style="width:48px;height:48px;border-radius:999px">48</i>
+      <i style="width:48px;height:48px;border-radius:999px">48</i>
+      <span class="f12" style="color:var(--onv)">Icon buttons, bottom nav items and list rows all clear 48dp.</span>
+    </div></div>
+
+  <div class="dsrow"><div class="dstitle">Navigation<div class="dssub">Bottom nav, three destinations</div></div>
+    <div style="width:360px;border:1px solid var(--outv);border-radius:var(--r-m);overflow:hidden">
+      <div class="bnav"><div class="on"><span class="pill">${ic('list')}</span>Applications</div>
+        <div><span class="pill">${ic('store')}</span>Portfolio</div>
+        <div><span class="pill">${ic('user')}</span>Profile</div></div></div></div>
+
+  <div class="dsrow"><div class="dstitle">Handoff surface<div class="dssub">The one moment the whole screen changes character</div></div>
+    <div class="dscols">
+      <div class="hero" style="border-radius:var(--r-l);padding:var(--s4)">
+        <div class="f12" style="opacity:.8">HANDED TO CUSTOMER</div>
+        <div style="font-size:22px;margin-top:var(--s2);line-height:1.2">May we check your credit history?</div>
+        <div class="f13" style="opacity:.82;margin-top:var(--s2)">Primary container fills the surface. The executive's queue is locked away behind it.</div>
+      </div>
+      <div class="stat"><div class="f12" style="color:var(--onv)">WORK MODE</div>
+        <div style="font-size:22px;margin-top:var(--s2);line-height:1.2">Where does Jayesh live?</div>
+        <div class="f13 dim" style="margin-top:var(--s2)">Surface stays paper white. Dense, fast, built for repetition.</div></div>
+    </div></div>
+</div>`;
+
+const MODE={login:'work',dashboard:'work',portfolio:'work',personal:'handoff',address:'work',
+  employment:'work',vehicle:'work',consent:'handoff',summary:'turn-around',kfs:'handoff',
+  disbursed:'work',system:'design system'};
+document.getElementById('sheet').innerHTML = Object.entries(S).map(([k,v])=>
+  k==='system'
+   ? `<div class="cell" style="width:100%;align-items:flex-start">
+        <div class="dswrap" data-name="${k}">${v}</div>
+        <div class="cap">${k}</div><div class="mode">${MODE[k]}</div></div>`
+   : `<div class="cell"><div class="frame"><div class="screen" data-name="${k}">${v}</div></div>
+        <div class="cap">${k}</div><div class="mode">${MODE[k]}</div></div>`).join('');
+</script></body></html>

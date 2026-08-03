@@ -3,29 +3,26 @@
    leaks into the case studies (which keep their own restrained styling). */
 
 export const NEON_CSS = `
-  /* Comic hard-shadow buttons (purple fill / yellow border / magenta shadow),
-     with an RGB-split glitch tic on hover, exactly like the hero CTAs. */
+  /* Buttons: same shape as before (12px radius, 13/26 padding), but wearing the
+     landing hero's restrained treatment — 1px hairline border, solid accent fill
+     on primary, no hard offset shadow and no tilt. */
   .ab-btn{
-    --ab-rot: -1deg;
-    position:relative; display:inline-flex; align-items:center; gap:8px;
-    border-radius:12px; border:2px solid #F2D50F; padding:13px 26px;
+    position:relative; display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    border-radius:12px; border:1px solid #F5379B; padding:13px 26px;
     font-family:'Outfit',sans-serif; font-weight:700; font-size:15px;
-    letter-spacing:0.01em; text-decoration:none; cursor:pointer;
-    background:#7B2FBE; color:#F4F3FA; box-shadow:5px 5px 0 #F0186C;
-    transform:rotate(var(--ab-rot));
-    transition:transform 0.14s ease-out, box-shadow 0.14s ease-out;
+    letter-spacing:0.02em; text-decoration:none; cursor:pointer;
+    background:#F5379B; color:#FFFFFF;
+    transition:background-color 0.14s ease-out, border-color 0.14s ease-out, transform 0.14s ease-out;
   }
-  .ab-btn-ghost{ --ab-rot: 1deg; background:transparent; box-shadow:5px 5px 0 #7B2FBE; }
-  .ab-btn:active{ transform:translate(3px,3px) rotate(var(--ab-rot)) scale(0.97); box-shadow:2px 2px 0 #F0186C; }
-  .ab-btn-ghost:active{ box-shadow:2px 2px 0 #7B2FBE; }
-  .ab-btn:focus-visible{ outline:2px solid #17C3E8; outline-offset:3px; }
+  .ab-btn-ghost{
+    background:transparent; color:#F4F3FA;
+    border-color:rgba(244,243,250,0.28);
+  }
+  .ab-btn:active{ transform:translateY(1px); }
+  .ab-btn:focus-visible{ outline:2px solid #2E78FF; outline-offset:3px; }
   @media (hover:hover) and (pointer:fine){
-    .ab-btn:hover{ animation:ab-tic 0.9s steps(2,end) infinite; }
-  }
-  @keyframes ab-tic{
-    0%,24%,100%{ text-shadow:none; }
-    8%{ text-shadow:-2px 0 #F0186C, 2px 0 #F2D50F; transform:translate(-1px,1px) rotate(var(--ab-rot)); }
-    16%{ text-shadow:2px 0 #F0186C, -2px 0 #F2D50F; transform:translate(1px,-1px) rotate(var(--ab-rot)); }
+    .ab-btn:hover{ background:#D81F7E; border-color:#D81F7E; }
+    .ab-btn-ghost:hover{ background:transparent; border-color:rgba(244,243,250,0.6); }
   }
 
   /* Glass chips: mono, dark glass, glow dot, like the landing chips. */
@@ -82,31 +79,25 @@ export const NEON_CSS = `
     94%{ opacity:0.4; transform:translate(-3px,2px) scale(0.9); }
     96%{ opacity:1; transform:translate(2px,2px) scale(1.08); }
   }
-  /* Comic panels: hard offset shadow, colored border, slight tilt, RGB-split
-     glitch on hover (straightens up). Border/shadow cycle the four-pillar
-     palette; grid cards alternate tilt for a scattered-panels feel. */
+  /* Panels: flat, square to the grid, hairline border. No coloured borders, no
+     hard offset shadows, no tilt. Hover lifts very slightly and warms the
+     border rather than throwing a coloured block behind the card.
+     (The ab-c1..c4 classes are kept so existing markup keeps working; they no
+     longer tint the border, they only nudge the hover accent.) */
   .ab-card{
-    --bd:#F2D50F; --sh:#F0186C; --tilt:-0.9deg;
+    --accent:rgba(244,243,250,0.34);
     position:relative; background:#181126; border-radius:14px;
-    border:2px solid var(--bd); box-shadow:6px 6px 0 var(--sh);
-    transform:rotate(var(--tilt));
-    transition:transform 0.16s ease-out, box-shadow 0.16s ease-out;
+    border:1px solid rgba(244,243,250,0.12);
+    transition:transform 0.16s ease-out, border-color 0.16s ease-out, background-color 0.16s ease-out;
   }
-  .ab-card:nth-of-type(4n+2){ --bd:#17C3E8; --sh:#7B2FBE; }
-  .ab-card:nth-of-type(4n+3){ --bd:#F0186C; --sh:#F2D50F; }
-  .ab-card:nth-of-type(4n+4){ --bd:#7B2FBE; --sh:#17C3E8; }
-  .ab-card:nth-of-type(even){ --tilt:0.9deg; }
-  .ab-card.ab-flat{ --tilt:0deg; }
-  .ab-card.ab-c1{ --bd:#F2D50F; --sh:#F0186C; } .ab-card.ab-c2{ --bd:#17C3E8; --sh:#7B2FBE; }
-  .ab-card.ab-c3{ --bd:#F0186C; --sh:#F2D50F; } .ab-card.ab-c4{ --bd:#7B2FBE; --sh:#17C3E8; }
+  .ab-card.ab-c1, .ab-card.ab-c2, .ab-card.ab-c3, .ab-card.ab-c4, .ab-card.ab-flat{ --accent:rgba(244,243,250,0.34); }
   @media (hover:hover) and (pointer:fine){
-    .ab-card:hover{ transform:rotate(0) translate(-2px,-2px); box-shadow:9px 9px 0 var(--sh); }
-    .ab-card:hover > h3, .ab-card:hover .ab-card-t{ text-shadow:-2px 0 var(--sh), 2px 0 var(--bd); }
+    .ab-card:hover{ transform:translateY(-2px); border-color:var(--accent); background:#1C1430; }
   }
-  .ab-card:focus-within{ transform:rotate(0); }
+  .ab-card:focus-within{ border-color:var(--accent); }
 
   @media (prefers-reduced-motion: reduce){
-    .ab-btn:hover, .ab-glitch, .ab-glitch::before, .ab-glitch::after, .ab-sq-1, .ab-sq-2, .ab-sq-3{ animation:none !important; }
+    .ab-glitch, .ab-glitch::before, .ab-glitch::after, .ab-sq-1, .ab-sq-2, .ab-sq-3{ animation:none !important; }
     .ab-glitch::before, .ab-glitch::after{ display:none; }
     .ab-card{ transform:none !important; }
   }

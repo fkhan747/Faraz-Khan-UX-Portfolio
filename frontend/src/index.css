@@ -243,61 +243,75 @@ h5.font-display, h6.font-display {
   --radius: 1rem;
 }
 
-/* Comic hard-shadow button: the hero's visual language, echoed on the one
-   button that appears on every page. Magenta fill, electric-yellow hard
-   shadow, presses INTO the page, glitch tic on hover. */
+/* Site button. Same shape as before (12px radius), now wearing the landing
+   hero's restrained treatment: solid accent fill, 1px hairline border, no
+   coloured hard shadow, no tilt. Class names kept so markup is unchanged. */
 .btn-comic {
-  background: #7B2FBE;
+  background: #F5379B;
   color: #fff;
-  border: 2px solid #F2D50F;
-  border-radius: 12px;
-  box-shadow: 4px 4px 0 #F0186C;
-  transition: transform 0.14s ease-out, box-shadow 0.14s ease-out;
+  border: 1px solid #F5379B;
+  border-radius: 9999px;
+  transition: background-color 0.14s ease-out, border-color 0.14s ease-out, transform 0.14s ease-out;
 }
-/* Ghost counterpart (footer / secondary actions): transparent fill, same
-   yellow border, purple hard shadow. Fills in on hover. */
+/* Ghost counterpart (footer / secondary actions): transparent fill, neutral
+   hairline border that brightens on hover. */
 .btn-comic-ghost {
   background: transparent;
   color: #F4F3FA;
-  border: 2px solid #F2D50F;
-  border-radius: 12px;
-  box-shadow: 4px 4px 0 #7B2FBE;
-  transition: transform 0.14s ease-out, box-shadow 0.14s ease-out, background 0.14s ease-out, color 0.14s ease-out;
+  border: 1px solid rgba(244, 243, 250, 0.28);
+  border-radius: 9999px;
+  transition: background-color 0.14s ease-out, border-color 0.14s ease-out, transform 0.14s ease-out, color 0.14s ease-out;
 }
 .btn-comic:active,
 .btn-comic-ghost:active {
   animation: none;
-  transform: translate(3px, 3px) scale(0.98);
+  transform: translateY(1px);
 }
-.btn-comic:active { box-shadow: 1px 1px 0 #F0186C; }
-.btn-comic-ghost:active { box-shadow: 1px 1px 0 #7B2FBE; }
 .btn-comic:focus-visible,
 .btn-comic-ghost:focus-visible {
-  outline: 2px solid #17C3E8;
+  outline: 2px solid #2E78FF;
   outline-offset: 3px;
 }
-/* Yellow CTA variant (Book a Call): yellow fill, magenta text + border,
-   purple hard shadow. */
-.btn-comic-yellow {
-  background: #F2D50F;
-  color: #F0186C;
-  border-color: #F0186C;
-  box-shadow: 4px 4px 0 #7B2FBE;
-}
-.btn-comic-yellow:active { box-shadow: 1px 1px 0 #7B2FBE; }
-/* Ghost tints so the footer's secondary actions read apart (cyan / magenta).
-   Fill with their own colour on hover. */
-.btn-comic-cyan { color: #17C3E8; border-color: #17C3E8; box-shadow: 4px 4px 0 #17C3E8; }
-.btn-comic-magenta { color: #F0186C; border-color: #F0186C; box-shadow: 4px 4px 0 #F0186C; }
-.btn-comic-cyan:active { box-shadow: 1px 1px 0 #17C3E8; }
-.btn-comic-magenta:active { box-shadow: 1px 1px 0 #F0186C; }
 @media (hover: hover) and (pointer: fine) {
-  .btn-comic-cyan:hover { background: #17C3E8; color: #100210; }
-  .btn-comic-magenta:hover { background: #F0186C; color: #fff; }
+  .btn-comic:hover { background: #D81F7E; border-color: #D81F7E; }
+  .btn-comic-ghost:hover { border-color: rgba(244, 243, 250, 0.6); }
+}
+/* Primary CTA variant (Book a Call): kept as the one saturated fill on the
+   page so the main action still leads. */
+/* ── ONE BUTTON, TWO STATES ─────────────────────────────────────────────
+   These were four different buttons: magenta filled, yellow filled, cyan
+   outline, magenta outline, in a 12px rect while the rest of the site used a
+   pill. Colour was carrying no meaning, it was just decoration, and it made
+   every group of buttons look like a group of unrelated things.
+
+   Now there is exactly one filled variant (the accent) and one ghost. The
+   colour modifiers are kept as no-ops so the ~20 call sites do not all have to
+   change, and so a future primary colour is one rule here rather than a sweep.
+
+   If you want Book a Call back in yellow, it is one declaration: give
+   .btn-comic-yellow its own background and border and nothing else moves. */
+.btn-comic-yellow,
+.btn-comic-cyan,
+.btn-comic-magenta {
+  background: transparent;
+  color: #F4F3FA;
+  border: 1px solid rgba(244, 243, 250, 0.28);
+  border-radius: 9999px;
 }
 @media (hover: hover) and (pointer: fine) {
-  .btn-comic:hover { animation: btn-comic-glitch 0.9s steps(2, end) infinite; }
-  .btn-comic-ghost:hover { background: #7B2FBE; color: #fff; animation: btn-comic-glitch 0.9s steps(2, end) infinite; }
+  .btn-comic-yellow:hover,
+  .btn-comic-cyan:hover,
+  .btn-comic-magenta:hover {
+    background: rgba(255, 255, 255, 0.09);
+    border-color: rgba(244, 243, 250, 0.6);
+    color: #fff;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  /* No hover glitch. A button that shakes and colour-fringes while the cursor
+     is on it fights the click it is asking for; the fill change is the state. */
+  .btn-comic-ghost:hover { background: #7B2FBE; color: #fff; }
 }
 @keyframes btn-comic-glitch {
   0%, 24%, 100% { text-shadow: none; transform: translate(0, 0); }
@@ -320,17 +334,15 @@ h5.font-display, h6.font-display {
   color: #F0186C;
   transition: transform 0.14s ease-out, box-shadow 0.14s ease-out, background 0.14s ease-out, color 0.14s ease-out;
 }
-/* The floating top bar + mobile sheet: white translucent fill with a neon
-   gradient border (magenta -> purple -> cyan) to match the comic/neon style. */
-.nav-shell {
-  border: 2px solid transparent;
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)) padding-box,
-    linear-gradient(120deg, #F0186C, #7B2FBE 55%, #17C3E8) border-box;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 0 40px -6px rgba(123, 47, 190, 0.42);
-}
+/* No bar. The nav used to sit in a white pill with a neon gradient border,
+   which put a light chip on a near-black page and fought every other surface.
+   The items now sit directly on the ground; only the mobile sheet still needs
+   a surface of its own, since it overlays content. */
+.nav-shell { background: transparent; border: 0; box-shadow: none;
+  backdrop-filter: none; -webkit-backdrop-filter: none; }
+.nav-sheet { background: rgba(26, 19, 38, 0.96); border: 1px solid rgba(255,255,255,0.10);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+
 .nav-comic:active { transform: translate(1px, 1px) scale(0.98); }
 .nav-comic:focus-visible { outline: 2px solid #17C3E8; outline-offset: 2px; }
 /* Current page ("pressed"): outer magenta border, a gap, then an inner purple
@@ -348,4 +360,351 @@ h5.font-display, h6.font-display {
 }
 @media (hover: hover) and (pointer: fine) {
   .nav-comic:hover { background: #7B2FBE; color: #fff; box-shadow: none; animation: btn-comic-glitch 0.9s steps(2, end) infinite; }
+}
+
+/* ── NAV ITEMS + GLOBAL ICON COLOUR ────────────────────────────────────
+   Nav items carry their state with weight and a rule, not a border or a
+   filled chip, so Book a Call stays the only bordered control in the bar. */
+.nav-plain { position: relative; }
+.nav-plain-current { color: #fff; }
+.nav-plain-current::after {
+  content: ""; position: absolute; left: 12px; right: 12px; bottom: 2px;
+  height: 2px; background: #F5379B; border-radius: 2px;
+}
+.nav-plain:focus-visible { outline: 2px solid #F5379B; outline-offset: 3px; border-radius: 6px; }
+
+/* Icons were grey in some places and white in others. On every dark surface
+   they are white; anything that must keep a colour opts out with
+   data-keep-colour, and the light case-study pages are excluded because they
+   set their own ink. */
+/* Icons that are NOT inside a control. Anything sitting next to a label in a
+   link or button takes that label's colour instead, which is handled below.
+   Excluding controls here rather than trying to out-specify this rule later:
+   the earlier attempt at that quietly lost and left white arrows on a yellow
+   pill with dark text. */
+.App svg:not([data-keep-colour]):not(.cd svg):not(.concept-light svg):not(a svg):not(button svg) {
+  color: #FFFFFF;
+}
+.cd svg, .concept-light svg { color: inherit; }
+
+/* Disclosure markers: the FAQ plus is a text glyph, styled at its call site
+   in Contact.jsx, so there is nothing to override here. */
+details > summary { list-style: none; }
+details > summary::-webkit-details-marker { display: none; }
+
+/* Chrome / page separator. 28px above and 28px below, matching the 28px the
+   header already sits from the top of the viewport, so the three gaps are one
+   value. Full-bleed via a negative pull out of the Container. */
+.nav-rule {
+  margin-top: 28px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.12);
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+/* ── EYEBROWS ──────────────────────────────────────────────────────────
+   One treatment everywhere. They were 10-11px at weight 600, coloured
+   magenta on some pages and white on others, which at that size read as
+   noise rather than as a label. Now larger, heavier and grey, so they sit
+   quietly above the thing they are labelling instead of competing with it.
+   Scoped to `.font-mono.uppercase`, the eyebrow pattern, so mono numerals
+   and code-ish labels keep their own sizing. */
+.font-mono.uppercase:not(a):not(button):not([role="button"]) {
+  font-size: 13px;
+  font-weight: 700;
+  color: #A79FB8;
+}
+/* Same treatment, darker ink, on the light case-study and concept pages. */
+.cd .font-mono.uppercase:not(a):not(button),
+.concept-light .font-mono.uppercase:not(a):not(button) { color: #6B665D; }
+
+/* The eyebrow glitch went with it: the chromatic fringe was making small
+   tracked-out caps genuinely hard to read. */
+.ab-glitch::before, .ab-glitch::after { display: none !important; }
+.ab-glitch { animation: none !important; }
+
+/* ── BOOK A CALL ───────────────────────────────────────────────────────
+   The one yellow control on the site. It gets its own class rather than the
+   shared -yellow modifier, so Résumé and the other buttons that used to be
+   yellow stay ghosts and this stays the single primary CTA. */
+.btn-cta,
+.btn-comic.btn-cta {
+  background: #F2D50F;
+  color: #100210;
+  border: 1px solid #F2D50F;
+  border-radius: 9999px;
+}
+@media (hover: hover) and (pointer: fine) {
+  .btn-cta:hover, .btn-comic.btn-cta:hover { background: #D9BE0A; border-color: #D9BE0A; }
+}
+
+/* ── ONE GHOST HOVER ───────────────────────────────────────────────────
+   .btn-comic-ghost was washing purple on hover while the other ghosts washed
+   white, which is why LinkedIn / Email / Résumé still felt like three
+   different buttons. One hover for every ghost. */
+@media (hover: hover) and (pointer: fine) {
+  .btn-comic-ghost:hover {
+    background: rgba(255, 255, 255, 0.09);
+    border-color: rgba(244, 243, 250, 0.6);
+    color: #fff;
+  }
+}
+
+/* ── ICONS INSIDE CONTROLS ─────────────────────────────────────────────
+   The global "icons are white" rule was overriding icons that sit next to a
+   label, so a button with grey text got a white arrow. Inside any link or
+   button an icon matches its own label instead. */
+.App a svg:not([data-keep-colour]),
+.App button svg:not([data-keep-colour]) { color: inherit; }
+/* An icon in a control always matches its own label. */
+
+/* The About page wraps itself in `.ag-page`, which sets `isolation: isolate`
+   and holds a fixed, full-viewport, opaque ambient layer. A stacking context
+   paints after the ordinary block and inline content around it, so the
+   footer's plain text was being painted underneath it while the footer logo,
+   which forms its own context, stayed visible. Giving the chrome its own
+   context puts it back on top, on every page. */
+footer { position: relative; z-index: 1; }
+
+/* ══ LIGHT THEME ═══════════════════════════════════════════════════════
+   Landing keeps the dark cover. Every other page runs on paper, driven by
+   `.theme-light` on the Layout root (see Layout.jsx).
+
+   This is a token remap, not a redesign: the pages keep their exact markup
+   and the dark palette they were written against is re-pointed here. Doing it
+   as overrides rather than editing every file keeps the landing safe, since
+   Chrome, Footer, CaseCover and the rest are shared with it.
+
+   Palette matches the case studies so the whole site is one surface:
+     paper #EFEDE7 · ink #171512 · muted #6B665D · hairline #DCD7CC          */
+.theme-light { color: #171512; }
+
+/* Grounds and surfaces */
+.theme-light .bg-\[\#100210\] { background-color: #EFEDE7; }
+/* NOT remapped: this is the case-card root, which sits behind a full-bleed
+   photo. Turning it white put the white card titles onto a white surface. */
+.theme-light .bg-white\/10   { background-color: rgba(23,21,18,0.06); }
+.theme-light .bg-white\/5    { background-color: rgba(23,21,18,0.04); }
+.theme-light .bg-white\/\[0\.04\] { background-color: rgba(23,21,18,0.04); }
+
+/* Ink */
+.theme-light .text-\[\#F4F3FA\],
+.theme-light .text-\[\#F7F5FF\] { color: #171512; }
+.theme-light .text-\[\#A29CB4\] { color: #6B665D; }
+.theme-light .text-white       { color: #171512; }
+.theme-light .text-white\/85,
+.theme-light .text-white\/80,
+.theme-light .text-white\/75,
+.theme-light .text-white\/70   { color: #171512; }
+.theme-light .text-white\/55,
+.theme-light .text-white\/50,
+.theme-light .text-white\/45,
+.theme-light .text-white\/40   { color: #6B665D; }
+
+/* Hairlines */
+.theme-light .border-white\/25,
+.theme-light .border-white\/20,
+.theme-light .border-white\/15,
+.theme-light .border-white\/12,
+.theme-light .border-white\/10,
+.theme-light .border-white\/5  { border-color: #DCD7CC; }
+.theme-light .divide-white\/10 > * + * { border-color: #DCD7CC; }
+
+/* Accents that fail on paper. Magenta #F5379B is 3.04:1 and #F0186C similar,
+   so small text moves to the deepened magenta the concepts already use. */
+.theme-light .text-\[\#F5379B\],
+.theme-light .text-\[\#F0186C\] { color: #C71E73; }
+.theme-light .text-\[\#17C3E8\] { color: #0E7490; }
+.theme-light .text-\[\#9B4DE0\] { color: #6B21A8; }
+.theme-light .text-\[\#21BA45\] { color: #15803D; }
+
+/* Chrome */
+.theme-light .nav-rule { background: rgba(23,21,18,0.12); }
+.theme-light .nav-plain { color: #6B665D; }
+.theme-light .nav-plain:hover, .theme-light .nav-plain-current { color: #171512; }
+.theme-light .nav-sheet { background: rgba(255,255,255,0.97); border-color: #DCD7CC; }
+.theme-light [data-testid="chrome-logo"] svg { color: #171512; }
+
+/* Icons: white was for the dark ground. On paper they are ink, and controls
+   still inherit their own label colour (rule further up). */
+.theme-light svg:not([data-keep-colour]):not(a svg):not(button svg) { color: #171512; }
+
+/* Shared card surface used by exhibit components across the site. */
+.theme-light .dark-card { background: #FFFFFF; border: 1px solid #DCD7CC; }
+.theme-light .dark-card::before, .theme-light .dark-card::after { display: none; }
+
+/* Ghost buttons invert with the ground. */
+.theme-light .btn-comic-ghost,
+.theme-light .btn-comic-cyan,
+.theme-light .btn-comic-magenta,
+.theme-light .btn-comic-yellow { color: #171512; border-color: #DCD7CC; }
+@media (hover: hover) and (pointer: fine) {
+  .theme-light .btn-comic-ghost:hover,
+  .theme-light .btn-comic-cyan:hover,
+  .theme-light .btn-comic-magenta:hover,
+  .theme-light .btn-comic-yellow:hover {
+    background: rgba(23,21,18,0.05); border-color: #B9B2A5; color: #171512;
+  }
+}
+/* The case-study cards keep their own dark image overlays: those sit on
+   photography, not on the page. */
+.theme-light .cover-img ~ div { }
+
+/* Comic card panels from neonStyle: the last dark surfaces on the paper pages. */
+.theme-light .ab-card,
+.theme-light .ab-flat { background: #FFFFFF; border-color: #DCD7CC; }
+.theme-light .ab-card::before, .theme-light .ab-card::after { display: none; }
+
+/* Eyebrows: grey reads on the dark cover, but needs the darker muted on paper. */
+.theme-light .font-mono.uppercase:not(a):not(button) { color: #6B665D; }
+
+/* Tiles that are dark ON PURPOSE keep their light text. The global ink remap
+   above would otherwise put dark type on a dark panel. */
+.theme-light .ag-tile-ink,
+.theme-light .ag-tile-ink * { color: #F4F2F8 !important; }
+.theme-light .ag-tile-ink .font-mono.uppercase { color: #C9C2D8 !important; }
+
+/* Text that sits on photography or a dark scrim stays white on both themes.
+   The theme remap works on page surfaces; an image is not a page surface. */
+.theme-light [data-on-dark],
+.theme-light [data-on-dark] * { color: #FFFFFF !important; }
+
+/* ── LIGHT CHROME + REMAINING LIGHT-THEME FIXES ────────────────────────── */
+
+/* Footer logo: the gradient wordmark is a dark-ground device. On paper it is
+   solid ink, and the glitch animation is off for the same reason it came off
+   the eyebrows: it makes a small mark hard to read. */
+.theme-light footer [data-testid="chrome-logo"] svg *,
+.theme-light footer a svg *,
+.theme-light footer .fk-logo * { fill: #171512 !important; stroke: none !important; }
+.theme-light footer svg,
+.theme-light footer svg * { animation: none !important; filter: none !important; }
+.theme-light footer .ab-glitch,
+.theme-light footer .ab-glitch::before,
+.theme-light footer .ab-glitch::after { animation: none !important; display: revert; }
+
+/* Card corners. The real mismatch was not the card but its LINK WRAPPER: the
+   anchor clips at 14px while the card inside rounds at 24px, so the wrapper
+   shaved a sliver off each corner. Matching the wrapper to the card fixes it
+   without retuning every radius on the site. */
+a:has(> .relative.overflow-hidden),
+a:has(.cover-img) { border-radius: 24px; }
+
+/* Case-study card titles sit on photography and stay white on both themes,
+   including the concept cards, which use their own markup. */
+.theme-light .cover-img ~ div,
+.theme-light .cover-img ~ div *,
+.theme-light .group:hover .cover-img ~ div * { color: #FFFFFF !important; }
+
+/* The featured demo panel is a dark surface by design. Its text stays light,
+   and it must not swap theme on hover. */
+.theme-light .ab-card.ab-flat:hover,
+.theme-light .ab-card:hover { background: #FFFFFF; }
+
+/* Footer logo, light theme. The glitch is driven by .fk-logo-* wrappers in
+   Footer's own style block, not by the svg, which is why an svg-targeted rule
+   did nothing. Kill the animation, drop the magenta/cyan offset layers (they
+   use mix-blend-mode: screen and only register on a dark ground), and set the
+   base mark to ink. */
+.theme-light .fk-logo-base,
+.theme-light .fk-logo-mag,
+.theme-light .fk-logo-cyan { animation: none !important; }
+.theme-light .fk-logo-layer { display: none !important; }
+.theme-light .fk-logo-base svg,
+.theme-light .fk-logo-base svg * { fill: #171512 !important; stroke: none !important; }
+.theme-light .fk-logo:hover .fk-logo-base { animation: none !important; }
+
+/* ── LIGHT-THEME AUDIT FIXES ───────────────────────────────────────────
+   Three clusters found by sweeping every text node on the paper pages and
+   resolving it against its real composited backdrop:
+
+     /projects  11x  light ink on .ab-card, which the remap turned white
+     /about     13x  chips and labels still carrying dark-theme ink
+     /contact    7x  .ab-card panels that never took the white fill
+
+   The first and third are the same root cause: the alpha variants
+   (text-[#F4F3FA]/85 and friends) are separate Tailwind classes, so remapping
+   the solid token missed them. Handled by surface here rather than by chasing
+   each alpha step. */
+.theme-light .ab-card,
+.theme-light .ab-card.ab-flat { background: #FFFFFF !important; border-color: #DCD7CC !important; }
+.theme-light .ab-card > *,
+.theme-light .ab-card :where(h1,h2,h3,h4,p,span,li,div,a,strong,em) {
+  color: #171512;
+}
+/* Secondary text inside those cards keeps a muted step rather than flattening
+   to a single ink. */
+.theme-light .ab-card :where(.text-sm, .text-xs, [class*="/85"], [class*="/75"], [class*="/70"]) {
+  color: #6B665D;
+}
+.theme-light .ab-card :where(a:hover) { color: #C71E73; }
+
+/* About: chips and small labels were still on dark-theme ink. */
+.theme-light .ag-chip,
+.theme-light .ag-chip * { color: #171512; }
+.theme-light .ag-page :where(.text-xs, .text-sm) { color: #6B665D; }
+
+/* Anything explicitly marked as sitting on a dark surface is exempt from all
+   of the above, so the ink tile and the photo cards keep their light type. */
+.theme-light [data-on-dark],
+.theme-light [data-on-dark] *,
+.theme-light .ag-tile-ink,
+.theme-light .ag-tile-ink * { color: #F4F2F8 !important; }
+
+/* ══ LIGHT-THEME PUNCH LIST ════════════════════════════════════════════ */
+
+/* (12) Squiggles are a landing-page device. Everywhere else they are noise. */
+.theme-light .ab-sq-1,
+.theme-light .ab-sq-2,
+.theme-light .ab-sq-3,
+.theme-light [class*="ab-sq"] { display: none !important; }
+
+/* (1) Primary buttons on light: magenta fill takes white type and a white
+   icon. The ink remap had turned the label dark on a saturated fill. */
+.theme-light .btn-comic:not(.btn-cta):not(.btn-comic-ghost):not(.btn-comic-cyan):not(.btn-comic-magenta):not(.btn-comic-yellow),
+.theme-light .btn-comic:not(.btn-cta):not(.btn-comic-ghost) *,
+.theme-light .ag-btn:not(.ag-btn-ghost),
+.theme-light .ag-btn:not(.ag-btn-ghost) * { color: #FFFFFF !important; }
+
+/* (2) The audit checklist tiles inside the featured demo panel. The remap
+   dropped them to a 4% ink wash, which is invisible on white; they need a
+   fill AND a hairline to read as containers. */
+.theme-light .ab-card [class*="bg-white/"],
+.theme-light .ab-card [class*="bg-black/"] {
+  background: #F4F2EC !important;
+  border: 1px solid #DCD7CC !important;
+}
+
+/* (4)(6) Pastel tile gradients, much lighter. These were carrying most of the
+   colour on the page and reading as heavy next to the paper ground. */
+.theme-light .ag-tile-rose { background: linear-gradient(140deg, rgba(255,214,232,0.30), rgba(255,255,255,0.92)) !important; }
+.theme-light .ag-tile-sky  { background: linear-gradient(140deg, rgba(206,229,255,0.30), rgba(255,255,255,0.92)) !important; }
+.theme-light .ag-tile-mint { background: linear-gradient(140deg, rgba(206,242,225,0.30), rgba(255,255,255,0.92)) !important; }
+.theme-light .ag-tile      { background: linear-gradient(140deg, rgba(255,255,255,0.96), rgba(255,255,255,0.86)) !important; }
+
+/* (5) The one dark tile has no reason to exist on a light page. */
+.theme-light .ag-tile-ink { background: linear-gradient(140deg, rgba(255,255,255,0.96), rgba(255,255,255,0.86)) !important; }
+.theme-light .ag-tile-ink,
+.theme-light .ag-tile-ink * { color: #171512 !important; }
+.theme-light .ag-tile-ink .font-mono.uppercase { color: #6B665D !important; }
+
+/* (8) Ghost buttons need a border you can actually see on paper. */
+.theme-light .ag-btn-ghost,
+.theme-light .btn-comic-ghost { border-color: #B9B2A5 !important; }
+
+/* (9) The LinkedIn glyph sits on a saturated purple tile. */
+.theme-light .bg-\[\#7B2FBE\] svg,
+.theme-light .bg-\[\#7B2FBE\] svg * { color: #FFFFFF !important; fill: currentColor !important; }
+
+/* (10) Form controls were still on the dark fill. */
+.theme-light input, .theme-light textarea, .theme-light select {
+  background: #FFFFFF !important;
+  border: 1px solid #DCD7CC !important;
+  color: #171512 !important;
+}
+.theme-light input::placeholder, .theme-light textarea::placeholder { color: #8A8478 !important; }
+.theme-light label, .theme-light .ab-label { color: #6B665D !important; }
+.theme-light input:focus, .theme-light textarea:focus, .theme-light select:focus {
+  border-color: #C71E73 !important; outline: 2px solid rgba(199,30,115,0.25); outline-offset: 1px;
 }

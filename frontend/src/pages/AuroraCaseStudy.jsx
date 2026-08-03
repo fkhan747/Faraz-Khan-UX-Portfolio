@@ -152,7 +152,7 @@ export default function AuroraCaseStudy() {
           ))}
         </div>
 
-        <Reveal delay={0.06} className="mt-8 rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
+        <Reveal delay={0.06} className="mt-8 rounded-3xl bg-white p-8 md:p-10">
           <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3 text-[#C71E73]">{au.overview.contextTitle}</p>
           <p className="font-display text-lg md:text-xl font-bold leading-snug text-black">{au.overview.contextBody}</p>
         </Reveal>
@@ -178,7 +178,7 @@ export default function AuroraCaseStudy() {
         </Reveal>
 
         <Reveal delay={0.06}>
-          <blockquote className="rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
+          <blockquote className="rounded-3xl bg-white p-8 md:p-10">
             <p className="font-display text-xl md:text-3xl italic leading-snug text-black">&ldquo;{au.problem.quote}&rdquo;</p>
             <footer className="mt-4 text-xs font-mono uppercase tracking-widest text-[#F5379B]">{au.problem.quoteAttribution}</footer>
           </blockquote>
@@ -237,7 +237,7 @@ export default function AuroraCaseStudy() {
           </ul>
         </Reveal>
 
-        <Reveal delay={0.06} className="mt-10 rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
+        <Reveal delay={0.06} className="mt-10 rounded-3xl bg-white p-8 md:p-10">
           <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3 text-[#C71E73]">★ key insight</p>
           <p className="font-display text-xl md:text-2xl font-bold leading-snug max-w-6xl text-black">{au.problem.keyInsight}</p>
         </Reveal>
@@ -342,7 +342,7 @@ export default function AuroraCaseStudy() {
         </Reveal>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {au.insights.designGoals.map((g, i) => (
-            <Reveal key={g.t} delay={(i % 2) * 0.06} className={`rounded-3xl p-6 ${i % 2 === 0 ? "dark-card" : "bg-white border-2 border-[#F5379B]"}`}>
+            <Reveal key={g.t} delay={(i % 2) * 0.06} className={`rounded-3xl p-6 ${i % 2 === 0 ? "dark-card" : "bg-white"}`}>
               <div className={`font-mono text-sm uppercase tracking-widest ${i % 2 === 0 ? "text-white" : "text-[#C71E73]"}`}>0{i + 1}</div>
               <h3 className={`mt-2 font-display text-lg font-black ${i % 2 === 0 ? "" : "text-[#F5379B]"}`}>{g.t}</h3>
               <p className={`mt-2 text-sm leading-relaxed ${i % 2 === 0 ? "" : "text-black"}`}>{g.d}</p>
@@ -441,11 +441,11 @@ export default function AuroraCaseStudy() {
           <AuroraDesignSystem />
         </Reveal>
 
-        <Reveal delay={0.06} className="mt-12 rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
+        <Reveal delay={0.06} className="mt-12 rounded-3xl bg-white p-8 md:p-10">
           <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#C71E73] mb-3">system outcomes</p>
           <p className="font-display text-xl md:text-2xl leading-snug text-black">{au.designSystem.systemOutcomes}</p>
         </Reveal>
-        <Reveal delay={0.06} className="mt-6 rounded-3xl bg-white border-2 border-[#F5379B] p-8 md:p-10">
+        <Reveal delay={0.06} className="mt-6 rounded-3xl bg-white p-8 md:p-10">
           <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3 text-[#C71E73]">cross-product collaboration</p>
           <p className="font-display text-lg md:text-xl font-bold leading-snug text-black">{au.designSystem.crossProduct}</p>
         </Reveal>

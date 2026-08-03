@@ -11,12 +11,38 @@ import { useVaultSrc } from "./VaultImage";
 const LightboxContext = createContext({ open: () => {}, close: () => {} });
 export const useLightbox = () => useContext(LightboxContext);
 
+/* One image inside the overlay. Split into its own component so each entry of a
+   group can resolve its own vault URL (hooks cannot run in a loop). */
+function LightboxImage({ src, alt, count = 1 }) {
+  const resolved = useVaultSrc(src);
+  /* Each image is capped to its share of the viewport width as well as its
+     height, so a group of tall phone screens fits on one row instead of
+     wrapping and overflowing off the top of the screen. */
+  const style = count > 1
+    ? { maxWidth: `${Math.floor(86 / count)}vw`, maxHeight: "82vh" }
+    : { maxWidth: "95vw", maxHeight: "85vh" };
+  return (
+    <img
+      src={resolved || src}
+      alt={alt || ""}
+      onClick={(e) => e.stopPropagation()}
+      style={style}
+      className="w-auto h-auto object-contain rounded-lg shadow-[0_40px_80px_-24px_rgba(7,94,253,0.45)] bg-white"
+    />
+  );
+}
+
 export function LightboxProvider({ children }) {
   const [item, setItem] = useState(null);
   const open = useCallback((it) => setItem(it), []);
   const close = useCallback(() => setItem(null), []);
-  // Encrypted case-study images resolve through the vault; plain paths pass through.
-  const resolvedSrc = useVaultSrc(item?.src);
+
+  /* Two shapes are accepted:
+       open({ src, alt, caption })              one image
+       open({ items: [{src, alt}], caption })   a group, shown side by side
+     The group form exists so a panel holding several screens can expand as one
+     unit rather than making the reader open each screen separately. */
+  const group = Array.isArray(item?.items) ? item.items : null;
 
   useEffect(() => {
     if (!item) return;
@@ -50,12 +76,18 @@ export function LightboxProvider({ children }) {
           >
             <X size={20} />
           </button>
-          <img
-            src={resolvedSrc || item.src}
-            alt={item.alt || ""}
-            onClick={(e) => e.stopPropagation()}
-            className="max-w-[95vw] max-h-[85vh] w-auto h-auto object-contain rounded-lg shadow-[0_40px_80px_-24px_rgba(7,94,253,0.45)] bg-white"
-          />
+          {group ? (
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="flex items-center justify-center gap-3 md:gap-6 max-w-[95vw] max-h-[85vh]"
+            >
+              {group.map((g) => (
+                <LightboxImage key={g.src} src={g.src} alt={g.alt} count={group.length} />
+              ))}
+            </div>
+          ) : (
+            <LightboxImage src={item.src} alt={item.alt} />
+          )}
           {item.caption && (
             <p
               onClick={(e) => e.stopPropagation()}

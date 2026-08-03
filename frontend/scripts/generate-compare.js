@@ -12,7 +12,7 @@ const AFTER = path.join(AUDIT, 'after');
 const LABELS = {
   landing: 'Landing', projects: 'Work / Projects', about: 'About', contact: 'Contact',
   'case-finvista': 'Case · FinVista', 'case-aurora': 'Case · Aurora',
-  'case-meridian': 'Case · Meridian', 'case-joat': 'Case · Jack of All Threads',
+  'case-meridian': 'Case · Meridian', 'case-threadfold': 'Case · Threadfold',
   'case-slate': 'Case · Slate', 'agentic-workflow': 'Agentic Audit demo',
 };
 // Where the fixes are most visible, called out per route.
@@ -24,11 +24,11 @@ const NOTES = {
   'case-finvista': 'Wordmark FinVista casing; NDA disclosure; jargon softened (auto-layout handoff, out-of-scope).',
   'case-aurora': 'Engineering jargon removed across the page (migration language, Azure DevOps, streaming/backend); NDA disclosure; goal-number contrast fixed.',
   'case-meridian': 'Leaked authoring note removed; jargon softened (data contract, CRM/SIS, semantic layer); principle 01 reconciled with the Overview.',
-  'case-joat': 'Minor jargon fix (profit "calc" to "figure").',
+  'case-threadfold': 'Minor jargon fix (profit "calc" to "figure").',
   'case-slate': 'Prototype rebranded RecruitOS to Slate; principle 02/04 eyebrows now visible; prototype hint fixed; jargon softened.',
   'agentic-workflow': 'No content change (reference).',
 };
-const ROUTE_ORDER = ['landing', 'projects', 'about', 'contact', 'case-finvista', 'case-aurora', 'case-meridian', 'case-joat', 'case-slate', 'agentic-workflow'];
+const ROUTE_ORDER = ['landing', 'projects', 'about', 'contact', 'case-finvista', 'case-aurora', 'case-meridian', 'case-threadfold', 'case-slate', 'agentic-workflow'];
 
 function shots(dir) {
   if (!fs.existsSync(dir)) return [];

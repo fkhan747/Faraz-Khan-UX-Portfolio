@@ -1,5 +1,5 @@
 // Post-build vault step (runs after react-snap):
-// 1. Encrypts every screenshot in build/{finvista,aurora,joat}/ in place
+// 1. Encrypts every screenshot in build/{finvista,aurora,threadfold}/ in place
 //    (cover.jpg excluded — it is the public card teaser), so the deployed
 //    site serves those files as AES-GCM ciphertext.
 // 2. Leak check: samples long strings from each study's decrypted data and
@@ -13,7 +13,7 @@ import { loadPassword, deriveKey, encryptBytes, isEncrypted, isDormant } from ".
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const BUILD = join(ROOT, "build");
-const LOCKED_DIRS = ["finvista", "aurora", "joat"];
+const LOCKED_DIRS = ["finvista", "aurora", "threadfold"];
 const PLAIN_ALLOWLIST = new Set(["cover.jpg"]);
 
 if (isDormant()) {

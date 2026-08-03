@@ -177,7 +177,7 @@ export default function MeridianFiveProblems() {
       {rows.map((r) => (
         <div key={r.num} className="dark-card rounded-3xl p-6 grid md:grid-cols-[1.1fr_1.4fr] gap-6 items-center">
           <div>
-            <div className="font-display text-5xl md:text-6xl font-black leading-none tracking-tight" style={{ color: "#F5379B" }}>
+            <div className="font-display text-5xl md:text-6xl font-black leading-none tracking-tight" style={{ color: "var(--acc, #F5379B)" }}>
               {r.num}
             </div>
             <div className="mt-3 font-display text-lg font-bold text-[#F4F3FA]">{r.label}</div>
@@ -185,28 +185,19 @@ export default function MeridianFiveProblems() {
           </div>
 
           <div className="flex items-center gap-3">
-            <div className="flex-1 relative bg-white rounded-lg p-3 pt-5 min-h-[178px] flex flex-col">
-              <span
-                className="absolute -top-2.5 left-3 font-mono text-[9.5px] font-semibold uppercase tracking-widest px-2.5 py-[3px] rounded-full text-white"
-                style={{ background: "#8C8C8C" }}
-              >
-                Before
-              </span>
+            {/* No Before / After pills: the arrow between the panels and the
+                grey-to-black caption weight already carry the direction, and
+                Faraz wants them gone across every case study. */}
+            <div className="flex-1 relative bg-white rounded-lg p-3 min-h-[178px] flex flex-col">
               <div className="text-[11.5px] font-semibold mb-2.5" style={{ color: "#8A8A8A" }}>{r.beforeTitle}</div>
               <div className="flex-1 flex flex-col justify-center">
                 <r.Before />
               </div>
             </div>
 
-            <ArrowRight className="w-6 h-6 shrink-0" style={{ color: "#F5379B" }} />
+            <ArrowRight className="w-6 h-6 shrink-0" style={{ color: "var(--acc, #F5379B)" }} />
 
-            <div className="flex-1 relative bg-white rounded-lg p-3 pt-5 min-h-[178px] flex flex-col">
-              <span
-                className="absolute -top-2.5 left-3 font-mono text-[9.5px] font-semibold uppercase tracking-widest px-2.5 py-[3px] rounded-full text-white"
-                style={{ background: "#004380" }}
-              >
-                After
-              </span>
+            <div className="flex-1 relative bg-white rounded-lg p-3 min-h-[178px] flex flex-col">
               <div className="text-[11.5px] font-semibold mb-2.5" style={{ color: "#1B1C1D" }}>{r.afterTitle}</div>
               <div className="flex-1 flex flex-col justify-center">
                 <r.After />

@@ -39,7 +39,7 @@ export default function MeridianIA() {
         className="w-[2px] h-6 rounded-full"
         style={{
           background:
-            "linear-gradient(180deg, #F5379B, rgba(245,55,155,0.25))",
+            "linear-gradient(180deg, var(--acc, #F5379B), rgba(245,55,155,0.25))",
         }}
       />
     </div>
@@ -126,7 +126,8 @@ export default function MeridianIA() {
         ))}
       </div>
 
-      <p className="text-center text-[12.5px] text-[#A29CB4] mt-5 max-w-2xl">
+      {/* Wide measure so this reads as one line at desktop, per Faraz. */}
+      <p className="text-center text-[12.5px] text-[#A29CB4] mt-5 max-w-4xl">
         Global filters (year, term, <b className="text-[#F5379B]">level</b>,
         decision plan, cohort) carry across every screen, so a number always
         means the same thing.

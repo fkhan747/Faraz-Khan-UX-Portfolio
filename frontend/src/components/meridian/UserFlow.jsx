@@ -12,7 +12,7 @@ export default function MeridianFlow() {
   const lanes = [
     {
       label: "Leadership, steps 1 to 2",
-      body: "Glance, trust, leave. The cockpit has already done the thinking, so a provost gets the headline in ninety seconds without touching a filter.",
+      body: "Glance, trust, leave. The cockpit has already done the thinking, so a dean gets the headline in ninety seconds without touching a filter.",
       box: "bg-[#075EFD]/8 border border-[#075EFD]/30",
       lh: "text-[#5B9BFF]",
     },

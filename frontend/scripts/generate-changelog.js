@@ -76,7 +76,7 @@ const SECTIONS = [
     ],
   },
   {
-    id: 'finvista-slate-joat', title: 'FinVista, Slate & JOAT — jargon', sub: 'The remaining confirmed engineering terms.',
+    id: 'finvista-slate-threadfold', title: 'FinVista, Slate & THREADFOLD — jargon', sub: 'The remaining confirmed engineering terms.',
     rows: [
       { cat: 'Jargon', what: 'FinVista — out of scope', before: `Third-party API integration logic`, after: `Connections to outside services, behind the scenes` },
       { cat: 'Jargon', what: 'FinVista — design system', before: `I built them on auto-layout and variants, so engineering could pull each one straight into the build.`, after: `I built them on auto-layout and variants, so every component could be recreated exactly as designed, with nothing lost in handoff.` },
@@ -86,7 +86,7 @@ const SECTIONS = [
       { cat: 'Jargon', what: 'Slate — competitive table', before: `NL search across desk`, after: `Plain-English search across the desk` },
       { cat: 'Jargon', what: 'Slate — the gap', before: `Incumbents are systems of record with AI bolted on; point tools own a feature, not the workflow.`, after: `Incumbents are filing cabinets with AI bolted on; point tools own a feature, not the workflow.` },
       { cat: 'Jargon', what: 'Slate — lifecycle', before: `Add candidates via resume / profile → structured records.`, after: `Add candidates from a resume or profile; each becomes a clean, complete candidate card.` },
-      { cat: 'Jargon', what: 'JOAT — Set Your Price', before: `...drive a live minimum-profit calc; the no-risk promise sits beside the CTA.`, after: `...update a live minimum-profit figure; the no-risk promise sits beside the CTA.` },
+      { cat: 'Jargon', what: 'THREADFOLD — Set Your Price', before: `...drive a live minimum-profit calc; the no-risk promise sits beside the CTA.`, after: `...update a live minimum-profit figure; the no-risk promise sits beside the CTA.` },
     ],
   },
   {

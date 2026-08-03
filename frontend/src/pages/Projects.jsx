@@ -3,7 +3,6 @@ import { Sparkles, ArrowUpRight, ArrowRight, Check, ShieldCheck } from "lucide-r
 import { projects, concepts } from "../data/content";
 import { Container, Grid } from "../components/Grid";
 import CaseCover from "../components/CaseCover";
-import RequestAccessPill from "../components/RequestAccessPill";
 import Seo from "../components/Seo";
 import { NEON_CSS as AB_CSS, Squiggle as AbSquiggle } from "../components/neonStyle";
 
@@ -66,7 +65,7 @@ export default function Projects() {
   return (
     <div data-testid="projects-page">
       <style>{AB_CSS}</style>
-      <Seo title="My Work" description="Selected UX case studies by Faraz Khan: FinVista, Aurora, Meridian, Jack of All Threads, and the Slate AI-native product concept." />
+      <Seo title="My Work" description="Selected UX case studies by Faraz Khan: FinVista, Aurora, Meridian, Threadfold, and the Slate AI-native product concept." />
       <section className="pt-12 pb-10 relative overflow-hidden">
         <AbSquiggle className="ab-sq-1" color="#F0186C" rot={-32} />
         <span className="hidden md:block absolute right-[26%] top-16 z-0"><AbSquiggle className="ab-sq-2" color="#9B4DE0" rot={20} /></span>
@@ -102,7 +101,6 @@ export default function Projects() {
                 <Link to={`/case/${p.slug}`} className="group block ab-card overflow-hidden">
                   <CaseCover img={p.coverImg} title={p.title} subtitle={p.subtitle} year={p.year} locked titleAs="h2" />
                 </Link>
-                <RequestAccessPill slug={p.slug} />
               </div>
             ) : (
               <Link
@@ -173,7 +171,7 @@ export default function Projects() {
                   target="_blank"
                   rel="noopener noreferrer"
                   data-testid={`concept-prototype-${c.slug}`}
-                  className="absolute top-4 left-4 z-10 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#F2D50F] text-[#100210] text-[10px] font-mono font-bold uppercase tracking-widest shadow-[3px_3px_0_#F0186C] hover:-translate-y-0.5 transition-transform"
+                  className="absolute top-4 left-4 z-10 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#F2D50F] text-[#100210] text-[10px] font-mono font-bold uppercase tracking-widest hover:-translate-y-0.5 transition-transform [&_svg]:text-[#100210]"
                 >
                   {c.status} <ArrowUpRight size={13} />
                 </a>

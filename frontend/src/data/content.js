@@ -18,7 +18,7 @@ export const PROFILE = {
 const F = (n) => `/finvista/${n}`;
 
 // Projects: 4 client case studies. Meridian leads and is open to explore.
-// FinVista, Aurora and Jack of All Threads are confidential client work, gated
+// FinVista, Aurora and Threadfold are confidential client work, gated
 // behind a password (see src/lib/caseLock.js) — `locked: true` drives the lock
 // treatment on the cards and the route-level CaseStudyGate.
 export const projects = [
@@ -73,15 +73,15 @@ export const projects = [
     locked: true,
   },
   {
-    slug: "joat",
-    title: "Jack of All Threads",
+    slug: "threadfold",
+    title: "Threadfold",
     subtitle: "India's First Crowdfunding Platform for Custom Apparel",
-    client: "Jack of All Threads (Bangalore)",
+    client: "Threadfold (Bangalore)",
     role: "Senior UX / UI Designer",
     services: "Product Design, UX, Visual Design",
     year: "2015",
-    cover: "/joat/cover.jpg",
-    coverImg: "/joat/cover.jpg",
+    cover: "/threadfold/cover.jpg",
+    coverImg: "/threadfold/cover.jpg",
     color: "#F25C4D",
     tag: "case study",
     summary:

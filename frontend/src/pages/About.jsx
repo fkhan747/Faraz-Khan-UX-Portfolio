@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import HeroFusion from "../components/hero/HeroFusion";
 import {
   Mail,
   Linkedin,
@@ -17,19 +16,17 @@ import {
   Award,
   GraduationCap,
   Sparkles,
+  ArrowUpRight,
 } from "lucide-react";
 import { PROFILE } from "../data/content";
-import { Container, Grid } from "../components/Grid";
+import { Container } from "../components/Grid";
 import BookCallButton from "../components/BookCallButton";
 import Seo from "../components/Seo";
-import { NEON_CSS as AB_CSS, Squiggle as AbSquiggle } from "../components/neonStyle";
+import Reveal from "../components/Reveal";
+import { GLASS_CSS, ACCENT, MUTED } from "./aboutGlass";
 
-/* The last word of the About headline rotates, like the landing's slot line. */
-const KINETIC_WORDS = ["systems.", "dashboards.", "decisions.", "interfaces."];
-
-/* Icon accent cycle: the four-pillar palette (UX magenta, Data Viz cyan,
-   Visual Design yellow, AI purple) rotated across the competency grid. */
-const ICON_COLORS = ["#F0186C", "#17C3E8", "#F2D50F", "#7B2FBE"];
+/* One icon stroke weight across the page, so the icon set reads as a family. */
+const STROKE = 1.75;
 
 const COMPETENCIES = [
   { icon: Lightbulb, t: "User Experience Strategy & Leadership", d: "Setting UX vision, OKRs, and design culture across multi-product orgs." },
@@ -42,36 +39,19 @@ const COMPETENCIES = [
   { icon: Repeat, t: "Continuous Improvement & UX Optimization", d: "Post-launch loops: heuristic audits, A/B testing, accessibility, and visual QA." },
 ];
 
-// Each tool carries a Simple Icons slug for its brand logo (rendered from
-// cdn.simpleicons.org). Any unknown slug falls back to text-only via onError.
 const TOOLS = {
   design: [
-    { name: "Figma Suite", slug: "figma" },
-    { name: "Adobe XD", slug: "adobexd" },
-    { name: "Illustrator", slug: "adobeillustrator" },
-    { name: "InVision", slug: "invision" },
+    { name: "Figma Suite" }, { name: "Adobe XD" }, { name: "Illustrator" }, { name: "InVision" },
   ],
   development: [
-    { name: "HTML", slug: "html5" },
-    { name: "CSS", slug: "css3" },
-    { name: "Power BI", slug: "powerbi" },
-    { name: "Tableau", slug: "tableau" },
-    { name: "MicroStrategy", slug: "microstrategy" },
+    { name: "HTML" }, { name: "CSS" }, { name: "Power BI" }, { name: "Tableau" }, { name: "MicroStrategy" },
   ],
   collaboration: [
-    { name: "Jira", slug: "jira" },
-    { name: "Confluence", slug: "confluence" },
-    { name: "Slack", slug: "slack" },
-    { name: "Teams", slug: "microsoftteams" },
-    { name: "Miro", slug: "miro" },
+    { name: "Jira" }, { name: "Confluence" }, { name: "Slack" }, { name: "Teams" }, { name: "Miro" },
   ],
   ai: [
-    { name: "VS Code", slug: "visualstudiocode" },
-    { name: "Claude AI", slug: "claude" },
-    { name: "Claude Code", slug: "claude" },
-    { name: "GitHub", slug: "github" },
-    { name: "ChatGPT", slug: "openai" },
-    { name: "Codex", slug: "openai" },
+    { name: "VS Code" }, { name: "Claude AI" }, { name: "Claude Code" },
+    { name: "GitHub" }, { name: "ChatGPT" }, { name: "Codex" },
   ],
 };
 
@@ -85,7 +65,6 @@ const CORE_SKILLS = [
 
 const INDUSTRIES = ["BFSI", "Software & High Tech", "Consumer Tech", "Education & Tech", "E-commerce"];
 
-// --- Résumé data (merged in from the former /resume page) ---
 const RESUME_PATH = "/files/Faraz_Khan_Resume.pdf";
 
 const EXPERIENCE = [
@@ -132,7 +111,7 @@ const EXPERIENCE = [
   },
   {
     role: "Senior UX / UI Designer",
-    org: "Jack of All Threads",
+    org: "Threadfold",
     time: "Feb 2015 - Mar 2016",
     place: "Bengaluru, India",
     points: [
@@ -163,7 +142,7 @@ const EXPERIENCE = [
 ];
 
 const CERTS = [
-  { t: "Advanced Certificate in UI/UX with Agentic AI & Gen-AI", s: "IIT Madras · pursuing" },
+  { t: "Advanced Certificate in UI/UX with Agentic AI & Gen-AI", s: "IIT Madras, pursuing" },
   { t: "AI for Designers", s: "Interaction Design Foundation" },
   { t: "Journey Mapping", s: "Interaction Design Foundation" },
 ];
@@ -173,109 +152,81 @@ const AWARDS = [
   { t: "Humanity Mindset Winner", s: "Persistent. For empathetic, people-first design." },
 ];
 
-// Text-only tool pill. Brand logos were dropped for consistency: several tools
-// (e.g. Adobe products) have no reliable logo source, so it was all-or-nothing.
-function ToolPill({ name }) {
-  return <span className="ab-chip">{name}</span>;
+function Chip({ children }) {
+  return <span className="ag-chip">{children}</span>;
+}
+
+/* Section headline. No eyebrow label above it on purpose: the section's place
+   on the page already says what it is, and stacked micro-labels above every
+   heading is the tell we are moving away from. */
+function Head({ children, sub }) {
+  return (
+    <Reveal className="mb-9 max-w-3xl">
+      <h2 className="font-display text-4xl md:text-5xl font-black tracking-tight leading-[1.06]">{children}</h2>
+      {sub && <p className="mt-4 text-lg leading-relaxed" style={{ color: MUTED }}>{sub}</p>}
+    </Reveal>
+  );
 }
 
 export default function About() {
   const [showAllExp, setShowAllExp] = useState(false);
-  const [word, setWord] = useState({ cur: KINETIC_WORDS[0], prev: null, n: 0 });
-  useEffect(() => {
-    const mq = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (mq && mq.matches) return undefined;
-    let i = 0;
-    const t = setInterval(() => {
-      i += 1;
-      setWord({ cur: KINETIC_WORDS[i % KINETIC_WORDS.length], prev: KINETIC_WORDS[(i - 1) % KINETIC_WORDS.length], n: i });
-    }, 3200);
-    return () => clearInterval(t);
-  }, []);
 
   return (
-    <div data-testid="about-page">
-      <style>{AB_CSS}</style>
-      <Seo title="This is Me" description="Faraz Khan, Senior UX Lead. 11+ years across BFSI, enterprise software, data and AI, and consumer tech. Design systems, dashboards, and AI-native product concepts." />
-      {/* HERO - kinetic headline + the glitching portrait */}
-      <section className="pt-10 pb-14 relative overflow-hidden" data-testid="about-hero">
-        <AbSquiggle className="ab-sq-1" color="#F0186C" rot={-34} />
-        <span className="hidden md:block absolute right-[38%] top-24 z-0"><AbSquiggle className="ab-sq-2" color="#9B4DE0" rot={22} /></span>
+    <div data-testid="about-page" className="ag-page">
+      <style>{GLASS_CSS}</style>
+      {/* Pastel field: fixed, behind everything, never repaints on scroll. */}
+      <div className="ag-field" aria-hidden="true">
+        <span className="ag-blob ag-blob-1" />
+        <span className="ag-blob ag-blob-2" />
+        <span className="ag-blob ag-blob-3" />
+        <span className="ag-blob ag-blob-4" />
+      </div>
+
+      <Seo title="About Me" description="Faraz Khan, Senior UX Lead. 11+ years across BFSI, enterprise software, data and AI, and consumer tech. Design systems, dashboards, and AI-native product concepts." />
+
+      {/* HERO: split. Headline, one paragraph, two actions, one real photograph. */}
+      <section className="pt-14 md:pt-20 pb-14" data-testid="about-hero">
         <Container>
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-center">
-          <div className="lg:col-span-7 relative z-10">
-            <div className="flex items-center gap-2 mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#F0186C] animate-pulse" />
-              <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F4F3FA]/80">
-                {PROFILE.status}
-              </span>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            <div className="lg:col-span-7">
+              <Reveal as="h1" className="font-display font-black tracking-tight leading-[0.98] text-[11vw] sm:text-6xl lg:text-[4.6rem]">
+                Designing clarity into<br />
+                <span className="italic font-light leading-[1.1] pb-1 inline-block" style={{ color: ACCENT }}>complex systems.</span>
+              </Reveal>
+              <Reveal as="p" delay={0.08} className="mt-7 max-w-xl text-lg md:text-xl leading-relaxed" style={{ color: MUTED }}>
+                UX Lead with <strong style={{ color: "#171512" }}>11+ years</strong> across BFSI, enterprise software and consumer tech. I turn research into interfaces that ship.
+              </Reveal>
+              <Reveal delay={0.16} className="mt-9 flex gap-3 flex-wrap items-center">
+                <a href={`mailto:${PROFILE.email}`} data-testid="about-cta-email" className="ag-btn">
+                  <Mail size={16} strokeWidth={STROKE} /> Get in Touch
+                </a>
+                <a href={RESUME_PATH} download="Faraz_Khan_Resume.pdf" data-testid="about-download-resume" className="ag-btn ag-btn-ghost">
+                  <Download size={16} strokeWidth={STROKE} /> Résumé
+                </a>
+              </Reveal>
             </div>
-            <h1 className="font-display font-black leading-[0.92] text-[8.8vw] md:text-[7.2vw] lg:text-[6.4rem] tracking-tighter">
-              designing&nbsp;clarity<br />
-              into&nbsp;<span className="italic font-light">complex</span>&nbsp;
-              <span className="ab-slot" aria-label={word.cur}>
-                <span className="ab-slot-sizer" aria-hidden="true">dashboards.</span>
-                {word.prev && (
-                  <span key={`o-${word.n}`} className="ab-word ab-word-out text-[#F0186C]" aria-hidden="true">{word.prev}</span>
-                )}
-                <span key={`i-${word.n}`} className="ab-word ab-word-in text-[#F0186C]">{word.cur}</span>
-              </span>
-            </h1>
-            <p className="mt-8 max-w-2xl text-lg md:text-xl leading-relaxed text-[#F4F3FA]">
-              User Experience Lead with <strong>11+ years</strong> across BFSI, enterprise software, and consumer tech. I turn research into interfaces that ship and scale.
-            </p>
-            <div className="mt-8 flex gap-4 flex-wrap items-center">
-              <a href={`mailto:${PROFILE.email}`} data-testid="about-cta-email" className="ab-btn">
-                <Mail size={16} /> Get in Touch
-              </a>
-              <a href={RESUME_PATH} download="Faraz_Khan_Resume.pdf" data-testid="about-download-resume" className="ab-btn ab-btn-ghost">
-                <Download size={16} /> Résumé
-              </a>
-              <Link to="/projects" className="ab-btn ab-btn-ghost">
-                See My Work
-              </Link>
-            </div>
+            <Reveal delay={0.1} className="lg:col-span-5">
+              <div className="ag-tile ag-lift p-3">
+                <img
+                  src="/images/faraz.jpg"
+                  alt="Faraz Khan"
+                  className="w-full h-[340px] sm:h-[400px] object-cover object-top"
+                  style={{ borderRadius: "var(--ag-media)" }}
+                />
+              </div>
+            </Reveal>
           </div>
-          {/* The glitching portrait, reused from the landing at a smaller size */}
-          <div className="lg:col-span-5 relative z-10 flex justify-center lg:justify-end" data-testid="about-hero-portrait">
-            <HeroFusion portraitOnly portraitW="min(72vw, 360px)" />
-          </div>
-        </div>
         </Container>
       </section>
 
-      {/* PROFILE + STATS */}
-      <section className="pb-16" data-testid="about-profile">
+      {/* THE SHORT VERSION: 3 cells, asymmetric. */}
+      <section className="py-10" data-testid="about-profile">
         <Container>
-        {/* Profile card - photo (home-hero treatment) + identity + bio, all in one container */}
-        <div className="ab-card ab-flat ab-c2 overflow-hidden flex flex-col sm:flex-row" data-testid="about-profile-card">
-          {/* Photo strip - fades into the card: downward on mobile, rightward on desktop */}
-          <div className="relative w-full h-56 sm:h-auto sm:w-52 md:w-64 flex-shrink-0 overflow-hidden">
-            <img
-              src="/images/faraz.jpg"
-              alt="Faraz Khan"
-              className="absolute inset-0 w-full h-full object-cover object-top" style={{ filter: "grayscale(0.15) contrast(1.05) saturate(1.05)" }}
-            />
-            <div className="absolute inset-0 grain-overlay pointer-events-none" aria-hidden="true" />
-            <div className="absolute inset-0 pointer-events-none sm:hidden" aria-hidden="true" style={{ background: "linear-gradient(to bottom, rgba(24,17,38,0) 45%, #181126 100%)" }} />
-            <div className="absolute inset-0 pointer-events-none hidden sm:block" aria-hidden="true" style={{ background: "linear-gradient(to right, rgba(24,17,38,0) 52%, #181126 100%)" }} />
-          </div>
-          {/* Identity + bio */}
-          <div className="flex-1 p-7 md:p-10 relative overflow-hidden">
-            <div className="absolute -top-10 -right-10 w-72 h-72 rounded-full bg-[#7B2FBE] blur-3xl opacity-20 pointer-events-none" aria-hidden="true" />
-            <div className="relative">
-              <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
-                <div>
-                  <h2 className="font-display text-2xl md:text-3xl font-black">Faraz Khan</h2>
-                  <p className="text-sm md:text-base text-[#A29CB4] mt-1">{PROFILE.role}</p>
-                </div>
-                <div className="text-sm text-[#A29CB4] sm:text-right flex-shrink-0 leading-snug">
-                  <span className="block text-sm font-mono uppercase tracking-[0.2em] text-white">Currently at</span>
-                  <strong className="block text-[#F4F3FA] font-semibold mt-0.5">{PROFILE.currentCompany}</strong>
-                  <span className="block text-xs text-[#A29CB4] mt-0.5">since {PROFILE.currentSince}</span>
-                </div>
-              </div>
-              <div className="mt-6 space-y-4 text-base md:text-lg leading-relaxed text-white/95">
+          <div className="ag-bento">
+            <Reveal className="ag-tile ag-lift p-8 md:p-10" style={{ gridColumn: "span 4" }} data-testid="about-profile-card">
+              <h2 className="font-display text-2xl md:text-3xl font-black">Faraz Khan</h2>
+              <p className="text-sm mt-1" style={{ color: MUTED }}>{PROFILE.role}</p>
+              <div className="mt-6 space-y-4 text-base md:text-[17px] leading-relaxed">
                 <p>
                   Hey there. I&apos;m a UX Lead with <strong>11+ years</strong> in the messy end of product design: enterprise dashboards, lending flows, analytics tools, the systems most people find intimidating. I like taking something dense and complicated and making it feel obvious. I sit right between design, data, and engineering, which is usually where the interesting problems hide.
                 </p>
@@ -283,197 +234,198 @@ export default function About() {
                   I&apos;ve done this for first-time founders and for some of the bigger names in banking and enterprise software. I stay in the file doing the actual pixels, not just the slides, and I care as much about whether a thing ships as whether it looks good. Right now I&apos;m after a senior product or UX role, in India, the Middle East, or fully remote.
                 </p>
               </div>
-            </div>
-          </div>
-        </div>
+            </Reveal>
 
-        {/* Industry verticals */}
-        <div className="mt-6 ab-card ab-flat ab-c3 p-6 md:p-7" data-testid="about-industries">
-          <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
-            <p className="text-sm font-mono uppercase tracking-widest text-white">industry verticals</p>
-            <p className="text-sm font-mono uppercase tracking-widest text-white">{INDUSTRIES.length} sectors</p>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {INDUSTRIES.map((i) => (
-              <span key={i} className="ab-chip">{i}</span>
-            ))}
-          </div>
-        </div>
-        </Container>
-      </section>
-
-      {/* 01 - CORE COMPETENCIES */}
-      <section className="py-20 border-t border-white/10" data-testid="about-competencies">
-        <Container>
-        <p data-text="01 / what i do" className="ab-glitch inline-block text-[11px] font-mono uppercase tracking-[0.25em] text-[#F0186C] mb-4">01 / what i do</p>
-        <h2 className="font-display text-4xl md:text-5xl font-black mb-10 max-w-5xl">core <span className="italic font-light">competencies.</span></h2>
-        <Grid>
-          {COMPETENCIES.map((c, i) => (
-            <div key={c.t} data-testid={`competency-${i}`} className="col-span-12 sm:col-span-6 lg:col-span-3 ab-card p-6 group">
-              <c.icon size={24} style={{ color: ICON_COLORS[i % ICON_COLORS.length] }} className="mb-5 group-hover:scale-110 transition-transform" />
-              <h3 className="font-display text-base md:text-lg font-black leading-snug mb-3">{c.t}</h3>
-              <p className="text-sm leading-relaxed text-[#F4F3FA]/85">{c.d}</p>
-            </div>
-          ))}
-        </Grid>
-        </Container>
-      </section>
-
-      {/* 02 - TOOLKIT */}
-      <section className="py-20 border-t border-white/10" data-testid="about-tools">
-        <Container>
-        <p data-text="02 / toolkit" className="ab-glitch inline-block text-[11px] font-mono uppercase tracking-[0.25em] text-[#F0186C] mb-4">02 / toolkit</p>
-        <h2 className="font-display text-4xl md:text-5xl font-black mb-10 max-w-5xl">tools & <span className="italic font-light">skills.</span></h2>
-
-        <Grid>
-          <div className="col-span-12 md:col-span-4 ab-card p-7">
-            <p className="text-sm font-mono uppercase tracking-widest text-white mb-4">design tools</p>
-            <div className="flex flex-wrap gap-2">
-              {TOOLS.design.map((t) => <ToolPill key={t.name} {...t} />)}
-            </div>
-          </div>
-
-          <div className="col-span-12 md:col-span-4 ab-card p-7">
-            <p className="text-sm font-mono uppercase tracking-widest text-white mb-2">development</p>
-            <p className="text-xs italic text-[#A29CB4] mb-4">Basic understanding & familiarity with front-end technologies</p>
-            <div className="flex flex-wrap gap-2">
-              {TOOLS.development.map((t) => <ToolPill key={t.name} {...t} />)}
-            </div>
-          </div>
-
-          <div className="col-span-12 md:col-span-4 ab-card p-7">
-            <p className="text-sm font-mono uppercase tracking-widest text-white mb-4">collaboration</p>
-            <div className="flex flex-wrap gap-2">
-              {TOOLS.collaboration.map((t) => <ToolPill key={t.name} {...t} />)}
-            </div>
-          </div>
-        </Grid>
-
-        {/* AI Tools - thin full-width card with the closing-CTA glow treatment */}
-        <div className="mt-6 ab-card ab-flat ab-c4 relative overflow-hidden p-7 md:p-8" data-testid="about-ai-tools">
-          <div className="absolute -top-16 -right-10 w-72 h-72 rounded-full bg-[#7B2FBE] blur-3xl opacity-30 pointer-events-none" aria-hidden="true" />
-          <div className="absolute -bottom-20 -left-10 w-72 h-72 rounded-full bg-[#F0186C] blur-3xl opacity-25 pointer-events-none" aria-hidden="true" />
-          <div className="relative flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
-            <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-white md:w-28 flex-shrink-0">ai tools</p>
-            <div className="flex flex-wrap gap-2">
-              {TOOLS.ai.map((t) => <ToolPill key={t.name} {...t} />)}
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-6 ab-card ab-flat ab-c1 p-7" data-testid="about-core-skills">
-          <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
-            <p className="text-sm font-mono uppercase tracking-widest text-white">core skills</p>
-            <p className="text-sm font-mono uppercase tracking-widest text-white">{CORE_SKILLS.length} disciplines</p>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {CORE_SKILLS.map((s) => (
-              <span key={s} className="ab-chip cursor-default">{s}</span>
-            ))}
-          </div>
-        </div>
-        </Container>
-      </section>
-
-      {/* 03 - EXPERIENCE (merged from Résumé) */}
-      <section className="py-20 border-t border-white/10" data-testid="about-experience">
-        <Container>
-        <p data-text="03 / experience" className="ab-glitch inline-block text-[11px] font-mono uppercase tracking-[0.25em] text-[#F0186C] mb-4">03 / experience</p>
-        <h2 className="font-display text-4xl md:text-5xl font-black mb-10 max-w-5xl">where i&apos;ve <span className="italic font-light">worked.</span></h2>
-        <ol className="relative border-l border-white/10 pl-7 space-y-9 max-w-4xl">
-          {(showAllExp ? EXPERIENCE : EXPERIENCE.slice(0, 3)).map((e) => (
-            <li key={e.org} className="relative" data-testid={`experience-${e.org}`}>
-              <span className="absolute -left-[2.1rem] top-1.5 h-3 w-3 rounded-full bg-[#F0186C] ring-4 ring-[#100210]" aria-hidden="true" />
-              <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                <h3 className="font-display text-xl md:text-2xl font-black">{e.role}</h3>
-                <span className="text-sm font-mono uppercase tracking-widest text-white">{e.time}</span>
+            <Reveal delay={0.06} className="ag-tile ag-tile-ink ag-lift p-8 flex flex-col justify-between" style={{ gridColumn: "span 2" }}>
+              <div>
+                <p className="text-xs font-mono uppercase tracking-[0.2em]" style={{ color: "rgba(244,242,248,0.6)" }}>Currently at</p>
+                <p className="font-display text-2xl font-black mt-2 leading-tight">{PROFILE.currentCompany}</p>
+                <p className="text-sm mt-1" style={{ color: "rgba(244,242,248,0.6)" }}>since {PROFILE.currentSince}</p>
               </div>
-              <p className="text-sm font-semibold text-[#F0186C] mt-0.5">{e.org} <span className="text-[#A29CB4] font-normal">· {e.place}</span></p>
-              <ul className="mt-3 space-y-2">
-                {e.points.map((p, i) => (
-                  <li key={i} className="text-sm md:text-[15px] leading-relaxed text-[#F4F3FA]/90">
-                    {p}
+              <p className="text-sm mt-8 leading-relaxed" style={{ color: "rgba(244,242,248,0.82)" }}>{PROFILE.status}</p>
+            </Reveal>
+
+            <Reveal delay={0.1} className="ag-tile ag-tile-sky ag-lift p-8" style={{ gridColumn: "span 6" }} data-testid="about-industries">
+              <p className="font-display text-lg font-black mb-4">Industry verticals</p>
+              <div className="flex flex-wrap gap-2">
+                {INDUSTRIES.map((i) => <Chip key={i}>{i}</Chip>)}
+              </div>
+            </Reveal>
+          </div>
+        </Container>
+      </section>
+
+      {/* COMPETENCIES: 8 items, 8 cells. The first two run wide so the grid has
+          rhythm instead of a flat 4-up repeat. */}
+      <section className="py-16" data-testid="about-competencies">
+        <Container>
+          <Head sub="The eight things I actually get hired to do.">
+            Core <span className="italic font-light">competencies.</span>
+          </Head>
+          <div className="ag-bento">
+            {COMPETENCIES.map((c, i) => {
+              const wide = i < 2;
+              const tint = i === 0 ? "ag-tile-rose" : i === 1 ? "ag-tile-mint" : "";
+              return (
+                <Reveal
+                  key={c.t}
+                  delay={(i % 3) * 0.05}
+                  data-testid={`competency-${i}`}
+                  className={`ag-tile ag-lift p-7 ${tint}`}
+                  style={{ gridColumn: `span ${wide ? 3 : 2}` }}
+                >
+                  <c.icon size={26} strokeWidth={STROKE} style={{ color: ACCENT }} className="mb-5" />
+                  <h3 className={`font-display font-black leading-snug mb-2.5 ${wide ? "text-xl" : "text-base"}`}>{c.t}</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: MUTED }}>{c.d}</p>
+                </Reveal>
+              );
+            })}
+          </div>
+        </Container>
+      </section>
+
+      {/* TOOLKIT: 5 groups, 5 cells, two rows of different weight. */}
+      <section className="py-16" data-testid="about-tools">
+        <Container>
+          <Head>Tools &amp; <span className="italic font-light">skills.</span></Head>
+          <div className="ag-bento">
+            <Reveal className="ag-tile ag-lift p-7" style={{ gridColumn: "span 2" }}>
+              <p className="font-display text-lg font-black mb-4">Design</p>
+              <div className="flex flex-wrap gap-2">{TOOLS.design.map((t) => <Chip key={t.name}>{t.name}</Chip>)}</div>
+            </Reveal>
+
+            <Reveal delay={0.05} className="ag-tile ag-lift p-7" style={{ gridColumn: "span 2" }}>
+              <p className="font-display text-lg font-black mb-1">Development</p>
+              <p className="text-xs mb-4" style={{ color: MUTED }}>Working familiarity, not a front-end role.</p>
+              <div className="flex flex-wrap gap-2">{TOOLS.development.map((t) => <Chip key={t.name}>{t.name}</Chip>)}</div>
+            </Reveal>
+
+            <Reveal delay={0.1} className="ag-tile ag-lift p-7" style={{ gridColumn: "span 2" }}>
+              <p className="font-display text-lg font-black mb-4">Collaboration</p>
+              <div className="flex flex-wrap gap-2">{TOOLS.collaboration.map((t) => <Chip key={t.name}>{t.name}</Chip>)}</div>
+            </Reveal>
+
+            <Reveal delay={0.05} className="ag-tile ag-tile-ink ag-lift p-8 self-start" style={{ gridColumn: "span 2" }} data-testid="about-ai-tools">
+              <p className="font-display text-lg font-black mb-1">AI in the loop</p>
+              <p className="text-sm mb-5" style={{ color: "rgba(244,242,248,0.7)" }}>What I build and prototype with day to day.</p>
+              <div className="flex flex-wrap gap-2">
+                {TOOLS.ai.map((t) => (
+                  <span key={t.name} className="ag-chip" style={{ background: "rgba(255,255,255,0.12)", borderColor: "rgba(255,255,255,0.22)", color: "#F4F2F8" }}>{t.name}</span>
+                ))}
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.1} className="ag-tile ag-lift p-8" style={{ gridColumn: "span 4" }} data-testid="about-core-skills">
+              <div className="flex items-baseline justify-between gap-3 mb-5">
+                <p className="font-display text-lg font-black">Core skills</p>
+                <p className="text-sm font-mono" style={{ color: MUTED }}>{CORE_SKILLS.length}</p>
+              </div>
+              <div className="flex flex-wrap gap-2">{CORE_SKILLS.map((s) => <Chip key={s}>{s}</Chip>)}</div>
+            </Reveal>
+          </div>
+        </Container>
+      </section>
+
+      {/* EXPERIENCE: a timeline, deliberately a different layout family from the
+          bento sections either side of it. */}
+      <section className="py-16" data-testid="about-experience">
+        <Container>
+          <Head>Where I&apos;ve <span className="italic font-light">worked.</span></Head>
+          <div className="ag-tile p-8 md:p-11 max-w-4xl">
+            <ol className="space-y-9">
+              {(showAllExp ? EXPERIENCE : EXPERIENCE.slice(0, 3)).map((e, idx) => (
+                <li key={e.org} data-testid={`experience-${e.org}`}>
+                  {idx > 0 && <hr className="ag-rule mb-9" />}
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                    <h3 className="font-display text-xl md:text-2xl font-black">{e.role}</h3>
+                    <span className="text-sm font-mono" style={{ color: MUTED }}>{e.time}</span>
+                  </div>
+                  <p className="text-sm font-semibold mt-1" style={{ color: ACCENT }}>
+                    {e.org} <span className="font-normal" style={{ color: MUTED }}>· {e.place}</span>
+                  </p>
+                  <ul className="mt-3 space-y-2">
+                    {e.points.map((p, i) => (
+                      <li key={i} className="text-[15px] leading-relaxed" style={{ color: MUTED }}>{p}</li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ol>
+            {EXPERIENCE.length > 3 && (
+              <button
+                type="button"
+                onClick={() => setShowAllExp((v) => !v)}
+                data-testid="experience-toggle"
+                className="ag-btn ag-btn-ghost mt-9"
+              >
+                {showAllExp ? "Show fewer roles" : `Show all ${EXPERIENCE.length} roles`}
+              </button>
+            )}
+          </div>
+        </Container>
+      </section>
+
+      {/* CREDENTIALS: 3 items, 3 cells. */}
+      <section className="py-16" data-testid="about-credentials">
+        <Container>
+          <Head>Certs, awards &amp; <span className="italic font-light">education.</span></Head>
+          <div className="ag-bento">
+            <Reveal className="ag-tile ag-lift p-8" style={{ gridColumn: "span 2" }}>
+              <Sparkles size={22} strokeWidth={STROKE} style={{ color: ACCENT }} className="mb-4" />
+              <p className="font-display text-lg font-black mb-4">Certifications</p>
+              <ul className="space-y-4">
+                {CERTS.map((c) => (
+                  <li key={c.t}>
+                    <p className="text-sm font-semibold leading-snug">{c.t}</p>
+                    <p className="text-xs mt-0.5" style={{ color: MUTED }}>{c.s}</p>
                   </li>
                 ))}
               </ul>
-            </li>
-          ))}
-        </ol>
-        {EXPERIENCE.length > 3 && (
-          <button
-            type="button"
-            onClick={() => setShowAllExp((v) => !v)}
-            data-testid="experience-toggle"
-            className="ab-btn ab-btn-ghost mt-10 ml-7"
-          >
-            {showAllExp ? "Show Less" : `Show All ${EXPERIENCE.length} Roles`}
-          </button>
-        )}
+            </Reveal>
+
+            <Reveal delay={0.05} className="ag-tile ag-tile-rose ag-lift p-8" style={{ gridColumn: "span 2" }}>
+              <Award size={22} strokeWidth={STROKE} style={{ color: ACCENT }} className="mb-4" />
+              <p className="font-display text-lg font-black mb-4">Recognition</p>
+              <ul className="space-y-4">
+                {AWARDS.map((a) => (
+                  <li key={a.t}>
+                    <p className="text-sm font-semibold">{a.t}</p>
+                    <p className="text-xs mt-0.5" style={{ color: MUTED }}>{a.s}</p>
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+
+            <Reveal delay={0.1} className="ag-tile ag-lift p-8" style={{ gridColumn: "span 2" }}>
+              <GraduationCap size={22} strokeWidth={STROKE} style={{ color: ACCENT }} className="mb-4" />
+              <p className="font-display text-lg font-black mb-4">Education</p>
+              <p className="text-sm font-semibold">B.Sc. Multimedia</p>
+              <p className="text-xs mt-0.5" style={{ color: MUTED }}>Vishwakarma Creative-i College, Pune · 2008 - 2011</p>
+            </Reveal>
+          </div>
         </Container>
       </section>
 
-      {/* 04 - CREDENTIALS (merged from Résumé) */}
-      <section className="py-20 border-t border-white/10" data-testid="about-credentials">
-        <Container>
-        <p data-text="04 / credentials" className="ab-glitch inline-block text-[11px] font-mono uppercase tracking-[0.25em] text-[#F0186C] mb-4">04 / credentials</p>
-        <h2 className="font-display text-4xl md:text-5xl font-black mb-10 max-w-5xl">certs, awards &amp; <span className="italic font-light">education.</span></h2>
-        <Grid>
-          {/* Certifications */}
-          <div className="col-span-12 md:col-span-4 ab-card p-7">
-            <p className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.25em] text-[#F0186C] mb-5"><Sparkles size={14} /> certifications</p>
-            <ul className="space-y-4">
-              {CERTS.map((c) => (
-                <li key={c.t}>
-                  <p className="text-sm font-semibold leading-snug">{c.t}</p>
-                  <p className="text-xs text-[#A29CB4] mt-0.5">{c.s}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-          {/* Recognition */}
-          <div className="col-span-12 md:col-span-4 ab-card p-7">
-            <p className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.25em] text-[#F0186C] mb-5"><Award size={14} /> recognition</p>
-            <ul className="space-y-4">
-              {AWARDS.map((a) => (
-                <li key={a.t}>
-                  <p className="text-sm font-semibold">{a.t}</p>
-                  <p className="text-xs text-[#A29CB4] mt-0.5">{a.s}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-          {/* Education */}
-          <div className="col-span-12 md:col-span-4 ab-card p-7">
-            <p className="inline-flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.25em] text-[#F0186C] mb-5"><GraduationCap size={14} /> education</p>
-            <p className="text-sm font-semibold">B.Sc. Multimedia</p>
-            <p className="text-xs text-[#A29CB4] mt-0.5">Vishwakarma Creative-i College, Pune · 2008 - 2011</p>
-          </div>
-        </Grid>
-        </Container>
-      </section>
-
-      {/* FINAL CTA - identical to the Landing page banner */}
+      {/* CLOSING: one full-width ink panel. Same CTA label as the hero, so the
+          page carries one label per intent rather than three synonyms. */}
       <section className="py-16 md:py-20" data-testid="final-cta">
         <Container>
-        <div className="rounded-3xl dark-card text-white p-8 md:p-12 relative overflow-hidden">
-          <div className="absolute -top-10 -right-10 w-72 h-72 rounded-full bg-[#7B2FBE] blur-3xl opacity-40" />
-          <div className="absolute -bottom-12 -left-10 w-72 h-72 rounded-full bg-[#F0186C] blur-3xl opacity-30" />
-          <p className="relative text-[11px] font-mono uppercase tracking-[0.25em] text-white mb-4">let's build</p>
-          <h2 className="relative font-display text-4xl md:text-6xl font-black leading-[1.0] md:whitespace-nowrap">
-            have an idea <span className="italic font-light text-white">worth</span> shipping?
-          </h2>
-          <div className="relative mt-8 flex gap-4 flex-wrap">
-            <Link to="/contact" data-testid="cta-contact" className="ab-btn">
-              <Mail size={16} /> Get in Touch
-            </Link>
-            <BookCallButton data-testid="cta-book-call" className="ab-btn ab-btn-ghost">
-              <Calendar size={16} /> Book a Call
-            </BookCallButton>
-            <a href={PROFILE.social.linkedin} target="_blank" rel="noopener noreferrer" data-testid="cta-linkedin" className="ab-btn ab-btn-ghost">
-              <Linkedin size={16} /> LinkedIn
-            </a>
-          </div>
-        </div>
+          <Reveal className="ag-tile ag-tile-ink p-10 md:p-14">
+            <h2 className="font-display text-4xl md:text-6xl font-black leading-[1.02] max-w-3xl">
+              Have an idea <span className="italic font-light" style={{ color: "#FF7FB4" }}>worth</span> shipping?
+            </h2>
+            <div className="mt-9 flex gap-3 flex-wrap">
+              <Link to="/contact" data-testid="cta-contact" className="ag-btn">
+                <Mail size={16} strokeWidth={STROKE} /> Get in Touch
+              </Link>
+              <BookCallButton data-testid="cta-book-call" className="ag-btn ag-btn-ghost">
+                <Calendar size={16} strokeWidth={STROKE} /> Book a Call
+              </BookCallButton>
+              <a href={PROFILE.social.linkedin} target="_blank" rel="noopener noreferrer" data-testid="cta-linkedin" className="ag-btn ag-btn-ghost">
+                <Linkedin size={16} strokeWidth={STROKE} /> LinkedIn <ArrowUpRight size={14} strokeWidth={STROKE} />
+              </a>
+            </div>
+          </Reveal>
         </Container>
       </section>
     </div>

@@ -18,7 +18,7 @@ const ROUTES = [
   ['case-finvista', '/case/finvista'],
   ['case-aurora', '/case/aurora'],
   ['case-meridian', '/case/meridian'],
-  ['case-joat', '/case/somethings-cooking'],
+  ['case-threadfold', '/case/somethings-cooking'],
   ['case-slate', '/case/recruitos'],
   ['agentic-workflow', '/agentic-workflow'],
 ];

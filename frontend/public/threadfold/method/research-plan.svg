@@ -1,0 +1,47 @@
+<svg style="width:100%;background:#F8F7F3;border-radius:12px;" viewBox="0 0 1080 560" xmlns="http://www.w3.org/2000/svg">
+<style>text{font-family:Inter,-apple-system,sans-serif}
+.t{font-size:15px;font-weight:700;fill:#171512}
+.s{font-size:11.5px;font-weight:700;fill:#96420C;letter-spacing:.07em}
+.l{font-size:11.5px;fill:#6B665D}
+.n{font-size:12px;fill:#171512}
+.b{font-size:12px;font-weight:600;fill:#171512}
+.w{font-size:11.5px;fill:#fff}
+.wb{font-size:12px;font-weight:600;fill:#fff}
+.num{font-size:26px;font-weight:700;fill:#96420C}
+.axis{stroke:#D8D5CC;stroke-width:1.2}
+.dash{stroke:#96420C;stroke-width:1.3;stroke-dasharray:5 4;fill:none}</style>
+
+<text class="s" x="30" y="34">RESEARCH PLAN</text>
+<text class="t" x="30" y="56">Two sides, wildly unequal access</text>
+<text class="l" x="30" y="84">A marketplace has two user groups and you almost never get to study them the same way. Creators were few, findable and</text>
+<text class="l" x="30" y="101">happy to talk for an hour. Buyers were many, anonymous and gone in ninety seconds. The methods had to match that, not</text>
+<text class="l" x="30" y="118">fight it.</text>
+
+
+<rect x="30" y="150" width="500" height="330" rx="12" fill="#fff" stroke="#D8D5CC"/>
+<text class="s" x="54" y="182">FEW, DEEP</text>
+<text class="t" x="54" y="206">Creators (supply)</text>
+
+<text class="num" x="54" y="254">9</text>
+<text class="l" x="54" y="274">contextual inquiry sessions, in their own space</text>
+<text class="num" x="54" y="316">4</text>
+<text class="l" x="54" y="336">kept a two-week diary through a live campaign</text>
+<text class="num" x="54" y="378">5</text>
+<text class="l" x="54" y="398">per round in usability testing, per NN/g</text>
+
+
+<rect x="550" y="150" width="500" height="330" rx="12" fill="#fff" stroke="#D8D5CC"/>
+<text class="s" x="574" y="182">MANY, SHALLOW</text>
+<text class="t" x="574" y="206">Buyers (demand)</text>
+
+<text class="num" x="574" y="254">340</text>
+<text class="l" x="574" y="274">intercept survey responses from live campaigns</text>
+<text class="num" x="574" y="316">62</text>
+<text class="l" x="574" y="336">five-second tests on the campaign page</text>
+<text class="num" x="574" y="378">5</text>
+<text class="l" x="574" y="398">per round in usability testing, per NN/g</text>
+
+<rect x="30" y="500" width="1020" height="44" rx="10" fill="#F3E7DD"/>
+<text class="b" x="52" y="528">Supply first.</text>
+<text class="l" x="146" y="528">Around two-thirds of failed marketplaces die on the supply side, so creators got the deep research and the first release.</text>
+</svg>

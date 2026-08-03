@@ -19,7 +19,7 @@ One true name everywhere (no legacy dual names):
 | Meridian Institute Analytics | `/case/meridian` | open, leads the order |
 | FinVista | `/case/finvista` | **locked (vault)** |
 | Aurora | `/case/aurora` | **locked (vault)** |
-| Jack of All Threads | `/case/joat` | **locked (vault)** |
+| Threadfold | `/case/threadfold` | **locked (vault)** |
 | Slate (concept) | `/case/slate`, prototype `/slate/` | open |
 | Almanac (concept, dormant `live:false`) | `/case/almanac`, prototype `/almanac/` | open |
 | Crux (concept) | `/case/crux`, prototype `/crux/` | open |
@@ -29,15 +29,25 @@ redirect via `<Navigate>` routes in `App.js` + static stubs in
 `public/<old>/index.html` and `public/case/<old>/index.html`. Keep those stubs.
 
 Data files: `src/data/<name>Case.js` exporting the matching name (`meridian`,
-`finvista`, `aurora`, `joat`, `slate`, `almanac`, `crux`). Cards/order come from
+`finvista`, `aurora`, `threadfold`, `slate`, `almanac`, `crux`). Cards/order come from
 `src/data/content.js` (`projects` + `concepts`).
 
-## The vault (confidential case studies)
-FinVista, Aurora and JOAT are **AES-256-GCM encrypted on the deployed site**:
+## The vault (confidential case studies) — CURRENTLY DORMANT
+**Status: dormant since 2026-08-02.** `REACT_APP_VAULT_DORMANT=1` in
+`frontend/.env.local`, so FinVista, Aurora and Threadfold are **open, no password**.
+`/locked/*.json` ships as plaintext and screenshots ship unencrypted. The vault
+code, the scripts and `CS_PW` all stay in place: set the flag back to `0` and
+re-run the build to reactivate. Faraz's call, pending the visual redesign.
+
+**Before any live deploy while dormant**, confirm with Faraz that publishing the
+NDA client work (FinVista, Aurora, Threadfold screenshots + written content) openly is
+intended. The gate is the only thing that was keeping it private.
+
+When reactivated, the mechanism is AES-256-GCM:
 - Written content ships as `public/locked/<slug>.enc` (generated, gitignored);
   the app never imports their data modules — `CaseStudyGate` decrypts on unlock
   and provides data via `useCaseData()`.
-- All screenshots in `build/{finvista,aurora,joat}/` are encrypted by the
+- All screenshots in `build/{finvista,aurora,threadfold}/` are encrypted by the
   postbuild step (`cover.jpg` stays plain — public card teaser). Pages render
   them through `VaultImage`/`PhoneFrame`/`Lightbox`, which decrypt to object
   URLs at view time.

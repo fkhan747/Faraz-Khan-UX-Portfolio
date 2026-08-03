@@ -1,4 +1,5 @@
 import Chrome from "./Chrome";
+import { useLocation } from "react-router-dom";
 import Footer from "./Footer";
 import BackToTop from "./BackToTop";
 import TreasureSpark from "./TreasureSpark";
@@ -9,10 +10,14 @@ import TreasureSpark from "./TreasureSpark";
  * <TreasureSpark /> is a hidden Easter egg linking to the encrypted /deck/ gate.
  */
 export default function Layout({ children }) {
+  const isLanding = useLocation().pathname === "/";
   return (
-    <div className="min-h-screen bg-[#100210] flex flex-col">
+    /* Landing keeps the dark cover; every other page is on paper. One class
+       here drives it, so there is a single switch rather than a theme prop
+       threaded through every page. */
+    <div className={`min-h-screen flex flex-col ${isLanding ? "bg-[#100210]" : "theme-light bg-[#EFEDE7]"}`}>
       <Chrome />
-      <main className="pt-[90px] flex-1" data-testid="main-content">
+      <main className="pt-[153px] flex-1" data-testid="main-content">
         {children}
       </main>
       <Footer />
