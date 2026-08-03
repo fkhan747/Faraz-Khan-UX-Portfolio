@@ -1,0 +1,58 @@
+<svg style="width:100%;background:#F8F7F3;border-radius:12px;" viewBox="0 0 1080 660" xmlns="http://www.w3.org/2000/svg">
+<style>text{font-family:Inter,-apple-system,sans-serif}
+.t{font-size:15px;font-weight:700;fill:#171512}
+.s{font-size:11.5px;font-weight:700;fill:#96420C;letter-spacing:.07em}
+.l{font-size:11.5px;fill:#6B665D}
+.n{font-size:12px;fill:#171512}
+.b{font-size:12px;font-weight:600;fill:#171512}
+.w{font-size:11.5px;fill:#fff}
+.wb{font-size:12px;font-weight:600;fill:#fff}
+.num{font-size:26px;font-weight:700;fill:#96420C}
+.axis{stroke:#D8D5CC;stroke-width:1.2}
+.dash{stroke:#96420C;stroke-width:1.3;stroke-dasharray:5 4;fill:none}</style>
+
+<text class="s" x="30" y="34">ASSUMPTION MAP</text>
+<text class="t" x="30" y="56">What had to be true</text>
+
+<rect x="250" y="70" width="380" height="235" fill="#F3E7DD"/>
+<text class="s" x="266" y="275">TEST THIS FIRST</text>
+<text class="l" x="266" y="293">High stakes, no evidence</text>
+
+<rect x="250" y="70" width="760" height="470" fill="none" stroke="#D8D5CC" stroke-width="1.2"/>
+<line class="axis" x1="630" y1="70" x2="630" y2="540"/>
+<line class="axis" x1="250" y1="305" x2="1010" y2="305"/>
+
+<text class="l" x="250" y="564">← guessing</text>
+<text class="l" x="1010" y="564" text-anchor="end">we already know this →</text>
+<text class="b" x="630" y="564" text-anchor="middle">EVIDENCE</text>
+
+<text class="b" x="230" y="305" text-anchor="end">IMPORTANCE</text>
+<text class="l" x="230" y="84" text-anchor="end">kills the model</text>
+<text class="l" x="230" y="540" text-anchor="end">survivable</text>
+
+<circle cx="371.6" cy="117" r="15" fill="#96420C" stroke="#96420C" stroke-width="0"/>
+<text class="wb" x="371.6" y="121" text-anchor="middle">1</text>
+<circle cx="432.4" cy="164" r="15" fill="#96420C" stroke="#96420C" stroke-width="0"/>
+<text class="wb" x="432.4" y="168" text-anchor="middle">2</text>
+<circle cx="508.40000000000003" cy="131.1" r="15" fill="#96420C" stroke="#96420C" stroke-width="0"/>
+<text class="wb" x="508.40000000000003" y="135.1" text-anchor="middle">3</text>
+<circle cx="554" cy="220.4" r="12" fill="#fff" stroke="#96420C" stroke-width="1.4"/>
+<text class="b" x="554" y="224.4" text-anchor="middle">4</text>
+<circle cx="478" cy="276.8" r="12" fill="#fff" stroke="#96420C" stroke-width="1.4"/>
+<text class="b" x="478" y="280.8" text-anchor="middle">5</text>
+<circle cx="797.1999999999999" cy="182.8" r="12" fill="#fff" stroke="#96420C" stroke-width="1.4"/>
+<text class="b" x="797.1999999999999" y="186.8" text-anchor="middle">6</text>
+<circle cx="858" cy="361.4" r="12" fill="#fff" stroke="#96420C" stroke-width="1.4"/>
+<text class="b" x="858" y="365.4" text-anchor="middle">7</text>
+<circle cx="721.2" cy="417.8" r="12" fill="#fff" stroke="#96420C" stroke-width="1.4"/>
+<text class="b" x="721.2" y="421.8" text-anchor="middle">8</text>
+<text class="b" x="30" y="596">1. Creators will promote their own campaign  ●</text>
+<text class="b" x="30" y="613">2. Buyers will pay for a shirt that does not exist yet  ●</text>
+<text class="b" x="30" y="630">3. Buyers will trust an unknown site with card details  ●</text>
+<text class="l" x="30" y="647">4. A goal plus a deadline creates real urgency</text>
+<text class="l" x="545" y="596">5. Creators can make something sellable in a browser</text>
+<text class="l" x="545" y="613">6. College clubs are the right beachhead</text>
+<text class="l" x="545" y="630">7. Printers will accept small runs</text>
+<text class="l" x="545" y="647">8. Creators care more about margin than volume</text>
+<text class="l" x="30" y="672">● The three I tested before any interface work began.</text>
+</svg>
