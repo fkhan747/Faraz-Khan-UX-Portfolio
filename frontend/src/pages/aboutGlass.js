@@ -143,6 +143,53 @@ export const GLASS_CSS = `
 
   .ag-rule{ height:1px; background:linear-gradient(90deg, rgba(23,21,18,0.16), rgba(23,21,18,0)); border:0; }
 
+  /* Accent word inside a dark panel. It is a class rather than an inline
+     colour so the light theme can re-point it; an inline colour cannot be
+     overridden by the ink remap that repaints those panels for paper. */
+  .ag-accent{ color:#FF7FB4; }
+
+  /* Two-column card interior: a narrow identifying column, then the body.
+     Shared by the intro card and the experience timeline. Both of those run
+     the full six columns now, and prose at 880px is unreadable, so the split
+     is what keeps the measure honest while the card still fills its row. */
+  .ag-split{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(0,1.9fr);
+    column-gap:44px;
+  }
+  @media (max-width:899px){
+    .ag-split{ grid-template-columns:1fr; }
+    .ag-split > * + *{ margin-top:22px; }
+  }
+
+  /* The "currently at" band. Three short facts, so it is a horizontal strip
+     rather than a card: as a column beside the intro it stretched to the
+     intro's height and left a hole in its own middle. Spacing is margin-based
+     on purpose, since the prerender Chromium ignores flex gap. */
+  .ag-strip{
+    display:flex; flex-wrap:wrap;
+    align-items:center; justify-content:space-between;
+    padding:14px 30px;
+  }
+  /* 6px on every item, so the two halves keep 12px between them at the widths
+     where the chip wraps to its own line, and the strip still reads as 20px
+     of vertical padding when they sit on one line. */
+  .ag-strip > *{ margin-top:6px; margin-bottom:6px; }
+  .ag-strip-id{ display:flex; flex-wrap:wrap; align-items:baseline; }
+  .ag-strip-id > * + *{ margin-left:14px; }
+  .ag-strip-org{ font-size:20px; font-weight:900; letter-spacing:-0.01em; }
+  .ag-dot{
+    width:7px; height:7px; border-radius:9999px;
+    background:#15803D; margin-right:8px; flex:0 0 auto;
+  }
+  @media (max-width:767px){
+    .ag-strip{ padding:14px 22px; }
+    /* Stacked, the baseline row's left margins turned into a ragged indent,
+       so the three facts go back to one flush left edge. */
+    .ag-strip-id{ display:block; }
+    .ag-strip-id > * + *{ margin-left:0; margin-top:2px; }
+  }
+
   /* Accessibility fallbacks. Transparency support is uneven, so the solid
      fill has to carry enough contrast on its own. */
   @media (prefers-reduced-transparency: reduce){

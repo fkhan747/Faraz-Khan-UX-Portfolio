@@ -17,8 +17,8 @@ function AgenticCard() {
       data-testid="agentic-feature-link"
       className="group ab-card ab-flat ab-c2 block relative overflow-hidden p-7 md:p-9 lg:p-10"
     >
-      <div className="absolute -top-16 -right-10 w-64 h-64 rounded-full bg-[#7B2FBE] blur-3xl opacity-30 pointer-events-none" aria-hidden="true" />
-      <div className="absolute -bottom-20 left-1/4 w-56 h-56 rounded-full bg-[#F0186C] blur-3xl opacity-20 pointer-events-none" aria-hidden="true" />
+      <div className="ab-glow absolute -top-16 -right-10 w-64 h-64 rounded-full bg-[#7B2FBE] blur-3xl opacity-30 pointer-events-none" aria-hidden="true" />
+      <div className="ab-glow absolute -bottom-20 left-1/4 w-56 h-56 rounded-full bg-[#F0186C] blur-3xl opacity-20 pointer-events-none" aria-hidden="true" />
       <div className="relative grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
         {/* copy */}
         <div>
@@ -38,15 +38,17 @@ function AgenticCard() {
           </div>
         </div>
 
-        {/* mini audit panel */}
-        <div className="rounded-2xl p-4 md:p-5" style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.1)" }}>
+        {/* Mini audit panel. The fill and the border are Tailwind classes, not
+            inline styles: the light-theme remap works by class, so an inline
+            translucent white here vanished on the paper card. */}
+        <div className="rounded-2xl p-4 md:p-5 bg-white/[0.03] border border-white/10">
           <div className="flex items-center justify-between mb-3">
             <span className="text-[10px] font-mono uppercase tracking-widest text-[#A29CB4]">audit · acme.com</span>
             <span className="text-[10px] font-mono text-[#21BA45]">12 confirmed</span>
           </div>
           <div className="grid grid-cols-2 gap-2">
             {AGENTS.map((a) => (
-              <div key={a} className="flex items-center gap-2 rounded-lg px-2.5 py-1.5" style={{ background: "rgba(255,255,255,0.04)" }}>
+              <div key={a} className="flex items-center gap-2 rounded-lg px-2.5 py-1.5 bg-white/[0.04]">
                 <Check size={11} className="text-[#21BA45] flex-shrink-0" />
                 <span className="text-[11px] text-[#F4F3FA]/85 truncate case-keep">{a}</span>
               </div>

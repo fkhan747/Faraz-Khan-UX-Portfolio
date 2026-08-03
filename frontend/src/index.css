@@ -640,9 +640,13 @@ a:has(.cover-img) { border-radius: 24px; }
 }
 .theme-light .ab-card :where(a:hover) { color: #C71E73; }
 
-/* About: chips and small labels were still on dark-theme ink. */
+/* About: chips and small labels were still on dark-theme ink. The chip's own
+   border is 80% white, which was invisible against the white tiles, so the
+   pills were carried entirely by their drop shadow. They take the site
+   hairline instead, same 1px, so each pill has a real edge. */
 .theme-light .ag-chip,
 .theme-light .ag-chip * { color: #171512; }
+.theme-light .ag-chip { border-color: #DCD7CC; }
 .theme-light .ag-page :where(.text-xs, .text-sm) { color: #6B665D; }
 
 /* Anything explicitly marked as sitting on a dark surface is exempt from all
@@ -665,7 +669,26 @@ a:has(.cover-img) { border-radius: 24px; }
 .theme-light .btn-comic:not(.btn-cta):not(.btn-comic-ghost):not(.btn-comic-cyan):not(.btn-comic-magenta):not(.btn-comic-yellow),
 .theme-light .btn-comic:not(.btn-cta):not(.btn-comic-ghost) *,
 .theme-light .ag-btn:not(.ag-btn-ghost),
-.theme-light .ag-btn:not(.ag-btn-ghost) * { color: #FFFFFF !important; }
+.theme-light .ag-btn:not(.ag-btn-ghost) *,
+/* ab-btn was missing from this list, so the filled magenta buttons inside the
+   comic panels took the card's ink rule instead: dark label and dark icon on a
+   saturated fill. It is the same button as ag-btn, so it takes the same rule. */
+.theme-light .ab-btn:not(.ab-btn-ghost),
+.theme-light .ab-btn:not(.ab-btn-ghost) * { color: #FFFFFF !important; }
+/* White on that button's own fill (#F5379B, the landing magenta) is 3.56:1,
+   under AA for a 15px label. The fill moves to the deepened magenta the rest
+   of the light pages already use, which is 5.44:1 white, for the same reason
+   the small magenta text was remapped further up. It also puts ab-btn back on
+   the same colour as ag-btn, which aboutGlass declares as one button system
+   but can only enforce on pages that load its stylesheet. */
+.theme-light .ab-btn:not(.ab-btn-ghost) {
+  background: #C71E73 !important; border-color: #C71E73 !important;
+}
+@media (hover: hover) and (pointer: fine) {
+  .theme-light .ab-btn:not(.ab-btn-ghost):hover {
+    background: #A81861 !important; border-color: #A81861 !important;
+  }
+}
 
 /* (2) The audit checklist tiles inside the featured demo panel. The remap
    dropped them to a 4% ink wash, which is invisible on white; they need a
@@ -689,8 +712,11 @@ a:has(.cover-img) { border-radius: 24px; }
 .theme-light .ag-tile-ink * { color: #171512 !important; }
 .theme-light .ag-tile-ink .font-mono.uppercase { color: #6B665D !important; }
 
-/* (8) Ghost buttons need a border you can actually see on paper. */
+/* (8) Ghost buttons need a border you can actually see on paper. ab-btn-ghost
+   carries a 28%-white hairline authored for the dark ground, which on paper
+   left the button with no edge at all. */
 .theme-light .ag-btn-ghost,
+.theme-light .ab-btn-ghost,
 .theme-light .btn-comic-ghost { border-color: #B9B2A5 !important; }
 
 /* (9) The LinkedIn glyph sits on a saturated purple tile. */
@@ -708,3 +734,22 @@ a:has(.cover-img) { border-radius: 24px; }
 .theme-light input:focus, .theme-light textarea:focus, .theme-light select:focus {
   border-color: #C71E73 !important; outline: 2px solid rgba(199,30,115,0.25); outline-offset: 1px;
 }
+
+/* (13) The featured demo panel on /projects, finished. Rule (2) above only
+   reaches surfaces declared as Tailwind classes, and this panel declared its
+   fill and border inline, so the audit panel and all six checklist tiles were
+   translucent white sitting on a white card: no container read at all. The
+   markup now uses the classes; these two rules are what (2) could not do,
+   which is step the tiles off the panel's own fill so they keep an edge. */
+.theme-light .ab-card [class*="bg-white/"] [class*="bg-white/"] {
+  background: #FFFFFF !important;
+}
+/* The glow blobs behind that card are a dark-ground device, same as the
+   squiggles in (12). At 20-30% saturated magenta on white they read as a
+   stain rather than a glow. */
+.theme-light .ab-glow { display: none !important; }
+
+/* (14) Accent words authored for the ink panels (#FF7FB4 on near-black) were
+   flattened to ink by the ag-tile-ink remap in (5), so the About closing
+   headline lost its accent entirely. It keeps one, in the paper magenta. */
+.theme-light .ag-tile-ink .ag-accent { color: #C71E73 !important; }

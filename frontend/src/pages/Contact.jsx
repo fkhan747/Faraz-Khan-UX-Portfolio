@@ -85,8 +85,8 @@ export default function Contact() {
           className="ab-card ab-flat ab-c4 relative overflow-hidden px-6 py-6 md:px-8 md:py-7 flex flex-col md:flex-row md:items-center md:justify-between gap-5"
           data-testid="available-card"
         >
-          <div className="absolute -top-16 -right-10 w-72 h-72 rounded-full bg-[#7B2FBE] blur-3xl opacity-[0.10] pointer-events-none" aria-hidden="true" />
-          <div className="absolute -bottom-20 -left-10 w-72 h-72 rounded-full bg-[#F0186C] blur-3xl opacity-[0.09] pointer-events-none" aria-hidden="true" />
+          <div className="ab-glow absolute -top-16 -right-10 w-72 h-72 rounded-full bg-[#7B2FBE] blur-3xl opacity-[0.10] pointer-events-none" aria-hidden="true" />
+          <div className="ab-glow absolute -bottom-20 -left-10 w-72 h-72 rounded-full bg-[#F0186C] blur-3xl opacity-[0.09] pointer-events-none" aria-hidden="true" />
           <p className="relative text-lg md:text-xl font-bold leading-tight text-[#F4F3FA]">Open to full-time &amp; remote opportunities.</p>
           <div className="relative flex flex-wrap gap-4 md:flex-shrink-0">
             <a

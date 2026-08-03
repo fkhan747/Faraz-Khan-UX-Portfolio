@@ -223,26 +223,34 @@ export default function About() {
       <section className="py-10" data-testid="about-profile">
         <Container>
           <div className="ag-bento">
-            <Reveal className="ag-tile ag-lift p-8 md:p-10" style={{ gridColumn: "span 4" }} data-testid="about-profile-card">
-              <h2 className="font-display text-2xl md:text-3xl font-black">Faraz Khan</h2>
-              <p className="text-sm mt-1" style={{ color: MUTED }}>{PROFILE.role}</p>
-              <div className="mt-6 space-y-4 text-base md:text-[17px] leading-relaxed">
-                <p>
-                  Hey there. I&apos;m a UX Lead with <strong>11+ years</strong> in the messy end of product design: enterprise dashboards, lending flows, analytics tools, the systems most people find intimidating. I like taking something dense and complicated and making it feel obvious. I sit right between design, data, and engineering, which is usually where the interesting problems hide.
-                </p>
-                <p>
-                  I&apos;ve done this for first-time founders and for some of the bigger names in banking and enterprise software. I stay in the file doing the actual pixels, not just the slides, and I care as much about whether a thing ships as whether it looks good. Right now I&apos;m after a senior product or UX role, in India, the Middle East, or fully remote.
-                </p>
+            <Reveal className="ag-tile ag-lift p-8 md:p-10" style={{ gridColumn: "span 6" }} data-testid="about-profile-card">
+              <div className="ag-split">
+                <div>
+                  <h2 className="font-display text-2xl md:text-3xl font-black">Faraz Khan</h2>
+                  <p className="text-sm mt-1" style={{ color: MUTED }}>{PROFILE.role}</p>
+                  <hr className="ag-rule my-5" />
+                  <p className="text-sm" style={{ color: MUTED }}>{PROFILE.city}</p>
+                </div>
+                <div className="space-y-4 text-base md:text-[17px] leading-relaxed">
+                  <p>
+                    Hey there. I&apos;m a UX Lead with <strong>11+ years</strong> in the messy end of product design: enterprise dashboards, lending flows, analytics tools, the systems most people find intimidating. I like taking something dense and complicated and making it feel obvious. I sit right between design, data, and engineering, which is usually where the interesting problems hide.
+                  </p>
+                  <p>
+                    I&apos;ve done this for first-time founders and for some of the bigger names in banking and enterprise software. I stay in the file doing the actual pixels, not just the slides, and I care as much about whether a thing ships as whether it looks good. Right now I&apos;m after a senior product or UX role, in India, the Middle East, or fully remote.
+                  </p>
+                </div>
               </div>
             </Reveal>
 
-            <Reveal delay={0.06} className="ag-tile ag-tile-ink ag-lift p-8 flex flex-col justify-between" style={{ gridColumn: "span 2" }}>
-              <div>
-                <p className="text-xs font-mono uppercase tracking-[0.2em]" style={{ color: "rgba(244,242,248,0.6)" }}>Currently at</p>
-                <p className="font-display text-2xl font-black mt-2 leading-tight">{PROFILE.currentCompany}</p>
-                <p className="text-sm mt-1" style={{ color: "rgba(244,242,248,0.6)" }}>since {PROFILE.currentSince}</p>
+            <Reveal delay={0.06} className="ag-tile ag-lift ag-strip" style={{ gridColumn: "span 6" }} data-testid="about-current-role">
+              <div className="ag-strip-id">
+                <p className="text-xs font-mono uppercase tracking-[0.2em]" style={{ color: MUTED }}>Currently at</p>
+                <p className="ag-strip-org font-display">{PROFILE.currentCompany}</p>
+                <p className="text-sm" style={{ color: MUTED }}>since {PROFILE.currentSince}</p>
               </div>
-              <p className="text-sm mt-8 leading-relaxed" style={{ color: "rgba(244,242,248,0.82)" }}>{PROFILE.status}</p>
+              <span className="ag-chip">
+                <span className="ag-dot" aria-hidden="true" />{PROFILE.status}
+              </span>
             </Reveal>
 
             <Reveal delay={0.1} className="ag-tile ag-tile-sky ag-lift p-8" style={{ gridColumn: "span 6" }} data-testid="about-industries">
@@ -308,10 +316,12 @@ export default function About() {
             <Reveal delay={0.05} className="ag-tile ag-tile-ink ag-lift p-8 self-start" style={{ gridColumn: "span 2" }} data-testid="about-ai-tools">
               <p className="font-display text-lg font-black mb-1">AI in the loop</p>
               <p className="text-sm mb-5" style={{ color: "rgba(244,242,248,0.7)" }}>What I build and prototype with day to day.</p>
+              {/* Plain chips, not an inline-styled variant. The inline fill and
+                  border here were authored for the dark ink tile and could not
+                  be re-pointed by the light theme, so these six were the only
+                  chips on the page without a visible edge. */}
               <div className="flex flex-wrap gap-2">
-                {TOOLS.ai.map((t) => (
-                  <span key={t.name} className="ag-chip" style={{ background: "rgba(255,255,255,0.12)", borderColor: "rgba(255,255,255,0.22)", color: "#F4F2F8" }}>{t.name}</span>
-                ))}
+                {TOOLS.ai.map((t) => <Chip key={t.name}>{t.name}</Chip>)}
               </div>
             </Reveal>
 
@@ -331,23 +341,24 @@ export default function About() {
       <section className="py-16" data-testid="about-experience">
         <Container>
           <Head>Where I&apos;ve <span className="italic font-light">worked.</span></Head>
-          <div className="ag-tile p-8 md:p-11 max-w-4xl">
+          <div className="ag-tile p-8 md:p-11">
             <ol className="space-y-9">
               {(showAllExp ? EXPERIENCE : EXPERIENCE.slice(0, 3)).map((e, idx) => (
                 <li key={e.org} data-testid={`experience-${e.org}`}>
                   {idx > 0 && <hr className="ag-rule mb-9" />}
-                  <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                    <h3 className="font-display text-xl md:text-2xl font-black">{e.role}</h3>
-                    <span className="text-sm font-mono" style={{ color: MUTED }}>{e.time}</span>
+                  <div className="ag-split">
+                    <div>
+                      <h3 className="font-display text-xl md:text-2xl font-black leading-snug">{e.role}</h3>
+                      <p className="text-sm font-semibold mt-1.5" style={{ color: ACCENT }}>{e.org}</p>
+                      <p className="text-sm mt-0.5" style={{ color: MUTED }}>{e.place}</p>
+                      <p className="text-sm font-mono mt-2" style={{ color: MUTED }}>{e.time}</p>
+                    </div>
+                    <ul className="space-y-2">
+                      {e.points.map((p, i) => (
+                        <li key={i} className="text-[15px] leading-relaxed" style={{ color: MUTED }}>{p}</li>
+                      ))}
+                    </ul>
                   </div>
-                  <p className="text-sm font-semibold mt-1" style={{ color: ACCENT }}>
-                    {e.org} <span className="font-normal" style={{ color: MUTED }}>· {e.place}</span>
-                  </p>
-                  <ul className="mt-3 space-y-2">
-                    {e.points.map((p, i) => (
-                      <li key={i} className="text-[15px] leading-relaxed" style={{ color: MUTED }}>{p}</li>
-                    ))}
-                  </ul>
                 </li>
               ))}
             </ol>
@@ -412,7 +423,7 @@ export default function About() {
         <Container>
           <Reveal className="ag-tile ag-tile-ink p-10 md:p-14">
             <h2 className="font-display text-4xl md:text-6xl font-black leading-[1.02] max-w-3xl">
-              Have an idea <span className="italic font-light" style={{ color: "#FF7FB4" }}>worth</span> shipping?
+              Have an idea <span className="italic font-light ag-accent">worth</span> shipping?
             </h2>
             <div className="mt-9 flex gap-3 flex-wrap">
               <Link to="/contact" data-testid="cta-contact" className="ag-btn">
