@@ -35,7 +35,16 @@ export default function AuroraCaseStudy() {
   // Decrypted case data provided by CaseStudyGate after unlock.
   const au = useCaseData();
   return (
-    <article data-testid="aurora-case-study" className="pb-24">
+    /* theme-light drives the page. This route renders outside <Layout>, so it
+       never received the class and kept the dark palette it was authored
+       against. Its vocabulary (dark-card, #F4F3FA, text-white, #F5379B) is
+       what the remap in index.css already covers, so the class does the work
+       instead of a per-element rewrite. The cover header is the exception: it
+       sits on photography and keeps its dark scrim. */
+    <article
+      data-testid="aurora-case-study"
+      className="theme-light bg-[#EFEDE7] pb-24"
+    >
       <Seo title={au.title} description={au.subtitle} />
       <CaseStudyNav />
       {/* TITLE BLOCK over a darkened cover image */}
@@ -57,7 +66,9 @@ export default function AuroraCaseStudy() {
           aria-hidden="true"
           style={{ background: "linear-gradient(to bottom, rgba(16,2,16,0.55) 0%, rgba(16,2,16,0) 28%, rgba(16,2,16,0) 50%, rgba(16,2,16,0.92) 100%)" }}
         />
-        <Container className="relative z-10 pt-12 pb-14">
+        {/* Everything in here sits on the cover photograph, not on the page
+            surface, so it is exempt from the ink remap and stays white. */}
+        <Container className="relative z-10 pt-12 pb-14" data-on-dark>
           <div className="flex flex-wrap items-center justify-between gap-3 mb-10">
             <Link
               to="/projects"

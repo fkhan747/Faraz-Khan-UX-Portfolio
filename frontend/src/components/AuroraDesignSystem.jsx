@@ -840,7 +840,10 @@ const SearchSection = () => (
 
 export default function AuroraDesignSystem() {
   return (
-    <div className="space-y-16 md:space-y-20" style={ROBOTO}>
+    /* ds-spec marks this as a replica of the CLIENT product's UI, not portfolio
+       chrome. The light-theme remap must not repaint labels that sit on the
+       brand fills inside it. See the rule in index.css. */
+    <div className="ds-spec space-y-16 md:space-y-20" style={ROBOTO}>
       {/* Foundations */}
       <ColorSection />
       <TypographySection />

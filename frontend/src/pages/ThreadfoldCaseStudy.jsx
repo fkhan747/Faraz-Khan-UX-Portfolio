@@ -44,7 +44,13 @@ export default function ThreadfoldCaseStudy() {
   // Decrypted case data provided by CaseStudyGate after unlock.
   const j = useCaseData();
   return (
-    <article data-testid="threadfold-case-study" className="pb-24">
+    /* theme-light drives the page. Same reasoning as the Aurora page: rendered
+       outside <Layout>, so it never got the class and stayed on the dark
+       palette. The cover header keeps its dark scrim, it sits on photography. */
+    <article
+      data-testid="threadfold-case-study"
+      className="theme-light bg-[#EFEDE7] pb-24"
+    >
       <Seo title={j.title} description={j.subtitle} />
       <CaseStudyNav />
 
@@ -67,7 +73,9 @@ export default function ThreadfoldCaseStudy() {
           aria-hidden="true"
           style={{ background: "linear-gradient(to bottom, rgba(16,2,16,0.5) 0%, rgba(16,2,16,0) 30%, rgba(16,2,16,0) 50%, rgba(16,2,16,0.94) 100%)" }}
         />
-        <Container className="relative z-10 pt-12 pb-14">
+        {/* Everything in here sits on the cover photograph, not on the page
+            surface, so it is exempt from the ink remap and stays white. */}
+        <Container className="relative z-10 pt-12 pb-14" data-on-dark>
           <div className="flex flex-wrap items-center justify-between gap-3 mb-10">
             <Link
               to="/projects"
@@ -118,7 +126,7 @@ export default function ThreadfoldCaseStudy() {
         <Reveal as="h2" className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{j.overview.headline}</Reveal>
 
         <Reveal className="rounded-3xl dark-card text-white p-8 md:p-12 relative overflow-hidden">
-          <div className="absolute -top-10 -right-10 w-72 h-72 rounded-full bg-[#075EFD] blur-3xl opacity-30" />
+          <div className="ab-glow absolute -top-10 -right-10 w-72 h-72 rounded-full bg-[#075EFD] blur-3xl opacity-30" />
           <p className="relative text-[11px] font-mono uppercase tracking-[0.25em] text-white mb-4">{j.overview.tldrTitle}</p>
           <p className="relative font-display text-xl md:text-2xl leading-snug text-white/95 max-w-6xl case-keep">{j.overview.tldr}</p>
         </Reveal>

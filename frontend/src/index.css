@@ -735,6 +735,43 @@ a:has(.cover-img) { border-radius: 24px; }
   border-color: #C71E73 !important; outline: 2px solid rgba(199,30,115,0.25); outline-offset: 1px;
 }
 
+/* (17) The case-study scroll-spy jumper. It is a near-black glass pill built
+   for the dark pages, and on paper it read as leftover furniture, made worse
+   by the hairline remap putting a pale border on a black panel. On the light
+   pages it becomes a white glass pill with ink type. */
+.theme-light .cs-jumper {
+  background: rgba(255, 255, 255, 0.86) !important;
+  border-color: #DCD7CC !important;
+  box-shadow: 0 8px 32px -12px rgba(78, 62, 102, 0.34) !important;
+}
+.theme-light .cs-jumper-label { color: #6B665D !important; }
+.theme-light .cs-jumper-num,
+.theme-light .cs-jumper-name { color: #6B665D !important; }
+.theme-light .cs-jumper-num.is-active,
+.theme-light .cs-jumper-name.is-active { color: #171512 !important; }
+.theme-light .cs-jumper-item.is-active { background: rgba(23, 21, 18, 0.06) !important; }
+@media (hover: hover) and (pointer: fine) {
+  .theme-light .cs-jumper-item:hover { background: rgba(23, 21, 18, 0.05) !important; }
+  .theme-light .cs-jumper-item:hover .cs-jumper-num,
+  .theme-light .cs-jumper-item:hover .cs-jumper-name { color: #171512 !important; }
+}
+
+/* (15) Case-study body copy on the dark-card surfaces. Rule (13)'s sibling for
+   .ab-card only covered the comic panels; the case-study pages use .dark-card,
+   so their alpha text variants (text-[#F4F3FA]/85 and friends) were never
+   remapped and rendered near-white on a white card. Alpha variants are
+   separate Tailwind classes, so remapping the solid token misses them. */
+.theme-light .dark-card :where([class*="/95"], [class*="/85"], [class*="/80"], [class*="/75"], [class*="/70"]) {
+  color: #6B665D;
+}
+
+/* (16) Product design-system specimens are replicas of the CLIENT's own UI,
+   not page chrome. Their swatch fills survive the remap, but labels sitting on
+   those fills were declared text-white and the ink rule repainted them dark on
+   dark green. Inside a .ds-spec block they stay white. */
+.theme-light .ds-spec .text-white,
+.theme-light .ds-spec [class*="text-white/"] { color: #FFFFFF; }
+
 /* (13) The featured demo panel on /projects, finished. Rule (2) above only
    reaches surfaces declared as Tailwind classes, and this panel declared its
    fill and border inline, so the audit panel and all six checklist tiles were
