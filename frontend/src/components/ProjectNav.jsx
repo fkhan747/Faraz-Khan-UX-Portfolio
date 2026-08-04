@@ -41,7 +41,7 @@ function FooterLink({ to, dir, title }) {
       to={to}
       data-testid={isPrev ? "prev-project" : "next-project"}
       title={`${isPrev ? "Previous" : "Next"} project: ${title}`}
-      className={`pnav-pill group inline-flex items-center gap-2.5 px-6 py-3 rounded-full border border-white/20 text-[#A29CB4] hover:border-white/40 hover:text-[#F4F3FA] transition-[color,border-color,transform] duration-200 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F5379B] focus-visible:ring-offset-2 focus-visible:ring-offset-[#100210] ${isPrev ? "sm:mr-5" : "sm:ml-5"}`}
+      className={`pnav-pill group inline-flex items-center gap-2.5 px-6 py-3 rounded-full border border-white/20 text-[#A29CB4] hover:border-white/40 hover:text-[#F4F3FA] transition-[color,border-color,transform] duration-200 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C71E73] focus-visible:ring-offset-2 focus-visible:ring-offset-[#EFEDE7] ${isPrev ? "sm:mr-5" : "sm:ml-5"}`}
     >
       {isPrev && <ArrowLeft size={16} className="shrink-0 text-white/40 group-hover:text-[#F5379B] transition-colors" />}
       <span className={`leading-tight ${isPrev ? "text-left" : "text-right"}`}>

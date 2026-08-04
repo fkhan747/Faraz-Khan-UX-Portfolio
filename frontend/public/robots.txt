@@ -8,9 +8,8 @@ Allow: /
 # The stale /case/joat line went with them, since that slug is now a redirect
 # to /case/threadfold and needs to pass its authority through.
 
-# Superseded duplicates. Kept reachable, but not worth indexing next to the
-# pages that replaced them.
-Disallow: /case/finvista-deck
+# Pre-cleanup URLs. These now redirect to the pages that replaced them, so
+# they are not worth indexing in their own right.
 Disallow: /case/finvista-long
 
 # The hidden interview deck is reached through the easter egg, not search.

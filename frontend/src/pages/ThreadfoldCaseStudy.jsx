@@ -13,8 +13,11 @@ import CaseStudyNav from "../components/CaseStudyNav";
 import ProjectNav from "../components/ProjectNav";
 import { Container } from "../components/Grid";
 
-// Shared focus-visible ring for interactive elements on the dark page.
-const FOCUS = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F5379B] focus-visible:ring-offset-2 focus-visible:ring-offset-[#100210]";
+// Focus ring for the light ground. The offset used to be the dark site
+// background, which drew a near-black halo on paper, and the ring used the
+// bright magenta that fails contrast on light (3.04:1). Both now match the
+// rest of the light pages.
+const FOCUS = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C71E73] focus-visible:ring-offset-2 focus-visible:ring-offset-[#EFEDE7]";
 
 // Strong ease-out, matched to Reveal's curve, for the self-drawing divider.
 const EASE = [0.23, 1, 0.32, 1];

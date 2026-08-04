@@ -7,19 +7,19 @@ import { Fig, Head, Split, Phones, Venn, Thanks } from "./deckParts";
 /* FINVISTA, long-form, on the light slide-band design. THIS IS THE LIVE PAGE
    at /case/finvista as of 2026-08-04.
 
-   WHAT THIS IS: the same light treatment as CaseFinvistaDeck.jsx, but driven
+   WHAT THIS IS: the slide-band treatment shared with CaseMeridianDeck, driven
    by the long-form keys of src/data/finvistaCase.js (overview, problem,
    research, insights, flow, design, designSystem, validation, impact,
-   gallery) rather than the `deck` block. The deck version it replaced is not
-   deleted: it still renders at /case/finvista-deck, and Meridian, Aurora and
-   Threadfold are still on it until their long-form content is finalised.
+   gallery) rather than the `deck` block, which is now unused for FinVista.
+   The condensed deck version this replaced was deleted in the 2026-08-04
+   cleanup; git history has it, and /case/finvista-deck redirects here.
 
-   SCREENS: the product UI is the Material 3 set in public/finvista/m3, used
-   exactly as the shipped deck uses it. The long-form data also references the
-   older numbered captures; those are deliberately not used here, so the two
-   light pages show one visual language for the product.
+   SCREENS: the product UI is the Material 3 set in public/finvista/m3. The
+   long-form data also references the older numbered captures; those are
+   deliberately not used here, so the case studies show one visual language
+   for the product.
 
-   CONFIDENTIALITY: same contract as the deck page. Every word of copy comes
+   CONFIDENTIALITY: Every word of copy comes
    from the data module through useCaseData(), so this bundle ships no
    confidential text, and images render through Fig, which uses VaultImage. */
 

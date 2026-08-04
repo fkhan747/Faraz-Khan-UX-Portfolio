@@ -12,7 +12,11 @@ import CaseStudyNav from "../components/CaseStudyNav";
 import ProjectNav from "../components/ProjectNav";
 import { Container } from "../components/Grid";
 
-const FOCUS = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F5379B] focus-visible:ring-offset-2 focus-visible:ring-offset-[#100210]";
+// Focus ring for the light ground. The offset used to be the dark site
+// background, which drew a near-black halo on paper, and the ring used the
+// bright magenta that fails contrast on light (3.04:1). Both now match the
+// rest of the light pages.
+const FOCUS = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C71E73] focus-visible:ring-offset-2 focus-visible:ring-offset-[#EFEDE7]";
 // A shipped screen that anchors the Outcome section with a real visual.
 const A_HERO = "/aurora/04_RBJ_Properties_Weekly.jpg";
 
@@ -437,7 +441,7 @@ export default function AuroraCaseStudy() {
             <ol className="relative border-l-2 border-white/15 ml-2 space-y-6">
               {au.validation.rounds.map((r, i) => (
                 <li key={r.n} className="pl-6 relative">
-                  <span className="absolute -left-[14px] top-1 w-7 h-7 rounded-full bg-[#075EFD] text-white flex items-center justify-center font-display font-black text-sm border-4 border-[#100210]">{r.n}</span>
+                  <span className="absolute -left-[14px] top-1 w-7 h-7 rounded-full bg-[#075EFD] text-white flex items-center justify-center font-display font-black text-sm border-4 border-[#EFEDE7]">{r.n}</span>
                   <h4 className="font-display text-base font-black">{r.t}</h4>
                   <p className="mt-1.5 text-sm leading-relaxed">{r.d}</p>
                 </li>

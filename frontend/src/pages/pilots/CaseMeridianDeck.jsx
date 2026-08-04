@@ -312,6 +312,39 @@ export default function CaseMeridianDeck() {
         </div>
       </section>
 
+      {/* ── SECTOR CONTEXT ─────────────────────────────────────────
+          Moved here 2026-08-04 from meridianCase.body, which only the old
+          MeridianCaseStudy page read, so this never reached a live URL. Copy
+          is Faraz's, unchanged. It sits after the problem statement and before
+          the design principles because it explains why the problem is a sector
+          default rather than one university's mistake. */}
+      <section className="cd-band">
+        <div className="cd-in">
+          <Reveal>
+            <Head eye="The sector pattern">
+              What peer universities do about this, and where Meridian broke from the pattern
+            </Head>
+            <p className="cd-lede" style={{ maxWidth: "72ch" }}>
+              Dashboard sprawl is the sector&rsquo;s default state, not this university&rsquo;s special
+              failure. The common answer is to buy more dashboards: a BI license per department, each
+              with its own definitions, refresh cycles and owner. EDUCAUSE has ranked data and
+              analytics governance among higher ed&rsquo;s top technology issues for years, and the
+              pattern behind it is always the same. Institutional research becomes a report factory,
+              every leadership question becomes a ticket, and cabinet meetings open with an argument
+              about whose number is right, because &ldquo;enrolled student&rdquo; means three
+              different things in three different files.
+            </p>
+            <p className="cd-lede" style={{ maxWidth: "72ch", marginTop: 20 }}>
+              Meridian broke from that pattern in three ways. One platform instead of one per
+              department. One definition per metric, signed off by the analysts who own the data, so
+              the argument about whose number is right ends before the meeting starts. And
+              answer-first screens, so the platform replaces the report queue for routine questions
+              instead of adding to it.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
       {/* ── KEY THEMES ─────────────────────────────────────────────── */}
       <section className="cd-band">
         <div className="cd-in" style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,420px)", gap: 64, alignItems: "center" }}>
