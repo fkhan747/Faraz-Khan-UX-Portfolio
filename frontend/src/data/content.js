@@ -18,9 +18,15 @@ export const PROFILE = {
 const F = (n) => `/finvista/${n}`;
 
 // Projects: 4 client case studies. Meridian leads and is open to explore.
-// FinVista, Aurora and Threadfold are confidential client work, gated
-// behind a password (see src/lib/caseLock.js) — `locked: true` drives the lock
-// treatment on the cards and the route-level CaseStudyGate.
+// FinVista, Aurora and Threadfold are confidential client work.
+//
+// `locked: true` no longer draws anything. The vault went dormant on
+// 2026-08-02, so every case study opens without a password and CaseCover
+// ignores the prop (see the note in that file). The flag stays as the record
+// of which studies are NDA work, and it is what the route-level CaseStudyGate
+// and the encrypt scripts key off, so re-enabling the vault stays a one-flag
+// change rather than a hunt through the grids. Do not delete it because the
+// cards look the same with and without it.
 export const projects = [
   {
     slug: "meridian",

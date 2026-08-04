@@ -1,9 +1,19 @@
 User-agent: *
 Allow: /
 
-# Confidential client case studies — gated, kept out of search.
-Disallow: /case/finvista
-Disallow: /case/aurora
-Disallow: /case/joat
+# The client case studies were vault-gated and kept out of search. The vault
+# went dormant on 2026-08-02 and the pages are open, so the disallow lines for
+# /case/finvista and /case/aurora came off on 2026-08-04: they were hiding the
+# strongest work while the weaker unlocked pages were the only ones rankable.
+# The stale /case/joat line went with them, since that slug is now a redirect
+# to /case/threadfold and needs to pass its authority through.
+
+# Superseded duplicates. Kept reachable, but not worth indexing next to the
+# pages that replaced them.
+Disallow: /case/finvista-deck
+Disallow: /case/finvista-long
+
+# The hidden interview deck is reached through the easter egg, not search.
+Disallow: /deck/
 
 Sitemap: https://www.khanfaraz.in/sitemap.xml

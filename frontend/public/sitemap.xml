@@ -1,10 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Every page that is linked from the site and worth ranking.
+
+  Added 2026-08-04: finvista, aurora and threadfold. They were vault-gated when
+  this file was written and were left out along with the robots.txt block, so
+  the three strongest case studies were invisible to search long after the
+  vault went dormant. /agentic-workflow was simply missed.
+
+  Deliberately NOT here: /case/almanac (live:false, filtered out of /projects,
+  so listing it would surface parked work), /case/finvista-deck and
+  /case/finvista-long (superseded duplicates, disallowed in robots.txt), the
+  legacy redirect stubs, and /deck/.
+-->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://www.khanfaraz.in/</loc><priority>1.0</priority></url>
   <url><loc>https://www.khanfaraz.in/projects</loc><priority>0.9</priority></url>
   <url><loc>https://www.khanfaraz.in/about</loc><priority>0.8</priority></url>
   <url><loc>https://www.khanfaraz.in/contact</loc><priority>0.7</priority></url>
+
+  <!-- Client work. -->
+  <url><loc>https://www.khanfaraz.in/case/finvista</loc><priority>0.9</priority></url>
   <url><loc>https://www.khanfaraz.in/case/meridian</loc><priority>0.9</priority></url>
+  <url><loc>https://www.khanfaraz.in/case/aurora</loc><priority>0.9</priority></url>
+  <url><loc>https://www.khanfaraz.in/case/threadfold</loc><priority>0.9</priority></url>
+
+  <!-- Self-initiated concepts and the live agentic demo. -->
   <url><loc>https://www.khanfaraz.in/case/slate</loc><priority>0.8</priority></url>
   <url><loc>https://www.khanfaraz.in/case/crux</loc><priority>0.8</priority></url>
+  <url><loc>https://www.khanfaraz.in/agentic-workflow</loc><priority>0.8</priority></url>
 </urlset>
