@@ -98,13 +98,20 @@ const LONG_CSS = `
   .fvl-retro-col li::before{ content:""; position:absolute; left:0; top:.62em;
     width:7px; height:7px; border-radius:50%; background:var(--acc); }
 
-  /* Four impact metrics rather than the deck's three. Declared as a class, not
-     an inline grid-template, so it still collapses at the deck's own
-     breakpoints instead of forcing four columns onto a phone. */
+  /* The four process steps read as one row rather than three plus an orphan.
+     Declared with both class names so it beats .cd-3up's own breakpoints no
+     matter which stylesheet lands last. */
+  .cd-3up.fvl-4up{ grid-template-columns:repeat(4,1fr); }
+  @media (max-width:1000px){ .cd-3up.fvl-4up{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:560px){ .cd-3up.fvl-4up{ grid-template-columns:1fr; } }
+
   /* Two personas, not the deck's three. Same reasoning as fvl-metrics-4. */
   .fvl-2up{ grid-template-columns:repeat(2,1fr); }
   @media (max-width:900px){ .fvl-2up{ grid-template-columns:1fr; } }
 
+  /* Four impact metrics rather than the deck's three. Declared as a class, not
+     an inline grid-template, so it still collapses at the deck's own
+     breakpoints instead of forcing four columns onto a phone. */
   .fvl-metrics-4{ grid-template-columns:repeat(4,1fr); }
   @media (max-width:960px){ .fvl-metrics-4{ grid-template-columns:repeat(2,1fr); } }
   @media (max-width:480px){ .fvl-metrics-4{ grid-template-columns:1fr; } }
@@ -199,7 +206,7 @@ export default function CaseFinvistaLong() {
       <section className="cd-band cd-band-tight">
         <div className="cd-in">
           <Reveal><Head eye="How it ran">Four phases across five months.</Head></Reveal>
-          <div className="cd-3up">
+          <div className="cd-3up fvl-4up">
             {o.process.map((s, i) => (
               <Reveal className="cd-tile" key={s.step} delay={i * 0.05}>
                 <span className="cd-tile-k">{s.step}</span>

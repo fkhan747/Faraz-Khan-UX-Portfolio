@@ -74,9 +74,9 @@ export const finvista = {
   ],
 
   problem: {
-    headline: "One app, two personas, six products, and a device gap from flagship to entry-level 2G",
+    headline: "One app, two personas, six products, and a gap from flagship phones to entry-level Android on patchy coverage",
     intro:
-      "The old flow was paper, agents and fragments. The new one had to be fast enough for twenty applications a day, instantly readable the second the phone turns around to face the customer, solid on village 2G, and RBI-compliant end to end.",
+      "The old flow was paper, agents and fragments. The new one had to be fast enough for twenty applications a day, instantly readable the second the phone turns around to face the customer, solid where the coverage is patchy, and RBI-compliant end to end.",
     coreChallenge:
       "One scalable Android app, reusable across six products, holding up on every device and network in India.",
     dimensions: [
@@ -90,7 +90,7 @@ export const finvista = {
       },
       {
         title: "Device and Network Diversity",
-        desc: "Flagship on 5G to entry-level Android on 2G. The app holds up across the gap.",
+        desc: "Flagship phones on good coverage to entry-level Android where the signal drops. The app holds up across the gap.",
       },
     ],
     inScope: [
@@ -410,7 +410,7 @@ export const finvista = {
       ["8", "moments only the customer can complete"],
       ["100%", "of consents and signatures captured on paper"],
       ["6", "products, six separate processes"],
-      ["2G", "the slowest network it still had to work on"],
+      ["Patchy", "the weakest mobile coverage it still had to work on"],
       ["500+", "cities, from metro to village"],
     ],
 
@@ -546,8 +546,8 @@ export const finvista = {
       ],
       [
         "03",
-        "A flagship and a 2G handset, same screens",
-        "The app had to hold up from a metro flagship to an entry-level Android on village 2G. That ruled out heavy imagery and animation, and it is why the interface leans on type, spacing and iconography that render at any size.",
+        "A flagship and an entry-level handset, same screens",
+        "The app had to hold up from a metro flagship to an entry-level Android on patchy rural coverage. That ruled out heavy imagery and animation, and it is why the interface leans on type, spacing and iconography that render at any size.",
       ],
     ],
 
