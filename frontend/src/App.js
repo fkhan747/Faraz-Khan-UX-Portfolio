@@ -51,6 +51,10 @@ function App() {
           <Route path="/case/slate" element={<SlateConcept />} />
           <Route path="/case/almanac" element={<AlmanacConcept />} />
           <Route path="/case/crux" element={<CruxConcept />} />
+          {/* The agentic demo runs the same deck treatment as the case studies,
+              so it sits out here with its own CaseTopBar rather than inside the
+              site chrome. */}
+          <Route path="/agentic-workflow" element={<AgenticWorkflow />} />
           {/* URLs that were shared before the cleanup. */}
           <Route path="/case/finvista-long" element={<Navigate to="/case/finvista" replace />} />
           <Route path="/case/finvista-deck" element={<Navigate to="/case/finvista" replace />} />
@@ -86,7 +90,6 @@ function App() {
             <Route path="/case/joat" element={<Navigate to="/case/threadfold" replace />} />
             <Route path="/case/joat-v1" element={<Navigate to="/case/threadfold" replace />} />
             <Route path="/ai-lab" element={<AiLab />} />
-            <Route path="/agentic-workflow" element={<AgenticWorkflow />} />
             <Route path="/case/:slug" element={<CaseStudy />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
