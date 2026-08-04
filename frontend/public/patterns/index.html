@@ -208,6 +208,22 @@
     .factor{grid-template-columns:110px 1fr 40px;}
     .queue{grid-template-columns:1fr;}
   }
+
+  /* Cards fill their column rather than stopping mid-page; the paragraph
+     inside keeps a readable measure so the line length stays sane. */
+  .honest, .made-close{ max-width:none; }
+  .honest > p, .made-close > p{ margin:0; max-width:78ch; }
+
+  /* No orphan row: five pills laid out 3 + 2 rather than flex-wrapping to
+     4 + 1. Grid, so the row split is deliberate instead of incidental. */
+  .pat-strip{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:20px; }
+  @media (max-width:860px){ .pat-strip{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:560px){ .pat-strip{ grid-template-columns:1fr; } }
+  .pat-strip a{ justify-content:flex-start; }
+
+  /* No single word alone on a last line, and balanced headings. */
+  h1,h2,h3,h4{ text-wrap:balance; }
+  p,li,figcaption,blockquote{ text-wrap:pretty; }
 </style>
 </head>
 <body>
@@ -219,7 +235,7 @@
 </div>
 
 <div class="bar"><div class="bar-in">
-  <a href="/projects">← All work</a>
+  <a href="/ai-lab">← Back to AI Lab</a>
   <span class="name display">Faraz Khan</span>
 </div></div>
 
@@ -233,7 +249,7 @@
     <span class="chip">From <b>shipped + prototyped</b> work</span>
     <span class="chip">Faraz Khan · <b>Senior UX Lead</b></span>
   </div>
-  <p class="honest">Quick honesty note: everything here is documented from products you already use, plus my own client work and prototypes. Prototypes are labeled as prototypes, and there are no made-up numbers anywhere on this page.</p>
+  <div class="honest"><p>Quick honesty note: everything here is documented from products you already use, plus my own client work and prototypes. Prototypes are labeled as prototypes, and there are no made-up numbers anywhere on this page.</p></div>
 </header>
 
 <nav class="index wrap" aria-label="Pattern index">
@@ -580,7 +596,7 @@
     <div class="made glass"><span class="n">Step 05</span><h5>Taste rounds</h5><p>Then the edit passes: jargon out, casual voice in. Demos promoted from side snips to center stage. A frozen-glass theme, and the pink dialed back 50% when it shouted. The Japanese type lasted exactly one round.</p><p class="tools">⚙ <b>Bench:</b> screenshot reviews · side-by-side passes · direction notes ("halve the pink", "kill the kanji")</p></div>
     <div class="made glass"><span class="n">Step 06</span><h5>Ship honest</h5><p>Prototypes labeled as prototypes, shipped work labeled as shipped, and zero invented numbers. The trust page has to be trustworthy about itself.</p><p class="tools">⚙ <b>Bench:</b> plain static HTML · GitHub Pages · labels doing the compliance work</p></div>
   </div>
-  <p class="made-close">The meta point, quietly: this page was made the way it says AI products should work. AI did the heavy lifting, a human held the taste and the judgment, and every step left a trail.</p>
+  <div class="made-close"><p>The meta point, quietly: this page was made the way it says AI products should work. AI did the heavy lifting, a human held the taste and the judgment, and every step left a trail.</p></div>
 </section>
 
 </main>

@@ -172,6 +172,22 @@
   a.plain{color:var(--blue-deep); text-decoration:none; border-bottom:1px solid rgba(46,124,214,.3);}
 
   @media (max-width:920px){ .then-now{grid-template-columns:1fr;} .con-grid{grid-template-columns:1fr;} }
+
+  /* Cards fill their column rather than stopping mid-page; the paragraph
+     inside keeps a readable measure so the line length stays sane. */
+  .honest, .made-close{ max-width:none; }
+  .honest > p, .made-close > p{ margin:0; max-width:78ch; }
+
+  /* No orphan row: five pills laid out 3 + 2 rather than flex-wrapping to
+     4 + 1. Grid, so the row split is deliberate instead of incidental. */
+  .pat-strip{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:20px; }
+  @media (max-width:860px){ .pat-strip{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:560px){ .pat-strip{ grid-template-columns:1fr; } }
+  .pat-strip a{ justify-content:flex-start; }
+
+  /* No single word alone on a last line, and balanced headings. */
+  h1,h2,h3,h4{ text-wrap:balance; }
+  p,li,figcaption,blockquote{ text-wrap:pretty; }
 </style>
 </head>
 <body>
@@ -183,7 +199,7 @@
 </div>
 
 <div class="bar"><div class="bar-in">
-  <a href="/projects">← All work</a>
+  <a href="/ai-lab">← Back to AI Lab</a>
   <span class="name display">Faraz Khan</span>
 </div></div>
 
@@ -196,7 +212,7 @@
     <span class="chip"><b>Working demo</b> below</span>
     <span class="chip">Runs on the <b>12 trust patterns</b></span>
   </div>
-  <p class="honest">Honesty first: FinVista shipped and its numbers are real. The agent era version is a concept, and I won't invent adoption numbers for it. The design thinking is the claim, and you can operate it yourself below.</p>
+  <div class="honest"><p>Honesty first: FinVista shipped and its numbers are real. The agent era version is a concept, and I won't invent adoption numbers for it. The design thinking is the claim, and you can operate it yourself below.</p></div>
 </header>
 
 <main class="wrap">
@@ -299,7 +315,7 @@
     <div class="made glass"><span class="n">Step 05</span><h5>Build with AI, keep the wheel</h5><p>I directed, AI built, and I played the whole shift in a headless browser both ways, Clerk on Auto and on Suggest, until every path held up.</p><p class="tools">⚙ <b>Bench:</b> Claude for the build · vanilla HTML/CSS/JS · Playwright to play the shift both ways</p></div>
     <div class="made glass"><span class="n">Step 06</span><h5>Draw the honesty line</h5><p>Shipped numbers stay real, the concept stays labeled a concept, and the page says out loud that no bank has deployed this. The thinking is the claim.</p><p class="tools">⚙ <b>Bench:</b> labels, links and a footer that says "no bank has deployed this" in plain sight</p></div>
   </div>
-  <p class="made-close">Built the way it preaches: the machine did the work, the human kept the judgment, and the process left a trail you just read.</p>
+  <div class="made-close"><p>Built the way it preaches: the machine did the work, the human kept the judgment, and the process left a trail you just read.</p></div>
 
 </main>
 

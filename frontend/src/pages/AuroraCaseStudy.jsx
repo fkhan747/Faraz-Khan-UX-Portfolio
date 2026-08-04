@@ -164,7 +164,7 @@ export default function AuroraCaseStudy() {
         <Reveal delay={0.06} className="mt-10 rounded-3xl dark-card text-white p-8 md:p-10">
           <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-white mb-3">{au.problem.hypothesisTitle}</p>
           <p className="font-display text-xl md:text-2xl leading-snug max-w-6xl">{au.problem.hypothesis}</p>
-          <ul className="mt-6 flex flex-wrap gap-3">
+          <ul className="mt-6 grid sm:grid-cols-3 gap-3">
             {au.problem.hypothesisBullets.map((b) => (
               <li key={b} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#F5379B]/45 bg-[#F5379B]/10 text-[#F4F3FA] text-sm font-semibold">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#F5379B]" />{b}

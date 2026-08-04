@@ -415,7 +415,7 @@ export default function CaseFinvistaLong() {
             <p className="cd-lede">{dz.intro}</p>
             <div className="cd-how"><b>Wireframes</b><p>{dz.wireframes.intro}</p></div>
           </Reveal>
-          <div className="cd-shots">
+          <div className={`cd-shots${dz.wireframes.batches.length % 2 === 1 ? " cd-shots-3" : ""}`}>
             {dz.wireframes.batches.map((b) => (
               <Fig key={b.src} src={b.src} alt={b.caption} cap={b.caption} />
             ))}

@@ -274,7 +274,10 @@ export const DECK_CSS = `
   .cd-fig img{ width:100%; display:block; border-radius:8px; border:1px solid var(--line); background:#fff; }
   .cd-fig figcaption{ font-size:13px; color:var(--muted); margin-top:12px; }
   .cd-shots{ display:grid; grid-template-columns:repeat(2,1fr); gap:24px; margin-top:44px; }
-  @media (max-width:820px){ .cd-shots{ grid-template-columns:1fr; } }
+  /* Three shots go three across rather than 2 + 1: never leave one alone. */
+  .cd-shots-3{ grid-template-columns:repeat(3,1fr); }
+  @media (max-width:1000px){ .cd-shots-3{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:820px){ .cd-shots, .cd-shots-3{ grid-template-columns:1fr; } }
   .cd-shots figure{ margin:0; position:relative; }
 
   /* "How it was run": the mechanics behind a method, set apart from the

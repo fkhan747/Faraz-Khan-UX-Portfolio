@@ -1,4 +1,5 @@
 import Reveal from "./Reveal";
+import { rowCols, gridColsClass } from "../lib/rowFit";
 
 /**
  * "What I owned" responsibility chips, shown in a case-study hero.
@@ -16,11 +17,14 @@ import Reveal from "./Reveal";
  */
 export default function OwnedCard({ items = [], accent = "#C71E73", className = "" }) {
   if (!items.length) return null;
+  /* Flex-wrap decided the break by text length and left one chip alone on the
+     last row. A grid picks the split deliberately: six chips read 4 + 2. */
+  const cols = rowCols(items.length, 4);
   return (
     /* `owned-card` / `owned-card-label` are styling hooks kept for the concept
        pages, which target them from their own stylesheet. */
     <Reveal
-      className={`owned-card mt-7 max-w-4xl rounded-2xl p-5 bg-white border border-[#DCD7CC] ${className}`}
+      className={`owned-card mt-7 rounded-2xl p-5 bg-white border border-[#DCD7CC] ${className}`}
     >
       <p
         className="owned-card-label text-[10px] font-mono uppercase tracking-widest mb-3"
@@ -28,11 +32,11 @@ export default function OwnedCard({ items = [], accent = "#C71E73", className = 
       >
         What I owned
       </p>
-      <div className="flex flex-wrap gap-2.5">
+      <div className={`grid gap-2.5 ${gridColsClass(cols)}`}>
         {items.map((x) => (
           <span
             key={x}
-            className="inline-flex items-center gap-2 rounded-full border border-[#DCD7CC] bg-[#F7F6F2] px-4 py-2 text-sm font-semibold text-[#171512]"
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-[#DCD7CC] bg-[#F7F6F2] px-4 py-2 text-sm font-semibold text-[#171512] text-center"
           >
             <span className="h-1.5 w-1.5 rounded-full" style={{ background: accent }} />
             {x}
