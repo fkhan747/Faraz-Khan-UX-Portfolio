@@ -1,7 +1,12 @@
-// FinVista case study. Confidential client (NDA) — kept anonymized.
+// FinVista case study. Confidential client (NDA), kept anonymized.
 // Structured data consumed by FinVistaCaseStudy.jsx. Every top-level key
 // below is referenced by the page — do not remove keys, only shorten values.
 // Voice: first-person, conversational, plain. No em-dashes.
+//
+// REWRITTEN 2026-08-04: cut from ~1,500 to ~750 words of prose so the page
+// reads in about 3 minutes. Scale context (25M+ customers, Rs 30,000+ crore
+// book) comes from the client's public site, rounded to protect anonymity.
+// The full-length material lives in git history if anything needs reviving.
 const F = (n) => `/finvista/${n}`;
 
 export const finvista = {
@@ -27,10 +32,10 @@ export const finvista = {
   overview: {
     headline: "One lending app for six products, run by executives, handed to the customer at the moments that need them",
     intro:
-      "FinVista is a consumer lending app for a large Indian NBFC (client anonymized under NDA), serving borrowers across 500+ cities. I led UX across six products, with the two-wheeler flow as the proving ground.",
+      "FinVista is the assisted lending app of one of India's largest NBFCs (client anonymized under NDA): 25 million+ customers, a loan book above Rs 30,000 crore, loans originated in 500+ cities. I led UX across all six products, with the two-wheeler flow as the proving ground.",
     tldrTitle: "TL;DR",
     tldr:
-      "Paper-heavy origination → 11-step native Android journey run by sales, call centre and store staff, with designed handoff moments where the customer signs, consents and verifies in person. Six products on one 100+ component system. Processing ~60% faster, training down ~40%.",
+      "Paper-heavy origination became an 11-step native Android journey run by sales, call centre and store staff, with designed handoff moments where the customer signs, consents and verifies in person. Six products on one 100+ component system. Processing ~60% faster, agent training down ~40%.",
     facts: [
       { label: "Role", value: "Senior UX Lead" },
       { label: "Duration", value: "5 months" },
@@ -46,17 +51,16 @@ export const finvista = {
       { step: "04", title: "Validation", duration: "4 weeks" },
     ],
     productLandscape: {
-      intro:
-        "Six products, one system. I used the highest-volume one as the proving ground.",
+      intro: "Six products, one system. The highest-volume one proved it.",
       products: [
         {
           name: "Two-Wheeler Loan",
           badge: "PROVING GROUND",
-          desc: "New and used bikes, scooters, electric, mopeds. This case study is about this flow.",
+          desc: "New and used bikes, scooters, electric. This case study is this flow.",
         },
         {
           name: "Consumer Durable · Personal · Used Car · Tractor · Three-Wheeler",
-          desc: "Five more loan products on the same 100+ component system.",
+          desc: "Five more products on the same 100+ component system.",
         },
       ],
     },
@@ -64,65 +68,60 @@ export const finvista = {
 
   // --- 02 PROBLEM ---
   primaryUsers: [
-    { label: "Sales Centre Executives", desc: "They process loans over phone and app, juggle a dozen applications at once, and own the compliance. Speed is their whole job." },
-    { label: "Store Managers", desc: "Own the dealer portfolio, the team's pipeline and the escalations. They read the app more than they key into it." },
-    { label: "The customer", desc: "Not a user. A participant, for the eight or so moments only they can complete: live photo, KYC and bureau consent, OTP, uploads, e-signature, home-visit consent." },
+    { label: "Sales Centre Executives", desc: "Run loans over phone and app, a dozen applications at once, and own the compliance. Speed is the job." },
+    { label: "Store Managers", desc: "Own the dealer portfolio, the pipeline and the escalations. They read the app more than they type into it." },
+    { label: "The customer", desc: "Not a user. A participant, for the eight or so moments only they can complete: live photo, consents, OTP, uploads, e-signature." },
   ],
 
   problem: {
     headline: "One app, two personas, six products, and a device gap from flagship to entry-level 2G",
     intro:
-      "The old flow was paper, agents, and fragments. I had to design one app fast enough for someone running twenty applications a day, that becomes instantly readable when the phone is turned around to the customer, holds up on 2G, and stays RBI-compliant end to end.",
+      "The old flow was paper, agents and fragments. The new one had to be fast enough for twenty applications a day, instantly readable the second the phone turns around to face the customer, solid on village 2G, and RBI-compliant end to end.",
     coreChallenge:
-      "One scalable Android app, reusable components, holding up across every device and network in India, staying compliant.",
+      "One scalable Android app, reusable across six products, holding up on every device and network in India.",
     dimensions: [
       {
         title: "Multi-Persona Complexity",
-        desc: "Executives drive; the customer takes over for signatures, consents and verification. Same screens, two completely different readers.",
+        desc: "Executives drive; the customer takes over for signatures and consents. Same screens, two completely different readers.",
       },
       {
         title: "Information Overload",
-        desc: "One application is 40+ fields. Fit them on a phone without drowning anyone. The IA does the heavy lifting.",
+        desc: "One application is 40+ fields. The IA does the heavy lifting.",
       },
       {
         title: "Device and Network Diversity",
-        desc: "Flagship on 5G to entry-level Android on village 2G. The app has to hold up across the whole gap.",
+        desc: "Flagship on 5G to entry-level Android on 2G. The app holds up across the gap.",
       },
     ],
     inScope: [
-      "End-to-end loan origination for 6 products",
-      "Two-Wheeler journey as primary focus",
-      "Native Android design system",
-      "In-store, call-centre and store-manager pathways",
+      "End-to-end origination for 6 products",
+      "Native Android design system (100+ components)",
+      "Sales, call-centre and store-manager pathways",
       "KYC, identity verification, consent flows",
-      "Scalable component library (100+ components)",
     ],
     outOfScope: [
       "Backend credit scoring",
       "Payment gateway UI",
-      "Admin panel and back-office",
-      "Marketing site",
-      "Post-disbursal loan management",
+      "Admin and back-office",
+      "Post-disbursal servicing",
     ],
   },
 
   // --- 03 RESEARCH ---
   research: {
-    headline: "What the best Indian lending apps already do, and what they miss",
+    headline: "What the best Indian lending apps already do, and the gap they all leave",
     intro:
-      "I pulled apart the leading Indian lending apps, sat with stakeholders, ran a heuristic sweep. The pattern was clear.",
+      "I pulled apart the leading Indian lending apps and ran a heuristic sweep with stakeholders.",
     competitive: [
       {
         name: "Navi",
         image: F("Navi.jpg"),
-        notes:
-          "Clean UI, one-step-at-a-time flow, intuitive micro-interactions.",
+        notes: "Clean UI, one step at a time, intuitive micro-interactions.",
       },
       {
         name: "KreditBee",
         image: F("KreditBee.jpg"),
-        notes:
-          "Stepped onboarding, progress tracking, help always in reach.",
+        notes: "Stepped onboarding, progress tracking, help always in reach.",
       },
     ],
     findingsTable: {
@@ -137,19 +136,19 @@ export const finvista = {
       ],
     },
     keyInsight:
-      "Every competitor nails a single-product flow. None solve multi-product, multi-persona. That gap is the opportunity: one flexible system for 6 products and 2 personas.",
+      "Every competitor nails a single-product flow. None solve multi-product, multi-persona. That gap is the opportunity.",
     approach: [
-      { title: "Material Foundation", desc: "Built on Material and card layouts. Android users already know it." },
-      { title: "Clean and Minimal", desc: "One hierarchy, uncluttered surface. Matters most in the seconds a customer is holding a phone they have never seen." },
-      { title: "Progress Always Visible", desc: "Users always know where they are and what is next." },
+      { title: "Material Foundation", desc: "Material and card layouts. Android users already know them." },
+      { title: "Clean and Minimal", desc: "One hierarchy. Matters most when a customer is holding a phone they have never seen." },
+      { title: "Progress Always Visible", desc: "Everyone knows where they are and what comes next." },
     ],
   },
 
   // --- 04 INSIGHTS ---
   insights: {
-    headline: "Two personas, one journey",
+    headline: "Two readers, one journey",
     intro:
-      "Two archetypes, both served without forcing either into the other's workflow.",
+      "The executive and the customer read the same screens, so both had to be designed for at once.",
     personas: [
       {
         name: "Rahul Sharma",
@@ -159,15 +158,15 @@ export const finvista = {
           { t: "Time", d: "Many customers at once. Every extra tap costs him." },
         ],
         goals: [
-          { t: "Phone-to-App Continuity", d: "A call picks up exactly where the app left off." },
+          { t: "Continuity", d: "A call picks up exactly where the app left off." },
         ],
       },
       {
         name: "Ankita Agarwal",
-        role: "Call Centre Executive",
-        quote: "Give me a loan I understand, from my phone, with no hidden charges.",
+        role: "The customer at handoff",
+        quote: "Give me a loan I understand, on this phone, with no hidden charges.",
         challenges: [
-          { t: "Trust", d: "Cautious about sharing financial data. Needs visible safeguards first." },
+          { t: "Trust", d: "Cautious about financial data. Needs visible safeguards first." },
         ],
         goals: [
           { t: "Transparency", d: "Clear rate, EMI, fees, total. No fine print surprises." },
@@ -176,82 +175,68 @@ export const finvista = {
     ],
     principles: [
       { t: "Progressive Disclosure", d: "One category of fields at a time. The load never spikes." },
-      { t: "Trust at Every Step", d: "Visible security cues, transparent consent, a plain reason for every field." },
-      { t: "Two readers, one screen", d: "Dense and fast for the executive; stripped back and plain for the customer at handoff." },
+      { t: "Trust at Every Step", d: "Visible security cues and a plain reason for every field." },
+      { t: "Two Readers, One Screen", d: "Dense and fast for the executive; stripped back and plain at handoff." },
     ],
   },
 
   // --- 05 USER FLOW & TASKS ---
   flow: {
     headline: "The Two-Wheeler loan journey in 11 steps",
-    intro:
-      "One screen, one job, progress always visible. Onboarding on one end, disbursement on the other.",
+    intro: "One screen, one job, progress always visible.",
     diagramSvg: F("svg-12.svg"),
     diagramCaption:
-      "Two-Wheeler loan journey: 11-step application flow from welcome to disbursement",
+      "Two-Wheeler loan journey: 11 steps from welcome to disbursement",
     tasks: [
-      { n: 1, t: "Personal Details", d: "Name, DOB, gender, marital status, live photo capture" },
-      { n: 2, t: "PAN Verification", d: "PAN card or Form 60 verification and validation" },
-      { n: 3, t: "Address Details", d: "Residence type, landmark, and pin code" },
-      { n: 4, t: "Employment Details", d: "Employment type, company name, and landmark" },
-      { n: 5, t: "Income Details", d: "Applicant income and total household income" },
-      { n: 6, t: "Product Details", d: "Vehicle type, make, model, scheme selection" },
-      { n: 7, t: "Schemes & VAS", d: "Add-ons: InstaCard, Credit Shield, extended warranty" },
-      { n: 8, t: "Bank Account", d: "UPI ID, bank account, and mandate setup" },
-      { n: 9, t: "Photo & Documents", d: "Document capture and live photo verification" },
-      { n: 10, t: "Notifications & Consent", d: "E-consent and communication preferences" },
-      { n: 11, t: "Loan Summary", d: "Review all details and submit application" },
+      { n: 1, t: "Personal Details", d: "Identity plus live photo" },
+      { n: 2, t: "PAN Verification", d: "PAN or Form 60" },
+      { n: 3, t: "Address Details", d: "Pin code and landmark" },
+      { n: 4, t: "Employment Details", d: "Type and employer" },
+      { n: 5, t: "Income Details", d: "Applicant and household" },
+      { n: 6, t: "Product Details", d: "Vehicle, make, model, scheme" },
+      { n: 7, t: "Schemes & VAS", d: "Add-ons and insurance" },
+      { n: 8, t: "Bank Account", d: "UPI, account, mandate" },
+      { n: 9, t: "Photo & Documents", d: "Capture and upload" },
+      { n: 10, t: "Notifications & Consent", d: "E-consent preferences" },
+      { n: 11, t: "Loan Summary", d: "Review and submit" },
     ],
   },
 
   // --- 06 DESIGN ---
   design: {
-    headline: "From wireframes to production",
+    headline: "Four decisions that carried the design",
     intro:
-      "Low-fi to lock IA, mid-fi for visual direction, high-fi sharpened against real feedback.",
+      "Low-fi locked the IA, mid-fi set direction, hi-fi sharpened against real feedback.",
     wireframes: {
-      intro:
-        "I explored the hardest screens in grayscale, options side by side.",
+      intro: "The hardest screens in grayscale, options side by side.",
       batches: [
         { src: F("svg-13.svg"), caption: "Loan application: long form vs accordion vs stepped wizard. The wizard won." },
-        { src: F("svg-14.svg"), caption: "Applications dashboard: plain list vs status cards vs grouping by stage. Status cards won." },
-        { src: F("svg-15.svg"), caption: "Progress: top bar vs vertical stepper vs progress ring. The stepper kept every stage visible." },
+        { src: F("svg-14.svg"), caption: "Dashboard: plain list vs status cards vs grouping by stage. Status cards won." },
+        { src: F("svg-15.svg"), caption: "Progress: top bar vs vertical stepper vs ring. The stepper kept every stage visible." },
       ],
     },
     explorations: {
-      intro:
-        "Flat vs 3D icons, input styles, layout density. Tested with stakeholders, iterated.",
+      intro: "Flat vs 3D icons, input styles, layout density.",
       images: [
         { src: F("002-design-explorations-comparing-flat-and-3d-approaches.png"), caption: "Flat vs 3D icons across tenure, loan amount, and add-on screens" },
       ],
     },
     finalDesign: {
-      intro:
-        "16 screens from login to disbursement. Every screen holds a single action.",
+      intro: "Six of the 46 production screens. Every screen holds a single action.",
       screens: [
-        { src: F("005-login-authentication.png"), title: "Login & Authentication", desc: "Mobile number + OTP, with an employee login fallback." },
         { src: F("006-applications-dashboard.png"), title: "Applications Dashboard", desc: "Search, sort, filter with status badges." },
-        { src: F("007-dealer-portfolio.png"), title: "Dealer & Portfolio", desc: "Executive-only step, before the customer journey begins." },
         { src: F("008-personal-details.png"), title: "Personal Details", desc: "Pre-verified KYC, live photo, dual progress." },
-        { src: F("009-address-details.png"), title: "Address Details", desc: "Pin-code auto-fill and landmark assistance." },
-        { src: F("010-employment-info.png"), title: "Employment Info", desc: "Type chips + income with currency formatting." },
-        { src: F("011-vehicle-selection.png"), title: "Vehicle Selection", desc: "Chip selection, ICE vs Electric, icon-led." },
         { src: F("012-product-config.png"), title: "Product Config", desc: "Bottom sheet for Make / Model / Variant." },
         { src: F("013-scheme-selection.png"), title: "Scheme Selection", desc: "Recommended scheme with a full breakdown." },
-        { src: F("014-add-on-products.png"), title: "Add-On Products", desc: "Helmets and gear, bundled into financing." },
-        { src: F("015-co-applicant.png"), title: "Co-Applicant", desc: "Existing relationships or a new addition." },
-        { src: F("016-loan-summary.png"), title: "Loan Summary", desc: "Amount, EMI, tenure, IRR, all on one screen." },
-        { src: F("017-asset-validation.png"), title: "Asset Validation", desc: "Engine and chassis number with barcode scan." },
+        { src: F("016-loan-summary.png"), title: "Loan Summary", desc: "Amount, EMI, tenure, IRR, one screen." },
         { src: F("018-kfs-e-agreement.png"), title: "KFS & E-Agreement", desc: "OTP signature and real-time tracking." },
-        { src: F("019-document-upload.png"), title: "Document Upload", desc: "Downpayment, insurance, passbook, with format hints." },
-        { src: F("021-disbursement.png"), title: "Disbursement", desc: "Success state with application number." },
       ],
     },
     keyDecisions: [
-      { t: "No-Scroll Screen", d: "One screen, one job. It mattered most for agents processing 15-20 applications a day." },
-      { t: "Dual Progress", d: "Top-level percentage and step-level indicator. Orientation without overwhelm." },
-      { t: "Assistive Onboarding", d: "Every step opens with plain-language help, so the executive never has to translate the screen out loud." },
-      { t: "Pre-verified Data", d: "For existing customers: pre-populated fields with checkmarks and one-tap confirm." },
+      { t: "No-Scroll Screen", d: "One screen, one job. It mattered most for agents running 15 to 20 applications a day." },
+      { t: "Dual Progress", d: "Journey-level percentage plus step-level indicator. Orientation without overwhelm." },
+      { t: "Assistive Onboarding", d: "Every step opens with plain-language help, so the executive never translates the screen out loud." },
+      { t: "Pre-verified Data", d: "Existing customers get pre-filled fields with checkmarks and one-tap confirm." },
     ],
   },
 
@@ -259,13 +244,10 @@ export const finvista = {
   designSystem: {
     headline: "A 100+ component library, one visual language across six products",
     intro:
-      "Built in Figma on auto-layout, variants, and tokens, so engineering handoff stayed clean.",
-    panelsIntro:
-      "Four families: tokens, form controls, navigation, and content containers.",
+      "Figma auto-layout, variants and tokens, so engineering handoff stayed clean.",
+    panelsIntro: "Foundations, form controls, and content containers.",
     panels: [
       { src: F("022-foundation-color-palette-typography-scale-and-spacing-system.png"), caption: "Foundation: color, type scale, spacing" },
-      { src: F("023-icons-illustrations-functional-icons-multi-color-variants-an.png"), caption: "Icons and illustrations: functional icons, multi-color variants" },
-      { src: F("024-button-system-primary-secondary-and-tertiary-button-states-w.png"), caption: "Button system: primary, secondary, tertiary with all states" },
       { src: F("025-form-controls-input-states-checkboxes-progress-bars-toasts-a.png"), caption: "Form controls: inputs, checkboxes, progress, toasts, file upload" },
       { src: F("026-cards-sheets-lead-cards-vas-cards-popup-dialogs-and-bottom-s.png"), caption: "Cards and sheets: lead cards, VAS cards, dialogs, bottom sheets" },
     ],
@@ -275,16 +257,16 @@ export const finvista = {
 
   // --- 08 VALIDATION ---
   validation: {
-    headline: "Rounds with executives and with customers, until the handoff stopped failing",
+    headline: "Five rounds with real users, until the handoff stopped failing",
     intro:
-      "No formal lab. I shared Figma prototypes with real users across five rounds, watched, and refined.",
+      "No formal lab. I shared Figma prototypes with real users, watched, and refined.",
     rounds: [
-      { n: 1, t: "Internal stakeholders", d: "PM, analysts, engineering on wireframes. Surfaced the IA problem: scrollable multi-action screens overwhelmed everyone. I pivoted to one screen, one action." },
-      { n: 2, t: "Sales executives", d: "Six executives on mid-fi. Nobody could find the way back to edit a completed step. Added persistent edit icons + visible step-back." },
-      { n: 3, t: "Customers at handoff", d: "Watched customers take the phone at consent and signature steps. They signed without reading. Rewrote every handoff screen to one plain question plus what happens next." },
+      { n: 1, t: "Internal stakeholders", d: "Scrollable multi-action screens overwhelmed everyone on wireframes. I pivoted to one screen, one action." },
+      { n: 2, t: "Sales executives", d: "Six executives on mid-fi. Nobody could find the way back to edit a completed step, so edit icons became persistent." },
+      { n: 3, t: "Customers at handoff", d: "Customers signed without reading. I rewrote every handoff screen to one plain question plus what happens next." },
     ],
     outcome:
-      "The design moved from a scrollable, multi-action layout to a focused, single-screen journey an executive can run at speed and hand over cleanly at every point that needs the customer.",
+      "A journey an executive can run at speed and hand over cleanly at every point that needs the customer.",
   },
 
   // --- 09 IMPACT ---
@@ -299,13 +281,12 @@ export const finvista = {
     wentWell: [
       "One screen, one action killed form fatigue for executives running back-to-back applications",
       "Progressive disclosure made the 11-step journey \"not feel long\"",
-      "Dual progress kept everyone oriented without anxiety",
       "The early design system let later product journeys assemble in days",
     ],
     differently: [
       "Bring sales executives in on round one. Their deepest insight only surfaced in round two",
-      "Test on low-end Android devices sooner. Performance gaps appeared late",
-      "Design error states from the start, not against edge cases at the end",
+      "Test on low-end Android devices sooner",
+      "Design error states from the start, not at the end",
     ],
   },
 

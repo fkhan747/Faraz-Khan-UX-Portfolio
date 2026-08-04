@@ -31,6 +31,7 @@ import PilotMetalab from "./pages/pilots/PilotMetalab";
 import CaseMeridianLight from "./pages/pilots/CaseMeridianLight";
 import CaseMeridianDeck from "./pages/pilots/CaseMeridianDeck";
 import CaseFinvistaDeck from "./pages/pilots/CaseFinvistaDeck";
+import CaseFinvistaLong from "./pages/pilots/CaseFinvistaLong";
 import CaseAuroraDeck from "./pages/pilots/CaseAuroraDeck";
 import CaseThreadfoldDeck from "./pages/pilots/CaseThreadfoldDeck";
 
@@ -50,7 +51,12 @@ function App() {
               footer would fight the design. The vault gate still wraps the
               confidential ones, so reactivating the password is one flag. */}
           <Route path="/case/meridian" element={<CaseMeridianDeck />} />
-          <Route path="/case/finvista" element={<CaseStudyGate key="finvista" slug="finvista"><CaseFinvistaDeck /></CaseStudyGate>} />
+          {/* FinVista runs the long-form treatment as of 2026-08-04. The deck
+              version it replaced stays reachable at /case/finvista-deck. The
+              other three are still on the deck and move over as their
+              long-form content is finalised. */}
+          <Route path="/case/finvista" element={<CaseStudyGate key="finvista" slug="finvista"><CaseFinvistaLong /></CaseStudyGate>} />
+          <Route path="/case/finvista-deck" element={<CaseStudyGate key="finvista-deck" slug="finvista"><CaseFinvistaDeck /></CaseStudyGate>} />
           <Route path="/case/aurora" element={<CaseStudyGate key="aurora" slug="aurora"><CaseAuroraDeck /></CaseStudyGate>} />
           <Route path="/case/threadfold" element={<CaseStudyGate key="threadfold" slug="threadfold"><CaseThreadfoldDeck /></CaseStudyGate>} />
           {/* Concepts sit outside <Layout> for the same reason the deck pages
@@ -65,6 +71,9 @@ function App() {
           <Route path="/case/aurora-v1" element={<CaseStudyGate key="aurora-v1" slug="aurora"><AuroraCaseStudy /></CaseStudyGate>} />
           <Route path="/case/threadfold-v1" element={<CaseStudyGate key="threadfold-v1" slug="threadfold"><ThreadfoldCaseStudy /></CaseStudyGate>} />
           <Route path="/case/meridian-narrated" element={<CaseMeridianLight />} />
+          {/* The review URL the long-form page was signed off at, kept working
+              for any link already shared. */}
+          <Route path="/case/finvista-long" element={<Navigate to="/case/finvista" replace />} />
           {/* Old pilot paths keep working for any link already shared. */}
           <Route path="/pilot/case/meridian" element={<Navigate to="/case/meridian" replace />} />
           <Route path="/pilot/case/finvista" element={<Navigate to="/case/finvista" replace />} />
