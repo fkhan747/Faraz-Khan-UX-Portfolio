@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FinVista, Agent Era · Faraz Khan</title>
+<meta name="description" content="I designed the app where sales executives run the whole lending journey. This is what that desk becomes when AI agents do the processing and the executive keeps the judgment. With a live demo." />
+<link rel="canonical" href="https://www.khanfaraz.in/agent-era/" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.khanfaraz.in/agent-era/" />
+<meta property="og:title" content="FinVista, Agent Era · Faraz Khan" />
+<meta property="og:description" content="What a shipped assisted-lending desk looks like when AI agents do the processing and the executive's job becomes judgment. Operable concept console." />
+<meta name="twitter:card" content="summary" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@300..800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#23272E; --muted:#5B6470; --line:rgba(35,39,46,.10);
+    --blue:#2E7CD6; --blue-deep:#1B5FB3; --blue-ice:#9CC6F0;
+    --pink:#E86FA4; --pink-soft:#F7CBDC;
+    --glass:rgba(255,255,255,.62); --glass-hi:rgba(255,255,255,.85);
+    --good:#178A55; --warn:#C25E1E;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    color:var(--ink); font-family:'Outfit',system-ui,sans-serif; line-height:1.6;
+    background:
+      radial-gradient(1100px 600px at 85% -5%, rgba(156,198,240,.55), transparent 60%),
+      radial-gradient(900px 550px at -10% 22%, rgba(247,203,220,.5), transparent 55%),
+      radial-gradient(1000px 700px at 70% 70%, rgba(156,198,240,.32), transparent 60%),
+      radial-gradient(700px 500px at 15% 95%, rgba(247,203,220,.35), transparent 60%),
+      linear-gradient(180deg, #EDF4FA 0%, #F3F0F5 50%, #ECF3FA 100%);
+    background-attachment:fixed; min-height:100vh; overflow-x:hidden;
+  }
+  .display{font-family:'Space Grotesk',sans-serif;}
+  .mono{font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:.22em; font-size:11px;}
+  .wrap{max-width:1240px; margin:0 auto; padding:0 28px; position:relative; z-index:1;}
+
+  .sky{position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;}
+  .flake{position:absolute; top:-4vh; border-radius:50%; background:rgba(255,255,255,.9); box-shadow:0 0 8px rgba(255,255,255,.9); animation:fall linear infinite;}
+  .petal{position:absolute; top:-4vh; background:linear-gradient(135deg,#F9C9DC,#F09CC0); border-radius:64% 4% 64% 4%; opacity:.75; animation:fall linear infinite, spin 7s ease-in-out infinite alternate;}
+  @keyframes fall{ to{ transform:translate3d(var(--drift,40px), 108vh, 0);} }
+  @keyframes spin{ from{rotate:-24deg;} to{rotate:36deg;} }
+  .flake:nth-child(1){left:8%; width:5px; height:5px; animation-duration:24s; --drift:60px;}
+  .flake:nth-child(2){left:22%; width:3px; height:3px; animation-duration:32s; animation-delay:-9s; --drift:-40px;}
+  .flake:nth-child(3){left:41%; width:6px; height:6px; animation-duration:27s; animation-delay:-17s; --drift:70px;}
+  .flake:nth-child(4){left:60%; width:4px; height:4px; animation-duration:35s; animation-delay:-4s; --drift:-60px;}
+  .flake:nth-child(5){left:76%; width:5px; height:5px; animation-duration:23s; animation-delay:-13s; --drift:50px;}
+  .flake:nth-child(6){left:90%; width:4px; height:4px; animation-duration:31s; animation-delay:-20s; --drift:-50px;}
+  .petal:nth-child(7){left:15%; width:11px; height:11px; animation-duration:34s; animation-delay:-11s; --drift:100px;}
+  .petal:nth-child(8){left:49%; width:9px; height:9px; animation-duration:39s; animation-delay:-24s; --drift:-90px;}
+  .petal:nth-child(9){left:83%; width:12px; height:12px; animation-duration:32s; animation-delay:-6s; --drift:110px;}
+  @media (prefers-reduced-motion: reduce){ .sky{display:none;} }
+
+  .hidden{display:none !important;}
+  .glass{background:var(--glass); backdrop-filter:blur(18px) saturate(150%); -webkit-backdrop-filter:blur(18px) saturate(150%);
+    border:1px solid rgba(255,255,255,.75); box-shadow:0 8px 32px rgba(27,95,179,.10), inset 0 1px 0 rgba(255,255,255,.9); border-radius:22px;}
+
+  .bar{position:sticky; top:0; z-index:50; background:rgba(240,245,250,.72); backdrop-filter:blur(14px) saturate(160%);
+    border-bottom:1px solid rgba(255,255,255,.7); box-shadow:0 1px 20px rgba(27,95,179,.06);}
+  .bar-in{max-width:1360px; margin:0 auto; padding:14px 28px; display:flex; justify-content:space-between; align-items:center;}
+  .bar a{color:var(--muted); text-decoration:none; font-size:13.5px;}
+  .bar a:hover{color:var(--ink);}
+  .bar .name{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:16px;}
+
+  .hero{padding:80px 0 26px;}
+  .eyebrow{color:var(--blue-deep); display:inline-flex; gap:10px; align-items:center; margin-bottom:22px;}
+  h1{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(38px,6vw,72px); line-height:1.03; letter-spacing:-.03em; max-width:960px;}
+  h1 .grad{background:linear-gradient(92deg, var(--blue-deep) 10%, var(--blue) 45%, var(--pink) 95%);
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+  .stand{margin-top:24px; font-size:clamp(17px,2vw,21px); font-weight:300; max-width:760px; line-height:1.55; color:#333A44;}
+  .hero-meta{margin-top:26px; display:flex; flex-wrap:wrap; gap:10px;}
+  .chip{border-radius:999px; padding:8px 16px; font-size:13.5px; background:var(--glass); backdrop-filter:blur(12px);
+    border:1px solid rgba(255,255,255,.8); box-shadow:0 2px 10px rgba(27,95,179,.08);}
+  .chip b{font-weight:600;}
+  .honest{margin-top:26px; max-width:860px; padding:16px 22px; font-size:15px; border-radius:18px;
+    background:linear-gradient(120deg, rgba(247,203,220,.2), rgba(255,255,255,.65)); backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,.8); border-left:4px solid var(--pink);}
+
+  h3.sec{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(24px,2.8vw,34px); letter-spacing:-.02em; margin:70px 0 10px;}
+  .lede{max-width:760px; color:#333A44; font-size:16px;}
+
+  .then-now{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:24px;}
+  .tn{padding:24px 26px;}
+  .tn .mono{display:block; margin-bottom:12px;}
+  .tn.then .mono{color:var(--blue-deep);}
+  .tn.now .mono{color:var(--pink);}
+  .tn h4{font-family:'Space Grotesk',sans-serif; font-size:19px; margin-bottom:8px;}
+  .tn p{font-size:14.5px; color:#333A44;}
+  .tn ul{margin:10px 0 0 18px; font-size:14.5px; color:#333A44;}
+  .tn li{margin-top:6px;}
+
+  /* ---------- console ---------- */
+  .stage{position:relative; border-radius:28px; padding:1.5px; margin-top:26px;
+    background:linear-gradient(135deg, rgba(46,124,214,.55), rgba(255,255,255,.2) 30%, rgba(232,111,164,.28) 100%);
+    box-shadow:0 24px 70px rgba(27,95,179,.16), 0 4px 18px rgba(232,111,164,.05);}
+  .console{border-radius:26.5px; padding:24px; background:linear-gradient(160deg, rgba(255,255,255,.8), rgba(255,255,255,.55));
+    backdrop-filter:blur(22px) saturate(160%);}
+  .live-dot{width:8px; height:8px; border-radius:50%; background:var(--pink); box-shadow:0 0 0 0 rgba(232,111,164,.55); animation:pulse 2s infinite; display:inline-block;}
+  @keyframes pulse{ 70%{box-shadow:0 0 0 9px rgba(232,111,164,0);} 100%{box-shadow:0 0 0 0 rgba(232,111,164,0);} }
+  @media (prefers-reduced-motion: reduce){ .live-dot{animation:none;} }
+  .con-top{display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:18px;}
+  .con-top .mono{color:var(--muted);}
+  .con-grid{display:grid; grid-template-columns:7fr 5fr; gap:18px;}
+  .panel{background:rgba(255,255,255,.66); border:1px solid rgba(255,255,255,.95); border-radius:16px; padding:16px; box-shadow:0 2px 12px rgba(27,95,179,.07);}
+  .panel h4{font-size:13px; font-weight:600; margin-bottom:10px; display:flex; align-items:center; gap:8px;}
+  .app{border-radius:12px; padding:10px 12px; font-size:13.5px; margin-top:8px; background:rgba(255,255,255,.9);
+    border:1px solid rgba(255,255,255,1); box-shadow:0 1px 6px rgba(27,95,179,.07); display:flex; gap:10px; align-items:center; flex-wrap:wrap;}
+  .app .id{font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--blue-deep);}
+  .app .stagelbl{margin-left:auto; font-size:12px; color:var(--muted);}
+  .app.flash{animation:flash 1.2s;}
+  @keyframes flash{0%{background:rgba(156,198,240,.5);}100%{background:rgba(255,255,255,.9);}}
+  .tag{display:inline-block; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.12em; text-transform:uppercase; border-radius:7px; padding:3.5px 8px;}
+  .tag.agent{background:rgba(46,124,214,.14); color:var(--blue-deep);}
+  .tag.human{background:rgba(232,111,164,.16); color:#B3376E;}
+  .tag.ok{background:rgba(23,138,85,.13); color:var(--good);}
+  .tag.warn{background:rgba(194,94,30,.13); color:var(--warn);}
+  .tag.cust{background:rgba(35,39,46,.08); color:var(--ink);}
+  button{font-family:'Outfit',sans-serif; font-size:14px; cursor:pointer; border-radius:999px; padding:9px 18px; transition:all .18s;
+    border:1px solid rgba(255,255,255,.85); background:rgba(255,255,255,.75); color:var(--ink); box-shadow:0 2px 8px rgba(27,95,179,.08);}
+  button:hover{transform:translateY(-1px); box-shadow:0 6px 16px rgba(27,95,179,.14);}
+  button.primary{background:linear-gradient(120deg, var(--blue-deep), var(--blue)); color:#fff; border-color:transparent;}
+  button.danger{background:rgba(255,255,255,.8); color:#B3376E; border-color:rgba(232,111,164,.5);}
+  button.sm{font-size:13px; padding:7px 14px;}
+  .needs{min-height:120px;}
+  .needcard{border-radius:12px; padding:12px 14px; margin-top:8px; background:rgba(247,203,220,.14); border:1px solid rgba(232,111,164,.25); font-size:13.5px;}
+  .needcard .rowline{margin-top:10px;}
+  .rowline{display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
+  .small{font-size:13px; color:var(--muted);}
+  .log{max-height:300px; overflow:auto;}
+  .logrow{font-size:12.5px; padding:7px 2px; border-bottom:1px dashed rgba(35,39,46,.12); display:flex; gap:8px; align-items:baseline; flex-wrap:wrap;}
+  .logrow .t{font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--muted);}
+  .seg{display:inline-flex; border-radius:999px; overflow:hidden; background:rgba(255,255,255,.65); border:1px solid rgba(255,255,255,.9); box-shadow:0 2px 10px rgba(27,95,179,.08);}
+  .seg button{border:0; border-radius:0; background:transparent; padding:7px 13px; font-size:12.5px; box-shadow:none;}
+  .seg button:hover{transform:none;}
+  .seg button.on{background:linear-gradient(120deg, var(--blue-deep), var(--blue)); color:#fff;}
+  .meter{height:10px; border-radius:999px; background:rgba(35,39,46,.07); overflow:hidden; width:120px; display:inline-block; vertical-align:middle;}
+  .meter > i{display:block; height:100%; border-radius:999px; background:linear-gradient(90deg, var(--blue), var(--pink));}
+  .summary{margin-top:16px; border-radius:14px; padding:14px 18px; background:rgba(156,198,240,.18); border:1px solid rgba(46,124,214,.25); font-size:14px; display:none;}
+  .summary.show{display:block;}
+
+  .pat-strip{display:flex; flex-wrap:wrap; gap:10px; margin-top:20px;}
+  .pat-strip a{text-decoration:none; color:var(--ink); font-size:13.5px; border-radius:999px; padding:8px 16px;
+    background:var(--glass); border:1px solid rgba(255,255,255,.8); box-shadow:0 2px 10px rgba(27,95,179,.08); transition:transform .18s;}
+  .pat-strip a:hover{transform:translateY(-2px);}
+  .pat-strip .n{font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--pink); font-weight:700; margin-right:7px;}
+
+  .human-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:14px; margin-top:22px;}
+  .hcard{padding:18px 20px;}
+  .hcard .who{margin-bottom:8px;}
+  .hcard p{font-size:14px; color:#333A44;}
+
+  /* ---------- how I made this ---------- */
+  .made-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:22px;}
+  @media (max-width:920px){ .made-grid{grid-template-columns:1fr;} }
+  .made .tools{margin-top:12px; padding-top:10px; border-top:1px dashed rgba(35,39,46,.14); font-family:'JetBrains Mono',monospace;
+    font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--blue-deep); line-height:1.8;}
+  .made .tools b{color:var(--pink); font-weight:700;}
+  .made{padding:18px 20px; position:relative;}
+  .made .n{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.2em; color:var(--pink); font-weight:700;}
+  .made h5{font-family:'Space Grotesk',sans-serif; font-size:15.5px; margin:8px 0 6px; letter-spacing:-.01em;}
+  .made p{font-size:13.5px; color:#4A5260; line-height:1.55;}
+  .made-close{margin-top:18px; max-width:760px; font-size:14.5px; color:#333A44; border-radius:14px; padding:14px 18px;
+    background:rgba(156,198,240,.16); border:1px solid rgba(46,124,214,.22);}
+
+  footer{margin-top:100px; padding:56px 0 90px; background:linear-gradient(180deg, transparent, rgba(255,255,255,.5));}
+  footer .glass{padding:38px 40px;}
+  footer .display{font-size:clamp(24px,3vw,38px); font-weight:700; letter-spacing:-.02em;}
+  .cta{display:inline-block; margin-top:20px; border-radius:999px; padding:13px 26px; text-decoration:none; font-size:14.5px; color:#fff;
+    background:linear-gradient(120deg, var(--blue-deep), var(--blue) 60%, var(--pink)); box-shadow:0 10px 30px rgba(27,95,179,.25);}
+  a.plain{color:var(--blue-deep); text-decoration:none; border-bottom:1px solid rgba(46,124,214,.3);}
+
+  @media (max-width:920px){ .then-now{grid-template-columns:1fr;} .con-grid{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+
+<div class="sky" aria-hidden="true">
+  <span class="flake"></span><span class="flake"></span><span class="flake"></span>
+  <span class="flake"></span><span class="flake"></span><span class="flake"></span>
+  <span class="petal"></span><span class="petal"></span><span class="petal"></span>
+</div>
+
+<div class="bar"><div class="bar-in">
+  <a href="/projects">← All work</a>
+  <span class="name display">Faraz Khan</span>
+</div></div>
+
+<header class="hero wrap">
+  <p class="mono eyebrow">✦ Concept · Assisted Lending × AI Agents</p>
+  <h1 class="display">FinVista, <span class="grad">Agent Era</span>.</h1>
+  <p class="stand">In 2023 I designed the app where sales executives run an entire lending journey by hand: 11 steps, 6 products, ~60% faster than the paper flow it replaced. Shipped, measured, real. This page asks the obvious next question: what does that desk look like when AI agents do the processing, and the executive's job becomes judgment?</p>
+  <div class="hero-meta">
+    <span class="chip">Built on <b>shipped work</b></span>
+    <span class="chip"><b>Working demo</b> below</span>
+    <span class="chip">Runs on the <b>12 trust patterns</b></span>
+  </div>
+  <p class="honest">Honesty first: FinVista shipped and its numbers are real. The agent era version is a concept, and I won't invent adoption numbers for it. The design thinking is the claim, and you can operate it yourself below.</p>
+</header>
+
+<main class="wrap">
+
+  <h3 class="sec display">The shift: from running the journey to supervising it</h3>
+  <p class="lede">The 2023 insight was that lending is assisted: an executive drives, and the customer takes the phone only for the moments the law says must be theirs. Agents don't change that insight. They move the executive one seat up.</p>
+  <div class="then-now">
+    <div class="tn then glass">
+      <span class="mono">2023 · Shipped</span>
+      <h4>The executive runs every step</h4>
+      <p>One screen, one action, 11 steps. The executive types, uploads, verifies, and hands the phone to the customer at consent and signature moments.</p>
+      <ul>
+        <li>Speed came from focus: no scrolling, no branching</li>
+        <li>~60% faster processing, ~40% less training (measured)</li>
+        <li>The customer's moments stayed sacred: photo, consent, e-sign</li>
+      </ul>
+    </div>
+    <div class="tn now glass">
+      <span class="mono">Concept · Agent Era</span>
+      <h4>Agents run the steps, the executive runs the desk</h4>
+      <p>Filing, verification, and drafting become agent work. The executive supervises a queue: approving what's gated, resolving what's escalated, and stepping in when confidence drops.</p>
+      <ul>
+        <li>Every agent action is previewed, gated, or logged</li>
+        <li>Below 70% confidence, the console forces escalation</li>
+        <li>The customer's moments stay exactly where they were: human</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 class="sec display">The Loan Desk, live</h3>
+  <p class="lede">This is the concept as working interface, not slides. Run the morning shift: three agents process four applications, and everything that needs your judgment comes to you. Turn Clerk's dial to change how much runs on its own.</p>
+
+  <div class="stage"><div class="console" id="console">
+    <div class="con-top">
+      <span class="live-dot"></span><span class="mono">Live demo · The Loan Desk · Tue 09:12</span>
+      <span style="margin-left:auto" class="rowline">
+        <span class="small">Clerk's autonomy:</span>
+        <span class="seg" id="clerkDial">
+          <button data-m="suggest">Suggest</button>
+          <button data-m="auto" class="on">Auto + audit</button>
+        </span>
+        <button class="primary" id="runBtn">Run the morning shift</button>
+      </span>
+    </div>
+    <div class="con-grid">
+      <div>
+        <div class="panel">
+          <h4>Queue · Two-Wheeler · <span class="small">4 applications</span></h4>
+          <div id="apps"></div>
+        </div>
+        <div class="summary" id="summary"></div>
+      </div>
+      <div>
+        <div class="panel needs">
+          <h4>Needs you <span class="tag human">judgment</span></h4>
+          <div id="needs"><p class="small" id="needsEmpty">Nothing yet. Run the shift.</p></div>
+        </div>
+        <div class="panel" style="margin-top:14px">
+          <h4>Action log <span class="tag agent">every move</span> <span class="small" id="logCount" style="margin-left:auto"></span></h4>
+          <div class="log" id="log"></div>
+        </div>
+      </div>
+    </div>
+  </div></div>
+
+  <h3 class="sec display">What stays human, on purpose</h3>
+  <p class="lede">FinVista taught me that the handoff is the story. Agents make that lesson sharper, not obsolete. Three kinds of moments never become agent work:</p>
+  <div class="human-grid">
+    <div class="hcard glass">
+      <span class="tag cust who">Customer only</span>
+      <p>Live photo, KYC and bureau consent, OTP, e-signature. The law gives these to the customer, and the interface keeps them ceremonial: plain question, clear consequence, their own hand.</p>
+    </div>
+    <div class="hcard glass">
+      <span class="tag human who">Executive only</span>
+      <p>Approving gated actions, resolving escalations, overriding an agent, and every conversation that carries the relationship. Judgment is the job description now.</p>
+    </div>
+    <div class="hcard glass">
+      <span class="tag warn who">Never automated</span>
+      <p>Credit decisions and anything touching a protected attribute. Agents prepare the file; they don't decide who deserves money. That line is drawn in the interface, not the policy PDF.</p>
+    </div>
+  </div>
+
+  <h3 class="sec display">The patterns doing the work</h3>
+  <p class="lede">Everything in the demo above is assembled from my <a class="plain" href="/patterns">AI Trust Patterns Field Guide</a>, where each one runs as its own live demo:</p>
+  <div class="pat-strip">
+    <a href="/patterns#p02"><span class="n">02</span>Intent Preview, before the bureau pull</a>
+    <a href="/patterns#p03"><span class="n">03</span>The Autonomy Dial, on Clerk</a>
+    <a href="/patterns#p08"><span class="n">08</span>The Escalation Threshold, at 70%</a>
+    <a href="/patterns#p09"><span class="n">09</span>The Audit Trail, growing as you play</a>
+    <a href="/patterns#p12"><span class="n">12</span>Who Did What, on every log line</a>
+  </div>
+
+  <h3 class="sec display">How I Made This, Step By Step</h3>
+  <p class="lede">A taste of the process: the steps, the thinking, and what was on the bench. Same honesty as the rest of the page.</p>
+  <div class="made-grid">
+    <div class="made glass"><span class="n">Step 01</span><h5>Start from the shipped thing</h5><p>The question came from watching executives run FinVista's 11 steps by hand in 2023. Which of those steps were judgment, and which were just motion?</p><p class="tools">⚙ <b>Bench:</b> the shipped FinVista flows · 5 rounds of validation notes from 2023</p></div>
+    <div class="made glass"><span class="n">Step 02</span><h5>Sort every step into buckets</h5><p>Agent work, executive judgment, customer-only. The three buckets became the three surfaces you see above: the queue, the needs-you panel, and the untouchable moments.</p><p class="tools">⚙ <b>Bench:</b> the 11-step journey map · one question per step: judgment or motion?</p></div>
+    <div class="made glass"><span class="n">Step 03</span><h5>Borrow my own guardrails</h5><p>No re-deriving from scratch: the intent preview, the dial, the 70% threshold, the audit log all came straight from my Field Guide, already tested as standalone demos.</p><p class="tools">⚙ <b>Bench:</b> my AI Trust Patterns Field Guide · Crux's tested dial, threshold and audit demos</p></div>
+    <div class="made glass"><span class="n">Step 04</span><h5>Script a believable morning</h5><p>Four applications, nine actions, three judgment calls. I tuned that ratio deliberately, because the ratio is the argument: agents do most of it, humans decide what matters.</p><p class="tools">⚙ <b>Bench:</b> a scripted event chain · a ratio tuned by hand: 9 actions, 3 human calls</p></div>
+    <div class="made glass"><span class="n">Step 05</span><h5>Build with AI, keep the wheel</h5><p>I directed, AI built, and I played the whole shift in a headless browser both ways, Clerk on Auto and on Suggest, until every path held up.</p><p class="tools">⚙ <b>Bench:</b> Claude for the build · vanilla HTML/CSS/JS · Playwright to play the shift both ways</p></div>
+    <div class="made glass"><span class="n">Step 06</span><h5>Draw the honesty line</h5><p>Shipped numbers stay real, the concept stays labeled a concept, and the page says out loud that no bank has deployed this. The thinking is the claim.</p><p class="tools">⚙ <b>Bench:</b> labels, links and a footer that says "no bank has deployed this" in plain sight</p></div>
+  </div>
+  <p class="made-close">Built the way it preaches: the machine did the work, the human kept the judgment, and the process left a trail you just read.</p>
+
+</main>
+
+<footer>
+  <div class="wrap"><div class="glass">
+    <p class="mono" style="color:var(--pink); margin-bottom:14px">✦ The Point</p>
+    <p class="display">I've shipped the manual era. I've prototyped the agent era. The bridge is the interesting part.</p>
+    <p style="margin-top:14px; max-width:680px; color:#333A44">If your lending, banking, or ops team is putting agents to work and wants humans who still trust the system, this is the exact problem I want to design. Read the <a class="plain" href="/case/finvista">shipped story</a>, play with <a class="plain" href="/case/crux">Crux</a>, or just get in touch.</p>
+    <a class="cta" href="/contact">Talk to me →</a>
+    <p class="small" style="margin-top:26px">© Faraz Khan · <a href="/" class="plain">khanfaraz.in</a> · The demo above is real interface with scripted data. No bank has deployed this, and the page says so out loud.</p>
+  </div></div>
+</footer>
+
+<script>
+const APPS = [
+  { id: "A-1041", name: "Priya S.", stage: "Documents received" },
+  { id: "A-1042", name: "Mohan T.", stage: "Income verification" },
+  { id: "A-1043", name: "Ravi K.", stage: "Awaiting bureau check" },
+  { id: "A-1044", name: "Sana F.", stage: "KYC face match" },
+];
+const appsEl = document.getElementById("apps"), needsEl = document.getElementById("needs"),
+      logEl = document.getElementById("log"), runBtn = document.getElementById("runBtn"),
+      summaryEl = document.getElementById("summary"), needsEmpty = document.getElementById("needsEmpty");
+let clerkMode = "auto", logN = 0, humanN = 0, running = false;
+
+function renderApps() {
+  appsEl.innerHTML = "";
+  APPS.forEach((a) => {
+    const el = document.createElement("div");
+    el.className = "app"; el.id = "app-" + a.id;
+    el.innerHTML = '<span class="id">' + a.id + "</span><span>" + a.name + " · Two-Wheeler</span>" +
+      '<span class="stagelbl">' + a.stage + "</span>";
+    appsEl.appendChild(el);
+  });
+}
+function setStage(id, stage, cls) {
+  const a = APPS.find((x) => x.id === id); a.stage = stage;
+  renderApps();
+  const el = document.getElementById("app-" + id);
+  el.classList.add("flash");
+  if (cls) el.querySelector(".stagelbl").innerHTML = stage + " " + cls;
+}
+function log(text, tags) {
+  logN++;
+  const t = new Date(); // display-only
+  const row = document.createElement("div");
+  row.className = "logrow";
+  row.innerHTML = '<span class="t">#' + String(logN).padStart(2, "0") + "</span><span>" + text + "</span>" + (tags || "");
+  logEl.prepend(row);
+  document.getElementById("logCount").textContent = logN + " entries";
+}
+const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+function ask(html) {
+  return new Promise((resolve) => {
+    needsEmpty.classList.add("hidden");
+    const card = document.createElement("div");
+    card.className = "needcard";
+    card.innerHTML = html;
+    needsEl.appendChild(card);
+    card.querySelectorAll("button").forEach((b) =>
+      b.addEventListener("click", () => { card.remove(); resolve(b.dataset.act); })
+    );
+  });
+}
+
+document.querySelectorAll("#clerkDial button").forEach((b) =>
+  b.addEventListener("click", () => {
+    document.querySelectorAll("#clerkDial button").forEach((x) => x.classList.remove("on"));
+    b.classList.add("on"); clerkMode = b.dataset.m;
+    if (!running) log("You set Clerk to <b>" + (clerkMode === "auto" ? "Auto + audit" : "Suggest only") + "</b>", '<span class="tag human">human</span>');
+  })
+);
+
+runBtn.addEventListener("click", async () => {
+  if (running) return;
+  running = true; humanN = 0; runBtn.disabled = true; runBtn.textContent = "Shift running...";
+  summaryEl.classList.remove("show");
+
+  // 1. Clerk files documents
+  await wait(700);
+  setStage("A-1041", "Docs filed by Clerk");
+  log("<b>Clerk</b> classified and filed 6 documents for A-1041", '<span class="tag agent">auto · within policy</span>');
+
+  // 2. Ledger normalizes income
+  await wait(1100);
+  setStage("A-1042", "Income verified");
+  log("<b>Ledger</b> corrected A-1042 income: <s>₹41,000 (form)</s> → ₹38,500 (6-month bank average)", '<span class="tag agent">auto · logged with diff</span>');
+
+  // 3. Sentinel wants the bureau pull — gated
+  await wait(1100);
+  setStage("A-1043", "Bureau pull proposed");
+  const act = await ask(
+    '<span class="tag agent">Agent · Sentinel</span> <b>wants to pull the credit bureau report for A-1043.</b>' +
+    '<div class="small" style="margin-top:6px">Reads: consent record (granted 09:02) · touches: Bureau API, read-only · cost: one inquiry · reversible: yes</div>' +
+    '<div class="rowline"><button class="primary sm" data-act="ok">Approve</button><button class="danger sm" data-act="no">Decline</button></div>'
+  );
+  humanN++;
+  if (act === "ok") {
+    setStage("A-1043", "Bureau report in");
+    log("<b>Sentinel</b> pulled bureau report for A-1043", '<span class="tag agent">proposed</span> <span class="tag human">approved · you</span>');
+  } else {
+    setStage("A-1043", "Paused by you");
+    log("You declined the bureau pull for A-1043. Sentinel parked the application", '<span class="tag human">declined · you</span>');
+  }
+
+  // 4. KYC face match comes back low — forced escalation
+  await wait(1200);
+  setStage("A-1044", "KYC at 62% · escalated");
+  const kyc = await ask(
+    '<span class="tag warn">Escalation</span> <b>Sana F.’s live photo matched at 62%.</b> Below the 70% line, so approving is not on the menu.' +
+    '<div class="small" style="margin-top:6px; display:flex; align-items:center; gap:8px;">Confidence <span class="meter"><i style="width:62%"></i></span> 62% · glare on the ID photo is the top factor</div>' +
+    '<div class="rowline"><button class="primary sm" data-act="recapture">Ask for a fresh live photo</button><button class="danger sm" data-act="reject">Send to manual review</button></div>'
+  );
+  humanN++;
+  if (kyc === "recapture") {
+    log("You asked for a fresh live photo on A-1044. The customer takes it, nobody else", '<span class="tag human">escalation · you</span> <span class="tag cust">customer moment</span>');
+    await wait(1600);
+    setStage("A-1044", "New photo · 91% · cleared");
+    log("<b>Sentinel</b> re-ran the match on the new photo: 91%, auto-cleared", '<span class="tag agent">auto · above threshold</span>');
+  } else {
+    setStage("A-1044", "Manual review");
+    log("A-1044 routed to manual review with the full context package", '<span class="tag human">escalation · you</span>');
+  }
+
+  // 5. Clerk drafts status SMS — depends on the dial
+  await wait(1000);
+  if (clerkMode === "auto") {
+    log("<b>Clerk</b> sent 3 status SMS drafts (within template policy)", '<span class="tag agent">auto · logged</span>');
+  } else {
+    const sms = await ask(
+      '<span class="tag agent">Agent · Clerk</span> <b>drafted 3 status SMS.</b> Dial is on Suggest, so they wait for you.' +
+      '<div class="rowline"><button class="primary sm" data-act="send">Review looked fine, send</button><button class="sm" data-act="hold">Hold them</button></div>'
+    );
+    humanN++;
+    log(sms === "send" ? "You reviewed and sent Clerk's 3 SMS drafts" : "You held Clerk's SMS drafts", '<span class="tag human">' + (sms === "send" ? "approved" : "held") + " · you</span>");
+  }
+
+  // 6. The customer moment stays a customer moment
+  await wait(900);
+  setStage("A-1042", "Waiting: customer e-sign");
+  log("A-1042 reached the e-signature step. The phone turns around, same as it always did", '<span class="tag cust">customer only</span>');
+
+  const agentActs = logN - humanN;
+  summaryEl.innerHTML = "<b>Shift summary:</b> " + logN + " logged actions. Agents handled " + agentActs +
+    " within policy; <b>" + humanN + " needed your judgment</b>, and the log shows who did what on every line. That ratio is the product.";
+  summaryEl.classList.add("show");
+  runBtn.disabled = false; runBtn.textContent = "Run it again";
+  running = false;
+});
+
+renderApps();
+log("Desk opened. Three agents on duty: Sentinel (KYC & bureau), Ledger (income & docs), Clerk (filing & comms)", '<span class="tag agent">system</span>');
+</script>
+</body>
+</html>
