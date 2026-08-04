@@ -97,6 +97,7 @@
       "/case/slate",
       "/case/almanac",
       "/case/crux",
+      "/ai-lab",
       "/agentic-workflow"
     ],
     "crawl": false,

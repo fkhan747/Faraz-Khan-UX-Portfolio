@@ -99,13 +99,22 @@ Gotchas: use nvm node 20.20.2 (`/usr/local/bin/node` is broken on this Mac);
 react-snap port 45678 zombie → `lsof -ti :45678 | xargs kill -9`; never pipe
 builds (masks exit codes).
 
-## Hidden interview deck
-`/deck/` = encrypted 35-slide deck (same password, its own AES payload),
-reached via the TreasureSpark easter egg in `Layout.jsx`. Confidential images
-are inlined as data URIs inside its encrypted payload, so encrypting the site
-images does not affect it. Plaintext working copy: `presentation/` (gitignored,
-local only). The hosted payload sits in `public/deck/index.html` under
-`<script id="deck-data">`.
+## AI Lab
+`/ai-lab` is the self-initiated AI track, added 2026-08-04. It was a section at
+the bottom of `/projects` called "what I can do with AI", below four case-study
+cards, where most visitors never scrolled to it. It has a top-nav slot and a
+footer link now, and `/projects` carries only a navigation card to it above the
+footer.
+
+Order on that page is deliberate: the **agentic audit demo leads** because it is
+a working multi-agent system, and Slate and Crux sit under it as supporting
+exhibits. They are reconstructed from secondary research and claim no users or
+outcomes, so they must not open the page. The tools line is text, not a logo
+wall, on purpose.
+
+**The hidden interview deck is gone** (2026-08-04). The TreasureSpark easter egg,
+`/deck/` and its 2.4 MB payload were all deleted at Faraz's request. Do not
+reintroduce them; the plaintext working copy in `presentation/` is local only.
 
 ## Analytics
 GA4 (`G-H7ZD6PZMK1`) + Microsoft Clarity (`xktpj6mube`) + Cloudflare Web

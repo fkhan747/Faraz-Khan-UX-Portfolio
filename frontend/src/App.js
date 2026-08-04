@@ -15,6 +15,7 @@ import SlateConcept from "./pages/SlateConcept";
 import AlmanacConcept from "./pages/AlmanacConcept";
 import CruxConcept from "./pages/CruxConcept";
 import AgenticWorkflow from "./pages/AgenticWorkflow";
+import AiLab from "./pages/AiLab";
 import NotFound from "./pages/NotFound";
 import CaseStudyGate from "./components/CaseStudyGate";
 // The two case studies that run the slide-band treatment. They live under
@@ -84,6 +85,7 @@ function App() {
                 name, so it redirects rather than being served. */}
             <Route path="/case/joat" element={<Navigate to="/case/threadfold" replace />} />
             <Route path="/case/joat-v1" element={<Navigate to="/case/threadfold" replace />} />
+            <Route path="/ai-lab" element={<AiLab />} />
             <Route path="/agentic-workflow" element={<AgenticWorkflow />} />
             <Route path="/case/:slug" element={<CaseStudy />} />
             <Route path="*" element={<NotFound />} />

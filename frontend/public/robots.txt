@@ -12,7 +12,4 @@ Allow: /
 # they are not worth indexing in their own right.
 Disallow: /case/finvista-long
 
-# The hidden interview deck is reached through the easter egg, not search.
-Disallow: /deck/
-
 Sitemap: https://www.khanfaraz.in/sitemap.xml

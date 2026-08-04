@@ -14,6 +14,7 @@ import Logo from "./Logo";
  */
 const NAV = [
   { to: "/projects", label: "Work" },
+  { to: "/ai-lab", label: "AI Lab" },
   { to: "/about", label: "About Me" },
   { to: "/contact", label: "Contact" },
 ];
