@@ -28,10 +28,12 @@ the prev/next order in `ProjectNav`, so reordering it moves all three at once.
 | Almanac (concept, dormant `live:false`) | `/case/almanac`, prototype `/almanac/` | open |
 | Crux (concept) | `/case/crux`, prototype `/crux/` | open |
 
-Meridian carries `badge: "designed, not yet measured"` on its card, and its
-impact figures are labelled as design targets rather than results. It was
-designed and demonstrated, never shipped, so nothing on it has been observed in
-production. Do not let that framing get quietly upgraded.
+Meridian's impact figures come from **six rounds of validation with real users
+and stakeholders**, timed and counted in those sessions. An earlier pass here
+labelled them untested targets and put a "designed, not yet measured" badge on
+the card, on the strength of a stale note in the old case data. Faraz corrected
+that on 2026-08-04: the rounds happened and the numbers held. Do not re-add the
+badge or downgrade the framing.
 
 Old URLs (`recruitos`, `knowledgeos`, `decisionos`, `somethings-cooking`)
 redirect via `<Navigate>` routes in `App.js` + static stubs in

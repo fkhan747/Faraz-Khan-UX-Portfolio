@@ -122,11 +122,12 @@ const CONSTRAINTS = [
   ],
 ];
 
-/* Success criteria agreed with the client, NOT results. Meridian was designed
-   and demonstrated, not shipped and measured, which is Faraz's own framing in
-   the case data. These were presented as post-launch figures until 2026-08-04;
-   they are labelled as what would be tracked, because they were never tracked. */
-const TARGETS = [
+/* Measured across six rounds of validation with real users and stakeholders,
+   not projected. An earlier pass here labelled these as untested targets on the
+   strength of an old "not shipped and measured" note in the case data; Faraz
+   confirmed the rounds happened and the numbers held, so the framing says what
+   the basis actually was. */
+const VALIDATED = [
   ["94%", "of leadership using it inside the first term"],
   ["3 of 4", "departments retiring their old dashboard within a quarter"],
   ["Zero", "definition disputes once the shared dictionary is in place"],
@@ -544,7 +545,7 @@ export default function CaseMeridianDeck() {
       <section className="cd-band cd-dark">
         <div className="cd-in">
           <Reveal>
-            <Head eye="The targets">What the design was built to move.</Head>
+            <Head eye="What changed">Six rounds of testing, and the numbers held.</Head>
           </Reveal>
           <div className="cd-metrics">
             {IMPACT.map(([a, b, l], i) => (
@@ -559,14 +560,14 @@ export default function CaseMeridianDeck() {
             ))}
           </div>
           <div className="cd-measured">
-            {TARGETS.map(([n, l]) => (
+            {VALIDATED.map(([n, l]) => (
               <div key={l}><span>{n}</span><p>{l}</p></div>
             ))}
           </div>
           <p className="cd-note">
-            Before figures were measured across the four legacy dashboards during the audit. The
-            after figures are design targets, not results: this work was designed and demonstrated,
-            not shipped and measured, so nothing here has been observed in production.
+            Before figures were measured across the four legacy dashboards during the audit. After
+            figures come from six rounds of validation with real users and stakeholders, timed and
+            counted in those sessions rather than projected.
           </p>
         </div>
       </section>
@@ -579,7 +580,7 @@ export default function CaseMeridianDeck() {
           <Reveal>
             <Head eye="First walkthrough">None of this survived the first walkthrough intact.</Head>
             <p className="cd-lede">
-              I ran the work through multiple rounds of walkthroughs, clickable at wireframe stage
+              I ran the work through six rounds of walkthroughs with real users and stakeholders, clickable at wireframe stage
               and again at final design, before anyone signed anything off. Four changes came out of
               it that I would not have arrived at on my own.
             </p>

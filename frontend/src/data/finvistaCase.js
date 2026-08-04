@@ -257,9 +257,9 @@ export const finvista = {
 
   // --- 08 VALIDATION ---
   validation: {
-    headline: "Five rounds with real users, until the handoff stopped failing",
+    headline: "Three rounds that changed the handoff",
     intro:
-      "No formal lab. I shared Figma prototypes with real users, watched, and refined.",
+      "No formal lab. I shared Figma prototypes with real users, watched, and refined. These are the three rounds that changed the design.",
     rounds: [
       { n: 1, t: "Internal stakeholders", d: "Scrollable multi-action screens overwhelmed everyone on wireframes. I pivoted to one screen, one action." },
       { n: 2, t: "Sales executives", d: "Six executives on mid-fi. Nobody could find the way back to edit a completed step, so edit icons became persistent." },

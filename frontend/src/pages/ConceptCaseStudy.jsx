@@ -4,7 +4,6 @@ import { Mail, Check, X, Sparkles, Maximize2 } from "lucide-react";
 import { concepts, PROFILE } from "../data/content";
 import Seo from "../components/Seo";
 import Zoomable from "../components/Zoomable";
-import CaseStudyNav from "../components/CaseStudyNav";
 import ProjectNav from "../components/ProjectNav";
 import Reveal from "../components/Reveal";
 import OwnedCard from "../components/OwnedCard";
@@ -128,16 +127,6 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
         .concept-light .owned-card .owned-card-label{ color:#C71E73 !important; }
         .concept-light .owned-card [class*="bg-white/"]{ background:#F4F2EC !important;
           border:1px solid #DCD7CC; }
-        /* The floating section jumper is shared with the dark v1 pages, so it
-           is re-grounded here rather than converted. */
-        .concept-light .cs-jumper{ background:rgba(255,255,255,.94) !important;
-          border-color:#DCD7CC !important; box-shadow:0 8px 30px rgba(23,21,18,.10) !important; }
-        .concept-light .cs-jumper-label{ color:#6B665D !important; }
-        .concept-light .cs-jumper-num{ color:#6B665D !important; }
-        .concept-light .cs-jumper-num.is-active{ color:#C71E73 !important; }
-        .concept-light .cs-jumper-name{ color:#6B665D !important; }
-        .concept-light .cs-jumper-name.is-active{ color:#171512 !important; }
-        .concept-light .cs-jumper-item.is-active{ background:#F4F2EC !important; }
         /* Prev/next footer, also shared with the dark pages. */
         .concept-light .pnav-pill,
         .concept-light .pnav-chip{ background:#fff !important; border-color:#DCD7CC !important;
@@ -151,7 +140,6 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
         .concept-light .pnav-pill svg,
         .concept-light .pnav-chip svg{ color:#6B665D !important; }
       `}</style>
-      <CaseStudyNav />
 
       {/* Same sticky masthead the deck case studies use. `overflow-x: clip`
           rather than hidden on the wrapper above, or this would stick to that
@@ -281,7 +269,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
           <>
             <Reveal as="h3" className="mt-14 font-display text-2xl md:text-3xl font-black mb-2">a few key screens</Reveal>
             <Reveal as="p" delay={0.06} className="text-sm text-[#6B665D] mb-6">The prototype above is the real thing; these are highlights.</Reveal>
-            <div className="grid md:grid-cols-2 gap-5">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {design.finalScreens.map((s, i) => (
                 <Reveal key={s.title} as="figure" delay={(i % 2) * 0.05} className="rounded-2xl dark-card overflow-hidden">
                   <Zoomable src={s.src} alt={s.title} caption={s.desc} className="bg-white p-3 border-b border-black/[0.06]">
@@ -310,7 +298,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
         {ai.intro && (
           <Reveal as="p" delay={0.08} className="text-base md:text-lg leading-relaxed max-w-4xl text-[#171512] mb-10">{ai.intro}</Reveal>
         )}
-        <div className="grid md:grid-cols-2 gap-5">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {ai.patterns.map((p, i) => (
             <Reveal key={p.id || p.t} delay={(i % 2) * 0.06} className="dark-card rounded-3xl p-7">
               <div className="flex items-center gap-3 mb-2">
@@ -364,7 +352,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
       <SectionWrap>
         <Reveal as="p" className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#C71E73] mb-4">more concepts</Reveal>
         <Reveal as="h2" delay={0.08} className="font-display text-3xl md:text-4xl font-black mb-8">the rest of the AI-native track &rarr;</Reveal>
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {concepts.filter((x) => x.slug !== r.slug && x.live !== false).map((x, i) => {
             const card = (
               <div className="rounded-3xl dark-card p-7 flex items-start justify-between gap-6 h-full">
@@ -394,10 +382,12 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
       <SectionWrap className="text-center">
         <Reveal as="h2" className="font-display text-3xl md:text-5xl font-black mb-6">thank you for reading.</Reveal>
         <Reveal as="p" delay={0.08} className="text-lg text-[#6B665D] mb-8">{r.title} is a self-initiated concept I keep iterating on. If you&apos;d like to talk through the thinking, or where it goes next, I&apos;d love to connect.</Reveal>
-        <div className="flex gap-4 justify-center flex-wrap items-center">
+        <div className="cs-end">
+          <a href={`mailto:${PROFILE.email}`} data-testid="case-cta-email" className="cs-btn"><Mail size={16} /> Email Me</a>
+          <Link to="/projects" className="cs-btn-ghost">All Projects</Link>
+        </div>
+        <div className="flex gap-4 justify-center flex-wrap items-center mt-8">
           <ProjectNav slug={r.slug} variant="footer" which="prev" />
-          <a href={`mailto:${PROFILE.email}`} data-testid="case-cta-email" className={`inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-[#C71E73] font-semibold text-sm hover:bg-[#C71E73] hover:text-[#171512] transition-[background-color,color,transform] duration-200 active:scale-[0.97] ${FOCUS}`}><Mail size={16} /> Email Me</a>
-          <Link to="/projects" className={`inline-flex items-center gap-2 px-7 py-4 rounded-full border border-black/15 text-[#171512] font-semibold text-sm hover:bg-[#FFFFFF] transition-[background-color,color,transform] duration-200 active:scale-[0.97] ${FOCUS}`}>View All Projects</Link>
           <ProjectNav slug={r.slug} variant="footer" which="next" />
         </div>
       </SectionWrap>

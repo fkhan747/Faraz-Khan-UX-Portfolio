@@ -79,10 +79,6 @@ export const projects = [
     coverImg: "/meridian/cover.jpg",
     color: "#0E1430",
     tag: "case study",
-    // Faraz's own framing from the case data: "Designed and demonstrated,
-    // not shipped and measured." The card says so up front rather than
-    // letting the reader assume shipped outcomes.
-    badge: "designed, not yet measured",
     summary:
       "Unified four siloed Power BI dashboards (undergraduate and graduate admissions, research, and HR) into one analytics platform with an overview-and-drill-down model and an optional AI layer.",
     detail: true,

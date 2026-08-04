@@ -7,8 +7,8 @@ import Seo from "../components/Seo";
 import Reveal from "../components/Reveal";
 import OwnedCard from "../components/OwnedCard";
 import Zoomable from "../components/Zoomable";
+import ScreenCarousel from "../components/ScreenCarousel";
 import AuroraDesignSystem from "../components/AuroraDesignSystem";
-import CaseStudyNav from "../components/CaseStudyNav";
 import ProjectNav from "../components/ProjectNav";
 import { Container } from "../components/Grid";
 
@@ -17,6 +17,10 @@ import { Container } from "../components/Grid";
 // bright magenta that fails contrast on light (3.04:1). Both now match the
 // rest of the light pages.
 const FOCUS = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C71E73] focus-visible:ring-offset-2 focus-visible:ring-offset-[#EFEDE7]";
+/* Aurora's own brand green, taken from the design system it shipped with
+   (Evergreen #1A4C49). It replaces the site's old dark-theme electric blue on
+   every number and accent on this page. */
+const ACCENT = "#1A4C49";
 // A shipped screen that anchors the Outcome section with a real visual.
 const A_HERO = "/aurora/04_RBJ_Properties_Weekly.jpg";
 
@@ -48,66 +52,59 @@ export default function AuroraCaseStudy() {
     <article
       data-testid="aurora-case-study"
       className="theme-light bg-[#EFEDE7] pb-24"
+      style={{ "--case-acc": ACCENT }}
     >
       <Seo title={au.title} description={au.subtitle} />
-      <CaseStudyNav />
-      {/* TITLE BLOCK over a darkened cover image */}
-      <header className="relative overflow-hidden">
-        <VaultImage
-          src="/aurora/cover.jpg"
-          alt=""
-          aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover"
-          loading="eager"
-        />
-        <div
-          className="absolute inset-0"
-          aria-hidden="true"
-          style={{ background: "linear-gradient(105deg, rgba(16,2,16,0.92) 0%, rgba(16,2,16,0.64) 60%, rgba(16,2,16,0.42) 100%)" }}
-        />
-        <div
-          className="absolute inset-0"
-          aria-hidden="true"
-          style={{ background: "linear-gradient(to bottom, rgba(16,2,16,0.55) 0%, rgba(16,2,16,0) 28%, rgba(16,2,16,0) 50%, rgba(16,2,16,0.92) 100%)" }}
-        />
-        {/* Everything in here sits on the cover photograph, not on the page
-            surface, so it is exempt from the ink remap and stays white. */}
-        <Container className="relative z-10 pt-12 pb-14" data-on-dark>
-          <div className="flex flex-wrap items-center justify-between gap-3 mb-10">
+      {/* HERO, light. Was white type over a darkened cover photograph, which
+          left Aurora as a dark page inside a light site. Same structure as the
+          FinVista hero now: paper ground, ink type, and the cover shown as a
+          picture rather than used as a scrim. */}
+      <header className="pt-10 pb-14">
+        <Container>
+          <div className="flex flex-wrap items-center justify-between gap-3 mb-12">
             <Link
               to="/projects"
               data-testid="back-link"
-              className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-white/70 hover:text-[#F5379B] transition-colors"
+              className={`inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#6B665D] hover:text-[#171512] rounded transition-colors ${FOCUS}`}
             >
               <ArrowLeft size={14} /> All Projects
             </Link>
           </div>
-          <Reveal as="p" delay={0} className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-5">
+          <Reveal as="p" delay={0} className="text-[11px] font-mono uppercase tracking-[0.25em] mb-5" style={{ color: ACCENT }}>
             ux case study · b2b saas · europe
           </Reveal>
-          <Reveal as="h1" delay={0.08} className="font-display text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9] case-keep text-[#F7F5FF]">
+          <Reveal as="h1" delay={0.08} className="font-display text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[0.9] case-keep text-[#171512]">
             Aur<span className="dot-o">o</span>ra
           </Reveal>
-          <Reveal as="p" delay={0.16} className="mt-8 max-w-3xl text-xl md:text-2xl text-[#F4F3FA] leading-snug font-light italic">
+          <Reveal as="p" delay={0.16} className="mt-8 max-w-3xl text-xl md:text-2xl text-[#171512] leading-snug font-light italic">
             {au.subtitle}
           </Reveal>
 
+          <Reveal delay={0.22} className="mt-12 rounded-3xl overflow-hidden border border-[#DCD7CC] bg-white">
+            <VaultImage
+              src="/aurora/cover.jpg"
+              alt="Aurora campaign platform"
+              className="w-full h-auto block"
+              loading="eager"
+            />
+          </Reveal>
+
           {au.hero.facts && (
-            <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl">
+            <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4">
               {au.hero.facts.map((f, i) => (
-                <Reveal key={f.label} delay={0.24 + i * 0.06} className="rounded-2xl p-5 bg-[#100210]/55 backdrop-blur-md border border-white/12">
-                  <p className="text-[10px] font-mono uppercase tracking-widest text-[#F5379B] mb-2">{f.label}</p>
-                  <p className="font-display text-base md:text-lg font-bold text-[#F4F3FA] leading-snug">{f.value}</p>
+                <Reveal key={f.label} delay={0.24 + i * 0.06} className="rounded-2xl p-5 bg-white border border-[#DCD7CC]">
+                  <p className="text-[10px] font-mono uppercase tracking-widest mb-2" style={{ color: ACCENT }}>{f.label}</p>
+                  <p className="font-display text-base md:text-lg font-bold text-[#171512] leading-snug">{f.value}</p>
                 </Reveal>
               ))}
             </div>
           )}
 
-          <div className="mt-4 grid grid-cols-3 gap-4 max-w-4xl">
+          <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
             {au.hero.stats.map((s, i) => (
-              <Reveal key={s.label} delay={0.42 + i * 0.06} className="rounded-2xl p-5 md:p-6 bg-[#100210]/55 backdrop-blur-md border border-white/12">
-                <div className="num text-3xl md:text-5xl font-black text-[#075EFD] leading-none">{s.value}</div>
-                <div className="mt-3 text-[10px] md:text-xs font-mono uppercase tracking-widest text-white/70">{s.label}</div>
+              <Reveal key={s.label} delay={0.42 + i * 0.06} className="rounded-2xl p-5 md:p-6 bg-white border border-[#DCD7CC]">
+                <div className="num text-3xl md:text-5xl font-black leading-none" style={{ color: ACCENT }}>{s.value}</div>
+                <div className="mt-3 text-[10px] md:text-xs font-mono uppercase tracking-widest text-[#6B665D]">{s.label}</div>
               </Reveal>
             ))}
           </div>
@@ -130,10 +127,10 @@ export default function AuroraCaseStudy() {
           <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-10 mt-12">{au.problem.headline}</h2>
         </Reveal>
 
-        <div className="mt-12 grid md:grid-cols-2 gap-5">
+        <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {au.problem.challenges.map((c, i) => (
             <Reveal key={c.t} delay={(i % 2) * 0.06} className="dark-card rounded-3xl p-7">
-              <div className="font-display text-5xl font-black text-[#075EFD] leading-none">{i + 1}</div>
+              <div className="font-display text-5xl font-black text-[var(--case-acc)] leading-none">{i + 1}</div>
               <h3 className="mt-4 font-display text-xl font-black ">{c.t}</h3>
               <p className="mt-2 text-base leading-relaxed">{c.d}</p>
             </Reveal>
@@ -146,7 +143,7 @@ export default function AuroraCaseStudy() {
         <Reveal delay={0.08}>
           <p className="text-base md:text-lg leading-relaxed max-w-6xl mb-8 text-[#F4F3FA]">{au.problem.scopeIntro}</p>
         </Reveal>
-        <div className="grid md:grid-cols-2 gap-5">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           <Reveal className="dark-card rounded-3xl p-7">
             <div className="flex items-center gap-2 mb-4">
               <span className="w-2 h-2 rounded-full bg-[#F5379B]" />
@@ -160,12 +157,12 @@ export default function AuroraCaseStudy() {
           </Reveal>
           <Reveal delay={0.06} className="dark-card rounded-3xl p-7">
             <div className="flex items-center gap-2 mb-4">
-              <span className="w-2 h-2 rounded-full bg-[#075EFD]" />
+              <span className="w-2 h-2 rounded-full bg-[var(--case-acc)]" />
               <p className="font-mono text-xs uppercase tracking-widest">out of scope</p>
             </div>
             <ul className="space-y-3">
               {au.problem.outOfScope.map((s) => (
-                <li key={s} className="flex items-start gap-3 text-base"><X className="flex-shrink-0 mt-1 text-[#075EFD]" size={16} />{s}</li>
+                <li key={s} className="flex items-start gap-3 text-base"><X className="flex-shrink-0 mt-1 text-[var(--case-acc)]" size={16} />{s}</li>
               ))}
             </ul>
           </Reveal>
@@ -221,7 +218,7 @@ export default function AuroraCaseStudy() {
         </Reveal>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {au.primaryUsers.map((u, i) => (
-            <Reveal key={u.label} delay={(i % 2) * 0.06} className="dark-card rounded-2xl p-6 border-l-4 border-[#075EFD]">
+            <Reveal key={u.label} delay={(i % 2) * 0.06} className="dark-card rounded-2xl p-6 border-l-4 border-[var(--case-acc)]">
               <h3 className="font-display text-lg font-black mb-2">{u.label}</h3>
               <p className="text-sm leading-relaxed text-[#F4F3FA]/85">{u.desc}</p>
             </Reveal>
@@ -242,9 +239,9 @@ export default function AuroraCaseStudy() {
         <Reveal delay={0.08}>
           <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{au.research.auditIntro}</p>
         </Reveal>
-        <div className="grid md:grid-cols-2 gap-5">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {au.research.auditFindings.map((f, i) => (
-            <Reveal key={f.t} delay={(i % 2) * 0.06} className="dark-card rounded-3xl p-7 border-l-4 border-[#075EFD]">
+            <Reveal key={f.t} delay={(i % 2) * 0.06} className="dark-card rounded-3xl p-7 border-l-4 border-[var(--case-acc)]">
               <h3 className="font-display text-xl font-black mb-2">{f.t}</h3>
               <p className="text-base leading-relaxed">{f.d}</p>
             </Reveal>
@@ -259,7 +256,7 @@ export default function AuroraCaseStudy() {
             <div key={h.t} className="p-5 md:p-6 grid grid-cols-12 gap-4 items-center">
               <div className="col-span-12 md:col-span-4 font-display font-bold text-base ">{h.t}</div>
               <div className="col-span-9 md:col-span-6 text-sm text-[#F4F3FA]/80">{h.d}</div>
-              <div className="col-span-3 md:col-span-2 text-right font-display font-black text-2xl text-[#075EFD]">{h.s}</div>
+              <div className="col-span-3 md:col-span-2 text-right font-display font-black text-2xl text-[var(--case-acc)]">{h.s}</div>
             </div>
           ))}
         </Reveal>
@@ -271,7 +268,7 @@ export default function AuroraCaseStudy() {
           {au.research.stakeholders.map((s, i) => (
             <Reveal key={s.role} delay={(i % 2) * 0.06} className="dark-card rounded-3xl p-7">
               <p className="text-[10px] font-mono uppercase tracking-widest text-[#F5379B] mb-3">{s.role}</p>
-              <p className="italic text-base leading-relaxed border-l-2 border-[#075EFD] pl-4 mb-4">&ldquo;{s.quote}&rdquo;</p>
+              <p className="italic text-base leading-relaxed border-l-2 border-[var(--case-acc)] pl-4 mb-4">&ldquo;{s.quote}&rdquo;</p>
               <div className="text-xs font-mono uppercase tracking-widest text-white">priority</div>
               <div className="font-display text-base font-bold mt-1">{s.priority}</div>
             </Reveal>
@@ -281,7 +278,7 @@ export default function AuroraCaseStudy() {
         <Reveal>
           <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">research findings</h3>
         </Reveal>
-        <div className="grid md:grid-cols-2 gap-5">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {au.research.findings.map((f, i) => (
             <Reveal key={f.t} delay={(i % 2) * 0.06} className="dark-card rounded-3xl p-7">
               <h3 className="font-display text-lg font-black mb-2">{f.t}</h3>
@@ -330,7 +327,7 @@ export default function AuroraCaseStudy() {
         <Reveal delay={0.08}>
           <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{au.design.sketchesIntro}</p>
         </Reveal>
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {au.design.sketches.map((s, i) => (
             <Reveal key={s.title} delay={(i % 2) * 0.06} as="figure" className="rounded-3xl dark-card overflow-hidden">
               <Zoomable src={s.src} alt={s.title} caption={s.desc} className="bg-[#FAF5E8] p-4 md:p-6">
@@ -351,7 +348,7 @@ export default function AuroraCaseStudy() {
         <Reveal delay={0.08}>
           <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{au.design.wireframesIntro}</p>
         </Reveal>
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {au.design.wireframes.map((w, i) => (
             <Reveal key={w.title} delay={(i % 2) * 0.06} as="figure" className="rounded-3xl dark-card overflow-hidden">
               <Zoomable src={w.src} alt={w.title} caption={w.desc} className="bg-white p-4 md:p-6 border-b border-white/5">
@@ -372,20 +369,18 @@ export default function AuroraCaseStudy() {
         <Reveal delay={0.08}>
           <p className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-8">{au.design.finalIntro}</p>
         </Reveal>
-        <div className="columns-1 md:columns-2 lg:columns-3 gap-5">
-          {au.design.finalScreens.map((s, i) => (
-            <Reveal key={s.title} delay={(i % 2) * 0.06} as="figure" className="mb-5 break-inside-avoid rounded-3xl dark-card overflow-hidden">
-              <Zoomable src={s.src} alt={s.title} caption={s.desc} className="bg-white p-3 border-b border-white/5">
-                <VaultImage src={s.src} alt={s.title} loading="lazy" className="w-full h-auto rounded-lg" />
-              </Zoomable>
-              <figcaption className="p-5">
-                <span className="text-[10px] font-mono uppercase tracking-widest text-[#F5379B]">{s.tag}</span>
-                <h3 className="mt-2 font-display text-base font-black ">{s.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-[#F4F3FA]/85">{s.desc}</p>
-              </figcaption>
-            </Reveal>
-          ))}
-        </div>
+        {/* Was a three-column masonry grid, which made every screen too small to
+            read and gave the sequence no order. One screen at a time now, with
+            the next peeking so it is obvious there is more. */}
+        <ScreenCarousel
+          label="Aurora final design screens"
+          items={au.design.finalScreens}
+          renderMedia={(s) => (
+            <Zoomable src={s.src} alt={s.title} caption={s.desc}>
+              <VaultImage src={s.src} alt={s.title} loading="lazy" className="w-full h-auto rounded-lg" />
+            </Zoomable>
+          )}
+        />
       </SectionWrap>
 
       {/* 06 DESIGN SYSTEM */}
@@ -441,7 +436,7 @@ export default function AuroraCaseStudy() {
             <ol className="relative border-l-2 border-white/15 ml-2 space-y-6">
               {au.validation.rounds.map((r, i) => (
                 <li key={r.n} className="pl-6 relative">
-                  <span className="absolute -left-[14px] top-1 w-7 h-7 rounded-full bg-[#075EFD] text-white flex items-center justify-center font-display font-black text-sm border-4 border-[#EFEDE7]">{r.n}</span>
+                  <span className="absolute -left-[14px] top-1 w-7 h-7 rounded-full bg-[var(--case-acc)] text-white flex items-center justify-center font-display font-black text-sm border-4 border-[#EFEDE7]">{r.n}</span>
                   <h4 className="font-display text-base font-black">{r.t}</h4>
                   <p className="mt-1.5 text-sm leading-relaxed">{r.d}</p>
                 </li>
@@ -459,7 +454,7 @@ export default function AuroraCaseStudy() {
             <Reveal delay={0.06} className="dark-card rounded-3xl p-6">
               <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-3">what I&apos;d do differently</p>
               <ul className="space-y-2.5">
-                {au.impact.differently.map((x) => (<li key={x} className="flex items-start gap-3 text-sm"><Star className="flex-shrink-0 mt-0.5 text-[#075EFD]" size={14} /><span>{x}</span></li>))}
+                {au.impact.differently.map((x) => (<li key={x} className="flex items-start gap-3 text-sm"><Star className="flex-shrink-0 mt-0.5 text-[var(--case-acc)]" size={14} /><span>{x}</span></li>))}
               </ul>
             </Reveal>
           </div>
@@ -471,11 +466,13 @@ export default function AuroraCaseStudy() {
         <Reveal>
           <h2 className="font-display text-3xl md:text-5xl font-black mb-6">thank you for reading.</h2>
           <p className="text-lg text-[#A29CB4] mb-8">Want the story behind any decision here? I&apos;m happy to walk you through it.</p>
-          <div className="flex gap-4 justify-center flex-wrap items-center">
+          <div className="cs-end">
+            <a href={`mailto:${PROFILE.email}`} data-testid="case-cta-email" className="cs-btn"><Mail size={16} /> Email Me</a>
+            <Link to="/case/finvista" className="cs-btn-ghost">Read FinVista</Link>
+            <Link to="/projects" className="cs-btn-ghost">All Projects</Link>
+          </div>
+          <div className="flex gap-4 justify-center flex-wrap items-center mt-8">
             <ProjectNav slug="aurora" variant="footer" which="prev" />
-            <a href={`mailto:${PROFILE.email}`} data-testid="case-cta-email" className={`inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-[#C71E73] font-semibold text-sm hover:bg-[#C71E73] hover:text-white transition-[background-color,color,transform] duration-200 active:scale-[0.97] ${FOCUS}`}><Mail size={16} /> Email Me</a>
-            <Link to="/case/finvista" className={`inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-[#F4F3FA] font-semibold text-sm hover:bg-[#261E3A] transition-[background-color,color,transform] duration-200 active:scale-[0.97] ${FOCUS}`}>Read FinVista Case Study</Link>
-            <Link to="/projects" className={`inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-[#F4F3FA] font-semibold text-sm hover:bg-[#261E3A] transition-[background-color,color,transform] duration-200 active:scale-[0.97] ${FOCUS}`}>View All Projects</Link>
             <ProjectNav slug="aurora" variant="footer" which="next" />
           </div>
         </Reveal>

@@ -9,7 +9,6 @@ import Reveal from "../components/Reveal";
 import OwnedCard from "../components/OwnedCard";
 import Zoomable from "../components/Zoomable";
 import PhoneFrame from "../components/PhoneFrame";
-import CaseStudyNav from "../components/CaseStudyNav";
 import ProjectNav from "../components/ProjectNav";
 import { Container } from "../components/Grid";
 
@@ -18,6 +17,10 @@ import { Container } from "../components/Grid";
 // bright magenta that fails contrast on light (3.04:1). Both now match the
 // rest of the light pages.
 const FOCUS = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C71E73] focus-visible:ring-offset-2 focus-visible:ring-offset-[#EFEDE7]";
+
+/* Threadfold's brand coral, deepened for paper. The card colour (#F25C4D) is
+   only 3:1 on the light ground, so text and numbers use this darker step. */
+const ACCENT = "#A63B25";
 
 // Strong ease-out, matched to Reveal's curve, for the self-drawing divider.
 const EASE = [0.23, 1, 0.32, 1];
@@ -53,68 +56,60 @@ export default function ThreadfoldCaseStudy() {
     <article
       data-testid="threadfold-case-study"
       className="theme-light bg-[#EFEDE7] pb-24"
+      style={{ "--case-acc": ACCENT }}
     >
       <Seo title={j.title} description={j.subtitle} />
-      <CaseStudyNav />
 
-      {/* TITLE BLOCK over a darkened cover image */}
-      <header className="relative overflow-hidden">
-        <VaultImage
-          src={j.hero.cover}
-          alt=""
-          aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover"
-          loading="eager"
-        />
-        <div
-          className="absolute inset-0"
-          aria-hidden="true"
-          style={{ background: "linear-gradient(105deg, rgba(16,2,16,0.94) 0%, rgba(16,2,16,0.7) 55%, rgba(16,2,16,0.5) 100%)" }}
-        />
-        <div
-          className="absolute inset-0"
-          aria-hidden="true"
-          style={{ background: "linear-gradient(to bottom, rgba(16,2,16,0.5) 0%, rgba(16,2,16,0) 30%, rgba(16,2,16,0) 50%, rgba(16,2,16,0.94) 100%)" }}
-        />
-        {/* Everything in here sits on the cover photograph, not on the page
-            surface, so it is exempt from the ink remap and stays white. */}
-        <Container className="relative z-10 pt-12 pb-14" data-on-dark>
-          <div className="flex flex-wrap items-center justify-between gap-3 mb-10">
+      {/* HERO, light. Same change as the Aurora page: the cover is a picture
+          now rather than a scrim, so Threadfold is not a dark page inside a
+          light site. */}
+      <header className="pt-10 pb-14">
+        <Container>
+          <div className="flex flex-wrap items-center justify-between gap-3 mb-12">
             <Link
               to="/projects"
               data-testid="back-link"
-              className={`inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-white/70 hover:text-[#F5379B] rounded transition-[color,transform] duration-200 active:scale-[0.97] ${FOCUS}`}
+              className={`inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#6B665D] hover:text-[#171512] rounded transition-colors ${FOCUS}`}
             >
               <ArrowLeft size={14} /> All Projects
             </Link>
           </div>
 
-          <Reveal as="p" className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-5">
+          <Reveal as="p" className="text-[11px] font-mono uppercase tracking-[0.25em] mb-5" style={{ color: ACCENT }}>
             ux case study · crowdfunding commerce · india
           </Reveal>
-          <Reveal as="h1" delay={0.08} className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[0.95] text-[#F7F5FF] max-w-5xl case-keep">
+          <Reveal as="h1" delay={0.08} className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[0.95] text-[#171512] max-w-5xl case-keep">
             Threadfold
           </Reveal>
-          <Reveal as="p" delay={0.16} className="mt-7 max-w-3xl text-lg md:text-2xl text-[#F4F3FA] leading-snug font-light italic">
+          <Reveal as="p" delay={0.16} className="mt-7 max-w-3xl text-lg md:text-2xl text-[#171512] leading-snug font-light italic">
             {j.subtitle}
           </Reveal>
 
+          <Reveal delay={0.22} className="mt-12 rounded-3xl overflow-hidden border border-[#DCD7CC] bg-white">
+            <VaultImage
+              src={j.hero.cover}
+              alt="Threadfold crowdfunding platform"
+              className="w-full h-auto block"
+              loading="eager"
+            />
+          </Reveal>
+
           {j.hero.facts && (
-            <div className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl">
+            <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4">
               {j.hero.facts.map((f, i) => (
-                <Reveal key={f.label} delay={0.24 + i * 0.06} className="rounded-2xl p-5 bg-[#100210]/55 backdrop-blur-md border border-white/12">
-                  <p className="text-[10px] font-mono uppercase tracking-widest text-[#F5379B] mb-2">{f.label}</p>
-                  <p className="font-display text-base md:text-lg font-bold text-[#F4F3FA] leading-snug">{f.value}</p>
+                <Reveal key={f.label} delay={0.24 + i * 0.06} className="rounded-2xl p-5 bg-white border border-[#DCD7CC]">
+                  <p className="text-[10px] font-mono uppercase tracking-widest mb-2" style={{ color: ACCENT }}>{f.label}</p>
+                  <p className="font-display text-base md:text-lg font-bold text-[#171512] leading-snug">{f.value}</p>
                 </Reveal>
               ))}
             </div>
           )}
 
-          <div className="mt-4 grid grid-cols-3 gap-4 max-w-3xl">
+          <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-4">
             {j.hero.stats.map((s, i) => (
-              <Reveal key={s.label} delay={0.42 + i * 0.06} className="rounded-2xl p-5 md:p-6 bg-[#100210]/55 backdrop-blur-md border border-white/12">
-                <div className="num text-3xl md:text-5xl font-black text-[#075EFD] leading-none">{s.value}</div>
-                <div className="mt-3 text-[10px] md:text-xs font-mono uppercase tracking-widest text-white/70">{s.label}</div>
+              <Reveal key={s.label} delay={0.42 + i * 0.06} className="rounded-2xl p-5 md:p-6 bg-white border border-[#DCD7CC]">
+                <div className="num text-3xl md:text-5xl font-black leading-none" style={{ color: ACCENT }}>{s.value}</div>
+                <div className="mt-3 text-[10px] md:text-xs font-mono uppercase tracking-widest text-[#6B665D]">{s.label}</div>
               </Reveal>
             ))}
           </div>
@@ -129,7 +124,7 @@ export default function ThreadfoldCaseStudy() {
         <Reveal as="h2" className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{j.overview.headline}</Reveal>
 
         <Reveal className="rounded-3xl dark-card text-white p-8 md:p-12 relative overflow-hidden">
-          <div className="ab-glow absolute -top-10 -right-10 w-72 h-72 rounded-full bg-[#075EFD] blur-3xl opacity-30" />
+          <div className="ab-glow absolute -top-10 -right-10 w-72 h-72 rounded-full bg-[var(--case-acc)] blur-3xl opacity-30" />
           <p className="relative text-[11px] font-mono uppercase tracking-[0.25em] text-white mb-4">{j.overview.tldrTitle}</p>
           <p className="relative font-display text-xl md:text-2xl leading-snug text-white/95 max-w-6xl case-keep">{j.overview.tldr}</p>
         </Reveal>
@@ -156,7 +151,7 @@ export default function ThreadfoldCaseStudy() {
         <Reveal as="h3" className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">Primary Users</Reveal>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {j.primaryUsers.map((u, i) => (
-            <Reveal key={u.label} delay={(i % 3) * 0.05} className="dark-card rounded-2xl p-6 border-l-4 border-[#075EFD]">
+            <Reveal key={u.label} delay={(i % 3) * 0.05} className="dark-card rounded-2xl p-6 border-l-4 border-[var(--case-acc)]">
               <h4 className="font-display text-lg font-black mb-2">{u.label}</h4>
               <p className="text-sm leading-relaxed text-[#F4F3FA]/85">{u.desc}</p>
             </Reveal>
@@ -174,10 +169,10 @@ export default function ThreadfoldCaseStudy() {
           <p className="font-display text-xl md:text-2xl font-bold leading-snug text-black case-keep">{j.problem.coreChallenge}</p>
         </Reveal>
 
-        <div className="mt-12 grid md:grid-cols-2 gap-5">
+        <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {j.problem.dimensions.map((d, i) => (
             <Reveal key={d.title} delay={(i % 2) * 0.06} className="dark-card rounded-3xl p-7">
-              <div className="font-display text-5xl font-black text-[#075EFD] leading-none">{String(i + 1).padStart(2, "0")}</div>
+              <div className="font-display text-5xl font-black text-[var(--case-acc)] leading-none">{String(i + 1).padStart(2, "0")}</div>
               <h3 className="mt-4 font-display text-xl font-black">{d.title}</h3>
               <p className="mt-2 text-base leading-relaxed">{d.desc}</p>
             </Reveal>
@@ -206,7 +201,7 @@ export default function ThreadfoldCaseStudy() {
         <div className="mt-12 grid md:grid-cols-3 gap-5">
           {j.howItWorks.steps.map((s, i) => (
             <Reveal key={s.n} delay={(i % 3) * 0.05} className="dark-card rounded-3xl p-7">
-              <div className="num text-4xl md:text-5xl font-black text-[#075EFD] leading-none">{s.n}</div>
+              <div className="num text-4xl md:text-5xl font-black text-[var(--case-acc)] leading-none">{s.n}</div>
               <h3 className="mt-4 font-display text-xl font-black">{s.t}</h3>
               <p className="mt-2 text-base leading-relaxed">{s.d}</p>
             </Reveal>
@@ -279,7 +274,7 @@ export default function ThreadfoldCaseStudy() {
 
         <div className="mt-8 grid md:grid-cols-3 gap-5">
           {j.studio.points.map((p, i) => (
-            <Reveal key={p.t} delay={(i % 3) * 0.05} className="dark-card rounded-3xl p-7 border-l-4 border-[#075EFD]">
+            <Reveal key={p.t} delay={(i % 3) * 0.05} className="dark-card rounded-3xl p-7 border-l-4 border-[var(--case-acc)]">
               <h3 className="font-display text-lg font-black mb-2">{p.t}</h3>
               <p className="text-sm leading-relaxed text-[#F4F3FA]">{p.d}</p>
             </Reveal>
@@ -314,7 +309,7 @@ export default function ThreadfoldCaseStudy() {
         <Reveal as="h2" className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{j.dashboard.headline}</Reveal>
         <Reveal as="p" delay={0.08} className="text-base md:text-lg leading-relaxed max-w-6xl text-[#F4F3FA] mb-10">{j.dashboard.intro}</Reveal>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {j.dashboard.screens.map((s, i) => (
             <Reveal as="figure" key={s.title} delay={(i % 2) * 0.06} className="rounded-3xl dark-card overflow-hidden">
               <Zoomable src={s.src} alt={s.title} caption={`${s.title}: ${s.desc}`} className="bg-white">
@@ -357,7 +352,7 @@ export default function ThreadfoldCaseStudy() {
           <p className="font-display text-lg md:text-xl leading-snug max-w-6xl text-white/95 case-keep">{j.reflection.note}</p>
         </Reveal>
 
-        <div className="mt-12 grid md:grid-cols-2 gap-5">
+        <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           <Reveal className="dark-card rounded-3xl p-7">
             <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">{j.reflection.pressTitle}</p>
             <ul className="space-y-3">
@@ -370,7 +365,7 @@ export default function ThreadfoldCaseStudy() {
             <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#F5379B] mb-4">what I&apos;d do differently</p>
             <ul className="space-y-3">
               {j.reflection.differently.map((x) => (
-                <li key={x} className="flex items-start gap-3 text-base"><Star className="flex-shrink-0 mt-1 text-[#075EFD]" size={16} /><span>{x}</span></li>
+                <li key={x} className="flex items-start gap-3 text-base"><Star className="flex-shrink-0 mt-1 text-[var(--case-acc)]" size={16} /><span>{x}</span></li>
               ))}
             </ul>
           </Reveal>
@@ -381,11 +376,13 @@ export default function ThreadfoldCaseStudy() {
       <SectionWrap className="text-center">
         <Reveal as="h2" className="font-display text-3xl md:text-4xl font-black mb-6">thank you for reading.</Reveal>
         <Reveal as="p" delay={0.08} className="text-lg text-[#A29CB4] mb-8">If you&apos;d like to talk through this project or how I approach end-to-end product design, I&apos;d love to connect.</Reveal>
-        <div className="flex gap-4 justify-center flex-wrap items-center">
+        <div className="cs-end">
+          <a href={`mailto:${PROFILE.email}`} data-testid="case-cta-email" className="cs-btn"><Mail size={16} /> Email Me</a>
+          <Link to="/case/aurora" className="cs-btn-ghost">Read Aurora</Link>
+          <Link to="/projects" className="cs-btn-ghost">All Projects</Link>
+        </div>
+        <div className="flex gap-4 justify-center flex-wrap items-center mt-8">
           <ProjectNav slug={j.slug} variant="footer" which="prev" />
-          <a href={`mailto:${PROFILE.email}`} data-testid="case-cta-email" className={`inline-flex items-center gap-2 px-7 py-4 rounded-full bg-white text-[#C71E73] font-semibold text-sm hover:bg-[#C71E73] hover:text-white transition-[background-color,color,transform] duration-200 active:scale-[0.97] ${FOCUS}`}><Mail size={16} /> Email Me</a>
-          <Link to="/case/aurora" className={`inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-[#F4F3FA] font-semibold text-sm hover:bg-[#261E3A] transition-[background-color,transform] duration-200 active:scale-[0.97] ${FOCUS}`}>Read Aurora Case Study</Link>
-          <Link to="/projects" className={`inline-flex items-center gap-2 px-7 py-4 rounded-full border border-white text-[#F4F3FA] font-semibold text-sm hover:bg-[#261E3A] transition-[background-color,transform] duration-200 active:scale-[0.97] ${FOCUS}`}>View All Projects</Link>
           <ProjectNav slug={j.slug} variant="footer" which="next" />
         </div>
       </SectionWrap>

@@ -425,11 +425,22 @@ export const DECK_CSS = `
 
   .cd-end{ border-top:1px solid rgba(255,255,255,.24); padding:38px 0 0;
     display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
-  .cd-btn{ display:inline-block; padding:13px 26px; border-radius:9999px; font-size:15px;
+  /* Height and hover match the .cs-btn system the other case studies use, so
+     every closing row behaves the same. The colours are inverted here because
+     this band is painted in the case accent, not paper. */
+  .cd-btn{ display:inline-flex; align-items:center; justify-content:center;
+    min-height:52px; padding:0 26px; border-radius:9999px; font-size:15px;
     font-weight:600; text-decoration:none; background:#fff; color:var(--acc);
-    white-space:nowrap; }
+    white-space:nowrap; border:1px solid #fff; line-height:1;
+    transition:background-color .16s ease-out, border-color .16s ease-out,
+               color .16s ease-out, transform .16s ease-out; }
   .cd-btn-ghost{ background:transparent; color:#fff; border:1px solid rgba(255,255,255,.55); }
+  .cd-btn:active{ transform:translateY(1px); }
   .cd-btn:focus-visible{ outline:2px solid #fff; outline-offset:3px; }
+  @media (hover:hover) and (pointer:fine){
+    .cd-btn:hover{ background:rgba(255,255,255,.88); border-color:rgba(255,255,255,.88); }
+    .cd-btn-ghost:hover{ background:rgba(255,255,255,.14); border-color:#fff; color:#fff; }
+  }
 
   @media (prefers-reduced-motion: reduce){ .cd *{ transition:none !important; } }
 `;

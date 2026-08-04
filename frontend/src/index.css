@@ -745,25 +745,70 @@ a:has(.cover-img) { border-radius: 24px; }
   border: 1px solid rgba(255, 255, 255, 0.15) !important;
 }
 
-/* (17) The case-study scroll-spy jumper. It is a near-black glass pill built
-   for the dark pages, and on paper it read as leftover furniture, made worse
-   by the hairline remap putting a pale border on a black panel. On the light
-   pages it becomes a white glass pill with ink type. */
-.theme-light .cs-jumper {
-  background: rgba(255, 255, 255, 0.86) !important;
-  border-color: #DCD7CC !important;
-  box-shadow: 0 8px 32px -12px rgba(78, 62, 102, 0.34) !important;
+/* (20) The dotted letter in a case-study title. It was painted with --brand,
+   the old electric blue, and haloed with the dark page colour, so on the light
+   case pages it read as a blue dot with a black ring. On any page that sets a
+   case accent it takes that accent and a paper halo. */
+[style*="--case-acc"] .dot-o::after {
+  background: var(--case-acc);
+  box-shadow: 0 0 0 2px #EFEDE7;
 }
-.theme-light .cs-jumper-label { color: #6B665D !important; }
-.theme-light .cs-jumper-num,
-.theme-light .cs-jumper-name { color: #6B665D !important; }
-.theme-light .cs-jumper-num.is-active,
-.theme-light .cs-jumper-name.is-active { color: #171512 !important; }
-.theme-light .cs-jumper-item.is-active { background: rgba(23, 21, 18, 0.06) !important; }
+
+/* (19) ONE CLOSING ACTION ROW FOR EVERY CASE STUDY.
+   Each case study had grown its own end-of-page buttons: a white pill with
+   magenta text on one, a white-bordered ghost on another, a black-on-black
+   hover that hid its own label, and the prev/next pills sitting in the same
+   row at a different height. These classes are the single treatment. Colour
+   comes from --case-acc so each case keeps its own brand, with the light
+   magenta as the fallback for pages that do not set one. */
+.cs-end {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  align-items: stretch;
+}
+.cs-btn,
+.cs-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 52px;
+  padding: 0 26px;
+  border-radius: 9999px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background-color 0.16s ease-out, border-color 0.16s ease-out,
+              color 0.16s ease-out, transform 0.16s ease-out;
+}
+.cs-btn {
+  background: var(--case-acc, #C71E73);
+  border-color: var(--case-acc, #C71E73);
+  color: #FFFFFF;
+}
+.cs-btn * { color: #FFFFFF; }
+.cs-btn-ghost {
+  background: transparent;
+  border-color: #B9B2A5;
+  color: #171512;
+}
+.cs-btn:active, .cs-btn-ghost:active { transform: translateY(1px); }
+.cs-btn:focus-visible, .cs-btn-ghost:focus-visible {
+  outline: 2px solid var(--case-acc, #C71E73);
+  outline-offset: 3px;
+}
 @media (hover: hover) and (pointer: fine) {
-  .theme-light .cs-jumper-item:hover { background: rgba(23, 21, 18, 0.05) !important; }
-  .theme-light .cs-jumper-item:hover .cs-jumper-num,
-  .theme-light .cs-jumper-item:hover .cs-jumper-name { color: #171512 !important; }
+  /* One hover behaviour: the filled button darkens, the ghost takes a faint
+     ink wash. Neither ever puts its label on a colour it cannot be read on. */
+  .cs-btn:hover { filter: brightness(0.88); }
+  .cs-btn-ghost:hover { background: rgba(23, 21, 18, 0.05); border-color: #8A8478; }
 }
 
 /* (15) Case-study body copy on the dark-card surfaces. Rule (13)'s sibling for
@@ -781,6 +826,13 @@ a:has(.cover-img) { border-radius: 24px; }
    dark green. Inside a .ds-spec block they stay white. */
 .theme-light .ds-spec .text-white,
 .theme-light .ds-spec [class*="text-white/"] { color: #FFFFFF; }
+/* Same reasoning for the specimen's icons. Two global rules paint every svg
+   (one white for the dark shell, one ink for paper), which turned the status
+   icons on the notification banners white on a pale green/red/amber fill, so
+   they vanished. Inside a specimen an icon inherits the colour its own
+   component gave it. */
+.App .ds-spec svg:not(a svg):not(button svg),
+.theme-light .ds-spec svg:not(a svg):not(button svg) { color: inherit !important; }
 
 /* (13) The featured demo panel on /projects, finished. Rule (2) above only
    reaches surfaces declared as Tailwind classes, and this panel declared its
