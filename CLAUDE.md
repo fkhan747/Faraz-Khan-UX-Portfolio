@@ -18,6 +18,7 @@ One true name everywhere (no legacy dual names):
 |---|---|---|
 | Meridian Institute Analytics | `/case/meridian` | open, leads the order |
 | FinVista | `/case/finvista` | **locked (vault)** |
+| FinVista, previous deck version | `/case/finvista-deck` | kept reachable, unlinked |
 | Aurora | `/case/aurora` | **locked (vault)** |
 | Threadfold | `/case/threadfold` | **locked (vault)** |
 | Slate (concept) | `/case/slate`, prototype `/slate/` | open |
@@ -31,6 +32,17 @@ redirect via `<Navigate>` routes in `App.js` + static stubs in
 Data files: `src/data/<name>Case.js` exporting the matching name (`meridian`,
 `finvista`, `aurora`, `threadfold`, `slate`, `almanac`, `crux`). Cards/order come from
 `src/data/content.js` (`projects` + `concepts`).
+
+**Long-form migration, started 2026-08-04.** Case studies are moving off the
+deck's condensed `deck` block onto long-form pages wearing the *same* light
+slide-band design. FinVista is done: `pages/pilots/CaseFinvistaLong.jsx` owns
+`/case/finvista`, driven by the long-form data keys, using the Material 3
+screens in `public/finvista/m3` and leaving the older numbered captures unused.
+Meridian, Aurora and Threadfold are still on the deck and move over as Faraz
+finalises each one. When adding a `<slug>-deck` route, also add it to
+`reactSnap.include` in `package.json`: nothing links to it, and react-snap only
+prerenders what it can crawl or is told to include. A route that is neither
+crawlable nor included 404s on Pages.
 
 ## The vault (confidential case studies) — CURRENTLY DORMANT
 **Status: dormant since 2026-08-02.** `REACT_APP_VAULT_DORMANT=1` in
