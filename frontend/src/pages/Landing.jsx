@@ -203,12 +203,12 @@ export default function Landing() {
             p.locked ? (
               <div key={p.slug} className="relative">
                 <Link to={`/case/${p.slug}`} data-testid={`featured-link-${p.slug}`} className="block group rounded-3xl overflow-hidden lift">
-                  <CaseCover img={p.coverImg} title={p.title} subtitle={p.subtitle} year={p.year} locked titleAs="h2" />
+                  <CaseCover img={p.coverImg} title={p.title} subtitle={p.subtitle} year={p.year} badge={p.badge} locked titleAs="h2" />
                 </Link>
               </div>
             ) : (
               <Link key={p.slug} to={`/case/${p.slug}`} data-testid={`featured-link-${p.slug}`} className="block group rounded-3xl overflow-hidden lift">
-                <CaseCover img={p.coverImg} title={p.title} subtitle={p.subtitle} year={p.year} titleAs="h2" />
+                <CaseCover img={p.coverImg} title={p.title} subtitle={p.subtitle} year={p.year} badge={p.badge} titleAs="h2" />
               </Link>
             )
           )}

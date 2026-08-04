@@ -17,7 +17,12 @@ export const PROFILE = {
 
 const F = (n) => `/finvista/${n}`;
 
-// Projects: 4 client case studies. Meridian leads and is open to explore.
+// Projects: 4 client case studies, ordered by strength of proof (2026-08-04).
+// FinVista leads on real measured outcomes, Aurora next for the shipped AI
+// feature and the 3:1 click reduction, then Meridian which is designed but
+// not yet measured, and Threadfold last as the 2015 closer with its press
+// coverage. This array drives the /projects grid, the landing page featured
+// pair (first two), and the prev/next order in ProjectNav.
 // FinVista, Aurora and Threadfold are confidential client work.
 //
 // `locked: true` no longer draws anything. The vault went dormant on
@@ -28,22 +33,6 @@ const F = (n) => `/finvista/${n}`;
 // change rather than a hunt through the grids. Do not delete it because the
 // cards look the same with and without it.
 export const projects = [
-  {
-    slug: "meridian",
-    title: "Meridian Institute Analytics",
-    subtitle: "Re-imagining a University's Analytics Platform: One Cockpit for Admissions, Research & HR",
-    client: "Meridian Institute of Technology (anonymized)",
-    role: "Lead UX Designer",
-    services: "UX, Data Visualization, Design Systems",
-    year: "2024",
-    cover: "/meridian/cover.jpg",
-    coverImg: "/meridian/cover.jpg",
-    color: "#0E1430",
-    tag: "case study",
-    summary:
-      "Unified four siloed Power BI dashboards (undergraduate and graduate admissions, research, and HR) into one analytics platform with an overview-and-drill-down model and an optional AI layer.",
-    detail: true,
-  },
   {
     slug: "finvista",
     title: "FinVista",
@@ -77,6 +66,26 @@ export const projects = [
       "Led the redesign of the Recurring Batch Journey configurator and embedded the Helio AI composer. Cut clicks for campaign setup 3:1 and shipped a 52-component design system.",
     detail: true,
     locked: true,
+  },
+  {
+    slug: "meridian",
+    title: "Meridian Institute Analytics",
+    subtitle: "Re-imagining a University's Analytics Platform: One Cockpit for Admissions, Research & HR",
+    client: "Meridian Institute of Technology (anonymized)",
+    role: "Lead UX Designer",
+    services: "UX, Data Visualization, Design Systems",
+    year: "2024",
+    cover: "/meridian/cover.jpg",
+    coverImg: "/meridian/cover.jpg",
+    color: "#0E1430",
+    tag: "case study",
+    // Faraz's own framing from the case data: "Designed and demonstrated,
+    // not shipped and measured." The card says so up front rather than
+    // letting the reader assume shipped outcomes.
+    badge: "designed, not yet measured",
+    summary:
+      "Unified four siloed Power BI dashboards (undergraduate and graduate admissions, research, and HR) into one analytics platform with an overview-and-drill-down model and an optional AI layer.",
+    detail: true,
   },
   {
     slug: "threadfold",

@@ -14,16 +14,24 @@ headings, bottom-nav chrome. Shared comic CSS lives in
 ## Case studies — names, routes, access
 One true name everywhere (no legacy dual names):
 
+Cards are ordered by strength of proof (2026-08-04). That one array in
+`content.js` also drives the landing page's featured pair (the first two) and
+the prev/next order in `ProjectNav`, so reordering it moves all three at once.
+
 | Study | Slug/route | Access |
 |---|---|---|
-| Meridian Institute Analytics | `/case/meridian` | open, leads the order |
-| FinVista | `/case/finvista` | **locked (vault)** |
-| FinVista, previous deck version | `/case/finvista-deck` | kept reachable, unlinked |
+| FinVista | `/case/finvista` | **locked (vault)**, leads the order |
 | Aurora | `/case/aurora` | **locked (vault)** |
-| Threadfold | `/case/threadfold` | **locked (vault)** |
+| Meridian Institute Analytics | `/case/meridian` | open |
+| Threadfold | `/case/threadfold` | **locked (vault)**, closes the order |
 | Slate (concept) | `/case/slate`, prototype `/slate/` | open |
 | Almanac (concept, dormant `live:false`) | `/case/almanac`, prototype `/almanac/` | open |
 | Crux (concept) | `/case/crux`, prototype `/crux/` | open |
+
+Meridian carries `badge: "designed, not yet measured"` on its card, and its
+impact figures are labelled as design targets rather than results. It was
+designed and demonstrated, never shipped, so nothing on it has been observed in
+production. Do not let that framing get quietly upgraded.
 
 Old URLs (`recruitos`, `knowledgeos`, `decisionos`, `somethings-cooking`)
 redirect via `<Navigate>` routes in `App.js` + static stubs in

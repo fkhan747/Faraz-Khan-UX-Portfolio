@@ -101,7 +101,7 @@ export default function Projects() {
                 data-testid={`projects-card-${p.slug}`}
               >
                 <Link to={`/case/${p.slug}`} className="group block ab-card overflow-hidden">
-                  <CaseCover img={p.coverImg} title={p.title} subtitle={p.subtitle} year={p.year} locked titleAs="h2" />
+                  <CaseCover img={p.coverImg} title={p.title} subtitle={p.subtitle} year={p.year} badge={p.badge} locked titleAs="h2" />
                 </Link>
               </div>
             ) : (
@@ -111,7 +111,7 @@ export default function Projects() {
                 className="col-span-12 md:col-span-6 group block ab-card overflow-hidden"
                 data-testid={`projects-card-${p.slug}`}
               >
-                <CaseCover img={p.coverImg} title={p.title} subtitle={p.subtitle} year={p.year} comingSoon={p.comingSoon} titleAs="h2" />
+                <CaseCover img={p.coverImg} title={p.title} subtitle={p.subtitle} year={p.year} badge={p.badge} comingSoon={p.comingSoon} titleAs="h2" />
               </Link>
             )
           )}

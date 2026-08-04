@@ -735,6 +735,16 @@ a:has(.cover-img) { border-radius: 24px; }
   border-color: #C71E73 !important; outline: 2px solid rgba(199,30,115,0.25); outline-offset: 1px;
 }
 
+/* (18) Card badges sit ON the cover photograph, not on the card surface, so
+   rule (2) must not repaint them. It matches any bg-black/* inside an .ab-card
+   and was turning the badge pill near-white while [data-on-dark] kept its label
+   white, which made the text vanish. Anything marked data-on-dark keeps the
+   scrim it was designed with. */
+.theme-light .ab-card [data-on-dark][class*="bg-black/"] {
+  background: rgba(0, 0, 0, 0.45) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
 /* (17) The case-study scroll-spy jumper. It is a near-black glass pill built
    for the dark pages, and on paper it read as leftover furniture, made worse
    by the hairline remap putting a pale border on a black panel. On the light

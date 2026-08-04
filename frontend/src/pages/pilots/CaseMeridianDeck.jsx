@@ -122,12 +122,14 @@ const CONSTRAINTS = [
   ],
 ];
 
-/* Post-launch measurement. Deliberately a small, plausible set rather than a
-   wall of numbers: three figures a stakeholder would actually have tracked. */
-const MEASURED = [
+/* Success criteria agreed with the client, NOT results. Meridian was designed
+   and demonstrated, not shipped and measured, which is Faraz's own framing in
+   the case data. These were presented as post-launch figures until 2026-08-04;
+   they are labelled as what would be tracked, because they were never tracked. */
+const TARGETS = [
   ["94%", "of leadership using it inside the first term"],
-  ["3 of 4", "departments retired their old dashboard within a quarter"],
-  ["Zero", "definition disputes raised since the shared dictionary shipped"],
+  ["3 of 4", "departments retiring their old dashboard within a quarter"],
+  ["Zero", "definition disputes once the shared dictionary is in place"],
 ];
 
 /* What multi-round prototype testing actually changed. Each row is feedback in,
@@ -542,7 +544,7 @@ export default function CaseMeridianDeck() {
       <section className="cd-band cd-dark">
         <div className="cd-in">
           <Reveal>
-            <Head eye="After rollout">The same baseline, re-measured.</Head>
+            <Head eye="The targets">What the design was built to move.</Head>
           </Reveal>
           <div className="cd-metrics">
             {IMPACT.map(([a, b, l], i) => (
@@ -557,13 +559,14 @@ export default function CaseMeridianDeck() {
             ))}
           </div>
           <div className="cd-measured">
-            {MEASURED.map(([n, l]) => (
+            {TARGETS.map(([n, l]) => (
               <div key={l}><span>{n}</span><p>{l}</p></div>
             ))}
           </div>
           <p className="cd-note">
-            Before figures measured across the four legacy dashboards during the audit. After
-            figures measured once the platform was live.
+            Before figures were measured across the four legacy dashboards during the audit. The
+            after figures are design targets, not results: this work was designed and demonstrated,
+            not shipped and measured, so nothing here has been observed in production.
           </p>
         </div>
       </section>
