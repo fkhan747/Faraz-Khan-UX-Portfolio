@@ -127,10 +127,12 @@ const LAB_CSS = `
     color:var(--lab-ink); margin:10px 0 0; }
   .lab-tools-note{ font-size:14.5px; line-height:1.6; color:var(--lab-muted); margin:14px 0 0; max-width:62ch; }
 
+  /* Fills the column. It is a note card, and stopping the text mid-page with
+     empty space to the right of it reads as a mistake. */
   .lab-honesty{
-    border-left:3px solid var(--lab-pink); border-radius:0 14px 14px 0; padding:16px 20px;
+    border-left:3px solid var(--lab-pink); border-radius:0 14px 14px 0; padding:16px 22px;
     background:rgba(255,255,255,.6); font-size:14.5px; line-height:1.6; color:var(--lab-muted);
-    max-width:70ch; margin-top:26px;
+    margin-top:26px;
   }
 
   @media (prefers-reduced-motion: reduce){

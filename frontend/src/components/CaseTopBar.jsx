@@ -21,8 +21,11 @@ const BAR_CSS = `
     background:var(--ctb-acc, #171512);
     border-bottom:1px solid rgba(255,255,255,.16);
   }
+  /* 68px tall with a 48px mark, matching the landing page's nav-shell
+     exactly, so the bar does not change height as you move between the site
+     and a case study. */
   .ctb-in{
-    max-width:1360px; margin:0 auto; padding:12px 40px;
+    max-width:1360px; margin:0 auto; padding:10px 40px; min-height:68px;
     display:grid; grid-template-columns:1fr auto 1fr; align-items:center;
   }
   @media (max-width:900px){ .ctb-in{ padding:10px 22px; } }
@@ -33,8 +36,8 @@ const BAR_CSS = `
     color:rgba(255,255,255,.82); display:inline-flex; align-items:center; gap:7px;
     transition:color .16s ease-out;
   }
-  .ctb-home{ justify-self:center; display:inline-flex; line-height:0; padding:2px; border-radius:8px; }
-  .ctb-logo{ width:auto; height:26px; display:block; }
+  .ctb-home{ justify-self:center; display:inline-flex; line-height:0; border-radius:8px; }
+  .ctb-logo{ width:auto; height:48px; display:block; }
   .ctb-mark{
     justify-self:end;
     font-family:'Playfair Display',serif; font-size:17px; letter-spacing:-.02em;
