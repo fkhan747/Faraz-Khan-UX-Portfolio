@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The AI Trust Patterns Field Guide · Faraz Khan</title>
+<meta name="description" content="Twelve interface patterns that make AI feel like a colleague you can trust. Live demos, real products, and where I built each one." />
+<link rel="canonical" href="https://www.khanfaraz.in/patterns/" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.khanfaraz.in/patterns/" />
+<meta property="og:title" content="The AI Trust Patterns Field Guide · Faraz Khan" />
+<meta property="og:description" content="Twelve interface patterns that make AI feel like a colleague you can trust. Live demos, real products, and where I built each one." />
+<meta name="twitter:card" content="summary" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Outfit:wght@300..800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#23272E; --muted:#5B6470; --line:rgba(35,39,46,.10);
+    --blue:#2E7CD6; --blue-deep:#1B5FB3; --blue-ice:#9CC6F0;
+    --pink:#E86FA4; --pink-soft:#F7CBDC;
+    --glass:rgba(255,255,255,.62); --glass-hi:rgba(255,255,255,.85);
+    --good:#178A55; --warn:#C25E1E;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    color:var(--ink); font-family:'Outfit',system-ui,sans-serif; line-height:1.6;
+    background:
+      radial-gradient(1100px 600px at 85% -5%, rgba(156,198,240,.55), transparent 60%),
+      radial-gradient(900px 550px at -10% 22%, rgba(247,203,220,.5), transparent 55%),
+      radial-gradient(1000px 700px at 70% 70%, rgba(156,198,240,.32), transparent 60%),
+      radial-gradient(700px 500px at 15% 95%, rgba(247,203,220,.35), transparent 60%),
+      linear-gradient(180deg, #EDF4FA 0%, #F3F0F5 50%, #ECF3FA 100%);
+    background-attachment:fixed;
+    min-height:100vh; overflow-x:hidden;
+  }
+  .display{font-family:'Space Grotesk',sans-serif;}
+  .mono{font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:.22em; font-size:11px;}
+  .wrap{max-width:1240px; margin:0 auto; padding:0 28px; position:relative; z-index:1;}
+
+  /* ---------- snow + sakura ---------- */
+  .sky{position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;}
+  .flake{position:absolute; top:-4vh; border-radius:50%; background:rgba(255,255,255,.9);
+    box-shadow:0 0 8px rgba(255,255,255,.9); animation:fall linear infinite;}
+  .petal{position:absolute; top:-4vh; background:linear-gradient(135deg,#F9C9DC,#F09CC0);
+    border-radius:64% 4% 64% 4%; opacity:.75; animation:fall linear infinite, spin 7s ease-in-out infinite alternate;}
+  @keyframes fall{ to{ transform:translate3d(var(--drift,40px), 108vh, 0);} }
+  @keyframes spin{ from{rotate:-24deg;} to{rotate:36deg;} }
+  .flake:nth-child(1){left:6%; width:5px; height:5px; animation-duration:23s; --drift:60px;}
+  .flake:nth-child(2){left:16%; width:3px; height:3px; animation-duration:31s; animation-delay:-9s; --drift:-40px;}
+  .flake:nth-child(3){left:27%; width:6px; height:6px; animation-duration:26s; animation-delay:-17s; --drift:70px;}
+  .flake:nth-child(4){left:38%; width:4px; height:4px; animation-duration:34s; animation-delay:-4s; --drift:-60px;}
+  .flake:nth-child(5){left:52%; width:5px; height:5px; animation-duration:22s; animation-delay:-13s; --drift:50px;}
+  .flake:nth-child(6){left:63%; width:3px; height:3px; animation-duration:36s; animation-delay:-22s; --drift:-30px;}
+  .flake:nth-child(7){left:74%; width:6px; height:6px; animation-duration:25s; animation-delay:-7s; --drift:80px;}
+  .flake:nth-child(8){left:85%; width:4px; height:4px; animation-duration:30s; animation-delay:-19s; --drift:-70px;}
+  .flake:nth-child(9){left:93%; width:5px; height:5px; animation-duration:27s; animation-delay:-2s; --drift:40px;}
+  .petal:nth-child(10){left:11%; width:12px; height:12px; animation-duration:33s; animation-delay:-11s; --drift:110px;}
+  .petal:nth-child(11){left:33%; width:9px; height:9px; animation-duration:39s; animation-delay:-25s; --drift:-90px;}
+  .petal:nth-child(12){left:58%; width:13px; height:13px; animation-duration:31s; animation-delay:-6s; --drift:120px;}
+  .petal:nth-child(13){left:79%; width:10px; height:10px; animation-duration:37s; animation-delay:-16s; --drift:-100px;}
+  .petal:nth-child(14){left:untouched;} /* spare */
+  @media (prefers-reduced-motion: reduce){ .sky{display:none;} }
+
+  /* ---------- glass primitives ---------- */
+  .glass{background:var(--glass); backdrop-filter:blur(18px) saturate(150%); -webkit-backdrop-filter:blur(18px) saturate(150%);
+    border:1px solid rgba(255,255,255,.75); box-shadow:0 8px 32px rgba(27,95,179,.10), inset 0 1px 0 rgba(255,255,255,.9); border-radius:22px;}
+  .frost-line{height:1px; background:linear-gradient(90deg, transparent, rgba(35,39,46,.14), transparent); border:0; margin:14px 0;}
+
+  /* ---------- top bar ---------- */
+  .bar{position:sticky; top:0; z-index:50; background:rgba(240,245,250,.72); backdrop-filter:blur(14px) saturate(160%);
+    border-bottom:1px solid rgba(255,255,255,.7); box-shadow:0 1px 20px rgba(27,95,179,.06);}
+  .bar-in{max-width:1360px; margin:0 auto; padding:10px 28px; min-height:68px;
+    display:grid; grid-template-columns:1fr auto 1fr; align-items:center;}
+  .bar-in > :first-child{justify-self:start;}
+  .bar-in > :last-child{justify-self:end;}
+  .bar-logo{justify-self:center; display:inline-flex; line-height:0; border-radius:8px;}
+  .bar-logo img{height:48px; width:auto; display:block;}
+  @media (max-width:520px){ .bar-in{grid-template-columns:1fr auto;} .bar-logo{display:none;} }
+  .bar a{color:var(--muted); text-decoration:none; font-size:13.5px;}
+  .bar a:hover{color:var(--ink);}
+  .bar .name{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:16px; letter-spacing:-.01em;}
+
+  /* ---------- hero ---------- */
+  .hero{padding:84px 0 30px;}
+  .eyebrow{color:var(--blue-deep); display:inline-flex; gap:10px; align-items:center; margin-bottom:22px;}
+  h1{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(40px,6.4vw,76px); line-height:1.02; letter-spacing:-.03em; max-width:980px;}
+  h1 .grad{background:linear-gradient(92deg, var(--blue-deep) 10%, var(--blue) 40%, var(--pink) 90%);
+    -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;}
+  .stand{margin-top:24px; font-size:clamp(17px,2vw,21px); font-weight:300; max-width:720px; line-height:1.55; color:#333A44;}
+  .hero-meta{margin-top:28px; display:flex; flex-wrap:wrap; gap:10px;}
+  .chip{border-radius:999px; padding:8px 16px; font-size:13.5px; background:var(--glass); backdrop-filter:blur(12px);
+    border:1px solid rgba(255,255,255,.8); box-shadow:0 2px 10px rgba(27,95,179,.08);}
+  .chip b{font-weight:600;}
+  .honest{margin-top:28px; max-width:820px; padding:16px 22px; font-size:15px; border-radius:18px;
+    background:linear-gradient(120deg, rgba(247,203,220,.2), rgba(255,255,255,.65)); backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,.8); border-left:4px solid var(--pink);}
+
+  /* ---------- index ---------- */
+  .index{padding:36px 0 0;}
+  .index-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); gap:12px; margin-top:16px;}
+  .index a{display:flex; gap:12px; align-items:baseline; border-radius:16px; padding:14px 16px; text-decoration:none; color:var(--ink);
+    font-size:14.5px; background:var(--glass); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,.75);
+    box-shadow:0 2px 12px rgba(27,95,179,.06); transition:transform .18s, box-shadow .18s;}
+  .index a:hover{transform:translateY(-2px); box-shadow:0 10px 26px rgba(27,95,179,.14);}
+  .index .n{font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--pink); font-weight:700;}
+  .fam{font-size:10px; color:var(--muted); margin-left:auto; font-family:'JetBrains Mono',monospace; letter-spacing:.12em; text-transform:uppercase; white-space:nowrap;}
+
+  /* ---------- pattern sections ---------- */
+  /* Each pattern is one card of its own, rather than a bare two-column band
+     separated only by whitespace. */
+  section.pattern{
+    padding:0; margin-top:26px;
+    background:linear-gradient(160deg, rgba(255,255,255,.72), rgba(255,255,255,.48));
+    border:1px solid rgba(255,255,255,.8); border-radius:26px;
+    box-shadow:0 20px 50px -30px rgba(27,95,179,.30), inset 0 1px 0 rgba(255,255,255,.9);
+  }
+  section.pattern > .p-grid{padding:40px 38px;}
+  @media (max-width:920px){ section.pattern > .p-grid{padding:28px 22px;} }
+  /* Sticky made sense in a full-page column; inside its own card there is
+     nothing for it to travel against. */
+  .p-text{position:static !important;}
+  .p-grid{display:grid; grid-template-columns:minmax(320px,5fr) 7fr; gap:52px; align-items:start;}
+  .p-text{position:sticky; top:92px;}
+  .p-head{display:flex; gap:12px; align-items:center; flex-wrap:wrap;}
+  .p-num{font-family:'JetBrains Mono',monospace; color:var(--blue-deep); font-size:12px; letter-spacing:.24em; text-transform:uppercase;}
+  .p-fam{font-family:'JetBrains Mono',monospace; color:var(--muted); font-size:10px; letter-spacing:.16em; text-transform:uppercase;
+    border-radius:999px; padding:5px 12px; background:var(--glass); border:1px solid rgba(255,255,255,.8);}
+  h2{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(26px,3vw,38px); letter-spacing:-.02em; margin-top:14px; line-height:1.1;}
+  .p-problem{margin-top:16px; font-size:16px; color:#333A44;}
+  .p-problem b, .p-desc b{font-weight:600;}
+  .p-problem b{color:var(--pink);}
+  .p-desc{margin-top:12px; font-size:16px; color:#333A44;}
+  .p-desc b{color:var(--blue-deep);}
+  .p-links{margin-top:18px; font-size:13.5px; color:var(--muted); line-height:1.65;}
+  .p-links b{color:var(--ink); font-weight:600;}
+  .p-links a{color:var(--blue-deep); text-decoration:none; border-bottom:1px solid rgba(46,124,214,.3);}
+  .p-links a:hover{border-bottom-color:var(--blue-deep);}
+  .p-links .row{margin-top:6px;}
+
+  /* ---------- demo stage ---------- */
+  .stage{position:relative; border-radius:28px; padding:1.5px;
+    background:linear-gradient(135deg, rgba(46,124,214,.55), rgba(255,255,255,.2) 30%, rgba(232,111,164,.28) 100%);
+    box-shadow:0 24px 70px rgba(27,95,179,.16), 0 4px 18px rgba(232,111,164,.05);}
+  .demo{border-radius:26.5px; padding:26px 26px 24px; background:linear-gradient(160deg, rgba(255,255,255,.78), rgba(255,255,255,.5));
+    backdrop-filter:blur(22px) saturate(160%); -webkit-backdrop-filter:blur(22px) saturate(160%); min-height:200px;}
+  .demo .label{color:var(--muted); margin-bottom:18px; display:flex; align-items:center; gap:9px;}
+  .live-dot{width:8px; height:8px; border-radius:50%; background:var(--pink); box-shadow:0 0 0 0 rgba(232,111,164,.55); animation:pulse 2s infinite;}
+  @keyframes pulse{ 70%{box-shadow:0 0 0 9px rgba(232,111,164,0);} 100%{box-shadow:0 0 0 0 rgba(232,111,164,0);} }
+  @media (prefers-reduced-motion: reduce){ .live-dot{animation:none;} }
+
+  /* ---------- demo internals ---------- */
+  button{font-family:'Outfit',sans-serif; font-size:14px; cursor:pointer; border-radius:999px; padding:9px 18px; transition:all .18s;
+    border:1px solid rgba(255,255,255,.85); background:rgba(255,255,255,.7); color:var(--ink); box-shadow:0 2px 8px rgba(27,95,179,.08);}
+  button:hover{transform:translateY(-1px); box-shadow:0 6px 16px rgba(27,95,179,.14);}
+  button.primary{background:linear-gradient(120deg, var(--blue-deep), var(--blue)); color:#fff; border-color:transparent;}
+  button.danger{background:rgba(255,255,255,.75); color:#B3376E; border-color:rgba(232,111,164,.5);}
+  button:disabled{opacity:.45; cursor:not-allowed; transform:none;}
+  .tag{display:inline-block; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.13em; text-transform:uppercase; border-radius:7px; padding:4px 9px;}
+  .tag.agent{background:rgba(46,124,214,.14); color:var(--blue-deep);}
+  .tag.human{background:rgba(232,111,164,.16); color:#B3376E;}
+  .tag.ok{background:rgba(23,138,85,.13); color:var(--good);}
+  .tag.warn{background:rgba(194,94,30,.13); color:var(--warn);}
+  .meter{height:12px; border-radius:999px; background:rgba(35,39,46,.07); overflow:hidden; box-shadow:inset 0 1px 3px rgba(35,39,46,.09);}
+  .meter > i{display:block; height:100%; border-radius:999px; transition:width .3s;
+    background:linear-gradient(90deg, var(--blue), var(--pink));}
+  .small{font-size:13.5px; color:var(--muted);}
+  .rowline{display:flex; align-items:center; gap:12px; flex-wrap:wrap;}
+  .icecard{background:rgba(255,255,255,.72); border:1px solid rgba(255,255,255,.9); border-radius:14px; box-shadow:0 2px 10px rgba(27,95,179,.07);}
+  .srcchip{font-size:12.5px; border-radius:999px; padding:5px 12px; cursor:pointer; background:rgba(255,255,255,.8);
+    border:1px dashed rgba(46,124,214,.45); color:var(--blue-deep);}
+  .srcchip:hover{border-style:solid;}
+  .popnote{display:none; margin-top:12px; border-radius:12px; padding:12px 16px; font-size:13.5px;
+    background:rgba(247,203,220,.14); border:1px solid rgba(232,111,164,.15);}
+  .popnote.show{display:block;}
+  .factor{display:grid; grid-template-columns:150px 1fr 44px; gap:12px; align-items:center; font-size:13.5px; margin-top:10px;}
+  .hidden{display:none !important;}
+  .queue{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:16px;}
+  .qcol{border-radius:16px; padding:14px; background:rgba(237,244,250,.75); border:1px solid rgba(255,255,255,.9); min-height:150px;}
+  .qcol h4{font-size:13px; font-weight:600;}
+  .qitem{border-radius:10px; padding:8px 12px; font-size:13px; margin-top:8px; background:rgba(255,255,255,.85);
+    border:1px solid rgba(255,255,255,1); box-shadow:0 1px 6px rgba(27,95,179,.07);}
+  .seg{display:inline-flex; border-radius:999px; overflow:hidden; background:rgba(255,255,255,.65);
+    border:1px solid rgba(255,255,255,.9); box-shadow:0 2px 10px rgba(27,95,179,.08);}
+  .seg button{border:0; border-radius:0; background:transparent; padding:9px 16px; font-size:13.5px; box-shadow:none;}
+  .seg button:hover{transform:none;}
+  .seg button.on{background:linear-gradient(120deg, var(--blue-deep), var(--blue)); color:#fff;}
+  .stream{border-radius:14px; padding:16px 18px; min-height:104px; font-size:14.5px;
+    background:rgba(237,244,250,.8); border:1px solid rgba(255,255,255,.95);}
+  .caret{display:inline-block; width:8px; height:16px; background:var(--pink); vertical-align:-2px; animation:blink 1s steps(1) infinite;}
+  @keyframes blink{50%{opacity:0;}}
+  [contenteditable="true"]{outline:2px solid var(--blue); border-radius:10px;}
+  .diff-del{background:rgba(232,111,164,.16); color:#9E2F60; text-decoration:line-through; padding:1px 6px; border-radius:6px;}
+  .diff-add{background:rgba(23,138,85,.13); color:var(--good); padding:1px 6px; border-radius:6px;}
+  .memchip{display:inline-flex; align-items:center; gap:9px; border-radius:999px; padding:7px 9px 7px 14px; font-size:13.5px; margin:5px 7px 0 0;
+    background:rgba(255,255,255,.85); border:1px solid rgba(255,255,255,1); box-shadow:0 2px 8px rgba(27,95,179,.08);}
+  .memchip .x{cursor:pointer; border:0; background:rgba(232,111,164,.14); color:#B3376E; border-radius:50%;
+    width:21px; height:21px; line-height:1; font-size:12px; padding:0; box-shadow:none;}
+  .memchip .used{width:7px; height:7px; border-radius:50%; background:var(--pink);}
+  .timeline .tl{display:flex; gap:12px; padding:11px 2px; border-bottom:1px dashed rgba(35,39,46,.14); font-size:14px; align-items:baseline; flex-wrap:wrap;}
+  input[type="range"]{accent-color:var(--blue-deep); width:230px;}
+
+  /* ---------- how I made this ---------- */
+  .made-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:22px;}
+  @media (max-width:920px){ .made-grid{grid-template-columns:1fr;} }
+  .made .tools{margin-top:12px; padding-top:10px; border-top:1px dashed rgba(35,39,46,.14); font-family:'JetBrains Mono',monospace;
+    font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--blue-deep); line-height:1.8;}
+  .made .tools b{color:var(--pink); font-weight:700;}
+  .made{padding:18px 20px; position:relative;}
+  .made .n{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.2em; color:var(--pink); font-weight:700;}
+  .made h5{font-family:'Space Grotesk',sans-serif; font-size:15.5px; margin:8px 0 6px; letter-spacing:-.01em;}
+  .made p{font-size:13.5px; color:#4A5260; line-height:1.55;}
+  .made-close{margin-top:18px; max-width:760px; font-size:14.5px; color:#333A44; border-radius:14px; padding:14px 18px;
+    background:rgba(156,198,240,.16); border:1px solid rgba(46,124,214,.22);}
+
+  footer{margin-top:110px; padding:56px 0 90px; background:linear-gradient(180deg, transparent, rgba(255,255,255,.5));}
+  footer .glass{padding:38px 40px;}
+  footer .display{font-size:clamp(26px,3.2vw,40px); font-weight:700; letter-spacing:-.02em;}
+  .cta{display:inline-block; margin-top:20px; border-radius:999px; padding:13px 26px; text-decoration:none; font-size:14.5px; color:#fff;
+    background:linear-gradient(120deg, var(--blue-deep), var(--blue) 60%, var(--pink)); box-shadow:0 10px 30px rgba(27,95,179,.25);}
+  .cta:hover{filter:brightness(1.06);}
+
+  @media (max-width:920px){
+    .p-grid{grid-template-columns:1fr; gap:26px;}
+    .p-text{position:static;}
+    .factor{grid-template-columns:110px 1fr 40px;}
+    .queue{grid-template-columns:1fr;}
+  }
+
+  /* Cards fill their column rather than stopping mid-page; the paragraph
+     inside keeps a readable measure so the line length stays sane. */
+  .honest, .made-close{ max-width:none; }
+  .honest > p, .made-close > p{ margin:0; max-width:none; }
+
+  /* No orphan row: five pills laid out 3 + 2 rather than flex-wrapping to
+     4 + 1. Grid, so the row split is deliberate instead of incidental. */
+  .pat-strip{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:20px; }
+  @media (max-width:860px){ .pat-strip{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:560px){ .pat-strip{ grid-template-columns:1fr; } }
+  .pat-strip a{ justify-content:flex-start; }
+
+  /* No single word alone on a last line, and balanced headings. */
+  h1,h2,h3,h4{ text-wrap:balance; }
+  p,li,figcaption,blockquote{ text-wrap:pretty; }
+</style>
+</head>
+<body>
+
+<div class="sky" aria-hidden="true">
+  <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
+  <span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span><span class="flake"></span>
+  <span class="petal"></span><span class="petal"></span><span class="petal"></span><span class="petal"></span>
+</div>
+
+<div class="bar"><div class="bar-in">
+  <a href="/ai-lab">← Back to AI Lab</a>
+  <a class="bar-logo" href="/" aria-label="Faraz Khan, home"><img src="/logo.svg" alt="" /></a>
+  <span class="name display">Faraz Khan</span>
+</div></div>
+
+<header class="hero wrap">
+  <p class="mono eyebrow">✿ Field Guide · AI Experience Design</p>
+  <h1 class="display">Twelve ways to make AI feel <span class="grad">trustworthy</span>, not just impressive.</h1>
+  <p class="stand">AI that sounds sure of everything is easy to build and hard to trust. These are the twelve interface patterns I keep reaching for to fix that, each one running live on this page. Go ahead, click things.</p>
+  <div class="hero-meta">
+    <span class="chip"><b>12</b> patterns</span>
+    <span class="chip"><b>Live demos</b>, not screenshots</span>
+    <span class="chip">From <b>shipped + prototyped</b> work</span>
+    <span class="chip">Faraz Khan · <b>Senior UX Lead</b></span>
+  </div>
+  <div class="honest"><p>Quick honesty note: everything here is documented from products you already use, plus my own client work and prototypes. Prototypes are labeled as prototypes, and there are no made-up numbers anywhere on this page.</p></div>
+</header>
+
+<nav class="index wrap" aria-label="Pattern index">
+  <p class="mono" style="color:var(--muted)">The Twelve</p>
+  <div class="index-grid" id="indexGrid"></div>
+</nav>
+
+<main class="wrap">
+
+<!-- P01 -->
+<section class="pattern" id="p01" data-name="Confidence With Receipts" data-fam="Evidence">
+  <div class="p-grid">
+    <div class="p-text">
+      <div class="p-head"><span class="p-num">Pattern 01</span><span class="p-fam">Evidence</span></div>
+      <h2 class="display">Confidence With Receipts</h2>
+      <p class="p-problem"><b>The problem.</b> "87% match" with no receipts. You either trust it blind or ignore it completely. Both are bad.</p>
+      <p class="p-desc"><b>The pattern.</b> Give every score two handles: tap it to see what's behind it, tap the source to see where it came from. People trust numbers they can argue with.</p>
+      <div class="p-links">
+        <div class="row"><b>Out in the wild:</b> Perplexity's citations, Copilot's referenced files, Claude's source links.</div>
+        <div class="row"><b>Where I built it:</b> <a href="/case/slate">Slate</a> (fit scores with receipts, prototype) and <a href="/case/crux">Crux</a> (tap-to-unpack confidence, prototype).</div>
+      </div>
+    </div>
+    <div class="stage"><div class="demo" id="demo01">
+      <p class="label mono"><span class="live-dot"></span>Live demo · tap the score</p>
+      <div class="rowline">
+        <strong>Ayesha R. · Backend Engineer</strong>
+        <span class="tag agent">AI ranked</span>
+        <span style="margin-left:auto" class="small"><span id="d1pct">87%</span> fit</span>
+      </div>
+      <div class="meter" style="margin-top:12px"><i style="width:87%"></i></div>
+      <div class="rowline" style="margin-top:14px">
+        <button id="d1why">Why 87%?</button>
+        <span class="srcchip" data-pop="d1pop1">Source: profile</span>
+        <span class="srcchip" data-pop="d1pop2">Source: repo activity</span>
+      </div>
+      <div id="d1factors" class="hidden">
+        <div class="factor"><span>Skills match</span><div class="meter"><i style="width:92%"></i></div><span class="small">92%</span></div>
+        <div class="factor"><span>Domain overlap</span><div class="meter"><i style="width:84%"></i></div><span class="small">84%</span></div>
+        <div class="factor"><span>Seniority signal</span><div class="meter"><i style="width:71%"></i></div><span class="small">71%</span></div>
+        <p class="small" style="margin-top:12px">A weighted blend. The weak factor is listed, not hidden.</p>
+      </div>
+      <div class="popnote" id="d1pop1">Public profile, captured 12 Jul. The AI read the headline, roles, and stack keywords. It did not read private messages.</div>
+      <div class="popnote" id="d1pop2">Public repo activity, last 12 months. Commit language only; no code was judged for quality.</div>
+    </div></div>
+  </div>
+</section>
+
+<!-- P02 -->
+<section class="pattern" id="p02" data-name="Intent Preview" data-fam="Control">
+  <div class="p-grid">
+    <div class="p-text">
+      <div class="p-head"><span class="p-num">Pattern 02</span><span class="p-fam">Control</span></div>
+      <h2 class="display">Intent Preview</h2>
+      <p class="p-problem"><b>The problem.</b> An AI that acts first and explains later teaches everyone to fear it. One surprise action on real data is all it takes.</p>
+      <p class="p-desc"><b>The pattern.</b> Before anything real happens, show the plan: what it will do, what it touches, and whether you can take it back. No surprises, ever.</p>
+      <div class="p-links">
+        <div class="row"><b>Out in the wild:</b> Claude Code's action previews, plan-before-execute steps in agent tools.</div>
+        <div class="row"><b>Where I built it:</b> <a href="/case/crux">Crux</a> (intent cards before any agent action, prototype); the same rule runs through my <a href="/case/finvista">FinVista</a> work: every output shows where it came from.</div>
+      </div>
+    </div>
+    <div class="stage"><div class="demo" id="demo02">
+      <p class="label mono"><span class="live-dot"></span>Live demo · your call</p>
+      <div class="rowline"><span class="tag agent">Agent · Sentinel</span><strong>wants to pull a credit bureau report</strong></div>
+      <hr class="frost-line" />
+      <div class="small">Application <b style="color:var(--ink)">A-1043</b> · reads: applicant consent record · touches: Bureau API (read-only) · reversible: yes · cost: one bureau inquiry</div>
+      <div class="rowline" style="margin-top:16px">
+        <button class="primary" id="d2approve">Approve</button>
+        <button class="danger" id="d2decline">Decline</button>
+        <span class="small" id="d2status"></span>
+      </div>
+    </div></div>
+  </div>
+</section>
+
+<!-- P03 -->
+<section class="pattern" id="p03" data-name="The Autonomy Dial" data-fam="Control">
+  <div class="p-grid">
+    <div class="p-text">
+      <div class="p-head"><span class="p-num">Pattern 03</span><span class="p-fam">Control</span></div>
+      <h2 class="display">The Autonomy Dial</h2>
+      <p class="p-problem"><b>The problem.</b> All-or-nothing autonomy fails both ways. Approve everything and you become a rubber stamp. Automate everything and nobody can explain what happened.</p>
+      <p class="p-desc"><b>The pattern.</b> Autonomy comes in steps: suggest only, approve each, auto with a paper trail. The AI earns each step, and you can watch the work move when you turn the dial.</p>
+      <div class="p-links">
+        <div class="row"><b>Out in the wild:</b> auto-accept levels in agentic coding tools, per-workflow automation toggles.</div>
+        <div class="row"><b>Where I built it:</b> <a href="/case/crux">Crux</a>'s three-position dial per agent, live in the prototype. The interaction people remember.</div>
+      </div>
+    </div>
+    <div class="stage"><div class="demo" id="demo03">
+      <p class="label mono"><span class="live-dot"></span>Live demo · turn the dial</p>
+      <div class="seg" role="group" aria-label="Autonomy level">
+        <button data-mode="suggest" class="on">Suggest only</button>
+        <button data-mode="approve">Approve each</button>
+        <button data-mode="auto">Auto + audit</button>
+      </div>
+      <div class="queue">
+        <div class="qcol"><h4>Waiting on you (<span id="d3wait">4</span>)</h4><div id="d3waitlist"></div></div>
+        <div class="qcol"><h4>Flowing through (<span id="d3flow">0</span>)</h4><div id="d3flowlist"></div></div>
+      </div>
+      <p class="small" id="d3note" style="margin-top:12px">Suggest only: the agent drafts, you do. Everything waits for you.</p>
+    </div></div>
+  </div>
+</section>
+
+<!-- P04 -->
+<section class="pattern" id="p04" data-name="The Gate And The Undo Window" data-fam="Control">
+  <div class="p-grid">
+    <div class="p-text">
+      <div class="p-head"><span class="p-num">Pattern 04</span><span class="p-fam">Control</span></div>
+      <h2 class="display">The Gate And The Undo Window</h2>
+      <p class="p-problem"><b>The problem.</b> Some AI actions are cheap to draft and painful to take back. An email to 14 people should never be one accidental click away.</p>
+      <p class="p-desc"><b>The pattern.</b> A human gate before the send, and a short undo window after it. "Approved" and "gone forever" should never be the same moment.</p>
+      <div class="p-links">
+        <div class="row"><b>Out in the wild:</b> Gmail's undo send, scheduled sends, staged deploys.</div>
+        <div class="row"><b>Where I built it:</b> <a href="/case/slate">Slate</a> (the AI drafts, the recruiter sends, prototype) and the customer consent gates in <a href="/case/finvista">FinVista</a>, shipped.</div>
+      </div>
+    </div>
+    <div class="stage"><div class="demo" id="demo04">
+      <p class="label mono"><span class="live-dot"></span>Live demo · send it, then take it back</p>
+      <div class="rowline"><span class="tag agent">AI drafted</span><strong>Outreach to 14 shortlisted candidates</strong></div>
+      <p class="small" style="margin-top:8px">Personalised from each candidate's public work. Nothing sends without you.</p>
+      <div class="rowline" style="margin-top:16px">
+        <button class="primary" id="d4send">Approve and send</button>
+        <button id="d4undo" class="hidden">Undo</button>
+        <span class="small" id="d4status"></span>
+      </div>
+    </div></div>
+  </div>
+</section>
+
+<!-- P05 -->
+<section class="pattern" id="p05" data-name="Streaming With A Stop Handle" data-fam="Recovery">
+  <div class="p-grid">
+    <div class="p-text">
+      <div class="p-head"><span class="p-num">Pattern 05</span><span class="p-fam">Recovery</span></div>
+      <h2 class="display">Streaming With A Stop Handle</h2>
+      <p class="p-problem"><b>The problem.</b> A spinner that ends in a wall of text gives you two options: wait blind, or read something that's already wrong.</p>
+      <p class="p-desc"><b>The pattern.</b> Let the answer appear as it's written, and give people a brake. Stopping halfway is a feature, not a failure.</p>
+      <div class="p-links">
+        <div class="row"><b>Out in the wild:</b> every serious chat product. Much rarer inside enterprise tools, which is exactly where it matters.</div>
+        <div class="row"><b>Where I built it:</b> the in-canvas composer in <a href="/case/aurora">Aurora</a>, where writers stop and reshape AI drafts without leaving the block. Shipped.</div>
+      </div>
+    </div>
+    <div class="stage"><div class="demo" id="demo05">
+      <p class="label mono"><span class="live-dot"></span>Live demo · hit stop mid-sentence</p>
+      <div class="stream" id="d5text"><span class="caret"></span></div>
+      <div class="rowline" style="margin-top:14px">
+        <button class="primary" id="d5run">Generate summary</button>
+        <button id="d5stop" class="hidden">Stop</button>
+        <span class="small" id="d5status"></span>
+      </div>
+    </div></div>
+  </div>
+</section>
+
+<!-- P06 -->
+<section class="pattern" id="p06" data-name="Editable AI Output" data-fam="Recovery">
+  <div class="p-grid">
+    <div class="p-text">
+      <div class="p-head"><span class="p-num">Pattern 06</span><span class="p-fam">Recovery</span></div>
+      <h2 class="display">Editable AI Output</h2>
+      <p class="p-problem"><b>The problem.</b> If AI text can only be accepted or regenerated, it never feels like yours. Errors survive, and the voice drifts.</p>
+      <p class="p-desc"><b>The pattern.</b> Every draft is a starting point. Edit in place, and let the interface remember the handover from machine words to your words.</p>
+      <div class="p-links">
+        <div class="row"><b>Out in the wild:</b> Notion AI's in-place drafts, Gmail's Help me write, Figma's AI edits.</div>
+        <div class="row"><b>Where I built it:</b> <a href="/case/aurora">Aurora</a>'s composer (shipped) and <a href="/case/slate">Slate</a>'s outreach drafts (prototype).</div>
+      </div>
+    </div>
+    <div class="stage"><div class="demo" id="demo06">
+      <p class="label mono"><span class="live-dot"></span>Live demo · click edit, change a word</p>
+      <div class="rowline"><span class="tag agent" id="d6badge">AI draft</span></div>
+      <p id="d6text" class="icecard" style="margin-top:12px; padding:14px 16px; font-size:14.5px;">Hi Ayesha, your work on payment reconciliation at scale caught our eye. We are building the lending rails for two-wheeler finance across India, and your profile reads like someone who has solved this before.</p>
+      <div class="rowline" style="margin-top:14px"><button id="d6edit">Edit draft</button><span class="small" id="d6status"></span></div>
+    </div></div>
+  </div>
+</section>
+
+<!-- P07 -->
+<section class="pattern" id="p07" data-name="Graceful Uncertainty" data-fam="Candor">
+  <div class="p-grid">
+    <div class="p-text">
+      <div class="p-head"><span class="p-num">Pattern 07</span><span class="p-fam">Candor</span></div>
+      <h2 class="display">Graceful Uncertainty</h2>
+      <p class="p-problem"><b>The problem.</b> AI sounds just as confident at 55% as at 95%. People find out the hard way, then stop trusting all of it.</p>
+      <p class="p-desc"><b>The pattern.</b> When the signal is weak, say so. Show what's missing and how to fix it. An honest "I'm not sure" earns more trust than a smooth guess.</p>
+      <div class="p-links">
+        <div class="row"><b>Out in the wild:</b> Claude declining to guess, "insufficient evidence" states in medical and legal AI.</div>
+        <div class="row"><b>Where I built it:</b> <a href="/case/slate">Slate</a>'s low-signal states (prototype) and <a href="/case/meridian">Meridian</a>'s suppressed small-count views, designed for restricted data.</div>
+      </div>
+    </div>
+    <div class="stage"><div class="demo" id="demo07">
+      <p class="label mono"><span class="live-dot"></span>Live demo · flip the signal</p>
+      <div class="seg" role="group" aria-label="Signal strength">
+        <button data-sig="strong" class="on">Strong signal</button>
+        <button data-sig="weak">Weak signal</button>
+      </div>
+      <div id="d7strong" style="margin-top:16px">
+        <div class="rowline"><span class="tag ok">High confidence</span><strong>Recommend: proceed to interview</strong></div>
+        <p class="small" style="margin-top:9px">Based on 3 corroborating sources and a complete work history. Full reasoning one click away.</p>
+      </div>
+      <div id="d7weak" class="hidden" style="margin-top:16px">
+        <div class="rowline"><span class="tag warn">Not enough signal</span><strong>No recommendation yet</strong></div>
+        <p class="small" style="margin-top:9px">Only one source found, and the work history has a 3-year gap the AI can't explain. What would raise confidence: a portfolio link, a second public profile, or your own note on the gap.</p>
+      </div>
+    </div></div>
+  </div>
+</section>
+
+<!-- P08 -->
+<section class="pattern" id="p08" data-name="The Escalation Threshold" data-fam="Control">
+  <div class="p-grid">
+    <div class="p-text">
+      <div class="p-head"><span class="p-num">Pattern 08</span><span class="p-fam">Control</span></div>
+      <h2 class="display">The Escalation Threshold</h2>
+      <p class="p-problem"><b>The problem.</b> If a tired human can one-click approve a shaky AI call at 6pm on a Friday, someday one will.</p>
+      <p class="p-desc"><b>The pattern.</b> Below a set confidence, take the easy button away. The only path left is sending it to a human with the full story attached. The interface holds the line so people don't have to.</p>
+      <div class="p-links">
+        <div class="row"><b>Out in the wild:</b> fraud review queues, human-review thresholds in moderation, underwriting referral rules.</div>
+        <div class="row"><b>Where I built it:</b> <a href="/case/crux">Crux</a>: below 70%, the console removes Approve and forces escalation. Live in the prototype.</div>
+      </div>
+    </div>
+    <div class="stage"><div class="demo" id="demo08">
+      <p class="label mono"><span class="live-dot"></span>Live demo · drag the confidence down</p>
+      <div class="rowline">
+        <input type="range" id="d8range" min="40" max="100" value="86" aria-label="Agent confidence" />
+        <span class="small">Agent confidence: <b id="d8val" style="color:var(--ink)">86%</b> · threshold 70%</span>
+      </div>
+      <div class="rowline" style="margin-top:16px">
+        <button class="primary" id="d8btn">Approve KYC match</button>
+        <span class="small" id="d8note">Above threshold. One-click approval available.</span>
+      </div>
+    </div></div>
+  </div>
+</section>
+
+<!-- P09 -->
+<section class="pattern" id="p09" data-name="The Audit Trail With Diffs" data-fam="Evidence">
+  <div class="p-grid">
+    <div class="p-text">
+      <div class="p-head"><span class="p-num">Pattern 09</span><span class="p-fam">Evidence</span></div>
+      <h2 class="display">The Audit Trail With Diffs</h2>
+      <p class="p-problem"><b>The problem.</b> "What did the AI change, and who said yes?" If that takes a meeting to answer, every AI feature becomes a fight with compliance.</p>
+      <p class="p-desc"><b>The pattern.</b> Log everything: what happened, who approved it, and a before-and-after for every change. Boring on purpose, and the reason everything else on this page is allowed to exist.</p>
+      <div class="p-links">
+        <div class="row"><b>Out in the wild:</b> version history everywhere serious: Git, Figma, banking cores. Still rare for AI actions, which is the gap.</div>
+        <div class="row"><b>Where I built it:</b> <a href="/case/crux">Crux</a>'s action log with before-and-after diffs and incident replay. Prototype.</div>
+      </div>
+    </div>
+    <div class="stage"><div class="demo" id="demo09">
+      <p class="label mono"><span class="live-dot"></span>Live demo · open the first entry</p>
+      <div class="qitem" style="cursor:pointer" id="d9row">
+        <div class="rowline"><span class="tag agent">Agent · Ledger</span><span>Updated applicant income field</span><span class="tag human" style="margin-left:auto">Approved · R. Mehta</span></div>
+        <div id="d9diff" class="hidden" style="margin-top:10px; font-size:13.5px;">
+          Monthly income: <span class="diff-del">₹41,000 (form entry)</span> <span class="diff-add">₹38,500 (bank statement average, 6 months)</span>
+          <p class="small" style="margin-top:8px">Source: uploaded statements · 14:32 IST · permanent entry #4,281</p>
+        </div>
+      </div>
+      <div class="qitem"><div class="rowline"><span class="tag agent">Agent · Sentinel</span><span>Pulled bureau report A-1043</span><span class="tag human" style="margin-left:auto">Approved · you</span></div></div>
+      <div class="qitem"><div class="rowline"><span class="tag agent">Agent · Scout</span><span>Drafted 14 outreach emails</span><span class="tag ok" style="margin-left:auto">Auto · within policy</span></div></div>
+    </div></div>
+  </div>
+</section>
+
+<!-- P10 -->
+<section class="pattern" id="p10" data-name="Reasoning On Demand" data-fam="Evidence">
+  <div class="p-grid">
+    <div class="p-text">
+      <div class="p-head"><span class="p-num">Pattern 10</span><span class="p-fam">Evidence</span></div>
+      <h2 class="display">Reasoning On Demand</h2>
+      <p class="p-problem"><b>The problem.</b> Show all the reasoning and you bury the answer. Show none and you're asking for blind faith. Both lose people, just at different speeds.</p>
+      <p class="p-desc"><b>The pattern.</b> Lead with the answer. Keep the "why" one tap behind it, complete when opened. Progressive disclosure has been my signature for a decade; AI is where it became non-negotiable.</p>
+      <div class="p-links">
+        <div class="row"><b>Out in the wild:</b> expandable reasoning in ChatGPT and Claude, Copilot's "explain this suggestion".</div>
+        <div class="row"><b>Where I built it:</b> everywhere I work. It's why FinVista's 11 steps <a href="/case/finvista">"didn't feel long"</a> (shipped), and how <a href="/case/slate">Slate</a> keeps AI reasoning collapsed by default.</div>
+      </div>
+    </div>
+    <div class="stage"><div class="demo" id="demo10">
+      <p class="label mono"><span class="live-dot"></span>Live demo</p>
+      <div class="rowline"><strong>Answer: schedule the campaign for Tuesday 10am</strong><span class="tag agent">AI</span></div>
+      <div class="rowline" style="margin-top:12px"><button id="d10why">Why this answer</button></div>
+      <div id="d10r" class="popnote">Open rates for this audience peak Tuesday mornings across the last 6 sends. Monday competes with weekend backlog. The two prior Tuesday sends beat the account average by 18% and 11%. Confidence: moderate, the sample is small.</div>
+    </div></div>
+  </div>
+</section>
+
+<!-- P11 -->
+<section class="pattern" id="p11" data-name="Memory You Can See And Edit" data-fam="Candor">
+  <div class="p-grid">
+    <div class="p-text">
+      <div class="p-head"><span class="p-num">Pattern 11</span><span class="p-fam">Candor</span></div>
+      <h2 class="display">Memory You Can See And Edit</h2>
+      <p class="p-problem"><b>The problem.</b> An AI that remembers things about you without showing what it remembers feels creepy, even when it's trying to help.</p>
+      <p class="p-desc"><b>The pattern.</b> Make memory a visible surface: what's saved, what was used just now, and a one-tap way to forget. And forgetting means forgotten.</p>
+      <div class="p-links">
+        <div class="row"><b>Out in the wild:</b> ChatGPT's memory manager, Claude's editable memory, browser permissions.</div>
+        <div class="row"><b>Where I built it:</b> the thinking behind <a href="/case/slate">Slate</a>'s "nothing lost when someone leaves" bet: team memory that stays visible and owned.</div>
+      </div>
+    </div>
+    <div class="stage"><div class="demo" id="demo11">
+      <p class="label mono"><span class="live-dot"></span>Live demo · forget something</p>
+      <div id="d11chips">
+        <span class="memchip"><span class="used" title="used in this answer"></span> Prefers evening interview slots <button class="x" aria-label="forget">×</button></span>
+        <span class="memchip"><span class="used" title="used in this answer"></span> Hiring for the Pune office <button class="x" aria-label="forget">×</button></span>
+        <span class="memchip">Budget band confirmed in March <button class="x" aria-label="forget">×</button></span>
+      </div>
+      <p class="small" id="d11status" style="margin-top:12px">Pink dots mark memories used in the current answer.</p>
+    </div></div>
+  </div>
+</section>
+
+<!-- P12 -->
+<section class="pattern" id="p12" data-name="Who Did What" data-fam="Evidence">
+  <div class="p-grid">
+    <div class="p-text">
+      <div class="p-head"><span class="p-num">Pattern 12</span><span class="p-fam">Evidence</span></div>
+      <h2 class="display">Who Did What</h2>
+      <p class="p-problem"><b>The problem.</b> Six months later, nobody remembers whether the machine decided or the human did. That gap is where accountability goes to die.</p>
+      <p class="p-desc"><b>The pattern.</b> Label agency the moment it happens: proposed by the agent, approved by you, edited by her. You can't reconstruct it later, so the interface writes it down now.</p>
+      <div class="p-links">
+        <div class="row"><b>Out in the wild:</b> co-authored commits, "drafted with AI" labels, editorial bylines.</div>
+        <div class="row"><b>Where I built it:</b> the operating rule of my AI work at Persistent: AI proposes, people decide, every output shows where it came from. Rendered as UI across <a href="/case/crux">Crux</a>.</div>
+      </div>
+    </div>
+    <div class="stage"><div class="demo" id="demo12">
+      <p class="label mono"><span class="live-dot"></span>Live demo · one loan application's day</p>
+      <div class="timeline">
+        <div class="tl"><span class="small">09:14</span><span>Documents classified and filed</span><span class="tag agent" style="margin-left:auto">Agent · Clerk</span></div>
+        <div class="tl"><span class="small">10:02</span><span>Bureau report pulled</span><span style="margin-left:auto"><span class="tag agent">proposed</span> <span class="tag human">approved · you</span></span></div>
+        <div class="tl"><span class="small">11:47</span><span>Income figure corrected</span><span style="margin-left:auto"><span class="tag agent">proposed</span> <span class="tag human">edited · R. Mehta</span></span></div>
+        <div class="tl"><span class="small">12:30</span><span>Sanction letter drafted</span><span class="tag agent" style="margin-left:auto">Agent · Ledger</span></div>
+      </div>
+    </div></div>
+  </div>
+</section>
+
+
+<section id="made" style="padding:76px 0 6px">
+  <h3 class="sec display" style="margin-top:0">How I Made This, Step By Step</h3>
+  <p class="lede" style="max-width:760px; color:#333A44; font-size:16px;">A taste of the process: the steps, the thinking, and what was on the bench at each one. A page about trust should not hide its own kitchen.</p>
+  <div class="made-grid">
+    <div class="made glass"><span class="n">Step 01</span><h5>Harvest, don't invent</h5><p>The patterns came out of work that already exists: Crux's supervision console, Slate's receipts, Aurora's in-canvas AI, FinVista's handoff rules. I collected what I kept reusing. The thinking: credibility comes from reuse, so the source material had to be things that already survived contact with users.</p><p class="tools">⚙ <b>Bench:</b> Figma archives · shipped screens · Crux + Slate prototype code</p></div>
+    <div class="made glass"><span class="n">Step 02</span><h5>Three gates to get in</h5><p>Each candidate had to pass three checks: a problem I've actually seen, a sighting in a product you already use, and a place I built it myself. Twelve passed.</p><p class="tools">⚙ <b>Bench:</b> a plain-text longlist · product teardowns of ChatGPT, Claude, Gemini, Copilot</p></div>
+    <div class="made glass"><span class="n">Step 03</span><h5>Demos before words</h5><p>Rule number one: every pattern must run, not be described. I sketched each interaction first, then wrote the copy around what the demo proved.</p><p class="tools">⚙ <b>Bench:</b> interaction briefs written in plain language, one per pattern, before any visuals</p></div>
+    <div class="made glass"><span class="n">Step 04</span><h5>Build with AI, keep the wheel</h5><p>I directed, AI built, and every demo was click-tested in a headless browser until all twelve passed. The workflow is Pattern 12 practicing itself: the machine works, I decide.</p><p class="tools">⚙ <b>Bench:</b> Claude for the build · hand-tuned HTML/CSS/JS, no framework · Playwright headless browser for click-tests</p></div>
+    <div class="made glass"><span class="n">Step 05</span><h5>Taste rounds</h5><p>Then the edit passes: jargon out, casual voice in. Demos promoted from side snips to center stage. A frozen-glass theme, and the pink dialed back 50% when it shouted. The Japanese type lasted exactly one round.</p><p class="tools">⚙ <b>Bench:</b> screenshot reviews · side-by-side passes · direction notes ("halve the pink", "kill the kanji")</p></div>
+    <div class="made glass"><span class="n">Step 06</span><h5>Ship honest</h5><p>Prototypes labeled as prototypes, shipped work labeled as shipped, and zero invented numbers. The trust page has to be trustworthy about itself.</p><p class="tools">⚙ <b>Bench:</b> plain static HTML · GitHub Pages · labels doing the compliance work</p></div>
+  </div>
+  <div class="made-close"><p>The meta point, quietly: this page was made the way it says AI products should work. AI did the heavy lifting, a human held the taste and the judgment, and every step left a trail.</p></div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap"><div class="glass">
+    <p class="mono" style="color:var(--pink); margin-bottom:14px">✿ Use These</p>
+    <p class="display">Patterns are free. Judgment is the job.</p>
+    <p style="margin-top:14px; max-width:660px; color:#333A44">Building an AI product and want these patterns applied to your problem? I'm open to Senior UX and Lead roles across fintech, enterprise, and AI-native products.</p>
+    <a class="cta" href="/contact">Talk to me →</a>
+    <p class="small" style="margin-top:26px">© Faraz Khan · <a href="/" style="color:var(--blue-deep); text-decoration:none">khanfaraz.in</a> · One more thing: this page is itself a working prototype. Every demo above is real interface, built by hand.</p>
+  </div></div>
+</footer>
+
+<script>
+// ---------- index ----------
+const grid = document.getElementById("indexGrid");
+document.querySelectorAll("section.pattern").forEach((s, i) => {
+  const a = document.createElement("a");
+  a.href = "#" + s.id;
+  a.innerHTML = '<span class="n">' + String(i + 1).padStart(2, "0") + "</span>" + s.dataset.name + '<span class="fam">' + s.dataset.fam + "</span>";
+  grid.appendChild(a);
+});
+
+// ---------- P01 ----------
+document.getElementById("d1why").addEventListener("click", (e) => {
+  const f = document.getElementById("d1factors");
+  const open = f.classList.toggle("hidden");
+  e.target.textContent = open ? "Why 87%?" : "Hide the working";
+});
+document.querySelectorAll("#demo01 .srcchip").forEach((c) =>
+  c.addEventListener("click", () => {
+    const pop = document.getElementById(c.dataset.pop);
+    document.querySelectorAll("#demo01 .popnote").forEach((p) => { if (p !== pop) p.classList.remove("show"); });
+    pop.classList.toggle("show");
+  })
+);
+
+// ---------- P02 ----------
+const d2s = document.getElementById("d2status");
+document.getElementById("d2approve").addEventListener("click", () => {
+  d2s.innerHTML = 'Approved. Logged as <b>proposed by Sentinel, approved by you</b>. See Pattern 09.';
+});
+document.getElementById("d2decline").addEventListener("click", () => {
+  d2s.innerHTML = "Declined. Sentinel asks what to try instead; nothing was sent to the bureau.";
+});
+
+// ---------- P03 ----------
+const d3items = ["Verify PAN for A-1043", "Draft welcome SMS", "Classify uploaded docs", "Pre-fill address form"];
+const d3conf =  [0.94, 0.88, 0.97, 0.66];
+function d3render(mode) {
+  const waitL = document.getElementById("d3waitlist"), flowL = document.getElementById("d3flowlist");
+  waitL.innerHTML = ""; flowL.innerHTML = "";
+  let w = 0, f = 0;
+  d3items.forEach((t, i) => {
+    const el = document.createElement("div"); el.className = "qitem"; el.textContent = t;
+    const flows = mode === "auto" ? d3conf[i] >= 0.7 : false;
+    if (flows) { flowL.appendChild(el); f++; } else { waitL.appendChild(el); w++; }
+  });
+  document.getElementById("d3wait").textContent = w;
+  document.getElementById("d3flow").textContent = f;
+  document.getElementById("d3note").textContent =
+    mode === "suggest" ? "Suggest only: the agent drafts, you do. Everything waits for you."
+    : mode === "approve" ? "Approve each: the agent works, every item pauses for your click."
+    : "Auto with audit: confident items flow through and land in the log. The 66% one still waits for you.";
+}
+document.querySelectorAll("#demo03 .seg button").forEach((b) =>
+  b.addEventListener("click", () => {
+    document.querySelectorAll("#demo03 .seg button").forEach((x) => x.classList.remove("on"));
+    b.classList.add("on");
+    d3render(b.dataset.mode);
+  })
+);
+d3render("suggest");
+
+// ---------- P04 ----------
+let d4timer = null, d4left = 5;
+const d4send = document.getElementById("d4send"), d4undo = document.getElementById("d4undo"), d4status = document.getElementById("d4status");
+d4send.addEventListener("click", () => {
+  d4send.classList.add("hidden"); d4undo.classList.remove("hidden");
+  d4left = 5;
+  d4status.textContent = "Scheduled. Sending in 5s...";
+  d4timer = setInterval(() => {
+    d4left--;
+    if (d4left <= 0) {
+      clearInterval(d4timer); d4undo.classList.add("hidden");
+      d4status.innerHTML = "Sent to 14 candidates. Logged with your approval. <a href='#' id='d4reset' style='color:var(--blue-deep)'>reset demo</a>";
+      document.getElementById("d4reset").addEventListener("click", (e) => { e.preventDefault(); d4send.classList.remove("hidden"); d4status.textContent = ""; });
+    } else d4status.textContent = "Scheduled. Sending in " + d4left + "s...";
+  }, 1000);
+});
+d4undo.addEventListener("click", () => {
+  clearInterval(d4timer);
+  d4undo.classList.add("hidden"); d4send.classList.remove("hidden");
+  d4status.textContent = "Recalled. Nothing left the building.";
+});
+
+// ---------- P05 ----------
+const d5full = "Summary: 3 of 5 shortlisted candidates have shipped lending or payments products. Ayesha R. is the standout on domain fit; Vikram S. is the strongest pure engineer but has no fintech history. Recommend interviewing Ayesha and Vikram this week, holding the other three until the client confirms budget.";
+let d5i = 0, d5timer = null;
+const d5text = document.getElementById("d5text"), d5run = document.getElementById("d5run"), d5stop = document.getElementById("d5stop"), d5status = document.getElementById("d5status");
+function d5tick() {
+  d5i += 2 + Math.floor(Math.random() * 3);
+  d5text.innerHTML = d5full.slice(0, d5i) + '<span class="caret"></span>';
+  if (d5i >= d5full.length) { clearInterval(d5timer); d5text.textContent = d5full; d5stop.classList.add("hidden"); d5run.classList.remove("hidden"); d5run.textContent = "Regenerate"; d5status.textContent = "Done."; }
+}
+d5run.addEventListener("click", () => {
+  d5i = 0; d5run.classList.add("hidden"); d5stop.classList.remove("hidden"); d5status.textContent = "Streaming...";
+  d5timer = setInterval(d5tick, 40);
+});
+d5stop.addEventListener("click", () => {
+  clearInterval(d5timer);
+  d5text.innerHTML = d5full.slice(0, d5i) + ' <span class="tag warn">stopped by you</span>';
+  d5stop.classList.add("hidden"); d5run.classList.remove("hidden"); d5run.textContent = "Regenerate";
+  d5status.textContent = "Stopped mid-stream. Your partial text stays; steer and rerun.";
+});
+
+// ---------- P06 ----------
+const d6text = document.getElementById("d6text"), d6badge = document.getElementById("d6badge"), d6btn = document.getElementById("d6edit");
+let d6orig = d6text.textContent;
+d6btn.addEventListener("click", () => {
+  if (d6text.isContentEditable) {
+    d6text.contentEditable = "false"; d6btn.textContent = "Edit draft";
+    if (d6text.textContent !== d6orig) {
+      d6badge.textContent = "AI drafted · human edited"; d6badge.className = "tag human";
+      document.getElementById("d6status").textContent = "The handover is recorded. These are your words now.";
+    }
+  } else {
+    d6text.contentEditable = "true"; d6text.focus(); d6btn.textContent = "Done";
+    document.getElementById("d6status").textContent = "Editing. Change anything.";
+  }
+});
+
+// ---------- P07 ----------
+document.querySelectorAll("#demo07 .seg button").forEach((b) =>
+  b.addEventListener("click", () => {
+    document.querySelectorAll("#demo07 .seg button").forEach((x) => x.classList.remove("on"));
+    b.classList.add("on");
+    document.getElementById("d7strong").classList.toggle("hidden", b.dataset.sig !== "strong");
+    document.getElementById("d7weak").classList.toggle("hidden", b.dataset.sig !== "weak");
+  })
+);
+
+// ---------- P08 ----------
+const d8r = document.getElementById("d8range"), d8btn = document.getElementById("d8btn"), d8note = document.getElementById("d8note"), d8val = document.getElementById("d8val");
+function d8sync() {
+  const v = +d8r.value; d8val.textContent = v + "%";
+  if (v >= 70) { d8btn.textContent = "Approve KYC match"; d8btn.className = "primary"; d8note.textContent = "Above threshold. One-click approval available."; }
+  else { d8btn.textContent = "Escalate to human review"; d8btn.className = "danger"; d8note.textContent = "Below 70%. One-click approval is gone; escalation carries the full story with it."; }
+}
+d8r.addEventListener("input", d8sync); d8sync();
+
+// ---------- P09 ----------
+document.getElementById("d9row").addEventListener("click", () => document.getElementById("d9diff").classList.toggle("hidden"));
+
+// ---------- P10 ----------
+document.getElementById("d10why").addEventListener("click", (e) => {
+  const r = document.getElementById("d10r");
+  r.classList.toggle("show");
+  e.target.textContent = r.classList.contains("show") ? "Hide the reasoning" : "Why this answer";
+});
+
+// ---------- P11 ----------
+document.querySelectorAll("#d11chips .x").forEach((x) =>
+  x.addEventListener("click", () => {
+    x.parentElement.remove();
+    document.getElementById("d11status").textContent = "Forgotten. It won't be used again, and the log records that you removed it.";
+  })
+);
+</script>
+</body>
+</html>
