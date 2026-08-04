@@ -11,6 +11,7 @@ import Zoomable from "../components/Zoomable";
 import PhoneFrame from "../components/PhoneFrame";
 import ProjectNav from "../components/ProjectNav";
 import { Container } from "../components/Grid";
+import CaseTopBar from "../components/CaseTopBar";
 
 // Focus ring for the light ground. The offset used to be the dark site
 // background, which drew a near-black halo on paper, and the ring used the
@@ -59,21 +60,13 @@ export default function ThreadfoldCaseStudy() {
       style={{ "--case-acc": ACCENT }}
     >
       <Seo title={j.title} description={j.subtitle} />
+      <CaseTopBar accent={ACCENT} />
 
       {/* HERO, light. Same change as the Aurora page: the cover is a picture
           now rather than a scrim, so Threadfold is not a dark page inside a
           light site. */}
       <header className="pt-10 pb-14">
         <Container>
-          <div className="flex flex-wrap items-center justify-between gap-3 mb-12">
-            <Link
-              to="/projects"
-              data-testid="back-link"
-              className={`inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#6B665D] hover:text-[#171512] rounded transition-colors ${FOCUS}`}
-            >
-              <ArrowLeft size={14} /> All Projects
-            </Link>
-          </div>
 
           <Reveal as="p" className="text-[11px] font-mono uppercase tracking-[0.25em] mb-5" style={{ color: ACCENT }}>
             ux case study · crowdfunding commerce · india
@@ -114,7 +107,7 @@ export default function ThreadfoldCaseStudy() {
             ))}
           </div>
 
-          <OwnedCard items={["UI design", "Information architecture", "Interaction design", "Visual & brand", "Prototyping"]} />
+          <OwnedCard items={["UI design", "Information architecture", "Interaction design", "Visual & brand", "Prototyping"]} accent={ACCENT} />
         </Container>
       </header>
 

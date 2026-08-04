@@ -11,6 +11,7 @@ import ScreenCarousel from "../components/ScreenCarousel";
 import AuroraDesignSystem from "../components/AuroraDesignSystem";
 import ProjectNav from "../components/ProjectNav";
 import { Container } from "../components/Grid";
+import CaseTopBar from "../components/CaseTopBar";
 
 // Focus ring for the light ground. The offset used to be the dark site
 // background, which drew a near-black halo on paper, and the ring used the
@@ -55,21 +56,13 @@ export default function AuroraCaseStudy() {
       style={{ "--case-acc": ACCENT }}
     >
       <Seo title={au.title} description={au.subtitle} />
+      <CaseTopBar accent={ACCENT} />
       {/* HERO, light. Was white type over a darkened cover photograph, which
           left Aurora as a dark page inside a light site. Same structure as the
           FinVista hero now: paper ground, ink type, and the cover shown as a
           picture rather than used as a scrim. */}
       <header className="pt-10 pb-14">
         <Container>
-          <div className="flex flex-wrap items-center justify-between gap-3 mb-12">
-            <Link
-              to="/projects"
-              data-testid="back-link"
-              className={`inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#6B665D] hover:text-[#171512] rounded transition-colors ${FOCUS}`}
-            >
-              <ArrowLeft size={14} /> All Projects
-            </Link>
-          </div>
           <Reveal as="p" delay={0} className="text-[11px] font-mono uppercase tracking-[0.25em] mb-5" style={{ color: ACCENT }}>
             ux case study · b2b saas · europe
           </Reveal>
@@ -109,7 +102,7 @@ export default function AuroraCaseStudy() {
             ))}
           </div>
 
-          <OwnedCard items={["Research", "Information architecture", "UI design", "Design system", "AI interaction patterns", "Prototyping"]} />
+          <OwnedCard items={["Research", "Information architecture", "UI design", "Design system", "AI interaction patterns", "Prototyping"]} accent={ACCENT} />
         </Container>
       </header>
 

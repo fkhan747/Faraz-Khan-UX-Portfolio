@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import Reveal from "../../components/Reveal";
+import CaseTopBar from "../../components/CaseTopBar";
 import { DECK_CSS } from "./caseDeck";
 import { Fig, Shot, Head, Split, Venn, Thanks } from "./deckParts";
 import MeridianPersonas from "../../components/meridian/Personas";
@@ -174,12 +175,7 @@ export default function CaseMeridianDeck() {
     <div className="cd" style={{ "--acc": ACCENT }}>
       <style>{DECK_CSS}</style>
 
-      <header className="cd-top">
-        <div className="cd-top-in">
-          <Link to="/projects" className="cd-back">← All work</Link>
-          <span className="cd-mark">Faraz Khan</span>
-        </div>
-      </header>
+      <CaseTopBar accent={ACCENT} />
 
       {/* ── HERO ───────────────────────────────────────────────────── */}
       <section className="cd-hero">

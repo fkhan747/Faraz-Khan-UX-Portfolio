@@ -7,6 +7,7 @@ export default function CruxConcept() {
     <ConceptCaseStudy
       data={crux}
       accent="linear-gradient(120deg,#E8519B,#C45BCB 55%,#8A6BF0)"
+      barAccent="#B0246A"
       wordmark={<>Crux</>}
     />
   );

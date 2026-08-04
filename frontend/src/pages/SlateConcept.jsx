@@ -9,6 +9,7 @@ export default function SlateConcept() {
     <ConceptCaseStudy
       data={slate}
       accent="linear-gradient(120deg,#4285F4,#9168F0 55%,#E8519B)"
+      barAccent="#1A56C4"
       wordmark={<>Slate</>}
     />
   );

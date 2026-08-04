@@ -1,6 +1,7 @@
 import { useCaseData } from "../../components/CaseStudyGate";
 import { Link } from "react-router-dom";
 import Reveal from "../../components/Reveal";
+import CaseTopBar from "../../components/CaseTopBar";
 import { DECK_CSS } from "./caseDeck";
 import { Fig, Head, Split, Phones, Venn, Thanks } from "./deckParts";
 
@@ -144,12 +145,7 @@ export default function CaseFinvistaLong() {
       <style>{DECK_CSS}</style>
       <style>{LONG_CSS}</style>
 
-      <header className="cd-top">
-        <div className="cd-top-in">
-          <Link to="/projects" className="cd-back">← All work</Link>
-          <span className="cd-mark">Faraz Khan</span>
-        </div>
-      </header>
+      <CaseTopBar accent={ACCENT} />
 
       {/* ── HERO ───────────────────────────────────────────────────── */}
       <section className="cd-hero">

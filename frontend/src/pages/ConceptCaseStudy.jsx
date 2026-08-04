@@ -6,6 +6,7 @@ import Seo from "../components/Seo";
 import Zoomable from "../components/Zoomable";
 import ProjectNav from "../components/ProjectNav";
 import Reveal from "../components/Reveal";
+import CaseTopBar from "../components/CaseTopBar";
 import OwnedCard from "../components/OwnedCard";
 
 const FOCUS = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C71E73] focus-visible:ring-offset-2 focus-visible:ring-offset-[#EFEDE7]";
@@ -40,7 +41,7 @@ const SectionWrap = ({ children, className = "", ...rest }) => (
   </section>
 );
 
-export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
+export default function ConceptCaseStudy({ data: r, accent, barAccent = "#C71E73", wordmark }) {
   const AI_GRAD = accent;
   const gradText = {
     background: AI_GRAD, WebkitBackgroundClip: "text",
@@ -144,18 +145,7 @@ export default function ConceptCaseStudy({ data: r, accent, wordmark }) {
       {/* Same sticky masthead the deck case studies use. `overflow-x: clip`
           rather than hidden on the wrapper above, or this would stick to that
           box instead of the viewport. */}
-      <header className="sticky top-0 z-40 border-b border-black/10 bg-[#EFEDE7]/[0.88] backdrop-blur-[10px]">
-        <div className="mx-auto w-full max-w-[1360px] px-6 md:px-10 py-3.5 flex items-center justify-between">
-          <Link
-            to="/projects"
-            data-testid="back-link"
-            className="text-[13.5px] text-[#6B665D] hover:text-[#171512] transition-colors no-underline"
-          >
-            ← All work
-          </Link>
-          <span className="font-display text-[17px] tracking-[-0.02em]">Faraz Khan</span>
-        </div>
-      </header>
+      <CaseTopBar accent={barAccent} />
 
       {/* ============ TITLE BLOCK ============ */}
       <header className="mx-auto w-full max-w-screen-2xl px-6 md:px-10 lg:px-16 pt-12 pb-8">
