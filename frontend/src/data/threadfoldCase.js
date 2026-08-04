@@ -8,6 +8,10 @@
 // outcome figures, kept inside published benchmarks and quarantined from the
 // press claims; see the METRICS note there. Faraz's role: Senior UX / UI Designer.
 // Image w/h are intrinsic pixel sizes (reserve space, prevent layout shift).
+//
+// REWRITTEN 2026-08-04: cut to a ~3 minute read, same treatment as FinVista.
+// All keys preserved; values shortened, screen counts trimmed. Full-length
+// material is in git history.
 
 const J = (f) => `/threadfold/${f}`;
 
@@ -34,9 +38,9 @@ export const threadfold = {
   // --- 01 OVERVIEW ---
   overview: {
     headline: "Project Overview",
-    tldrTitle: "TL;DR",
+    tldrTitle: "The short version",
     tldr:
-      "Threadfold was an early crowdfunding platform for custom apparel in India: design a tee in the browser, set a goal, and sell it before a single shirt is printed. I led the UX and visual redesign end to end: the Design Studio, the campaign flow, the buyer journey, and the Raiser dashboards.",
+      "Threadfold was one of India's first crowdfunding platforms for custom apparel: design a tee in the browser, set a goal, and sell it before a single shirt is printed. I led the UX and visual redesign end to end: the Design Studio, the campaign flow, the buyer journey, and the Raiser dashboards. Covered by national newspapers and the startup press; national children's charities ran campaigns on it.",
     facts: [
       { label: "Role", value: "Senior UX / UI Designer" },
       { label: "Company", value: "Threadfold (anonymised)" },
@@ -44,30 +48,29 @@ export const threadfold = {
       { label: "Scope", value: "End-to-end product redesign" },
     ],
     intro:
-      "Threadfold grew out of a college project into one of the first t-shirt crowdfunding platforms in India. National business and technology press covered it, and national children's charities ran campaigns on it. I owned the interface end to end and reframed the product as a single, cohesive platform.",
+      "This is the oldest work on this site, from 2015, and it stays because the product was ahead of its time. Threadfold grew out of a college project into one of the first t-shirt crowdfunding platforms in India, and I owned the interface end to end, reframing it as a single, cohesive platform.",
     intro2:
-      "The redesign had one job at its center: take a process that used to span six disconnected tools and vendors, and make it feel like one calm flow that anyone could finish in an afternoon.",
+      "The redesign had one job: take a process that used to span six disconnected tools and vendors, and make it one calm flow anyone could finish in an afternoon.",
     contextTitle: "The model in one line",
     contextBody:
-      "You publicize. We produce. You keep the profit. The creator designs and promotes; Threadfold handles production, shipping, payments and support; nobody pays upfront and nothing is printed until the campaign is funded.",
+      "You publicize. We produce. You keep the profit. Nobody pays upfront and nothing is printed until the campaign is funded.",
   },
 
   primaryUsers: [
-    { label: "Campaign Raisers", desc: "Students, college clubs, bands, artists and small brands who design a tee and run a campaign to sell it, with no upfront cost and no inventory." },
+    { label: "Campaign Raisers", desc: "Students, clubs, bands, artists and small brands who run a campaign with no upfront cost and no inventory." },
     { label: "Cause & NGO Raisers", desc: "National children's charities raising funds and awareness through merchandise campaigns." },
-    { label: "Buyers / Backers", desc: "Supporters who land on a campaign from a shared link or a Facebook ad and order the tee, which is what funds the run." },
+    { label: "Buyers / Backers", desc: "Supporters who land from a shared link or a Facebook ad and order the tee, which is what funds the run." },
   ],
 
   // --- 02 PROBLEM ---
   problem: {
     headline: "Selling custom merch meant juggling a stack of tools",
     coreChallenge:
-      "To make and sell custom tees, people stitched together separate tools and vendors: one to design, another to mock it up, a printer with high minimum orders, a way to take payments, and their own shipping. Every handoff added cost, dependency and risk before a single shirt sold.",
+      "One tool to design, another to mock up, a printer with high minimum orders, a way to take payments, and your own shipping. Every handoff added cost, dependency and risk before a single shirt sold.",
     dimensions: [
-      { title: "A stack of disconnected tools", desc: "Design in one place, mock up in another, print with a vendor, collect payments somewhere else, arrange shipping yourself. Nothing talked to anything." },
+      { title: "A stack of disconnected tools", desc: "Nothing talked to anything, and the creator carried every handoff." },
       { title: "Cost and risk upfront", desc: "High minimum orders and pay-first printing put real money on the line before any demand was proven." },
-      { title: "No owner of the journey", desc: "If one tool or vendor fell over, the whole campaign stalled, and the creator carried the fallout alone." },
-      { title: "Promote to strangers", desc: "Campaigns lived or died on a shareable link dropped into Facebook ads and social, so the funnel had to convert cold traffic." },
+      { title: "Promote to strangers", desc: "Campaigns lived or died on a link dropped into Facebook ads, so the funnel had to convert cold traffic." },
     ],
     hypothesisTitle: "The redesign bet",
     hypothesis:
@@ -79,11 +82,11 @@ export const threadfold = {
   howItWorks: {
     headline: "How a campaign works",
     intro:
-      "I surfaced the whole product as one loop, right on the homepage, so a first-time raiser gets it before they ever sign up.",
+      "The whole product is one loop, surfaced right on the homepage, so a first-time raiser gets it before they sign up.",
     steps: [
-      { n: "01", t: "Design in minutes", d: "Pick a product and color, drop in artwork, text or an upload, and preview it live on the tee. A base cost appears instantly for different quantities." },
-      { n: "02", t: "Set your price and promote", d: "Choose a sales goal, an end date and a per-tee price; the flow shows the minimum profit before you launch. Share the campaign link and drive traffic with Facebook ads and social." },
-      { n: "03", t: "We produce, you profit", d: "If the goal is met, Threadfold prints, ships to every buyer, and transfers the profit. The raiser pays nothing upfront and nothing if the campaign falls short, so there is no inventory and no risk." },
+      { n: "01", t: "Design in minutes", d: "Pick a product and color, drop in artwork or text, and preview it live with an instant base cost." },
+      { n: "02", t: "Set your price and promote", d: "Choose a goal, an end date and a per-tee price; the flow shows the minimum profit before launch. Then share the link." },
+      { n: "03", t: "We produce, you profit", d: "Goal met: Threadfold prints, ships and transfers the profit. Goal missed: nobody pays anything. No inventory, no risk." },
     ],
     image: { src: J("01-homepage.jpg"), w: 1400, h: 3920, caption: "Homepage: the model explained to a first-time raiser, with live campaigns and press credibility." },
   },
@@ -92,7 +95,7 @@ export const threadfold = {
   ia: {
     headline: "Structuring a stack of tools into one platform",
     intro:
-      "The IA had to hold a creator tool, a public storefront, and a back office in one place, none of them feeling bolted on. So I organized everything around three jobs: create a campaign, back a campaign, and manage what you have launched.",
+      "A creator tool, a public storefront and a back office in one place, organized around three jobs: create a campaign, back a campaign, manage what you launched.",
     diagram: J("ia.svg"),
     diagramW: 1080,
     diagramH: 560,
@@ -103,7 +106,7 @@ export const threadfold = {
   userFlow: {
     headline: "One journey, two sides",
     intro:
-      "I split the journey in two so neither side carries the other's weight. The raiser designs, prices and launches. The buyer arrives from an ad or a shared link and orders. Everything in between, production, payments, shipping, is the platform's job, not theirs.",
+      "The raiser designs, prices and launches. The buyer arrives from an ad and orders. Everything in between, production, payments, shipping, is the platform's job, not theirs.",
     diagram: J("flow.svg"),
     diagramW: 1080,
     diagramH: 440,
@@ -114,11 +117,11 @@ export const threadfold = {
   wireframes: {
     headline: "From graybox layouts to the final product",
     intro:
-      "Before any visual design, I blocked out the heaviest screens in grayscale to settle structure and hierarchy. Each one was a few layout options pressure-tested on its core job.",
+      "The heaviest screens blocked out in grayscale first, a few layout options each, pressure-tested on their core job.",
     batches: [
-      { src: J("wf-studio.svg"), w: 1080, h: 580, caption: "Design Studio: controls in a left rail vs a top toolbar vs floating panels. The left rail won, keeping the live tee preview central." },
-      { src: J("wf-campaign.svg"), w: 1080, h: 580, caption: "Set Price and Goal: economics buried in a form vs surfaced as a live profit panel beside the tee. The live panel made the money obvious before launch." },
-      { src: J("wf-home.svg"), w: 1080, h: 580, caption: "Homepage: explain-then-browse vs browse-first vs a single hero. Explain-then-browse won, since most visitors had never seen crowdfunded tees." },
+      { src: J("wf-studio.svg"), w: 1080, h: 580, caption: "Design Studio: left rail vs top toolbar vs floating panels. The left rail won, keeping the live tee preview central." },
+      { src: J("wf-campaign.svg"), w: 1080, h: 580, caption: "Set Price and Goal: economics buried in a form vs a live profit panel beside the tee. The live panel made the money obvious." },
+      { src: J("wf-home.svg"), w: 1080, h: 580, caption: "Homepage: explain-then-browse won, since most visitors had never seen crowdfunded tees." },
     ],
   },
 
@@ -126,12 +129,12 @@ export const threadfold = {
   studio: {
     headline: "The Design Studio: design in the browser, nothing to install",
     intro:
-      "Instead of opening design software, exporting a file and emailing a printer, a creator designs right here. Pick a product and color, then add artwork, a layout, text, an upload or a background, with a live preview and a running base cost. It's one step inside a single flow that ends in a live campaign, not a handoff to the next tool.",
+      "Instead of design software, an export and an email to a printer, a creator designs right here, with a live preview and a running base cost, inside the flow that ends in a live campaign.",
     image: { src: J("02-design-studio.jpg"), w: 1400, h: 870, caption: "Design Studio: central live preview, one controls rail, and base cost surfaced as you design." },
     points: [
-      { t: "No installs, no handoffs", d: "Design in the browser. The file never leaves the platform on its way to print, so there is nothing to export, email or re-upload." },
-      { t: "Live tee preview", d: "Front and back, real product colors, and a curated artwork library so a blank tee becomes a finished design fast." },
-      { t: "Cost as you go", d: "A base cost at a sample quantity sits beside the canvas, so the economics start before the campaign flow even opens." },
+      { t: "No installs, no handoffs", d: "The file never leaves the platform on its way to print." },
+      { t: "Live tee preview", d: "Front and back, real product colors, and a curated artwork library." },
+      { t: "Cost as you go", d: "A base cost sits beside the canvas, so the economics start before the campaign flow opens." },
     ],
   },
 
@@ -139,11 +142,11 @@ export const threadfold = {
   campaign: {
     headline: "Making the money obvious",
     intro:
-      "Design is step one of three: Design your tee, Set your price, Add a description. The pricing step is where most platforms hide the economics; I pulled them into the open. A goal slider, an end date and a per-tee price update a live minimum-profit figure. The reassurance that matters most, pay nothing even if the campaign fails, sits right beside the CTA.",
+      "The pricing step is where most platforms hide the economics; I pulled them into the open. A goal slider, an end date and a per-tee price update a live minimum-profit figure, and the no-risk promise sits beside the CTA.",
     screens: [
-      { src: J("03-set-price.jpg"), w: 1400, h: 870, title: "Set Your Price", desc: "Goal slider, campaign end date and selling price update a live minimum-profit figure; the no-risk promise sits beside the CTA." },
-      { src: J("04-add-description.jpg"), w: 1400, h: 870, title: "Add a Description", desc: "The final step before launch, the story and details that make a campaign shareable." },
-      { src: J("05-campaign.jpg"), w: 1400, h: 870, title: "Campaign Page", desc: "The public campaign page a raiser shares into Facebook ads and social to convert cold traffic into buyers." },
+      { src: J("03-set-price.jpg"), w: 1400, h: 870, title: "Set Your Price", desc: "Goal, end date and selling price update a live minimum-profit figure." },
+      { src: J("04-add-description.jpg"), w: 1400, h: 870, title: "Add a Description", desc: "The story and details that make a campaign shareable." },
+      { src: J("05-campaign.jpg"), w: 1400, h: 870, title: "Campaign Page", desc: "The public page a raiser shares to convert cold traffic into buyers." },
     ],
   },
 
@@ -151,12 +154,11 @@ export const threadfold = {
   dashboard: {
     headline: "Running the campaign after launch",
     intro:
-      "Once a campaign is live, the raiser needs to track orders, watch the goal, manage their account, and get paid. I kept the dashboards in the same calm, single-focus language as the studio, so going live never felt like switching to a different product.",
+      "Orders, goal progress and payout, in the same calm, single-focus language as the studio, so going live never felt like switching products.",
     screens: [
-      { src: J("06-dashboard.jpg"), w: 1400, h: 922, title: "Order Tracking", desc: "Where a raiser follows orders and campaign progress at a glance." },
-      { src: J("07-payout.jpg"), w: 1400, h: 808, title: "Payout", desc: "The profit transfer view, the moment the whole model pays off for the creator." },
+      { src: J("06-dashboard.jpg"), w: 1400, h: 922, title: "Order Tracking", desc: "Orders and campaign progress at a glance." },
+      { src: J("07-payout.jpg"), w: 1400, h: 808, title: "Payout", desc: "The profit transfer view, where the whole model pays off." },
       { src: J("08-stories.jpg"), w: 1400, h: 1891, title: "Stories", desc: "Real campaigns and causes, doubling as social proof for the next raiser." },
-      { src: J("10-account.jpg"), w: 1400, h: 808, title: "Account", desc: "Profile and settings, kept light so the focus stays on creating and selling." },
     ],
   },
 
@@ -164,12 +166,10 @@ export const threadfold = {
   responsive: {
     headline: "Desktop to mobile",
     intro:
-      "I designed the studio and storefront to scale from a wide desktop canvas down to a single-column phone layout. On mobile the model collapses to the same three promises: Design in Minutes, Set Your Price and Sell, We Produce You Profit. So a campaign discovered on a phone, where most ad traffic landed, still makes sense in one scroll.",
+      "Most ad traffic landed on phones, so the model collapses to the same three promises in one scroll: Design in Minutes, Set Your Price and Sell, We Produce You Profit.",
     screens: [
       { src: J("m-home.jpg"), title: "Mobile · Home" },
       { src: J("m-stories.jpg"), title: "Mobile · Stories" },
-      { src: J("m-login.jpg"), title: "Mobile · Log in" },
-      { src: J("m-about.jpg"), title: "Mobile · About" },
     ],
   },
 
@@ -186,10 +186,9 @@ export const threadfold = {
       "Reported by press to have grown quickly through 2014 and 2015.",
     ],
     differently: [
-      "The Design Studio tried to offer everything at once. I'd stage the controls harder, getting a raiser to a sellable design in three taps and revealing power later.",
-      "We designed desktop-first; most ad traffic arrived on phones. I'd lead with the mobile campaign flow next time, not retrofit it.",
-      "The economics UI was strong but untested with real raisers. I'd put the goal, price and profit screen in front of actual first-time creators before build.",
-      "Campaign pages had to convert cold Facebook traffic, a job for sharper, test-driven landing pages than a one-size template.",
+      "The Design Studio offered everything at once. I'd stage the controls harder: a sellable design in three taps, power revealed later.",
+      "We designed desktop-first; most ad traffic arrived on phones. I'd lead with the mobile campaign flow next time.",
+      "The goal, price and profit screen was strong but untested with real raisers. I'd put it in front of actual first-time creators before build.",
     ],
   },
 

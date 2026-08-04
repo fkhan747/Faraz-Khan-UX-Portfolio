@@ -57,8 +57,8 @@ function App() {
               long-form content is finalised. */}
           <Route path="/case/finvista" element={<CaseStudyGate key="finvista" slug="finvista"><CaseFinvistaLong /></CaseStudyGate>} />
           <Route path="/case/finvista-deck" element={<CaseStudyGate key="finvista-deck" slug="finvista"><CaseFinvistaDeck /></CaseStudyGate>} />
-          <Route path="/case/aurora" element={<CaseStudyGate key="aurora" slug="aurora"><CaseAuroraDeck /></CaseStudyGate>} />
-          <Route path="/case/threadfold" element={<CaseStudyGate key="threadfold" slug="threadfold"><CaseThreadfoldDeck /></CaseStudyGate>} />
+          <Route path="/case/aurora" element={<CaseStudyGate key="aurora" slug="aurora"><AuroraCaseStudy /></CaseStudyGate>} />
+          <Route path="/case/threadfold" element={<CaseStudyGate key="threadfold" slug="threadfold"><ThreadfoldCaseStudy /></CaseStudyGate>} />
           {/* Concepts sit outside <Layout> for the same reason the deck pages
               do: they now wear the light case-study chrome, and the dark site
               nav on top of a paper ground reads as two different websites. */}
@@ -68,8 +68,8 @@ function App() {
           {/* Superseded versions, kept reachable rather than deleted. */}
           <Route path="/case/meridian-v1" element={<MeridianCaseStudy />} />
           <Route path="/case/finvista-v1" element={<CaseStudyGate key="finvista-v1" slug="finvista"><FinvistaCaseStudy /></CaseStudyGate>} />
-          <Route path="/case/aurora-v1" element={<CaseStudyGate key="aurora-v1" slug="aurora"><AuroraCaseStudy /></CaseStudyGate>} />
-          <Route path="/case/threadfold-v1" element={<CaseStudyGate key="threadfold-v1" slug="threadfold"><ThreadfoldCaseStudy /></CaseStudyGate>} />
+          <Route path="/case/aurora-v1" element={<CaseStudyGate key="aurora-v1" slug="aurora"><CaseAuroraDeck /></CaseStudyGate>} />
+          <Route path="/case/threadfold-v1" element={<CaseStudyGate key="threadfold-v1" slug="threadfold"><CaseThreadfoldDeck /></CaseStudyGate>} />
           <Route path="/case/meridian-narrated" element={<CaseMeridianLight />} />
           {/* The review URL the long-form page was signed off at, kept working
               for any link already shared. */}

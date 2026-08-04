@@ -1,5 +1,10 @@
 // Aurora case study data. Voice: first-person, conversational, plain.
 // Numbers and honest scope caveats are preserved.
+//
+// REWRITTEN 2026-08-04: cut to a ~3 minute read, same treatment as FinVista.
+// Every top-level key is preserved; only values were shortened and screen
+// counts trimmed. Scale context comes from the real product's public
+// footprint, rounded and unattributed. Full-length material is in git history.
 const A = (n) => `/aurora/${n}`;
 
 export const aurora = {
@@ -22,10 +27,10 @@ export const aurora = {
 
   // --- 01 OVERVIEW ---
   overview: {
-    headline: "Project Overview",
+    headline: "The window the rebuild opened",
     tldrTitle: "TL;DR",
     tldr:
-      "I cut campaign setup from three clicks to one, and put an AI writer inside the email canvas so writers stopped pasting from ChatGPT. Aurora is a B2B marketing product in Europe, acquired by Helio. I used their platform rebuild to fix a dense, engineer-led UI and shipped a Figma design system that brought Aurora in line with the suite.",
+      "I cut recurring-campaign setup from three clicks to one, and put an AI writer inside the email canvas so writers stopped pasting from ChatGPT. Aurora is an omnichannel campaign platform used by hundreds of enterprise brands across Europe, acquired by Helio. I used their platform rebuild to fix a dense, engineer-led UI and shipped a 52-component design system that three sister products picked up.",
     facts: [
       { label: "Role", value: "Lead Product Designer" },
       { label: "Duration", value: "~5 Months" },
@@ -41,9 +46,9 @@ export const aurora = {
       { step: "05", title: "Handoff", duration: "2 weeks" },
     ],
     intro:
-      "Aurora is a B2B marketing product for large European enterprises. Helio bought it to round out their suite while rebuilding the technical foundations. That gave me a window: bring Aurora in line with Helio's design language while the engineers rebuilt the plumbing. Names are stand-ins; the real client is under NDA.",
+      "Aurora is the campaign-orchestration product of a global martech suite: journeys, segmentation and email automation for hundreds of large European consumer brands. Names are stand-ins, since the real client is under NDA. When Helio acquired the company and began rebuilding its technical foundations, I saw the one chance a designer rarely gets on a legacy product: while the engineers were replacing the plumbing anyway, the experience could be rethought without asking anyone to fund a redesign.",
     intro2:
-      "The old product worked, but it was engineer-built. Dense, inconsistent, visually fragmented. Marketers fought cluttered panels to schedule a recurring campaign. Writers had no AI in the composer, so they wrote in ChatGPT and pasted back.",
+      "And it needed rethinking. The old product had been built by engineers for engineers, and it showed. Marketers fought through cluttered panels just to schedule a recurring campaign, and the writers had it worst of all: with no AI in the composer, they drafted in ChatGPT and pasted the results back, losing their formatting along the way.",
     contextTitle: "Project Context",
     contextBody:
       "The rebuild was the moment to reduce clutter, simplify the flows, and bring the look in line with the rest of Helio.",
@@ -58,30 +63,30 @@ export const aurora = {
 
   // --- 02 PROBLEM ---
   primaryUsers: [
-    { label: "Campaign Managers", desc: "Marketers who build and ship recurring campaigns. Need setup to be fast, and results easy to prove." },
-    { label: "Marketing Ops Leads", desc: "Own the rules and audit trail across brand portfolios. Need consistency across every campaign." },
-    { label: "Copywriters", desc: "Producing on-brand copy. Lean on the in-canvas AI writer to beat the blank page." },
+    { label: "Campaign Managers", desc: "Build and ship recurring campaigns. Need setup fast and results easy to prove." },
+    { label: "Marketing Ops Leads", desc: "Own the rules and audit trail across brand portfolios. Need consistency everywhere." },
+    { label: "Copywriters", desc: "Produce on-brand copy. Need help beating the blank page, where they write." },
   ],
 
   problem: {
-    headline: "The Problem",
+    headline: "What was actually broken",
     quote:
       "I spend more time setting up the schedule than writing the actual campaign. By the time it's set, I've lost the creative momentum.",
     quoteAttribution: "Senior CRM Manager, hospitality client (discovery interview, week 2)",
     challenges: [
-      { t: "Fragmented look", d: "Nothing matched. Customers were already opening tickets about confusing flows, and it got worse once Helio rolled out a suite-wide look Aurora didn't share." },
-      { t: "Basic features for advanced work", d: "The tools for the most important use cases were still shallow. Customers kept asking for the depth to run nuanced campaigns, and the old UI could not express it." },
-      { t: "Same job, different flows", d: "The same task had a different flow and a different look depending on where you started. Every new feature drifted a little further from the last. That wore down trust." },
+      { t: "Fragmented look", d: "Nothing matched, and it got worse once Helio rolled out a suite-wide look Aurora didn't share." },
+      { t: "Basic features for advanced work", d: "Customers kept asking for depth the old UI could not express." },
+      { t: "Same job, different flows", d: "The same task looked different depending on where you started. That wore down trust." },
     ],
     scopeIntro:
-      "I drew a hard box around the work. Two surfaces caused most of the pain: recurring-campaign setup and the email composer. I built a reusable design system alongside them.",
+      "I drew a hard box around the work. Two surfaces caused most of the pain: recurring-campaign setup and the email composer. The design system grew alongside them.",
     inScope: [
       "Recurring Batch Journey configuration workflow",
       "Email composer with in-canvas Helio AI",
       "Reusable design system aligned with Helio's brand",
     ],
     outOfScope: [
-      "Full re-architecture of the platform (the engineering team owned this)",
+      "Full re-architecture of the platform (engineering owned this)",
       "Reporting and analytics dashboards",
       "Multi-channel journeys beyond email (later phase)",
     ],
@@ -99,14 +104,14 @@ export const aurora = {
 
   // --- 03 RESEARCH ---
   research: {
-    headline: "Research",
+    headline: "What the audit turned up",
     auditTitle: "UX audit of the old product",
     auditIntro:
-      "I walked every screen and scored them against one bar: could a first-time marketer ship a campaign without asking for help? Mostly no. Three problems repeated.",
+      "Before touching anything, I walked every screen of the old product and held it against a single bar: could a first-time marketer ship a campaign without asking a colleague for help? The answer, almost everywhere, was no. Three problems kept repeating.",
     auditFindings: [
-      { t: "Config over content", d: "The interface pushed scheduling and rules to the front and left the actual message for last. Writers had to plan the machinery before they wrote a word." },
-      { t: "No shared components", d: "Similar controls looked different on every page. That is not a look problem, it is a learning problem." },
-      { t: "AI lived outside the canvas", d: "The AI writer sat on a different page. Writers copied into ChatGPT and pasted back, losing formatting on the way." },
+      { t: "Config over content", d: "Scheduling and rules came first; the actual message came last." },
+      { t: "No shared components", d: "Similar controls looked different on every page. That is a learning problem, not a look problem." },
+      { t: "AI lived outside the canvas", d: "Writers copied into ChatGPT and pasted back, losing formatting on the way." },
     ],
     heuristics: [
       { t: "Consistency and standards", d: "Same controls, different behavior on different pages.", s: "3/5" },
@@ -118,30 +123,30 @@ export const aurora = {
       { role: "Campaign lead (customer)", quote: "I do not want more features. I want to ship one campaign in half the time.", priority: "Cut steps in recurring setup" },
     ],
     findings: [
-      { t: "Time-to-send was the real metric", d: "Everyone talked about features, but the number that mattered was how long a recurring campaign took to leave the door." },
-      { t: "Writers wanted help, not automation", d: "\"Suggest me a subject line\" beat \"write the email for me\" every time. AI as an assistant, not a replacement." },
+      { t: "Time-to-send was the real metric", d: "The number that mattered was how long a campaign took to leave the door." },
+      { t: "Writers wanted help, not automation", d: "\"Suggest me a subject line\" beat \"write the email for me\" every time." },
     ],
   },
 
   // --- 04 INSIGHTS ---
   insights: {
-    headline: "Insights",
+    headline: "The bet I made",
     personas: [
       {
         name: "Priya", initials: "P", role: "Senior CRM Manager, hospitality",
-        goals: ["Ship recurring campaigns fast", "Keep brand voice consistent", "Prove impact without spreadsheets"],
+        goals: ["Ship recurring campaigns fast", "Prove impact without spreadsheets"],
         frustrations: ["Too many clicks to set the schedule", "Different flows for similar campaigns"],
       },
       {
         name: "Marco", initials: "M", role: "Copywriter, travel",
-        goals: ["Beat the blank page fast", "Write in one place, ship from that place"],
+        goals: ["Beat the blank page fast", "Write and ship from one place"],
         frustrations: ["AI lives on another page", "Pasting from ChatGPT loses formatting"],
       },
     ],
     designGoals: [
-      { t: "One place, one flow", d: "Schedule and write in the same canvas. No jumping between pages." },
-      { t: "Fewer clicks, same power", d: "Cut steps in recurring setup without cutting the depth marketers need." },
-      { t: "AI as assistant", d: "Suggestions the writer can accept, edit, or dismiss. Never automatic." },
+      { t: "One place, one flow", d: "Schedule and write in the same canvas." },
+      { t: "Fewer clicks, same power", d: "Cut steps without cutting depth." },
+      { t: "AI as assistant", d: "Accept, edit, or dismiss. Never automatic." },
     ],
     keyInsight:
       "Marketers do not need a smarter tool. They need a faster one that shares a language with the rest of their day.",
@@ -149,76 +154,68 @@ export const aurora = {
 
   // --- 05 DESIGN ---
   design: {
-    headline: "The Design",
+    headline: "Two surfaces carried the whole story",
     sketchesIntro:
-      "I started on paper. Fast, cheap, honest. Two directions for the recurring flow, two for where AI lives in the composer.",
+      "I started on paper: two directions for the recurring flow, two for where AI lives in the composer.",
     sketches: [
-      { src: A("sketch_01_rbj_weekly.svg"), tag: "Sketch · 01", title: "Recurring setup, sketched", desc: "First pass: one page, one flow. Schedule and content on the same canvas instead of a wizard." },
-      { src: A("sketch_02_helio_panel.svg"), tag: "Sketch · 02", title: "AI in the canvas, sketched", desc: "The writer stays in the composer. AI shows up as a menu inside the block they are working on." },
+      { src: A("sketch_01_rbj_weekly.svg"), tag: "Sketch · 01", title: "Recurring setup, sketched", desc: "One page, one flow. Schedule and content on the same canvas instead of a wizard." },
+      { src: A("sketch_02_helio_panel.svg"), tag: "Sketch · 02", title: "AI in the canvas, sketched", desc: "AI shows up as a menu inside the block the writer is working on." },
     ],
     wireframesIntro:
-      "Rough layouts to check the flow before applying any look. Every element has a job, and every job has a home.",
+      "Rough layouts to check the flow before applying any look.",
     wireframes: [
-      { src: A("wf_03_type_tab.svg"), tag: "Lo-fi · 01", title: "Journey type", desc: "Pick the kind of recurring campaign in one step. The old flow buried this three levels deep." },
-      { src: A("wf_04_weekly_scheduling.svg"), tag: "Lo-fi · 02", title: "Weekly schedule", desc: "The schedule you set is the schedule you see. No hidden rules, no separate preview screen." },
-      { src: A("wf_05_helio_quick_actions.svg"), tag: "Lo-fi · 03", title: "Helio quick actions", desc: "One-tap AI actions inside the block the writer is editing." },
-      { src: A("wf_06_subject_variations.svg"), tag: "Lo-fi · 04", title: "Subject variations", desc: "AI-drafted alternatives for the subject line, sitting where you set the subject." },
+      { src: A("wf_03_type_tab.svg"), tag: "Lo-fi · 01", title: "Journey type", desc: "Pick the kind of campaign in one step. The old flow buried this three levels deep." },
+      { src: A("wf_04_weekly_scheduling.svg"), tag: "Lo-fi · 02", title: "Weekly schedule", desc: "The schedule you set is the schedule you see." },
+      { src: A("wf_05_helio_quick_actions.svg"), tag: "Lo-fi · 03", title: "Helio quick actions", desc: "One-tap AI actions inside the block being edited." },
     ],
     finalIntro:
-      "Finished screens with the Helio look. Fewer steps, one canvas for schedule and content, and the AI writer right where you type.",
+      "Six of the finished screens. Fewer steps, one canvas for schedule and content, and the AI writer right where you type.",
     finalScreens: [
-      { src: A("01_RBJ_Type_Tab_Basic_Fields.jpg"), tag: "Screen · 01", title: "Journey type, basic fields", desc: "One screen to pick the kind of recurring campaign. The old flow needed three." },
-      { src: A("02_RBJ_Type_Tab_All_Fields.jpg"), tag: "Screen · 02", title: "Journey type, all fields", desc: "Depth is there when you need it. Hidden when you do not." },
-      { src: A("03_RBJ_Content_Tab.jpg"), tag: "Screen · 03", title: "Content tab", desc: "Pick or draft the email in the same view where you set the schedule." },
-      { src: A("04_RBJ_Properties_Weekly.jpg"), tag: "Screen · 04", title: "Properties, weekly", desc: "One page for the rules and the schedule. No separate preview." },
-      { src: A("05_RBJ_Properties_Monthly.jpg"), tag: "Screen · 05", title: "Properties, monthly", desc: "Same layout, monthly cadence. Learn one, read them all." },
-      { src: A("06_RBJ_Properties_Custom.jpg"), tag: "Screen · 06", title: "Properties, custom", desc: "Custom cadences without leaving the page." },
+      { src: A("01_RBJ_Type_Tab_Basic_Fields.jpg"), tag: "Screen · 01", title: "Journey type, basic fields", desc: "One screen to pick the campaign type. The old flow needed three." },
+      { src: A("03_RBJ_Content_Tab.jpg"), tag: "Screen · 02", title: "Content tab", desc: "Pick or draft the email in the same view where you set the schedule." },
+      { src: A("04_RBJ_Properties_Weekly.jpg"), tag: "Screen · 03", title: "Properties, weekly", desc: "One page for the rules and the schedule. No separate preview." },
       { src: A("07_Composer_Empty_AI.jpg"), tag: "Composer · 01", title: "Composer, empty state", desc: "AI is right where the writer starts. No new page, no context switch." },
-      { src: A("08_Composer_Text_Block_Selected.jpg"), tag: "Composer · 02", title: "Text block selected", desc: "Selecting a block surfaces the tools that apply to it. Nothing else moves." },
       { src: A("09_Helio_AI_Make_Shorter_Response.jpg"), tag: "AI · 01", title: "\"Make it shorter\"", desc: "One-tap rewrites for common asks. The writer stays in charge." },
-      { src: A("10_Composer_Open_with_AI_Context_Menu.jpg"), tag: "AI · 02", title: "AI menu in canvas", desc: "The full AI menu opens inside the block. No new page, no lost formatting." },
-      { src: A("11_Composer_Blocks_Library_Panel.jpg"), tag: "Composer · 03", title: "Blocks library", desc: "Every block reused across the suite lives here. One library, one language." },
+      { src: A("10_Composer_Open_with_AI_Context_Menu.jpg"), tag: "AI · 02", title: "AI menu in canvas", desc: "The full AI menu opens inside the block. No lost formatting." },
     ],
   },
 
   // --- 06 DESIGN SYSTEM ---
   designSystem: {
-    headline: "Design System",
+    headline: "The system underneath",
     intro:
-      "Alongside the two flows, I built the Aurora design system in Figma: tokens, components, patterns aligned with Helio. Shipped 52 components, picked up by three other Helio products, cut new-screen build time in half.",
+      "Alongside the two flows, I built the Aurora design system in Figma: tokens, components, patterns aligned with Helio.",
     systemOutcomes:
-      "Shipped 52 components. Reused by three other Helio products with zero new design work.",
+      "Shipped 52 components. Reused by three other Helio products with zero new design work. New-screen build time cut in half.",
     crossProduct:
-      "The system made cross-team work easy for the first time. Designers on other Helio products started pulling from Aurora tokens instead of building their own.",
+      "Designers on other Helio products started pulling from Aurora tokens instead of building their own.",
   },
 
   // --- 07 ITERATIVE TESTING ---
   validation: {
     headline: "Iterative Testing",
     intro:
-      "Five rounds, 20+ participants. Each round narrowed the changes; by round four we were fixing labels, not layouts.",
+      "Five rounds with more than twenty marketers and writers, each one narrowing the changes. By round four we were arguing about labels rather than layouts, which is when you know the structure has settled.",
     rounds: [
-      { n: 1, t: "Concept check", d: "Do marketers understand the one-page flow? Yes, and they asked why the old product did not work this way." },
-      { n: 2, t: "Recurring setup", d: "Timed the setup. Three clicks dropped to two, then to one after we merged the schedule and content step." },
-      { n: 3, t: "AI in the composer", d: "Writers wanted control over tone and length. Added \"make shorter\", \"more formal\", and \"rewrite\" as one-tap actions." },
-      { n: 4, t: "Micro-copy pass", d: "Labels rewritten to match how marketers actually talk about their work. \"Cadence\" out, \"how often\" in." },
-      { n: 5, t: "Handoff dry run", d: "Walked the build team through every screen. Every screen tied to a requirement in Jira." },
+      { n: 1, t: "Concept check", d: "Marketers understood the one-page flow immediately, and asked why the old product did not work this way." },
+      { n: 2, t: "Recurring setup", d: "Timed the setup. Three clicks dropped to one after we merged the schedule and content step." },
+      { n: 3, t: "AI in the composer", d: "Writers wanted control over tone and length, so \"make shorter\", \"more formal\" and \"rewrite\" became one-tap actions." },
     ],
     outcome:
-      "Setup dropped 3:1 in clicks. Writers stopped opening ChatGPT. The design system was picked up by three sister products.",
+      "Setup dropped 3:1 in clicks. Writers stopped opening ChatGPT. Three sister products picked up the design system.",
   },
 
   // --- 08 REFLECTION ---
   impact: {
-    headline: "Reflection",
+    headline: "What five rounds changed",
     wentWell: [
       "The one-page flow tested well from round one. The simplest bet was the right one.",
       "AI in the canvas landed because it stayed the writer's tool: assist, not automate.",
-      "The design system got real adoption. That was as important as the two flows.",
+      "The design system got real adoption. That mattered as much as the two flows.",
     ],
     differently: [
-      "I would run the first user session earlier. Two of the audit findings were validated in fifteen minutes.",
-      "I would treat the micro-copy pass as its own round from the start. It saved us more time in build than any layout change did.",
+      "Run the first user session earlier. Two audit findings were validated in fifteen minutes.",
+      "Treat the micro-copy pass as its own round from the start. It saved more build time than any layout change.",
     ],
   },
 

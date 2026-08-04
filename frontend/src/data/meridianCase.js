@@ -54,7 +54,7 @@ export const meridian = {
     "Better KPI discoverability, one definition per metric, a delta on every tile",
     "Consistent reporting, learn one page and you can read them all",
   ],
-  body: `## TL;DR
+  body: `## The short read
 
 Meridian ran a whole university off four Power BI dashboards that never talked to each other. The numbers were right. Reading them was the problem.
 
@@ -80,6 +80,12 @@ Six findings from the sector became six rules.
 - **Test-optional is reversing.** Test policy is a filter you can hold constant.
 - **Demographic data got restricted in 2023.** Those views hide small counts and skip categories the university cannot release.
 - **Predictive analytics carries a real bias risk.** AI here is a guide, never the decider. Sensitive attributes stay out of any scoring.
+
+## What peer universities do about this, and where Meridian broke from the pattern
+
+Dashboard sprawl is the sector's default state, not this university's special failure. The common answer is to buy more dashboards: a BI license per department, each with its own definitions, refresh cycles and owner. EDUCAUSE has ranked data and analytics governance among higher ed's top technology issues for years, and the pattern behind it is always the same. Institutional research becomes a report factory, every leadership question becomes a ticket, and cabinet meetings open with an argument about whose number is right, because "enrolled student" means three different things in three different files.
+
+Meridian broke from that pattern in three ways. One platform instead of one per department. One definition per metric, signed off by the analysts who own the data, so the argument about whose number is right ends before the meeting starts. And answer-first screens, so the platform replaces the report queue for routine questions instead of adding to it.
 
 ## Information architecture: one navigation, five tabs
 

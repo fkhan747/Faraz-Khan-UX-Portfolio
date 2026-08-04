@@ -101,87 +101,18 @@ export default function AuroraCaseStudy() {
         </Container>
       </header>
 
-      {/* 01 OVERVIEW */}
-      <SectionWrap data-testid="section-overview">
-        <SectionLabel num="01" name="Overview" />
-        <Reveal>
-          <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{au.overview.headline}</h2>
-        </Reveal>
-
-        <Reveal delay={0.06}>
-          <div className="rounded-3xl dark-card text-white p-8 md:p-12 relative overflow-hidden">
-            <div className="absolute -top-10 -right-10 w-72 h-72 rounded-full bg-[#075EFD] blur-3xl opacity-30" />
-            <p className="relative text-[11px] font-mono uppercase tracking-[0.25em] text-white mb-4">{au.overview.tldrTitle}</p>
-            <p className="relative font-display text-xl md:text-2xl leading-snug text-white/95">{au.overview.tldr}</p>
-          </div>
-        </Reveal>
-
-        <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-          {au.overview.facts.map((f, i) => (
-            <Reveal key={f.label} delay={(i % 2) * 0.06} className="dark-card rounded-2xl p-5">
-              <p className="text-sm font-mono uppercase tracking-widest text-white mb-2">{f.label}</p>
-              <p className="font-display text-base md:text-lg font-bold">{f.value}</p>
-            </Reveal>
-          ))}
-        </div>
-
-        <Reveal>
-          <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-8">design process</h3>
-        </Reveal>
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-          {au.overview.process.map((p, i) => (
-            <Reveal key={p.step} delay={(i % 2) * 0.06} className="dark-card rounded-2xl p-6">
-              <div className="num text-4xl md:text-5xl font-black text-[#075EFD]">{p.step}</div>
-              <div className="mt-3 font-display text-lg font-bold ">{p.title}</div>
-              <div className="mt-1 text-xs font-mono uppercase tracking-widest text-white">{p.duration}</div>
-            </Reveal>
-          ))}
-        </div>
-
-        <Reveal delay={0.08} className="mt-16 space-y-5 text-base md:text-lg leading-relaxed text-[#F4F3FA]">
-          <p>{au.overview.intro}</p>
-          <p>{au.overview.intro2}</p>
-        </Reveal>
-
-        <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
-          {au.overview.metadata.map((m, i) => (
-            <Reveal key={m.k} delay={(i % 2) * 0.06} className="dark-card rounded-2xl p-5">
-              <p className="text-sm font-mono uppercase tracking-widest text-white mb-2">{m.k}</p>
-              <p className="font-display text-sm md:text-base font-bold leading-snug">{m.v}</p>
-            </Reveal>
-          ))}
-        </div>
-
-        <Reveal delay={0.06} className="mt-8 rounded-3xl bg-white p-8 md:p-10">
-          <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3 text-[#C71E73]">{au.overview.contextTitle}</p>
-          <p className="font-display text-lg md:text-xl font-bold leading-snug text-black">{au.overview.contextBody}</p>
-        </Reveal>
-
-        <Reveal>
-          <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">Primary Users</h3>
-        </Reveal>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {au.primaryUsers.map((u, i) => (
-            <Reveal key={u.label} delay={(i % 2) * 0.06} className="dark-card rounded-2xl p-6 border-l-4 border-[#075EFD]">
-              <h3 className="font-display text-lg font-black mb-2">{u.label}</h3>
-              <p className="text-sm leading-relaxed text-[#F4F3FA]/85">{u.desc}</p>
-            </Reveal>
-          ))}
-        </div>
-      </SectionWrap>
-
-      {/* 02 PROBLEM */}
+      {/* 01 THE COMPLAINT */}
       <SectionWrap data-testid="section-problem">
-        <SectionLabel num="02" name="The Problem" />
+        <SectionLabel num="01" name="The Complaint" />
         <Reveal>
-          <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-10">{au.problem.headline}</h2>
-        </Reveal>
-
-        <Reveal delay={0.06}>
           <blockquote className="rounded-3xl bg-white p-8 md:p-10">
             <p className="font-display text-xl md:text-3xl italic leading-snug text-black">&ldquo;{au.problem.quote}&rdquo;</p>
             <footer className="mt-4 text-xs font-mono uppercase tracking-widest text-[#F5379B]">{au.problem.quoteAttribution}</footer>
           </blockquote>
+        </Reveal>
+
+        <Reveal delay={0.06}>
+          <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-10 mt-12">{au.problem.headline}</h2>
         </Reveal>
 
         <div className="mt-12 grid md:grid-cols-2 gap-5">
@@ -243,9 +174,49 @@ export default function AuroraCaseStudy() {
         </Reveal>
       </SectionWrap>
 
+      {/* 02 THE WINDOW */}
+      <SectionWrap data-testid="section-overview">
+        <SectionLabel num="02" name="The Window" />
+        <Reveal>
+          <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{au.overview.headline}</h2>
+        </Reveal>
+
+        <Reveal delay={0.08} className="mt-2 space-y-5 text-base md:text-lg leading-relaxed text-[#F4F3FA]">
+          <p>{au.overview.intro}</p>
+          <p>{au.overview.intro2}</p>
+        </Reveal>
+
+        <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+          {au.overview.facts.map((f, i) => (
+            <Reveal key={f.label} delay={(i % 2) * 0.06} className="dark-card rounded-2xl p-5">
+              <p className="text-sm font-mono uppercase tracking-widest text-white mb-2">{f.label}</p>
+              <p className="font-display text-base md:text-lg font-bold">{f.value}</p>
+            </Reveal>
+          ))}
+        </div>
+
+
+        <Reveal delay={0.06} className="mt-8 rounded-3xl bg-white p-8 md:p-10">
+          <p className="text-[11px] font-mono uppercase tracking-[0.25em] mb-3 text-[#C71E73]">{au.overview.contextTitle}</p>
+          <p className="font-display text-lg md:text-xl font-bold leading-snug text-black">{au.overview.contextBody}</p>
+        </Reveal>
+
+        <Reveal>
+          <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-6">Primary Users</h3>
+        </Reveal>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {au.primaryUsers.map((u, i) => (
+            <Reveal key={u.label} delay={(i % 2) * 0.06} className="dark-card rounded-2xl p-6 border-l-4 border-[#075EFD]">
+              <h3 className="font-display text-lg font-black mb-2">{u.label}</h3>
+              <p className="text-sm leading-relaxed text-[#F4F3FA]/85">{u.desc}</p>
+            </Reveal>
+          ))}
+        </div>
+      </SectionWrap>
+
       {/* 03 RESEARCH */}
       <SectionWrap data-testid="section-research">
-        <SectionLabel num="03" name="Research" />
+        <SectionLabel num="03" name="The Audit" />
         <Reveal>
           <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{au.research.headline}</h2>
         </Reveal>
@@ -307,35 +278,10 @@ export default function AuroraCaseStudy() {
 
       {/* 04 INSIGHTS */}
       <SectionWrap data-testid="section-insights">
-        <SectionLabel num="04" name="Insights" />
+        <SectionLabel num="04" name="The Bet" />
         <Reveal>
           <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-10">{au.insights.headline}</h2>
         </Reveal>
-
-        <Reveal>
-          <h3 className="font-display text-2xl md:text-3xl font-black mb-8">user personas</h3>
-        </Reveal>
-        <div className="grid md:grid-cols-3 gap-5">
-          {au.insights.personas.map((p, i) => (
-            <Reveal key={p.name} delay={(i % 2) * 0.06} className="dark-card rounded-3xl p-7">
-              <div className="flex items-center gap-4 mb-5">
-                <div className="w-14 h-14 rounded-full bg-[#075EFD] text-white flex items-center justify-center font-display font-black text-lg">{p.initials}</div>
-                <div>
-                  <h3 className="font-display text-lg font-black">{p.name}</h3>
-                  <p className="text-xs font-mono uppercase tracking-widest text-white">{p.role}</p>
-                </div>
-              </div>
-              <p className="text-[10px] font-mono uppercase tracking-widest text-[#F5379B] mb-2">goals</p>
-              <ul className="space-y-1.5 mb-4">
-                {p.goals.map((g) => (<li key={g} className="text-sm flex gap-2"><Check size={14} className="flex-shrink-0 mt-1 text-[#F5379B]" />{g}</li>))}
-              </ul>
-              <p className="text-[10px] font-mono uppercase tracking-widest text-[#F5379B] mb-2">frustrations</p>
-              <ul className="space-y-1.5">
-                {p.frustrations.map((f) => (<li key={f} className="text-sm flex gap-2"><X size={14} className="flex-shrink-0 mt-1 text-[#075EFD]" />{f}</li>))}
-              </ul>
-            </Reveal>
-          ))}
-        </div>
 
         <Reveal>
           <h3 className="mt-16 font-display text-2xl md:text-3xl font-black mb-8">design goals</h3>
@@ -358,7 +304,7 @@ export default function AuroraCaseStudy() {
 
       {/* 05 DESIGN */}
       <SectionWrap data-testid="section-design">
-        <SectionLabel num="05" name="Design" />
+        <SectionLabel num="05" name="Two Surfaces" />
         <Reveal>
           <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{au.design.headline}</h2>
         </Reveal>
@@ -429,7 +375,7 @@ export default function AuroraCaseStudy() {
 
       {/* 06 DESIGN SYSTEM */}
       <SectionWrap data-testid="section-design-system">
-        <SectionLabel num="06" name="Design System" />
+        <SectionLabel num="06" name="The System" />
         <Reveal>
           <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{au.designSystem.headline}</h2>
         </Reveal>
@@ -453,7 +399,7 @@ export default function AuroraCaseStudy() {
 
       {/* 07 OUTCOME — merges validation + reflection into one section */}
       <SectionWrap data-testid="section-outcome">
-        <SectionLabel num="07" name="Outcome" />
+        <SectionLabel num="07" name="What Changed" />
         <Reveal>
           <h2 className="font-display text-3xl md:text-4xl font-black leading-tight max-w-6xl mb-6">{au.impact.headline}</h2>
         </Reveal>

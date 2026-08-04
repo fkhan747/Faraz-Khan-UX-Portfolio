@@ -107,7 +107,7 @@ export const concepts = [
     role: "Senior UX Lead · self-initiated",
     year: "2026",
     accent: "#4285F4",
-    coverImg: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1200&q=80&auto=format&fit=crop",
+    coverImg: "/slate-shots/01-overview.png",
     status: "live prototype",
     prototypeUrl: "/slate/",
     summary:
@@ -125,7 +125,7 @@ export const concepts = [
     role: "Senior UX Lead · self-initiated",
     year: "2026",
     accent: "#0E9CA6",
-    coverImg: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&q=80&auto=format&fit=crop",
+    coverImg: "/almanac-shots/hi-01-ask-answer.png",
     status: "live prototype",
     prototypeUrl: "/almanac/",
     summary:
