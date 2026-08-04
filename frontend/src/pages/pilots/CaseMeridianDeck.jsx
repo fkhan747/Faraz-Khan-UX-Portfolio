@@ -55,7 +55,7 @@ const OVERVIEW = [
 /* Measured across the four legacy dashboards during the audit. */
 const BASELINE = [
   ["4", "dashboards to open before you had one answer"],
-  ["12 min", "average time to answer a leadership question"],
+  ["6 min", "average time to answer a leadership question"],
   ["1 yr", "of history visible on any screen"],
   ["11", "pie charts across the four tools"],
   ["9", "metrics carrying more than one definition"],
@@ -64,7 +64,7 @@ const BASELINE = [
 
 const IMPACT = [
   ["4", "1", "tools a dean has to open"],
-  ["12 min", "45 sec", "time to answer a leadership question"],
+  ["6 min", "2 min", "time to answer a leadership question"],
   ["1 yr", "5 yrs", "history on screen by default"],
   ["9", "0", "metrics with a disputed definition"],
   ["7", "2", "clicks to a segmented view"],
@@ -99,7 +99,7 @@ const AUDIT = [
 
 const THEMES = [
   ["Trusted", "Every number traces to the Common Data Set and IPEDS. One definition, one owner, no exceptions."],
-  ["Readable", "The headline first, the detail on demand. Ninety seconds has to be enough to get an answer."],
+  ["Readable", "The headline first, the detail on demand. Two minutes has to be enough to get an answer."],
   ["Segmented", "Nothing blends across levels. Undergraduate and graduate never share a number."],
 ];
 
@@ -108,7 +108,7 @@ const THEMES = [
 const CONSTRAINTS = [
   [
     "01",
-    "Ninety seconds and one hour, on the same screen",
+    "Two minutes and one hour, on the same screen",
     "A dean skims. An analyst excavates. Two interfaces would have split the vocabulary again, so I built one: the headline answers in a glance, and every tile is a door into the detail underneath it. Nobody gets a lesser version.",
   ],
   [
@@ -184,8 +184,8 @@ export default function CaseMeridianDeck() {
             <p className="cd-eye">Case study · Analytics platform</p>
             <h1 className="cd-h1">Meridian</h1>
             <p className="cd-hero-deck">
-              One analytics platform for an entire university, built so a dean can read it in
-              seconds instead of minutes.
+              One analytics platform for an entire university, built so a dean gets an answer in
+              about two minutes instead of six.
             </p>
           </Reveal>
         </div>
@@ -383,7 +383,7 @@ export default function CaseMeridianDeck() {
           <Reveal className="cd-half-in">
             <Head eye="What leadership asked for">The questions they could not answer</Head>
             <ul className="cd-ul">
-              <li><b>The dean.</b> Ninety seconds between meetings. Wants the headline and whether it is moving the right way.</li>
+              <li><b>The dean.</b> A couple of minutes between meetings. Wants the headline and whether it is moving the right way.</li>
               <li><b>The analyst.</b> Happy to spend an hour pulling a cohort apart, as long as the numbers hold up.</li>
               <li><b>Both.</b> One screen has to serve them without compromising for either.</li>
             </ul>
