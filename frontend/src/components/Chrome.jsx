@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { NavLink, Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Download, Menu, X } from "lucide-react";
 import { Container } from "./Grid";
 import BookCallButton from "./BookCallButton";
 import Logo from "./Logo";
+
+/* Same file the About, Contact and Footer buttons serve. */
+const RESUME_PATH = "/files/Faraz_Khan_Resume.pdf";
 
 /**
  * Global top header (sticky). White "inverse" bar aligned to the body-content
@@ -66,13 +69,33 @@ export default function Chrome() {
               </div>
             </div>
 
-            {/* Right: desktop CTA, or hamburger on phones */}
-            <BookCallButton
-              data-testid="sidebar-book-call"
-              className="btn-comic btn-cta hidden sm:inline-flex ml-2 items-center px-4 md:px-5 py-2.5 text-[13px] md:text-sm font-semibold normal-case whitespace-nowrap flex-shrink-0"
-            >
-              Book a Call →
-            </BookCallButton>
+            {/* Right: desktop CTAs, or hamburger on phones. The resume link is
+                the ghost variant so Book a Call stays the one filled control in
+                the chrome; two saturated buttons side by side would split the
+                target. .btn-comic-ghost already carries both grounds, dark bar
+                on the landing and light bar everywhere else. */}
+            <div className="hidden sm:flex items-center gap-2 md:gap-2.5 flex-shrink-0">
+              <a
+                href={RESUME_PATH}
+                download="Faraz_Khan_Resume.pdf"
+                data-testid="nav-download-resume"
+                className="btn-comic btn-comic-ghost inline-flex items-center gap-2 px-4 md:px-5 py-2.5 text-[13px] md:text-sm font-semibold normal-case whitespace-nowrap"
+              >
+                <Download size={15} aria-hidden="true" />
+                {/* Short label until there is room for the long one. The nav
+                    links are nowrap inside a min-w-0 flex child, so when the
+                    bar runs out of width they overflow their own box and slide
+                    under this button rather than making anything shrink. */}
+                <span className="lg:hidden">Resume</span>
+                <span className="hidden lg:inline">Download Resume</span>
+              </a>
+              <BookCallButton
+                data-testid="sidebar-book-call"
+                className="btn-comic btn-cta inline-flex items-center px-4 md:px-5 py-2.5 text-[13px] md:text-sm font-semibold normal-case whitespace-nowrap"
+              >
+                Book a Call →
+              </BookCallButton>
+            </div>
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
@@ -108,8 +131,18 @@ export default function Chrome() {
                   {item.label}
                 </NavLink>
               ))}
+              <a
+                href={RESUME_PATH}
+                download="Faraz_Khan_Resume.pdf"
+                data-testid="nav-mobile-download-resume"
+                onClick={() => setOpen(false)}
+                className="btn-comic btn-comic-ghost w-full mt-1 inline-flex items-center justify-center gap-2 px-4 py-3 text-sm font-semibold normal-case"
+              >
+                <Download size={15} aria-hidden="true" />
+                Download Resume
+              </a>
               <BookCallButton
-                className="btn-comic btn-comic-yellow w-full mt-1 inline-flex items-center justify-center px-4 py-3 text-sm font-semibold normal-case"
+                className="btn-comic btn-comic-yellow w-full mt-2 inline-flex items-center justify-center px-4 py-3 text-sm font-semibold normal-case"
               >
                 Book a Call →
               </BookCallButton>

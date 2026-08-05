@@ -47,39 +47,32 @@ const HXC_CSS = `
                statement font size (both Playfair, measured ratio). */
             --hxc-st-size: clamp(30px, 3.6vw, 50px);
             --hxc-name-size: calc(var(--hxc-st-size) * 4.729);
-            --hxc-head-w: min(38vw, calc((100svh - 200px) * 0.667));
+            /* The head is 1.5x its width, so its width is what has to fit the
+               leftover height: viewport, less the top bar, less the top gap
+               and a little breathing room at the bottom. Off --site-chrome so
+               it tracks the bar instead of drifting from it.
+               The 345px cap is three of the eight columns: now that
+               .hxc-inner stops growing at 1040px, a purely vw-based width
+               kept widening past the container and would run under the copy
+               on big screens. */
+            --hxc-head-w: min(38vw, 345px, calc((100svh - var(--site-chrome) - 47px) * 0.667));
           }
-        }
-        /* Shorter viewports (laptops ~768 tall): shrink the masthead and
-           tighten the vertical rhythm so nothing clips or scrolls. */
-        @media (min-width: 768px) and (max-height: 840px){
-          .hxc-hero{
-            --hxc-st-size: clamp(26px, 3vw, 42px);
-            --hxc-head-w: min(34vw, calc((100svh - 170px) * 0.667));
-          }
-          .hxc-solo{ --hxc-top-gap: clamp(6px, 1.5vh, 16px); }
-          .hxc-chips{ margin-bottom:9px; }
-          .hxc-nameplate{ margin-bottom:6px; }
-          .hxc-statement{ margin-bottom:12px; }
-          .hxc-sub{ margin-bottom:16px; }
-        }
-        @media (min-width: 768px) and (max-height: 680px){
-          .hxc-hero{ --hxc-st-size: clamp(22px, 2.6vw, 34px); }
-          .hxc-sub{ font-size:14px; margin-bottom:12px; }
         }
 
-        /* Solo: full-viewport standalone landing. The site main pads 90px,
-           so the section owns the rest and never scrolls on desktop. */
+        /* Solo: full-viewport standalone landing. The section owns whatever
+           the fixed top bar leaves, so it never scrolls on desktop.
+           --site-chrome is defined in index.css and is the SAME value <main>
+           pads with; hard-coding it here is what made the page scroll before. */
         .hxc-solo{
-          min-height:calc(100vh - 90px);
-          min-height:calc(100svh - 90px);
+          min-height:calc(100vh - var(--site-chrome));
+          min-height:calc(100svh - var(--site-chrome));
           padding-top:24px; padding-bottom:40px;
         }
         @media (min-width: 768px){
           .hxc-solo{
-            height:calc(100vh - 90px);
-            height:calc(100svh - 90px);
-            max-height:calc(100svh - 90px);
+            height:calc(100vh - var(--site-chrome));
+            height:calc(100svh - var(--site-chrome));
+            max-height:calc(100svh - var(--site-chrome));
             min-height:0;
             overflow:hidden;
             display:flex; align-items:stretch;
@@ -90,8 +83,20 @@ const HXC_CSS = `
           }
           .hxc-solo .hxc-inner{ width:100%; }
           /* Explicit height (not %: the perspective wrapper is auto-height)
-             so the absolutely-centered copy + picture have a box to center in. */
-          .hxc-solo .hxc-stage{ height:calc(100vh - 90px); height:calc(100svh - 90px); }
+             so the absolutely-positioned copy + picture have a box to sit in. */
+          .hxc-solo .hxc-stage{
+            height:calc(100vh - var(--site-chrome));
+            height:calc(100svh - var(--site-chrome));
+          }
+          /* Both columns hang from the top gap rather than centring in the
+             stage. Centring left a dead band under the navbar that grew with
+             the viewport, and the block read as floating too low. */
+          .hxc-solo .hxc-copy{
+            justify-content:flex-start; padding-top:var(--hxc-top-gap);
+          }
+          .hxc-solo .hxc-figure{
+            top:var(--hxc-top-gap); transform:none;
+          }
         }
 
         .hxc-persp{ perspective:none; }
@@ -235,25 +240,25 @@ const HXC_CSS = `
         @media (min-width: 768px){
           .hxc-copy{
             position:absolute; left:0; top:0; bottom:0;
-            width:min(50%, 620px); margin-top:0;
+            /* Five of the eight columns. The container's content box is 960px
+               at full width, so 5 columns + 4 gutters = 591px, leaving one
+               24px gutter and a 345px three-column portrait. At the old 50%
+               the copy was 480px while the nowrap statement line needed 549,
+               so the masthead (fitted to that line, inside an overflow:hidden
+               clip) lost its last glyphs on wide screens. */
+            width:min(61.5%, 620px); margin-top:0;
             display:flex; flex-direction:column; justify-content:center;
           }
-          /* Roomier vertical rhythm on taller displays so the block fills
-             the height and never reads as cramped-at-top. */
-          @media (min-height: 860px){
-            .hxc-chips{ margin-bottom:20px; }
-            .hxc-nameplate{ margin-bottom:20px; }
-            .hxc-statement{ margin-bottom:30px; }
-            .hxc-sub{ margin-bottom:34px; }
-            .hxc-cta-row{ margin-bottom:6px; }
-            .hxc-featured{ margin-top:26px; }
-          }
         }
+        /* margin-bottom matches .hxc-chips' margin-bottom on purpose: the
+           eyebrow sits optically centred between the chip row and the
+           masthead. Keep the two in step in every height tier below. */
         .hxc-eyebrow{
           font-family:'JetBrains Mono', ui-monospace, monospace; font-weight:600;
           font-size:14.5px; letter-spacing:0.22em; color:#F5379B;
-          margin-bottom:6px;
+          margin-bottom:14px;
         }
+        .hxc-eyebrow-line{ display:block; line-height:1.5; }
         .hxc-cursor{
           display:inline-block; margin-left:0.4em; color:#F5379B;
           animation:hxc-blink 1.1s steps(2, end) infinite;
@@ -330,11 +335,16 @@ const HXC_CSS = `
           .hxc-btn-ghost:hover{ border-color:rgba(244,243,250,0.6); }
         }
 
+        /* Featured case studies: one quiet line of links under the buttons.
+           A glass card was tried here on 2026-08-05 and pulled: it competed
+           with the chip row for attention and boxed in the copy column. Type
+           is 14.5px rather than the original 12.5px so the names carry
+           without needing a container around them. */
         .hxc-featured{
           display:flex; flex-wrap:wrap; align-items:center; gap:16px;
           margin-top:18px;
           font-family:'JetBrains Mono', ui-monospace, monospace; font-weight:600;
-          font-size:12.5px; letter-spacing:0.08em; color:#A29CB4;
+          font-size:14.5px; letter-spacing:0.08em; color:#A29CB4;
         }
         .hxc-featured-link{
           color:#F4F3FA; text-decoration:underline;
@@ -436,6 +446,88 @@ const HXC_CSS = `
           transform-style:preserve-3d;
           pointer-events:none;
         }
+
+        /* SHORT VIEWPORTS (laptops roughly 700-840 tall). The whole copy
+           column has to fit: .hxc-solo is a fixed height with overflow:hidden,
+           so anything that does not fit is not scrolled to, it is invisible.
+           The featured card is last in the column and was the first thing to
+           disappear.
+           This block lives at the END of the sheet deliberately. It used to be
+           declared near the top, before the base rules, and at equal
+           specificity every margin it set was overridden by the base value
+           further down: it read as if it tightened the layout and did nothing
+           at all. */
+        /* NARROW PHONES. Three things in the copy column are white-space:
+           nowrap and were running past the screen edge; the section's
+           overflow:hidden was quietly clipping them rather than scrolling.
+           - the eyebrow's second line wrapped again and stranded "ANALYTICS"
+           - the wide chip is 34 characters of tracked mono
+           - the rotating line's longest phrase is 41 characters
+           The slot can simply wrap: the hidden sizer still sets the height,
+           and the absolute words share the slot's width, so they wrap the
+           same way and the box stays the right size. */
+        @media (max-width: 480px){
+          .hxc-eyebrow{ font-size:12px; letter-spacing:0.16em; }
+          .hxc-chip-card{ font-size:10px; padding:7px 11px; letter-spacing:0.06em; }
+          .hxc-slot-line{ white-space:normal; }
+          .hxc-slot{ display:block; }
+          .hxc-slot-sizer, .hxc-word{ white-space:normal; }
+        }
+
+        /* HEIGHT TIERS. All of them live here, at the end of the sheet, and
+           all of them are plain class selectors at the same specificity as
+           the base rules above. That is deliberate: put any of these earlier
+           and the base value further down silently wins. Two separate bugs in
+           this file came from exactly that.
+
+           In each tier .hxc-chips and .hxc-eyebrow margins are a matched
+           pair, sized so the eyebrow sits optically centred between the chip
+           row and the masthead (see the fit() routine, which cancels the
+           masthead's leading so these numbers mean what they look like).
+           .hxc-eyebrow carries the larger of the two because its own line box
+           has ~5.6px of leading above the caps and only ~3.1px below. */
+
+        /* TIER 1 (880+ tall): the roomy rhythm. The threshold is measured, not
+           picked: the roomy column needs ~834px of viewport at its tallest
+           (widest statement, so tallest masthead), and 880 leaves a margin
+           over that. It sat at 941 while the featured block was a card, and
+           at 860 before that, where it wrote generous margins into a column
+           too short to hold them and the last row fell off the bottom. */
+        @media (min-width: 768px) and (min-height: 880px){
+          .hxc-chips{ margin-bottom:19px; }
+          .hxc-eyebrow{ margin-bottom:21px; }
+          .hxc-nameplate{ margin-bottom:20px; }
+          .hxc-statement{ margin-bottom:30px; }
+          .hxc-sub{ margin-bottom:34px; }
+          .hxc-cta-row{ margin-bottom:6px; }
+          .hxc-featured{ margin-top:26px; }
+        }
+
+        /* TIER 2 (under 880 tall): tighter rhythm and a smaller masthead. */
+        @media (min-width: 768px) and (max-height: 879px){
+          .hxc-hero{
+            --hxc-st-size: clamp(24px, 2.6vw, 36px);
+            /* Bigger bottom allowance than the tall case: down here the
+               portrait, not the copy, is what runs into the bottom edge. */
+            --hxc-head-w: min(34vw, 345px, calc((100svh - var(--site-chrome) - 62px) * 0.667));
+          }
+          .hxc-solo{ --hxc-top-gap: clamp(6px, 1.5vh, 16px); }
+          .hxc-chips{ margin-bottom:8px; }
+          .hxc-chip-card{ padding:6px 12px; }
+          .hxc-eyebrow{ font-size:13px; margin-bottom:10px; }
+          .hxc-nameplate{ margin-bottom:6px; }
+          .hxc-statement{ margin-bottom:12px; }
+          .hxc-sub{ font-size:15px; margin-bottom:14px; }
+          .hxc-featured{ margin-top:13px; font-size:13.5px; gap:13px; }
+        }
+
+        /* TIER 3: the shortest desktop windows. 730 rather than 700 so the
+           very common 1280x720 gets the extra squeeze; at 720 the tier above
+           left the copy with single-digit slack. */
+        @media (min-width: 768px) and (max-height: 730px){
+          .hxc-hero{ --hxc-st-size: clamp(21px, 2.2vw, 30px); }
+          .hxc-sub{ font-size:14px; margin-bottom:11px; }
+        }
 `;
 /* Alternate expressions, swapped in during glitches */
 const ALT_CARTOONS = [
@@ -455,6 +547,10 @@ const WORDS = [
   "47 tabs deep, dreamin' in internet waves.",
 ];
 const LONGEST_WORD = WORDS[3];
+
+/* One reusable 2d context for text metrics. The masthead fit runs on every
+   resize, and a fresh canvas per call is pure garbage. */
+let metricsCtx = null;
 
 /* Ambient glitch rhythm */
 const BURST_MIN_GAP = 5000; /* quiet time between bursts, ms (owner: one glitch every ~5s) */
@@ -556,22 +652,80 @@ export default function HeroFusion({ solo = false, portraitOnly = false, portrai
     const name = nameRef.current;
     const line = stLineRef.current;
     if (!name || !line) return undefined;
+    /* Width of the TEXT, not of the box holding it. .hxc-st-line is a block,
+       so its rect is the whole copy column, and .hxc-nameplate is capped by
+       max-width:100%, so its rect stops growing once the masthead reaches the
+       column edge. Measuring boxes made the ratio below meaningless: the name
+       was fitted to the column rather than to the statement, and once the
+       column narrowed to the 1040 grid the "." was clipped by .hxc-clip's
+       overflow:hidden. A Range reports the real ink and ignores both. */
+    const inkWidth = (el) => {
+      const r = document.createRange();
+      r.selectNodeContents(el);
+      return r.getBoundingClientRect().width;
+    };
     const fit = () => {
       name.style.fontSize = "";
-      const nw = name.getBoundingClientRect().width;
-      const lw = line.getBoundingClientRect().width;
+      const nw = inkWidth(name);
+      const lw = inkWidth(line);
       if (nw > 0 && lw > 0) {
         const cur = parseFloat(getComputedStyle(name).fontSize);
         const target = (cur * lw) / nw;
-        /* Cap by viewport height so the masthead never forces a scroll on
-           short laptops (it just ends a touch before the "s" there). */
-        const cap = window.innerHeight * 0.27;
+        /* Cap the masthead so it never squeezes the rest of the column off a
+           short laptop (it just ends a touch before the "s" there). The cap is
+           a share of the space the hero actually gets, not of the whole
+           window, because the fixed top bar takes a constant bite: on an 800px
+           screen a window-relative cap left the masthead at a third of the
+           column and pushed the featured card out of view. Non-binding on
+           tall viewports, where the measured fit is smaller than the cap. */
+        const chrome =
+          parseFloat(
+            getComputedStyle(document.documentElement).getPropertyValue(
+              "--site-chrome"
+            )
+          ) || 153;
+        const cap = (window.innerHeight - chrome) * 0.24;
         name.style.fontSize = `${Math.min(target, cap).toFixed(2)}px`;
+      }
+
+      /* Optical centring for the eyebrow above. The masthead's line box is
+         shorter than its glyphs (line-height 0.95) and the clip adds padding,
+         so the nameplate's box top sits ~47px above where the F actually
+         starts. That slack made a 6px margin read as a 56px gap while the
+         20px above the eyebrow read as 26px: equal margins would not have
+         looked equal. Measure the slack and pull the plate up by exactly it,
+         so from here the margins ARE the gaps you see. Measured rather than
+         hard-coded because the JS cap above can change the font size, and the
+         slack scales with it. */
+      const plate = name.closest(".hxc-nameplate");
+      const clip = name.parentElement;
+      if (plate && clip) {
+        const cs = getComputedStyle(name);
+        metricsCtx =
+          metricsCtx || document.createElement("canvas").getContext("2d");
+        metricsCtx.font = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
+        const m = metricsCtx.measureText("F");
+        const asc = m.fontBoundingBoxAscent;
+        const desc = m.fontBoundingBoxDescent;
+        const inkAsc = m.actualBoundingBoxAscent;
+        /* Older engines omit the fontBoundingBox* metrics; leave it alone
+           rather than guess and pull the masthead somewhere wrong. */
+        if (asc && desc && inkAsc) {
+          const lineH = parseFloat(cs.lineHeight);
+          const halfLead = (lineH - (asc + desc)) / 2;
+          const clipPad = parseFloat(getComputedStyle(clip).paddingTop) || 0;
+          const slack = clipPad + halfLead + asc - inkAsc;
+          plate.style.marginTop = `${(-slack).toFixed(2)}px`;
+        }
       }
     };
     fit();
     const ro = new ResizeObserver(fit);
     ro.observe(line);
+    /* The observer only fires when the statement line changes width. The cap
+       above is height-based, so a resize that changes only the height (or a
+       phone rotating into a short landscape) has to re-run the fit too. */
+    window.addEventListener("resize", fit);
     let dead = false;
     if (document.fonts && document.fonts.ready) {
       document.fonts.ready.then(() => {
@@ -581,6 +735,7 @@ export default function HeroFusion({ solo = false, portraitOnly = false, portrai
     return () => {
       dead = true;
       ro.disconnect();
+      window.removeEventListener("resize", fit);
     };
   }, []);
 
@@ -715,7 +870,18 @@ export default function HeroFusion({ solo = false, portraitOnly = false, portrai
 
     /* Flat tint copy of a canvas, alpha preserved */
     /* Detail-preserving tint: multiply the artwork with a color (keeps the
-       drawing visible inside the tint), then restore the original alpha. */
+       drawing visible inside the tint), then restore the original alpha.
+     *
+     * The second multiply by `src` is what keeps the glitch dark. These copies
+     * get screened over the whole frame for the RGB fringe, and `screen` only
+     * ever brightens: screen(x, y) = 1 - (1-x)(1-y). The artwork's ground is
+     * near-black but not black, so a plain tint left it dark-grey, and two
+     * full-frame screens (magenta + cyan) lifted the entire panel to a milky
+     * mauve every time it glitched. Multiplying by the source twice more
+     * cubes the luminance, which crushes that ground to true black, where
+     * screen(x, 0) = x leaves it alone. Only the brightest pixels survive the
+     * cubing, which is exactly the neon rim and the lit face, so they still
+     * throw the offset fringe that sells the effect. */
     const tinted = (src, paint) => {
       const c = document.createElement("canvas");
       c.width = src.width;
@@ -725,6 +891,8 @@ export default function HeroFusion({ solo = false, portraitOnly = false, portrai
       t.globalCompositeOperation = "multiply";
       t.fillStyle = paint;
       t.fillRect(0, 0, c.width, c.height);
+      t.drawImage(src, 0, 0);
+      t.drawImage(src, 0, 0);
       t.globalCompositeOperation = "destination-in";
       t.drawImage(src, 0, 0);
       t.globalCompositeOperation = "source-over";
@@ -790,7 +958,10 @@ export default function HeroFusion({ solo = false, portraitOnly = false, portrai
           const nctx = nc.getContext("2d");
           if (!nctx) throw new Error("no neon context");
           if ("filter" in nctx) {
-            nctx.filter = "saturate(1.7) brightness(1.25)";
+            /* Saturation carries the flash, not brightness. A brightness
+               boost scales the near-black ground up too, so the panel went
+               grey on every flash frame; saturation leaves black at black. */
+            nctx.filter = "saturate(2.1) brightness(1.06)";
             nctx.drawImage(compCanvas, 0, 0);
             nctx.filter = "none";
           } else {
@@ -943,13 +1114,18 @@ export default function HeroFusion({ solo = false, portraitOnly = false, portrai
         );
       }
 
-      /* Hard RGB split */
+      /* Hard RGB split.
+       * Alpha stays low because this screens two FULL-FRAME copies over the
+       * whole canvas, and every point of alpha lifts the near-black ground
+       * along with the rim. The fringe reads from the offset, not from
+       * opacity, so 0.3-0.45 looks the same on the head and leaves the
+       * background where it belongs. */
       const jm = (seeded(bi * 7 + stepIdx, 61) * 2 - 1) * 4;
       const jb = (seeded(bi * 11 + stepIdx, 62) * 2 - 1) * 4;
       const offM = 8 + seeded(bi * 13 + stepIdx, 63) * 12;
       const offB = 8 + seeded(bi * 17 + stepIdx, 64) * 12;
       ctx.globalCompositeOperation = "screen";
-      ctx.globalAlpha = 0.6 + seeded(bi + stepIdx, 66) * 0.3;
+      ctx.globalAlpha = 0.3 + seeded(bi + stepIdx, 66) * 0.15;
       ctx.drawImage(mag, -offM, jm, w, h);
       ctx.drawImage(blue, offB, jb, w, h);
       ctx.globalCompositeOperation = "source-over";
@@ -1309,7 +1485,10 @@ export default function HeroFusion({ solo = false, portraitOnly = false, portrai
     >
       <style>{HXC_CSS}</style>
 
-      <div className="hxc-inner relative mx-auto w-full max-w-screen-2xl px-6 md:px-10 lg:px-16">
+      {/* Same measure as <Container>: max-w-[1040px] px-6 md:px-10. The hero
+          used to run to max-w-screen-2xl, so the landing was the one page that
+          did not sit on the site's 8-column column. */}
+      <div className="hxc-inner relative mx-auto w-full max-w-[1040px] px-6 md:px-10">
         <div className="hxc-persp">
           <motion.div className="hxc-stage" style={{ rotateX, rotateY }}>
             {/* Layer 1 · ambient glow */}
@@ -1353,9 +1532,14 @@ export default function HeroFusion({ solo = false, portraitOnly = false, portrai
                 </div>
               </motion.div>
 
+              {/* Two deliberate lines. Left to wrap on its own it broke after
+                  the ampersand and dropped "ANALYTICS" alone onto line two. */}
               <motion.p className="hxc-eyebrow" {...entrance(0.26, 14)}>
-                SENIOR UX LEAD · ENTERPRISE, FINTECH &amp; ANALYTICS
-                <span className="hxc-cursor" aria-hidden="true">▍</span>
+                <span className="hxc-eyebrow-line">SENIOR UX LEAD</span>
+                <span className="hxc-eyebrow-line">
+                  ENTERPRISE, FINTECH &amp; ANALYTICS
+                  <span className="hxc-cursor" aria-hidden="true">▍</span>
+                </span>
               </motion.p>
 
               {/* The white FARAZ masthead */}
@@ -1416,6 +1600,9 @@ export default function HeroFusion({ solo = false, portraitOnly = false, portrai
               </motion.div>
 
               {solo && (
+                /* Order matches `projects` in content.js: strongest proof
+                   first. Meridian came off this line on 2026-08-05; the two
+                   client studies carry it. */
                 <motion.p className="hxc-featured" {...entrance(0.6, 8, 0.45)}>
                   <span>Featured case studies</span>
                   <Link className="hxc-featured-link" to="/case/finvista">
@@ -1423,9 +1610,6 @@ export default function HeroFusion({ solo = false, portraitOnly = false, portrai
                   </Link>
                   <Link className="hxc-featured-link" to="/case/aurora">
                     Aurora
-                  </Link>
-                  <Link className="hxc-featured-link" to="/case/meridian">
-                    Meridian
                   </Link>
                 </motion.p>
               )}

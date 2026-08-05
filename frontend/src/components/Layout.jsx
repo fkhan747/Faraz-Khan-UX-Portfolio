@@ -15,7 +15,7 @@ export default function Layout({ children }) {
        threaded through every page. */
     <div className={`min-h-screen flex flex-col ${isLanding ? "bg-[#100210]" : "theme-light bg-[#EFEDE7]"}`}>
       <Chrome />
-      <main className="pt-[153px] flex-1" data-testid="main-content">
+      <main className="pt-[var(--site-chrome)] flex-1" data-testid="main-content">
         {children}
       </main>
       <Footer />

@@ -3,6 +3,12 @@
 @tailwind utilities;
 
 :root {
+  /* Height the fixed top bar reserves in <main>. The landing hero sizes itself
+     to the remaining viewport off this same value, so the two cannot drift:
+     when they did (main padded 153px while the hero still subtracted a stale
+     90px) the landing overflowed by exactly the 63px difference and scrolled. */
+  --site-chrome: 153px;
+
   /* Brand palette - single source of truth (Palette A: retro peach / magenta / indigo).
      Swapping the whole site's colors = editing the values here.
      NOTE: --brand (not --primary) holds the brand accent, to avoid colliding with
