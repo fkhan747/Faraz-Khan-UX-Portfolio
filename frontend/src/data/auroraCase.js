@@ -509,4 +509,133 @@ export const aurora = {
     screensNote:
       "The shipped surfaces, in Helio's design language. Client branding is removed and the product is anonymised under NDA.",
   },
+  // ── v3, 2026-09-13 (revised doc, same day) ─────────────────────────
+  // From Faraz's "aurora revised.md": the story is the Home Dashboard and
+  // journey creation during the AngularJS to Angular migration, not the
+  // composer AI. Rendered in the WongDoody rhythm (full-bleed cover, narrow
+  // uppercase text blocks, big rounded screens between). AuroraCaseStudy.jsx
+  // renders THIS block only; the older keys stay for the encrypt script and
+  // history, and two of them are pulled forward here because the doc points
+  // at them: the heuristic audit (02) and the personas + stakeholder quotes
+  // (04). No GIF / MP4 slots. No wireframes standing in for product UI.
+  // No legacy dashboard capture exists in the archive, so 02 and 03 carry
+  // the audit as a table and the creation flow as the shipped screens.
+  v3: {
+    title: ["Aurora: Architecting a", "Unified Campaign Ecosystem at Scale"],
+    tags: "Marketing Tech · B2B SaaS · Enterprise",
+    deck: "Aurora is the campaign orchestration engine for a global martech suite. When Helio migrated the frontend from AngularJS to Angular, I used the window to rethink the experience end to end.",
+    mark: { m: "Aurora by Helio", s: "Case study" },
+    facts: [
+      { label: "Role", value: "Lead Product Designer (Experience Transformation, UI Architecture, Design System)" },
+      { label: "Scale", value: "Hundreds of enterprise brands · 7 development epics · 3 sister products onboarded" },
+    ],
+    cover: "/aurora/cover.jpg",
+    // The outcome, before the story: recruiters scan the first two screens.
+    kpis: [["3 → 1", "clicks to create a journey"], ["78", "SUS, up from 51"], ["52", "components shipped"], ["3", "sister products onboarded"]],
+    leadShot: { src: "/aurora/04_RBJ_Properties_Weekly.jpg", alt: "The unified journey creator", cap: "The unified single-canvas journey creator: type, rules and cadence on one page." },
+
+    sections: [
+      {
+        h: "Executive Summary",
+        ps: [
+          "Aurora is the campaign orchestration engine for a global martech suite. When our parent company, Helio, initiated a massive frontend migration from AngularJS to Angular, I saw the one chance a designer rarely gets on a legacy product. While the engineers were replacing the plumbing anyway, I used that window to completely rethink the experience and bring the product in line with Helio's unified UX vision. Ultimately, we dropped journey creation from three clicks to one, eliminated severe design silos, and delivered a reusable system that fundamentally de-risked the engineering effort.",
+        ],
+      },
+      {
+        h: "The Challenge",
+        ps: [
+          "The old product had been built by engineers for engineers, with virtually no design involvement. Starting a Recurring Batch Journey meant leaving the dashboard, waiting for a separate page to load, and hunting for a button: three clicks and a heavy page load before any work began. The dashboard surfaced only failed list queries and yesterday's journeys, and truncated the long names enterprise marketers rely on, so reading a status meant hovering for a tooltip.",
+          "Designers across Helio's products had worked in isolation, so similar functions had different flows and customers were raising support tickets about the UI. And the fix had to land inside engineering's Angular migration sprints, without removing the nuanced capability enterprise customers were demanding.",
+        ],
+      },
+      {
+        h: "Our Solution",
+        ps: [
+          "A unified command centre. Primary actions surface directly on the dashboard, so journey creation drops from three clicks to one. Components were restructured to show full journey names natively, with no reliance on hover states. A filtering system restores the view of past quarters, and warnings and alerts are pulled to the top level. Advanced tools stayed, folded in through progressive disclosure.",
+          "Behind it, a reusable Figma UI kit aligned to Helio's new brand guidelines, translated into dev-ready assets and linked to user stories in Azure DevOps. It spanned seven development epics and three sister products, and stopped the UI fragmentation that had been eroding brand trust.",
+        ],
+      },
+      {
+        n: "01", h: "Operating Context and Enterprise Constraints",
+        p: "The old product had been built by engineers for engineers, with virtually no prior design involvement. Three realities shaped the architecture:",
+        // Short cards, not bullets: the constraint and one line of consequence.
+        cards: [
+          ["The rebuild clock", "Design had to land inside the Angular migration sprints. Anything late would ship as the old interface in new paint."],
+          ["Breaking the silos", "Designers across Helio products worked in isolation. Similar functions had different flows, and customers were raising support tickets."],
+          ["Enterprise nuance", "Customers wanted more capability, not less. Advanced tools had to fold in through progressive disclosure."],
+        ],
+        media: [
+          { kind: "duo", items: [{ src: "/aurora/01_RBJ_Type_Tab_Basic_Fields.jpg", alt: "Journey creation, the basics first" }, { src: "/aurora/02_RBJ_Type_Tab_All_Fields.jpg", alt: "The full rule set, on request" }], cap: "Enterprise nuance, folded in. The same creation page with the basics, and with every rule opened through progressive disclosure." },
+        ],
+      },
+      {
+        n: "02", h: "The UX Audit: Dashboard and Journey Friction",
+        p: "A heuristic sweep and stakeholder workshops, before any sketching. The friction was concentrated in how marketers started their day on the Home Dashboard.",
+        // The findings as a grid of headline + one line. Numbers where the
+        // original audit had them.
+        findingsTitle: "What the audit found",
+        findings: [
+          ["3 clicks", "to start a journey", "Leave the dashboard, wait for the Journey page, hunt for the button."],
+          ["1 day", "of journey history", "The dashboard showed only yesterday's runs. Everything else was invisible."],
+          ["Hover to read", "journey names", "Long, purposeful names were truncated behind a tooltip."],
+          ["Failed queries", "the only alert", "Useful for QA, useless for daily marketing operations."],
+          ["14 fields", "on first load", "No progressive disclosure, no help, no validation until submit. 33% abandoned at the audience step."],
+          ["7 of 12", "screens failed WCAG AA", "Unlabelled inputs, broken focus order, a schedule grid unreachable by keyboard."],
+        ],
+      },
+      {
+        n: "03", h: "Architectural Pivot: The Unified Command Center",
+        p: "Marketers did not need a smarter tool; they needed a faster one that stopped forcing them to switch modes. The critical data and actions moved to the marketer's primary workspace.",
+        cards: [
+          ["Zero-friction creation", "Primary actions surface on the dashboard. Journey creation drops from three clicks to one."],
+          ["Context without tooltips", "Components restructured to show full journey names natively. No hover states."],
+          ["Expanded visibility", "A quarter filter restores yearly performance. Warnings and alerts pulled to the top level."],
+        ],
+        media: [
+          { kind: "single", items: [{ src: "/aurora/03_RBJ_Content_Tab.jpg", alt: "The journey creator, content tab" }], cap: "The flattened creation flow. Type, content and properties in one place, reached in one click from the dashboard." },
+          { kind: "duo", items: [{ src: "/aurora/05_RBJ_Properties_Monthly.jpg", alt: "Properties, monthly cadence" }, { src: "/aurora/06_RBJ_Properties_Custom.jpg", alt: "Properties, custom cadence" }], cap: "Cadence demystified. Monthly and custom states, each with a plain-English summary of what will send." },
+        ],
+      },
+      {
+        n: "04", h: "Field Validation and Iteration",
+        p: "Moderated prototype testing with the priority personas, before development began. It aligned stakeholders early and de-risked the Angular migration. By the final round we were refining micro-copy, not debating layouts.",
+        // Personas as one line each: who, what they need, what hurts.
+        personasTitle: "Who we tested with",
+        personaRows: [
+          ["Maya", "CRM Manager", "Ship the weekly newsletter in under 30 minutes", "Re-entering audience filters"],
+          ["Tomás", "Marketing Ops Lead", "Compare performance across past quarters", "A dashboard that only shows yesterday"],
+          ["Riya", "Junior Copywriter", "Generate variations to compare quickly", "Blank-page paralysis on body copy"],
+        ],
+        setup: [["18", "participants, 2 rounds"], ["50 min", "moderated remote sessions"], ["5", "scenarios per session"], ["Figma · Maze · Dovetail", "tools"]],
+        resultsTitle: "Results",
+        results: [["91%", "Task completion", "+33 pts"], ["8.4 min", "Setup time", "−55%"], ["9%", "Schedule errors", "−78%"], ["78", "SUS", "+27 pts"]],
+        media: [
+          { kind: "duo", items: [{ src: "/aurora/01_RBJ_Type_Tab_Basic_Fields.jpg", alt: "The prototype, basic fields" }, { src: "/aurora/04_RBJ_Properties_Weekly.jpg", alt: "The prototype, weekly cadence" }], cap: "The high-fidelity flows put in front of campaign managers before development began." },
+        ],
+      },
+      {
+        n: "05", h: "Scalability and Engineering Integration",
+        p: "A reusable Figma UI kit aligned to Helio's new brand guidelines, translated into dev-ready assets and linked to user stories in Azure DevOps. It spanned seven development epics and stopped the UI fragmentation that had been eroding brand trust.",
+        cards: [
+          ["52 components, 8 token sets", "Full coverage of the journey and composer flows, each linked to an Azure DevOps story."],
+          ["3 surfaces back-filled", "Audience Builder, Reports and Admin took the kit with zero new design work."],
+          ["Monthly cross-product review", "Shared tokens and a contribution model ended the every-feature-looks-different pattern."],
+        ],
+        media: [
+          { kind: "trio", items: [{ src: "/aurora/11_Composer_Blocks_Library_Panel.jpg", alt: "Blocks library" }, { src: "/aurora/10_Composer_Open_with_AI_Context_Menu.jpg", alt: "Contextual actions inside a block" }, { src: "/aurora/09_Helio_AI_Make_Shorter_Response.jpg", alt: "Assist panel" }], cap: "From the UI kit: the blocks library, contextual actions and the assist panel, built once and reused across the suite." },
+        ],
+      },
+      {
+        n: "06", h: "Strategic Retrospective",
+        sub: "Key learnings",
+        numbered: [
+          ["Count the Switches, Not Just the Clicks:", "While we successfully dropped the click count from three to one, the real victory was saving marketers time by surfacing the status of all journeys immediately on the dashboard."],
+          ["Design Systems are Operational Tools, Not Just Visuals:", "By integrating the Figma UI kit directly into the Agile delivery process via Azure DevOps, the design system became a tool for engineering velocity, not just a set of brand guidelines."],
+        ],
+        media: [
+          { kind: "single", items: [{ src: "/aurora/07_Composer_Empty_AI.jpg", alt: "The product in use" }], cap: "The unified workspace, in Helio's design language." },
+        ],
+      },
+    ],
+  },
 };
