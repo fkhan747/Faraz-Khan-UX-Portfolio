@@ -523,7 +523,7 @@ export const aurora = {
   v3: {
     title: ["Aurora: Architecting a", "Unified Campaign Ecosystem at Scale"],
     tags: "Marketing Tech · B2B SaaS · Enterprise",
-    deck: "Aurora is the campaign orchestration engine for a global martech suite. When Helio migrated the frontend from AngularJS to Angular, I used the window to rethink the experience end to end.",
+    deck: "Campaign orchestration for a global martech suite, rethought end to end during Helio's AngularJS to Angular migration.",
     mark: { m: "Aurora by Helio", s: "Case study" },
     facts: [
       { label: "Role", value: "Lead Product Designer (Experience Transformation, UI Architecture, Design System)" },
@@ -536,23 +536,15 @@ export const aurora = {
 
     sections: [
       {
-        h: "Executive Summary",
-        ps: [
-          "Aurora is the campaign orchestration engine for a global martech suite. When our parent company, Helio, initiated a massive frontend migration from AngularJS to Angular, I saw the one chance a designer rarely gets on a legacy product. While the engineers were replacing the plumbing anyway, I used that window to completely rethink the experience and bring the product in line with Helio's unified UX vision. Ultimately, we dropped journey creation from three clicks to one, eliminated severe design silos, and delivered a reusable system that fundamentally de-risked the engineering effort.",
-        ],
-      },
-      {
         h: "The Challenge",
         ps: [
-          "The old product had been built by engineers for engineers, with virtually no design involvement. Starting a Recurring Batch Journey meant leaving the dashboard, waiting for a separate page to load, and hunting for a button: three clicks and a heavy page load before any work began. The dashboard surfaced only failed list queries and yesterday's journeys, and truncated the long names enterprise marketers rely on, so reading a status meant hovering for a tooltip.",
-          "Designers across Helio's products had worked in isolation, so similar functions had different flows and customers were raising support tickets about the UI. And the fix had to land inside engineering's Angular migration sprints, without removing the nuanced capability enterprise customers were demanding.",
+          "A product built by engineers for engineers. Starting a journey took three clicks and a page load; the dashboard showed only failed queries and yesterday's runs, and truncated the names marketers rely on. Siloed design across Helio meant different flows for the same job, and support tickets to prove it.",
         ],
       },
       {
         h: "Our Solution",
         ps: [
-          "A unified command centre. Primary actions surface directly on the dashboard, so journey creation drops from three clicks to one. Components were restructured to show full journey names natively, with no reliance on hover states. A filtering system restores the view of past quarters, and warnings and alerts are pulled to the top level. Advanced tools stayed, folded in through progressive disclosure.",
-          "Behind it, a reusable Figma UI kit aligned to Helio's new brand guidelines, translated into dev-ready assets and linked to user stories in Azure DevOps. It spanned seven development epics and three sister products, and stopped the UI fragmentation that had been eroding brand trust.",
+          "A unified command centre. Creation moved onto the dashboard, three clicks to one. Full journey names, no tooltips. A quarter filter and top-level alerts restored visibility, with advanced rules kept behind progressive disclosure. All of it on a Figma UI kit wired to Azure DevOps, across seven epics and three sister products.",
         ],
       },
       {

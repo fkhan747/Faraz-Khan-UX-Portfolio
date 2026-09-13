@@ -160,14 +160,13 @@ const WD_CSS = `
   .au-table tbody th b{ display:block; } .au-table tbody th span{ font-size:12px; color:var(--acc); letter-spacing:.06em; text-transform:uppercase; }
   .au-table td{ color:var(--ink); }
 
-  .au-setup{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; margin:24px 0 24px; }
-  @media (max-width:760px){ .au-setup{ grid-template-columns:repeat(2,1fr); } }
-  .au-setup div{ border-top:1px solid var(--rule); padding-top:10px; }
-  .au-setup .v{ font-size:22px; font-weight:300; line-height:1.2; }
-  .au-setup .l{ font-size:12.5px; color:var(--muted); margin-top:4px; }
+  .au-setup{ display:flex; flex-wrap:wrap; gap:8px 28px; margin:20px 0 28px; padding:14px 0; border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); }
+  .au-setup > div{ display:flex; align-items:baseline; gap:6px; }
+  .au-setup .v{ font-size:15px; font-weight:700; }
+  .au-setup .l{ font-size:13px; color:var(--muted); }
   .au-results{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; margin:8px 0 24px; }
   @media (max-width:760px){ .au-results{ grid-template-columns:repeat(2,1fr); } }
-  .au-results div{ border-top:1px solid var(--ink); padding-top:12px; }
+  .au-results > div{ border-top:1px solid var(--ink); padding-top:12px; }
   .au-results .v{ font-size:40px; font-weight:300; letter-spacing:-.03em; line-height:1; font-variant-numeric:tabular-nums; }
   .au-results .l{ font-size:14px; margin-top:6px; } .au-results .s{ font-size:12.5px; color:var(--acc); margin-top:2px; font-weight:700; }
 
@@ -288,11 +287,10 @@ export default function AuroraCaseStudy() {
           {v.facts.map((f) => <div key={f.label}><b>{f.label}</b>{f.value}</div>)}
         </div>
 
-        {/* Executive summary, then The Challenge and Our Solution side by
-            side, then the lead screen under them, then the numbered detail. */}
-        <TextBlock s={v.sections[0]} />
+        {/* The Challenge and Our Solution side by side, then the lead screen
+            under them, then the numbered detail. */}
         <Reveal className="au-pair">
-          {v.sections.slice(1, 3).map((s) => (
+          {v.sections.slice(0, 2).map((s) => (
             <div className="au-pair-col" key={s.h}>
               <h2 className="au-h2">{s.h}</h2>
               {(s.ps || []).map((t) => <p key={t.slice(0, 24)}>{rich(t)}</p>)}
@@ -304,7 +302,7 @@ export default function AuroraCaseStudy() {
           {v.kpis.map(([val, l]) => <div className="au-kpi" key={l}><div className="v">{val}</div><div className="l">{l}</div></div>)}
         </Reveal>
 
-        {v.sections.slice(3).map((s) => (
+        {v.sections.slice(2).map((s) => (
           <div key={s.h}>
             <TextBlock s={s} />
             {(s.media || []).map((m, i) => <Media key={i} kind={m.kind} items={m.items} cap={m.cap} />)}
