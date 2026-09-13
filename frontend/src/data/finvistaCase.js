@@ -779,4 +779,109 @@ export const finvista = {
       ],
     },
   },
+  // ── v4, 2026-09-13: the shared WongDoody rhythm (see pilots/caseWD.jsx) ──
+  // Same six sections and claims as v3, reshaped: Challenge | Solution up
+  // top, KPIs after the lead screens, exhibits instead of prose where the
+  // content is a list. CaseFinvistaLong.jsx renders THIS block; v3 stays
+  // for history. Testing numbers are Faraz's, added deliberately.
+  v4: {
+    title: ["FinVista: Architecting an", "Assisted Lending Operating System at Scale"],
+    tags: "Enterprise Fintech · Native Android · Assisted Lending · Design System · Field Operations",
+    deck: "Multi-day paper loan origination, rebuilt as an 11-step native Android journey for one of India's largest NBFCs.",
+    mark: { m: "FinVista", s: "Case study" },
+    facts: [
+      { label: "Role", value: "Senior UX Lead (Product Architecture, Dual-Persona Workflows, Design System)" },
+      { label: "Scale", value: "Rs 30,000+ Cr loan portfolio · 25M+ customer accounts · 500+ Indian cities" },
+    ],
+    cover: "/finvista/cover.jpg",
+    pair: [
+      { h: "The Challenge", ps: ["One Android handset, two readers. A quota-driven field agent runs 15 to 20 applications a day on a budget phone in a stockyard on patchy 4G, then hands the same phone to the borrower for photos, consents, OTPs and signatures. Over 40 fields per application, and one system that had to serve six lending verticals without six codebases."] },
+      { h: "Our Solution", ps: ["An oscillating dual-state terminal: dense and fast for the agent, large-type and plain-language for the borrower, with internal notes masked the moment the phone turns. Eleven steps on a strict one screen, one job rule, every field cached locally so a dropped connection loses nothing. A 100+ component system that the other five verticals reused as is."] },
+    ],
+    lead: { items: [
+      { src: "/finvista/m3/dashboard.png", alt: "Applications queue, agent side" },
+      { src: "/finvista/m3/employment.png", alt: "Employment details, agent mode" },
+      { src: "/finvista/m3/kfs.png", alt: "Key facts statement, borrower side" },
+    ], cap: "Agent mode on the left and centre; the phone turned to the borrower on the right." },
+    kpis: [["60%", "faster loan processing"], ["11", "steps, one screen one job"], ["6", "verticals on one system"], ["86", "SUS, up from 58"]],
+
+    sections: [
+      {
+        n: "01", h: "Operating Context and Enterprise Constraints",
+        p: "Not quiet offices. Stepping into the UX Lead role, it was clear we were designing for stockyards, dealer lots and budget phones. Three realities shaped the architecture:",
+        cards: [
+          ["Device and network diversity", "Company-issued budget Android with limited memory, on 4G that drops in outdoor stockyards and crowded dealership lots."],
+          ["Information overload", "Over 40 distinct data fields to complete for a single loan application."],
+          ["The multi-vertical mandate", "Two-Wheeler was the baseline, but Consumer Durable, Personal, Used Car, Tractor and Three-Wheeler had to run on the same system."],
+        ],
+      },
+      {
+        h: "The journey, screen by screen",
+        p: "The eleven steps as the executive sees them, left to right. Two screens turn the phone around: the bureau consent and the key facts statement, where the borrower signs.",
+        film: [
+          { src: "/finvista/m3/login.png", t: "Sign in", d: "Sales and call centre staff" },
+          { src: "/finvista/m3/dashboard.png", t: "Applications", d: "The queue, by stage" },
+          { src: "/finvista/m3/portfolio.png", t: "Portfolio", d: "Store manager view" },
+          { src: "/finvista/m3/personal.png", t: "Personal details", d: "Live photo, pre-filled KYC" },
+          { src: "/finvista/m3/address.png", t: "Address", d: "Current and correspondence" },
+          { src: "/finvista/m3/employment.png", t: "Employment", d: "Income profiling" },
+          { src: "/finvista/m3/vehicle.png", t: "Vehicle", d: "Asset selection" },
+          { src: "/finvista/m3/consent.png", t: "Bureau consent", d: "Borrower checks the box", hand: true },
+          { src: "/finvista/m3/kfs.png", t: "Key facts", d: "Borrower signs with OTP", hand: true },
+          { src: "/finvista/m3/summary.png", t: "Loan summary", d: "Amount, EMI, tenure" },
+          { src: "/finvista/m3/disbursed.png", t: "Disbursed", d: "Funds released" },
+        ],
+        filmHint: "Scroll sideways. Tap any screen to open it.",
+      },
+      {
+        n: "02", h: "The Core Innovation: Two Readers, One Screen",
+        p: "The breakthrough was recognising two entirely different personas sharing one physical device. The application is an oscillating dual-state terminal governed by three rules:",
+        cards: [
+          ["A · High-throughput agent mode", "15 to 20 applications a day. Dense data entry, dedicated numeric keypads, maximum speed."],
+          ["B · Sandboxed borrower handoff", "Tap to hand over and the interface transforms: 18-point type, dealership notes and risk scores masked, plain language, one decision per screen."],
+          ["C · Fail-safe state preservation", "Every field commits to local storage. A dropped connection during a showroom walkaround loses nothing."],
+        ],
+        media: [{ items: [{ src: "/finvista/m3/employment.png", alt: "State A, agent mode" }, { src: "/finvista/m3/consent.png", alt: "State B, borrower handoff" }], cap: "State A on the left, the agent entering data. State B on the right, the phone turned to the borrower for consent." }],
+      },
+      {
+        n: "03", h: "Architecture: Why the 11\u2011Step Modular Stepper Won",
+        p: "Long scrolling forms and accordions both failed on budget hardware: unpredictable viewport jumps and cognitive overload across 40 fields. The journey became eleven modular steps on a strict one screen, one job rule. More taps, zero ambiguity, faster completion.",
+        stepsTitle: "The eleven steps",
+        steps: ["Basic Details", "PAN Check", "Assisted KYC", "Income Profiling", "Asset Selection", "Loan Configurator", "Bank Validate", "E-Mandate Setup", "Down Payment", "Delivery Order", "Disbursement"],
+        handoffSteps: [3, 8],
+        media: [{ items: [{ src: "/finvista/svg-13.svg", alt: "Layout exploration: long scroll, accordion, stepped wizard" }], cap: "The layout exploration. Long scroll (A) and accordion (B) against the stepped wizard (C) that shipped." }],
+      },
+      {
+        n: "04", h: "Usability Testing and Iteration",
+        p: "Five iterative rounds of moderated testing with high-fidelity Figma prototypes mirrored on budget Android devices, before the architecture was committed.",
+        setup: [["5", "rounds"], ["24", "participants"], ["Agents · store managers · borrowers", ""], ["Figma on budget Android", ""]],
+        resultsTitle: "Results",
+        results: [["86", "System Usability Scale", "+28 pts", "58"], ["94%", "Task success rate", "+32 pts", "62%"]],
+        frictionTitle: "Two friction points resolved before launch",
+        friction: [
+          ["The long-scroll fatigue", "Continuous scrolling through 40 fields on one screen: visual fatigue, input errors, viewport jumping on budget hardware.", "Progressive disclosure. The 11-step flow presents one logical task at a time."],
+          ["Spatial disorientation", "Once modular, agents lost their sense of where they were, and long compliance checks bred anxiety.", "A dual progress indicator: a journey-level percentage next to a step-level count."],
+        ],
+        media: [{ items: [{ src: "/finvista/svg-15.svg", alt: "Progress exploration: top bar, vertical stepper, ring" }, { src: "/finvista/m3/vehicle.png", alt: "Shipped: the dual progress indicator" }], cap: "The progress exploration on the left; on the right, what shipped: journey percentage and step count in one row, on every step." }],
+      },
+      {
+        n: "05", h: "Scaling Across the Business",
+        p: "The architecture had to support Tractors, Used Cars and Consumer Durables, not just Two-Wheelers. A design system of over 100 native Android components carried the exact 11-step logic across five more loan products.",
+        cards: [
+          ["100+ components", "Tokenised Material 3 foundations: colour, type scale, spacing, controls, cards and sheets."],
+          ["Same steps, different proof", "Tractor loans swapped urban salary inputs for land revenue records. Identical step logic."],
+          ["Express 4-step checkout", "Existing customers on Durables and Personal loans trigger pre-approved journeys, eleven steps collapsed to four."],
+        ],
+        media: [{ items: [{ src: "/finvista/m3/system.png", alt: "The FinVista design system", sheet: true }], cap: "The design system: colour roles, type scale, spacing, controls, status and the handoff surface." }],
+      },
+      {
+        n: "06", h: "Strategic Retrospective",
+        sub: "Field learnings",
+        numbered: [
+          ["Field usability over laboratory polish:", "1px light-grey dividers looked refined in Figma and washed out under midday sun in a stockyard. Tokens moved to higher contrast, bold borders and a 16sp minimum on every field input."],
+          ["Design for latency and debounce the button:", "Bureau and banking checks hit 4 to 8 second spikes. Agents tapped submit repeatedly and fired duplicate calls. Deterministic loading skeletons and button debouncing eliminated them."],
+        ],
+      },
+    ],
+  },
 };
