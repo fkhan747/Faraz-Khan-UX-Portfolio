@@ -623,4 +623,160 @@ export const finvista = {
     screensNote:
       "Structure, flow and content are the product as it shipped. The visual layer is a Material 3 refresh in the current design language.",
   },
+  // ── v3, 2026-09-13 ─────────────────────────────────────────────────
+  // The restructured case study, from Faraz's "finvista revised.md". Six
+  // numbered sections in the order the doc runs them. CaseFinvistaLong.jsx
+  // renders THIS block only; the older keys above stay for the encrypt
+  // script and git history. Testing numbers (5 rounds, 24 participants,
+  // SUS 58 to 86, task success 62 to 94) are Faraz's, added deliberately.
+  // Assets come from the existing public/finvista archive: the M3 screens
+  // for product UI, the svg explorations and numbered captures for process.
+  v3: {
+    title: "FinVista: Architecting an Assisted Lending Operating System at Scale",
+    tags: ["Enterprise Fintech", "Native Android", "Assisted Lending", "Design System", "Field Operations"],
+    facts: [
+      { label: "Role", value: "Senior UX Lead (Product Architecture, Dual-Persona Workflows, Design System)" },
+      { label: "Scale", value: "Rs 30,000+ Cr loan portfolio · 25M+ customer accounts · 500+ Indian cities" },
+    ],
+    hero: {
+      left: { label: "High-density agent flow", src: F("m3/dashboard.png"), alt: "Applications queue, agent side" },
+      right: { label: "High-legibility customer verification", src: F("m3/kfs.png"), alt: "Key facts statement, borrower side" },
+    },
+
+    summary: {
+      eye: "Executive summary & operational impact",
+      h: "Multi-day paper origination became an 11\u2011step operating system.",
+      p: "FinVista transformed a multi-day paper origination process across India's largest NBFC network into an 11-step high-throughput native Android operating system. Ultimately, we reduced the loan processing turnaround time by 60 percent.",
+      dilemma: {
+        eye: "The strategic interaction dilemma",
+        q: "Multi-persona complexity on one handset.",
+        ps: [
+          "Consumer lending apps optimise for single-user self-service. FinVista operates on a different paradigm: a single Android handset shared by a quota-driven field sales agent processing multiple applications simultaneously, and the actual borrower.",
+          "The borrower is a participant who takes over the device only for critical compliance moments: live photos, consents, OTPs and digital signatures.",
+        ],
+      },
+    },
+
+    context: {
+      n: "01",
+      eye: "Operating context & enterprise constraints",
+      h: "Not quiet offices. Stockyards, dealer lots, budget phones.",
+      p: "Stepping into the UX Lead role, I quickly realised we were not designing for users in quiet office environments. The architecture was shaped by strict operational realities.",
+      cards: [
+        { k: "Device & network diversity", t: "Budget Android, patchy 4G", d: "Sales agents worked in outdoor vehicle stockyards and crowded dealership lots on company-issued budget phones with limited memory and inconsistent 4G." },
+        { k: "Information overload", t: "40+ fields per application", d: "A single loan application required agents to complete over 40 distinct data fields." },
+        { k: "The multi-vertical mandate", t: "One system, six verticals", d: "Two-Wheeler financing was the baseline, but the system had to scale across Consumer Durable, Personal, Used Car, Tractor and Three-Wheeler without engineering separate applications." },
+      ],
+      topology: {
+        before: { k: "Legacy", t: "Paper and branch", nodes: ["Showroom visit", "Paper form", "!Courier to branch", "!Manual data entry", "!Branch underwriting", "Callback", "Disbursement"], note: "multi-day · consent re-captured · no offline state" },
+        after: { k: "FinVista", t: "Centralised pipeline", nodes: ["Agent mode", "Handoff: KYC", "Configure & validate", "Handoff: e-mandate", "Disbursement"], note: "60% faster · local cache survives a dropped connection · one handset" },
+      },
+    },
+
+    innovation: {
+      n: "02",
+      eye: "The core innovation",
+      h: "Two readers, one screen.",
+      p: "The critical breakthrough came when I recognised we were designing for two entirely different personas sharing a single physical device. I engineered the application as an oscillating dual-state terminal governed by strict operational rules.",
+      states: [
+        { k: "A", t: "The high-throughput agent mode", d: "For sales agents processing 15 to 20 applications daily. Dense data entry, dedicated numeric keypads, maximum speed." },
+        { k: "B", t: "The sandboxed borrower handoff", d: "Regulation mandates the agent physically hand the device to the customer at multiple intervals. The moment they tap to hand over, the interface transforms: type scales to 18 point, internal dealership notes and risk scores are masked, and complexity gives way to plain language." },
+        { k: "C", t: "Fail-safe state preservation", d: "If the connection drops, local caching picks the application up exactly where it left off. No data loss during showroom walkarounds." },
+      ],
+      handoff: {
+        a: { src: F("m3/personal.png"), alt: "Agent data entry state", label: "State A · agent mode" },
+        b: { src: F("m3/consent.png"), alt: "Customer consent screen", label: "State B · borrower handoff" },
+      },
+    },
+
+    architecture: {
+      n: "03",
+      eye: "Architecture",
+      h: "Why the 11-step modular stepper won.",
+      ps: [
+        "To find the best way to input 40 data fields, we evaluated long scrolling forms and accordions. Both failed significantly on budget hardware: unpredictable viewport jumps and massive cognitive overload.",
+        "So I made the architectural decision to break the journey into an 11-step modular flow on a strict \"one screen, one job\" rule. It nominally increased the tap count and effectively reduced cognitive load to zero. Agents completed applications much faster because they always knew exactly what the screen in front of them wanted, whether scanning a PAN card or calculating an EMI.",
+      ],
+      steps: ["Basic Details", "PAN Check", "Assisted KYC", "Income Profiling", "Asset Selection", "Loan Configurator", "Bank Validate", "E-Mandate Setup", "Down Payment", "Delivery Order", "Disbursement"],
+      handoffSteps: [3, 8],
+    },
+
+    // The shipped journey, screen by screen, in the order an executive runs
+    // it. Sits right after 01 so the reader sees the product before the
+    // interaction argument and the testing that shaped it. `hand` marks the borrower-handoff screens.
+    journey: {
+      eye: "The journey, screen by screen",
+      h: "One application, start to finish.",
+      p: "The eleven steps as the executive sees them, left to right. Two screens turn the phone around: the credit bureau consent and the key facts statement, where the borrower signs.",
+      screens: [
+        { src: F("m3/login.png"), t: "Sign in", d: "Sales and call centre staff" },
+        { src: F("m3/dashboard.png"), t: "Applications", d: "The queue, by stage" },
+        { src: F("m3/portfolio.png"), t: "Portfolio", d: "Store manager view" },
+        { src: F("m3/personal.png"), t: "Personal details", d: "Live photo, pre-filled KYC" },
+        { src: F("m3/address.png"), t: "Address", d: "Current and correspondence" },
+        { src: F("m3/employment.png"), t: "Employment", d: "Income profiling" },
+        { src: F("m3/vehicle.png"), t: "Vehicle", d: "Asset selection" },
+        { src: F("m3/consent.png"), t: "Bureau consent", d: "Borrower checks the box", hand: true },
+        { src: F("m3/kfs.png"), t: "Key facts", d: "Borrower signs with OTP", hand: true },
+        { src: F("m3/summary.png"), t: "Loan summary", d: "Amount, EMI, tenure" },
+        { src: F("m3/disbursed.png"), t: "Disbursed", d: "Funds released" },
+      ],
+    },
+
+    testing: {
+      n: "04",
+      eye: "Usability testing & iteration",
+      h: "Five rounds, 24 participants, tested on the real phones.",
+      p: "To be sure the architecture would survive hostile field conditions, I ran five iterative rounds of moderated usability testing with high-fidelity Figma prototypes mirrored on budget Android devices. 24 participants: sales agents, store managers and actual borrowers.",
+      metrics: [
+        { v: "5", l: "Iterative rounds of moderated testing." },
+        { v: "24", l: "Participants across agents, store managers and borrowers." },
+        { from: "58", to: "86", l: "System Usability Scale, baseline to final round." },
+        { from: "62%", to: "94%", l: "Overall task success rate." },
+      ],
+      frictionEye: "Two friction points resolved before launch",
+      friction: [
+        { t: "The long-scroll fatigue", found: "Agents struggled with continuous scrolling through 40 fields on one screen: visual fatigue, frequent input errors, viewport jumping on budget hardware.", fixed: "Replaced the long scroll with a progressive disclosure model. The 11-step flow presents one logical task at a time, which removed the scrolling friction and cut data entry errors." },
+        { t: "Spatial disorientation in complex flows", found: "Once modular, agents lost their sense of where they were in the journey, and lengthy compliance checks bred anxiety without a sense of completion time.", fixed: "A dual progress indicator: a macro journey-level percentage combined with a micro step-level indicator. Transparent pacing kept users anchored." },
+      ],
+      // The layout exploration is the before/after in one frame: Option A is
+      // the long scroll that fatigued agents, Option C the stepper that shipped.
+      layout: { src: F("svg-13.svg"), alt: "Loan application layout exploration: long scroll, accordion, stepped wizard", cap: "Long scroll (A) against accordion (B) and the stepped wizard (C) that shipped." },
+      progress: { src: F("svg-15.svg"), alt: "Application progress exploration: top bar, vertical stepper, ring", cap: "Progress exploration: top bar, vertical stepper, ring." },
+      shipped: { src: F("063-personal-details-form-a.png"), alt: "Personal details with the dual progress indicator", cap: "Shipped: journey percentage and step count, side by side." },
+    },
+
+    scaling: {
+      n: "05",
+      eye: "Scaling across the business",
+      h: "The same 11 steps, reused across five more loan products.",
+      ps: [
+        "We were not just building a Two-Wheeler loan application. The architecture had to support Tractors, Used Cars and Consumer Durables.",
+        "I developed a design system of over 100 native Android components. With that unified architecture the exact 11-step logic was reused across five additional loan products. For Tractor loans we simply swapped urban salary inputs for land revenue records. That modularity saved engineering months of duplicated effort.",
+      ],
+      system: [
+        { src: F("022-foundation-color-palette-typography-scale-and-spacing-system.png"), alt: "Foundation: colour, type scale, spacing", cap: "Foundation: colour, type scale, spacing" },
+        { src: F("025-form-controls-input-states-checkboxes-progress-bars-toasts-a.png"), alt: "Form controls and feedback", cap: "Form controls: inputs, checkboxes, progress, toasts, file upload" },
+        { src: F("026-cards-sheets-lead-cards-vas-cards-popup-dialogs-and-bottom-s.png"), alt: "Cards, sheets and dialogs", cap: "Cards and sheets: lead cards, VAS cards, dialogs, bottom sheets" },
+      ],
+    },
+
+    retro: {
+      n: "06",
+      eye: "Strategic retrospective & field learnings",
+      h: "Field realities override laboratory assumptions.",
+      p: "Designing for shared devices in hostile environments yielded two critical technical learnings.",
+      lessons: [
+        { t: "Field usability over laboratory polish", d: "Subtle 1px light-grey dividers and low-contrast borders looked refined in design software and washed out completely under midday sun in outdoor stockyards. We overhauled the tokens for higher contrast ratios, bold borders and a 16sp minimum on all field inputs." },
+        { t: "Designing for latency and button debouncing", d: "Credit bureau and banking checks regularly hit 4 to 8 second latency spikes. Agents tapped submit repeatedly during freezes, firing duplicate verification calls. Deterministic optimistic loading skeletons and button debouncing eliminated the duplicates." },
+      ],
+      // The two wait states the latency lesson is about: eligibility check
+      // and application processing, each holding the agent while the bank
+      // or bureau responds.
+      waits: [
+        { src: F("051-loan-approval-wait.png"), alt: "Eligibility check wait state", label: "Bureau check · held" },
+        { src: F("052-loan-approval-wait-alt.png"), alt: "Application processing wait state", label: "Bank processing · held" },
+      ],
+    },
+  },
 };

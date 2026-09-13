@@ -1,31 +1,30 @@
 import { useCaseData } from "../../components/CaseStudyGate";
-import { Link } from "react-router-dom";
 import Reveal from "../../components/Reveal";
 import CaseTopBar from "../../components/CaseTopBar";
 import { DECK_CSS } from "./caseDeck";
-import { Fig, Head, Split, Phones, Venn, Thanks } from "./deckParts";
+import { Fig, Thanks } from "./deckParts";
 
-/* FINVISTA, long-form, on the light slide-band design. THIS IS THE LIVE PAGE
-   at /case/finvista as of 2026-08-04.
+/* FINVISTA, restructured 2026-09-13. THIS IS THE LIVE PAGE at /case/finvista.
 
-   WHAT THIS IS: the slide-band treatment shared with CaseMeridianDeck, driven
-   by the long-form keys of src/data/finvistaCase.js (overview, problem,
-   research, insights, flow, design, designSystem, validation, impact,
-   gallery) rather than the `deck` block, which is now unused for FinVista.
-   The condensed deck version this replaced was deleted in the 2026-08-04
-   cleanup; git history has it, and /case/finvista-deck redirects here.
+   WHAT THIS IS: the six-section structure from Faraz's "finvista revised.md",
+   rendered on the slide-band design shared with CaseMeridianDeck. Every word
+   of copy comes from `finvista.v3` in src/data/finvistaCase.js through
+   useCaseData(), so this bundle ships no confidential text. The previous
+   long-form page (overview / problem / research / ... / gallery) is in git
+   history; its data keys stay in the module untouched.
 
-   SCREENS: the product UI is the Material 3 set in public/finvista/m3. The
-   long-form data also references the older numbered captures; those are
-   deliberately not used here, so the case studies show one visual language
-   for the product.
+   SECTION RHYTHM: eyebrow with the section number, a big accent headline,
+   then the description DIRECTLY BELOW the headline on a wide measure. Faraz
+   asked for this explicitly over the split (headline left, copy right) that
+   the draft used: the copy was cramped on the right and the space wasted.
 
-   CONFIDENTIALITY: Every word of copy comes
-   from the data module through useCaseData(), so this bundle ships no
-   confidential text, and images render through Fig, which uses VaultImage. */
+   ASSETS: product UI is the Material 3 set in public/finvista/m3; the
+   explorations (svg-13 layout, svg-15 progress), the design-system sheets
+   (022/025/026) and the wait states (051/052) are the original captures in
+   public/finvista. The doc also asks for a looping hero MP4; none exists, so
+   the hero is the two-mode split as a still. */
 
 const ACCENT = "#16653C";
-const F = (n) => `/finvista/${n}`;
 
 const NEXT_WORK = [
   ["/case/meridian", "/meridian/cover.jpg", "Meridian", "University analytics"],
@@ -33,117 +32,219 @@ const NEXT_WORK = [
   ["/case/threadfold", "/threadfold/cover.jpg", "Threadfold", "Crowdfunding commerce"],
 ];
 
-/* The product screens, in the order the journey runs. The long-form gallery
-   lists the older numbered captures; these are the current visual design and
-   are used as they are. */
-const JOURNEY_SCREENS = [
-  ["m3/login.png", "Sign in, for sales and call centre staff"],
-  ["m3/dashboard.png", "Applications queue"],
-  ["m3/portfolio.png", "Portfolio, the store manager view"],
-  ["m3/personal.png", "Personal details and live photo"],
-  ["m3/address.png", "Address details"],
-  ["m3/employment.png", "Employment details"],
-  ["m3/vehicle.png", "Vehicle type selection"],
-  ["m3/consent.png", "Credit bureau check consent"],
-  ["m3/kfs.png", "Key facts statement and e-signature"],
-  ["m3/summary.png", "Loan summary"],
-  ["m3/disbursed.png", "Disbursed"],
-];
+/* Page-local additions to the deck system, namespaced fv3-.
+   NO BACKTICKS BELOW: one template literal; a stray backtick takes the build
+   down with it. */
+const V3_CSS = `
+  /* ── Section head: eyebrow, headline, then copy below on a wide measure ── */
+  .fv3-head{ max-width:1040px; }
+  .fv3-n{ font-family:'JetBrains Mono',monospace; font-weight:600; color:var(--acc);
+    margin-right:12px; letter-spacing:.14em; }
+  .fv3-head .cd-h2{ max-width:24ch; margin-bottom:26px; }
+  .fv3-lede{ font-size:19.5px; line-height:1.68; color:var(--ink); max-width:74ch; margin:0; }
+  .fv3-lede + .fv3-lede{ margin-top:20px; }
+  .cd-dark .fv3-lede{ color:rgba(239,237,231,.82); }
 
-/* Page-local additions to the deck system: a comparison table, the eleven-step
-   grid, a persona card and the two-column retro. Namespaced fvl- so nothing
-   here can reach the shipped deck pages.
-   NO BACKTICKS BELOW: this is one template literal and a stray backtick in a
-   comment terminates it and takes the build down with it. */
-const LONG_CSS = `
-  .fvl-table-wrap{ margin-top:44px; overflow-x:auto; border:1px solid var(--line);
-    border-radius:16px; background:#fff; }
-  .fvl-table{ width:100%; border-collapse:collapse; min-width:640px; }
-  .fvl-table th, .fvl-table td{ text-align:left; padding:14px 18px; font-size:15px;
-    border-bottom:1px solid var(--line); }
-  .fvl-table thead th{ font-family:'JetBrains Mono',monospace; font-size:11px;
-    text-transform:uppercase; letter-spacing:.16em; color:var(--muted); font-weight:600; }
-  .fvl-table tbody th{ font-weight:600; color:var(--ink); }
-  .fvl-table td{ color:var(--muted); text-align:center; }
-  .fvl-table tbody tr:last-child th, .fvl-table tbody tr:last-child td{ border-bottom:0; }
-  .fvl-yes{ color:var(--acc); font-weight:700; }
+  /* ── Hero ─────────────────────────────────────────────────────────── */
+  /* The deck's h1 is sized for a one-word title. This title runs to nine
+     words, so it steps down and gets a measure. */
+  .fv3-h1{ font-size:clamp(2.2rem,4.6vw,4rem); max-width:18ch; }
+  .fv3-tags{ display:flex; flex-wrap:wrap; gap:8px; margin-top:28px; }
+  .fv3-tag{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.1em;
+    text-transform:uppercase; border:1px solid var(--line); background:#fff;
+    padding:6px 10px; border-radius:3px; color:var(--muted); }
+  .fv3-facts{ display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line);
+    border:1px solid var(--line); margin-top:48px; }
+  @media (max-width:760px){ .fv3-facts{ grid-template-columns:1fr; } }
+  .fv3-fact{ background:var(--paper); padding:20px 22px; }
+  .fv3-fact dt{ font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--muted); }
+  .fv3-fact dd{ margin:8px 0 0; font-size:15.5px; line-height:1.5; }
+  .fv3-hero{ margin-top:56px; background:var(--acc); padding:48px 40px; position:relative;
+    display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:end; }
+  @media (max-width:820px){ .fv3-hero{ grid-template-columns:1fr; padding:40px 22px 32px; } }
+  .fv3-mode{ display:flex; flex-direction:column; align-items:center; gap:18px; }
+  .fv3-mode-l{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.16em;
+    text-transform:uppercase; color:rgba(255,255,255,.88); text-align:center; }
+  .fv3-phone{ width:min(300px,100%); margin:0; border-radius:22px; border:6px solid #0f3d25;
+    box-shadow:0 30px 60px rgba(0,0,0,.35); background:#fff; overflow:hidden; position:relative; }
+  .fv3-phone img{ display:block; width:100%; }
+  .fv3-phone .cd-zoom{ top:10px; right:10px; }
 
-  .fvl-steps{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:44px; }
-  @media (max-width:900px){ .fvl-steps{ grid-template-columns:repeat(2,1fr); } }
-  @media (max-width:520px){ .fvl-steps{ grid-template-columns:1fr; } }
-  .fvl-step{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:18px 20px; }
-  .fvl-step-n{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.16em;
-    color:var(--acc); font-weight:600; display:block; margin-bottom:8px; }
-  .fvl-step-t{ font-weight:700; font-size:15.5px; margin:0 0 4px; color:var(--ink); }
-  .fvl-step-d{ font-size:14px; color:var(--muted); margin:0; line-height:1.5; }
+  /* ── Dilemma: ink panel + explanation ─────────────────────────────── */
+  .fv3-dil{ display:grid; grid-template-columns:5fr 7fr; border:1px solid var(--line); margin-top:56px; }
+  @media (max-width:900px){ .fv3-dil{ grid-template-columns:1fr; } }
+  .fv3-dil-l{ background:var(--ink); color:var(--paper); padding:52px 44px; }
+  .fv3-dil-l .cd-eye{ color:var(--paper); }
+  .fv3-dil-q{ font-family:'Playfair Display',serif; font-weight:700; margin:0;
+    font-size:clamp(1.7rem,3vw,2.6rem); line-height:1.1; letter-spacing:-.02em; }
+  .fv3-dil-r{ background:#fff; padding:52px 44px; }
+  .fv3-dil-r p{ font-size:17px; line-height:1.68; color:var(--ink); margin:0; }
+  .fv3-dil-r p + p{ margin-top:18px; }
+  @media (max-width:600px){ .fv3-dil-l, .fv3-dil-r{ padding:32px 24px; } }
 
-  .fvl-persona{ background:#fff; border:1px solid var(--line); border-radius:16px; padding:30px 28px; }
-  .fvl-persona-role{ font-family:'JetBrains Mono',monospace; font-size:11px;
-    text-transform:uppercase; letter-spacing:.16em; color:var(--muted); display:block; margin-bottom:10px; }
-  .fvl-quote{ font-family:'Playfair Display',serif; font-style:italic; font-size:1.15rem;
-    line-height:1.45; color:var(--acc); margin:0 0 18px; }
-  .fvl-pair{ margin-top:16px; }
-  .fvl-pair-k{ font-size:13px; font-weight:700; color:var(--ink); margin:0; }
-  .fvl-pair-v{ font-size:14.5px; color:var(--muted); margin:2px 0 0; line-height:1.55; }
+  /* ── Constraint cards: one object, shared edges ───────────────────── */
+  .fv3-cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line);
+    border:1px solid var(--line); margin-top:48px; }
+  @media (max-width:900px){ .fv3-cards{ grid-template-columns:1fr; } }
+  .fv3-card{ background:#fff; padding:30px 28px; }
+  .fv3-k{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--acc); display:block; margin-bottom:12px; }
+  .fv3-card .cd-h3{ font-size:1.15rem; margin-bottom:10px; }
+  .fv3-card p{ font-size:15px; line-height:1.6; color:var(--muted); margin:0; }
 
-  /* Two-column retro. Margin-based spacing, not flex gap: the prerender
-     Chromium ignores gap and would run the columns together. */
-  .fvl-retro{ display:grid; grid-template-columns:repeat(2,1fr); gap:24px; margin-top:44px; }
-  @media (max-width:820px){ .fvl-retro{ grid-template-columns:1fr; } }
-  .fvl-retro-col{ background:#fff; border:1px solid var(--line); border-radius:16px; padding:30px 28px; }
-  .fvl-retro-col h3{ font-size:1.05rem; font-weight:700; margin:0 0 16px; color:var(--ink); }
-  .fvl-retro-col ul{ list-style:none; padding:0; margin:0; }
-  .fvl-retro-col li{ position:relative; padding-left:20px; font-size:15.5px; line-height:1.6;
-    color:var(--muted); }
-  .fvl-retro-col li + li{ margin-top:12px; }
-  .fvl-retro-col li::before{ content:""; position:absolute; left:0; top:.62em;
-    width:7px; height:7px; border-radius:50%; background:var(--acc); }
+  /* ── Topology strip ───────────────────────────────────────────────── */
+  .fv3-topo{ margin-top:48px; background:#fff; border:1px solid var(--line); padding:40px;
+    position:relative; }
+  @media (max-width:700px){ .fv3-topo{ padding:28px 22px; } }
+  .fv3-topo-row{ display:grid; grid-template-columns:150px minmax(0,1fr); gap:28px; align-items:center; }
+  @media (max-width:700px){ .fv3-topo-row{ grid-template-columns:1fr; gap:14px; } }
+  .fv3-topo-row + .fv3-topo-row{ margin-top:28px; padding-top:28px; border-top:1px dashed var(--line); }
+  .fv3-topo-k{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--muted); }
+  .fv3-topo-k b{ display:block; font-family:'Outfit',system-ui,sans-serif; font-size:15px;
+    letter-spacing:0; text-transform:none; color:var(--ink); margin-top:4px; }
+  .fv3-flow{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+  .fv3-node{ padding:10px 14px; border:1px solid var(--line); border-radius:3px; font-size:13.5px;
+    background:var(--paper); }
+  .fv3-node-bad{ border-color:#C44; color:#8A2B2B; background:#FBEDEA; }
+  .fv3-node-acc{ border-color:var(--acc); background:var(--tint); color:var(--acc); font-weight:600; }
+  .fv3-arr{ color:var(--muted); font-family:'JetBrains Mono',monospace; }
+  .fv3-flow-t{ font-size:12.5px; color:var(--muted); margin-top:10px; font-family:'JetBrains Mono',monospace; }
 
-  /* The four process steps read as one row rather than three plus an orphan.
-     Declared with both class names so it beats .cd-3up's own breakpoints no
-     matter which stylesheet lands last. */
-  .cd-3up.fvl-4up{ grid-template-columns:repeat(4,1fr); }
-  @media (max-width:1000px){ .cd-3up.fvl-4up{ grid-template-columns:repeat(2,1fr); } }
-  @media (max-width:560px){ .cd-3up.fvl-4up{ grid-template-columns:1fr; } }
+  /* ── States + handoff ─────────────────────────────────────────────── */
+  .fv3-states{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:56px;
+    align-items:start; margin-top:48px; }
+  @media (max-width:900px){ .fv3-states{ grid-template-columns:1fr; gap:40px; } }
+  .fv3-rule{ display:grid; grid-template-columns:56px minmax(0,1fr); gap:18px; padding:22px 0;
+    border-top:1px solid var(--line); }
+  .fv3-rule:last-child{ border-bottom:1px solid var(--line); }
+  .fv3-rule-k{ font-family:'Playfair Display',serif; font-weight:700; font-size:2rem; line-height:1;
+    color:var(--acc); }
+  .fv3-rule .cd-h3{ font-family:'Outfit',system-ui,sans-serif; font-size:1.05rem; margin:2px 0 6px; }
+  .fv3-rule p{ font-size:15.5px; line-height:1.62; color:var(--muted); margin:0; }
+  .fv3-hand{ background:var(--acc); padding:40px 24px; position:relative;
+    display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); gap:16px; align-items:center; }
+  @media (max-width:520px){ .fv3-hand{ grid-template-columns:1fr; } .fv3-turn{ transform:rotate(90deg); } }
+  .fv3-hand .fv3-phone{ width:100%; max-width:250px; margin:0 auto; }
+  .fv3-turn{ font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.14em;
+    text-transform:uppercase; color:#fff; text-align:center; line-height:1.6; }
+  .fv3-turn svg{ display:block; margin:0 auto 8px; }
+  .fv3-hand-l{ font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.14em;
+    text-transform:uppercase; color:rgba(255,255,255,.88); text-align:center; margin-top:14px; }
 
-  /* Two personas, not the deck's three. Same reasoning as fvl-metrics-4. */
-  .fvl-2up{ grid-template-columns:repeat(2,1fr); }
-  @media (max-width:900px){ .fvl-2up{ grid-template-columns:1fr; } }
+  /* ── Flow strip: the eleven steps ─────────────────────────────────── */
+  .fv3-strip-wrap{ margin-top:48px; overflow-x:auto; padding-bottom:8px; }
+  .fv3-strip{ list-style:none; padding:0; margin:0; display:flex; min-width:1180px; }
+  .fv3-strip li{ flex:1; padding:18px 14px 18px 18px; border:1px solid var(--line); border-right:0;
+    background:#fff; display:flex; flex-direction:column; gap:6px; min-width:0; }
+  .fv3-strip li:last-child{ border-right:1px solid var(--line); background:var(--tint); }
+  .fv3-strip li.fv3-hs{ background:#FFF9D6; }
+  .fv3-st-n{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.16em;
+    color:var(--acc); font-weight:600; }
+  .fv3-st-t{ font-size:14px; font-weight:700; line-height:1.3; }
+  .fv3-st-h{ font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.14em; color:var(--ink);
+    opacity:.7; }
+  .fv3-strip-cap{ font-size:13px; color:var(--muted); margin-top:12px; }
 
-  /* Four impact metrics rather than the deck's three. Declared as a class, not
-     an inline grid-template, so it still collapses at the deck's own
-     breakpoints instead of forcing four columns onto a phone. */
-  .fvl-metrics-4{ grid-template-columns:repeat(4,1fr); }
-  @media (max-width:960px){ .fvl-metrics-4{ grid-template-columns:repeat(2,1fr); } }
-  @media (max-width:480px){ .fvl-metrics-4{ grid-template-columns:1fr; } }
 
-  .fvl-facts{ display:grid; grid-template-columns:repeat(6,1fr); gap:1px;
-    background:var(--line); border:1px solid var(--line); margin-top:44px; }
-  @media (max-width:900px){ .fvl-facts{ grid-template-columns:repeat(3,1fr); } }
-  @media (max-width:520px){ .fvl-facts{ grid-template-columns:repeat(2,1fr); } }
-  .fvl-fact{ background:#fff; padding:22px 18px; }
-  .fvl-fact-k{ font-family:'JetBrains Mono',monospace; font-size:10px; text-transform:uppercase;
-    letter-spacing:.16em; color:var(--muted); display:block; margin-bottom:8px; }
-  .fvl-fact-v{ font-weight:700; font-size:15.5px; color:var(--ink); margin:0; line-height:1.35; }
+  /* ── Journey filmstrip: every screen in order, one connecting line ────
+     Scrolls sideways inside its own container; the page never does. Each cell
+     is a fixed-width phone so eleven of them read as one sequence. */
+  .fv3-film-wrap{ margin-top:48px; overflow-x:auto; padding:8px 0 20px;
+    scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch; }
+  .fv3-film{ list-style:none; margin:0 0 0 -24px; padding:0; display:flex; gap:0; width:max-content; }
+  /* every cell carries the same padding, so every phone is the same width */
+  .fv3-cell{ width:260px; flex:none; position:relative; padding:0 12px 0 24px; scroll-snap-align:start; }
+  /* the connecting line runs behind the step number of every cell but the first */
+  .fv3-cell + .fv3-cell::before{ content:""; position:absolute; left:-12px; top:11px; width:36px;
+    height:1px; background:var(--line); }
+  .fv3-cell-n{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.16em;
+    color:var(--acc); font-weight:600; display:inline-block; background:var(--paper);
+    padding-right:8px; position:relative; z-index:1; }
+  .fv3-cell-hand{ font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:.14em;
+    margin-left:6px; background:var(--ink); color:#F2D50F; padding:3px 7px; border-radius:3px;
+    vertical-align:1px; }
+  .fv3-cell .cd-fig{ margin:14px 0 0; }
+  /* captures differ slightly in height; one ratio keeps the captions on a line */
+  .fv3-cell .cd-fig img{ border-radius:16px; aspect-ratio:9/19.2; object-fit:cover; object-position:top; }
+  .fv3-cell-t{ font-weight:700; font-size:14.5px; margin:14px 0 0; color:var(--ink); }
+  .fv3-cell-d{ font-size:13px; color:var(--muted); margin:2px 0 0; line-height:1.45; }
+  .fv3-film-hint{ font-size:12.5px; color:var(--muted); margin-top:4px;
+    font-family:'JetBrains Mono',monospace; letter-spacing:.06em; }
+  @media (hover:hover){ .fv3-film-wrap{ scrollbar-width:thin; } }
+
+  /* ── Testing metrics: from → to ───────────────────────────────────── */
+  .fv3-metrics{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line);
+    border:1px solid var(--line); margin-top:48px; }
+  @media (max-width:960px){ .fv3-metrics{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:480px){ .fv3-metrics{ grid-template-columns:1fr; } }
+  .fv3-metric{ background:var(--paper); padding:32px 28px; }
+  .fv3-metric-n{ font-family:'Playfair Display',serif; font-weight:700; line-height:1;
+    font-size:clamp(2rem,3.2vw,2.8rem); letter-spacing:-.03em; color:var(--acc);
+    font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .fv3-to{ font-family:'Outfit',system-ui,sans-serif; font-weight:400; color:var(--muted);
+    font-size:.55em; vertical-align:middle; margin:0 6px; }
+  .fv3-metric-l{ font-size:14.5px; line-height:1.5; color:var(--muted); margin-top:12px; }
+
+  .fv3-friction{ display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line);
+    border:1px solid var(--line); margin-top:20px; }
+  @media (max-width:900px){ .fv3-friction{ grid-template-columns:1fr; } }
+  .fv3-fr{ background:#fff; padding:30px 28px; }
+  .fv3-fr .cd-h3{ font-size:1.2rem; margin-bottom:14px; }
+  .fv3-fr p{ font-size:15.5px; line-height:1.62; color:var(--muted); margin:0; }
+  .fv3-fr p + p{ margin-top:12px; }
+  .fv3-fr b{ color:var(--ink); }
+
+  .fv3-duo{ display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:48px; }
+  @media (max-width:820px){ .fv3-duo{ grid-template-columns:1fr; } }
+  /* Exploration diagram on the left, the shipped phone on the right, sized
+     to the diagram's height rather than the column width. */
+  .fv3-duo{ grid-template-columns:minmax(0,3fr) minmax(0,2fr); align-items:start; }
+  .fv3-duo .cd-fig{ margin:0; }
+  .fv3-duo-phone .cd-fig{ max-width:320px; margin:0 auto; }
+
+  /* ── Wide figure with a stand-in marker ───────────────────────────── */
+  .fv3-figwrap{ margin-top:48px; position:relative; }
+  .fv3-figwrap .cd-fig{ margin:0; }
+
+  /* ── Retro lessons on ink ─────────────────────────────────────────── */
+  .fv3-lessons{ display:grid; grid-template-columns:1fr 1fr; gap:40px; margin-top:48px; }
+  @media (max-width:900px){ .fv3-lessons{ grid-template-columns:1fr; gap:28px; } }
+  .fv3-lesson{ border-top:1px solid rgba(239,237,231,.25); padding-top:22px; }
+  .fv3-lesson .cd-h3{ color:var(--paper); font-size:1.2rem; margin-bottom:12px; }
+  .fv3-lesson p{ font-size:15.5px; line-height:1.62; color:rgba(239,237,231,.8); margin:0; }
+  .fv3-field{ margin-top:56px; background:var(--acc); padding:48px 40px; position:relative;
+    display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:end; }
+  @media (max-width:620px){ .fv3-field{ grid-template-columns:1fr; padding:40px 22px; } }
+  .fv3-field .fv3-phone{ width:min(280px,100%); }
 `;
+
+/* Section head: number + eyebrow, headline, copy below on the wide measure. */
+function SecHead({ n, eye, h, ps, p }) {
+  const paras = ps || (p ? [p] : []);
+  return (
+    <Reveal className="fv3-head">
+      <p className="cd-eye">{n ? <span className="fv3-n">{n}</span> : null}{eye}</p>
+      <h2 className="cd-h2">{h}</h2>
+      {paras.map((t) => <p className="fv3-lede" key={t.slice(0, 24)}>{t}</p>)}
+    </Reveal>
+  );
+}
+
+function Phone({ src, alt }) {
+  return <Fig src={src} alt={alt} className="fv3-phone" />;
+}
 
 export default function CaseFinvistaLong() {
   const fv = useCaseData();
-  const o = fv.overview;
-  const p = fv.problem;
-  const r = fv.research;
-  const ins = fv.insights;
-  const fl = fv.flow;
-  const dz = fv.design;
-  const ds = fv.designSystem;
-  const val = fv.validation;
-  const imp = fv.impact;
-  const gal = fv.gallery;
+  const v = fv.v3;
+  const { summary, context, innovation, architecture, journey, testing, scaling, retro } = v;
 
   return (
     <div className="cd" style={{ "--acc": ACCENT }} data-testid="finvista-long">
       <style>{DECK_CSS}</style>
-      <style>{LONG_CSS}</style>
+      <style>{V3_CSS}</style>
 
       <CaseTopBar accent={ACCENT} />
 
@@ -151,395 +252,237 @@ export default function CaseFinvistaLong() {
       <section className="cd-hero">
         <div className="cd-in">
           <Reveal>
-            <p className="cd-eye">UX case study · Fintech, digital lending</p>
-            <h1 className="cd-h1">{fv.title}</h1>
-            <p className="cd-hero-deck">{fv.subtitle}</p>
-          </Reveal>
-        </div>
-        <Reveal className="cd-in">
-          <Fig src={F("cover.jpg")} alt="FinVista lending app" cap={fv.deck.heroCaption} />
-        </Reveal>
-      </section>
-
-      {/* ── OUTCOME COUNTER ────────────────────────────────────────── */}
-      <section className="cd-band cd-dark">
-        <div className="cd-in">
-          <Reveal><Head eye="Outcome">What the work moved.</Head></Reveal>
-          <div className="cd-metrics">
-            {fv.hero.stats.map((s, i) => (
-              <Reveal className="cd-metric" key={s.label} delay={i * 0.04}>
-                <div className="cd-metric-n">{s.value}</div>
-                <div className="cd-metric-l">{s.label}</div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── PROJECT OVERVIEW ───────────────────────────────────────── */}
-      <section className="cd-band">
-        <div className="cd-in">
-          <Reveal>
-            <Head eye="Project overview">{o.headline}</Head>
-            <p className="cd-lede">{o.intro}</p>
-          </Reveal>
-          <Reveal className="cd-aside">
-            <h3 className="cd-h3">{o.tldrTitle}</h3>
-            <p>{o.tldr}</p>
-          </Reveal>
-          <div className="fvl-facts">
-            {o.facts.map((f, i) => (
-              <Reveal className="fvl-fact" key={f.label} delay={i * 0.03}>
-                <span className="fvl-fact-k">{f.label}</span>
-                <p className="fvl-fact-v">{f.value}</p>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── DESIGN PROCESS ─────────────────────────────────────────── */}
-      <section className="cd-band cd-band-tight">
-        <div className="cd-in">
-          <Reveal><Head eye="How it ran">Four phases across five months.</Head></Reveal>
-          <div className="cd-3up fvl-4up">
-            {o.process.map((s, i) => (
-              <Reveal className="cd-tile" key={s.step} delay={i * 0.05}>
-                <span className="cd-tile-k">{s.step}</span>
-                <h3 className="cd-h3">{s.title}</h3>
-                <p>{s.duration}</p>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── PRODUCT LANDSCAPE ──────────────────────────────────────── */}
-      <section className="cd-band cd-band-tight">
-        <div className="cd-in">
-          <Reveal><Head eye="Product landscape">{o.productLandscape.intro}</Head></Reveal>
-          <div className="cd-3up">
-            {o.productLandscape.products.map((pr, i) => (
-              <Reveal className="cd-tile" key={pr.name} delay={i * 0.06}>
-                {pr.badge ? <span className="cd-sev">{pr.badge}</span> : null}
-                <h3 className="cd-h3">{pr.name}</h3>
-                <p>{pr.desc}</p>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── WHO RUNS IT ────────────────────────────────────────────── */}
-      <section className="cd-band">
-        <div className="cd-in">
-          <Reveal>
-            <Head eye="Who runs it">Three roles drive this app. None of them is the borrower.</Head>
-          </Reveal>
-          <div className="cd-3up">
-            {fv.primaryUsers.map((u, i) => (
-              <Reveal className="cd-tile" key={u.label} delay={i * 0.06}>
-                <h3 className="cd-h3">{u.label}</h3>
-                <p>{u.desc}</p>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── PROBLEM ────────────────────────────────────────────────── */}
-      <section className="cd-band cd-stat">
-        <div className="cd-in">
-          <Reveal>
-            <p className="cd-eye">The problem</p>
-            <p className="cd-stat-eye">{p.headline}</p>
-            <p className="cd-stat-q">{p.coreChallenge}</p>
-            <p className="cd-lede" style={{ marginTop: 44, maxWidth: "64ch" }}>{p.intro}</p>
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="cd-band cd-band-tight">
-        <div className="cd-in">
-          <Reveal><Head eye="Three dimensions">What made it hard.</Head></Reveal>
-          <div className="cd-3up">
-            {p.dimensions.map((dim, i) => (
-              <Reveal className="cd-tile" key={dim.title} delay={i * 0.06}>
-                <h3 className="cd-h3">{dim.title}</h3>
-                <p>{dim.desc}</p>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── SCOPE ──────────────────────────────────────────────────── */}
-      <section className="cd-split">
-        <div className="cd-half">
-          <Reveal className="cd-half-in">
-            <Head eye="Scope">What I took on</Head>
-            <ul className="cd-ul">{p.inScope.map((s) => <li key={s}>{s}</li>)}</ul>
-          </Reveal>
-        </div>
-        <div className="cd-panel-dark">
-          <Reveal>
-            <h3 className="cd-h3">Out of scope</h3>
-            <ul className="cd-ul">{p.outOfScope.map((s) => <li key={s}>{s}</li>)}</ul>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ── RESEARCH ───────────────────────────────────────────────── */}
-      <section className="cd-band">
-        <div className="cd-in">
-          <Reveal>
-            <Head eye="Teardown">{r.headline}</Head>
-            <p className="cd-lede">{r.intro}</p>
-          </Reveal>
-          <div className="cd-shots">
-            {r.competitive.map((c) => (
-              <Fig key={c.name} src={c.image} alt={`${c.name} app screens`} cap={`${c.name}: ${c.notes}`} />
-            ))}
-          </div>
-          <div className="fvl-table-wrap">
-            <table className="fvl-table">
-              <thead>
-                <tr>{r.findingsTable.headers.map((h) => <th key={h} scope="col">{h}</th>)}</tr>
-              </thead>
-              <tbody>
-                {r.findingsTable.rows.map(([pattern, ...cells]) => (
-                  <tr key={pattern}>
-                    <th scope="row">{pattern}</th>
-                    {cells.map((c, i) => (
-                      <td key={i} className={c === "✓" ? "fvl-yes" : undefined}>{c}</td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <Reveal className="cd-aside">
-            <h3 className="cd-h3">What the teardown settled</h3>
-            <p>{r.keyInsight}</p>
-          </Reveal>
-          <div className="cd-3up">
-            {r.approach.map((a, i) => (
-              <Reveal className="cd-tile" key={a.title} delay={i * 0.06}>
-                <h3 className="cd-h3">{a.title}</h3>
-                <p>{a.desc}</p>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── INSIGHTS ───────────────────────────────────────────────── */}
-      <section className="cd-band">
-        <div className="cd-in">
-          <Reveal>
-            <Head eye="Two readers">{ins.headline}</Head>
-            <p className="cd-lede">{ins.intro}</p>
-          </Reveal>
-          <div className="cd-3up fvl-2up">
-            {ins.personas.map((per, i) => (
-              <Reveal className="fvl-persona" key={per.name} delay={i * 0.06}>
-                <span className="fvl-persona-role">{per.role}</span>
-                <h3 className="cd-h3">{per.name}</h3>
-                <p className="fvl-quote">“{per.quote}”</p>
-                {per.challenges.map((c) => (
-                  <div className="fvl-pair" key={c.t}>
-                    <p className="fvl-pair-k">{c.t}</p>
-                    <p className="fvl-pair-v">{c.d}</p>
-                  </div>
-                ))}
-                {per.goals.map((g) => (
-                  <div className="fvl-pair" key={g.t}>
-                    <p className="fvl-pair-k">{g.t}</p>
-                    <p className="fvl-pair-v">{g.d}</p>
-                  </div>
-                ))}
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── PRINCIPLES ─────────────────────────────────────────────── */}
-      <section className="cd-band">
-        <div
-          className="cd-in"
-          style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,420px)", gap: 64, alignItems: "center" }}
-        >
-          <Reveal>
-            <Head eye="Non-negotiables">The three rules the design had to keep.</Head>
-            <ul className="cd-ul">
-              {ins.principles.map((pr) => <li key={pr.t}><b>{pr.t}.</b> {pr.d}</li>)}
-            </ul>
-          </Reveal>
-          <Reveal delay={0.1} style={{ width: "100%" }}>
-            <Venn
-              labels={ins.principles.map((pr) => pr.t.split(" ")[0])}
-              center="One journey"
-            />
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ── USER FLOW ──────────────────────────────────────────────── */}
-      <section className="cd-band cd-band-tight">
-        <div className="cd-in">
-          <Reveal>
-            <Head eye="The eleven steps">{fl.headline}</Head>
-            <p className="cd-lede">{fl.intro}</p>
-          </Reveal>
-          <Reveal className="cd-card">
-            <Fig src={fl.diagramSvg} alt={fl.diagramCaption} cap={fl.diagramCaption} />
-          </Reveal>
-          <div className="fvl-steps">
-            {fl.tasks.map((t, i) => (
-              <Reveal className="fvl-step" key={t.n} delay={(i % 4) * 0.04}>
-                <span className="fvl-step-n">{String(t.n).padStart(2, "0")}</span>
-                <p className="fvl-step-t">{t.t}</p>
-                <p className="fvl-step-d">{t.d}</p>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── WIREFRAMES ─────────────────────────────────────────────── */}
-      <section className="cd-band cd-band-tight">
-        <div className="cd-in">
-          <Reveal>
-            <Head eye="Options on the table">{dz.headline}</Head>
-            <p className="cd-lede">{dz.intro}</p>
-            <div className="cd-how"><b>Wireframes</b><p>{dz.wireframes.intro}</p></div>
-          </Reveal>
-          <div className={`cd-shots${dz.wireframes.batches.length % 2 === 1 ? " cd-shots-3" : ""}`}>
-            {dz.wireframes.batches.map((b) => (
-              <Fig key={b.src} src={b.src} alt={b.caption} cap={b.caption} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── EXPLORATIONS ───────────────────────────────────────────── */}
-      <section className="cd-band cd-band-tight">
-        <div className="cd-in">
-          <Reveal><Head eye="Explorations">{dz.explorations.intro}</Head></Reveal>
-          {dz.explorations.images.map((im) => (
-            <Reveal className="cd-card" key={im.src}>
-              <Fig src={im.src} alt={im.caption} cap={im.caption} />
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* ── KEY DECISIONS, with the work-mode / handoff-mode pair ──── */}
-      <Split
-        eye="Four decisions"
-        title="What the design actually rests on."
-        bullets={dz.keyDecisions.map((k) => <><b>{k.t}.</b> {k.d}</>)}
-      >
-        <Phones items={[
-          { src: F("m3/employment.png"), alt: "Employment details, work mode" },
-          { src: F("m3/consent.png"), alt: "Credit bureau consent, handoff mode" },
-          { src: F("m3/summary.png"), alt: "Loan summary" },
-        ]} />
-      </Split>
-
-      {/* ── DESIGN SYSTEM ──────────────────────────────────────────── */}
-      <section className="cd-band cd-band-tight">
-        <div className="cd-in">
-          <Reveal>
-            <Head eye="The library">{ds.headline}</Head>
-            <p className="cd-lede">{ds.intro}</p>
-          </Reveal>
-          <Reveal>
-            <Fig
-              src={F("m3/system.png")}
-              alt="FinVista design system in the Forest palette"
-              cap="Colour roles, type scale, buttons, inputs, status and the handoff surface"
-            />
-          </Reveal>
-          <Reveal className="cd-aside">
-            <h3 className="cd-h3">What the library bought</h3>
-            <p>{ds.systemImpact}</p>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ── VALIDATION ─────────────────────────────────────────────── */}
-      <section className="cd-band">
-        <div className="cd-in">
-          <Reveal>
-            <Head eye="In the store">{val.headline}</Head>
-            <p className="cd-lede">{val.intro}</p>
-          </Reveal>
-          <div className="cd-iters">
-            {val.rounds.map((rd, i) => (
-              <Reveal className="cd-iter" key={rd.t} delay={i * 0.05}>
-                <span className="cd-iter-n">{String(rd.n).padStart(2, "0")}</span>
-                <div>
-                  <h3 className="cd-h3">{rd.t}</h3>
-                  <p>{rd.d}</p>
+            <p className="cd-eye">Case study · Enterprise fintech</p>
+            <h1 className="cd-h1 fv3-h1">{v.title}</h1>
+            <div className="fv3-tags">
+              {v.tags.map((t) => <span className="fv3-tag" key={t}>{t}</span>)}
+            </div>
+            <dl className="fv3-facts">
+              {v.facts.map((f) => (
+                <div className="fv3-fact" key={f.label}>
+                  <dt>{f.label}</dt>
+                  <dd>{f.value}</dd>
                 </div>
-              </Reveal>
+              ))}
+            </dl>
+          </Reveal>
+          <Reveal className="fv3-hero">
+            {[v.hero.left, v.hero.right].map((m) => (
+              <div className="fv3-mode" key={m.label}>
+                <span className="fv3-mode-l">{m.label}</span>
+                <Phone src={m.src} alt={m.alt} />
+              </div>
             ))}
-          </div>
-          <Reveal className="cd-aside">
-            <h3 className="cd-h3">Where it landed</h3>
-            <p>{val.outcome}</p>
           </Reveal>
         </div>
       </section>
 
-      {/* ── IMPACT ─────────────────────────────────────────────────── */}
-      <section className="cd-band cd-dark">
-        <div className="cd-in">
-          <Reveal><Head eye="What changed">{imp.headline}</Head></Reveal>
-          <div className="cd-metrics fvl-metrics-4">
-            {imp.metrics.map((m, i) => (
-              <Reveal className="cd-metric" key={m.l} delay={i * 0.04}>
-                <div className="cd-metric-n">{m.v}</div>
-                <div className="cd-metric-l">{m.l}</div>
-                <p className="cd-note" style={{ marginTop: 8 }}>{m.s}</p>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── RETRO ──────────────────────────────────────────────────── */}
+      {/* ── EXECUTIVE SUMMARY ──────────────────────────────────────── */}
       <section className="cd-band cd-band-tight">
         <div className="cd-in">
-          <Reveal><Head eye="Honestly">What worked, and what I would change.</Head></Reveal>
-          <div className="fvl-retro">
-            <Reveal className="fvl-retro-col">
-              <h3>What went well</h3>
-              <ul>{imp.wentWell.map((w) => <li key={w}>{w}</li>)}</ul>
+          <SecHead eye={summary.eye} h={summary.h} p={summary.p} />
+          <Reveal className="fv3-dil">
+            <div className="fv3-dil-l">
+              <p className="cd-eye">{summary.dilemma.eye}</p>
+              <p className="fv3-dil-q">{summary.dilemma.q}</p>
+            </div>
+            <div className="fv3-dil-r">
+              {summary.dilemma.ps.map((t) => <p key={t.slice(0, 24)}>{t}</p>)}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── 01 CONTEXT ─────────────────────────────────────────────── */}
+      <section className="cd-band">
+        <div className="cd-in">
+          <SecHead n={context.n} eye={context.eye} h={context.h} p={context.p} />
+          <div className="fv3-cards">
+            {context.cards.map((c, i) => (
+              <Reveal className="fv3-card" key={c.k} delay={i * 0.05}>
+                <span className="fv3-k">{c.k}</span>
+                <h3 className="cd-h3">{c.t}</h3>
+                <p>{c.d}</p>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal className="fv3-topo">
+            {[context.topology.before, context.topology.after].map((row, ri) => (
+              <div className="fv3-topo-row" key={row.k}>
+                <div className="fv3-topo-k">{row.k}<b>{row.t}</b></div>
+                <div>
+                  <div className="fv3-flow">
+                    {row.nodes.map((nd, i) => {
+                      const bad = nd.startsWith("!");
+                      const label = bad ? nd.slice(1) : nd;
+                      const cls = ri === 1 ? "fv3-node fv3-node-acc" : bad ? "fv3-node fv3-node-bad" : "fv3-node";
+                      return (
+                        <span key={label} style={{ display: "contents" }}>
+                          {i > 0 ? <span className="fv3-arr">→</span> : null}
+                          <span className={cls}>{label}</span>
+                        </span>
+                      );
+                    })}
+                  </div>
+                  <div className="fv3-flow-t">{row.note}</div>
+                </div>
+              </div>
+            ))}
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── THE JOURNEY, SCREEN BY SCREEN ──────────────────────────── */}
+      <section className="cd-band cd-band-tight">
+        <div className="cd-in">
+          <SecHead eye={journey.eye} h={journey.h} p={journey.p} />
+          <Reveal className="fv3-film-wrap">
+            <ol className="fv3-film" aria-label="The shipped journey in order">
+              {journey.screens.map((sc, i) => (
+                <li className="fv3-cell" key={sc.src}>
+                  <span className="fv3-cell-n">{String(i + 1).padStart(2, "0")}</span>
+                  {sc.hand ? <span className="fv3-cell-hand">HANDOFF</span> : null}
+                  <Fig src={sc.src} alt={sc.t} />
+                  <p className="fv3-cell-t">{sc.t}</p>
+                  <p className="fv3-cell-d">{sc.d}</p>
+                </li>
+              ))}
+            </ol>
+          </Reveal>
+          <p className="fv3-film-hint">scroll sideways · tap any screen to open it</p>
+        </div>
+      </section>
+
+      {/* ── 02 TWO READERS, ONE SCREEN ─────────────────────────────── */}
+      <section className="cd-band" style={{ background: "var(--tint)" }}>
+        <div className="cd-in">
+          <SecHead n={innovation.n} eye={innovation.eye} h={`“${innovation.h}”`} p={innovation.p} />
+          <div className="fv3-states">
+            <Reveal>
+              {innovation.states.map((s) => (
+                <div className="fv3-rule" key={s.k}>
+                  <div className="fv3-rule-k">{s.k}</div>
+                  <div>
+                    <h3 className="cd-h3">{s.t}</h3>
+                    <p>{s.d}</p>
+                  </div>
+                </div>
+              ))}
             </Reveal>
-            <Reveal className="fvl-retro-col" delay={0.08}>
-              <h3>What I would do differently</h3>
-              <ul>{imp.differently.map((w) => <li key={w}>{w}</li>)}</ul>
+            <Reveal className="fv3-hand" delay={0.08}>
+              <div>
+                <Phone src={innovation.handoff.a.src} alt={innovation.handoff.a.alt} />
+                <div className="fv3-hand-l">{innovation.handoff.a.label}</div>
+              </div>
+              <div className="fv3-turn">
+                <svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="#fff" strokeWidth="2" aria-hidden="true">
+                  <path d="M6 18a12 12 0 0 1 20-9" /><path d="M26 4v6h-6" />
+                  <path d="M30 18a12 12 0 0 1-20 9" /><path d="M10 32v-6h6" />
+                </svg>
+                hand<br />over
+              </div>
+              <div>
+                <Phone src={innovation.handoff.b.src} alt={innovation.handoff.b.alt} />
+                <div className="fv3-hand-l">{innovation.handoff.b.label}</div>
+              </div>
             </Reveal>
           </div>
         </div>
       </section>
 
-      {/* ── SCREENS ────────────────────────────────────────────────── */}
+      {/* ── 03 ARCHITECTURE ────────────────────────────────────────── */}
       <section className="cd-band">
         <div className="cd-in">
-          <Reveal>
-            <Head eye="The shipped app">{gal.headline}</Head>
-            <p className="cd-lede">{gal.intro}</p>
-            <p className="cd-note">{fv.deck.screensNote}</p>
+          <SecHead n={architecture.n} eye={architecture.eye} h={architecture.h} ps={architecture.ps} />
+          <Reveal className="fv3-strip-wrap" style={{ position: "relative" }}>
+            <ol className="fv3-strip" aria-label="The eleven steps">
+              {architecture.steps.map((t, i) => {
+                const n = i + 1;
+                const hs = architecture.handoffSteps.includes(n);
+                return (
+                  <li key={t} className={hs ? "fv3-hs" : undefined}>
+                    <span className="fv3-st-n">{String(n).padStart(2, "0")}</span>
+                    <b className="fv3-st-t">{t}</b>
+                    {hs ? <span className="fv3-st-h">HANDOFF</span> : null}
+                  </li>
+                );
+              })}
+            </ol>
+            <p className="fv3-strip-cap">Steps 03 and 08 are the two borrower handoffs.</p>
           </Reveal>
-          <div className="cd-gallery">
-            {JOURNEY_SCREENS.map(([src, alt]) => (
-              <Fig key={src} src={F(src)} alt={alt} cap={alt} className="cd-phone-cell" />
+        </div>
+      </section>
+
+      {/* ── 04 USABILITY TESTING ───────────────────────────────────── */}
+      <section className="cd-band" style={{ background: "var(--tint)" }}>
+        <div className="cd-in">
+          <SecHead n={testing.n} eye={testing.eye} h={testing.h} p={testing.p} />
+          <div className="fv3-metrics">
+            {testing.metrics.map((m, i) => (
+              <Reveal className="fv3-metric" key={m.l} delay={i * 0.04}>
+                <div className="fv3-metric-n">
+                  {m.v ? m.v : <>{m.from}<span className="fv3-to">→</span>{m.to}</>}
+                </div>
+                <div className="fv3-metric-l">{m.l}</div>
+              </Reveal>
             ))}
           </div>
+          <Reveal><p className="cd-eye" style={{ marginTop: 56 }}>{testing.frictionEye}</p></Reveal>
+          <div className="fv3-friction">
+            {testing.friction.map((f, i) => (
+              <Reveal className="fv3-fr" key={f.t} delay={i * 0.06}>
+                <h3 className="cd-h3">{f.t}</h3>
+                <p><b>Found.</b> {f.found}</p>
+                <p><b>Fixed.</b> {f.fixed}</p>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal className="cd-card">
+            <Fig src={testing.layout.src} alt={testing.layout.alt} cap={testing.layout.cap} />
+          </Reveal>
+          <div className="fv3-duo">
+            <Reveal className="cd-card" style={{ marginTop: 0 }}>
+              <Fig src={testing.progress.src} alt={testing.progress.alt} cap={testing.progress.cap} />
+            </Reveal>
+            <Reveal delay={0.06} className="fv3-duo-phone">
+              <Fig src={testing.shipped.src} alt={testing.shipped.alt} cap={testing.shipped.cap} />
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 05 SCALING ─────────────────────────────────────────────── */}
+      <section className="cd-band">
+        <div className="cd-in">
+          <SecHead n={scaling.n} eye={scaling.eye} h={scaling.h} ps={scaling.ps} />
+          <div className="cd-shots cd-shots-3">
+            {scaling.system.map((sh) => (
+              <Fig key={sh.src} src={sh.src} alt={sh.alt} cap={sh.cap} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── 06 RETROSPECTIVE ───────────────────────────────────────── */}
+      <section className="cd-band cd-dark">
+        <div className="cd-in">
+          <SecHead n={retro.n} eye={retro.eye} h={retro.h} p={retro.p} />
+          <div className="fv3-lessons">
+            {retro.lessons.map((l, i) => (
+              <Reveal className="fv3-lesson" key={l.t} delay={i * 0.06}>
+                <h3 className="cd-h3">{l.t}</h3>
+                <p>{l.d}</p>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal className="fv3-field">
+            {retro.waits.map((w) => (
+              <div className="fv3-mode" key={w.src}>
+                <Phone src={w.src} alt={w.alt} />
+                <span className="fv3-mode-l">{w.label}</span>
+              </div>
+            ))}
+          </Reveal>
         </div>
       </section>
 
