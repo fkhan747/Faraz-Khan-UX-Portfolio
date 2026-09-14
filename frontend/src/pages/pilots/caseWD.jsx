@@ -70,6 +70,26 @@ export const wdCss = (accent) => `
   .wd-kpi .v{ font-size:56px; font-weight:300; letter-spacing:-.03em; line-height:1; font-variant-numeric:tabular-nums; }
   .wd-kpi .l{ font-size:14px; color:var(--muted); margin-top:8px; }
 
+  /* ── Before / After, the transformation before the narrative ─────── */
+  .wd-ba{ display:grid; grid-template-columns:1fr 64px 1fr; gap:24px; align-items:start; margin:72px 80px 0; }
+  @media (max-width:900px){ .wd-ba{ grid-template-columns:1fr; gap:16px; margin:48px 22px 0; } }
+  .wd-ba-col .k{ font-size:12px; letter-spacing:.2em; text-transform:uppercase; font-weight:700; color:var(--muted); padding-bottom:12px; border-bottom:2px solid var(--ink); }
+  .wd-ba-col.after .k{ color:var(--acc); border-color:var(--acc); }
+  .wd-ba-col ul{ list-style:none; margin:0; padding:0; }
+  .wd-ba-col li{ display:grid; grid-template-columns:minmax(96px,auto) 1fr; gap:16px; align-items:baseline; padding:14px 0; border-bottom:1px solid var(--rule); }
+  .wd-ba-col li .v{ font-size:34px; font-weight:300; letter-spacing:-.03em; line-height:1; font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .wd-ba-col.after li .v{ font-weight:400; color:var(--acc); }
+  .wd-ba-col li .l{ font-size:16px; line-height:1.4; }
+  .wd-ba-arrow{ display:grid; place-items:center; height:100%; color:var(--muted); padding-top:48px; }
+  @media (max-width:900px){ .wd-ba-arrow{ padding:0; transform:rotate(90deg); height:auto; } }
+  .wd-ba-note{ margin:14px 80px 0; font-size:13px; color:var(--muted); }
+  @media (max-width:900px){ .wd-ba-note{ margin:12px 22px 0; } }
+  /* ── Design change to outcome ─────────────────────────────────────── */
+  .wd-map{ width:100%; border-collapse:collapse; margin:8px 0 24px; }
+  .wd-map th, .wd-map td{ text-align:left; padding:12px 16px 12px 0; vertical-align:top; border-bottom:1px solid var(--rule); font-size:15px; line-height:1.45; }
+  .wd-map thead th{ font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); font-weight:700; border-bottom:1px solid var(--ink); }
+  .wd-map td.o{ font-weight:700; white-space:nowrap; color:var(--acc); }
+
   /* ── Frames: the one rule for every image ────────────────────────── */
   .wd-media{ margin:72px 80px 0; padding:0; }
   .wd-frame{ position:relative; border-radius:var(--r); overflow:hidden;
@@ -201,7 +221,9 @@ export function Frame({ src, alt, cap }) {
    real width/height; the grid takes the widest so nothing wide is cropped. */
 export function Media({ items, cap, ratios }) {
   const n = items.length;
-  const tall = items.every((it) => (ratios[it.src] || 1.6) < 1);
+  // portrait ratio means "phone" unless the item says otherwise (a tall
+  // dashboard or a system sheet is `wide` / `sheet`, not a phone)
+  const tall = items.every((it) => (ratios[it.src] || 1.6) < 1 && !it.wide && !it.sheet);
   if (n === 1) {
     return (
       <Reveal>
@@ -263,6 +285,22 @@ export function Film({ screens, hint }) {
   );
 }
 
+
+/* The transformation in two columns, read before the narrative. Every row
+   must be a figure already evidenced on the page; nothing here is new. */
+export function BeforeAfter({ before, after, note }) {
+  return (
+    <Reveal>
+      <div className="wd-ba">
+        <div className="wd-ba-col"><div className="k">Before</div><ul>{before.map(([v, l]) => <li key={l}><span className="v">{v}</span><span className="l">{l}</span></li>)}</ul></div>
+        <div className="wd-ba-arrow" aria-hidden="true"><svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="2"><path d="M8 20h24M22 10l10 10-10 10" /></svg></div>
+        <div className="wd-ba-col after"><div className="k">After</div><ul>{after.map(([v, l]) => <li key={l}><span className="v">{v}</span><span className="l">{l}</span></li>)}</ul></div>
+      </div>
+      {note ? <p className="wd-ba-note">{note}</p> : null}
+    </Reveal>
+  );
+}
+
 export function Kpis({ items }) {
   return (
     <Reveal className="wd-kpis">
@@ -318,6 +356,13 @@ export function TextBlock({ s }) {
         </table></div>
       ) : null}
       {s.setup ? <div className="wd-setup">{s.setup.map(([v, l]) => <div key={v + l}><div className="v">{v}</div><div className="l">{l}</div></div>)}</div> : null}
+      {s.mapTitle ? <h3 className="wd-h3">{s.mapTitle}</h3> : null}
+      {s.map ? (
+        <div className="wd-tablewrap"><table className="wd-map">
+          <thead><tr><th>Design change</th><th>Measured outcome</th></tr></thead>
+          <tbody>{s.map.map(([c, o]) => <tr key={c}><td>{c}</td><td className="o">{o}</td></tr>)}</tbody>
+        </table></div>
+      ) : null}
       {s.resultsTitle ? <h3 className="wd-h3">{s.resultsTitle}</h3> : null}
       {s.results ? (
         <div className="wd-results">

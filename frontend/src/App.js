@@ -21,7 +21,7 @@ import CaseStudyGate from "./components/CaseStudyGate";
 // The two case studies that run the slide-band treatment. They live under
 // pilots/ for historical reasons; the directory name is the last trace of the
 // redesign trial and the pages in it are production.
-import CaseMeridianDeck from "./pages/pilots/CaseMeridianDeck";
+import CaseMeridianWD from "./pages/pilots/CaseMeridianWD";
 import CaseFinvistaLong from "./pages/pilots/CaseFinvistaLong";
 
 function App() {
@@ -42,7 +42,7 @@ function App() {
               slide-band system; Aurora and Threadfold run their own section
               pages. The dark versions of all of these were deleted on
               2026-08-04, git history has them. */}
-          <Route path="/case/meridian" element={<CaseMeridianDeck />} />
+          <Route path="/case/meridian" element={<CaseMeridianWD />} />
           <Route path="/case/finvista" element={<CaseStudyGate key="finvista" slug="finvista"><CaseFinvistaLong /></CaseStudyGate>} />
           <Route path="/case/aurora" element={<CaseStudyGate key="aurora" slug="aurora"><AuroraCaseStudy /></CaseStudyGate>} />
           <Route path="/case/threadfold" element={<CaseStudyGate key="threadfold" slug="threadfold"><ThreadfoldCaseStudy /></CaseStudyGate>} />
