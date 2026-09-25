@@ -58,10 +58,13 @@ export const wdCss = (accent) => `
   @media (max-width:800px){ .wd-deck{ grid-template-columns:1fr; padding:44px 22px 20px; } .wd-meta{ margin:0 22px; } }
 
   /* ── The Challenge / Our Solution, side by side ──────────────────── */
-  .wd-pair{ display:grid; grid-template-columns:1fr 1fr; gap:64px; margin:96px 80px 0; }
+  /* Stacked, not side by side: Faraz 2026-09-26. Two columns made the
+     reader compare them line by line; one under the other just reads. */
+  .wd-pair{ display:block; margin:96px 80px 0; max-width:842px; }
+  .wd-pair-col + .wd-pair-col{ margin-top:56px; }
   .wd-pair-col p{ margin:0 0 16px; font-size:17px; line-height:1.55; }
   .wd-pair-col .wd-h2{ margin-bottom:16px; }
-  @media (max-width:900px){ .wd-pair{ grid-template-columns:1fr; gap:48px; margin:64px 22px 0; } }
+  @media (max-width:900px){ .wd-pair{ margin:64px 22px 0; } .wd-pair-col + .wd-pair-col{ margin-top:40px; } }
 
   /* ── KPI strip ───────────────────────────────────────────────────── */
   .wd-kpis{ display:grid; grid-template-columns:repeat(4,1fr); gap:24px; margin:56px 80px 0; }
@@ -89,6 +92,13 @@ export const wdCss = (accent) => `
   .wd-map th, .wd-map td{ text-align:left; padding:12px 16px 12px 0; vertical-align:top; border-bottom:1px solid var(--rule); font-size:15px; line-height:1.45; }
   .wd-map thead th{ font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); font-weight:700; border-bottom:1px solid var(--ink); }
   .wd-map td.o{ font-weight:700; white-space:nowrap; color:var(--acc); }
+
+  /* ── On the record: independently checkable claims, kept apart ───── */
+  .wd-record{ margin:8px 0 12px; padding:0; list-style:none; border-top:1px solid var(--ink); }
+  .wd-record li{ padding:12px 0; border-bottom:1px solid var(--rule); font-size:16px; line-height:1.5;
+    display:grid; grid-template-columns:20px 1fr; gap:12px; }
+  .wd-record li::before{ content:""; width:8px; height:8px; border-radius:50%; background:var(--acc); margin-top:.5em; }
+  .wd-record-note{ font-size:13px; color:var(--muted); margin:0 0 24px; }
 
   /* ── Frames: the one rule for every image ────────────────────────── */
   .wd-media{ margin:72px 80px 0; padding:0; }
@@ -374,6 +384,13 @@ export function TextBlock({ s }) {
             </div>
           ))}
         </div>
+      ) : null}
+      {s.recordTitle ? <h3 className="wd-h3">{s.recordTitle}</h3> : null}
+      {s.record ? (
+        <>
+          <ul className="wd-record">{s.record.map((r) => <li key={r}>{r}</li>)}</ul>
+          {s.recordNote ? <p className="wd-record-note">{s.recordNote}</p> : null}
+        </>
       ) : null}
       {s.frictionTitle ? <h3 className="wd-h3">{s.frictionTitle}</h3> : null}
       {s.friction ? (

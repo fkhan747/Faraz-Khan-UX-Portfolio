@@ -523,7 +523,7 @@ export const aurora = {
   v3: {
     title: ["Aurora: Architecting a", "Unified Campaign Ecosystem at Scale"],
     tags: "Marketing Tech · B2B SaaS · Enterprise",
-    deck: "Campaign orchestration for a global martech suite, rethought end to end during Helio's AngularJS to Angular migration.",
+    deck: "Aurora runs campaigns for a global martech suite. Helio was rebuilding the frontend anyway, so I used that window to rethink the whole thing.",
     mark: { m: "Aurora by Helio", s: "Case study" },
     facts: [
       { label: "Role", value: "Lead Product Designer (Experience Transformation, UI Architecture, Design System)" },
@@ -532,65 +532,65 @@ export const aurora = {
     cover: "/aurora/cover.jpg",
     // The outcome, before the story: recruiters scan the first two screens.
     kpis: [["3 → 1", "clicks to create a journey"], ["78", "SUS, up from 51"], ["52", "components shipped"], ["3", "sister products onboarded"]],
-    leadShot: { src: "/aurora/04_RBJ_Properties_Weekly.jpg", alt: "The unified journey creator", cap: "The unified single-canvas journey creator: type, rules and cadence on one page." },
+    leadShot: { src: "/aurora/04_RBJ_Properties_Weekly.jpg", alt: "The unified journey creator", cap: "The whole journey on one page, with no wizard and no next button." },
 
     sections: [
       {
         h: "The Challenge",
         ps: [
-          "A product built by engineers for engineers. Starting a journey took three clicks and a page load; the dashboard showed only failed queries and yesterday's runs, and truncated the names marketers rely on. Siloed design across Helio meant different flows for the same job, and support tickets to prove it.",
+          "The product was built by engineers with no designer involved. To start a campaign you had to leave the dashboard, wait for a separate page to load, and then find the create button on that page. That was three clicks before you did any work. The dashboard only showed the runs from the previous day and any queries that had failed. It also cut off long journey names, so people had to hover over them and wait for a tooltip to see which campaign was which. On top of that, designers on the other Helio products worked separately, so the same task looked different in each one. Customers were raising support tickets about it.",
         ],
       },
       {
         h: "Our Solution",
         ps: [
-          "A unified command centre. Creation moved onto the dashboard, three clicks to one. Full journey names, no tooltips. A quarter filter and top-level alerts restored visibility, with advanced rules kept behind progressive disclosure. All of it on a Figma UI kit wired to Azure DevOps, across seven epics and three sister products.",
+          "Everything now happens on one screen. Creating a journey moved onto the dashboard, so it takes one click instead of three. Journey names show in full. There is a quarter filter for looking back at previous quarters, and warnings and alerts sit at the top of the page. The advanced rules are all still there, they just stay hidden until you open them. The whole thing runs on a Figma kit that is linked to Azure DevOps, and that is how it ended up being used across seven epics and three other products.",
         ],
       },
       {
         n: "01", h: "Operating Context and Enterprise Constraints",
-        p: "The old product had been built by engineers for engineers, with virtually no prior design involvement. Three realities shaped the architecture:",
+        p: "No designer had worked on this product before me. Three things shaped what I could do:",
         // Short cards, not bullets: the constraint and one line of consequence.
         cards: [
-          ["The rebuild clock", "Design had to land inside the Angular migration sprints. Anything late would ship as the old interface in new paint."],
-          ["Breaking the silos", "Designers across Helio products worked in isolation. Similar functions had different flows, and customers were raising support tickets."],
-          ["Enterprise nuance", "Customers wanted more capability, not less. Advanced tools had to fold in through progressive disclosure."],
+          ["The rebuild clock", "My designs had to be ready inside engineering's sprints. If I missed one, that screen would ship with the old design on it."],
+          ["Breaking the silos", "Designers on the different Helio products worked separately, so the same task was built a different way in each product. Customers noticed and raised tickets about it."],
+          ["Enterprise nuance", "Customers were asking for more control, so removing the advanced options was never on the table. They had to be hidden until someone needed them."],
         ],
         media: [
-          { kind: "duo", items: [{ src: "/aurora/01_RBJ_Type_Tab_Basic_Fields.jpg", alt: "Journey creation, the basics first" }, { src: "/aurora/02_RBJ_Type_Tab_All_Fields.jpg", alt: "The full rule set, on request" }], cap: "Enterprise nuance, folded in. The same creation page with the basics, and with every rule opened through progressive disclosure." },
+          { kind: "duo", items: [{ src: "/aurora/01_RBJ_Type_Tab_Basic_Fields.jpg", alt: "Journey creation, the basics first" }, { src: "/aurora/02_RBJ_Type_Tab_All_Fields.jpg", alt: "The full rule set, on request" }], cap: "The same page twice: on the left the default view, on the right what it looks like with every rule opened." },
         ],
       },
       {
         n: "02", h: "The UX Audit: Dashboard and Journey Friction",
-        p: "A heuristic sweep and stakeholder workshops, before any sketching. The friction was concentrated in how marketers started their day on the Home Dashboard.",
+        p: "I ran a heuristic sweep and a few stakeholder workshops before I sketched anything. Most of the problems turned out to be in the first few minutes of someone's day, on the Home Dashboard.",
         // The findings as a grid of headline + one line. Numbers where the
         // original audit had them.
         findingsTitle: "What the audit found",
         findings: [
           ["3 clicks", "to start a journey", "Leave the dashboard, wait for the Journey page, hunt for the button."],
-          ["1 day", "of journey history", "The dashboard showed only yesterday's runs. Everything else was invisible."],
-          ["Hover to read", "journey names", "Long, purposeful names were truncated behind a tooltip."],
-          ["Failed queries", "the only alert", "Useful for QA, useless for daily marketing operations."],
-          ["14 fields", "on first load", "No progressive disclosure, no help, no validation until submit. 33% abandoned at the audience step."],
-          ["7 of 12", "screens failed WCAG AA", "Unlabelled inputs, broken focus order, a schedule grid unreachable by keyboard."],
+          ["1 day", "of journey history", "The dashboard only showed the runs from the previous day. Anything older was not visible at all."],
+          ["Hover to read", "journey names", "Marketers used long, specific names to tell campaigns apart. The interface cut them short, so you had to hover and wait for a tooltip."],
+          ["Failed queries", "the only alert", "That is helpful while you are testing, but it does very little for day to day campaign work."],
+          ["14 fields", "on first load", "There was no help text and no validation until you submitted the form. A third of new users gave up at the audience step."],
+          ["7 of 12", "screens failed WCAG AA", "The inputs had no labels, the focus order was broken, and the schedule grid could not be reached with a keyboard."],
         ],
       },
       {
         n: "03", h: "Architectural Pivot: The Unified Command Center",
-        p: "Marketers did not need a smarter tool; they needed a faster one that stopped forcing them to switch modes. The critical data and actions moved to the marketer's primary workspace.",
+        p: "Marketers were not asking for a cleverer tool, they wanted to stop switching between pages. So I moved the things they used most onto the screen they already had open.",
         cards: [
-          ["Zero-friction creation", "Primary actions surface on the dashboard. Journey creation drops from three clicks to one."],
-          ["Context without tooltips", "Components restructured to show full journey names natively. No hover states."],
-          ["Expanded visibility", "A quarter filter restores yearly performance. Warnings and alerts pulled to the top level."],
+          ["Start from the dashboard", "The main actions are on the dashboard now, so creating a journey takes one click instead of three."],
+          ["Names you can read", "I rebuilt the components so the full journey name fits on the card. There is nothing to hover over."],
+          ["A year of history", "A quarter filter lets you look back at previous quarters. Warnings and alerts moved to the top of the page."],
         ],
         media: [
-          { kind: "single", items: [{ src: "/aurora/03_RBJ_Content_Tab.jpg", alt: "The journey creator, content tab" }], cap: "The flattened creation flow. Type, content and properties in one place, reached in one click from the dashboard." },
-          { kind: "duo", items: [{ src: "/aurora/05_RBJ_Properties_Monthly.jpg", alt: "Properties, monthly cadence" }, { src: "/aurora/06_RBJ_Properties_Custom.jpg", alt: "Properties, custom cadence" }], cap: "Cadence demystified. Monthly and custom states, each with a plain-English summary of what will send." },
+          { kind: "single", items: [{ src: "/aurora/03_RBJ_Content_Tab.jpg", alt: "The journey creator, content tab" }], cap: "One click from the dashboard gets you the whole thing." },
+          { kind: "duo", items: [{ src: "/aurora/05_RBJ_Properties_Monthly.jpg", alt: "Properties, monthly cadence" }, { src: "/aurora/06_RBJ_Properties_Custom.jpg", alt: "Properties, custom cadence" }], cap: "The monthly and custom views. Each one says in plain English what will be sent and when." },
         ],
       },
       {
         n: "04", h: "Field Validation and Iteration",
-        p: "Moderated prototype testing with the priority personas, before development began. It aligned stakeholders early and de-risked the Angular migration. By the final round we were refining micro-copy, not debating layouts.",
+        p: "I tested the prototypes with real campaign managers before any code was written. It got the stakeholders to agree early and it meant engineering was not building on a guess. By the last round the only feedback left was about wording and labels.",
         // Personas as one line each: who, what they need, what hurts.
         personasTitle: "Who we tested with",
         personaRows: [
@@ -602,30 +602,30 @@ export const aurora = {
         resultsTitle: "Results",
         results: [["91%", "Task completion", "+33 pts"], ["8.4 min", "Setup time", "−55%"], ["9%", "Schedule errors", "−78%"], ["78", "SUS", "+27 pts"]],
         media: [
-          { kind: "duo", items: [{ src: "/aurora/01_RBJ_Type_Tab_Basic_Fields.jpg", alt: "The prototype, basic fields" }, { src: "/aurora/04_RBJ_Properties_Weekly.jpg", alt: "The prototype, weekly cadence" }], cap: "The high-fidelity flows put in front of campaign managers before development began." },
+          { kind: "duo", items: [{ src: "/aurora/01_RBJ_Type_Tab_Basic_Fields.jpg", alt: "The prototype, basic fields" }, { src: "/aurora/04_RBJ_Properties_Weekly.jpg", alt: "The prototype, weekly cadence" }], cap: "The flows campaign managers tested, weeks before any code was written." },
         ],
       },
       {
         n: "05", h: "Scalability and Engineering Integration",
-        p: "A reusable Figma UI kit aligned to Helio's new brand guidelines, translated into dev-ready assets and linked to user stories in Azure DevOps. It spanned seven development epics and stopped the UI fragmentation that had been eroding brand trust.",
+        p: "The kit is a Figma library built on Helio's new brand guidelines. Every component is linked to its Azure DevOps story, so engineering never had to guess what I meant. It ended up covering seven epics, and after that new features stopped looking different from each other.",
         cards: [
-          ["52 components, 8 token sets", "Full coverage of the journey and composer flows, each linked to an Azure DevOps story."],
-          ["3 surfaces back-filled", "Audience Builder, Reports and Admin took the kit with zero new design work."],
-          ["Monthly cross-product review", "Shared tokens and a contribution model ended the every-feature-looks-different pattern."],
+          ["52 components, 8 token sets", "Enough to cover the journey and composer flows completely, with each component tied to its ticket."],
+          ["3 surfaces back-filled", "Audience Builder, Reports and Admin all picked up the kit without any new design work."],
+          ["Monthly cross-product review", "Designers from the other products joined a review once a month. They shared tokens and had a way to contribute back, which is what kept everything consistent."],
         ],
         media: [
-          { kind: "trio", items: [{ src: "/aurora/11_Composer_Blocks_Library_Panel.jpg", alt: "Blocks library" }, { src: "/aurora/10_Composer_Open_with_AI_Context_Menu.jpg", alt: "Contextual actions inside a block" }, { src: "/aurora/09_Helio_AI_Make_Shorter_Response.jpg", alt: "Assist panel" }], cap: "From the UI kit: the blocks library, contextual actions and the assist panel, built once and reused across the suite." },
+          { kind: "trio", items: [{ src: "/aurora/11_Composer_Blocks_Library_Panel.jpg", alt: "Blocks library" }, { src: "/aurora/10_Composer_Open_with_AI_Context_Menu.jpg", alt: "Contextual actions inside a block" }, { src: "/aurora/09_Helio_AI_Make_Shorter_Response.jpg", alt: "Assist panel" }], cap: "The blocks library, the in-block actions and the assist panel, all built once in the kit and reused across the suite." },
         ],
       },
       {
         n: "06", h: "Strategic Retrospective",
         sub: "Key learnings",
         numbered: [
-          ["Count the Switches, Not Just the Clicks:", "While we successfully dropped the click count from three to one, the real victory was saving marketers time by surfacing the status of all journeys immediately on the dashboard."],
-          ["Design Systems are Operational Tools, Not Just Visuals:", "By integrating the Figma UI kit directly into the Agile delivery process via Azure DevOps, the design system became a tool for engineering velocity, not just a set of brand guidelines."],
+          ["Counting switches mattered more than counting clicks", "The click count went from three to one, but the bigger saving was that a marketer could see the status of every journey as soon as they opened the tool, so they were not hunting for where they had got to."],
+          ["A design system belongs in the delivery process", "Linking the Figma kit to Azure DevOps meant engineering could pick components straight off the ticket. Without that link it would have just been a style guide."],
         ],
         media: [
-          { kind: "single", items: [{ src: "/aurora/07_Composer_Empty_AI.jpg", alt: "The product in use" }], cap: "The unified workspace, in Helio's design language." },
+          { kind: "single", items: [{ src: "/aurora/07_Composer_Empty_AI.jpg", alt: "The product in use" }], cap: "The workspace as it shipped, in Helio's design language." },
         ],
       },
     ],

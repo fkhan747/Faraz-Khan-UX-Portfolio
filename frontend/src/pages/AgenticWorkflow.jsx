@@ -259,7 +259,7 @@ export default function AgenticWorkflow() {
       {/* ── THE TOOL ───────────────────────────────────────────────────
           The demo's internals were written against the dark shell. Rather
           than rewrite a working state machine, the band carries theme-light,
-          which is the same class-based remap the Aurora and Threadfold pages
+          which is the same class-based remap the Aurora and Jack of All Threads pages
           use, so dark-card and the #F4F3FA family land on paper. */}
       <section className="cd-band cd-band-tight" ref={toolRef}>
         <div className="cd-in theme-light">

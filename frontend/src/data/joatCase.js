@@ -13,16 +13,16 @@
 // All keys preserved; values shortened, screen counts trimmed. Full-length
 // material is in git history.
 
-const J = (f) => `/threadfold/${f}`;
+const J = (f) => `/joat/${f}`;
 
-export const threadfold = {
-  slug: "threadfold",
+export const joat = {
+  slug: "joat",
   title: "Threadfold",
   subtitle:
     "A crowdfunding platform for custom apparel, designed from nothing: design a tee, set a goal, and sell it before a single shirt is printed.",
 
   hero: {
-    cover: "/threadfold/cover.jpg",
+    cover: "/joat/cover.jpg",
     facts: [
       { label: "Role", value: "Senior UX / UI Designer" },
       { label: "Domain", value: "Crowdfunding commerce" },
@@ -177,7 +177,7 @@ export const threadfold = {
   reflection: {
     headline: "What it was, and what I'd do differently",
     note:
-      "I won't invent numbers for this one. What stands is the work itself and what the press recorded at the time.",
+      "The work speaks for itself, and so does the record: what it was, who covered it, and who ran campaigns on it.",
     pressTitle: "What the record shows",
     press: [
       "One of the first crowdfunding platforms for t-shirts and custom apparel in India.",
@@ -517,6 +517,150 @@ export const threadfold = {
       ["m-stories.jpg", "Stories"],
       ["m-login.jpg", "Log in"],
       ["m-about.jpg", "About"],
+    ],
+  },
+  // ── v2, 2026-09-25: the old case study, in the shared rhythm ─────────
+  // Faraz's call: keep the ORIGINAL Jack of All Threads content (the
+  // long-form keys above, pre-anonymisation) and give it the visual design
+  // and structure the other three case studies now use. CaseJoatWD.jsx
+  // renders this block.
+  //
+  // THE ANONYMISATION IS REVERSED (2026-09-25). The company no longer
+  // trades, so the real name, the real press list and the real partners are
+  // back. The August "Threadfold" pseudonym and its constructed method and
+  // outcome figures are NOT used here: the original posture was that no
+  // numbers would be invented for this project, and that posture is what
+  // this block carries. `deck` keeps the constructed material for history.
+  v2: {
+    title: ["Jack of All Threads:", "Sell the Shirt Before It Is Printed"],
+    tags: "UX Case Study · Crowdfunding Commerce · India · 2015",
+    deck: "India's first crowdfunding platform for custom apparel, built in Bangalore. You design a tee in the browser, set a sales goal, and sell it before anything gets printed.",
+    mark: { m: "Jack of All Threads", s: "Case study" },
+    facts: [
+      { label: "Role", value: "Senior UX / UI Designer" },
+      { label: "Company", value: "Jack of All Threads, Bangalore" },
+      { label: "Platform", value: "Responsive web + mobile" },
+      { label: "Scope", value: "End-to-end product redesign" },
+    ],
+    cover: "/joat/cover.jpg",
+
+    // Structural facts about the product, not performance claims. This case
+    // study deliberately carries no invented metrics; what stands is the work
+    // and what the press recorded at the time.
+    kpis: [
+      ["1st", "crowdfunding platform for custom apparel in India"],
+      ["₹0", "upfront cost to the creator"],
+      ["6+", "tools and vendors collapsed into one flow"],
+      ["3", "steps from a blank tee to a live campaign"],
+    ],
+
+    pair: [
+      { h: "The Challenge", ps: ["If you wanted to make and sell custom tees, you had to put the whole thing together yourself. One tool to design it, another to mock it up, a printer who would only take large orders, some way of collecting payments, and then you arranged the shipping. Every one of those handoffs cost money and could go wrong, and all of it happened before you had sold a single shirt."] },
+      { h: "Our Solution", ps: ["One platform that handles all of it: the design, the pricing, the payments, the printing, the shipping and the payout. The creator designs the tee and promotes it, and we do everything after that. Nobody pays anything up front, and nothing gets printed until the campaign has hit its goal."] },
+    ],
+    lead: { items: [{ src: "/joat/02-design-studio.jpg", alt: "The Design Studio" }], cap: "The Design Studio. The preview sits in the middle, the controls are in one rail on the left, and the base cost updates while you work." },
+
+    sections: [
+      {
+        n: "01", h: "Project Overview",
+        ps: [
+          "Jack of All Threads started as a college project and became India's first t-shirt crowdfunding platform. The Hindu, Deccan Herald, DNA and YourStory all covered it, and causes like CRY and the Akshaya Patra Foundation ran campaigns on it. I owned the interface end to end and rebuilt the product as one platform rather than a set of separate tools.",
+          "The main job of the redesign was to take something that used to span six different tools and vendors and turn it into one flow that somebody could get through in an afternoon.",
+        ],
+        sub: "Who it was for",
+        bullets: [
+          ["Campaign raisers.", "Students, college clubs, bands, artists and small brands. They design a tee and run a campaign to sell it, without paying anything up front or holding any stock."],
+          ["Cause and NGO raisers.", "Non-profits like CRY and the Akshaya Patra Foundation, using merch campaigns to raise money and get attention."],
+          ["Buyers and backers.", "People who arrive from a shared link or a Facebook ad and order the tee. Their orders are what funds the print run."],
+        ],
+      },
+      {
+        n: "02", h: "Selling Custom Merch Meant Juggling a Stack of Tools",
+        p: "Three things made the old way expensive before anyone had sold anything:",
+        cards: [
+          ["A stack of disconnected tools", "You designed in one place, mocked it up in another, printed with a vendor, collected payments somewhere else and arranged the shipping yourself. None of it was connected."],
+          ["Cost and risk upfront", "Printers wanted large minimum orders and payment before printing, so you had real money committed before you knew if anyone wanted the shirt."],
+          ["No owner of the journey", "If one tool or one vendor let you down, the whole campaign stopped, and the creator had to sort it out on their own."],
+        ],
+        sub: "The redesign bet",
+        bullets: [["If one platform owns the whole journey,", "the design, the pricing, the payments, the printing, the shipping and the payout, then a creator can launch without paying anything and without having to manage any of it."]],
+      },
+      {
+        n: "03", h: "How a Campaign Works",
+        p: "I put the whole model on the homepage, so somebody landing for the first time understands how it works before they sign up for anything.",
+        stepsTitle: "Three steps, start to payout",
+        steps: ["Design it in minutes", "Set your price and promote", "We produce, you profit"],
+        sub: "What each step does",
+        bullets: [
+          ["Design in minutes.", "You pick a product and a colour, add artwork, text or your own upload, and see it on the tee as you go. The base cost shows up straight away for different quantities."],
+          ["Set your price and promote.", "You choose a sales goal, an end date and a price per tee, and the flow tells you what you would make before you launch. Then you share the link and push traffic at it with Facebook ads and social."],
+          ["We produce, you profit.", "If the campaign hits its goal, we print the shirts, ship them to every buyer and transfer the profit. If it does not hit the goal, nobody is charged anything, so the creator is never holding stock or out of pocket."],
+        ],
+        media: [{ items: [{ src: "/joat/01-homepage.jpg", alt: "The homepage", sheet: true }], cap: "The homepage, explaining the model to somebody seeing it for the first time, with live campaigns and the press coverage underneath." }],
+      },
+      {
+        n: "04", h: "Structuring a Stack of Tools Into One Platform",
+        ps: [
+          "The structure had to hold three different things at once: a creator tool, a public storefront and a back office. None of them could feel bolted on. So I organised it around what people are actually trying to do, which is create a campaign, back a campaign, or manage one you have already launched.",
+          "Then I split the journey in two, so neither side has to deal with the other side's work. The raiser designs the tee, sets the price and launches. The buyer turns up from an ad or a shared link and places an order. Everything in the middle, the printing, the payments and the shipping, is handled by the platform.",
+        ],
+        media: [
+          { items: [{ src: "/joat/ia.svg", alt: "Information architecture" }], cap: "The information architecture. The creator studio, the buyer storefront and the raiser back office, all in one place." },
+          { items: [{ src: "/joat/flow.svg", alt: "User flow" }], cap: "The raiser journey and the buyer journey, meeting at the live campaign page." },
+        ],
+      },
+      {
+        n: "05", h: "From Graybox Layouts to the Final Product",
+        p: "Before doing any visual design I blocked out the heaviest screens in grayscale, to settle the structure first. For each one I tried a few layouts and tested them against the job that screen had to do.",
+        media: [{ items: [
+          { src: "/joat/wf-studio.svg", alt: "Design Studio wireframes" },
+          { src: "/joat/wf-campaign.svg", alt: "Set price wireframes" },
+          { src: "/joat/wf-home.svg", alt: "Homepage wireframes" },
+        ], cap: "Studio: controls in a left rail, a top toolbar or floating panels. The left rail won, keeping the live tee preview central. Set price: economics buried in a form or surfaced as a live profit panel. Homepage: explain-then-browse won, since most visitors had never seen crowdfunded tees." }],
+      },
+      {
+        n: "06", h: "The Design Studio: Design in the Browser, Nothing to Install",
+        p: "You design the tee here rather than opening design software, exporting a file and emailing it to a printer. You pick a product and a colour, then add artwork, a layout, text, an upload or a background, and watch it appear on the shirt with the cost updating as you go. It is one step inside a flow that ends with a live campaign, so there is no handing anything over to the next tool.",
+        cards: [
+          ["No installs, no handoffs", "You design in the browser, and the file never leaves the platform on its way to print. There is nothing to export, email or upload again."],
+          ["Live tee preview", "You see the front and the back in the real product colours, and there is an artwork library to pull from, so a blank tee turns into a finished design quickly."],
+          ["Cost as you go", "The base cost for a sample quantity sits next to the canvas, so you are thinking about the money before you even reach the campaign flow."],
+        ],
+      },
+      {
+        n: "07", h: "Making the Money Obvious",
+        p: "Designing the tee is the first of three steps, followed by setting your price and adding a description. Most platforms bury the economics in that middle step, and I brought them out into the open instead. A goal slider, an end date and a price per tee all update a live figure showing the minimum you would make. The thing people most need to hear, that they pay nothing if the campaign fails, sits right next to the button.",
+        media: [
+          { items: [{ src: "/joat/03-set-price.jpg", alt: "Set your price" }, { src: "/joat/04-add-description.jpg", alt: "Add a description" }], cap: "Set your price: goal slider, end date and selling price driving a live minimum-profit figure. Then the story and details that make a campaign shareable." },
+          { items: [{ src: "/joat/05-campaign.jpg", alt: "The public campaign page" }], cap: "The public campaign page. This is what a raiser shares into Facebook ads and social, so it had to work for people who had never heard of us." },
+        ],
+      },
+      {
+        n: "08", h: "Running the Campaign After Launch",
+        p: "Once a campaign is running, the raiser needs to track orders, watch the goal, manage their account and get paid. I kept the dashboards in the same style as the studio, so going live does not feel like moving to a different product.",
+        media: [
+          { items: [{ src: "/joat/06-dashboard.jpg", alt: "Order tracking" }, { src: "/joat/07-payout.jpg", alt: "Payout" }], cap: "Order tracking on the left, where a raiser can see orders and progress towards the goal. Payout on the right, which is where the creator finally gets paid." },
+          { items: [{ src: "/joat/08-stories.jpg", alt: "Stories" }, { src: "/joat/10-account.jpg", alt: "Account" }], cap: "Stories on the left, showing real campaigns and causes, which also works as proof for the next raiser. Account on the right, kept deliberately simple." },
+        ],
+      },
+      {
+        n: "09", h: "What It Was, and What I Would Do Differently",
+        p: "Here is what the product was, who wrote about it, and who ran campaigns on it.",
+        sub: "What I would do differently",
+        numbered: [
+          ["The Design Studio tried to offer everything at once.", "I would stage the controls more carefully, so a raiser gets to something they could sell in about three taps, and the more powerful options show up later."],
+          ["We designed desktop first, and most of the ad traffic came in on phones.", "Next time I would start with the mobile campaign flow and work up from there."],
+          ["The pricing screen was the strongest idea in the product and we never tested it.", "I would put the goal, price and profit screen in front of real first-time creators before anyone built it."],
+          ["Campaign pages had to sell to people who had never heard of us.", "That needs proper landing pages that get tested, rather than one template used for everything."],
+        ],
+        recordTitle: "What the record shows",
+        record: [
+          "India's first crowdfunding platform for t-shirts and custom apparel, out of Bangalore.",
+          "Covered by The Hindu, Deccan Herald, DNA, YourStory and Inc42.",
+          "Used for college tees, fan groups, artwork and social causes, with partners including CRY and the Akshaya Patra Foundation.",
+          "Reported by press to have grown quickly through 2014 and 2015.",
+        ],
+      },
     ],
   },
 };

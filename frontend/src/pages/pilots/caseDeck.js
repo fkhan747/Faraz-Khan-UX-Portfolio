@@ -407,7 +407,7 @@ export const DECK_CSS = `
      size are fixed by the system; only the colour changes per case. */
   .cd-thanks{ background:var(--acc); color:#fff; padding:104px 0 96px; }
   /* .82 not .72: this rule serves all four accents, and on the lightest of
-     them (Threadfold's burnt orange) 72% white lands at 4.35:1, under AA. */
+     them (Jack of All Threads's burnt orange) 72% white lands at 4.35:1, under AA. */
   .cd-thanks .cd-eye{ color:rgba(255,255,255,.82); }
   .cd-thanks-h{ font-family:'Playfair Display',serif; font-weight:700;
     font-size:clamp(2.6rem,6vw,4.6rem); line-height:1; letter-spacing:-.035em; margin:0 0 18px; }

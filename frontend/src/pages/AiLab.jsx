@@ -146,7 +146,14 @@ const AGENT_CHECKS = ["Accessibility", "Content & voice", "Visual hierarchy", "I
 const TOOLS = ["Claude Code", "Claude", "ChatGPT", "Codex", "VS Code", "GitHub", "Figma"];
 
 export default function AiLab() {
-  const live = concepts.filter((c) => c.live !== false);
+  /* DORMANT 2026-09-26, Faraz's call: the Field Guide, the agentic audit tool
+   and FinVista Agent Era are off this page for now. Their markup is kept
+   intact below the flag so bringing them back is a one-line change, and the
+   routes (/patterns/, /agentic-workflow, /agent-era/) are untouched, so every
+   URL still works and anything already linking to them still resolves. */
+const SHOW_BUILT_THINGS = false;
+
+const live = concepts.filter((c) => c.live !== false);
 
   return (
     <div className="lab" data-testid="ai-lab-page">
@@ -154,7 +161,7 @@ export default function AiLab() {
       <div className="lab-field" aria-hidden="true" />
       <Seo
         title="AI Lab"
-        description="Faraz Khan's self-initiated AI work: a field guide of twelve trust patterns with live demos, a working multi-agent audit tool, an operable agent-supervision concept, and two AI-native product prototypes."
+        description="Faraz Khan's self-initiated AI work: AI-native product concepts, designed end to end and built as working prototypes."
       />
 
       {/* ── INTRO ──────────────────────────────────────────────────── */}
@@ -165,20 +172,12 @@ export default function AiLab() {
             <h1 className="lab-h1">
               AI Lab<em>.</em>
             </h1>
-            <p className="lab-lede">
-              Client work is where I ship. This is where I find out what AI-native actually feels
-              like: a field guide of trust patterns you can click through, a multi-agent tool that
-              audits real websites, and product concepts built as working prototypes rather than
-              slides.
-            </p>
-            <div className="lab-honesty">
-              Everything here is labelled for what it is. Shipped work says shipped, prototypes say
-              prototype, and there are no invented numbers on any of these pages.
-            </div>
           </Reveal>
         </Container>
       </section>
 
+      {SHOW_BUILT_THINGS ? (
+        <>
       {/* ── LEAD: THE FIELD GUIDE ──────────────────────────────────── */}
       <section className="pb-6" data-testid="ai-lab-guide">
         <Container>
@@ -249,8 +248,7 @@ export default function AiLab() {
                   yourself, including the escalation you are forced to handle.
                 </p>
                 <p className="lab-card-p" style={{ color: "#A83566" }}>
-                  The shipped numbers are real. The agent era is a concept, and no bank has
-                  deployed it.
+                  The lending desk shipped. This is the next version of it.
                 </p>
                 <span className="lab-go">
                   Operate the Loan Desk <ArrowUpRight size={17} strokeWidth={2.2} />
@@ -260,17 +258,18 @@ export default function AiLab() {
           </div>
         </Container>
       </section>
+        </>
+      ) : null}
 
       {/* ── SUPPORTING: THE TWO CONCEPTS ───────────────────────────── */}
-      <section className="pt-12 pb-6" data-testid="ai-lab-concepts">
+      <section className="pt-2 pb-6" data-testid="ai-lab-concepts">
         <Container>
           <Reveal>
-            <p className="lab-eyebrow">Product concepts</p>
-            <h2 className="lab-sec-h mt-3">Designed end to end, then built to click through.</h2>
+            <h2 className="lab-sec-h">Concepts</h2>
             <p className="lab-sec-p">
-              Both are self-initiated and reconstructed from secondary research. No users were
-              tested and no outcomes are claimed. What they show is how I think an AI-native product
-              should behave when a person still has to stay accountable for the decision.
+              Two products I built on my own time. Same idea behind both: the AI does the work, you
+              still make the call. They are real prototypes, not mockups, so go ahead and click
+              through them.
             </p>
           </Reveal>
           <div className="lab-grid-2">

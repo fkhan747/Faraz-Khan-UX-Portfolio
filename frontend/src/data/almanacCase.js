@@ -10,7 +10,7 @@ export const almanac = {
   title: "Almanac",
   kind: "AI-native concept · self-initiated",
   subtitle:
-    "An enterprise AI knowledge engine. Employees ask a question in plain language and get a synthesised, cited answer drawn from the company's own documents, wikis, and tickets. I took it from problem framing through research, IA, and a clickable prototype, with answer-provenance and trust as the central design problem. An answer you can't verify is an answer no one will act on.",
+    "An enterprise AI knowledge engine. People ask a question in plain language and get one answer back, pulled from the company's own documents, wikis and tickets, with the sources attached. I took it from the problem framing through the research and the IA to a clickable prototype, and the sources on every answer are the central design problem. An answer you can't verify is an answer no one will act on.",
 
   hero: {
     stats: [
@@ -22,10 +22,10 @@ export const almanac = {
 
   // --- 00 OVERVIEW ---
   overview: {
-    headline: "A knowledge engine that answers in your company's own words, and shows its sources.",
+    headline: "A knowledge engine that answers using your company's own documents, and shows you where each part came from.",
     tldrTitle: "TL;DR · Concept Summary",
     tldr:
-      "Inside most companies, the answer to a question already exists, in a doc, a wiki page, a closed ticket, or a Slack thread. Finding it means knowing where to look and who to ask. Almanac lets anyone ask in plain language and get one synthesised answer from the company's own sources, every claim cited and clickable. I built it as a self-initiated concept, reconstructed from secondary research, end to end through to hi-fi screens. Answer-provenance is the load-bearing trust mechanism throughout.",
+      "Inside most companies, the answer to a question already exists, in a doc, a wiki page, a closed ticket, or a Slack thread. Finding it means knowing where to look and who to ask. Almanac lets anyone ask in plain language and get one synthesised answer from the company's own sources, every claim cited and clickable. I designed it end to end, through to hi-fi screens. Answer-provenance is the load-bearing trust mechanism throughout.",
     badge: "Concept · self-initiated · not client work",
     facts: [
       { label: "Type", value: "AI-native product concept" },
@@ -42,12 +42,12 @@ export const almanac = {
       { step: "05", title: "Validate", duration: "Planned next" },
     ],
     intro:
-      "Almanac is a self-initiated concept, not a client engagement. I chose enterprise knowledge because it's a problem every company has and almost none have solved well: institutional memory is real, valuable, and effectively unsearchable. It's also a sharp test of AI-trust design. Generative answers are easy to produce and easy to distrust. The design challenge is making an AI answer one a domain expert will actually rely on, which is why every answer here carries its sources, not just a confident tone.",
+      "I chose enterprise knowledge for this because it's a problem every company has and almost none have solved well: institutional memory is real, valuable, and effectively unsearchable. It's also a sharp test of AI-trust design. Generative answers are easy to produce and easy to distrust. The design challenge is making an AI answer one a domain expert will actually rely on, which is why every answer here carries its sources, not just a confident tone.",
     intro2:
-      "I didn't interview anyone for this. It's a self-initiated concept, and I'd rather show the reasoning than claim research I didn't run. The problem is reconstructed from the public record: industry write-ups on knowledge work, the complaints teams air about their wikis and search tools, and the gaps reviewers flag in the incumbents. Knowledge work runs on questions, 'how did we handle this last time?', 'what's our policy on X?', 'who decided this and why?'. Today those get answered by interrupting a colleague, digging through a stale wiki, or giving up. The job here was to design an answer surface trustworthy enough to replace the colleague-interrupt.",
+      "The problem is built from the public record: industry write-ups on knowledge work, the complaints teams air about their wikis and search tools, and the gaps reviewers flag in the incumbents. Knowledge work runs on questions, 'how did we handle this last time?', 'what's our policy on X?', 'who decided this and why?'. Today those get answered by interrupting a colleague, digging through a stale wiki, or giving up. The job here was to design an answer surface trustworthy enough to replace the colleague-interrupt.",
     contextTitle: "Why this concept",
     contextBody:
-      "Three reasons. It's a near-universal enterprise pain with no good incumbent. Answer-provenance is a genuinely hard, genuinely important trust-design problem. And it lets the case study show a process that's jobs-to-be-done and content-model-led, different from the ethnographic Slate or the decision-led Crux.",
+      "A few reasons. Nearly every company has this problem and nobody has solved it well. Showing where an answer came from is a hard trust problem and worth working on. And it let me work in a different way to Slate, starting from what people are trying to get done and from the content model, rather than from the decision-led Crux.",
     metadata: [
       { k: "Domain", v: "Enterprise Knowledge / Search" },
       { k: "Primary user", v: "Any employee with a question" },
@@ -58,22 +58,22 @@ export const almanac = {
   },
 
   primaryUsers: [
-    { label: "Knowledge Seekers", desc: "The primary user: anyone on the team who needs an answer now and currently hunts across wikis, drives and Slack threads." },
-    { label: "Domain Experts", desc: "Hold the answers in their heads and are tired of being interrupted for things that should be self-serve." },
-    { label: "Knowledge Admins", desc: "Curate sources and permissions, keeping what the AI draws on trustworthy and current." },
+    { label: "Knowledge Seekers", desc: "The main user is anyone who needs an answer right now and currently goes hunting through wikis, drives and Slack threads to find it." },
+    { label: "Domain Experts", desc: "They hold the answers in their heads and are tired of being interrupted for things people should be able to look up." },
+    { label: "Knowledge Admins", desc: "They look after the sources and the permissions, so what the AI draws on stays current and worth trusting." },
   ],
 
   // --- 01 PERSONAS ---
   personasSection: {
     headline: "Meet the people with the questions, and the answers.",
     intro:
-      "These aren't interview subjects. I didn't interview anyone for a self-initiated concept, and I won't pretend I did. They're archetypes built from public material: write-ups on knowledge work, the complaints teams air about their wikis and search tools, and product reviews of the incumbents. Knowledge has a supply side and a demand side. Most people are on the demand side: they have a question and need an answer now. A few are domain experts who hold the answers and get interrupted for them all day. And someone owns whether the knowledge base is trustworthy at all. Almanac has to serve the asker without burning out the expert.",
+      "Three archetypes, drawn from public material: write-ups on knowledge work, the complaints teams air about their wikis and search tools, and product reviews of the incumbents. Knowledge has a supply side and a demand side. Most people are on the demand side: they have a question and need an answer now. A few are domain experts who hold the answers and get interrupted for them all day. And someone owns whether the knowledge base is trustworthy at all. Almanac has to serve the asker without burning out the expert.",
     personas: [
       {
         name: "Sam Okonkwo",
         initials: "SO",
         role: "Knowledge Seeker · primary",
-        context: "A mid-level employee in sales, ops, support, or engineering, who hits questions all day that someone, somewhere in the company, has already answered.",
+        context: "Someone mid-level in sales, ops, support or engineering, who runs into questions all day that somebody else in the company has already answered.",
         goals: [
           "Get a trustworthy answer without interrupting a busy colleague",
           "Know the answer is current, not from a doc that's two reorgs old",
@@ -91,7 +91,7 @@ export const almanac = {
         name: "Dr. Lena Hartmann",
         initials: "LH",
         role: "Domain Expert",
-        context: "The person everyone pings. Holds deep knowledge in her head and in scattered docs, and loses hours a week to questions she's answered a dozen times.",
+        context: "The person everyone messages. She knows a lot of it by heart and the rest is in documents nobody else can find, and she loses hours a week answering the same questions again.",
         goals: [
           "Stop answering the same question for the tenth time",
           "Make sure people get the right answer, not a half-remembered version",
@@ -109,7 +109,7 @@ export const almanac = {
         name: "Marcus Webb",
         initials: "MW",
         role: "Knowledge Admin",
-        context: "Owns the knowledge base, the wiki, the intranet. Accountable for whether any of it is trustworthy, and quietly aware that most of it isn't.",
+        context: "She owns the knowledge base, the wiki and the intranet, and she is the one accountable for whether any of it can be trusted. She already knows most of it cannot.",
         goals: [
           "Make the knowledge base something people actually trust and use",
           "See what people are asking that the docs don't answer",
@@ -131,7 +131,7 @@ export const almanac = {
     headline: "I followed a question through the company, on paper.",
     methodTitle: "A jobs-to-be-done lens, from the public record",
     methodIntro:
-      "Rather than ask people what they think of their wiki, I traced how a real question moves: what someone needs to know, where they look, how long it takes, and what they do when they give up. I reconstructed that path from secondary sources, write-ups on knowledge work, the complaints teams air online about search and wikis, and tool reviews, mapping a question from 'I need to know X' to 'I have a usable answer', or to abandonment.",
+      "Rather than ask people what they think of their wiki, I traced how a real question moves: what someone needs to know, where they look, how long it takes, and what they do when they give up. I built that path from the public record: write-ups on knowledge work, the complaints teams air online about search and wikis, and tool reviews, mapping a question from 'I need to know X' to 'I have a usable answer', or to abandonment.",
     method: [
       { l: "Basis", v: "Secondary research" },
       { l: "Lens", v: "Jobs-to-be-done" },
@@ -140,7 +140,7 @@ export const almanac = {
     ],
     timelineTitle: "The life of a question",
     timelineIntro:
-      "Mapping one question's journey, reconstructed from the research, showed where the time and trust leak out, and why people default to interrupting a human even when the answer is written down somewhere.",
+      "Following one question all the way through showed where the time goes and why people end up asking a colleague even when the answer is written down somewhere.",
     timeline: [
       { time: "Step 1", label: "Question hits", note: "Someone needs to know 'what's our refund policy for enterprise?' mid-task." },
       { time: "Step 2", label: "Wiki search", note: "Searches the wiki and gets 40 results. The top ones are from a policy that changed last quarter.", pain: true },
@@ -272,7 +272,7 @@ export const almanac = {
     ],
     cardSortTitle: "Deriving the structure",
     cardSortIntro:
-      "With no users to card-sort for a self-initiated concept, and I won't claim a method I didn't run, I derived the information architecture from the problem itself: people arrive thinking in questions, not in documents or departments. So the structure organises around what someone is trying to find out, which settled the top-level surfaces: Ask, Sources, Saved Answers, and an admin Insights view.",
+      "I derived the information architecture from the problem itself: people arrive thinking in questions, not in documents or departments. So the structure organises around what someone is trying to find out, which settled the top-level surfaces: Ask, Sources, Saved Answers, and an admin Insights view.",
     cardSort: [
       { l: "Approach", v: "First-principles from the question" },
       { l: "Basis", v: "Public research + teardown" },
@@ -392,7 +392,7 @@ export const almanac = {
       "A concept case study can be rigorous without pretending it shipped. Here's what exists, what it's designed to prove, and what would come next if this moved from portfolio to product.",
     doneTitle: "The artifact",
     done: [
-      "A defined problem reconstructed from secondary research: tracing the life of a question through an org, mapping where answers actually live, and identifying the colleague-interrupt as the true competitor.",
+      "A defined problem: tracing the life of a question through an org, mapping where answers actually live, and identifying the colleague-interrupt as the true competitor.",
       "A competitive teardown across six tools, exposing the gap between search (returns documents) and AI bolt-ons (answer confidently without citations).",
       "A question-centric IA derived from the problem, structured around what people are trying to find out, not where documents are stored.",
       "Three core task flows (ask → answer, answer → verify source, answer → capture) with trust gates at each AI boundary.",

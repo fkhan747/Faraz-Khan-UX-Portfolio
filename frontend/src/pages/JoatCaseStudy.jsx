@@ -19,7 +19,7 @@ import CaseTopBar from "../components/CaseTopBar";
 // rest of the light pages.
 const FOCUS = "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C71E73] focus-visible:ring-offset-2 focus-visible:ring-offset-[#EFEDE7]";
 
-/* Threadfold's brand coral, deepened for paper. The card colour (#F25C4D) is
+/* Jack of All Threads's brand coral, deepened for paper. The card colour (#F25C4D) is
    only 3:1 on the light ground, so text and numbers use this darker step. */
 const ACCENT = "#A63B25";
 
@@ -47,7 +47,7 @@ const SectionWrap = ({ children, className = "", ...rest }) => (
   </section>
 );
 
-export default function ThreadfoldCaseStudy() {
+export default function JoatCaseStudy() {
   // Decrypted case data provided by CaseStudyGate after unlock.
   const j = useCaseData();
   return (
@@ -55,7 +55,7 @@ export default function ThreadfoldCaseStudy() {
        outside <Layout>, so it never got the class and stayed on the dark
        palette. The cover header keeps its dark scrim, it sits on photography. */
     <article
-      data-testid="threadfold-case-study"
+      data-testid="joat-case-study"
       className="theme-light bg-[#EFEDE7] pb-24"
       style={{ "--case-acc": ACCENT }}
     >
@@ -63,7 +63,7 @@ export default function ThreadfoldCaseStudy() {
       <CaseTopBar accent={ACCENT} />
 
       {/* HERO, light. Same change as the Aurora page: the cover is a picture
-          now rather than a scrim, so Threadfold is not a dark page inside a
+          now rather than a scrim, so Jack of All Threads is not a dark page inside a
           light site. */}
       <header className="pt-10 pb-14">
         <Container>
@@ -72,7 +72,7 @@ export default function ThreadfoldCaseStudy() {
             ux case study · crowdfunding commerce · india
           </Reveal>
           <Reveal as="h1" delay={0.08} className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[0.95] text-[#171512] max-w-5xl case-keep">
-            Threadfold
+            Jack of All Threads
           </Reveal>
           <Reveal as="p" delay={0.16} className="mt-7 max-w-3xl text-lg md:text-2xl text-[#171512] leading-snug font-light italic">
             {j.subtitle}
@@ -81,7 +81,7 @@ export default function ThreadfoldCaseStudy() {
           <Reveal delay={0.22} className="mt-12 rounded-3xl overflow-hidden border border-[#DCD7CC] bg-white">
             <VaultImage
               src={j.hero.cover}
-              alt="Threadfold crowdfunding platform"
+              alt="Jack of All Threads crowdfunding platform"
               className="w-full h-auto block"
               loading="eager"
             />

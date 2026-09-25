@@ -50,7 +50,7 @@ const RATIO = {
 const NEXT_WORK = [
   ["/case/finvista", "/finvista/cover.jpg", "FinVista", "Assisted lending"],
   ["/case/meridian", "/meridian/cover.jpg", "Meridian", "University analytics"],
-  ["/case/threadfold", "/threadfold/cover.jpg", "Threadfold", "Crowdfunding commerce"],
+  ["/case/joat", "/joat/cover.jpg", "Jack of All Threads", "Crowdfunding commerce"],
 ];
 
 /* NO BACKTICKS BELOW: one template literal. */
@@ -87,10 +87,13 @@ const WD_CSS = `
   @media (max-width:800px){ .au-deck{ grid-template-columns:1fr; padding:44px 22px 20px; } .au-meta{ margin:0 22px; } }
 
   /* ── The Challenge / Our Solution, side by side ──────────────────── */
-  .au-pair{ display:grid; grid-template-columns:1fr 1fr; gap:64px; margin:96px 80px 0; }
+  /* Stacked, not side by side: Faraz 2026-09-26. Two columns made the
+     reader compare them line by line; one under the other just reads. */
+  .au-pair{ display:block; margin:96px 80px 0; max-width:842px; }
+  .au-pair-col + .au-pair-col{ margin-top:56px; }
   .au-pair-col p{ margin:0 0 16px; font-size:17px; line-height:1.55; }
   .au-pair-col .au-h2{ margin-bottom:16px; }
-  @media (max-width:900px){ .au-pair{ grid-template-columns:1fr; gap:48px; margin:64px 22px 0; } }
+  @media (max-width:900px){ .au-pair{ margin:64px 22px 0; } .au-pair-col + .au-pair-col{ margin-top:40px; } }
 
   /* ── Frames: the one rule for every image ────────────────────────── */
   .au-media{ margin:72px 80px 0; padding:0; }

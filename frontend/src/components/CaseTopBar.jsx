@@ -8,11 +8,11 @@ import Logo from "./Logo";
  * It is painted in the case study's own brand colour. Pass `accent`, or let it
  * read --case-acc from an ancestor. Everything on it is white, so an accent
  * has to be dark enough to carry white type; every case accent in use is
- * (FinVista #16653C, Meridian #8E2131, Aurora #1A4C49, Threadfold #A63B25).
+ * (FinVista #16653C, Meridian #8E2131, Aurora #1A4C49, Jack of All Threads #A63B25).
  *
  * Replaces three different top bars: the deck pages' paper-coloured cd-top,
  * the concept pages' sticky white header, and the inline back-links that
- * Aurora and Threadfold had instead of a bar.
+ * Aurora and Jack of All Threads had instead of a bar.
  */
 
 const BAR_CSS = `

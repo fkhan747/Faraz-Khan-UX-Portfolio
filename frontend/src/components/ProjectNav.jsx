@@ -6,7 +6,7 @@ import { projects, concepts } from "../data/content";
  * ProjectNav - Previous / Next project pager.
  *
  * Fixed, circular order matching the data ([...projects, ...concepts]):
- *   FinVista → Aurora → Next-Gen Institute → Threadfold
+ *   FinVista → Aurora → Next-Gen Institute → Jack of All Threads
  *   → Slate → Almanac → Crux → (wraps back to FinVista).
  *
  * variant="footer" (the site-wide default placement now): a subtle, grey-bordered

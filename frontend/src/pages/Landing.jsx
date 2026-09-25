@@ -4,7 +4,6 @@ import { ArrowRight, Mail, Calendar, Linkedin, Briefcase, User } from "lucide-re
 import { PROFILE, projects } from "../data/content";
 import { Container } from "../components/Grid";
 import CaseCover from "../components/CaseCover";
-import AgenticFeature from "../components/AgenticFeature";
 import BookCallButton from "../components/BookCallButton";
 import Seo from "../components/Seo";
 
@@ -144,7 +143,7 @@ export default function Landing() {
                 Senior UX Lead · Enterprise, Fintech &amp; Analytics
               </p>
               <p className="mt-4 max-w-xl text-base md:text-lg text-[#A29CB4] leading-relaxed rise rise-3" data-testid="hero-sub">
-                11+ years across UX, product and data, with roots in brand and code. Big believer in clarity over decoration, <span className="text-[#F4F3FA] underline decoration-[#075EFD] decoration-2 underline-offset-4">facts over feelings</span>, and design that gets out of your way. Turns out treating people well is also great for business. Who knew.
+                11+ years across UX, product and data, and I came into it from brand and code. I care about clarity over decoration and <span className="text-[#F4F3FA] underline decoration-[#075EFD] decoration-2 underline-offset-4">facts over feelings</span>, and about design that gets out of your way. Turns out treating people well is also great for business. Who knew.
               </p>
               <div className="mt-9 flex items-center gap-4 flex-wrap rise rise-3">
                 <Link
@@ -216,8 +215,9 @@ export default function Landing() {
         </Container>
       </section>
 
-      {/* FEATURED: agentic audit live demo — compact band, below the case studies */}
-      <AgenticFeature compact className="pb-16" />
+      {/* The agentic audit band was removed 2026-09-26 at Faraz's request,
+          alongside hiding it on /ai-lab. The component and its route are
+          untouched; re-add this line to bring the band back. */}
 
       {/* MARQUEE */}
       <section className="py-12 border-y border-white/10 overflow-hidden dark-card" data-testid="marquee">

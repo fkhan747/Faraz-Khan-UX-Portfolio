@@ -10,7 +10,8 @@ import Contact from "./pages/Contact";
 // Resume page merged into About ("About Me"). /resume redirects to /about below.
 import CaseStudy from "./pages/CaseStudy";
 import AuroraCaseStudy from "./pages/AuroraCaseStudy";
-import ThreadfoldCaseStudy from "./pages/ThreadfoldCaseStudy";
+import JoatCaseStudy from "./pages/JoatCaseStudy";
+import CaseJoatWD from "./pages/pilots/CaseJoatWD";
 import SlateConcept from "./pages/SlateConcept";
 import AlmanacConcept from "./pages/AlmanacConcept";
 import CruxConcept from "./pages/CruxConcept";
@@ -39,13 +40,14 @@ function App() {
               password is one flag.
 
               Two page treatments, both light. Meridian and FinVista run the
-              slide-band system; Aurora and Threadfold run their own section
+              slide-band system; Aurora and Jack of All Threads run their own section
               pages. The dark versions of all of these were deleted on
               2026-08-04, git history has them. */}
           <Route path="/case/meridian" element={<CaseMeridianWD />} />
           <Route path="/case/finvista" element={<CaseStudyGate key="finvista" slug="finvista"><CaseFinvistaLong /></CaseStudyGate>} />
           <Route path="/case/aurora" element={<CaseStudyGate key="aurora" slug="aurora"><AuroraCaseStudy /></CaseStudyGate>} />
-          <Route path="/case/threadfold" element={<CaseStudyGate key="threadfold" slug="threadfold"><ThreadfoldCaseStudy /></CaseStudyGate>} />
+          <Route path="/case/joat" element={<CaseStudyGate key="joat" slug="joat"><JoatCaseStudy /></CaseStudyGate>} />
+          <Route path="/case/joat-draft" element={<CaseStudyGate key="joat-draft" slug="joat"><CaseJoatWD /></CaseStudyGate>} />
           {/* Concepts sit outside <Layout> for the same reason. Almanac is
               dormant (live:false in content.js) and unlinked, kept reachable. */}
           <Route path="/case/slate" element={<SlateConcept />} />
@@ -60,7 +62,7 @@ function App() {
           <Route path="/case/finvista-deck" element={<Navigate to="/case/finvista" replace />} />
           <Route path="/case/finvista-v1" element={<Navigate to="/case/finvista" replace />} />
           <Route path="/case/aurora-v1" element={<Navigate to="/case/aurora" replace />} />
-          <Route path="/case/threadfold-v1" element={<Navigate to="/case/threadfold" replace />} />
+          <Route path="/case/joat-v1" element={<Navigate to="/case/joat" replace />} />
           <Route path="/case/meridian-v1" element={<Navigate to="/case/meridian" replace />} />
           <Route path="/case/meridian-narrated" element={<Navigate to="/case/meridian" replace />} />
           <Route path="/pilot/case/meridian" element={<Navigate to="/case/meridian" replace />} />
@@ -76,7 +78,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/resume" element={<Navigate to="/about" replace />} />
-            {/* /case/aurora and /case/threadfold are served by the deck pages above,
+            {/* /case/aurora and /case/joat are served by the deck pages above,
                 outside Layout. */}
             {/* Concepts are served outside Layout too, alongside the deck
                 pages. See the block above. */}
@@ -84,11 +86,11 @@ function App() {
             <Route path="/case/recruitos" element={<Navigate to="/case/slate" replace />} />
             <Route path="/case/knowledgeos" element={<Navigate to="/case/almanac" replace />} />
             <Route path="/case/decisionos" element={<Navigate to="/case/crux" replace />} />
-            <Route path="/case/somethings-cooking" element={<Navigate to="/case/threadfold" replace />} />
+            <Route path="/case/somethings-cooking" element={<Navigate to="/case/joat" replace />} />
+            <Route path="/case/threadfold" element={<Navigate to="/case/joat" replace />} />
             {/* Anonymised 2026-08-03. The old slug abbreviated the real company
                 name, so it redirects rather than being served. */}
-            <Route path="/case/joat" element={<Navigate to="/case/threadfold" replace />} />
-            <Route path="/case/joat-v1" element={<Navigate to="/case/threadfold" replace />} />
+                        <Route path="/case/joat-v1" element={<Navigate to="/case/joat" replace />} />
             <Route path="/ai-lab" element={<AiLab />} />
             <Route path="/case/:slug" element={<CaseStudy />} />
             <Route path="*" element={<NotFound />} />

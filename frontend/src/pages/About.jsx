@@ -29,14 +29,14 @@ import { GLASS_CSS, ACCENT, MUTED } from "./aboutGlass";
 const STROKE = 1.75;
 
 const COMPETENCIES = [
-  { icon: Lightbulb, t: "User Experience Strategy & Leadership", d: "Setting UX vision, OKRs, and design culture across multi-product orgs." },
-  { icon: Users, t: "Design Thinking & Human-Centered Innovation", d: "Workshops, divergent exploration, and decision frameworks that ship." },
-  { icon: Search, t: "User Research & Behavioral Insights", d: "Qualitative interviews, diary studies, usability testing, and synthesis." },
-  { icon: Palette, t: "Advanced UI/UX & Visual Design", d: "Systems thinking down to pixel-level craft in Figma, across web and mobile." },
-  { icon: LineChart, t: "Data-Driven Dashboard Design", d: "Translating BI data (Power BI, Tableau, MicroStrategy) into clear, actionable UIs." },
-  { icon: GitBranch, t: "Agile Collaboration & DesignOps", d: "Tight loops with PMs, engineers and QA. Jira-native, sprint-ready handoffs." },
-  { icon: Globe, t: "Global & Multicultural UX Expertise", d: "11+ years across BFSI, edtech, enterprise and consumer tech, multiple geographies." },
-  { icon: Repeat, t: "Continuous Improvement & UX Optimization", d: "Post-launch loops: heuristic audits, A/B testing, accessibility, and visual QA." },
+  { icon: Lightbulb, t: "User Experience Strategy & Leadership", d: "Setting the UX direction for several products at once, and the way the design team works." },
+  { icon: Users, t: "Design Thinking & Human-Centered Innovation", d: "Running workshops, exploring a lot of options early, and getting a decision made so the work can move." },
+  { icon: Search, t: "User Research & Behavioral Insights", d: "Interviews, diary studies and usability testing, then making sense of what came out of them." },
+  { icon: Palette, t: "Advanced UI/UX & Visual Design", d: "Designing the system and the individual screens in Figma, for web and mobile." },
+  { icon: LineChart, t: "Data-Driven Dashboard Design", d: "Turning BI data from Power BI, Tableau and MicroStrategy into screens people can actually read." },
+  { icon: GitBranch, t: "Agile Collaboration & DesignOps", d: "Working closely with PMs, engineers and QA, and handing over work in a state they can build from." },
+  { icon: Globe, t: "Global & Multicultural UX Expertise", d: "Eleven years across banking, edtech, enterprise and consumer products, for clients in several countries." },
+  { icon: Repeat, t: "Continuous Improvement & UX Optimization", d: "Going back after launch: heuristic audits, A/B tests, accessibility checks and visual QA." },
 ];
 
 const TOOLS = {
@@ -74,9 +74,9 @@ const EXPERIENCE = [
     time: "Feb 2023 - Present",
     place: "Pune, India",
     points: [
-      "Lead UX for enterprise platforms end-to-end, from wireframes to high-fidelity Figma prototypes. The focus is clean navigation and engagement we can actually measure.",
-      "Build and maintain scalable design systems that stay consistent across web, mobile and enterprise environments.",
-      "Embed UX inside Agile delivery (JIRA, Confluence), keeping product, engineering and business aligned every sprint.",
+      "I lead UX on enterprise platforms from the first wireframes through to the final Figma prototypes. Most of the work goes into navigation that makes sense and results we can measure.",
+      "I build and look after the design systems, so the same components work on web, mobile and the enterprise products.",
+      "Design sits inside the sprint rather than ahead of it, so product, engineering and the business stay on the same page.",
     ],
   },
   {
@@ -85,9 +85,9 @@ const EXPERIENCE = [
     time: "Dec 2017 - Dec 2022",
     place: "Nagpur, India",
     points: [
-      "Designed dynamic, actionable dashboards that turned complex datasets into confident, data-driven decisions for global clients.",
-      "Ran usability audits and experience optimization to surface pain points and lift engagement.",
-      "Partnered with PMs and stakeholders to translate business goals into intuitive, real-world interfaces.",
+      "I designed dashboards that took large, messy datasets and made them readable enough for clients to make decisions from.",
+      "I ran usability audits to find where people were getting stuck, then fixed those parts.",
+      "I worked with PMs and stakeholders to turn what the business wanted into screens that made sense to use.",
     ],
   },
   {
@@ -96,8 +96,8 @@ const EXPERIENCE = [
     time: "Jan 2017 - Dec 2017",
     place: "Bengaluru, India",
     points: [
-      "Designed end-to-end digital ecosystems across web, mobile and social: sitemaps, flows, wireframes and interactive mockups.",
-      "Applied heuristic evaluation, personas and usability testing to sharpen task flows across platforms.",
+      "I designed complete products across web, mobile and social, from sitemaps and flows through to wireframes and clickable mockups.",
+      "I used heuristic evaluation, personas and usability testing to tidy up the task flows.",
     ],
   },
   {
@@ -106,17 +106,17 @@ const EXPERIENCE = [
     time: "Apr 2016 - Dec 2016",
     place: "Bengaluru, India",
     points: [
-      "Crafted multi-platform brand and campaign assets with consistency and impact across digital and print.",
+      "I made brand and campaign assets for digital and print, and kept them consistent across both.",
     ],
   },
   {
     role: "Senior UX / UI Designer",
-    org: "Threadfold",
+    org: "Jack of All Threads",
     time: "Feb 2015 - Mar 2016",
     place: "Bengaluru, India",
     points: [
-      "Ran usability research and shipped user-focused redesigns that lifted website performance and engagement.",
-      "Used data-backed strategies to grow traffic, improve retention, and strengthen the brand online.",
+      "I ran the usability research and shipped the redesigns that came out of it, which improved how the site performed.",
+      "I used the data we had to grow traffic, keep people coming back, and build up the brand online.",
     ],
   },
   {
@@ -125,8 +125,8 @@ const EXPERIENCE = [
     time: "Jan 2013 - Dec 2014",
     place: "Bhopal, India",
     points: [
-      "Built cohesive brand identities, logos, brand guides, and templates, for a consistent presence across channels.",
-      "Designed digital and print campaigns end to end, from concept through final production.",
+      "I built brand identities, logos, brand guides and templates, so everything looked the same wherever it turned up.",
+      "I designed digital and print campaigns from the first idea through to final production.",
     ],
   },
   {
@@ -135,8 +135,8 @@ const EXPERIENCE = [
     time: "Nov 2011 - Dec 2012",
     place: "Bhopal, India",
     points: [
-      "Created print and digital advertising campaigns for local newspapers and businesses.",
-      "Turned client briefs into production-ready brochures, banners, signage, and displays.",
+      "I made print and digital advertising for local newspapers and businesses.",
+      "I turned client briefs into brochures, banners, signage and displays that were ready to print.",
     ],
   },
 ];
@@ -194,7 +194,7 @@ export default function About() {
                 <span className="italic font-light leading-[1.1] pb-1 inline-block" style={{ color: ACCENT }}>complex systems.</span>
               </Reveal>
               <Reveal as="p" delay={0.08} className="mt-7 max-w-xl text-lg md:text-xl leading-relaxed" style={{ color: MUTED }}>
-                UX Lead with <strong style={{ color: "#171512" }}>11+ years</strong> across BFSI, enterprise software and consumer tech. I turn research into interfaces that ship.
+                UX Lead, <strong style={{ color: "#171512" }}>11+ years</strong> across banking, enterprise software and consumer tech. I do the research and then design the screens that get built from it.
               </Reveal>
               <Reveal delay={0.16} className="mt-9 flex gap-3 flex-wrap items-center">
                 <a href={`mailto:${PROFILE.email}`} data-testid="about-cta-email" className="ag-btn">
@@ -267,7 +267,7 @@ export default function About() {
           rhythm instead of a flat 4-up repeat. */}
       <section className="py-16" data-testid="about-competencies">
         <Container>
-          <Head sub="The eight things I actually get hired to do.">
+          <Head sub="The eight things I get hired to do.">
             Core <span className="italic font-light">competencies.</span>
           </Head>
           <div className="ag-bento">
@@ -304,7 +304,7 @@ export default function About() {
 
             <Reveal delay={0.05} className="ag-tile ag-lift p-7" style={{ gridColumn: "span 2" }}>
               <p className="font-display text-lg font-black mb-1">Development</p>
-              <p className="text-xs mb-4" style={{ color: MUTED }}>Working familiarity, not a front-end role.</p>
+              <p className="text-xs mb-4" style={{ color: MUTED }}>Enough to work with, though I am not a front-end developer.</p>
               <div className="flex flex-wrap gap-2">{TOOLS.development.map((t) => <Chip key={t.name}>{t.name}</Chip>)}</div>
             </Reveal>
 

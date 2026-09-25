@@ -20,10 +20,12 @@ const F = (n) => `/finvista/${n}`;
 // Projects: 4 client case studies, ordered by strength of proof (2026-08-04).
 // FinVista leads on real measured outcomes, Aurora next for the shipped AI
 // feature and the 3:1 click reduction, then Meridian which is designed but
-// not yet measured, and Threadfold last as the 2015 closer with its press
+// measured across six validation rounds, and Jack of All Threads last as the 2015 closer with its press
 // coverage. This array drives the /projects grid, the landing page featured
 // pair (first two), and the prev/next order in ProjectNav.
-// FinVista, Aurora and Threadfold are confidential client work.
+// FinVista and Aurora are confidential client work. Jack of All Threads
+// ships under its real name (2026-09-25): the company is no longer trading,
+// so the 2026-08 anonymisation was reversed.
 //
 // `locked: true` no longer draws anything. The vault went dormant on
 // 2026-08-02, so every case study opens without a password and CaseCover
@@ -46,7 +48,7 @@ export const projects = [
     color: "#FFE3B3",
     tag: "case study",
     summary:
-      "Led the UX of a native Android Loan Origination System covering 6 loan products, with a 100+ component design system and a streamlined 11-step Two-Wheeler journey.",
+      "I led the UX on a native Android loan origination system that covers six loan products. It runs on a design system of over a hundred components, and the two-wheeler journey is eleven steps.",
     detail: true,
     locked: true,
   },
@@ -63,7 +65,7 @@ export const projects = [
     color: "#E8F2F0",
     tag: "case study",
     summary:
-      "Led the redesign of the Recurring Batch Journey configurator and embedded the Helio AI composer. Cut clicks for campaign setup 3:1 and shipped a 52-component design system.",
+      "I redesigned the journey configurator and put the Helio AI composer inside the canvas. Setting up a campaign went from three clicks to one, and the design system shipped with 52 components.",
     detail: true,
     locked: true,
   },
@@ -80,25 +82,24 @@ export const projects = [
     color: "#0E1430",
     tag: "case study",
     summary:
-      "Unified four siloed Power BI dashboards (undergraduate and graduate admissions, research, and HR) into one analytics platform with an overview-and-drill-down model and an optional AI layer.",
+      "Four separate Power BI dashboards became one platform with five tabs. You land on an overview and drill into whichever area you need, with an AI layer you can call on if you want it.",
     detail: true,
   },
   {
-    slug: "threadfold",
-    title: "Threadfold",
+    slug: "joat",
+    title: "Jack of All Threads",
     subtitle: "India's First Crowdfunding Platform for Custom Apparel",
-    client: "Threadfold (Bangalore)",
+    client: "Jack of All Threads (Bangalore)",
     role: "Senior UX / UI Designer",
     services: "Product Design, UX, Visual Design",
     year: "2015",
-    cover: "/threadfold/cover.jpg",
-    coverImg: "/threadfold/cover.jpg",
+    cover: "/joat/cover.jpg",
+    coverImg: "/joat/cover.jpg",
     color: "#F25C4D",
     tag: "case study",
     summary:
-      "Designed the end-to-end product for India's first t-shirt crowdfunding platform: an in-browser design studio, the campaign-creation flow, and the buyer + raiser journeys across desktop and mobile.",
+      "I designed the whole product for India's first t-shirt crowdfunding platform. That covers the design studio in the browser, the flow for setting up a campaign, and both sides of the journey on desktop and mobile.",
     detail: true,
-    locked: true,
   },
 ];
 
@@ -116,9 +117,9 @@ export const concepts = [
     status: "live prototype",
     prototypeUrl: "/slate/",
     summary:
-      "A recruitment workspace where the AI sources, ranks, and drafts outreach while the recruiter stays the decision-maker. Designed end-to-end and built as an interactive prototype.",
+      "A recruiting workspace where the AI finds the candidates, ranks them and drafts the outreach, and the recruiter still decides who to contact. I designed it end to end and built it as a working prototype.",
     blurb:
-      "The AI sources candidates, ranks them, and drafts the outreach. The recruiter stays the one who decides. Designed end to end and built as a working prototype.",
+      "The AI finds candidates, ranks them and drafts the outreach. The recruiter decides who actually gets contacted. I designed it end to end and built it as a working prototype.",
     href: "/case/slate",
     live: true,
   },
@@ -134,7 +135,7 @@ export const concepts = [
     status: "live prototype",
     prototypeUrl: "/almanac/",
     summary:
-      "Turning institutional memory into something teams can actually ask, not just search through.",
+      "Everything a company knows is written down somewhere. Almanac lets people ask a question and get an answer back, with the sources attached.",
     href: "/case/almanac",
     live: false,                          // dormant, may revive later
   },
@@ -150,7 +151,7 @@ export const concepts = [
     status: "live prototype",
     prototypeUrl: "/crux/",
     summary:
-      "Five AI agents run a bank's operations while a human keeps every call. The five agent-trust patterns, built as a working prototype.",
+      "Five AI agents run a bank's daily operations and one person approves, steers or takes over. I built the five agent-trust patterns into a working prototype.",
     href: "/case/crux",
     live: true,                           // Control Room prototype merged 2026-07-06
   },

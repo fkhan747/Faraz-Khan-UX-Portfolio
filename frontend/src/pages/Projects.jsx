@@ -10,7 +10,7 @@ export default function Projects() {
   return (
     <div data-testid="projects-page">
       <style>{AB_CSS}</style>
-      <Seo title="My Work" description="Selected UX case studies by Faraz Khan: FinVista, Aurora, Meridian, Threadfold, and the Slate AI-native product concept." />
+      <Seo title="My Work" description="Selected UX case studies by Faraz Khan: FinVista, Aurora, Meridian, Jack of All Threads, and the Slate AI-native product concept." />
       <section className="pt-12 pb-10 relative overflow-hidden">
         <AbSquiggle className="ab-sq-1" color="#F0186C" rot={-32} />
         <span className="hidden md:block absolute right-[26%] top-16 z-0"><AbSquiggle className="ab-sq-2" color="#9B4DE0" rot={20} /></span>
