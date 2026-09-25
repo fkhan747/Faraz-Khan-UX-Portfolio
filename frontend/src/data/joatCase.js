@@ -1,12 +1,17 @@
-// Threadfold - a crowdfunding platform for custom apparel, built in India.
+// Jack of All Threads - a crowdfunding platform for custom apparel, built in
+// Bangalore. Faraz's role: Senior UX / UI Designer.
 //
-// ANONYMISED 2026-08-03. "Threadfold" is a stand-in; the real company, its
-// wordmark and its named press and charity partners are not on this page. The
-// screenshots were rebranded by scripts/rebrand-case-screens.py, and the press
-// band is generalised, because naming the real outlets alongside a fake company
-// name would lead straight back to the original. The `deck` block carries constructed
-// outcome figures, kept inside published benchmarks and quarantined from the
-// press claims; see the METRICS note there. Faraz's role: Senior UX / UI Designer.
+// DE-ANONYMISED 2026-09-26. The company no longer trades, so the real name,
+// the real press list and the real charity partners are all back, and the
+// screenshots were restored from 40541d7^ (the versions before
+// scripts/rebrand-case-screens.py replaced the wordmark). This study also
+// left the vault on the same date: nothing here is confidential, so the
+// pages import this module directly instead of reading it through
+// CaseStudyGate.
+//
+// The `deck` block still carries the constructed outcome figures from the
+// August rewrite; see the METRICS note there. The v2 block that the new page
+// renders deliberately does not use them.
 // Image w/h are intrinsic pixel sizes (reserve space, prevent layout shift).
 //
 // REWRITTEN 2026-08-04: cut to a ~3 minute read, same treatment as FinVista.
@@ -17,7 +22,7 @@ const J = (f) => `/joat/${f}`;
 
 export const joat = {
   slug: "joat",
-  title: "Threadfold",
+  title: "Jack of All Threads",
   subtitle:
     "A crowdfunding platform for custom apparel, designed from nothing: design a tee, set a goal, and sell it before a single shirt is printed.",
 
@@ -40,15 +45,15 @@ export const joat = {
     headline: "Project Overview",
     tldrTitle: "The short version",
     tldr:
-      "Threadfold was one of India's first crowdfunding platforms for custom apparel: design a tee in the browser, set a goal, and sell it before a single shirt is printed. I led the UX and visual redesign end to end: the Design Studio, the campaign flow, the buyer journey, and the Raiser dashboards. Covered by national newspapers and the startup press; national children's charities ran campaigns on it.",
+      "Jack of All Threads was India's first crowdfunding platform for custom apparel. You design a tee in the browser, set a sales goal, and sell it before anything gets printed. I led the UX and visual redesign end to end, covering the Design Studio, the campaign flow, the buyer journey and the raiser dashboards. The Hindu, Deccan Herald, DNA and YourStory all covered it, and CRY and the Akshaya Patra Foundation ran campaigns on it.",
     facts: [
       { label: "Role", value: "Senior UX / UI Designer" },
-      { label: "Company", value: "Threadfold (anonymised)" },
+      { label: "Company", value: "Jack of All Threads, Bangalore" },
       { label: "Platform", value: "Responsive Web + Mobile" },
       { label: "Scope", value: "End-to-end product redesign" },
     ],
     intro:
-      "This is the oldest work on this site, from 2015, and it stays because the product was ahead of its time. Threadfold grew out of a college project into one of the first t-shirt crowdfunding platforms in India, and I owned the interface end to end, reframing it as a single, cohesive platform.",
+      "This is the oldest work on the site, from 2015, and it stays because the product was ahead of its time. Jack of All Threads started as a college project and became India's first t-shirt crowdfunding platform. I owned the interface end to end and rebuilt it as one platform rather than a set of separate tools.",
     intro2:
       "The redesign had one job: take a process that used to span six disconnected tools and vendors, and make it one calm flow anyone could finish in an afternoon.",
     contextTitle: "The model in one line",
@@ -86,7 +91,7 @@ export const joat = {
     steps: [
       { n: "01", t: "Design in minutes", d: "Pick a product and color, drop in artwork or text, and preview it live with an instant base cost." },
       { n: "02", t: "Set your price and promote", d: "Choose a goal, an end date and a per-tee price; the flow shows the minimum profit before launch. Then share the link." },
-      { n: "03", t: "We produce, you profit", d: "Goal met: Threadfold prints, ships and transfers the profit. Goal missed: nobody pays anything. No inventory, no risk." },
+      { n: "03", t: "We produce, you profit", d: "If the goal is met we print the shirts, ship them and transfer the profit. If it is missed, nobody pays anything, so the creator is never holding stock." },
     ],
     image: { src: J("01-homepage.jpg"), w: 1400, h: 3920, caption: "Homepage: the model explained to a first-time raiser, with live campaigns and press credibility." },
   },
@@ -192,7 +197,7 @@ export const joat = {
     ],
   },
 
-  // Copy for the slide-band page (pages/pilots/CaseThreadfoldDeck.jsx). It lives here,
+  // Copy for the slide-band page that used to render this study. That page is
   // not in the component, so it ships as ciphertext when the vault is on.
   // Bold is marked with **double asterisks** and rendered by deckParts/rich().
   //
@@ -211,7 +216,7 @@ export const joat = {
     standfirst:
       "Selling a custom tee meant six tools, a printer with minimums, and your own money on the line. We built the thing that replaced all of it, starting from a blank page and a risky assumption.",
     heroCaption:
-      "Threadfold: a crowdfunding platform for custom apparel. Company name, branding and partners anonymised",
+      "Jack of All Threads, a crowdfunding platform for custom apparel, built in Bangalore.",
 
     owned: [
       {
@@ -251,7 +256,7 @@ export const joat = {
       [
         "03",
         "We produce, you profit",
-        "Hit the goal and Threadfold prints, ships to every buyer and transfers the profit. Miss it and nobody pays anything. No inventory, no upfront cost, no risk to the creator.",
+        "Hit the goal and we print the shirts, ship them to every buyer and transfer the profit. Miss it and nobody is charged anything, so the creator never holds stock or pays up front.",
       ],
     ],
 
@@ -279,7 +284,7 @@ export const joat = {
         "The model only works if a chain of beliefs all hold, and most of them had **no evidence behind them at all**. So the first job was writing them down and sorting them by what happens if they are wrong.",
         "Importance on one axis, evidence on the other. Everything in the top-left corner is a bet the business dies on, with nothing supporting it yet.",
         "Three landed there. **Creators will promote their own campaign.** **Buyers will pay for a shirt that does not exist yet.** **Buyers will trust an unknown site with their card.**",
-        "The first one is the whole company. Threadfold has no audience of its own: every sale comes through a link the creator shares. If creators do not promote, nothing else on this page matters.",
+        "The first one is the whole company. Jack of All Threads has no audience of its own, so every sale comes through a link the creator shares. If creators do not promote, nothing else on this page matters.",
         "So that became the thing to design for, and the thing to test first, before a single interface decision got made.",
       ],
       shot: ["method/assumption-map.svg", "Assumption map: importance against evidence, with the three that got tested first"],
