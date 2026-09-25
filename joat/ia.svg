@@ -9,7 +9,7 @@
 
 <!-- ROOT -->
 <rect x="430" y="34" width="220" height="44" rx="10" fill="#1F1233"/>
-<text class="root" x="540" y="61">Threadfold</text>
+<text class="root" x="540" y="61">Jack of All Threads</text>
 
 <!-- root trunk + bus -->
 <path class="ln" d="M540 78 L540 108"/>
@@ -101,5 +101,5 @@
 <text class="n" x="870" y="459">Notifications</text>
 
 <!-- footer caption -->
-<text class="cap" x="540" y="525">Information Architecture · Threadfold · custom-tee crowdfunding</text>
+<text class="cap" x="540" y="525">Information Architecture · Jack of All Threads · custom-tee crowdfunding</text>
 </svg>
