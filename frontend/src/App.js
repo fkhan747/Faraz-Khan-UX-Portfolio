@@ -10,7 +10,6 @@ import Contact from "./pages/Contact";
 // Resume page merged into About ("About Me"). /resume redirects to /about below.
 import CaseStudy from "./pages/CaseStudy";
 import AuroraCaseStudy from "./pages/AuroraCaseStudy";
-import JoatCaseStudy from "./pages/JoatCaseStudy";
 import CaseJoatWD from "./pages/pilots/CaseJoatWD";
 import SlateConcept from "./pages/SlateConcept";
 import AlmanacConcept from "./pages/AlmanacConcept";
@@ -46,8 +45,7 @@ function App() {
           <Route path="/case/meridian" element={<CaseMeridianWD />} />
           <Route path="/case/finvista" element={<CaseStudyGate key="finvista" slug="finvista"><CaseFinvistaLong /></CaseStudyGate>} />
           <Route path="/case/aurora" element={<CaseStudyGate key="aurora" slug="aurora"><AuroraCaseStudy /></CaseStudyGate>} />
-          <Route path="/case/joat" element={<JoatCaseStudy />} />
-          <Route path="/case/joat-draft" element={<CaseJoatWD />} />
+          <Route path="/case/joat" element={<CaseJoatWD />} />
           {/* Concepts sit outside <Layout> for the same reason. Almanac is
               dormant (live:false in content.js) and unlinked, kept reachable. */}
           <Route path="/case/slate" element={<SlateConcept />} />
@@ -88,6 +86,7 @@ function App() {
             <Route path="/case/decisionos" element={<Navigate to="/case/crux" replace />} />
             <Route path="/case/somethings-cooking" element={<Navigate to="/case/joat" replace />} />
             <Route path="/case/threadfold" element={<Navigate to="/case/joat" replace />} />
+            <Route path="/case/joat-draft" element={<Navigate to="/case/joat" replace />} />
             {/* Anonymised 2026-08-03. The old slug abbreviated the real company
                 name, so it redirects rather than being served. */}
                         <Route path="/case/joat-v1" element={<Navigate to="/case/joat" replace />} />
