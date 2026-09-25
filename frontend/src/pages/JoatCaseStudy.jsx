@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, Mail, Check, Star } from "lucide-react";
-import { useCaseData } from "../components/CaseStudyGate";
+import { joat } from "../data/joatCase";
 import VaultImage from "../components/VaultImage";
 import { PROFILE } from "../data/content";
 import Seo from "../components/Seo";
@@ -49,7 +49,9 @@ const SectionWrap = ({ children, className = "", ...rest }) => (
 
 export default function JoatCaseStudy() {
   // Decrypted case data provided by CaseStudyGate after unlock.
-  const j = useCaseData();
+  // Out of the vault since 2026-09-26, so the data module is imported
+  // directly. VaultImage below is now a plain passthrough for /joat/ paths.
+  const j = joat;
   return (
     /* theme-light drives the page. Same reasoning as the Aurora page: rendered
        outside <Layout>, so it never got the class and stayed on the dark

@@ -1,5 +1,4 @@
-import { useCaseData } from "../../components/CaseStudyGate";
-import VaultImage from "../../components/VaultImage";
+import { joat } from "../../data/joatCase";
 import Reveal from "../../components/Reveal";
 import CaseTopBar from "../../components/CaseTopBar";
 import Seo from "../../components/Seo";
@@ -8,8 +7,8 @@ import { DECK_CSS } from "./caseDeck";
 import { wdCss, Media, Kpis, Pair, TextBlock } from "./caseWD";
 
 /* JACK OF ALL THREADS on the shared rhythm (see pilots/caseWD.jsx), 2026-09-25.
-   Driven by `joat.v2` through useCaseData(), so this bundle ships no
-   confidential text; the slide-band page it replaces is in git history.
+   Driven by `joat.v2`, imported directly: this study left the vault on
+   2026-09-26, so there is nothing to gate.
 
    THE ANONYMISATION IS REVERSED (2026-09-25, Faraz's call: the company no
    longer trades). Real name, real press, real partners. This page carries
@@ -45,8 +44,7 @@ const NEXT_WORK = [
 ];
 
 export default function CaseJoatWD() {
-  const tf = useCaseData();
-  const v = tf.v2;
+  const v = joat.v2;
 
   return (
     <div className="wd cd" style={{ "--acc": ACCENT }} data-testid="joat-wd">
@@ -57,7 +55,7 @@ export default function CaseJoatWD() {
 
       <div className="wd-wrap">
         <section className="wd-hero">
-          <VaultImage src={v.cover} alt="Jack of All Threads" />
+          <img src={v.cover} alt="Jack of All Threads" />
           <div className="wd-hero-t">
             <p className="wd-tags">{v.tags}</p>
             <h1 className="wd-h1">{v.title[0]}<b>{v.title[1]}</b></h1>

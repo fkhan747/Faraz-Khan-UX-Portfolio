@@ -1,5 +1,7 @@
-// Client-side vault for the confidential case studies (FinVista, Aurora,
-// Jack of All Threads). The deployed site serves their written content and
+// Client-side vault for the confidential case studies (FinVista and Aurora).
+// Jack of All Threads left the vault on 2026-09-26: the company no longer
+// trades and the case study ships under its real name, so none of its
+// content is confidential. The deployed site serves the written content and
 // screenshots as AES-256-GCM ciphertext; this module decrypts them in the
 // browser after the visitor enters the password on the case-study gate.
 //
@@ -7,7 +9,7 @@
 // - frontend/scripts/encrypt-case-data.mjs (prestart/prebuild) encrypts each
 //   study's data module to public/locked/<slug>.enc.
 // - frontend/scripts/encrypt-build.mjs (postbuild) encrypts the screenshot
-//   files inside build/{finvista,aurora,joat}/ (cover.jpg stays plain — it is
+//   files inside build/{finvista,aurora}/ (cover.jpg stays plain, it is
 //   the public card teaser).
 // - Both use the same format: "CSE1" magic + 12-byte IV + ciphertext, with the
 //   key derived from the password via PBKDF2 (fixed public salt below, 150k
@@ -22,8 +24,8 @@
 
 const MAGIC = "CSE1";
 const SALT = "khanfaraz.in/case-vault/v1"; // public KDF salt, not a secret
-const LOCKED = new Set(["finvista", "aurora", "joat"]);
-const LOCKED_PREFIX = /^\/(finvista|aurora|joat)\//;
+const LOCKED = new Set(["finvista", "aurora"]);
+const LOCKED_PREFIX = /^\/(finvista|aurora)\//;
 const DEV = process.env.NODE_ENV === "development";
 
 // Dormant mode: vault code stays, but no gate, no encryption, no key.

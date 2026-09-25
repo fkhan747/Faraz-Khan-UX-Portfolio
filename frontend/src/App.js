@@ -46,8 +46,8 @@ function App() {
           <Route path="/case/meridian" element={<CaseMeridianWD />} />
           <Route path="/case/finvista" element={<CaseStudyGate key="finvista" slug="finvista"><CaseFinvistaLong /></CaseStudyGate>} />
           <Route path="/case/aurora" element={<CaseStudyGate key="aurora" slug="aurora"><AuroraCaseStudy /></CaseStudyGate>} />
-          <Route path="/case/joat" element={<CaseStudyGate key="joat" slug="joat"><JoatCaseStudy /></CaseStudyGate>} />
-          <Route path="/case/joat-draft" element={<CaseStudyGate key="joat-draft" slug="joat"><CaseJoatWD /></CaseStudyGate>} />
+          <Route path="/case/joat" element={<JoatCaseStudy />} />
+          <Route path="/case/joat-draft" element={<CaseJoatWD />} />
           {/* Concepts sit outside <Layout> for the same reason. Almanac is
               dormant (live:false in content.js) and unlinked, kept reachable. */}
           <Route path="/case/slate" element={<SlateConcept />} />
